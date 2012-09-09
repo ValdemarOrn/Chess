@@ -5,8 +5,13 @@ using System.Text;
 
 namespace Chess
 {
-	public class Data
+	public class Notation
 	{
+		/// <summary>
+		/// Get the algebraic notation for the tile, e.g. a1, e4, h3
+		/// </summary>
+		/// <param name="tile"></param>
+		/// <returns></returns>
 		public static string TileToText(int tile)
 		{
 			if (tile < 0 || tile >= 64)
@@ -20,6 +25,11 @@ namespace Chess
 			return xx.ToString() + y;
 		}
 
+		/// <summary>
+		/// Convert algebraic notation into a tile number
+		/// </summary>
+		/// <param name="text"></param>
+		/// <returns></returns>
 		public static int TextToTile(string text)
 		{
 			text = text.Trim().ToLower();
@@ -60,7 +70,33 @@ namespace Chess
 
 			return y * 8 + x;
 		}
+		/*
+		public static char File(int tile)
+		{
+			if (tile < 0 || tile >= 64)
+				return (char)0;
 
+			int x = Board.X(tile);
+			char xx = (char)('a' + x);
+			return xx;
+		}
+
+		public static int Rank(int tile)
+		{
+			if (tile < 0 || tile >= 64)
+				return (char)0;
+
+			int y = Board.Y(tile);
+
+			y++;
+			return y;
+		}
+		*/
+		/// <summary>
+		/// Convert a FEN string into a Board object
+		/// </summary>
+		/// <param name="fenString"></param>
+		/// <returns></returns>
 		public static Board FENtoBoard(string fenString)
 		{
 			string[] parts = fenString.Split(' ');
@@ -152,11 +188,53 @@ namespace Chess
 			if (castle.Contains('q'))
 				b.CastleQueensideBlack = true;
 
-			// Todo: Process en passant
+			// Process en passant
+			if (parts.Length >= 4)
+			{
+				string enp = parts[3].ToLower();
+				if (enp.Contains('-'))
+					b.LastMove = new Move();
+				if (enp.Contains('3')) // white moved
+				{
+					int tile = Notation.TextToTile(enp);
 
-			// Todo: Process move counters
+					if(b.Turn == Colors.White)
+						throw new Exception("Malformed FEN string. En passant shows white moved last, but it's also his turn");
+
+					if (b.State[tile+8] != (Pieces.Pawn | Colors.White))
+						throw new Exception("Malformed FEN string. En passant expected white pawn at tile " + Notation.TileToText(tile + 8));
+
+					b.LastMove = new Move(tile - 8, tile + 8);
+				}
+				if (enp.Contains('6')) // black moved
+				{
+					int tile = Notation.TextToTile(enp);
+
+					if (b.Turn == Colors.Black)
+						throw new Exception("Malformed FEN string. En passant shows black moved last, but it's also his turn");
+
+					if (b.State[tile - 8] != (Pieces.Pawn | Colors.Black))
+						throw new Exception("Malformed FEN string. En passant expected black pawn at tile " + Notation.TileToText(tile + 8));
+
+					b.LastMove = new Move(tile + 8, tile - 8);
+				}
+			}
+
+			if (parts.Length >= 5)
+			{
+				int halfmoves = Convert.ToInt32(parts[4]);
+				b.FiftyMoveRule = halfmoves;
+			}
+
+			if (parts.Length >= 6)
+			{
+				int round = Convert.ToInt32(parts[5]);
+				b.Round = round;
+			}
 
 			return b;
 		}
+
+		
 	}
 }

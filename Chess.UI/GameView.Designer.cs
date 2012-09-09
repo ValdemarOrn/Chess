@@ -28,58 +28,79 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.button1 = new System.Windows.Forms.Button();
+			this.buttonNewGame = new System.Windows.Forms.Button();
 			this.labelSelectedTile = new System.Windows.Forms.Label();
-			this.gameControl = new Chess.UI.BoardControl();
+			this.boardControl = new Chess.UI.BoardControl();
 			this.labelChecked = new System.Windows.Forms.Label();
+			this.buttonSetState = new System.Windows.Forms.Button();
+			this.textBoxFEN = new System.Windows.Forms.TextBox();
 			this.SuspendLayout();
 			// 
-			// button1
+			// buttonNewGame
 			// 
-			this.button1.Location = new System.Drawing.Point(499, 35);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(75, 23);
-			this.button1.TabIndex = 1;
-			this.button1.Text = "New Game";
-			this.button1.UseVisualStyleBackColor = true;
-			this.button1.Click += new System.EventHandler(this.button1_Click);
+			this.buttonNewGame.Location = new System.Drawing.Point(499, 95);
+			this.buttonNewGame.Name = "buttonNewGame";
+			this.buttonNewGame.Size = new System.Drawing.Size(75, 23);
+			this.buttonNewGame.TabIndex = 1;
+			this.buttonNewGame.Text = "New Game";
+			this.buttonNewGame.UseVisualStyleBackColor = true;
+			this.buttonNewGame.Click += new System.EventHandler(this.button1_Click);
 			// 
 			// labelSelectedTile
 			// 
 			this.labelSelectedTile.AutoSize = true;
-			this.labelSelectedTile.Location = new System.Drawing.Point(496, 97);
+			this.labelSelectedTile.Location = new System.Drawing.Point(496, 157);
 			this.labelSelectedTile.Name = "labelSelectedTile";
 			this.labelSelectedTile.Size = new System.Drawing.Size(72, 13);
 			this.labelSelectedTile.TabIndex = 2;
 			this.labelSelectedTile.Text = "Selected Tile:";
 			// 
-			// boardUI1
+			// boardControl
 			// 
-			this.gameControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.gameControl.Location = new System.Drawing.Point(60, 35);
-			this.gameControl.Name = "boardUI1";
-			this.gameControl.Size = new System.Drawing.Size(400, 400);
-			this.gameControl.TabIndex = 0;
-			this.gameControl.MouseClick += new System.Windows.Forms.MouseEventHandler(this.boardUI1_MouseClick);
+			this.boardControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.boardControl.Location = new System.Drawing.Point(60, 35);
+			this.boardControl.Name = "boardControl";
+			this.boardControl.Size = new System.Drawing.Size(400, 400);
+			this.boardControl.TabIndex = 0;
+			this.boardControl.MouseClick += new System.Windows.Forms.MouseEventHandler(this.boardUI1_MouseClick);
 			// 
 			// labelChecked
 			// 
 			this.labelChecked.AutoSize = true;
-			this.labelChecked.Location = new System.Drawing.Point(496, 128);
+			this.labelChecked.Location = new System.Drawing.Point(496, 188);
 			this.labelChecked.Name = "labelChecked";
 			this.labelChecked.Size = new System.Drawing.Size(72, 13);
 			this.labelChecked.TabIndex = 3;
 			this.labelChecked.Text = "labelChecked";
+			// 
+			// buttonSetState
+			// 
+			this.buttonSetState.Location = new System.Drawing.Point(499, 66);
+			this.buttonSetState.Name = "buttonSetState";
+			this.buttonSetState.Size = new System.Drawing.Size(75, 23);
+			this.buttonSetState.TabIndex = 4;
+			this.buttonSetState.Text = "Set State";
+			this.buttonSetState.UseVisualStyleBackColor = true;
+			this.buttonSetState.Click += new System.EventHandler(this.buttonSetState_Click);
+			// 
+			// textBoxFEN
+			// 
+			this.textBoxFEN.Location = new System.Drawing.Point(499, 35);
+			this.textBoxFEN.Name = "textBoxFEN";
+			this.textBoxFEN.Size = new System.Drawing.Size(242, 20);
+			this.textBoxFEN.TabIndex = 5;
 			// 
 			// GameView
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(753, 532);
+			this.Controls.Add(this.textBoxFEN);
+			this.Controls.Add(this.buttonSetState);
 			this.Controls.Add(this.labelChecked);
 			this.Controls.Add(this.labelSelectedTile);
-			this.Controls.Add(this.button1);
-			this.Controls.Add(this.gameControl);
+			this.Controls.Add(this.buttonNewGame);
+			this.Controls.Add(this.boardControl);
 			this.Name = "GameView";
 			this.Text = "Game View";
 			this.ResumeLayout(false);
@@ -89,10 +110,12 @@
 
 		#endregion
 
-		public BoardControl gameControl;
-		private System.Windows.Forms.Button button1;
+		public BoardControl boardControl;
+		private System.Windows.Forms.Button buttonNewGame;
 		private System.Windows.Forms.Label labelSelectedTile;
 		public System.Windows.Forms.Label labelChecked;
+		private System.Windows.Forms.Button buttonSetState;
+		private System.Windows.Forms.TextBox textBoxFEN;
 	}
 }
 

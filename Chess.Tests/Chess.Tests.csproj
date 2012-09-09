@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestABN.cs" />
     <Compile Include="TestAttacksBishop.cs" />
     <Compile Include="TestAttacksKing.cs" />
     <Compile Include="TestAttacksKnight.cs" />
@@ -54,8 +55,11 @@
     <Compile Include="TestAttacksPawnWhite.cs" />
     <Compile Include="TestAttacksQueen.cs" />
     <Compile Include="TestAttacksRook.cs" />
+    <Compile Include="TestBoard.cs" />
     <Compile Include="TestCheck.cs" />
-    <Compile Include="TestData.cs" />
+    <Compile Include="TestColors.cs" />
+    <Compile Include="TestNotation.cs" />
+    <Compile Include="TestMoves.cs" />
     <Compile Include="TestMovesBishop.cs" />
     <Compile Include="TestMovesKing.cs" />
     <Compile Include="TestMovesKnight.cs" />
@@ -63,6 +67,8 @@
     <Compile Include="TestMovesPawnWhite.cs" />
     <Compile Include="TestMovesQueen.cs" />
     <Compile Include="TestMovesRook.cs" />
+    <Compile Include="TestPieces.cs" />
+    <Compile Include="TestPromote.cs" />
     <Compile Include="TestValidMove.cs" />
   </ItemGroup>
   <ItemGroup>

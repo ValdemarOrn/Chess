@@ -44,11 +44,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ABN.cs" />
     <Compile Include="Attacks.cs" />
     <Compile Include="Board.cs" />
-    <Compile Include="Data.cs" />
+    <Compile Include="Colors.cs" />
+    <Compile Include="Move.cs" />
+    <Compile Include="Notation.cs" />
     <Compile Include="Moves.cs" />
     <Compile Include="Check.cs" />
+    <Compile Include="Pieces.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

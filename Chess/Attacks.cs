@@ -32,8 +32,6 @@ namespace Chess
 
 		private static List<int> GetPawnAttacks(Board board, int square)
 		{
-			// Todo: En passant
-
 			int x = Board.X(square);
 			int y = Board.Y(square);
 			int color = board.Color(square);
@@ -51,6 +49,16 @@ namespace Chess
 				target = square + 9;
 				if (x < 7 && y < 7)
 					output.Add(target);
+
+				// en passant left
+				target = square + 7;
+				if (y == 4 && x > 0 && board.LastMove.From == (target + 8) && board.LastMove.To == (target - 8) && board.State[target - 8] == (Pieces.Pawn | Colors.Black))
+					output.Add(target - 8); // I'm ATTACKING the pawn at target-8 even though I move to target
+
+				// en passant right
+				target = square + 9;
+				if (y == 4 && x < 7 && board.LastMove.From == (target + 8) && board.LastMove.To == (target - 8) && board.State[target - 8] == (Pieces.Pawn | Colors.Black))
+					output.Add(target - 8); // I'm ATTACKING the pawn at target-8 even though I move to target
 			}
 			else
 			{
@@ -63,6 +71,16 @@ namespace Chess
 				target = square - 7;
 				if (x < 7 && y > 0)
 					output.Add(target);
+
+				// en passant left
+				target = square - 9;
+				if (y == 3 && x > 0 && board.LastMove.From == (target - 8) && board.LastMove.To == (target + 8) && board.State[target + 8] == (Pieces.Pawn | Colors.White))
+					output.Add(target+8); // I'm ATTACKING the pawn at target+8 even though I move to target
+
+				// en passant right
+				target = square - 7;
+				if (y == 3 && x < 7 && board.LastMove.From == (target - 8) && board.LastMove.To == (target + 8) && board.State[target + 8] == (Pieces.Pawn | Colors.White))
+					output.Add(target + 8); // I'm ATTACKING the pawn at target+8 even though I move to target
 			}
 
 			return output;

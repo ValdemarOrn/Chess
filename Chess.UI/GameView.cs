@@ -18,7 +18,7 @@ namespace Chess.UI
 			InitializeComponent();
 			PieceBitmaps.Dir = @"C:\Src\_Tree\Applications\Chess\Pieces\";
 			Ctrl = new GameController(this);
-			gameControl.GameUpdatedCallback = Ctrl.GameUpdated;
+			boardControl.GameUpdatedCallback = Ctrl.GameUpdated;
 		}
 
 		private void button1_Click(object sender, EventArgs e)
@@ -28,8 +28,13 @@ namespace Chess.UI
 
 		private void boardUI1_MouseClick(object sender, MouseEventArgs e)
 		{
-			int tile = gameControl.SelectedTile;
-			labelSelectedTile.Text = "Selected Tile: " + Data.TileToText(tile);
+			int tile = boardControl.SelectedTile;
+			labelSelectedTile.Text = "Selected Tile: " + Notation.TileToText(tile);
+		}
+
+		private void buttonSetState_Click(object sender, EventArgs e)
+		{
+			Ctrl.SetState(textBoxFEN.Text);
 		}
 	}
 }

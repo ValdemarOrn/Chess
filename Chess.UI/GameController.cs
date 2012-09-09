@@ -19,14 +19,27 @@ namespace Chess.UI
 		public void InitGame()
 		{
 			Board.InitBoard();
-			View.gameControl.Board = Board;
-			View.gameControl.Refresh();
+			View.boardControl.Board = Board;
+			Refresh();
+		}
+
+		public void SetState(string FEN)
+		{
+			var b = Notation.FENtoBoard(FEN);
+			Board = b;
+			View.boardControl.Board = b;
+			Refresh();
 		}
 
 		public void GameUpdated()
 		{
 			bool check = Check.IsChecked(Board, Board.Turn);
 			SetCheck(check);
+		}
+
+		public void Refresh()
+		{
+			View.boardControl.Refresh();
 		}
 
 		public void SetCheck(bool check)

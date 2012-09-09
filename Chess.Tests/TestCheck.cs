@@ -72,11 +72,10 @@ namespace Chess.Tests
 		public void TestCheckOneRook()
 		{
 			var b = new Board();
-			//b.State[6] = Pieces.Rook | Colors.White;
-			b.State[7] = Pieces.Rook | Colors.White;
-			b.State[8*6 + 7] = Pieces.King | Colors.Black;
-
-			bool check = Check.IsChecked(b, Colors.Black);
+			b.State[8 * 6 + 7] = Pieces.King | Colors.White;
+			b.State[7] = Pieces.Rook | Colors.Black;
+			
+			bool check = Check.IsChecked(b, Colors.White);
 
 			Assert.IsTrue(check);
 		}
@@ -139,19 +138,58 @@ namespace Chess.Tests
 		}
 
 		[TestMethod]
-		public void TestStalemateFalse()
+		public void TestStalemateIsChecked()
 		{
-			// should be able to move the queen in front
+			// king can't kill the queen, pawn protects
 			var b = new Board();
-			b.State[6] = Pieces.Rook | Colors.White;
-			b.State[7] = Pieces.Rook | Colors.White;
-			b.State[7 * 8 + 7] = Pieces.King | Colors.Black;
-			b.State[6 * 8 + 0] = Pieces.Queen | Colors.Black;
+			b.State[7 * 8] = Pieces.King | Colors.Black;
+			b.State[6 * 8 + 1] = Pieces.Queen | Colors.White;
+			b.State[5 * 8 + 2] = Pieces.Pawn | Colors.White;
+			b.State[7] = Pieces.King | Colors.White;
 			b.Turn = Colors.Black;
 
-			bool check = Check.IsStalemate(b, Colors.Black);
+			bool check = Check.IsChecked(b, Colors.Black);
+			Assert.IsTrue(check);
 
-			Assert.IsFalse(check);
+			bool stalemate = Check.IsStalemate(b, Colors.Black);
+			Assert.IsFalse(stalemate);
 		}
+
+		[TestMethod]
+		public void TestStalemateFalse()
+		{
+			// king can kill the rook
+			var b = new Board();
+			b.State[7*8] = Pieces.King | Colors.Black;
+			b.State[6*8+1] = Pieces.Rook | Colors.White;
+			b.State[7] = Pieces.King | Colors.White;
+			b.Turn = Colors.Black;
+
+			bool check = Check.IsChecked(b, Colors.Black);
+			Assert.IsFalse(check);
+
+			bool stalemate = Check.IsStalemate(b, Colors.Black);
+			Assert.IsFalse(stalemate);
+		}
+
+		[TestMethod]
+		public void TestStalemateTrue()
+		{
+			// king can't kill the rook, pawn protects
+			var b = new Board();
+			b.State[7 * 8] = Pieces.King | Colors.Black;
+			b.State[6 * 8 + 1] = Pieces.Rook | Colors.White;
+			b.State[5 * 8 + 2] = Pieces.Pawn | Colors.White;
+			b.State[7] = Pieces.King | Colors.White;
+			b.Turn = Colors.Black;
+
+			bool check = Check.IsChecked(b, Colors.Black);
+			Assert.IsFalse(check);
+
+			bool stalemate = Check.IsStalemate(b, Colors.Black);
+			Assert.IsTrue(stalemate);
+		}
+
+
 	}
 }

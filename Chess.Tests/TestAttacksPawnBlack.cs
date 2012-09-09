@@ -85,5 +85,43 @@ namespace Chess.Tests
 			var moves = Attacks.GetAttacks(b, pos);
 			Assert.AreEqual(2, moves.Count);
 		}
+
+		[TestMethod]
+		public void TestEnPassantLeft()
+		{
+			var b = new Board();
+			b.Turn = Colors.White;
+
+			int posBlack = Notation.TextToTile("e4");
+			int posWhite = Notation.TextToTile("d2");
+
+			b.State[posBlack] = Pieces.Pawn | Chess.Colors.Black;
+			b.State[posWhite] = Pieces.Pawn | Chess.Colors.White;
+
+			b.Move(posWhite, posWhite + 16);
+
+			var moves = Attacks.GetAttacks(b, posBlack);
+			Assert.AreEqual(3, moves.Count);
+			Assert.IsTrue(moves.Contains(Notation.TextToTile("d4")));
+		}
+
+		[TestMethod]
+		public void TestEnPassantRight()
+		{
+			var b = new Board();
+			b.Turn = Colors.White;
+
+			int posBlack = Notation.TextToTile("e4");
+			int posWhite = Notation.TextToTile("f2");
+
+			b.State[posBlack] = Pieces.Pawn | Chess.Colors.Black;
+			b.State[posWhite] = Pieces.Pawn | Chess.Colors.White;
+
+			b.Move(posWhite, posWhite + 16);
+
+			var moves = Attacks.GetAttacks(b, posBlack);
+			Assert.AreEqual(3, moves.Count);
+			Assert.IsTrue(moves.Contains(Notation.TextToTile("f4")));
+		}
 	}
 }

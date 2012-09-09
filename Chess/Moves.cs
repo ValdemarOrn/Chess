@@ -10,6 +10,48 @@ namespace Chess
 	/// </summary>
 	public sealed class Moves
 	{
+		public static bool IsCastlingMove(Board board, int from, int to)
+		{
+			// white kingside
+			if (from == 4 && to == 6 && board.State[from] == (Pieces.King | Colors.White))
+				return true;
+
+			// white queenside
+			if (from == 4 && to == 2 && board.State[from] == (Pieces.King | Colors.White))
+				return true;
+
+			// black kingside
+			if (from == 60 && to == 62 && board.State[from] == (Pieces.King | Colors.Black))
+				return true;
+
+			// black queenside
+			if (from == 60 && to == 58 && board.State[from] == (Pieces.King | Colors.Black))
+				return true;
+
+			return false;
+		}
+
+		public static bool IsEnPassantMove(Board board, int from, int to)
+		{
+			var color = board.Color(from);
+
+			if (color == Colors.White)
+			{
+				if (to == from + 7 || to == from + 9)
+					if (board.LastMove.From == to + 8 && board.LastMove.To == to - 8)
+						return true;
+			}
+
+			if (color == Colors.Black)
+			{
+				if (to == from - 7 || to == from - 9)
+					if (board.LastMove.From == to - 8 && board.LastMove.To == to + 8)
+						return true;
+			}
+
+			return false;
+		}
+
 		/// <summary>
 		/// Finds all moves for the piece that are legal and valid (do not leave your own king in check)
 		/// </summary>
@@ -60,8 +102,6 @@ namespace Chess
 
 		private static List<int> GetPawnMoves(Board board, int square)
 		{
-			// Todo: En passant
-
 			int x = Board.X(square);
 			int y = Board.Y(square);
 			int color = board.Color(square);
@@ -90,6 +130,16 @@ namespace Chess
 				target = square + 9;
 				if (x < 7 && y < 7 && board.Color(target) == Colors.Black)
 					output.Add(target);
+
+				// en passant left
+				target = square + 7;
+				if (y == 4 && x > 0 && board.LastMove.From == (target + 8) && board.LastMove.To == (target - 8) && board.State[target - 8] == (Pieces.Pawn | Colors.Black))
+					output.Add(target);
+
+				// en passant right
+				target = square + 9;
+				if (y == 4 && x < 7 && board.LastMove.From == (target + 8) && board.LastMove.To == (target - 8) && board.State[target - 8] == (Pieces.Pawn | Colors.Black))
+					output.Add(target);
 			}
 			else
 			{
@@ -111,6 +161,16 @@ namespace Chess
 				// capture right
 				target = square - 7;
 				if (x < 7 && y > 0 && board.Color(target) == Colors.White)
+					output.Add(target);
+
+				// en passant left
+				target = square - 9;
+				if (y == 3 && x > 0 && board.LastMove.From == (target - 8) && board.LastMove.To == (target + 8) && board.State[target + 8] == (Pieces.Pawn | Colors.White))
+					output.Add(target);
+
+				// en passant right
+				target = square - 7;
+				if (y == 3 && x < 7 && board.LastMove.From == (target - 8) && board.LastMove.To == (target + 8) && board.State[target + 8] == (Pieces.Pawn | Colors.White))
 					output.Add(target);
 			}
 
@@ -354,7 +414,22 @@ namespace Chess
 					output.Add(target);
 			}
 
-			//Todo: Support castle moves for king and rook
+			// castling
+			if (color == Colors.White && square == 4)
+			{
+				if (board.CastleKingsideWhite && board.State[5] == 0 && board.State[6] == 0)
+					output.Add(6);
+				if (board.CastleQueensideWhite && board.State[3] == 0 && board.State[2] == 0 && board.State[1] == 0)
+					output.Add(2);
+			}
+			else if (color == Colors.Black && square == 60)
+			{
+				if (board.CastleKingsideBlack && board.State[61] == 0 && board.State[62] == 0)
+					output.Add(62);
+				if (board.CastleQueensideBlack && board.State[59] == 0 && board.State[58] == 0 && board.State[57] == 0)
+					output.Add(58);
+			}
+
 			return output;
 		}
 	}
