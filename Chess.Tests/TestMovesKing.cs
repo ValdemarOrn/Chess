@@ -130,7 +130,7 @@ namespace Chess.Tests
 
 			bool ok = b.Move(7, 6);
 			Assert.IsTrue(ok);
-			b.Turn = Colors.White;
+			b.PlayerTurn = Colors.White;
 			ok = b.Move(6, 7);
 			Assert.IsTrue(ok);
 
@@ -184,7 +184,7 @@ namespace Chess.Tests
 			b.State[1] = 0;
 			bool ok = b.Move(0, 1);
 			Assert.IsTrue(ok);
-			b.Turn = Colors.White;
+			b.PlayerTurn = Colors.White;
 			ok = b.Move(1, 0);
 			Assert.IsTrue(ok);
 
@@ -232,10 +232,10 @@ namespace Chess.Tests
 			b.InitBoard();
 			b.State[61] = 0;
 			b.State[62] = 0;
-			b.Turn = Colors.Black;
+			b.PlayerTurn = Colors.Black;
 			bool ok = b.Move(63, 62);
 			Assert.IsTrue(ok);
-			b.Turn = Colors.Black;
+			b.PlayerTurn = Colors.Black;
 			b.Move(62, 63);
 			Assert.IsTrue(ok);
 
@@ -287,10 +287,10 @@ namespace Chess.Tests
 			b.State[59] = 0;
 			b.State[58] = 0;
 			b.State[57] = 0;
-			b.Turn = Colors.Black;
+			b.PlayerTurn = Colors.Black;
 			bool ok = b.Move(56, 57);
 			Assert.IsTrue(ok);
-			b.Turn = Colors.Black;
+			b.PlayerTurn = Colors.Black;
 			ok = b.Move(57, 58);
 			Assert.IsTrue(ok);
 

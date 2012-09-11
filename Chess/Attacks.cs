@@ -52,12 +52,12 @@ namespace Chess
 
 				// en passant left
 				target = square + 7;
-				if (y == 4 && x > 0 && board.LastMove.From == (target + 8) && board.LastMove.To == (target - 8) && board.State[target - 8] == (Pieces.Pawn | Colors.Black))
+				if (y == 4 && x > 0 && board.EnPassantTile == target && board.State[target - 8] == (Pieces.Pawn | Colors.Black))
 					output.Add(target - 8); // I'm ATTACKING the pawn at target-8 even though I move to target
 
 				// en passant right
 				target = square + 9;
-				if (y == 4 && x < 7 && board.LastMove.From == (target + 8) && board.LastMove.To == (target - 8) && board.State[target - 8] == (Pieces.Pawn | Colors.Black))
+				if (y == 4 && x < 7 && board.EnPassantTile == target && board.State[target - 8] == (Pieces.Pawn | Colors.Black))
 					output.Add(target - 8); // I'm ATTACKING the pawn at target-8 even though I move to target
 			}
 			else
@@ -74,12 +74,12 @@ namespace Chess
 
 				// en passant left
 				target = square - 9;
-				if (y == 3 && x > 0 && board.LastMove.From == (target - 8) && board.LastMove.To == (target + 8) && board.State[target + 8] == (Pieces.Pawn | Colors.White))
+				if (y == 3 && x > 0 && board.EnPassantTile == target && board.State[target + 8] == (Pieces.Pawn | Colors.White))
 					output.Add(target+8); // I'm ATTACKING the pawn at target+8 even though I move to target
 
 				// en passant right
 				target = square - 7;
-				if (y == 3 && x < 7 && board.LastMove.From == (target - 8) && board.LastMove.To == (target + 8) && board.State[target + 8] == (Pieces.Pawn | Colors.White))
+				if (y == 3 && x < 7 && board.EnPassantTile == target && board.State[target + 8] == (Pieces.Pawn | Colors.White))
 					output.Add(target + 8); // I'm ATTACKING the pawn at target+8 even though I move to target
 			}
 

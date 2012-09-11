@@ -10,44 +10,144 @@ namespace Chess
 	/// </summary>
 	public sealed class Moves
 	{
-		public static bool IsCastlingMove(Board board, int from, int to)
+		public const int CastleKingsideWhite = 1;
+		public const int CastleQueensideWhite = 2;
+		public const int CastleKingsideBlack = 3;
+		public const int CastleQueensideBlack = 4;
+
+		/// <summary>
+		/// Checks if the move is a castling move. Returns the type of castling that is
+		/// executed. Returns 0 if not a castling move. See Moves.CastleXXX constants in the Moves class
+		/// </summary>
+		/// <param name="board"></param>
+		/// <param name="from"></param>
+		/// <param name="to"></param>
+		/// <returns></returns>
+		public static int IsCastlingMove(Board board, int from, int to)
 		{
 			// white kingside
 			if (from == 4 && to == 6 && board.State[from] == (Pieces.King | Colors.White))
-				return true;
+				return CastleKingsideWhite;
 
 			// white queenside
 			if (from == 4 && to == 2 && board.State[from] == (Pieces.King | Colors.White))
-				return true;
+				return CastleQueensideWhite;
 
 			// black kingside
 			if (from == 60 && to == 62 && board.State[from] == (Pieces.King | Colors.Black))
-				return true;
+				return CastleKingsideBlack;
 
 			// black queenside
 			if (from == 60 && to == 58 && board.State[from] == (Pieces.King | Colors.Black))
-				return true;
+				return CastleQueensideBlack;
 
-			return false;
+			return 0;
 		}
 
+		/// <summary>
+		/// Checks if the move is an en passant move
+		/// </summary>
+		/// <param name="board"></param>
+		/// <param name="from"></param>
+		/// <param name="to"></param>
+		/// <returns></returns>
 		public static bool IsEnPassantMove(Board board, int from, int to)
 		{
 			var color = board.Color(from);
 
+			if (board.Piece(from) != Pieces.Pawn)
+				return false;
+
 			if (color == Colors.White)
 			{
 				if (to == from + 7 || to == from + 9)
-					if (board.LastMove.From == to + 8 && board.LastMove.To == to - 8)
+					if (board.EnPassantTile == to)
 						return true;
 			}
 
 			if (color == Colors.Black)
 			{
 				if (to == from - 7 || to == from - 9)
-					if (board.LastMove.From == to - 8 && board.LastMove.To == to + 8)
+					if (board.EnPassantTile == to)
 						return true;
 			}
+
+			return false;
+		}
+
+		/// <summary>
+		/// Returns the tile of the pawn that is killed in an en passant capture
+		/// </summary>
+		/// <param name="board"></param>
+		/// <param name="from"></param>
+		/// <param name="to"></param>
+		/// <returns></returns>
+		public static int EnPassantVictim(Board board, int from, int to)
+		{
+			var color = board.Color(from);
+
+			if (color == Colors.White)
+				return to - 8;
+
+			if (color == Colors.Black)
+				return to + 8;
+
+			throw new Exception("Unrecognized color");
+		}
+
+		/// <summary>
+		/// Checks if the move is pawn moving 2 tiles, and returns the tile at which it can be captured
+		/// (between from and to). Returns 0 if the piece can not be captured in an en passant move
+		/// </summary>
+		/// <param name="board"></param>
+		/// <param name="from"></param>
+		/// <param name="to"></param>
+		/// <returns></returns>
+		public static int EnPassantTile(Board board, int from, int to)
+		{
+			var color = board.Color(from);
+			var piece = board.Piece(from);
+			var y = Board.Y(from);
+
+			if (piece != Pieces.Pawn)
+				return 0;
+
+			if (color == Colors.White && y == 1 && to == (from + 16))
+				return from + 8;
+
+			if (color == Colors.Black && y == 6 && to == (from - 16))
+				return from - 8;
+
+			return 0;
+		}
+
+		public static bool IsCaptureMove(Board board, int from, int to)
+		{
+			if (board.State[to] != 0 || IsEnPassantMove(board, from, to))
+				return true;
+
+			return false;
+		}
+
+		/// <summary>
+		/// Checks if a piece can be promoted
+		/// </summary>
+		/// <param name="square"></param>
+		/// <param name="pieceType"></param>
+		/// <returns></returns>
+		public static bool CanPromote(Board board, int square)
+		{
+			// Can only promote pawns
+			if (board.Piece(square) != Pieces.Pawn)
+				return false;
+
+			int color = board.Color(square);
+
+			if (Board.Y(square) == 7 && color == Colors.White)
+				return true;
+
+			if (Board.Y(square) == 0 && color == Colors.Black)
+				return true;
 
 			return false;
 		}
@@ -133,12 +233,12 @@ namespace Chess
 
 				// en passant left
 				target = square + 7;
-				if (y == 4 && x > 0 && board.LastMove.From == (target + 8) && board.LastMove.To == (target - 8) && board.State[target - 8] == (Pieces.Pawn | Colors.Black))
+				if (y == 4 && x > 0 && board.EnPassantTile == target && board.State[target - 8] == (Pieces.Pawn | Colors.Black))
 					output.Add(target);
 
 				// en passant right
 				target = square + 9;
-				if (y == 4 && x < 7 && board.LastMove.From == (target + 8) && board.LastMove.To == (target - 8) && board.State[target - 8] == (Pieces.Pawn | Colors.Black))
+				if (y == 4 && x < 7 && board.EnPassantTile == target && board.State[target - 8] == (Pieces.Pawn | Colors.Black))
 					output.Add(target);
 			}
 			else
@@ -165,12 +265,12 @@ namespace Chess
 
 				// en passant left
 				target = square - 9;
-				if (y == 3 && x > 0 && board.LastMove.From == (target - 8) && board.LastMove.To == (target + 8) && board.State[target + 8] == (Pieces.Pawn | Colors.White))
+				if (y == 3 && x > 0 && board.EnPassantTile == target && board.State[target + 8] == (Pieces.Pawn | Colors.White))
 					output.Add(target);
 
 				// en passant right
 				target = square - 7;
-				if (y == 3 && x < 7 && board.LastMove.From == (target - 8) && board.LastMove.To == (target + 8) && board.State[target + 8] == (Pieces.Pawn | Colors.White))
+				if (y == 3 && x < 7 && board.EnPassantTile == target && board.State[target + 8] == (Pieces.Pawn | Colors.White))
 					output.Add(target);
 			}
 

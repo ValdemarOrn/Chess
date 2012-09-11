@@ -172,9 +172,9 @@ namespace Chess
 
 			// Process whose turn
 			if (turn.ToLower().Contains('w'))
-				b.Turn = Colors.White;
+				b.PlayerTurn = Colors.White;
 			else if (turn.ToLower().Contains('b'))
-				b.Turn = Colors.Black;
+				b.PlayerTurn = Colors.Black;
 			else
 				throw new Exception("Malformed FEN string. Turn color not recognized");
 
@@ -193,43 +193,43 @@ namespace Chess
 			{
 				string enp = parts[3].ToLower();
 				if (enp.Contains('-'))
-					b.LastMove = new Move();
+					b.EnPassantTile = 0;
 				if (enp.Contains('3')) // white moved
 				{
 					int tile = Notation.TextToTile(enp);
 
-					if(b.Turn == Colors.White)
+					if(b.PlayerTurn == Colors.White)
 						throw new Exception("Malformed FEN string. En passant shows white moved last, but it's also his turn");
 
 					if (b.State[tile+8] != (Pieces.Pawn | Colors.White))
 						throw new Exception("Malformed FEN string. En passant expected white pawn at tile " + Notation.TileToText(tile + 8));
 
-					b.LastMove = new Move(tile - 8, tile + 8);
+					b.EnPassantTile = tile;
 				}
 				if (enp.Contains('6')) // black moved
 				{
 					int tile = Notation.TextToTile(enp);
 
-					if (b.Turn == Colors.Black)
+					if (b.PlayerTurn == Colors.Black)
 						throw new Exception("Malformed FEN string. En passant shows black moved last, but it's also his turn");
 
 					if (b.State[tile - 8] != (Pieces.Pawn | Colors.Black))
 						throw new Exception("Malformed FEN string. En passant expected black pawn at tile " + Notation.TileToText(tile + 8));
 
-					b.LastMove = new Move(tile + 8, tile - 8);
+					b.EnPassantTile = tile;
 				}
 			}
 
 			if (parts.Length >= 5)
 			{
 				int halfmoves = Convert.ToInt32(parts[4]);
-				b.FiftyMoveRule = halfmoves;
+				b.FiftyMoveRulePlies = halfmoves;
 			}
 
 			if (parts.Length >= 6)
 			{
 				int round = Convert.ToInt32(parts[5]);
-				b.Round = round;
+				b.MoveCount = round;
 			}
 
 			return b;

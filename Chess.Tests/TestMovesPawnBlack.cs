@@ -14,7 +14,7 @@ namespace Chess.Tests
 		{
 			// test free space
 			var b = new Board();
-			b.Turn = Colors.Black;
+			b.PlayerTurn = Colors.Black;
 			int pos = 6 * 8 + 4;
 			b.State[pos] = Pieces.Pawn | Chess.Colors.Black;
 			var moves = Moves.GetMoves(b, pos);
@@ -28,7 +28,7 @@ namespace Chess.Tests
 		{
 			// test free space
 			var b = new Board();
-			b.Turn = Colors.Black;
+			b.PlayerTurn = Colors.Black;
 			int pos = 5 * 8 + 4;
 			b.State[pos] = Pieces.Pawn | Chess.Colors.Black;
 			var moves = Moves.GetMoves(b, pos);
@@ -41,7 +41,7 @@ namespace Chess.Tests
 		{
 			// Test edge of board
 			var b = new Board();
-			b.Turn = Colors.Black;
+			b.PlayerTurn = Colors.Black;
 			int pos = 8 + 4;
 			b.State[pos] = Pieces.Pawn | Chess.Colors.Black;
 			var moves = Moves.GetMoves(b, pos);
@@ -54,7 +54,7 @@ namespace Chess.Tests
 		{
 			// Test obstacle far, same color
 			var b = new Board();
-			b.Turn = Colors.Black;
+			b.PlayerTurn = Colors.Black;
 			int pos = 6 * 8 + 4;
 			b.State[pos] = Pieces.Pawn | Chess.Colors.Black;
 			b.State[pos - 16] = Pieces.Pawn | Chess.Colors.Black;
@@ -68,7 +68,7 @@ namespace Chess.Tests
 		{
 			// Test obstacle far, opposite color
 			var b = new Board();
-			b.Turn = Colors.Black;
+			b.PlayerTurn = Colors.Black;
 			int pos = 6 * 8 + 4;
 			b.State[pos] = Pieces.Pawn | Chess.Colors.Black;
 			b.State[pos - 16] = Pieces.Pawn | Chess.Colors.White;
@@ -82,7 +82,7 @@ namespace Chess.Tests
 		{
 			// Test obstacle near, same color
 			var b = new Board();
-			b.Turn = Colors.Black;
+			b.PlayerTurn = Colors.Black;
 			int pos = 6 * 8 + 4;
 			b.State[pos] = Pieces.Pawn | Chess.Colors.Black;
 			b.State[pos - 8] = Pieces.Pawn | Chess.Colors.Black;
@@ -95,7 +95,7 @@ namespace Chess.Tests
 		{
 			// Test obstacle near, opposite color
 			var b = new Board();
-			b.Turn = Colors.Black;
+			b.PlayerTurn = Colors.Black;
 			int pos = 6 * 8 + 4;
 			b.State[pos] = Pieces.Pawn | Chess.Colors.Black;
 			b.State[pos - 8] = Pieces.Pawn | Chess.Colors.White;
@@ -107,7 +107,7 @@ namespace Chess.Tests
 		public void TestCaptureLeft()
 		{
 			var b = new Board();
-			b.Turn = Colors.Black;
+			b.PlayerTurn = Colors.Black;
 			int pos = 6 * 8 + 4;
 			b.State[pos] = Pieces.Pawn | Chess.Colors.Black;
 			b.State[pos - 9] = Pieces.Pawn | Chess.Colors.White;
@@ -122,7 +122,7 @@ namespace Chess.Tests
 		public void TestCaptureRight()
 		{
 			var b = new Board();
-			b.Turn = Colors.Black;
+			b.PlayerTurn = Colors.Black;
 			int pos = 6 * 8 + 4;
 			b.State[pos] = Pieces.Pawn | Chess.Colors.Black;
 			b.State[pos - 7] = Pieces.Pawn | Chess.Colors.White;
@@ -137,7 +137,7 @@ namespace Chess.Tests
 		public void TestCaptureSameColor()
 		{
 			var b = new Board();
-			b.Turn = Colors.Black;
+			b.PlayerTurn = Colors.Black;
 			int pos = 6 * 8 + 4;
 			b.State[pos] = Pieces.Pawn | Chess.Colors.Black;
 			b.State[pos - 7] = Pieces.Pawn | Chess.Colors.Black;
@@ -150,7 +150,7 @@ namespace Chess.Tests
 		public void TestEnPassantLeft()
 		{
 			var b = new Board();
-			b.Turn = Colors.White;
+			b.PlayerTurn = Colors.White;
 
 			int posBlack = Notation.TextToTile("e4");
 			int posWhite = Notation.TextToTile("d2");
@@ -169,7 +169,7 @@ namespace Chess.Tests
 		public void TestEnPassantRight()
 		{
 			var b = new Board();
-			b.Turn = Colors.White;
+			b.PlayerTurn = Colors.White;
 
 			int posBlack = Notation.TextToTile("e4");
 			int posWhite = Notation.TextToTile("f2");

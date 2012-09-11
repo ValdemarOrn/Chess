@@ -8,12 +8,16 @@ namespace Chess
 	public sealed class Board
 	{
 		public int[] State;
-		public int Turn;
-		public int Round;
-		public Move LastMove;
+		public int PlayerTurn;
+		public int MoveCount;
 
-		// Todo: implement 50 move rule
-		public int FiftyMoveRule;
+		public int EnPassantTile;
+
+		/// <summary>
+		/// Counts halfmoves since the last pawn move or capture. NOTE: this contains half moves so the
+		/// number must reach 100 before the 50 move rule has been fulfilled
+		/// </summary>
+		public int FiftyMoveRulePlies;
 
 		public bool CastleQueensideWhite;
 		public bool CastleKingsideWhite;
@@ -26,10 +30,9 @@ namespace Chess
 		/// <param name="init">If set to true the board will be initialized to the standard chess starting position</param>
 		public Board(bool init = false)
 		{
-			Round = 1;
+			MoveCount = 1;
 			State = new int[64];
-			Turn = Colors.White;
-			LastMove = new Move();
+			PlayerTurn = Colors.White;
 
 			if (init)
 				InitBoard();
@@ -138,9 +141,11 @@ namespace Chess
 			b.CastleQueensideWhite = this.CastleQueensideWhite;
 			b.CastleKingsideBlack = this.CastleKingsideBlack;
 			b.CastleKingsideWhite = this.CastleKingsideWhite;
-			b.LastMove = this.LastMove;
-			b.Turn = this.Turn;
-
+			b.EnPassantTile = this.EnPassantTile;
+			b.FiftyMoveRulePlies = this.FiftyMoveRulePlies;
+			b.MoveCount = this.MoveCount;
+			b.PlayerTurn = this.PlayerTurn;
+			
 			this.State.CopyTo(b.State, 0);
 
 			return b;
@@ -154,10 +159,7 @@ namespace Chess
 		/// <returns></returns>
 		public bool Move(int from, int to, bool verifyLegalMove = false)
 		{
-			// Todo: Check for En passant and Castling and "fix" it
-			// Todo: update 50 move rule
-
-			if (Color(from) != this.Turn)
+			if (Color(from) != this.PlayerTurn)
 				return false;
 
 			if (verifyLegalMove)
@@ -167,12 +169,56 @@ namespace Chess
 					return false;
 			}
 
+			// Move the rook if we are castling
+			int castling = Moves.IsCastlingMove(this, from, to);
+			switch(castling)
+			{
+				case 0:
+					break;
+				case Moves.CastleKingsideWhite:
+					State[5] = State[7];
+					State[7] = 0;
+					break;
+				case Moves.CastleQueensideWhite:
+					State[3] = State[0];
+					State[0] = 0;
+					break;
+				case Moves.CastleKingsideBlack:
+					State[61] = State[63];
+					State[63] = 0;
+					break;
+				case Moves.CastleQueensideBlack:
+					State[59] = State[56];
+					State[56] = 0;
+					break;
+			}
+
+			// Remove the pawn if en passant attack
+			bool enpassant = Moves.IsEnPassantMove(this, from, to);
+			if (enpassant)
+			{
+				int victim = Moves.EnPassantVictim(this, from, to);
+				State[victim] = 0;
+			}
+
+			// Log the move if this enables an en passant attack
+			EnPassantTile = Moves.EnPassantTile(this, from, to);
+
+			// Check if this move resets the 50 move position
+			if (Piece(from) == Pieces.Pawn || Moves.IsCaptureMove(this, from, to))
+				FiftyMoveRulePlies = 0;
+			else
+				FiftyMoveRulePlies++;
+
+			// Perform the move
 			State[to] = State[from];
 			State[from] = 0;
 
-			LastMove = new Move(from, to);
+			// Update the round if it was black's turn to play
+			if (PlayerTurn == Colors.Black)
+				MoveCount++;
 
-			Turn = (Turn == Colors.White) ? Colors.Black : Colors.White;
+			PlayerTurn = (PlayerTurn == Colors.White) ? Colors.Black : Colors.White;
 
 			// check if castling is still allowed
 			CheckCastling();
@@ -242,12 +288,12 @@ namespace Chess
 		/// </summary>
 		public void InitBoard()
 		{
-			Round = 1;
+			MoveCount = 1;
 
 			for (int i = 0; i < State.Length; i++)
 				State[i] = 0;
 
-			Turn = Colors.White;
+			PlayerTurn = Colors.White;
 
 			State[1 * 8 + 0] = Colors.White | Pieces.Pawn;
 			State[1 * 8 + 1] = Colors.White | Pieces.Pawn;

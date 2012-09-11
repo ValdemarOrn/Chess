@@ -15,11 +15,14 @@ namespace Chess
 		/// <returns></returns>
 		public static List<Move> ABNToMoves(Board initBoard, string ANString)
 		{
-			var board = initBoard;
+			ANString = ANString.Replace(".", ". ");
+			ANString = ANString.Replace("  ", " ");
+
+			var board = initBoard.Copy();
 			var moves = new List<Move>();
 
-			var tokens = ANString.Split(' ').Select(x => x.Trim()).ToList();
-			int turn = 0;
+			var tokens = ANString.Split(' ').Select(x => x.Trim()).Where(x => !String.IsNullOrWhiteSpace(x)).ToList();
+			int MoveCount = 0;
 			int i = 0;
 
 			try
@@ -32,26 +35,43 @@ namespace Chess
 					if (token.Contains('.'))
 					{
 						int t = Convert.ToInt32(token.Replace(".", ""));
-						if (t < turn)
-							throw new Exception("Turn was lower than expected");
-						if (t == turn && moves.Count(x => x.Turn == t) != 1) // checks if we already have white's move
-							throw new Exception("Turn was lower than expected");
-						if (t > turn + 1)
-							throw new Exception("Missed turn " + (turn + 1));
-						turn = t;
+						if (t < MoveCount)
+							throw new Exception("Move count was lower than expected");
+						if (t == MoveCount && moves.Count(x => x.MoveCount == t) != 1) // checks if we already have white's move
+							throw new Exception("Move count was lower than expected");
+						if (t > MoveCount + 1)
+							throw new Exception("Missed move number " + (MoveCount + 1));
+						MoveCount = t;
 						continue;
 					}
 
+					// ---------------------- Parse final score ----------------------
+					if (i == tokens.Count - 1 && (token.Contains("1-0") || token.Contains("0-1") || token.Contains("1/2")))
+						continue;
+
 					// ---------------------- Parse the move ----------------------
-					Move move = GetMove(board, token, board.Turn);
-					move.Turn = turn;
+					Move move = GetMove(board, token, board.PlayerTurn);
+					move.MoveCount = MoveCount;
 					moves.Add(move);
 					board.Move(move.From, move.To, true);
+
+					// check for promotions
+					if (move.Promotion != 0)
+					{
+						if (Moves.CanPromote(board, move.To))
+						{
+							bool promoted = board.Promote(move.To, move.Promotion);
+							if(!promoted)
+								throw new Exception("Unable to promote piece");
+						}
+						else
+							throw new Exception("Unable to promote piece");
+					}
 				}
 			}
 			catch (Exception e)
 			{
-				throw new Exception("Error parsing algebraic notation at token " + i, e);
+				throw new Exception("Error parsing algebraic notation at token " + i + ", during move #" + MoveCount + " : " + tokens[i], e);
 			}
 
 			return moves;
@@ -119,13 +139,28 @@ namespace Chess
 
 
 			// promotion
-			char promotedTo = (char)0;
-			bool promotion = token.Contains('=');
-			if (promotion)
+			int promotion = 0;
+
+			if (piece == Pieces.Pawn)
 			{
-				promotedTo = token[token.IndexOf('=') + 1];
-				// remove promotion from string
-				token = token.Substring(0, token.IndexOf('=')) + token.Substring(token.IndexOf('=') + 1);
+				// I don't use the = sign
+				token = token.Replace("=", "");
+
+				// check if there are any piece specifiers in the string
+				if (token.Contains("Q"))
+					promotion = Pieces.Queen;
+				if (token.Contains("N"))
+					promotion = Pieces.Knight;
+				if (token.Contains("B"))
+					promotion = Pieces.Bishop;
+				if (token.Contains("R"))
+					promotion = Pieces.Rook;
+
+				// Remove promotion specifier from string
+				token = token.Replace("Q", "");
+				token = token.Replace("N", "");
+				token = token.Replace("B", "");
+				token = token.Replace("R", "");
 			}
 
 			// find the target
@@ -168,7 +203,7 @@ namespace Chess
 
 			from = possible[0];
 
-			return new Move(from, target, 0, color, capture, GetPiece(promotedTo), check, mate, queenside, kingside);
+			return new Move(from, target, 0, color, capture, promotion, check, mate, queenside, kingside);
 		}
 
 		private static Tuple<int, int> GetHint(string token)

@@ -33,7 +33,7 @@ namespace Chess.UI
 
 		public void GameUpdated()
 		{
-			bool check = Check.IsChecked(Board, Board.Turn);
+			bool check = Check.IsChecked(Board, Board.PlayerTurn);
 			SetCheck(check);
 		}
 
@@ -45,7 +45,7 @@ namespace Chess.UI
 		public void SetCheck(bool check)
 		{
 			if (check)
-				View.labelChecked.Text = Colors.ToString(Board.Turn) + " is checked";
+				View.labelChecked.Text = Colors.ToString(Board.PlayerTurn) + " is checked";
 			else
 				View.labelChecked.Text = "";
 		}

@@ -118,7 +118,7 @@ namespace Chess.UI
 				SelectedTile = -1;
 			else if (SelectedTile == tile)
 				SelectedTile = -1;
-			else if (Board.Color(tile) == Board.Turn)
+			else if (Board.Color(tile) == Board.PlayerTurn)
 				SelectedTile = tile;
 			else
 				SelectedTile = -1;

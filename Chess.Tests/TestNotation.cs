@@ -140,8 +140,7 @@ namespace Chess.Tests
 		{
 			var str = "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq -";
 			var b2 = Notation.FENtoBoard(str);
-			Assert.AreEqual(0, b2.LastMove.From);
-			Assert.AreEqual(0, b2.LastMove.To);
+			Assert.AreEqual(0, b2.EnPassantTile);
 		}
 
 		[TestMethod]
@@ -150,8 +149,7 @@ namespace Chess.Tests
 			var str = "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3";
 			var b2 = Notation.FENtoBoard(str);
 
-			Assert.AreEqual(Notation.TextToTile("e2"), b2.LastMove.From);
-			Assert.AreEqual(Notation.TextToTile("e4"), b2.LastMove.To);
+			Assert.AreEqual(Notation.TextToTile("e3"), b2.EnPassantTile);
 
 			// compare state
 			var b1 = new Board(true);
@@ -166,8 +164,7 @@ namespace Chess.Tests
 			var str = "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq c6";
 			var b2 = Notation.FENtoBoard(str);
 
-			Assert.AreEqual(Notation.TextToTile("c7"), b2.LastMove.From);
-			Assert.AreEqual(Notation.TextToTile("c5"), b2.LastMove.To);
+			Assert.AreEqual(Notation.TextToTile("c6"), b2.EnPassantTile);
 
 			// compare state
 			var b1 = new Board(true);
@@ -306,7 +303,7 @@ namespace Chess.Tests
 			var str = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR W Kq";
 			var b2 = Notation.FENtoBoard(str);
 
-			Assert.AreEqual(Colors.White, b2.Turn);
+			Assert.AreEqual(Colors.White, b2.PlayerTurn);
 		}
 
 		[TestMethod]
@@ -317,7 +314,7 @@ namespace Chess.Tests
 			var str = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR b Kq";
 			var b2 = Notation.FENtoBoard(str);
 
-			Assert.AreEqual(Colors.Black, b2.Turn);
+			Assert.AreEqual(Colors.Black, b2.PlayerTurn);
 		}
 
 		[TestMethod]
@@ -328,8 +325,8 @@ namespace Chess.Tests
 			var str = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR b Kq - 12 18";
 			var b2 = Notation.FENtoBoard(str);
 
-			Assert.AreEqual(12, b2.FiftyMoveRule);
-			Assert.AreEqual(18, b2.Round);
+			Assert.AreEqual(12, b2.FiftyMoveRulePlies);
+			Assert.AreEqual(18, b2.MoveCount);
 		}
 	}
 }

@@ -14,7 +14,7 @@ namespace Chess.Tests
 		{
 			// test free space
 			var b = new Board();
-			b.Turn = Colors.Black;
+			b.PlayerTurn = Colors.Black;
 			int pos = 6 * 8 + 4;
 			b.State[pos] = Pieces.Pawn | Chess.Colors.Black;
 			var moves = Attacks.GetAttacks(b, pos);
@@ -28,7 +28,7 @@ namespace Chess.Tests
 		{
 			// Test left edge of board
 			var b = new Board();
-			b.Turn = Colors.Black;
+			b.PlayerTurn = Colors.Black;
 			int pos = 24;
 			b.State[pos] = Pieces.Pawn | Chess.Colors.Black;
 			var moves = Attacks.GetAttacks(b, pos);
@@ -37,7 +37,7 @@ namespace Chess.Tests
 
 			// test right edge of board
 			b = new Board();
-			b.Turn = Colors.Black;
+			b.PlayerTurn = Colors.Black;
 			pos = 24 + 7;
 			b.State[pos] = Pieces.Pawn | Chess.Colors.Black;
 			moves = Attacks.GetAttacks(b, pos);
@@ -49,7 +49,7 @@ namespace Chess.Tests
 		public void TestCaptureLeft()
 		{
 			var b = new Board();
-			b.Turn = Colors.Black;
+			b.PlayerTurn = Colors.Black;
 			int pos = 6 * 8 + 4;
 			b.State[pos] = Pieces.Pawn | Chess.Colors.Black;
 			b.State[pos - 9] = Pieces.Pawn | Chess.Colors.White;
@@ -63,7 +63,7 @@ namespace Chess.Tests
 		public void TestCaptureRight()
 		{
 			var b = new Board();
-			b.Turn = Colors.Black;
+			b.PlayerTurn = Colors.Black;
 			int pos = 6 * 8 + 4;
 			b.State[pos] = Pieces.Pawn | Chess.Colors.Black;
 			b.State[pos - 7] = Pieces.Pawn | Chess.Colors.White;
@@ -77,7 +77,7 @@ namespace Chess.Tests
 		public void TestCaptureSameColor()
 		{
 			var b = new Board();
-			b.Turn = Colors.Black;
+			b.PlayerTurn = Colors.Black;
 			int pos = 6 * 8 + 4;
 			b.State[pos] = Pieces.Pawn | Chess.Colors.Black;
 			b.State[pos - 7] = Pieces.Pawn | Chess.Colors.Black;
@@ -90,7 +90,7 @@ namespace Chess.Tests
 		public void TestEnPassantLeft()
 		{
 			var b = new Board();
-			b.Turn = Colors.White;
+			b.PlayerTurn = Colors.White;
 
 			int posBlack = Notation.TextToTile("e4");
 			int posWhite = Notation.TextToTile("d2");
@@ -109,7 +109,7 @@ namespace Chess.Tests
 		public void TestEnPassantRight()
 		{
 			var b = new Board();
-			b.Turn = Colors.White;
+			b.PlayerTurn = Colors.White;
 
 			int posBlack = Notation.TextToTile("e4");
 			int posWhite = Notation.TextToTile("f2");

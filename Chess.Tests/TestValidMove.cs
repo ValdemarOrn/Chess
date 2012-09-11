@@ -13,7 +13,7 @@ namespace Chess.Tests
 		public void TestMoveCausesCheck()
 		{
 			var b = new Board();
-			b.Turn = Colors.Black;
+			b.PlayerTurn = Colors.Black;
 			int pos = 5*8 + 4;
 
 			b.State[7*8 + 4] = Pieces.King | Colors.Black;
@@ -44,7 +44,7 @@ namespace Chess.Tests
 		public void TestValidMoves()
 		{
 			var b = new Board();
-			b.Turn = Colors.Black;
+			b.PlayerTurn = Colors.Black;
 			int pos = 5 * 8 + 4;
 
 			b.State[pos + 16] = Pieces.King | Colors.Black;

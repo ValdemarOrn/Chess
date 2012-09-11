@@ -7,7 +7,7 @@ namespace Chess
 {
 	public struct Move
 	{
-		public int From, To, Turn, Color;
+		public int From, To, MoveCount, Color;
 		public bool Capture;
 		public int Promotion;
 		public bool Check;
@@ -29,7 +29,7 @@ namespace Chess
 		{
 			From = from;
 			To = to;
-			Turn = turn;
+			MoveCount = turn;
 			Color = color;
 			Capture = capture;
 			Promotion = promotion;

@@ -83,7 +83,7 @@ namespace Chess.Tests
 		public void TestEnPassantLeft()
 		{
 			var b = new Board();
-			b.Turn = Colors.Black;
+			b.PlayerTurn = Colors.Black;
 
 			int posWhite = Notation.TextToTile("e5");
 			int posBlack = Notation.TextToTile("d7");
@@ -102,7 +102,7 @@ namespace Chess.Tests
 		public void TestEnPassantRight()
 		{
 			var b = new Board();
-			b.Turn = Colors.Black;
+			b.PlayerTurn = Colors.Black;
 
 			int posWhite = Notation.TextToTile("e5");
 			int posBlack = Notation.TextToTile("f7");

@@ -52,6 +52,7 @@
     <Compile Include="Notation.cs" />
     <Compile Include="Moves.cs" />
     <Compile Include="Check.cs" />
+    <Compile Include="PGN.cs" />
     <Compile Include="Pieces.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -118,7 +118,7 @@ namespace Chess.Tests
 
 			b.AllowCastlingAll();
 
-			b.Turn = Colors.White;
+			b.PlayerTurn = Colors.White;
 			b.Move(0, 1);
 
 			Assert.IsTrue(b.CastleKingsideBlack);
@@ -127,7 +127,7 @@ namespace Chess.Tests
 			Assert.IsFalse(b.CastleQueensideWhite);
 
 			// test that we can't just move back
-			b.Turn = Colors.White;
+			b.PlayerTurn = Colors.White;
 			b.Move(1, 0);
 
 			Assert.IsTrue(b.CastleKingsideBlack);
@@ -150,7 +150,7 @@ namespace Chess.Tests
 
 			b.AllowCastlingAll();
 
-			b.Turn = Colors.White;
+			b.PlayerTurn = Colors.White;
 			b.Move(7, 6);
 
 			Assert.IsTrue(b.CastleKingsideBlack);
@@ -159,7 +159,7 @@ namespace Chess.Tests
 			Assert.IsTrue(b.CastleQueensideWhite);
 
 			// test that we can't just move back
-			b.Turn = Colors.White;
+			b.PlayerTurn = Colors.White;
 			b.Move(6, 7);
 
 			Assert.IsTrue(b.CastleKingsideBlack);
@@ -183,7 +183,7 @@ namespace Chess.Tests
 
 			b.AllowCastlingAll();
 
-			b.Turn = Colors.Black;
+			b.PlayerTurn = Colors.Black;
 			b.Move(56, 57);
 
 			Assert.IsTrue(b.CastleKingsideBlack);
@@ -192,7 +192,7 @@ namespace Chess.Tests
 			Assert.IsTrue(b.CastleQueensideWhite);
 
 			// test that we can't just move back
-			b.Turn = Colors.Black;
+			b.PlayerTurn = Colors.Black;
 			b.Move(57, 56);
 
 			Assert.IsTrue(b.CastleKingsideBlack);
@@ -215,7 +215,7 @@ namespace Chess.Tests
 
 			b.AllowCastlingAll();
 
-			b.Turn = Colors.Black;
+			b.PlayerTurn = Colors.Black;
 			b.Move(63, 62);
 
 			Assert.IsFalse(b.CastleKingsideBlack);
@@ -224,13 +224,43 @@ namespace Chess.Tests
 			Assert.IsTrue(b.CastleQueensideWhite);
 
 			// test that we can't just move back
-			b.Turn = Colors.Black;
+			b.PlayerTurn = Colors.Black;
 			b.Move(62, 63);
 
 			Assert.IsFalse(b.CastleKingsideBlack);
 			Assert.IsTrue(b.CastleKingsideWhite);
 			Assert.IsTrue(b.CastleQueensideBlack);
 			Assert.IsTrue(b.CastleQueensideWhite);
+		}
+
+		[TestMethod]
+		public void TestPromoteOK1()
+		{
+			//Todo: Test Promote()
+		}
+
+		[TestMethod]
+		public void TestPromoteOK2()
+		{
+			
+		}
+
+		[TestMethod]
+		public void TestPromoteFail()
+		{
+			
+		}
+
+		[TestMethod]
+		public void TestPromoteIllegalPiece()
+		{
+			
+		}
+
+		[TestMethod]
+		public void TestMove1()
+		{
+			//Todo: Test Move()
 		}
 	}
 }

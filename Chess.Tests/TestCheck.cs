@@ -100,7 +100,7 @@ namespace Chess.Tests
 			b.State[6] = Pieces.Rook | Colors.White;
 			b.State[7] = Pieces.Rook | Colors.White;
 			b.State[8 * 6 + 6] = Pieces.King | Colors.Black;
-			b.Turn = Colors.Black;
+			b.PlayerTurn = Colors.Black;
 
 			bool check = Check.IsCheckMate(b, Colors.Black);
 
@@ -114,7 +114,7 @@ namespace Chess.Tests
 			b.State[6] = Pieces.Rook | Colors.White;
 			b.State[7] = Pieces.Rook | Colors.White;
 			b.State[7*8 + 7] = Pieces.King | Colors.Black;
-			b.Turn = Colors.Black;
+			b.PlayerTurn = Colors.Black;
 
 			bool check = Check.IsCheckMate(b, Colors.Black);
 
@@ -130,7 +130,7 @@ namespace Chess.Tests
 			b.State[7] = Pieces.Rook | Colors.White;
 			b.State[7*8 + 7] = Pieces.King | Colors.Black;
 			b.State[6*8 + 0] = Pieces.Queen | Colors.Black;
-			b.Turn = Colors.Black;
+			b.PlayerTurn = Colors.Black;
 
 			bool check = Check.IsCheckMate(b, Colors.Black);
 
@@ -146,7 +146,7 @@ namespace Chess.Tests
 			b.State[6 * 8 + 1] = Pieces.Queen | Colors.White;
 			b.State[5 * 8 + 2] = Pieces.Pawn | Colors.White;
 			b.State[7] = Pieces.King | Colors.White;
-			b.Turn = Colors.Black;
+			b.PlayerTurn = Colors.Black;
 
 			bool check = Check.IsChecked(b, Colors.Black);
 			Assert.IsTrue(check);
@@ -163,7 +163,7 @@ namespace Chess.Tests
 			b.State[7*8] = Pieces.King | Colors.Black;
 			b.State[6*8+1] = Pieces.Rook | Colors.White;
 			b.State[7] = Pieces.King | Colors.White;
-			b.Turn = Colors.Black;
+			b.PlayerTurn = Colors.Black;
 
 			bool check = Check.IsChecked(b, Colors.Black);
 			Assert.IsFalse(check);
@@ -181,7 +181,7 @@ namespace Chess.Tests
 			b.State[6 * 8 + 1] = Pieces.Rook | Colors.White;
 			b.State[5 * 8 + 2] = Pieces.Pawn | Colors.White;
 			b.State[7] = Pieces.King | Colors.White;
-			b.Turn = Colors.Black;
+			b.PlayerTurn = Colors.Black;
 
 			bool check = Check.IsChecked(b, Colors.Black);
 			Assert.IsFalse(check);
