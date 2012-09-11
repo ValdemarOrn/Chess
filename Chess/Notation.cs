@@ -180,13 +180,13 @@ namespace Chess
 
 			// Process Castling
 			if (castle.Contains('K'))
-				b.CastleKingsideWhite = true;
+				b.CastleKW = Moves.CanCastle;
 			if (castle.Contains('Q'))
-				b.CastleQueensideWhite = true;
+				b.CastleQW = Moves.CanCastle;
 			if (castle.Contains('k'))
-				b.CastleKingsideBlack = true;
+				b.CastleKB = Moves.CanCastle;
 			if (castle.Contains('q'))
-				b.CastleQueensideBlack = true;
+				b.CastleQB = Moves.CanCastle;
 
 			// Process en passant
 			if (parts.Length >= 4)

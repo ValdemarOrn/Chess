@@ -34,6 +34,7 @@
 			this.labelChecked = new System.Windows.Forms.Label();
 			this.buttonSetState = new System.Windows.Forms.Button();
 			this.textBoxFEN = new System.Windows.Forms.TextBox();
+			this.labelScore = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
 			// buttonNewGame
@@ -90,11 +91,21 @@
 			this.textBoxFEN.Size = new System.Drawing.Size(242, 20);
 			this.textBoxFEN.TabIndex = 5;
 			// 
+			// labelScore
+			// 
+			this.labelScore.AutoSize = true;
+			this.labelScore.Location = new System.Drawing.Point(511, 252);
+			this.labelScore.Name = "labelScore";
+			this.labelScore.Size = new System.Drawing.Size(38, 13);
+			this.labelScore.TabIndex = 6;
+			this.labelScore.Text = "Score:";
+			// 
 			// GameView
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(753, 532);
+			this.Controls.Add(this.labelScore);
 			this.Controls.Add(this.textBoxFEN);
 			this.Controls.Add(this.buttonSetState);
 			this.Controls.Add(this.labelChecked);
@@ -116,6 +127,7 @@
 		public System.Windows.Forms.Label labelChecked;
 		private System.Windows.Forms.Button buttonSetState;
 		private System.Windows.Forms.TextBox textBoxFEN;
+		public System.Windows.Forms.Label labelScore;
 	}
 }
 

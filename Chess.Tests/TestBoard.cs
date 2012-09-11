@@ -79,10 +79,10 @@ namespace Chess.Tests
 		{
 			var b = new Board(false);
 			b.AllowCastlingAll(); // Can't do this without any pieces on the board
-			Assert.IsFalse(b.CastleKingsideBlack);
-			Assert.IsFalse(b.CastleKingsideWhite);
-			Assert.IsFalse(b.CastleQueensideBlack);
-			Assert.IsFalse(b.CastleQueensideWhite);
+			Assert.IsFalse(b.CanCastleKBlack);
+			Assert.IsFalse(b.CanCastleKWhite);
+			Assert.IsFalse(b.CanCastleQBlack);
+			Assert.IsFalse(b.CanCastleQWhite);
 		}
 
 		[TestMethod]
@@ -98,10 +98,10 @@ namespace Chess.Tests
 			b.State[60] = Pieces.King | Colors.Black;
 
 			b.AllowCastlingAll();
-			Assert.IsTrue(b.CastleKingsideBlack);
-			Assert.IsTrue(b.CastleKingsideWhite);
-			Assert.IsTrue(b.CastleQueensideBlack);
-			Assert.IsTrue(b.CastleQueensideWhite);
+			Assert.IsTrue(b.CanCastleKBlack);
+			Assert.IsTrue(b.CanCastleKWhite);
+			Assert.IsTrue(b.CanCastleQBlack);
+			Assert.IsTrue(b.CanCastleQWhite);
 		}
 
 		[TestMethod]
@@ -121,19 +121,19 @@ namespace Chess.Tests
 			b.PlayerTurn = Colors.White;
 			b.Move(0, 1);
 
-			Assert.IsTrue(b.CastleKingsideBlack);
-			Assert.IsTrue(b.CastleKingsideWhite);
-			Assert.IsTrue(b.CastleQueensideBlack);
-			Assert.IsFalse(b.CastleQueensideWhite);
+			Assert.IsTrue(b.CanCastleKBlack);
+			Assert.IsTrue(b.CanCastleKWhite);
+			Assert.IsTrue(b.CanCastleQBlack);
+			Assert.IsFalse(b.CanCastleQWhite);
 
 			// test that we can't just move back
 			b.PlayerTurn = Colors.White;
 			b.Move(1, 0);
 
-			Assert.IsTrue(b.CastleKingsideBlack);
-			Assert.IsTrue(b.CastleKingsideWhite);
-			Assert.IsTrue(b.CastleQueensideBlack);
-			Assert.IsFalse(b.CastleQueensideWhite);
+			Assert.IsTrue(b.CanCastleKBlack);
+			Assert.IsTrue(b.CanCastleKWhite);
+			Assert.IsTrue(b.CanCastleQBlack);
+			Assert.IsFalse(b.CanCastleQWhite);
 		}
 
 		[TestMethod]
@@ -153,19 +153,19 @@ namespace Chess.Tests
 			b.PlayerTurn = Colors.White;
 			b.Move(7, 6);
 
-			Assert.IsTrue(b.CastleKingsideBlack);
-			Assert.IsFalse(b.CastleKingsideWhite);
-			Assert.IsTrue(b.CastleQueensideBlack);
-			Assert.IsTrue(b.CastleQueensideWhite);
+			Assert.IsTrue(b.CanCastleKBlack);
+			Assert.IsFalse(b.CanCastleKWhite);
+			Assert.IsTrue(b.CanCastleQBlack);
+			Assert.IsTrue(b.CanCastleQWhite);
 
 			// test that we can't just move back
 			b.PlayerTurn = Colors.White;
 			b.Move(6, 7);
 
-			Assert.IsTrue(b.CastleKingsideBlack);
-			Assert.IsFalse(b.CastleKingsideWhite);
-			Assert.IsTrue(b.CastleQueensideBlack);
-			Assert.IsTrue(b.CastleQueensideWhite);
+			Assert.IsTrue(b.CanCastleKBlack);
+			Assert.IsFalse(b.CanCastleKWhite);
+			Assert.IsTrue(b.CanCastleQBlack);
+			Assert.IsTrue(b.CanCastleQWhite);
 		}
 
 
@@ -186,19 +186,19 @@ namespace Chess.Tests
 			b.PlayerTurn = Colors.Black;
 			b.Move(56, 57);
 
-			Assert.IsTrue(b.CastleKingsideBlack);
-			Assert.IsTrue(b.CastleKingsideWhite);
-			Assert.IsFalse(b.CastleQueensideBlack);
-			Assert.IsTrue(b.CastleQueensideWhite);
+			Assert.IsTrue(b.CanCastleKBlack);
+			Assert.IsTrue(b.CanCastleKWhite);
+			Assert.IsFalse(b.CanCastleQBlack);
+			Assert.IsTrue(b.CanCastleQWhite);
 
 			// test that we can't just move back
 			b.PlayerTurn = Colors.Black;
 			b.Move(57, 56);
 
-			Assert.IsTrue(b.CastleKingsideBlack);
-			Assert.IsTrue(b.CastleKingsideWhite);
-			Assert.IsFalse(b.CastleQueensideBlack);
-			Assert.IsTrue(b.CastleQueensideWhite);
+			Assert.IsTrue(b.CanCastleKBlack);
+			Assert.IsTrue(b.CanCastleKWhite);
+			Assert.IsFalse(b.CanCastleQBlack);
+			Assert.IsTrue(b.CanCastleQWhite);
 		}
 
 		[TestMethod]
@@ -218,19 +218,19 @@ namespace Chess.Tests
 			b.PlayerTurn = Colors.Black;
 			b.Move(63, 62);
 
-			Assert.IsFalse(b.CastleKingsideBlack);
-			Assert.IsTrue(b.CastleKingsideWhite);
-			Assert.IsTrue(b.CastleQueensideBlack);
-			Assert.IsTrue(b.CastleQueensideWhite);
+			Assert.IsFalse(b.CanCastleKBlack);
+			Assert.IsTrue(b.CanCastleKWhite);
+			Assert.IsTrue(b.CanCastleQBlack);
+			Assert.IsTrue(b.CanCastleQWhite);
 
 			// test that we can't just move back
 			b.PlayerTurn = Colors.Black;
 			b.Move(62, 63);
 
-			Assert.IsFalse(b.CastleKingsideBlack);
-			Assert.IsTrue(b.CastleKingsideWhite);
-			Assert.IsTrue(b.CastleQueensideBlack);
-			Assert.IsTrue(b.CastleQueensideWhite);
+			Assert.IsFalse(b.CanCastleKBlack);
+			Assert.IsTrue(b.CanCastleKWhite);
+			Assert.IsTrue(b.CanCastleQBlack);
+			Assert.IsTrue(b.CanCastleQWhite);
 		}
 
 		[TestMethod]

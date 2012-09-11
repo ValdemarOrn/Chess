@@ -99,7 +99,7 @@ namespace Chess.Tests
 			b.InitBoard();
 			b.State[5] = 0;
 			b.State[6] = 0;
-			Assert.IsTrue(b.CastleKingsideWhite);
+			Assert.IsTrue(b.CanCastleKWhite);
 
 			var moves = Moves.GetValidMoves(b, 4);
 			Assert.AreEqual(2, moves.Count);
@@ -113,7 +113,7 @@ namespace Chess.Tests
 			var b = new Board();
 			b.InitBoard();
 			b.State[5] = 0;
-			Assert.IsTrue(b.CastleKingsideWhite);
+			Assert.IsTrue(b.CanCastleKWhite);
 
 			var moves = Moves.GetValidMoves(b, 4);
 			Assert.AreEqual(1, moves.Count);
@@ -134,7 +134,7 @@ namespace Chess.Tests
 			ok = b.Move(6, 7);
 			Assert.IsTrue(ok);
 
-			Assert.IsFalse(b.CastleKingsideWhite);
+			Assert.IsFalse(b.CanCastleKWhite);
 
 			var moves = Moves.GetValidMoves(b, 4);
 			Assert.AreEqual(1, moves.Count);
@@ -152,7 +152,7 @@ namespace Chess.Tests
 			b.State[1] = 0;
 			b.State[2] = 0;
 			b.State[3] = 0;
-			Assert.IsTrue(b.CastleQueensideWhite);
+			Assert.IsTrue(b.CanCastleQWhite);
 
 			var moves = Moves.GetValidMoves(b, 4);
 			Assert.AreEqual(2, moves.Count);
@@ -167,7 +167,7 @@ namespace Chess.Tests
 			b.InitBoard();
 			b.State[3] = 0;
 			b.State[1] = 0;
-			Assert.IsTrue(b.CastleQueensideWhite);
+			Assert.IsTrue(b.CanCastleQWhite);
 
 			var moves = Moves.GetValidMoves(b, 4);
 			Assert.AreEqual(1, moves.Count);
@@ -188,7 +188,7 @@ namespace Chess.Tests
 			ok = b.Move(1, 0);
 			Assert.IsTrue(ok);
 
-			Assert.IsFalse(b.CastleQueensideWhite);
+			Assert.IsFalse(b.CanCastleQWhite);
 
 			var moves = Moves.GetValidMoves(b, 4);
 			Assert.AreEqual(1, moves.Count);
@@ -204,7 +204,7 @@ namespace Chess.Tests
 			b.InitBoard();
 			b.State[61] = 0;
 			b.State[62] = 0;
-			Assert.IsTrue(b.CastleKingsideBlack);
+			Assert.IsTrue(b.CanCastleKBlack);
 
 			var moves = Moves.GetValidMoves(b, 60);
 			Assert.AreEqual(2, moves.Count);
@@ -218,7 +218,7 @@ namespace Chess.Tests
 			var b = new Board();
 			b.InitBoard();
 			b.State[61] = 0;
-			Assert.IsTrue(b.CastleKingsideBlack);
+			Assert.IsTrue(b.CanCastleKBlack);
 
 			var moves = Moves.GetValidMoves(b, 60);
 			Assert.AreEqual(1, moves.Count);
@@ -239,7 +239,7 @@ namespace Chess.Tests
 			b.Move(62, 63);
 			Assert.IsTrue(ok);
 
-			Assert.IsFalse(b.CastleKingsideBlack);
+			Assert.IsFalse(b.CanCastleKBlack);
 
 			var moves = Moves.GetValidMoves(b, 60);
 			Assert.AreEqual(1, moves.Count);
@@ -257,7 +257,7 @@ namespace Chess.Tests
 			b.State[59] = 0;
 			b.State[58] = 0;
 			b.State[57] = 0;
-			Assert.IsTrue(b.CastleQueensideBlack);
+			Assert.IsTrue(b.CanCastleQBlack);
 
 			var moves = Moves.GetValidMoves(b, 60);
 			Assert.AreEqual(2, moves.Count);
@@ -272,7 +272,7 @@ namespace Chess.Tests
 			b.InitBoard();
 			b.State[59] = 0;
 			b.State[57] = 0;
-			Assert.IsTrue(b.CastleQueensideBlack);
+			Assert.IsTrue(b.CanCastleQBlack);
 
 			var moves = Moves.GetValidMoves(b, 60);
 			Assert.AreEqual(1, moves.Count);
@@ -294,7 +294,7 @@ namespace Chess.Tests
 			ok = b.Move(57, 58);
 			Assert.IsTrue(ok);
 
-			Assert.IsFalse(b.CastleQueensideBlack);
+			Assert.IsFalse(b.CanCastleQBlack);
 
 			var moves = Moves.GetValidMoves(b, 60);
 			Assert.AreEqual(1, moves.Count);

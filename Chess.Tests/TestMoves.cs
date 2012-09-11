@@ -14,7 +14,7 @@ namespace Chess.Tests
 		{
 			var b = new Board();
 			b.InitBoard();
-			Assert.IsTrue(b.CastleKingsideWhite);
+			Assert.IsTrue(b.CanCastleKWhite);
 
 			Assert.AreEqual(Moves.CastleKingsideWhite, Moves.IsCastlingMove(b, 4, 6));
 			Assert.AreEqual(Moves.CastleQueensideWhite, Moves.IsCastlingMove(b, 4, 2));

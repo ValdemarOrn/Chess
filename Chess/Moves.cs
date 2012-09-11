@@ -10,6 +10,10 @@ namespace Chess
 	/// </summary>
 	public sealed class Moves
 	{
+		public const int HasCastled = -1;
+		public const int CannotCastle = 0;
+		public const int CanCastle = 1;
+
 		public const int CastleKingsideWhite = 1;
 		public const int CastleQueensideWhite = 2;
 		public const int CastleKingsideBlack = 3;
@@ -150,6 +154,29 @@ namespace Chess
 				return true;
 
 			return false;
+		}
+
+		/// <summary>
+		/// Checks if a rook at the specified square still has the ability to castle
+		/// </summary>
+		/// <param name="board"></param>
+		/// <param name="square"></param>
+		/// <returns></returns>
+		public static bool CanRookStillCastle(Board board, int square)
+		{
+			switch(square)
+			{
+				case(0):
+					return board.CanCastleQWhite;
+				case (7):
+					return board.CanCastleKWhite;
+				case (56):
+					return board.CanCastleQBlack;
+				case (63):
+					return board.CanCastleKBlack;
+				default:
+					return false;
+			}
 		}
 
 		/// <summary>
@@ -517,16 +544,16 @@ namespace Chess
 			// castling
 			if (color == Colors.White && square == 4)
 			{
-				if (board.CastleKingsideWhite && board.State[5] == 0 && board.State[6] == 0)
+				if (board.CanCastleKWhite && board.State[5] == 0 && board.State[6] == 0)
 					output.Add(6);
-				if (board.CastleQueensideWhite && board.State[3] == 0 && board.State[2] == 0 && board.State[1] == 0)
+				if (board.CanCastleQWhite && board.State[3] == 0 && board.State[2] == 0 && board.State[1] == 0)
 					output.Add(2);
 			}
 			else if (color == Colors.Black && square == 60)
 			{
-				if (board.CastleKingsideBlack && board.State[61] == 0 && board.State[62] == 0)
+				if (board.CanCastleKBlack && board.State[61] == 0 && board.State[62] == 0)
 					output.Add(62);
-				if (board.CastleQueensideBlack && board.State[59] == 0 && board.State[58] == 0 && board.State[57] == 0)
+				if (board.CanCastleQBlack && board.State[59] == 0 && board.State[58] == 0 && board.State[57] == 0)
 					output.Add(58);
 			}
 

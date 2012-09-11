@@ -35,6 +35,8 @@ namespace Chess.UI
 		{
 			bool check = Check.IsChecked(Board, Board.PlayerTurn);
 			SetCheck(check);
+			var score = AI.PositionEvaluator.EvaluatePosition(Board);
+			SetScore(score);
 		}
 
 		public void Refresh()
@@ -48,6 +50,11 @@ namespace Chess.UI
 				View.labelChecked.Text = Colors.ToString(Board.PlayerTurn) + " is checked";
 			else
 				View.labelChecked.Text = "";
+		}
+
+		public void SetScore(int score)
+		{
+			View.labelScore.Text = "Score: " + score;
 		}
 	}
 }

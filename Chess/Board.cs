@@ -19,10 +19,15 @@ namespace Chess
 		/// </summary>
 		public int FiftyMoveRulePlies;
 
-		public bool CastleQueensideWhite;
-		public bool CastleKingsideWhite;
-		public bool CastleQueensideBlack;
-		public bool CastleKingsideBlack;
+		public bool CanCastleQWhite { get { return CastleQW == Moves.CanCastle; } }
+		public bool CanCastleKWhite { get { return CastleKW == Moves.CanCastle; } }
+		public bool CanCastleQBlack { get { return CastleQB == Moves.CanCastle; } }
+		public bool CanCastleKBlack { get { return CastleKB == Moves.CanCastle; } }
+
+		public int CastleQW;
+		public int CastleKW;
+		public int CastleQB;
+		public int CastleKB;
 
 		/// <summary>
 		/// Creates a new board
@@ -137,10 +142,12 @@ namespace Chess
 		public Board Copy()
 		{
 			var b = new Board();
-			b.CastleQueensideBlack = this.CastleQueensideBlack;
-			b.CastleQueensideWhite = this.CastleQueensideWhite;
-			b.CastleKingsideBlack = this.CastleKingsideBlack;
-			b.CastleKingsideWhite = this.CastleKingsideWhite;
+
+			b.CastleQW = this.CastleQW;
+			b.CastleKW = this.CastleKW;
+			b.CastleQB = this.CastleQB;
+			b.CastleKB = this.CastleKB;
+
 			b.EnPassantTile = this.EnPassantTile;
 			b.FiftyMoveRulePlies = this.FiftyMoveRulePlies;
 			b.MoveCount = this.MoveCount;
@@ -178,18 +185,22 @@ namespace Chess
 				case Moves.CastleKingsideWhite:
 					State[5] = State[7];
 					State[7] = 0;
+					CastleKW = Moves.HasCastled;
 					break;
 				case Moves.CastleQueensideWhite:
 					State[3] = State[0];
 					State[0] = 0;
+					CastleQW = Moves.HasCastled;
 					break;
 				case Moves.CastleKingsideBlack:
 					State[61] = State[63];
 					State[63] = 0;
+					CastleKB = Moves.HasCastled;
 					break;
 				case Moves.CastleQueensideBlack:
 					State[59] = State[56];
 					State[56] = 0;
+					CastleQB = Moves.HasCastled;
 					break;
 			}
 
@@ -277,10 +288,17 @@ namespace Chess
 			bool blackRookL = State[8 * 7 + 0] == (Pieces.Rook | Colors.Black);
 			bool blackRookR = State[8 * 7 + 7] == (Pieces.Rook | Colors.Black);
 
-			CastleQueensideWhite = CastleQueensideWhite && whiteKing && whiteRookL;
-			CastleKingsideWhite = CastleKingsideWhite && whiteKing && whiteRookR;
-			CastleQueensideBlack = CastleQueensideBlack && blackKing && blackRookL;
-			CastleKingsideBlack = CastleKingsideBlack && blackKing && blackRookR;
+			if (CastleQW != Moves.HasCastled)
+				CastleQW = (CanCastleQWhite && whiteKing && whiteRookL) ? Moves.CanCastle : Moves.CannotCastle;
+
+			if (CastleKW != Moves.HasCastled)
+				CastleKW = (CanCastleKWhite && whiteKing && whiteRookR) ? Moves.CanCastle : Moves.CannotCastle;
+
+			if (CastleQB != Moves.HasCastled)
+				CastleQB = (CanCastleQBlack && blackKing && blackRookL) ? Moves.CanCastle : Moves.CannotCastle;
+
+			if (CastleKB != Moves.HasCastled)
+				CastleKB = (CanCastleKBlack && blackKing && blackRookR) ? Moves.CanCastle : Moves.CannotCastle;
 		}
 
 		/// <summary>
@@ -339,10 +357,10 @@ namespace Chess
 		/// </summary>
 		public void AllowCastlingAll()
 		{
-			CastleKingsideBlack = true;
-			CastleKingsideWhite = true;
-			CastleQueensideBlack = true;
-			CastleQueensideWhite = true;
+			CastleKB = Moves.CanCastle;
+			CastleKW = Moves.CanCastle;
+			CastleQB = Moves.CanCastle;
+			CastleQW = Moves.CanCastle;
 			CheckCastling();
 		}
 	}

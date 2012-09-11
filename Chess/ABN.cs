@@ -109,14 +109,14 @@ namespace Chess
 
 			if (kingside && color == Colors.White)
 			{
-				if (board.CastleKingsideWhite && board.State[4] == (Pieces.King | Colors.White) && board.State[5] == 0 && board.State[6] == 0 && board.State[7] == (Pieces.Rook | Colors.White))
+				if (board.CanCastleKWhite && board.State[4] == (Pieces.King | Colors.White) && board.State[5] == 0 && board.State[6] == 0 && board.State[7] == (Pieces.Rook | Colors.White))
 					return new Move(4, 6, 0, color, false, 0, check, mate, queenside, kingside);
 				else
 					throw new Exception("Kingside castling for white should not be allowed at this point");
 			}
 			if (queenside && color == Colors.White)
 			{
-				if (board.CastleQueensideWhite && board.State[4] == (Pieces.King | Colors.White) && board.State[3] == 0 && board.State[2] == 0 && board.State[1] == 0 && board.State[0] == (Pieces.Rook | Colors.White))
+				if (board.CanCastleQWhite && board.State[4] == (Pieces.King | Colors.White) && board.State[3] == 0 && board.State[2] == 0 && board.State[1] == 0 && board.State[0] == (Pieces.Rook | Colors.White))
 					return new Move(4, 2, 0, color, false, 0, check, mate, queenside, kingside);
 				else
 					throw new Exception("Queenside castling for white should not be allowed at this point");
@@ -124,14 +124,14 @@ namespace Chess
 
 			if (kingside && color == Colors.Black)
 			{
-				if (board.CastleKingsideBlack && board.State[60] == (Pieces.King | Colors.Black) && board.State[61] == 0 && board.State[62] == 0 && board.State[63] == (Pieces.Rook | Colors.Black))
+				if (board.CanCastleKBlack && board.State[60] == (Pieces.King | Colors.Black) && board.State[61] == 0 && board.State[62] == 0 && board.State[63] == (Pieces.Rook | Colors.Black))
 					return new Move(60, 62, 0, color, false, 0, check, mate, queenside, kingside);
 				else
 					throw new Exception("Kingside castling for black should not be allowed at this point");
 			}
 			if (queenside && color == Colors.Black)
 			{
-				if (board.CastleQueensideBlack && board.State[60] == (Pieces.King | Colors.Black) && board.State[59] == 0 && board.State[58] == 0 && board.State[57] == 0 && board.State[56] == (Pieces.Rook | Colors.Black))
+				if (board.CanCastleQBlack && board.State[60] == (Pieces.King | Colors.Black) && board.State[59] == 0 && board.State[58] == 0 && board.State[57] == 0 && board.State[56] == (Pieces.Rook | Colors.Black))
 					return new Move(60, 58, 0, color, false, 0, check, mate, queenside, kingside);
 				else
 					throw new Exception("Queenside castling for black should not be allowed at this point");

@@ -82,6 +82,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Chess.AI\Chess.AI.csproj">
+      <Project>{1AD597B5-D14F-4CF9-8FB7-163725558C0A}</Project>
+      <Name>Chess.AI</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Chess\Chess.csproj">
       <Project>{5C3DE354-EDD4-4377-A3D0-A33A5D2C7C71}</Project>
       <Name>Chess</Name>

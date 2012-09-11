@@ -258,11 +258,11 @@ namespace Chess.Tests
 			var str = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq";
 			var b2 = Notation.FENtoBoard(str);
 
-			Assert.IsTrue(b2.CastleQueensideWhite);
-			Assert.IsTrue(b2.CastleKingsideWhite);
+			Assert.IsTrue(b2.CanCastleQWhite);
+			Assert.IsTrue(b2.CanCastleKWhite);
 
-			Assert.IsTrue(b2.CastleQueensideBlack);
-			Assert.IsTrue(b2.CastleKingsideBlack);
+			Assert.IsTrue(b2.CanCastleQBlack);
+			Assert.IsTrue(b2.CanCastleKBlack);
 		}
 
 		[TestMethod]
@@ -273,11 +273,11 @@ namespace Chess.Tests
 			var str = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w Kq";
 			var b2 = Notation.FENtoBoard(str);
 
-			Assert.IsFalse(b2.CastleQueensideWhite);
-			Assert.IsTrue(b2.CastleKingsideWhite);
+			Assert.IsFalse(b2.CanCastleQWhite);
+			Assert.IsTrue(b2.CanCastleKWhite);
 
-			Assert.IsTrue(b2.CastleQueensideBlack);
-			Assert.IsFalse(b2.CastleKingsideBlack);
+			Assert.IsTrue(b2.CanCastleQBlack);
+			Assert.IsFalse(b2.CanCastleKBlack);
 		}
 
 		[TestMethod]
@@ -288,11 +288,11 @@ namespace Chess.Tests
 			var str = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w -";
 			var b2 = Notation.FENtoBoard(str);
 
-			Assert.IsFalse(b2.CastleQueensideWhite);
-			Assert.IsFalse(b2.CastleKingsideWhite);
+			Assert.IsFalse(b2.CanCastleQWhite);
+			Assert.IsFalse(b2.CanCastleKWhite);
 
-			Assert.IsFalse(b2.CastleQueensideBlack);
-			Assert.IsFalse(b2.CastleKingsideBlack);
+			Assert.IsFalse(b2.CanCastleQBlack);
+			Assert.IsFalse(b2.CanCastleKBlack);
 		}
 
 		[TestMethod]
