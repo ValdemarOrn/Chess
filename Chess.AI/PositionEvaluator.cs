@@ -24,8 +24,8 @@ namespace Chess.AI
 			// 2. ==== Pawns ====
 			//
 			// a) Penalty for many pawns on the same channel
-			// c) extra penalty if pawn cannot move 
-			// 
+			// b) extra penalty if pawn cannot move 
+			// c) penalty for passed pawns
 			// 
 			// 3. ==== Knights ====
 			// 
@@ -102,14 +102,16 @@ namespace Chess.AI
 			int[] rooksBlack = new int[4];
 			int[] queensWhite = new int[4];
 			int[] queensBlack = new int[4];
-			int kingWhite;
-			int kingBlack;
+			int kingWhite = -1;
+			int kingBlack = -1;
 
 			var attacks = new int[64][];
 
 			var attackBoardWhite = new int[64];
 			var attackBoardBlack = new int[64];
 
+			#region find pieces and attacks
+			
 			// find all attacks
 			for (int i = 0; i < 64; i++)
 			{
@@ -195,6 +197,8 @@ namespace Chess.AI
 				totalPieceCount++;
 			}
 
+			#endregion
+
 			// list of all attackers
 			// Note: Data can be had from the loop aboce with minimal overhead
 			//var attackedBy = new Dictionary<int, List<int>>();
@@ -241,15 +245,16 @@ namespace Chess.AI
 				}
 
 				// e) Extra penalty for hanging pieces (use Attack boards and count attacks vs defences)
-				if (color == Colors.White && board.PlayerTurn != color && attackBoardWhite[i] < attackBoardBlack[i])
+				if (color == Colors.White && board.PlayerTurn != color && attackBoardWhite[i] == 0 && attackBoardBlack[i] > 0)
 					score.HangingPiecePenalty += HangingPiecePenalty;
-				else if (color == Colors.Black && board.PlayerTurn != color && attackBoardBlack[i] < attackBoardWhite[i])
+				else if (color == Colors.Black && board.PlayerTurn != color && attackBoardBlack[i] == 0 && attackBoardWhite[i] > 0)
 					score.HangingPiecePenalty += HangingPiecePenalty;
 
 				// f) Bonus for range of motion (number of moves available)
 				score.MovementBonus += (int)(attacksByPiece.Length * MovementBonusMultiplier);
+
+				#region Piece specific evaluations
 				
-				 
 				if (piece == Pieces.Pawn)
 				{
 					// 2. ==== Pawns ====
@@ -261,17 +266,24 @@ namespace Chess.AI
 						score.PawnsOnSameFilePenalty += PawnsOnSameFilePenalty;
 					else if (i + 24 < 64 && board.State[i + 24] == val)
 						score.PawnsOnSameFilePenalty += PawnsOnSameFilePenalty;
+					else if (i + 32 < 64 && board.State[i + 32] == val)
+						score.PawnsOnSameFilePenalty += PawnsOnSameFilePenalty;
 					else if (i - 8 >= 0 && board.State[i - 8] == val)
 						score.PawnsOnSameFilePenalty += PawnsOnSameFilePenalty;
 					else if (i - 16 >= 0 && board.State[i - 16] == val)
 						score.PawnsOnSameFilePenalty += PawnsOnSameFilePenalty;
 					else if (i - 24 >= 0 && board.State[i - 24] == val)
 						score.PawnsOnSameFilePenalty += PawnsOnSameFilePenalty;
+					else if (i - 32 >= 0 && board.State[i - 32] == val)
+						score.PawnsOnSameFilePenalty += PawnsOnSameFilePenalty;
 
-					// c) extra penalty if pawn cannot move
+					// b) extra penalty if pawn cannot move
 					var moves = Moves.GetMoves(board, i);
 					if (moves.Length == 0)
 						score.PawnCantMovePenalty += PawnCantMovePenalty;
+
+					// c) penalty for passed pawns
+					// Todo: passed pawns
 				}
 				else if (piece == Pieces.Knight)
 				{
@@ -321,7 +333,7 @@ namespace Chess.AI
 					// 6. ==== Rooks ====
 
 					// a) bonus for guarding back rank
-					// Todo: Improve, can't be boxed in
+					// Todo: Improve rook eval, can't be boxed in
 					if (color == Colors.White && Board.Y(i) == 0)
 						score.RookGuardsBackRank += RookGuardsBackRankBonus;
 					if (color == Colors.Black && Board.Y(i) == 7)
@@ -354,6 +366,8 @@ namespace Chess.AI
 					// 7. ==== Bishops ====
 				}
 
+				#endregion
+
 				if (color == Colors.White)
 					ScoreWhite.Add(score);
 				else
@@ -376,13 +390,56 @@ namespace Chess.AI
 
 			// c) Penalty for single pawn islands (I defend no pawns, I am defended by no pawns)
 			// d) bonus for pawn chains
+
 			// e) Bonus for not moving kingside pawns if castling possible or king behind them
+			int whitePawn = Pieces.Pawn | Colors.White;
+			int blackPawn = Pieces.Pawn | Colors.Black;
+			if (board.State[13] == whitePawn && board.State[14] == whitePawn && board.State[15] == whitePawn)
+				ScoreWhite.PawnsUntouchedKingsideBonus = PawnsUntouchedKingsideBonus;
+			if (board.State[53] == blackPawn && board.State[54] == blackPawn && board.State[55] == blackPawn)
+				ScoreBlack.PawnsUntouchedKingsideBonus = PawnsUntouchedKingsideBonus;
+
 			// f) Bonus for checks
 			// g) infinite bonus for mate
+			if (attackBoardBlack[kingWhite] > 0)
+			{
+				ScoreWhite.CheckPenalty = CheckPenalty;
+
+				// If check mate
+				if (Check.IsCheckMate(board, Colors.White))
+					ScoreWhite.MatePenalty = MatePenalty;
+			}
+			if (attackBoardWhite[kingBlack] > 0)
+			{
+				ScoreBlack.CheckPenalty = CheckPenalty;
+
+				if (Check.IsCheckMate(board, Colors.Black))
+					ScoreBlack.MatePenalty = MatePenalty;
+			}
+
 			// h) Bonus for tempo (whose turn it is)
+			
+			if (board.PlayerTurn == Colors.White)
+				ScoreWhite.TempoBonus = TempoBonus;
+			else
+				ScoreBlack.TempoBonus = TempoBonus;
+
 			// i) Don't bring out the queen early
+			if (board.MoveCount < 6 && queensWhite[0] != 3)
+				ScoreWhite.QueenMovedEarlyPenalty = QueenMovedEarlyPenalty;
+			if (board.MoveCount < 6 && queensBlack[0] != 59)
+				ScoreBlack.QueenMovedEarlyPenalty = QueenMovedEarlyPenalty;
+
 			// j) Bonus if both bishops
+
+			if (bwCount == 2)
+				ScoreWhite.BothBishopsBonus = BothBishopsBonus;
+			if (bbCount == 2)
+				ScoreBlack.BothBishopsBonus = BothBishopsBonus;
+
 			// k) Static exchange evaluation
+
+			// Todo: SEE
 
 			return new Tuple<Score, Score>(ScoreWhite, ScoreBlack);
 		}
@@ -413,6 +470,12 @@ namespace Chess.AI
 		public static float KingMovementBonusMultiplier = 10;
 		public static int RookGuardsBackRankBonus = 100;
 		public static int RookOnOpenFileBonus = 20;
+		public static int PawnsUntouchedKingsideBonus = 200;
+		public static int CheckPenalty = -500;
+		public static int MatePenalty = -1000000000;
+		public static int TempoBonus = 100;
+		public static int QueenMovedEarlyPenalty = -100;
+		public static int BothBishopsBonus = 50;
 
 		public static int CastledBonus = 300;
 

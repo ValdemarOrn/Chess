@@ -55,7 +55,7 @@
 			// labelSelectedTile
 			// 
 			this.labelSelectedTile.AutoSize = true;
-			this.labelSelectedTile.Location = new System.Drawing.Point(496, 157);
+			this.labelSelectedTile.Location = new System.Drawing.Point(496, 139);
 			this.labelSelectedTile.Name = "labelSelectedTile";
 			this.labelSelectedTile.Size = new System.Drawing.Size(72, 13);
 			this.labelSelectedTile.TabIndex = 2;
@@ -64,7 +64,7 @@
 			// labelChecked
 			// 
 			this.labelChecked.AutoSize = true;
-			this.labelChecked.Location = new System.Drawing.Point(496, 188);
+			this.labelChecked.Location = new System.Drawing.Point(496, 166);
 			this.labelChecked.Name = "labelChecked";
 			this.labelChecked.Size = new System.Drawing.Size(72, 13);
 			this.labelChecked.TabIndex = 3;
@@ -99,7 +99,7 @@
 			// labelBlackScore
 			// 
 			this.labelBlackScore.AutoSize = true;
-			this.labelBlackScore.Location = new System.Drawing.Point(738, 254);
+			this.labelBlackScore.Location = new System.Drawing.Point(775, 254);
 			this.labelBlackScore.Name = "labelBlackScore";
 			this.labelBlackScore.Size = new System.Drawing.Size(38, 13);
 			this.labelBlackScore.TabIndex = 7;
@@ -108,7 +108,7 @@
 			// label1
 			// 
 			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(738, 229);
+			this.label1.Location = new System.Drawing.Point(775, 229);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(65, 13);
 			this.label1.TabIndex = 9;
@@ -126,7 +126,7 @@
 			// labelScore
 			// 
 			this.labelScore.AutoSize = true;
-			this.labelScore.Location = new System.Drawing.Point(647, 498);
+			this.labelScore.Location = new System.Drawing.Point(496, 193);
 			this.labelScore.Name = "labelScore";
 			this.labelScore.Size = new System.Drawing.Size(57, 13);
 			this.labelScore.TabIndex = 10;
@@ -155,7 +155,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(940, 532);
+			this.ClientSize = new System.Drawing.Size(1014, 650);
 			this.Controls.Add(this.button1);
 			this.Controls.Add(this.labelScore);
 			this.Controls.Add(this.label1);

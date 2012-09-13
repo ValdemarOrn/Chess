@@ -21,6 +21,12 @@ namespace Chess.AI
 		public int RookGuardsBackRank;
 		public int RookOnOpenFileBonus;
 		public int CannotCastlePenalty;
+		public int PawnsUntouchedKingsideBonus;
+		public int CheckPenalty;
+		public int MatePenalty;
+		public int TempoBonus;
+		public int QueenMovedEarlyPenalty;
+		public int BothBishopsBonus;
 
 		public int TotalScore
 		{
@@ -40,7 +46,13 @@ namespace Chess.AI
 					KingMovementBonus +
 					RookGuardsBackRank +
 					RookOnOpenFileBonus +
-					CannotCastlePenalty;
+					CannotCastlePenalty +
+					PawnsUntouchedKingsideBonus +
+					CheckPenalty +
+					MatePenalty +
+					TempoBonus +
+					QueenMovedEarlyPenalty +
+					BothBishopsBonus;
 			}
 		}
 
@@ -60,6 +72,12 @@ namespace Chess.AI
 			RookGuardsBackRank += score.RookGuardsBackRank;
 			RookOnOpenFileBonus += score.RookOnOpenFileBonus;
 			CannotCastlePenalty += score.CannotCastlePenalty;
+			PawnsUntouchedKingsideBonus += score.PawnsUntouchedKingsideBonus;
+			CheckPenalty += score.CheckPenalty;
+			MatePenalty += score.MatePenalty;
+			TempoBonus += score.TempoBonus;
+			QueenMovedEarlyPenalty += score.QueenMovedEarlyPenalty;
+			BothBishopsBonus += score.BothBishopsBonus;
 		}
 
 		public string ToString()
@@ -79,6 +97,12 @@ namespace Chess.AI
 			s += "RookGuardsBackRank: " + (RookGuardsBackRank / 1000M) + "\n";
 			s += "RookOnOpenFileBonus: " + (RookOnOpenFileBonus / 1000M) + "\n";
 			s += "CannotCastlePenalty: " + (CannotCastlePenalty / 1000M) + "\n";
+			s += "PawnsUntouchedKingsideBonus: " + (PawnsUntouchedKingsideBonus / 1000M) + "\n";
+			s += "CheckPenalty: " + (CheckPenalty / 1000M) + "\n";
+			s += "MatePenalty: " + (MatePenalty / 1000M) + "\n";
+			s += "TempoBonus: " + (TempoBonus / 1000M) + "\n";
+			s += "QueenMovedEarlyPenalty: " + (QueenMovedEarlyPenalty / 1000M) + "\n";
+			s += "BothBishopsBonus: " + (BothBishopsBonus / 1000M) + "\n";
 			s += "\n";
 			s += "Score: " + (TotalScore / 1000M);
 
