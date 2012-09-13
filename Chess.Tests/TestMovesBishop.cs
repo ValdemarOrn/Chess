@@ -17,7 +17,7 @@ namespace Chess.Tests
 			int pos = 4 * 8 + 4;
 			b.State[pos] = Pieces.Bishop | Chess.Colors.White;
 			var moves = Moves.GetMoves(b, pos);
-			Assert.AreEqual(13, moves.Count);
+			Assert.AreEqual(13, moves.Length);
 
 			Assert.IsTrue(moves.Contains(pos + 9));
 			Assert.IsTrue(moves.Contains(pos + 18));
@@ -47,7 +47,7 @@ namespace Chess.Tests
 			b.State[pos - 14] = Pieces.Pawn | Chess.Colors.White;
 
 			var moves = Moves.GetMoves(b, pos);
-			Assert.AreEqual(4, moves.Count);
+			Assert.AreEqual(4, moves.Length);
 			Assert.IsTrue(moves.Contains(pos + 9));
 			Assert.IsTrue(moves.Contains(pos + 7));
 
@@ -67,7 +67,7 @@ namespace Chess.Tests
 			b.State[pos - 14] = Pieces.Pawn | Chess.Colors.Black;
 
 			var moves = Moves.GetMoves(b, pos);
-			Assert.AreEqual(8, moves.Count);
+			Assert.AreEqual(8, moves.Length);
 			Assert.IsTrue(moves.Contains(pos + 9));
 			Assert.IsTrue(moves.Contains(pos + 7));
 			Assert.IsTrue(moves.Contains(pos + 18));

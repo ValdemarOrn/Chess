@@ -19,7 +19,7 @@ namespace Chess.Tests
 
 			var moves = Moves.GetMoves(b, pos);
 
-			Assert.AreEqual(8, moves.Count);
+			Assert.AreEqual(8, moves.Length);
 
 			Assert.IsTrue(moves.Contains(pos + 7));
 			Assert.IsTrue(moves.Contains(pos + 8));
@@ -53,7 +53,7 @@ namespace Chess.Tests
 			
 			var moves = Moves.GetMoves(b, pos);
 
-			Assert.AreEqual(0, moves.Count);
+			Assert.AreEqual(0, moves.Length);
 		}
 
 		[TestMethod]
@@ -76,7 +76,7 @@ namespace Chess.Tests
 
 			var moves = Moves.GetMoves(b, pos);
 
-			Assert.AreEqual(8, moves.Count);
+			Assert.AreEqual(8, moves.Length);
 
 			Assert.IsTrue(moves.Contains(pos + 7));
 			Assert.IsTrue(moves.Contains(pos + 8));
@@ -102,7 +102,7 @@ namespace Chess.Tests
 			Assert.IsTrue(b.CanCastleKWhite);
 
 			var moves = Moves.GetValidMoves(b, 4);
-			Assert.AreEqual(2, moves.Count);
+			Assert.AreEqual(2, moves.Length);
 			Assert.IsTrue(moves.Contains(5));
 			Assert.IsTrue(moves.Contains(6));
 		}
@@ -116,7 +116,7 @@ namespace Chess.Tests
 			Assert.IsTrue(b.CanCastleKWhite);
 
 			var moves = Moves.GetValidMoves(b, 4);
-			Assert.AreEqual(1, moves.Count);
+			Assert.AreEqual(1, moves.Length);
 			Assert.IsTrue(moves.Contains(5));
 		}
 
@@ -137,7 +137,7 @@ namespace Chess.Tests
 			Assert.IsFalse(b.CanCastleKWhite);
 
 			var moves = Moves.GetValidMoves(b, 4);
-			Assert.AreEqual(1, moves.Count);
+			Assert.AreEqual(1, moves.Length);
 			Assert.IsTrue(moves.Contains(5));
 		}
 
@@ -155,7 +155,7 @@ namespace Chess.Tests
 			Assert.IsTrue(b.CanCastleQWhite);
 
 			var moves = Moves.GetValidMoves(b, 4);
-			Assert.AreEqual(2, moves.Count);
+			Assert.AreEqual(2, moves.Length);
 			Assert.IsTrue(moves.Contains(3));
 			Assert.IsTrue(moves.Contains(2));
 		}
@@ -170,7 +170,7 @@ namespace Chess.Tests
 			Assert.IsTrue(b.CanCastleQWhite);
 
 			var moves = Moves.GetValidMoves(b, 4);
-			Assert.AreEqual(1, moves.Count);
+			Assert.AreEqual(1, moves.Length);
 			Assert.IsTrue(moves.Contains(3));
 		}
 
@@ -191,7 +191,7 @@ namespace Chess.Tests
 			Assert.IsFalse(b.CanCastleQWhite);
 
 			var moves = Moves.GetValidMoves(b, 4);
-			Assert.AreEqual(1, moves.Count);
+			Assert.AreEqual(1, moves.Length);
 			Assert.IsTrue(moves.Contains(3));
 		}
 
@@ -207,7 +207,7 @@ namespace Chess.Tests
 			Assert.IsTrue(b.CanCastleKBlack);
 
 			var moves = Moves.GetValidMoves(b, 60);
-			Assert.AreEqual(2, moves.Count);
+			Assert.AreEqual(2, moves.Length);
 			Assert.IsTrue(moves.Contains(61));
 			Assert.IsTrue(moves.Contains(62));
 		}
@@ -221,7 +221,7 @@ namespace Chess.Tests
 			Assert.IsTrue(b.CanCastleKBlack);
 
 			var moves = Moves.GetValidMoves(b, 60);
-			Assert.AreEqual(1, moves.Count);
+			Assert.AreEqual(1, moves.Length);
 			Assert.IsTrue(moves.Contains(61));
 		}
 
@@ -242,7 +242,7 @@ namespace Chess.Tests
 			Assert.IsFalse(b.CanCastleKBlack);
 
 			var moves = Moves.GetValidMoves(b, 60);
-			Assert.AreEqual(1, moves.Count);
+			Assert.AreEqual(1, moves.Length);
 			Assert.IsTrue(moves.Contains(61));
 		}
 
@@ -260,7 +260,7 @@ namespace Chess.Tests
 			Assert.IsTrue(b.CanCastleQBlack);
 
 			var moves = Moves.GetValidMoves(b, 60);
-			Assert.AreEqual(2, moves.Count);
+			Assert.AreEqual(2, moves.Length);
 			Assert.IsTrue(moves.Contains(59));
 			Assert.IsTrue(moves.Contains(58));
 		}
@@ -275,7 +275,7 @@ namespace Chess.Tests
 			Assert.IsTrue(b.CanCastleQBlack);
 
 			var moves = Moves.GetValidMoves(b, 60);
-			Assert.AreEqual(1, moves.Count);
+			Assert.AreEqual(1, moves.Length);
 			Assert.IsTrue(moves.Contains(59));
 		}
 
@@ -297,7 +297,7 @@ namespace Chess.Tests
 			Assert.IsFalse(b.CanCastleQBlack);
 
 			var moves = Moves.GetValidMoves(b, 60);
-			Assert.AreEqual(1, moves.Count);
+			Assert.AreEqual(1, moves.Length);
 			Assert.IsTrue(moves.Contains(59));
 		}
 	}

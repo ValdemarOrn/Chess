@@ -80,7 +80,7 @@ namespace Chess
 					continue;
 
 				var moves = Moves.GetValidMoves(board, i);
-				if (moves.Count > 0)
+				if (moves.Length > 0)
 					return false;
 			}
 
@@ -109,7 +109,7 @@ namespace Chess
 					continue;
 
 				var moves = Moves.GetValidMoves(board, i);
-				if (moves.Count > 0)
+				if (moves.Length > 0)
 					return false;
 			}
 

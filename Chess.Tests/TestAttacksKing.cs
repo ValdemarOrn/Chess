@@ -19,7 +19,7 @@ namespace Chess.Tests
 
 			var moves = Attacks.GetAttacks(b, pos);
 
-			Assert.AreEqual(8, moves.Count);
+			Assert.AreEqual(8, moves.Length);
 
 			Assert.IsTrue(moves.Contains(pos + 7));
 			Assert.IsTrue(moves.Contains(pos + 8));
@@ -53,7 +53,7 @@ namespace Chess.Tests
 
 			var moves = Attacks.GetAttacks(b, pos);
 
-			Assert.AreEqual(8, moves.Count);
+			Assert.AreEqual(8, moves.Length);
 
 			Assert.IsTrue(moves.Contains(pos + 7));
 			Assert.IsTrue(moves.Contains(pos + 8));
@@ -87,7 +87,7 @@ namespace Chess.Tests
 
 			var moves = Attacks.GetAttacks(b, pos);
 
-			Assert.AreEqual(8, moves.Count);
+			Assert.AreEqual(8, moves.Length);
 
 			Assert.IsTrue(moves.Contains(pos + 7));
 			Assert.IsTrue(moves.Contains(pos + 8));

@@ -10,9 +10,9 @@ namespace Chess
 	/// </summary>
 	public sealed class Attacks
 	{
-		public static List<int> GetAttacks(Board board, int square)
+		public static int[] GetAttacks(Board board, int square)
 		{
-			var output = new List<int>();
+			List<int> output = null;
 
 			if (Pieces.Get(board.State[square]) == Pieces.Pawn)
 				output = GetPawnAttacks(board, square);
@@ -27,7 +27,7 @@ namespace Chess
 			else if (Pieces.Get(board.State[square]) == Pieces.King)
 				output = GetKingAttacks(board, square);
 
-			return output;
+			return output.ToArray();
 		}
 
 		private static List<int> GetPawnAttacks(Board board, int square)

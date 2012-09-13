@@ -36,5 +36,10 @@ namespace Chess.UI
 		{
 			Ctrl.SetState(textBoxFEN.Text);
 		}
+
+		private void button1_Click_1(object sender, EventArgs e)
+		{
+			Ctrl.SetScore();
+		}
 	}
 }

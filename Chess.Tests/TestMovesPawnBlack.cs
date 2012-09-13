@@ -18,7 +18,7 @@ namespace Chess.Tests
 			int pos = 6 * 8 + 4;
 			b.State[pos] = Pieces.Pawn | Chess.Colors.Black;
 			var moves = Moves.GetMoves(b, pos);
-			Assert.AreEqual(2, moves.Count);
+			Assert.AreEqual(2, moves.Length);
 			Assert.IsTrue(moves.Contains(pos - 8));
 			Assert.IsTrue(moves.Contains(pos - 16));
 		}
@@ -32,7 +32,7 @@ namespace Chess.Tests
 			int pos = 5 * 8 + 4;
 			b.State[pos] = Pieces.Pawn | Chess.Colors.Black;
 			var moves = Moves.GetMoves(b, pos);
-			Assert.AreEqual(1, moves.Count);
+			Assert.AreEqual(1, moves.Length);
 			Assert.IsTrue(moves.Contains(pos - 8));
 		}
 
@@ -45,7 +45,7 @@ namespace Chess.Tests
 			int pos = 8 + 4;
 			b.State[pos] = Pieces.Pawn | Chess.Colors.Black;
 			var moves = Moves.GetMoves(b, pos);
-			Assert.AreEqual(1, moves.Count);
+			Assert.AreEqual(1, moves.Length);
 			Assert.IsTrue(moves.Contains(pos - 8));
 		}
 
@@ -59,7 +59,7 @@ namespace Chess.Tests
 			b.State[pos] = Pieces.Pawn | Chess.Colors.Black;
 			b.State[pos - 16] = Pieces.Pawn | Chess.Colors.Black;
 			var moves = Moves.GetMoves(b, pos);
-			Assert.AreEqual(1, moves.Count);
+			Assert.AreEqual(1, moves.Length);
 			Assert.IsTrue(moves.Contains(pos - 8));
 		}
 
@@ -73,7 +73,7 @@ namespace Chess.Tests
 			b.State[pos] = Pieces.Pawn | Chess.Colors.Black;
 			b.State[pos - 16] = Pieces.Pawn | Chess.Colors.White;
 			var moves = Moves.GetMoves(b, pos);
-			Assert.AreEqual(1, moves.Count);
+			Assert.AreEqual(1, moves.Length);
 			Assert.IsTrue(moves.Contains(pos - 8));
 		}
 
@@ -87,7 +87,7 @@ namespace Chess.Tests
 			b.State[pos] = Pieces.Pawn | Chess.Colors.Black;
 			b.State[pos - 8] = Pieces.Pawn | Chess.Colors.Black;
 			var moves = Moves.GetMoves(b, pos);
-			Assert.AreEqual(0, moves.Count);
+			Assert.AreEqual(0, moves.Length);
 		}
 
 		[TestMethod]
@@ -100,7 +100,7 @@ namespace Chess.Tests
 			b.State[pos] = Pieces.Pawn | Chess.Colors.Black;
 			b.State[pos - 8] = Pieces.Pawn | Chess.Colors.White;
 			var moves = Moves.GetMoves(b, pos);
-			Assert.AreEqual(0, moves.Count);
+			Assert.AreEqual(0, moves.Length);
 		}
 
 		[TestMethod]
@@ -112,7 +112,7 @@ namespace Chess.Tests
 			b.State[pos] = Pieces.Pawn | Chess.Colors.Black;
 			b.State[pos - 9] = Pieces.Pawn | Chess.Colors.White;
 			var moves = Moves.GetMoves(b, pos);
-			Assert.AreEqual(3, moves.Count);
+			Assert.AreEqual(3, moves.Length);
 			Assert.IsTrue(moves.Contains(pos - 9));
 			Assert.IsTrue(moves.Contains(pos - 8));
 			Assert.IsTrue(moves.Contains(pos - 16));
@@ -127,7 +127,7 @@ namespace Chess.Tests
 			b.State[pos] = Pieces.Pawn | Chess.Colors.Black;
 			b.State[pos - 7] = Pieces.Pawn | Chess.Colors.White;
 			var moves = Moves.GetMoves(b, pos);
-			Assert.AreEqual(3, moves.Count);
+			Assert.AreEqual(3, moves.Length);
 			Assert.IsTrue(moves.Contains(pos - 7));
 			Assert.IsTrue(moves.Contains(pos - 8));
 			Assert.IsTrue(moves.Contains(pos - 16));
@@ -143,7 +143,7 @@ namespace Chess.Tests
 			b.State[pos - 7] = Pieces.Pawn | Chess.Colors.Black;
 			b.State[pos - 9] = Pieces.Pawn | Chess.Colors.Black;
 			var moves = Moves.GetMoves(b, pos);
-			Assert.AreEqual(2, moves.Count);
+			Assert.AreEqual(2, moves.Length);
 		}
 
 		[TestMethod]
@@ -161,7 +161,7 @@ namespace Chess.Tests
 			b.Move(posWhite, posWhite + 16);
 
 			var moves = Moves.GetMoves(b, posBlack);
-			Assert.AreEqual(2, moves.Count);
+			Assert.AreEqual(2, moves.Length);
 			Assert.IsTrue(moves.Contains(Notation.TextToTile("d3")));
 		}
 
@@ -180,7 +180,7 @@ namespace Chess.Tests
 			b.Move(posWhite, posWhite + 16);
 
 			var moves = Moves.GetMoves(b, posBlack);
-			Assert.AreEqual(2, moves.Count);
+			Assert.AreEqual(2, moves.Length);
 			Assert.IsTrue(moves.Contains(Notation.TextToTile("f3")));
 		}
 	}

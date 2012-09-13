@@ -13,16 +13,16 @@ namespace Chess.AI.Tests
 		public void TestReadTable()
 		{
 			int val = PositionEvaluator.ReadTable(PositionEvaluator.PawnTable, 9, Colors.White);
-			Assert.AreEqual(10, val);
+			Assert.AreEqual(100, val);
 
 			val = PositionEvaluator.ReadTable(PositionEvaluator.PawnTable, 49, Colors.Black);
-			Assert.AreEqual(10, val);
+			Assert.AreEqual(100, val);
 
 			val = PositionEvaluator.ReadTable(PositionEvaluator.PawnTable, 49, Colors.White);
-			Assert.AreEqual(50, val);
+			Assert.AreEqual(500, val);
 
 			val = PositionEvaluator.ReadTable(PositionEvaluator.PawnTable, 9, Colors.Black);
-			Assert.AreEqual(50, val);
+			Assert.AreEqual(500, val);
 		}
 	}
 }

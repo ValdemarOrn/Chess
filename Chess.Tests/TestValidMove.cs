@@ -58,10 +58,10 @@ namespace Chess.Tests
 
 			// rook is covering the king
 			var validMoves = Moves.GetValidMoves(b, pos);
-			Assert.AreEqual(4, validMoves.Count);
+			Assert.AreEqual(4, validMoves.Length);
 
 			var allMoves = Moves.GetMoves(b, pos);
-			Assert.AreEqual(4 + 7, allMoves.Count);
+			Assert.AreEqual(4 + 7, allMoves.Length);
 		}
 	}
 }

@@ -185,7 +185,7 @@ namespace Chess
 		/// <param name="board"></param>
 		/// <param name="square"></param>
 		/// <returns></returns>
-		public static List<int> GetValidMoves(Board board, int square)
+		public static int[] GetValidMoves(Board board, int square)
 		{
 			var output = new List<int>();
 
@@ -197,7 +197,7 @@ namespace Chess
 					output.Add(target);
 			}
 
-			return output;
+			return output.ToArray();
 		}
 
 		/// <summary>
@@ -207,9 +207,9 @@ namespace Chess
 		/// <param name="board"></param>
 		/// <param name="square"></param>
 		/// <returns></returns>
-		public static List<int> GetMoves(Board board, int square)
+		public static int[] GetMoves(Board board, int square)
 		{
-			var output = new List<int>();
+			List<int> output = null;
 
 			if (Pieces.Get(board.State[square]) == Pieces.Pawn)
 				output = GetPawnMoves(board, square);
@@ -224,7 +224,7 @@ namespace Chess
 			else if (Pieces.Get(board.State[square]) == Pieces.King)
 				output = GetKingMoves(board, square);
 
-			return output;
+			return output.ToArray();
 		}
 
 		private static List<int> GetPawnMoves(Board board, int square)

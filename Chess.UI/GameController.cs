@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Chess.AI;
 
 namespace Chess.UI
 {
@@ -35,8 +36,7 @@ namespace Chess.UI
 		{
 			bool check = Check.IsChecked(Board, Board.PlayerTurn);
 			SetCheck(check);
-			var score = AI.PositionEvaluator.EvaluatePosition(Board);
-			SetScore(score);
+			SetScore();
 		}
 
 		public void Refresh()
@@ -52,9 +52,13 @@ namespace Chess.UI
 				View.labelChecked.Text = "";
 		}
 
-		public void SetScore(int score)
+		public void SetScore()
 		{
-			View.labelScore.Text = "Score: " + score;
+			var scores = AI.PositionEvaluator.EvaluatePosition(Board);
+			View.labelWhiteScore.Text = scores.Item1.ToString();
+			View.labelBlackScore.Text = scores.Item2.ToString();
+			decimal diff = ((decimal)(scores.Item1.TotalScore - scores.Item2.TotalScore)) / 1000M;
+			View.labelScore.Text = diff.ToString("0.00");
 		}
 	}
 }
