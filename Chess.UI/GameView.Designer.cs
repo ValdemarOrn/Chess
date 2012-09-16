@@ -45,6 +45,7 @@
 			this.label3 = new System.Windows.Forms.Label();
 			this.labelTime = new System.Windows.Forms.Label();
 			this.boardControl = new Chess.UI.BoardControl();
+			this.labelWork = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
 			// buttonNewGame
@@ -172,7 +173,7 @@
 			this.textBoxDepth.Name = "textBoxDepth";
 			this.textBoxDepth.Size = new System.Drawing.Size(100, 20);
 			this.textBoxDepth.TabIndex = 14;
-			this.textBoxDepth.Text = "2";
+			this.textBoxDepth.Text = "3";
 			// 
 			// label3
 			// 
@@ -201,11 +202,21 @@
 			this.boardControl.TabIndex = 0;
 			this.boardControl.MouseClick += new System.Windows.Forms.MouseEventHandler(this.boardUI1_MouseClick);
 			// 
+			// labelWork
+			// 
+			this.labelWork.AutoSize = true;
+			this.labelWork.Location = new System.Drawing.Point(647, 166);
+			this.labelWork.Name = "labelWork";
+			this.labelWork.Size = new System.Drawing.Size(35, 13);
+			this.labelWork.TabIndex = 17;
+			this.labelWork.Text = "label4";
+			// 
 			// GameView
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1014, 650);
+			this.Controls.Add(this.labelWork);
 			this.Controls.Add(this.labelTime);
 			this.Controls.Add(this.label3);
 			this.Controls.Add(this.textBoxDepth);
@@ -249,6 +260,7 @@
 		private System.Windows.Forms.Label label3;
 		public System.Windows.Forms.TextBox textBoxDepth;
 		public System.Windows.Forms.Label labelTime;
+		public System.Windows.Forms.Label labelWork;
 	}
 }
 

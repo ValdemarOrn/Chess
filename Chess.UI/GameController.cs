@@ -72,8 +72,10 @@ namespace Chess.UI
 			var from = Notation.TileToText(move.From);
 			var to = Notation.TileToText(move.To);
 			View.labelBestmove.Text = from + " - " + to;
+			View.labelWork.Text = "Searched " + tree.Searches + " nodes and evaluated " + tree.Positions + " positions";
 			Board.Move(ref move, true);
 			Refresh();
+			SetScore();
 		}
 	}
 }

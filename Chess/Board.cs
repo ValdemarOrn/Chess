@@ -75,8 +75,8 @@ namespace Chess
 		/// <returns></returns>
 		public static int X(int tile)
 		{
-			// 512 = 8*8*8 constant added to prevent negative modulo results (-9 % 8 = -1)
-			return (512 + tile) % 8;
+			// 128 constant prevent negative numbers in modulu output
+			return (128 + tile) % 8;
 		}
 
 		/// <summary>
@@ -86,7 +86,7 @@ namespace Chess
 		/// <returns></returns>
 		public static int Y(int tile)
 		{
-			return tile / 8;
+			return tile >> 3;
 		}
 
 		/// <summary>
@@ -96,7 +96,7 @@ namespace Chess
 		/// <returns></returns>
 		public int Color(int square)
 		{
-			return Chess.Colors.Get(State[square]);
+			return State[square] & 0xF0;
 		}
 
 		/// <summary>
@@ -106,7 +106,7 @@ namespace Chess
 		/// <returns></returns>
 		public int Piece(int square)
 		{
-			return Chess.Pieces.Get(State[square]);
+			return State[square] & 0x0F;
 		}
 
 		public int KingLocation(int kingColor)

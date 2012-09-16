@@ -13,19 +13,29 @@ namespace Chess
 		public static int[] GetAttacks(Board board, int square)
 		{
 			List<int> output = null;
+			int pieceType = Pieces.Get(board.State[square]);
 
-			if (Pieces.Get(board.State[square]) == Pieces.Pawn)
-				output = GetPawnAttacks(board, square);
-			else if (Pieces.Get(board.State[square]) == Pieces.Knight)
-				output = GetKnightAttacks(board, square);
-			else if (Pieces.Get(board.State[square]) == Pieces.Rook)
-				output = GetRookAttacks(board, square);
-			else if (Pieces.Get(board.State[square]) == Pieces.Bishop)
-				output = GetBishopAttacks(board, square);
-			else if (Pieces.Get(board.State[square]) == Pieces.Queen)
-				output = GetQueenAttacks(board, square);
-			else if (Pieces.Get(board.State[square]) == Pieces.King)
-				output = GetKingAttacks(board, square);
+			switch (pieceType)
+			{
+				case Pieces.Pawn:
+					output = GetPawnAttacks(board, square);
+					break;
+				case Pieces.Knight:
+					output = GetKnightAttacks(board, square);
+					break;
+				case Pieces.Rook:
+					output = GetRookAttacks(board, square);
+					break;
+				case Pieces.Bishop:
+					output = GetBishopAttacks(board, square);
+					break;
+				case Pieces.Queen:
+					output = GetQueenAttacks(board, square);
+					break;
+				case Pieces.King:
+					output = GetKingAttacks(board, square);
+					break;
+			}
 
 			return output.ToArray();
 		}

@@ -210,19 +210,29 @@ namespace Chess
 		public static int[] GetMoves(Board board, int square)
 		{
 			List<int> output = null;
+			int pieceType = Pieces.Get(board.State[square]);
 
-			if (Pieces.Get(board.State[square]) == Pieces.Pawn)
-				output = GetPawnMoves(board, square);
-			else if (Pieces.Get(board.State[square]) == Pieces.Knight)
-				output = GetKnightMoves(board, square);
-			else if (Pieces.Get(board.State[square]) == Pieces.Rook)
-				output = GetRookMoves(board, square);
-			else if (Pieces.Get(board.State[square]) == Pieces.Bishop)
-				output = GetBishopMoves(board, square);
-			else if (Pieces.Get(board.State[square]) == Pieces.Queen)
-				output = GetQueenMoves(board, square);
-			else if (Pieces.Get(board.State[square]) == Pieces.King)
-				output = GetKingMoves(board, square);
+			switch(pieceType)
+			{
+				case Pieces.Pawn:
+					output = GetPawnMoves(board, square);
+					break;
+				case Pieces.Knight:
+					output = GetKnightMoves(board, square);
+					break;
+				case Pieces.Rook:
+					output = GetRookMoves(board, square);
+					break;
+				case Pieces.Bishop:
+					output = GetBishopMoves(board, square);
+					break;
+				case Pieces.Queen:
+					output = GetQueenMoves(board, square);
+					break;
+				case Pieces.King:
+					output = GetKingMoves(board, square);
+					break;
+			}
 
 			return output.ToArray();
 		}

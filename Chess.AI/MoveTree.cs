@@ -7,8 +7,12 @@ namespace Chess.AI
 {
 	public class MoveTree
 	{
+		public int Positions = 0;
+		public int Searches = 0;
+
 		public Tuple<int, Move> Search(Board board, int currentDepth, int finalDepth)
 		{
+			Searches++;
 			bool maximize = board.PlayerTurn == Colors.White;
 
 			var moves = new List<Move>();
@@ -31,12 +35,15 @@ namespace Chess.AI
 			{
 				var move = moves[i];
 				var temp = board.Copy();
-				bool valid = temp.Move(ref move, true);
+				bool valid = temp.Move(ref move);
 				if (!valid) throw new Exception("Can't make move!");
 
 				int result = 0;
 				if (currentDepth >= finalDepth)
+				{
 					result = PositionEvaluator.ScoreDiff(PositionEvaluator.EvaluatePosition(temp));
+					Positions++;
+				}
 				else
 					result = Search(temp, currentDepth + 1, finalDepth).Item1;
 
