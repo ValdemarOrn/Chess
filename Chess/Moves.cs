@@ -55,7 +55,7 @@ namespace Chess
 		/// <param name="from"></param>
 		/// <param name="to"></param>
 		/// <returns></returns>
-		public static bool IsEnPassantMove(Board board, int from, int to)
+		public static bool IsEnPassantCapture(Board board, int from, int to)
 		{
 			var color = board.Color(from);
 
@@ -127,7 +127,7 @@ namespace Chess
 
 		public static bool IsCaptureMove(Board board, int from, int to)
 		{
-			if (board.State[to] != 0 || IsEnPassantMove(board, from, to))
+			if (board.State[to] != 0 || IsEnPassantCapture(board, from, to))
 				return true;
 
 			return false;

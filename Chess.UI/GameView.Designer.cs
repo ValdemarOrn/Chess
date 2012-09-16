@@ -38,8 +38,13 @@
 			this.label1 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
 			this.labelScore = new System.Windows.Forms.Label();
-			this.boardControl = new Chess.UI.BoardControl();
 			this.button1 = new System.Windows.Forms.Button();
+			this.button2 = new System.Windows.Forms.Button();
+			this.labelBestmove = new System.Windows.Forms.Label();
+			this.textBoxDepth = new System.Windows.Forms.TextBox();
+			this.label3 = new System.Windows.Forms.Label();
+			this.labelTime = new System.Windows.Forms.Label();
+			this.boardControl = new Chess.UI.BoardControl();
 			this.SuspendLayout();
 			// 
 			// buttonNewGame
@@ -132,15 +137,6 @@
 			this.labelScore.TabIndex = 10;
 			this.labelScore.Text = "labelScore";
 			// 
-			// boardControl
-			// 
-			this.boardControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.boardControl.Location = new System.Drawing.Point(60, 35);
-			this.boardControl.Name = "boardControl";
-			this.boardControl.Size = new System.Drawing.Size(400, 400);
-			this.boardControl.TabIndex = 0;
-			this.boardControl.MouseClick += new System.Windows.Forms.MouseEventHandler(this.boardUI1_MouseClick);
-			// 
 			// button1
 			// 
 			this.button1.Location = new System.Drawing.Point(650, 95);
@@ -151,11 +147,70 @@
 			this.button1.UseVisualStyleBackColor = true;
 			this.button1.Click += new System.EventHandler(this.button1_Click_1);
 			// 
+			// button2
+			// 
+			this.button2.Location = new System.Drawing.Point(778, 95);
+			this.button2.Name = "button2";
+			this.button2.Size = new System.Drawing.Size(75, 23);
+			this.button2.TabIndex = 12;
+			this.button2.Text = "Best Move";
+			this.button2.UseVisualStyleBackColor = true;
+			this.button2.Click += new System.EventHandler(this.button2_Click);
+			// 
+			// labelBestmove
+			// 
+			this.labelBestmove.AutoSize = true;
+			this.labelBestmove.Location = new System.Drawing.Point(778, 139);
+			this.labelBestmove.Name = "labelBestmove";
+			this.labelBestmove.Size = new System.Drawing.Size(35, 13);
+			this.labelBestmove.TabIndex = 13;
+			this.labelBestmove.Text = "label3";
+			// 
+			// textBoxDepth
+			// 
+			this.textBoxDepth.Location = new System.Drawing.Point(859, 98);
+			this.textBoxDepth.Name = "textBoxDepth";
+			this.textBoxDepth.Size = new System.Drawing.Size(100, 20);
+			this.textBoxDepth.TabIndex = 14;
+			this.textBoxDepth.Text = "2";
+			// 
+			// label3
+			// 
+			this.label3.AutoSize = true;
+			this.label3.Location = new System.Drawing.Point(856, 76);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(36, 13);
+			this.label3.TabIndex = 15;
+			this.label3.Text = "Depth";
+			// 
+			// labelTime
+			// 
+			this.labelTime.AutoSize = true;
+			this.labelTime.Location = new System.Drawing.Point(856, 139);
+			this.labelTime.Name = "labelTime";
+			this.labelTime.Size = new System.Drawing.Size(36, 13);
+			this.labelTime.TabIndex = 16;
+			this.labelTime.Text = "Time: ";
+			// 
+			// boardControl
+			// 
+			this.boardControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.boardControl.Location = new System.Drawing.Point(60, 35);
+			this.boardControl.Name = "boardControl";
+			this.boardControl.Size = new System.Drawing.Size(400, 400);
+			this.boardControl.TabIndex = 0;
+			this.boardControl.MouseClick += new System.Windows.Forms.MouseEventHandler(this.boardUI1_MouseClick);
+			// 
 			// GameView
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1014, 650);
+			this.Controls.Add(this.labelTime);
+			this.Controls.Add(this.label3);
+			this.Controls.Add(this.textBoxDepth);
+			this.Controls.Add(this.labelBestmove);
+			this.Controls.Add(this.button2);
 			this.Controls.Add(this.button1);
 			this.Controls.Add(this.labelScore);
 			this.Controls.Add(this.label1);
@@ -189,6 +244,11 @@
 		public System.Windows.Forms.Label label2;
 		public System.Windows.Forms.Label labelScore;
 		private System.Windows.Forms.Button button1;
+		private System.Windows.Forms.Button button2;
+		public System.Windows.Forms.Label labelBestmove;
+		private System.Windows.Forms.Label label3;
+		public System.Windows.Forms.TextBox textBoxDepth;
+		public System.Windows.Forms.Label labelTime;
 	}
 }
 

@@ -41,5 +41,10 @@ namespace Chess.UI
 		{
 			Ctrl.SetScore();
 		}
+
+		private void button2_Click(object sender, EventArgs e)
+		{
+			Ctrl.GetMove();
+		}
 	}
 }

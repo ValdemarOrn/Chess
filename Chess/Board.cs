@@ -44,6 +44,31 @@ namespace Chess
 		}
 
 		/// <summary>
+		/// Create a copy of the board
+		/// </summary>
+		/// <returns></returns>
+		public Board Copy()
+		{
+			var b = new Board();
+
+			b.CastleQW = this.CastleQW;
+			b.CastleKW = this.CastleKW;
+			b.CastleQB = this.CastleQB;
+			b.CastleKB = this.CastleKB;
+
+			b.EnPassantTile = this.EnPassantTile;
+			b.FiftyMoveRulePlies = this.FiftyMoveRulePlies;
+			b.MoveCount = this.MoveCount;
+			b.PlayerTurn = this.PlayerTurn;
+
+			this.State.CopyTo(b.State, 0);
+
+			return b;
+		}
+
+		#region Search board state
+		
+		/// <summary>
 		/// Get the X coordinate of the tile. 0...7
 		/// </summary>
 		/// <param name="square"></param>
@@ -135,95 +160,102 @@ namespace Chess
 			return output;
 		}
 
-		/// <summary>
-		/// Create a copy of the board
-		/// </summary>
-		/// <returns></returns>
-		public Board Copy()
+		#endregion
+
+		public bool Move(int from, int to, bool verifyLegalMove = false)
 		{
-			var b = new Board();
-
-			b.CastleQW = this.CastleQW;
-			b.CastleKW = this.CastleKW;
-			b.CastleQB = this.CastleQB;
-			b.CastleKB = this.CastleKB;
-
-			b.EnPassantTile = this.EnPassantTile;
-			b.FiftyMoveRulePlies = this.FiftyMoveRulePlies;
-			b.MoveCount = this.MoveCount;
-			b.PlayerTurn = this.PlayerTurn;
-			
-			this.State.CopyTo(b.State, 0);
-
-			return b;
+			Move m = new Move(from, to);
+			bool complete = Move(ref m, verifyLegalMove);
+			return complete;
 		}
 
 		/// <summary>
-		/// Move a piece. Returns true if move was legal and allowed, false if it was prevented
+		/// Move a piece. Returns true if move was legal and allowed, false if it was prevented.
+		/// Modifies the move structure and sets properties about capture, castling, color and move count.
 		/// </summary>
 		/// <param name="from"></param>
 		/// <param name="to"></param>
 		/// <returns></returns>
-		public bool Move(int from, int to, bool verifyLegalMove = false)
+		public bool Move(ref Move move, bool verifyLegalMove = false)
 		{
-			if (Color(from) != this.PlayerTurn)
+			if (Color(move.From) != this.PlayerTurn)
 				return false;
 
 			if (verifyLegalMove)
 			{
-				bool causesSelfCheck = Check.MoveSelfChecks(this, from, to);
+				bool causesSelfCheck = Check.MoveSelfChecks(this, move.From, move.To);
 				if (causesSelfCheck)
 					return false;
 			}
 
+			move.Color = this.PlayerTurn;
+			move.MoveCount = this.MoveCount;
+
 			// Move the rook if we are castling
-			int castling = Moves.IsCastlingMove(this, from, to);
+			// Note: Only moves the ROOK, we still need to move the king like any other move.
+			int castling = Moves.IsCastlingMove(this, move.From, move.To);
 			switch(castling)
 			{
 				case 0:
 					break;
 				case Moves.CastleKingsideWhite:
+					if (!CanCastleKWhite) return false;
 					State[5] = State[7];
 					State[7] = 0;
 					CastleKW = Moves.HasCastled;
+					move.Kingside = true;
 					break;
 				case Moves.CastleQueensideWhite:
+					if (!CanCastleQWhite) return false;
 					State[3] = State[0];
 					State[0] = 0;
 					CastleQW = Moves.HasCastled;
+					move.Queenside = true;
 					break;
 				case Moves.CastleKingsideBlack:
+					if (!CanCastleKBlack) return false;
 					State[61] = State[63];
 					State[63] = 0;
 					CastleKB = Moves.HasCastled;
+					move.Kingside = true;
 					break;
 				case Moves.CastleQueensideBlack:
+					if (!CanCastleQBlack) return false;
 					State[59] = State[56];
 					State[56] = 0;
 					CastleQB = Moves.HasCastled;
+					move.Queenside = true;
 					break;
 			}
 
 			// Remove the pawn if en passant attack
-			bool enpassant = Moves.IsEnPassantMove(this, from, to);
+			bool enpassant = Moves.IsEnPassantCapture(this, move.From, move.To);
 			if (enpassant)
 			{
-				int victim = Moves.EnPassantVictim(this, from, to);
+
+				int victim = Moves.EnPassantVictim(this, move.From, move.To);
+				move.CaptureTile = victim;
+				move.Capture = State[victim];
 				State[victim] = 0;
 			}
+			else
+			{
+				move.Capture = State[move.To];
+				move.CaptureTile = move.To;
+			}
 
-			// Log the move if this enables an en passant attack
-			EnPassantTile = Moves.EnPassantTile(this, from, to);
+			// If this is a pawn move two squares out, it can be capture with an en passant attack.
+			EnPassantTile = Moves.EnPassantTile(this, move.From, move.To);
 
 			// Check if this move resets the 50 move position
-			if (Piece(from) == Pieces.Pawn || Moves.IsCaptureMove(this, from, to))
+			if (Piece(move.From) == Pieces.Pawn || Moves.IsCaptureMove(this, move.From, move.To))
 				FiftyMoveRulePlies = 0;
 			else
 				FiftyMoveRulePlies++;
 
 			// Perform the move
-			State[to] = State[from];
-			State[from] = 0;
+			State[move.To] = State[move.From];
+			State[move.From] = 0;
 
 			// Update the round if it was black's turn to play
 			if (PlayerTurn == Colors.Black)

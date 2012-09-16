@@ -79,8 +79,9 @@ namespace Chess
 
 		private static Move GetMove(Board board, string token, int color)
 		{
-			// Process captures
-			bool capture = token.Contains('x');
+			// Process captures - Done after we find target
+			int capture = 0;
+			int captureTile = -1;
 			token = token.Replace("x", "");
 
 			// find the piece
@@ -110,14 +111,14 @@ namespace Chess
 			if (kingside && color == Colors.White)
 			{
 				if (board.CanCastleKWhite && board.State[4] == (Pieces.King | Colors.White) && board.State[5] == 0 && board.State[6] == 0 && board.State[7] == (Pieces.Rook | Colors.White))
-					return new Move(4, 6, 0, color, false, 0, check, mate, queenside, kingside);
+					return new Move(4, 6, 0, color, capture, captureTile, 0, check, mate, queenside, kingside);
 				else
 					throw new Exception("Kingside castling for white should not be allowed at this point");
 			}
 			if (queenside && color == Colors.White)
 			{
 				if (board.CanCastleQWhite && board.State[4] == (Pieces.King | Colors.White) && board.State[3] == 0 && board.State[2] == 0 && board.State[1] == 0 && board.State[0] == (Pieces.Rook | Colors.White))
-					return new Move(4, 2, 0, color, false, 0, check, mate, queenside, kingside);
+					return new Move(4, 2, 0, color, capture, captureTile, 0, check, mate, queenside, kingside);
 				else
 					throw new Exception("Queenside castling for white should not be allowed at this point");
 			}
@@ -125,14 +126,14 @@ namespace Chess
 			if (kingside && color == Colors.Black)
 			{
 				if (board.CanCastleKBlack && board.State[60] == (Pieces.King | Colors.Black) && board.State[61] == 0 && board.State[62] == 0 && board.State[63] == (Pieces.Rook | Colors.Black))
-					return new Move(60, 62, 0, color, false, 0, check, mate, queenside, kingside);
+					return new Move(60, 62, 0, color, capture, captureTile, 0, check, mate, queenside, kingside);
 				else
 					throw new Exception("Kingside castling for black should not be allowed at this point");
 			}
 			if (queenside && color == Colors.Black)
 			{
 				if (board.CanCastleQBlack && board.State[60] == (Pieces.King | Colors.Black) && board.State[59] == 0 && board.State[58] == 0 && board.State[57] == 0 && board.State[56] == (Pieces.Rook | Colors.Black))
-					return new Move(60, 58, 0, color, false, 0, check, mate, queenside, kingside);
+					return new Move(60, 58, 0, color, capture, captureTile, 0, check, mate, queenside, kingside);
 				else
 					throw new Exception("Queenside castling for black should not be allowed at this point");
 			}
@@ -164,13 +165,17 @@ namespace Chess
 			}
 
 			// find the target
-			int target = 0;
+			int to = 0;
 			if (!kingside && !queenside)
 			{
 				string targetString = token.Substring(token.Length - 2);
-				target = Notation.TextToTile(targetString);
+				to = Notation.TextToTile(targetString);
 				token = token.Substring(0, token.Length - 2);
 			}
+
+			capture = board.State[to];
+			captureTile = to;
+
 
 			// find the hints
 			Tuple<int, int> hint = GetHint(token);
@@ -182,12 +187,12 @@ namespace Chess
 			foreach (var p in pieces)
 			{
 				var moves = Moves.GetValidMoves(board, p);
-				if (moves.Contains(target))
+				if (moves.Contains(to))
 					possible.Add(p);
 			}
 
 			if(possible.Count == 0)
-				throw new Exception("No piece has a valid move to tile " + Notation.TileToText(target));
+				throw new Exception("No piece has a valid move to tile " + Notation.TileToText(to));
 			
 			if (possible.Count > 1)
 			{
@@ -199,11 +204,18 @@ namespace Chess
 			}
 
 			if (possible.Count != 1)
-				throw new Exception("No piece has a valid move to tile " + Notation.TileToText(target));
+				throw new Exception("No piece has a valid move to tile " + Notation.TileToText(to));
 
 			from = possible[0];
 
-			return new Move(from, target, 0, color, capture, promotion, check, mate, queenside, kingside);
+			// Check if this is an en passant attack, then change the attackTile
+			if (Moves.IsEnPassantCapture(board, from, to))
+			{
+				captureTile = Moves.EnPassantVictim(board, from, to);
+				capture = board.State[captureTile];
+			}
+
+			return new Move(from, to, 0, color, capture, captureTile, promotion, check, mate, queenside, kingside);
 		}
 
 		private static Tuple<int, int> GetHint(string token)

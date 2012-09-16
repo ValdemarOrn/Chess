@@ -60,5 +60,20 @@ namespace Chess.UI
 			decimal diff = ((decimal)(scores.Item1.TotalScore - scores.Item2.TotalScore)) / 1000M;
 			View.labelScore.Text = diff.ToString("0.00");
 		}
+
+		public void GetMove()
+		{
+			var start = DateTime.Now;
+			var tree = new MoveTree();
+			int depth = Convert.ToInt32(View.textBoxDepth.Text);
+			var move = tree.Search(Board, 0, depth).Item2;
+			var millis = (DateTime.Now - start).TotalMilliseconds;
+			View.labelTime.Text = "Time (ms): " + millis;
+			var from = Notation.TileToText(move.From);
+			var to = Notation.TileToText(move.To);
+			View.labelBestmove.Text = from + " - " + to;
+			Board.Move(ref move, true);
+			Refresh();
+		}
 	}
 }

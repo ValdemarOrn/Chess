@@ -260,7 +260,7 @@ namespace Chess.Tests
 		[TestMethod]
 		public void TestMove1()
 		{
-			//Todo: Test Move()
+			//Todo: Test Move by ref()
 		}
 	}
 }

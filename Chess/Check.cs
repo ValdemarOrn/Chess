@@ -129,7 +129,7 @@ namespace Chess
 			int colorToMove = board.Color(from);
 
 			board = board.Copy();
-			board.Move(from, to);
+			board.Move(from, to, false);
 			bool ok = Check.IsChecked(board, colorToMove);
 			return ok;
 		}

@@ -91,10 +91,44 @@ namespace Chess.Tests
 
 			var board2 = Notation.FENtoBoard("2kr1b1r/ppq1pp1p/2npbnp1/8/4P3/N1PBBN2/PP1Q1PPP/2KR3R w -");
 
-			Assert.IsTrue(moves[6].Capture);
-			Assert.IsTrue(moves[9].Capture);
+			Assert.IsTrue(moves[6].Capture > 0);
+			Assert.IsTrue(moves[9].Capture > 0);
 			Assert.IsTrue(board2.State.SequenceEqual(board.State));
 			Assert.AreEqual(Colors.White, board.PlayerTurn);
+		}
+
+		[TestMethod]
+		public void TestABNEnPassantWhite()
+		{
+			// Tests castling both queenside
+			var board = new Board(true);
+			string str = "1.c4 g6 2.c5 d5 3.cxd6 ";
+			var moves = ABN.ABNToMoves(board, str);
+			foreach (var move in moves)
+			{
+				board.Move(move.From, move.To, true);
+			}
+
+			Assert.AreEqual((Pieces.Pawn | Colors.Black), moves[4].Capture);
+			Assert.AreEqual(moves[4].CaptureTile, 35);
+			Assert.AreEqual(moves[4].To, 43);
+		}
+
+		[TestMethod]
+		public void TestABNEnPassantBlack()
+		{
+			// Tests castling both queenside
+			var board = new Board(true);
+			string str = "1.h3 c5 2.h4 c4 3.d4 cxd3 ";
+			var moves = ABN.ABNToMoves(board, str);
+			foreach (var move in moves)
+			{
+				board.Move(move.From, move.To, true);
+			}
+
+			Assert.AreEqual((Pieces.Pawn | Colors.White), moves[5].Capture);
+			Assert.AreEqual(moves[5].CaptureTile, 27);
+			Assert.AreEqual(moves[5].To, 19);
 		}
 
 		[TestMethod]

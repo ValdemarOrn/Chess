@@ -47,11 +47,11 @@ namespace Chess.Tests
 
 			b.Move(posBlack, posBlack - 16);
 
-			bool isEnPassant = Moves.IsEnPassantMove(b, posWhite, posWhite + 7);
+			bool isEnPassant = Moves.IsEnPassantCapture(b, posWhite, posWhite + 7);
 			Assert.IsTrue(isEnPassant);
 
 			// test the other / wrong way - not allowed!
-			isEnPassant = Moves.IsEnPassantMove(b, posWhite, posWhite + 9);
+			isEnPassant = Moves.IsEnPassantCapture(b, posWhite, posWhite + 9);
 			Assert.IsFalse(isEnPassant);
 		}
 
@@ -69,11 +69,11 @@ namespace Chess.Tests
 
 			b.Move(posBlack, posBlack - 16);
 
-			bool isEnPassant = Moves.IsEnPassantMove(b, posWhite, posWhite + 9);
+			bool isEnPassant = Moves.IsEnPassantCapture(b, posWhite, posWhite + 9);
 			Assert.IsTrue(isEnPassant);
 
 			// test the other / wrong way - not allowed!
-			isEnPassant = Moves.IsEnPassantMove(b, posWhite, posWhite + 7);
+			isEnPassant = Moves.IsEnPassantCapture(b, posWhite, posWhite + 7);
 			Assert.IsFalse(isEnPassant);
 		}
 
@@ -91,11 +91,11 @@ namespace Chess.Tests
 
 			b.Move(posWhite, posWhite + 16);
 
-			bool isEnPassant = Moves.IsEnPassantMove(b, posBlack, posBlack - 9);
+			bool isEnPassant = Moves.IsEnPassantCapture(b, posBlack, posBlack - 9);
 			Assert.IsTrue(isEnPassant);
 
 			// test the other / wrong way - not allowed!
-			isEnPassant = Moves.IsEnPassantMove(b, posBlack, posBlack - 7);
+			isEnPassant = Moves.IsEnPassantCapture(b, posBlack, posBlack - 7);
 			Assert.IsFalse(isEnPassant);
 		}
 
@@ -113,11 +113,11 @@ namespace Chess.Tests
 
 			b.Move(posWhite, posWhite + 16);
 
-			bool isEnPassant = Moves.IsEnPassantMove(b, posBlack, posBlack - 7);
+			bool isEnPassant = Moves.IsEnPassantCapture(b, posBlack, posBlack - 7);
 			Assert.IsTrue(isEnPassant);
 
 			// test the other / wrong way - not allowed!
-			isEnPassant = Moves.IsEnPassantMove(b, posBlack, posBlack - 9);
+			isEnPassant = Moves.IsEnPassantCapture(b, posBlack, posBlack - 9);
 			Assert.IsFalse(isEnPassant);
 		}
 
@@ -135,7 +135,7 @@ namespace Chess.Tests
 
 			b.Move(posBlack, posBlack - 16);
 
-			bool isEnPassant = Moves.IsEnPassantMove(b, posWhite, posWhite + 9);
+			bool isEnPassant = Moves.IsEnPassantCapture(b, posWhite, posWhite + 9);
 			Assert.IsTrue(isEnPassant);
 
 			int target = Moves.EnPassantVictim(b, posWhite, posWhite + 9);
@@ -156,7 +156,7 @@ namespace Chess.Tests
 
 			b.Move(posWhite, posWhite + 16);
 
-			bool isEnPassant = Moves.IsEnPassantMove(b, posBlack, posBlack - 9);
+			bool isEnPassant = Moves.IsEnPassantCapture(b, posBlack, posBlack - 9);
 			Assert.IsTrue(isEnPassant);
 
 			int target = Moves.EnPassantVictim(b, posBlack, posBlack - 9);

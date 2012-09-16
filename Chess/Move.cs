@@ -8,19 +8,22 @@ namespace Chess
 	public struct Move
 	{
 		public int From, To, MoveCount, Color;
-		public bool Capture;
+		public int Capture;
+		public int CaptureTile; // only differs from "To" in en passant attacks
 		public int Promotion;
 		public bool Check;
 		public bool Mate;
 		public bool Queenside;
 		public bool Kingside;
+		
 
 		public Move(
 			int from,
 			int to,
-			int turn = 0,
+			int moveCount = 0,
 			int color = 0,
-			bool capture = false,
+			int capture = 0,
+			int captureTile = 0,
 			int promotion = 0,
 			bool check = false,
 			bool mate = false,
@@ -29,9 +32,10 @@ namespace Chess
 		{
 			From = from;
 			To = to;
-			MoveCount = turn;
+			MoveCount = moveCount;
 			Color = color;
 			Capture = capture;
+			CaptureTile = captureTile;
 			Promotion = promotion;
 			Check = check;
 			Mate = mate;

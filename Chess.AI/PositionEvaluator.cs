@@ -3,12 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Chess.AI.Tests")]
+
 namespace Chess.AI
 {
 	
 
 	public class PositionEvaluator
 	{
+		public static int ScoreDiff(Tuple<Score, Score> score)
+		{
+			return score.Item1.TotalScore - score.Item2.TotalScore;
+		}
+
 		public static Tuple<Score, Score> EvaluatePosition(Board board)
 		{
 			// 1. ==== All Pieces ====
@@ -444,42 +451,42 @@ namespace Chess.AI
 			return new Tuple<Score, Score>(ScoreWhite, ScoreBlack);
 		}
 		
-		public static int PieceValuePawn = 1000;
-		public static int PieceValueKnight = 3000;
-		public static int PieceValueishop = 3200;
-		public static int PieceValueRook = 5000;
-		public static int PieceValueQueen = 9000;
-		public static int PieceValueKing = 0;
+		internal static int PieceValuePawn = 1000;
+		internal static int PieceValueKnight = 3000;
+		internal static int PieceValueishop = 3200;
+		internal static int PieceValueRook = 5000;
+		internal static int PieceValueQueen = 9000;
+		internal static int PieceValueKing = 0;
 
-		public static int ProtectionValuePawn = 50;
-		public static int ProtectionValueKnight = 35;
-		public static int ProtectionValueBishop = 25;
-		public static int ProtectionValueRook = 10;
-		public static int ProtectionValueQueen = 10;
-		public static int ProtectionValueKing = 0;
+		internal static int ProtectionValuePawn = 50;
+		internal static int ProtectionValueKnight = 35;
+		internal static int ProtectionValueBishop = 25;
+		internal static int ProtectionValueRook = 10;
+		internal static int ProtectionValueQueen = 10;
+		internal static int ProtectionValueKing = 0;
 
-		public static float DefenceBonusMultiplier = 2.0f;
-		public static float AttackBonusMultiplier = 2.0f;
+		internal static float DefenceBonusMultiplier = 2.0f;
+		internal static float AttackBonusMultiplier = 2.0f;
 
-		public static int HangingPiecePenalty = -500;
-		public static float MovementBonusMultiplier = 25.0f;
-		public static int PawnsOnSameFilePenalty = -30;
-		public static int PawnCantMovePenalty = -40;
-		public static int KnightForksBonus = 60;
-		public static int CannotCastlePenalty = -60;
-		public static float KingMovementBonusMultiplier = 10;
-		public static int RookGuardsBackRankBonus = 100;
-		public static int RookOnOpenFileBonus = 20;
-		public static int PawnsUntouchedKingsideBonus = 200;
-		public static int CheckPenalty = -500;
-		public static int MatePenalty = -1000000000;
-		public static int TempoBonus = 100;
-		public static int QueenMovedEarlyPenalty = -100;
-		public static int BothBishopsBonus = 50;
+		internal static int HangingPiecePenalty = -500;
+		internal static float MovementBonusMultiplier = 25.0f;
+		internal static int PawnsOnSameFilePenalty = -30;
+		internal static int PawnCantMovePenalty = -40;
+		internal static int KnightForksBonus = 60;
+		internal static int CannotCastlePenalty = -60;
+		internal static float KingMovementBonusMultiplier = 10;
+		internal static int RookGuardsBackRankBonus = 100;
+		internal static int RookOnOpenFileBonus = 20;
+		internal static int PawnsUntouchedKingsideBonus = 200;
+		internal static int CheckPenalty = -500;
+		internal static int MatePenalty = -1000000000;
+		internal static int TempoBonus = 100;
+		internal static int QueenMovedEarlyPenalty = -100;
+		internal static int BothBishopsBonus = 50;
 
-		public static int CastledBonus = 300;
+		internal static int CastledBonus = 300;
 
-		public static int ReadTable(short[] table, int pos, int color)
+		internal static int ReadTable(short[] table, int pos, int color)
 		{
 			int x = Board.X(pos);
 			int y = Board.Y(pos);
@@ -488,7 +495,7 @@ namespace Chess.AI
 			return table[location]*10;
 		}
 
-		public static int GetPieceValue(int piece)
+		internal static int GetPieceValue(int piece)
 		{
 			switch (piece)
 			{
@@ -509,7 +516,7 @@ namespace Chess.AI
 			}
 		}
 
-		public static int GetProtectionValue(int piece)
+		internal static int GetProtectionValue(int piece)
 		{
 			switch (piece)
 			{
@@ -530,7 +537,7 @@ namespace Chess.AI
 			}
 		}
 
-		public static short[] GetPositionTable(int piece)
+		internal static short[] GetPositionTable(int piece)
 		{
 			switch(piece)
 			{
@@ -547,7 +554,7 @@ namespace Chess.AI
 			}
 		}
 
-		public static readonly short[] NullTable = new short[]
+		internal static readonly short[] NullTable = new short[]
 		{
 		  0,  0,  0,  0,  0,  0,  0,  0,
 		  0,  0,  0,  0,  0,  0,  0,  0,
@@ -559,7 +566,7 @@ namespace Chess.AI
 		  0,  0,  0,  0,  0,  0,  0,  0
 		};
 
-		public static readonly short[] PawnTable = new short[]
+		internal static readonly short[] PawnTable = new short[]
 		{
 		  0,  0,  0,  0,  0,  0,  0,  0,
 		 50, 50, 50, 50, 50, 50, 50, 50,
@@ -571,7 +578,7 @@ namespace Chess.AI
 		  0,  0,  0,  0,  0,  0,  0,  0
 		};
 
-		public static readonly short[] KnightTable = new short[]
+		internal static readonly short[] KnightTable = new short[]
 		{
 		 -50,-40,-30,-30,-30,-30,-40,-50,
 		 -40,-20,  0,  0,  0,  0,-20,-40,
@@ -583,7 +590,7 @@ namespace Chess.AI
 		 -50,-40,-20,-30,-30,-20,-40,-50,
 		};
 
-		public static readonly short[] BishopTable = new short[]
+		internal static readonly short[] BishopTable = new short[]
 		{
 		 -20,-10,-10,-10,-10,-10,-10,-20,
 		 -10,  0,  0,  0,  0,  0,  0,-10,
@@ -595,7 +602,7 @@ namespace Chess.AI
 		 -20,-10,-40,-10,-10,-40,-10,-20,
 		};
 
-		public static readonly short[] KingTable = new short[]
+		internal static readonly short[] KingTable = new short[]
 		{
 		  -30, -40, -40, -50, -50, -40, -40, -30,
 		  -30, -40, -40, -50, -50, -40, -40, -30,
@@ -607,7 +614,7 @@ namespace Chess.AI
 		   20,  30,  10,   0,   0,  10,  30,  20
 		};
 
-		public static readonly short[] KingTableEndGame = new short[]
+		internal static readonly short[] KingTableEndGame = new short[]
 		{
 		 -50,-40,-30,-20,-20,-30,-40,-50,
 		 -30,-20,-10,  0,  0,-10,-20,-30,
