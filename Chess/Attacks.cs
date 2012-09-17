@@ -12,91 +12,116 @@ namespace Chess
 	{
 		public static int[] GetAttacks(Board board, int square)
 		{
-			List<int> output = null;
+			int movecount = 0;
+			int[] moves = new int[28];
 			int pieceType = Pieces.Get(board.State[square]);
 
 			switch (pieceType)
 			{
 				case Pieces.Pawn:
-					output = GetPawnAttacks(board, square);
+					GetPawnAttacks(board, square, moves, ref movecount);
 					break;
 				case Pieces.Knight:
-					output = GetKnightAttacks(board, square);
+					GetKnightAttacks(board, square, moves, ref movecount);
 					break;
 				case Pieces.Rook:
-					output = GetRookAttacks(board, square);
+					GetRookAttacks(board, square, moves, ref movecount);
 					break;
 				case Pieces.Bishop:
-					output = GetBishopAttacks(board, square);
+					GetBishopAttacks(board, square, moves, ref movecount);
 					break;
 				case Pieces.Queen:
-					output = GetQueenAttacks(board, square);
+					GetQueenAttacks(board, square, moves, ref movecount);
 					break;
 				case Pieces.King:
-					output = GetKingAttacks(board, square);
+					GetKingAttacks(board, square, moves, ref movecount);
 					break;
 			}
 
-			return output.ToArray();
+			int[] output = new int[movecount];
+			for (int i = 0; i < movecount; i++)
+				output[i] = moves[i];
+
+			return output;
 		}
 
-		private static List<int> GetPawnAttacks(Board board, int square)
+		private static void GetPawnAttacks(Board board, int square, int[] moves, ref int count)
 		{
 			int x = Board.X(square);
 			int y = Board.Y(square);
 			int color = board.Color(square);
-
-			var output = new List<int>();
 
 			if (color == Colors.White)
 			{
 				// capture left
 				int target = square + 7;
 				if (x > 0 && y < 7)
-					output.Add(target);
+				{
+					moves[count] = target;
+					count++;
+				}
 
 				// capture right
 				target = square + 9;
 				if (x < 7 && y < 7)
-					output.Add(target);
+				{
+					moves[count] = target;
+					count++;
+				}
 
 				// en passant left
 				target = square + 7;
 				if (y == 4 && x > 0 && board.EnPassantTile == target && board.State[target - 8] == (Pieces.Pawn | Colors.Black))
-					output.Add(target - 8); // I'm ATTACKING the pawn at target-8 even though I move to target
+				{
+					moves[count] = target - 8; // I'm ATTACKING the pawn at target-8 even though I move to target
+					count++;
+				}
 
 				// en passant right
 				target = square + 9;
 				if (y == 4 && x < 7 && board.EnPassantTile == target && board.State[target - 8] == (Pieces.Pawn | Colors.Black))
-					output.Add(target - 8); // I'm ATTACKING the pawn at target-8 even though I move to target
+				{
+					moves[count] = target - 8; // I'm ATTACKING the pawn at target-8 even though I move to target
+					count++;
+				}
 			}
 			else
 			{
 				// capture left
 				int target = square - 9;
 				if (x > 0 && y > 0)
-					output.Add(target);
+				{
+					moves[count] = target;
+					count++;
+				}
 
 				// capture right
 				target = square - 7;
 				if (x < 7 && y > 0)
-					output.Add(target);
+				{
+					moves[count] = target;
+					count++;
+				}
 
 				// en passant left
 				target = square - 9;
 				if (y == 3 && x > 0 && board.EnPassantTile == target && board.State[target + 8] == (Pieces.Pawn | Colors.White))
-					output.Add(target+8); // I'm ATTACKING the pawn at target+8 even though I move to target
+				{
+					moves[count] = target+8; // I'm ATTACKING the pawn at target+8 even though I move to target
+					count++;
+				}
 
 				// en passant right
 				target = square - 7;
 				if (y == 3 && x < 7 && board.EnPassantTile == target && board.State[target + 8] == (Pieces.Pawn | Colors.White))
-					output.Add(target + 8); // I'm ATTACKING the pawn at target+8 even though I move to target
+				{
+					moves[count] = target + 8; // I'm ATTACKING the pawn at target+8 even though I move to target
+					count++;
+				}
 			}
-
-			return output;
 		}
 
-		private static List<int> GetKnightAttacks(Board board, int square)
+		private static void GetKnightAttacks(Board board, int square, int[] moves, ref int count)
 		{
 			// -x-x-  -0-1-
 			// x---x  2---3
@@ -104,7 +129,6 @@ namespace Chess
 			// x---x  4---5
 			// -x-x-  -6-7-
 
-			var output = new List<int>();
 			int target = 0;
 
 			int x = Board.X(square);
@@ -115,26 +139,30 @@ namespace Chess
 			if (x > 0 && y < 6)
 			{
 				target = square + 15;
-				output.Add(target);
+				moves[count] = target;
+				count++;
 			}
 			// 1
 			if (x < 7 && y < 6)
 			{
 				target = square + 17;
-				output.Add(target);
+				moves[count] = target;
+				count++;
 			}
 
 			// 2
 			if (x > 1 && y < 7)
 			{
 				target = square + 6;
-				output.Add(target);
+				moves[count] = target;
+				count++;
 			}
 			// 3
 			if (x < 6 && y < 7)
 			{
 				target = square + 10;
-				output.Add(target);
+				moves[count] = target;
+				count++;
 			}
 
 			// -x-x-  -0-1-
@@ -147,34 +175,35 @@ namespace Chess
 			if (x > 1 && y > 0)
 			{
 				target = square - 10;
-				output.Add(target);
+				moves[count] = target;
+				count++;
 			}
 			// 5
 			if (x < 6 && y > 0)
 			{
 				target = square - 6;
-				output.Add(target);
+				moves[count] = target;
+				count++;
 			}
 
 			// 6
 			if (x > 0 && y > 1)
 			{
 				target = square - 17;
-				output.Add(target);
+				moves[count] = target;
+				count++;
 			}
 			// 7
 			if (x < 7 && y > 1)
 			{
 				target = square - 15;
-				output.Add(target);
+				moves[count] = target;
+				count++;
 			}
-
-			return output;
 		}
 
-		private static List<int> GetRookAttacks(Board board, int square)
+		private static void GetRookAttacks(Board board, int square, int[] moves, ref int count)
 		{
-			var output = new List<int>();
 			int color = board.Color(square);
 			int target = 0;
 
@@ -182,7 +211,8 @@ namespace Chess
 			target = square + 8;
 			while (target < 64)
 			{
-				output.Add(target);
+				moves[count] = target; 
+				count++;
 				if (board.State[target] != 0) // piece
 					break;
 				target += 8;
@@ -192,7 +222,8 @@ namespace Chess
 			target = square - 8;
 			while (target >= 0)
 			{
-				output.Add(target);
+				moves[count] = target;
+				count++;
 				if (board.State[target] != 0) // piece
 					break;
 				target -= 8;
@@ -202,7 +233,8 @@ namespace Chess
 			target = square + 1;
 			while (Board.X(target) > Board.X(square))
 			{
-				output.Add(target);
+				moves[count] = target;
+				count++;
 				if (board.State[target] != 0) // piece
 					break;
 				target++;
@@ -212,18 +244,16 @@ namespace Chess
 			target = square - 1;
 			while (Board.X(target) < Board.X(square))
 			{
-				output.Add(target);
+				moves[count] = target;
+				count++;
 				if (board.State[target] != 0) // piece
 					break;
 				target--;
 			}
-
-			return output;
 		}
 
-		private static List<int> GetBishopAttacks(Board board, int square)
+		private static void GetBishopAttacks(Board board, int square, int[] moves, ref int count)
 		{
-			var output = new List<int>();
 			int x = Board.X(square);
 			int y = Board.Y(square);
 			int color = board.Color(square);
@@ -233,7 +263,8 @@ namespace Chess
 			target = square + 9;
 			while (target < 64 && Board.X(target) > x)
 			{
-				output.Add(target);
+				moves[count] = target;
+				count++;
 				if (board.State[target] != 0) // piece
 					break;
 				target += 9;
@@ -243,7 +274,8 @@ namespace Chess
 			target = square + 7;
 			while (target < 64 && Board.X(target) < x)
 			{
-				output.Add(target);
+				moves[count] = target;
+				count++;
 				if (board.State[target] != 0) //  piece
 					break;
 				target += 7;
@@ -253,7 +285,8 @@ namespace Chess
 			target = square - 7;
 			while (target >= 0 && Board.X(target) > x)
 			{
-				output.Add(target);
+				moves[count] = target;
+				count++;
 				if (board.State[target] != 0) // piece
 					break;
 				target -= 7;
@@ -263,25 +296,22 @@ namespace Chess
 			target = square - 9;
 			while (target >= 0 && Board.X(target) < x)
 			{
-				output.Add(target);
+				moves[count] = target;
+				count++;
 				if (board.State[target] != 0) // piece
 					break;
 				target -= 9;
 			}
-
-			return output;
 		}
 
-		private static List<int> GetQueenAttacks(Board board, int square)
+		private static void GetQueenAttacks(Board board, int square, int[] moves, ref int count)
 		{
-			var output = GetRookAttacks(board, square);
-			output.AddRange(GetBishopAttacks(board, square));
-			return output;
+			GetRookAttacks(board, square, moves, ref count);
+			GetBishopAttacks(board, square, moves, ref count);
 		}
 
-		private static List<int> GetKingAttacks(Board board, int square)
+		private static void GetKingAttacks(Board board, int square, int[] moves, ref int count)
 		{
-			var output = new List<int>();
 			int x = Board.X(square);
 			int y = Board.Y(square);
 			int color = board.Color(square);
@@ -291,39 +321,57 @@ namespace Chess
 			{
 				target = square + 7;
 				if (x > 0)
-					output.Add(target);
+				{
+					moves[count] = target;
+					count++;
+				}
 
 				target = square + 8;
-				output.Add(target);
+				moves[count] = target;
+				count++;
 
 				target = square + 9;
 				if (x < 7)
-					output.Add(target);
+				{
+					moves[count] = target;
+					count++;
+				}
 			}
 
 			target = square - 1;
 			if (x > 0)
-				output.Add(target);
+			{
+				moves[count] = target;
+				count++;
+			}
 
 			target = square + 1;
 			if (x < 7)
-				output.Add(target);
+			{
+				moves[count] = target;
+				count++;
+			}
 
 			if (y > 0)
 			{
 				target = square - 9;
 				if (x > 0)
-					output.Add(target);
+				{
+					moves[count] = target;
+					count++;
+				}
 
 				target = square - 8;
-				output.Add(target);
+				moves[count] = target;
+				count++;
 
 				target = square - 7;
 				if (x < 7)
-					output.Add(target);
+				{
+					moves[count] = target;
+					count++;
+				}
 			}
-
-			return output;
 		}
 	}
 }

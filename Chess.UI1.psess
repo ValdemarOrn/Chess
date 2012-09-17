@@ -49,7 +49,7 @@
   </PostinstrumentEvent>
   <Binaries>
     <ProjBinary>
-      <Path>C:\Src\_Tree\Applications\Chess\Chess.UI\obj\x86\Release\Chess.UI.exe</Path>
+      <Path>C:\Src\_Tree\Applications\Chess\Chess.UI\obj\x86\Debug\Chess.UI.exe</Path>
       <ArgumentTimestamp>01/01/0001 00:00:00</ArgumentTimestamp>
       <Instrument>true</Instrument>
       <Sample>true</Sample>
@@ -59,8 +59,8 @@
       <LaunchProject>true</LaunchProject>
       <OverrideProjectSettings>false</OverrideProjectSettings>
       <LaunchMethod>Executable</LaunchMethod>
-      <ExecutablePath>C:\Src\_Tree\Applications\Chess\Chess.UI\bin\Release\Chess.UI.exe</ExecutablePath>
-      <StartupDirectory>C:\Src\_Tree\Applications\Chess\Chess.UI\bin\Release\</StartupDirectory>
+      <ExecutablePath>C:\Src\_Tree\Applications\Chess\Chess.UI\bin\Debug\Chess.UI.exe</ExecutablePath>
+      <StartupDirectory>C:\Src\_Tree\Applications\Chess\Chess.UI\bin\Debug\</StartupDirectory>
       <Arguments />
       <NetAppHost>IIS</NetAppHost>
       <NetBrowser>InternetExplorer</NetBrowser>
@@ -79,7 +79,7 @@
   </Binaries>
   <Reports>
     <Report>
-      <Path>C:\Src\_Tree\Applications\Chess\Chess.UI120916(3).vsp</Path>
+      <Path>C:\Src\_Tree\Applications\Chess\Chess.UI120917(3).vsp</Path>
     </Report>
   </Reports>
   <Launches>
