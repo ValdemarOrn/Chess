@@ -7,7 +7,10 @@ namespace Chess
 {
 	public struct Move
 	{
-		public int From, To, MoveCount, Color;
+		public int From;
+		public int To;
+		public int MoveCount;
+		public int Color;
 		public int Capture;
 		public int CaptureTile; // only differs from "To" in en passant attacks
 		public int Promotion;

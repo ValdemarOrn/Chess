@@ -12,7 +12,7 @@ namespace MagicBitboard.Tests
 		[TestMethod]
 		public void TestRookVectors()
 		{
-			var m = Bitboard.RookVectors;
+			var m = BitboardRook.RookVectors;
 			var str = Bitboard.ToString(m[7]);
 		}
 
@@ -47,7 +47,7 @@ namespace MagicBitboard.Tests
 		[TestMethod]
 		public void TestRookVariations()
 		{
-			var perms = Bitboard.GetRookPermutations(0);
+            var perms = BitboardRook.GetRookPermutations(0);
 			var strs = perms.Select(x => Bitboard.ToString(x)).ToList();
 		}
 
@@ -56,12 +56,12 @@ namespace MagicBitboard.Tests
 		{
 			int idx = 0;
 
-			var perms = Bitboard.GetRookPermutations(idx);
+            var perms = BitboardRook.GetRookPermutations(idx);
 			var l = new List<Tuple<string, string>>();
 
 			foreach (var perm in perms)
 			{
-				var k = Bitboard.GetRookMoves(perm, idx);
+                var k = BitboardRook.GetRookMoves(perm, idx);
 				l.Add(new Tuple<string, string>(Bitboard.ToString(perm), Bitboard.ToString(k)));
 			}
 		}
@@ -71,18 +71,19 @@ namespace MagicBitboard.Tests
 		{
 			int idx = 0;
 
-			var perms = Bitboard.GetRookPermutations(idx);
+            var perms = BitboardRook.GetRookPermutations(idx);
 			var map = new Dictionary<ulong, ulong>();
 
 			foreach (var perm in perms)
 			{
-				map[perm] = Bitboard.GetRookMoves(perm, idx);
+                map[perm] = BitboardRook.GetRookMoves(perm, idx);
 			}
 
 			int count = map.Select(x => x.Value).Distinct().Count();
 
 			int bits = 18; // 2^18
-			Bitboard.FindMagic(map, bits);
+			bool running = true;
+			MagicBitboard.FindMagic(map, bits, 0, ref running);
 		}
 	}
 }
