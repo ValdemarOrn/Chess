@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Runtime.InteropServices;
 
 namespace MagicBitboard
 {
 	public class Bitboard
 	{
-
-
 		public static ulong Unset(ulong val, int index)
 		{
 			ulong inv = ~(ulong)((ulong)1 << index);
@@ -21,17 +20,38 @@ namespace MagicBitboard
 			return val | mask;
 		}
 
+		public static void Unset(ref ulong val, int index)
+		{
+			ulong inv = ~(ulong)((ulong)1 << index);
+			val = val & inv;
+		}
+
+		public static void Set(ref ulong val, int index)
+		{
+			ulong mask = ((ulong)1 << index);
+			val = val | mask;
+		}
+
 		public static bool Get(ulong val, int index)
 		{
 			ulong mask = ((ulong)1 << index);
 			return (val & mask) > 0;
 		}
 
-        /// <summary>
-        /// Generate a string representation from the bitboard
-        /// </summary>
-        /// <param name="val"></param>
-        /// <returns></returns>
+		public static ulong Make(params int[] tiles)
+		{
+			ulong bitboard = 0;
+			foreach (var tile in tiles)
+				Set(ref bitboard, tile);
+
+			return bitboard;
+		}
+
+		/// <summary>
+		/// Generate a string representation from the bitboard
+		/// </summary>
+		/// <param name="val"></param>
+		/// <returns></returns>
 		public static string ToString(ulong val)
 		{
 			var lines = new string[8];
@@ -55,14 +75,21 @@ namespace MagicBitboard
 			return output;
 		}
 
+		// --------------------- Bitscan Operations ---------------------
 
-        [System.Runtime.InteropServices.DllImport("..\\..\\..\\Release\\FastOps.dll", 
-            SetLastError = true, CallingConvention = System.Runtime.InteropServices.CallingConvention.Cdecl)]
-        public static extern uint FirstBit(ulong value);
+		[DllImport("..\\..\\..\\FastOps\\x64\\Debug\\FastOps.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
+		public static extern int Bitscan_ForwardBit(ulong value);
 
-        [System.Runtime.InteropServices.DllImport("..\\..\\..\\Release\\FastOps.dll",
-            SetLastError = true, CallingConvention = System.Runtime.InteropServices.CallingConvention.Cdecl)]
-        public static extern uint TryMany();
+		[DllImport("..\\..\\..\\FastOps\\x64\\Debug\\FastOps.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
+		public static extern int Bitscan_ReverseBit(ulong value);
+
+		[DllImport("..\\..\\..\\FastOps\\x64\\Debug\\FastOps.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
+		public static extern int Bitscan_PopCount(ulong value);
+
+		[DllImport("..\\..\\..\\FastOps\\x64\\Debug\\FastOps.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
+		public static extern int Bitscan_TryMany();
+
+		
 
 	}
 }

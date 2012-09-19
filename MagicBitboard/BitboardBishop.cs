@@ -4,24 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Runtime.InteropServices;
 
-[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("MagicBitboard.Tests")]
-[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("MagicBitboard.Calculate")]
-
 namespace MagicBitboard
 {
-	public sealed class BitboardRook
+	public sealed class BitboardBishop
 	{
-		internal static ulong[] RookVectors;
+		public static ulong[] BishopVectors;
 
-		static BitboardRook()
+		static BitboardBishop()
 		{
-			RookVectors = GetRookVectors();
+			BishopVectors = GetBishopVectors();
 		}
 
 		/// <summary>
-		/// creates move vectors with no blockers on the board for all 64 positions of the rook
+		/// creates move vectors with no blockers on the board for all 64 positions of the bishop
 		/// </summary>
-		static ulong[] GetRookVectors()
+		static ulong[] GetBishopVectors()
 		{
 			var vectors = new ulong[64];
 
@@ -32,22 +29,60 @@ namespace MagicBitboard
 				int x = i % 8;
 				int y = i >> 3; // i/8
 
-				// mark all in x direction, from file 2-7
-				for (int k = 1; k < 7; k++)
-					Move |= ((ulong)1) << (y * 8 + k);
+				int target = 0;
 
-				// mark all in y direction, from rank 2-7
-				for (int k = 1; k < 7; k++)
-					Move |= ((ulong)1) << (k * 8 + x);
+				// NOTE: We don't traverse x 0 and 7, or y 0 and 7
 
-				Bitboard.Unset(ref Move, i);
+				// mark up right
+				target = i;
+				while (true)
+				{
+					target += 9;
+					if (target < 56 && Board.X(target) < 7 && Board.X(target) > Board.X(i))
+						Bitboard.Set(ref Move, target);
+					else
+						break;
+				}
+
+				// mark up left
+				target = i;
+				while (true)
+				{
+					target += 7;
+					if (target < 56 && Board.X(target) > 0 && Board.X(target) < Board.X(i))
+						Bitboard.Set(ref Move, target);
+					else
+						break;
+				}
+
+				// mark down right
+				target = i;
+				while (true)
+				{
+					target -= 7;
+					if (target > 7 && Board.X(target) < 7 && Board.X(target) > Board.X(i))
+						Bitboard.Set(ref Move, target);
+					else
+						break;
+				}
+
+				// mark down left
+				target = i;
+				while (true)
+				{
+					target -= 9;
+					if (target > 7 && Board.X(target) > 0 && Board.X(target) < Board.X(i))
+						Bitboard.Set(ref Move, target);
+					else
+						break;
+				}
 
 				vectors[i] = Move;
 			}
 
 			return vectors;
 		}
-
+		
 		/// <summary>
 		/// Gets all permutations possible for a rook in that position.
 		/// checks all possible variations of blockers 
@@ -55,11 +90,11 @@ namespace MagicBitboard
 		/// </summary>
 		/// <param name="pos"></param>
 		/// <returns></returns>
-		internal static List<ulong> GetPermutations(int pos)
+		public static List<ulong> GetPermutations(int pos)
 		{
 			var variations = new List<ulong>();
 
-			var vector = RookVectors[pos];
+			var vector = BishopVectors[pos];
 			var str = Bitboard.ToString(vector);
 			List<int> bitlist = new List<int>();
 			for (int i = 0; i < 64; i++)
@@ -88,71 +123,91 @@ namespace MagicBitboard
 
 			return variations;
 		}
-
+		
 		/// <summary>
 		/// Convert the bitboard permutation into a valid attack board
 		/// </summary>
 		/// <param name="permutation"></param>
 		/// <param name="index"></param>
 		/// <returns></returns>
-		internal static ulong GetMoves(ulong permutation, int index)
+		public static ulong GetMoves(ulong permutation, int index)
 		{
 			ulong moves = 0;
 			int target = 0;
 
-			// Move up
-			target = index + 8;
-			while (target < 64)
+			// Move up right
+			target = index + 9;
+			while (true)
 			{
-				Bitboard.Set(ref moves, target);
+				if (target < 64 && Board.X(target) > Board.X(index))
+					Bitboard.Set(ref moves, target);
+				else
+					break;
+
 				if (Bitboard.Get(permutation, target)) // check for blockers
 					break;
-				target += 8;
+
+				target += 9;
 			}
 
-			// Move down
-			target = index - 8;
+			// Move up left
+			target = index + 7;
 			while (target >= 0)
 			{
-				Bitboard.Set(ref moves, target);
+				if (target < 64 && Board.X(target) < Board.X(index))
+					Bitboard.Set(ref moves, target);
+				else
+					break;
+
 				if (Bitboard.Get(permutation, target)) // check for blockers
 					break;
-				target -= 8;
+
+				target += 7;
 			}
 
-			// Move right
-			target = index + 1;
+			// Move down right
+			target = index - 7;
 			while (Board.X(target) > Board.X(index))
 			{
-				Bitboard.Set(ref moves, target);
+				if (target >= 0 && Board.X(target) > Board.X(index))
+					Bitboard.Set(ref moves, target);
+				else
+					break;
+
 				if (Bitboard.Get(permutation, target)) // check for blockers
 					break;
-				target++;
+
+				target -= 7;
 			}
 
-			// Move left
-			target = index - 1;
+			// Move down left
+			target = index - 9;
 			while (Board.X(target) < Board.X(index))
 			{
-				Bitboard.Set(ref moves, target);
+				if (target < 64 && Board.X(target) < Board.X(index))
+					Bitboard.Set(ref moves, target);
+				else
+					break;
+
 				if (Bitboard.Get(permutation, target)) // check for blockers
 					break;
-				target--;
+
+				target -= 9;
 			}
 
 			return moves;
 		}
 
-		// --------------------- Rook Operations ---------------------
+		// --------------------- Bishop Operations ---------------------
 
 		[DllImport("..\\..\\..\\FastOps\\x64\\Debug\\FastOps.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
-		public static extern void Rook_SetupTables();
+		public static extern void Bishop_SetupTables();
 
 		[DllImport("..\\..\\..\\FastOps\\x64\\Debug\\FastOps.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
-		public static extern int Rook_Load(int pos, ulong permutation, ulong moveBoard);
+		public static extern int Bishop_Load(int pos, ulong permutation, ulong moveBoard);
 
 		[DllImport("..\\..\\..\\FastOps\\x64\\Debug\\FastOps.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
-		public static extern ulong Rook_Read(int pos, ulong permutation);
+		public static extern ulong Bishop_Read(int pos, ulong permutation);
 
 		/// <summary>
 		/// This operation generates all permutations and their corresponding moves
@@ -160,7 +215,7 @@ namespace MagicBitboard
 		/// </summary>
 		public static void Initialize()
 		{
-			Rook_SetupTables();
+			Bishop_SetupTables();
 
 			for (int i = 0; i < 64; i++)
 			{
@@ -169,8 +224,8 @@ namespace MagicBitboard
 
 				foreach (var perm in perms)
 				{
-					var move = BitboardRook.GetMoves(perm, i);
-					int err = Rook_Load(i, perm, move);
+					var move = BitboardBishop.GetMoves(perm, i);
+					int err = Bishop_Load(i, perm, move);
 					if (err != 0)
 						throw new Exception("Table is corrupt");
 				}

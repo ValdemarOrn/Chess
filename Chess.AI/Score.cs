@@ -80,7 +80,7 @@ namespace Chess.AI
 			BothBishopsBonus += score.BothBishopsBonus;
 		}
 
-		public string ToString()
+		public override string ToString()
 		{
 			string s = "";
 			s += "Material: " + (Mater / 1000M) + "\n";
