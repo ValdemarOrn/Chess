@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Runtime.InteropServices;
 
-namespace MagicBitboard
+namespace Chess.Bitboard
 {
-	public sealed class BitboardBishop
+	public sealed class Bishop
 	{
 		public static ulong[] BishopVectors;
 
-		static BitboardBishop()
+		static Bishop()
 		{
 			BishopVectors = GetBishopVectors();
 		}
@@ -219,12 +219,12 @@ namespace MagicBitboard
 
 			for (int i = 0; i < 64; i++)
 			{
-				var perms = BitboardRook.GetPermutations(i);
+				var perms = Rook.GetPermutations(i);
 				var map = new Dictionary<ulong, ulong>();
 
 				foreach (var perm in perms)
 				{
-					var move = BitboardBishop.GetMoves(perm, i);
+					var move = Bishop.GetMoves(perm, i);
 					int err = Bishop_Load(i, perm, move);
 					if (err != 0)
 						throw new Exception("Table is corrupt");

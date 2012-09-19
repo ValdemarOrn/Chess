@@ -8,8 +8,8 @@
     <ProjectGuid>{79CAA135-2881-4E2D-93E3-45257546E766}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MagicBitboard</RootNamespace>
-    <AssemblyName>MagicBitboard</AssemblyName>
+    <RootNamespace>Chess.Bitboard</RootNamespace>
+    <AssemblyName>Chess.Bitboard</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -48,12 +48,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BitboardBishop.cs" />
-    <Compile Include="Board.cs" />
+    <Compile Include="Bishop.cs" />
     <Compile Include="Bitboard.cs" />
     <Compile Include="MagicBitboard.cs" />
-    <Compile Include="BitboardRook.cs" />
+    <Compile Include="Rook.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Chess\Chess.csproj">
+      <Project>{5C3DE354-EDD4-4377-A3D0-A33A5D2C7C71}</Project>
+      <Name>Chess</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

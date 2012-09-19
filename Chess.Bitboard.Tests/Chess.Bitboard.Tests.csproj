@@ -9,8 +9,8 @@
     <ProjectGuid>{52DE493F-84F8-451B-8D04-BEDD8D5DF586}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MagicBitboard.Tests</RootNamespace>
-    <AssemblyName>MagicBitboard.Tests</AssemblyName>
+    <RootNamespace>Chess.Bitboard.Tests</RootNamespace>
+    <AssemblyName>Chess.Bitboard.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -63,9 +63,9 @@
     <Compile Include="RookTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MagicBitboard\MagicBitboard.csproj">
+    <ProjectReference Include="..\Chess.Bitboard\Chess.Bitboard.csproj">
       <Project>{79CAA135-2881-4E2D-93E3-45257546E766}</Project>
-      <Name>MagicBitboard</Name>
+      <Name>Chess.Bitboard</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

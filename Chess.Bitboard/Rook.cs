@@ -4,16 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Runtime.InteropServices;
 
-[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("MagicBitboard.Tests")]
-[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("MagicBitboard.Calculate")]
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Chess.Bitboard.Tests")]
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Chess.Bitboard.Calculate")]
 
-namespace MagicBitboard
+namespace Chess.Bitboard
 {
-	public sealed class BitboardRook
+	public sealed class Rook
 	{
 		internal static ulong[] RookVectors;
 
-		static BitboardRook()
+		static Rook()
 		{
 			RookVectors = GetRookVectors();
 		}
@@ -164,12 +164,12 @@ namespace MagicBitboard
 
 			for (int i = 0; i < 64; i++)
 			{
-				var perms = BitboardRook.GetPermutations(i);
+				var perms = Rook.GetPermutations(i);
 				var map = new Dictionary<ulong, ulong>();
 
 				foreach (var perm in perms)
 				{
-					var move = BitboardRook.GetMoves(perm, i);
+					var move = Rook.GetMoves(perm, i);
 					int err = Rook_Load(i, perm, move);
 					if (err != 0)
 						throw new Exception("Table is corrupt");

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace MagicBitboard.Tests
+namespace Chess.Bitboard.Tests
 {
 	[TestClass]
 	public class BishopTest
@@ -12,7 +12,7 @@ namespace MagicBitboard.Tests
 		[TestMethod]
 		public void TestBishopVectors()
 		{
-			var vex = BitboardBishop.BishopVectors;
+			var vex = Bishop.BishopVectors;
 			var strs = vex.Select(x => Bitboard.ToString(x)).ToList();
 			Assert.AreEqual((ulong)0x0040201008040200, vex[0]);
 		}
@@ -20,8 +20,8 @@ namespace MagicBitboard.Tests
 		[TestMethod]
 		public void TestBishopPermutations()
 		{
-			var vex = BitboardBishop.BishopVectors;
-			var perms = BitboardBishop.GetPermutations(0);
+			var vex = Bishop.BishopVectors;
+			var perms = Bishop.GetPermutations(0);
 			var strs = perms.Select(x => Bitboard.ToString(x)).ToList();
 		}
 
@@ -29,9 +29,9 @@ namespace MagicBitboard.Tests
 		public void TestBishopMoves1()
 		{
 			int idx = 27;
-			var vex = BitboardBishop.BishopVectors;
-			var perms = BitboardBishop.GetPermutations(idx);
-			var moves = perms.Select(x => BitboardBishop.GetMoves(x, idx)).ToList();
+			var vex = Bishop.BishopVectors;
+			var perms = Bishop.GetPermutations(idx);
+			var moves = perms.Select(x => Bishop.GetMoves(x, idx)).ToList();
 
 			var strsp = perms.Select(x => Bitboard.ToString(x)).ToList();
 			var strsm = moves.Select(x => Bitboard.ToString(x)).ToList();
@@ -41,9 +41,9 @@ namespace MagicBitboard.Tests
 		public void TestBishopMoves2()
 		{
 			int idx = 0;
-			var vex = BitboardBishop.BishopVectors;
-			var perms = BitboardBishop.GetPermutations(idx);
-			var moves = perms.Select(x => BitboardBishop.GetMoves(x, idx)).ToList();
+			var vex = Bishop.BishopVectors;
+			var perms = Bishop.GetPermutations(idx);
+			var moves = perms.Select(x => Bishop.GetMoves(x, idx)).ToList();
 
 			var strsp = perms.Select(x => Bitboard.ToString(x)).ToList();
 			var strsm = moves.Select(x => Bitboard.ToString(x)).ToList();
@@ -54,8 +54,8 @@ namespace MagicBitboard.Tests
 		[TestMethod]
 		public void TestRookInitializeAndRead()
 		{
-			BitboardBishop.Initialize();
-			var r = BitboardBishop.Bishop_Read(27, (ulong)0);
+			Bishop.Initialize();
+			var r = Bishop.Bishop_Read(27, (ulong)0);
 		}
 	}
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Runtime.InteropServices;
 
-namespace MagicBitboard
+namespace Chess.Bitboard
 {
 	public class Bitboard
 	{

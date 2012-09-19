@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 
-namespace MagicBitboard.Performance
+namespace Chess.Bitboard.Performance
 {
 	class Program
 	{
@@ -56,19 +56,19 @@ namespace MagicBitboard.Performance
 
 				if (rook)
 				{
-					var perms = BitboardRook.GetPermutations(idx);
+					var perms = Rook.GetPermutations(idx);
 					Map = new Dictionary<ulong, ulong>();
 
 					foreach (var perm in perms)
-						Map[perm] = BitboardRook.GetMoves(perm, idx);
+						Map[perm] = Rook.GetMoves(perm, idx);
 				}
 				else
 				{
-					var perms = BitboardBishop.GetPermutations(idx);
+					var perms = Bishop.GetPermutations(idx);
 					Map = new Dictionary<ulong, ulong>();
 
 					foreach (var perm in perms)
-						Map[perm] = BitboardBishop.GetMoves(perm, idx);
+						Map[perm] = Bishop.GetMoves(perm, idx);
 				}
 
 				int cardinalCount = Map.Select(x => x.Value).Distinct().Count();
