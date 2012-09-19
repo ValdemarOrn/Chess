@@ -42,15 +42,15 @@ namespace MagicBitboard.Tests
 		public void TestForwardBit()
 		{
 			ulong val = 0x0100100;
-			var fwd = Bitboard.Bitscan_ForwardBit(val);
+			var fwd = Bitboard.Bitboard_ForwardBit(val);
 			Assert.AreEqual(8, fwd);
 
 			val = 0x23000;
-			fwd = Bitboard.Bitscan_ForwardBit(val);
+			fwd = Bitboard.Bitboard_ForwardBit(val);
 			Assert.AreEqual(12, fwd);
 
 			val = 0x2300000000000;
-			fwd = Bitboard.Bitscan_ForwardBit(val);
+			fwd = Bitboard.Bitboard_ForwardBit(val);
 			Assert.AreEqual(44, fwd);
 		}
 
@@ -58,15 +58,15 @@ namespace MagicBitboard.Tests
 		public void TestReverseBit()
 		{
 			ulong val = 0x0100100;
-			var rwd = Bitboard.Bitscan_ReverseBit(val);
+			var rwd = Bitboard.Bitboard_ReverseBit(val);
 			Assert.AreEqual(20, rwd);
 
 			val = 0x23000;
-			rwd = Bitboard.Bitscan_ReverseBit(val);
+			rwd = Bitboard.Bitboard_ReverseBit(val);
 			Assert.AreEqual(17, rwd);
 
 			val = 0x2300000000000;
-			rwd = Bitboard.Bitscan_ReverseBit(val);
+			rwd = Bitboard.Bitboard_ReverseBit(val);
 			Assert.AreEqual(49, rwd);
 		}
 
@@ -74,11 +74,11 @@ namespace MagicBitboard.Tests
 		public void TestPopCount()
 		{
 			ulong val = 0xff010010010030;
-			var cnt = Bitboard.Bitscan_PopCount(val);
+			var cnt = Bitboard.Bitboard_PopCount(val);
 			Assert.AreEqual(13, cnt);
 
 			val = 0xffff000000000001;
-			cnt = Bitboard.Bitscan_PopCount(val);
+			cnt = Bitboard.Bitboard_PopCount(val);
 			Assert.AreEqual(17, cnt);
 		}
 	}

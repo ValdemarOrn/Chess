@@ -78,16 +78,16 @@ namespace MagicBitboard
 		// --------------------- Bitscan Operations ---------------------
 
 		[DllImport("..\\..\\..\\FastOps\\x64\\Debug\\FastOps.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
-		public static extern int Bitscan_ForwardBit(ulong value);
+		public static extern int Bitboard_ForwardBit(ulong value);
 
 		[DllImport("..\\..\\..\\FastOps\\x64\\Debug\\FastOps.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
-		public static extern int Bitscan_ReverseBit(ulong value);
+		public static extern int Bitboard_ReverseBit(ulong value);
 
 		[DllImport("..\\..\\..\\FastOps\\x64\\Debug\\FastOps.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
-		public static extern int Bitscan_PopCount(ulong value);
+		public static extern int Bitboard_PopCount(ulong value);
 
 		[DllImport("..\\..\\..\\FastOps\\x64\\Debug\\FastOps.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
-		public static extern int Bitscan_TryMany();
+		public static extern int Bitboard_TryMany();
 
 		
 
