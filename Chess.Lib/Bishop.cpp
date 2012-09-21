@@ -4,7 +4,7 @@
 
 uint64_t** BishopTables;
 
-inline int GetIndex(int pos, uint64_t permutation)
+inline int BishopIndex(int pos, uint64_t permutation)
 {
 	int index = (int)((permutation * BishopMagic[pos]) >> (64 - BishopBits[pos]));
 	return index;
@@ -32,7 +32,7 @@ void Bishop_SetupTables()
 int Bishop_Load(int pos, uint64_t permutation, uint64_t moveBoard)
 {
 	uint64_t* table = BishopTables[pos];
-	int index = GetIndex(pos, permutation);
+	int index = BishopIndex(pos, permutation);
 
 	if(table[index] == 0 || table[index] == moveBoard)
 	{
@@ -47,7 +47,7 @@ int Bishop_Load(int pos, uint64_t permutation, uint64_t moveBoard)
 uint64_t Bishop_Read(int pos, uint64_t permutation)
 {
 	uint64_t* table = BishopTables[pos];
-	int index = GetIndex(pos, permutation);
+	int index = BishopIndex(pos, permutation);
 
 	uint64_t moveBoard = table[index];
 	return moveBoard;

@@ -50,11 +50,11 @@ namespace Chess.Bitboard.Tests
 
 			Assert.AreEqual((ulong)0x8040201008040200, moves[0]);
 		}
-
+		
 		[TestMethod]
 		public void TestRookInitializeAndRead()
 		{
-			Bishop.Initialize();
+			Bishop.Load();
 			var r = Bishop.Bishop_Read(27, (ulong)0);
 		}
 	}

@@ -77,17 +77,15 @@ namespace Chess.Bitboard
 
 		// --------------------- Bitscan Operations ---------------------
 
-		[DllImport("..\\..\\..\\FastOps\\x64\\Debug\\FastOps.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
 		public static extern int Bitboard_ForwardBit(ulong value);
 
-		[DllImport("..\\..\\..\\FastOps\\x64\\Debug\\FastOps.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
 		public static extern int Bitboard_ReverseBit(ulong value);
 
-		[DllImport("..\\..\\..\\FastOps\\x64\\Debug\\FastOps.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
 		public static extern int Bitboard_PopCount(ulong value);
 
-		[DllImport("..\\..\\..\\FastOps\\x64\\Debug\\FastOps.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
-		public static extern int Bitboard_TryMany();
 
 		
 

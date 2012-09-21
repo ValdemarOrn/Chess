@@ -248,6 +248,9 @@ namespace Chess
 			int y = Board.Y(square);
 			int color = board.Color(square);
 
+			if (y == 0 || y == 7) // cannot ever happen
+				return;
+
 			if(color == Colors.White)
 			{
 				// move forward

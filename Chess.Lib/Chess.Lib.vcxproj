@@ -99,7 +99,10 @@
     <ClCompile Include="Bishop.cpp" />
     <ClCompile Include="Bitboard.cpp" />
     <ClCompile Include="Board.cpp" />
+    <ClCompile Include="King.cpp" />
+    <ClCompile Include="Knight.cpp" />
     <ClCompile Include="Move.cpp" />
+    <ClCompile Include="Pawn.cpp" />
     <ClCompile Include="Rook.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -108,7 +111,10 @@
     <ClInclude Include="Bitboard.h" />
     <ClInclude Include="Board.h" />
     <ClInclude Include="inttypes.h" />
+    <ClInclude Include="King.h" />
+    <ClInclude Include="Knight.h" />
     <ClInclude Include="Move.h" />
+    <ClInclude Include="Pawn.h" />
     <ClInclude Include="Rook.h" />
     <ClInclude Include="RookMagic.h" />
   </ItemGroup>

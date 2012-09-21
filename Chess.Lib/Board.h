@@ -38,8 +38,9 @@ extern "C"
 	__declspec(dllexport) void Board_Color(Board* board, int square);
 	__declspec(dllexport) int Board_Piece(Board* board, int square);
 
-	__declspec(dllexport) int Board_Move(Board* board, int from, int to, int verifyLegalMove);
-	__declspec(dllexport) int Board_Move(Board* board, Move* move, int verifyLegalMove);
+	__declspec(dllexport) int Board_Make(Board* board, int from, int to, int verifyLegalMove);
+	__declspec(dllexport) int Board_Make(Board* board, Move* move, int verifyLegalMove);
+	__declspec(dllexport) int Board_Unmake(Board* board, Move* move, int verifyLegalMove);
 	__declspec(dllexport) int Board_Promote(Board* board, int square, int pieceType);
 
 	__declspec(dllexport) void Board_CheckCastling(Board* board);

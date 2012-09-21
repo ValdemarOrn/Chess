@@ -29,6 +29,9 @@ void Bitboard_SetRef(uint64_t* val, int index)
 	*val = *val | mask;
 }
 
+
+// ----------------------------------------------------
+
 int Bitboard_Get(uint64_t val, int index)
 {
 	uint64_t mask = ((uint64_t)1 << index);
@@ -46,38 +49,51 @@ uint64_t Bitboard_Make(int* tiles, int count)
 
 // ------------------------- Bitscan functions --------------------------
 
+//  least significant 1 bit (LSB)
 int Bitboard_ForwardBit(uint64_t val)
 {
 	unsigned long index;
 	unsigned char isNonzero = _BitScanForward64(&index, val);
-	return index;
+	
+	if(isNonzero)
+		return index;
+	else
+		return -1;
 }
 
+// most significant 1 bit (MSB) 
 int Bitboard_ReverseBit(uint64_t val)
 {
 	unsigned long index;
 	unsigned char isNonzero = _BitScanReverse64(&index, val);
-	return (int)index;
+	
+	if(isNonzero)
+		return index;
+	else
+		return -1;
 }
 
+// Count number of 1 bits
 int Bitboard_PopCount(uint64_t val)
 {
 	unsigned long count = __popcnt64(val);
 	return (int)count;
 }
 
-int Bitboard_TryMany()
+void Bitboard_BitList(uint64_t val, uint8_t* outputList_s28, int* count)
 {
-	unsigned long mask = 0x1000;
-	unsigned int output = 0;
-
-	for(int i=0; i<1000000; i++)
+	int i = 0;
+	while(true)
 	{
-		mask = i;
-		unsigned int index = Bitboard_ForwardBit(mask);
-		output += index;
+		int fwd = Bitboard_ForwardBit(val);
+		if(fwd == -1)
+			break;
+
+		uint8_t byte = (uint8_t)fwd;
+		outputList_s28[i] = byte;
+		i++;
 	}
 
-	return (int)output;
+	*count = i;
 }
 

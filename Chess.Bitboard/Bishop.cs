@@ -16,6 +16,29 @@ namespace Chess.Bitboard
 		}
 
 		/// <summary>
+		/// This operation generates all permutations and their corresponding moves
+		/// and calls Bishop_SetupTables in unmanaged code
+		/// </summary>
+		public static void Load()
+		{
+			Bishop_SetupTables();
+
+			for (int i = 0; i < 64; i++)
+			{
+				var perms = Bishop.GetPermutations(i);
+				var map = new Dictionary<ulong, ulong>();
+
+				foreach (var perm in perms)
+				{
+					var move = Bishop.GetMoves(perm, i);
+					int err = Bishop_Load(i, perm, move);
+					if (err != 0)
+						throw new Exception("Table is corrupt");
+				}
+			}
+		}
+
+		/// <summary>
 		/// creates move vectors with no blockers on the board for all 64 positions of the bishop
 		/// </summary>
 		static ulong[] GetBishopVectors()
@@ -90,7 +113,7 @@ namespace Chess.Bitboard
 		/// </summary>
 		/// <param name="pos"></param>
 		/// <returns></returns>
-		public static List<ulong> GetPermutations(int pos)
+		internal static List<ulong> GetPermutations(int pos)
 		{
 			var variations = new List<ulong>();
 
@@ -130,7 +153,7 @@ namespace Chess.Bitboard
 		/// <param name="permutation"></param>
 		/// <param name="index"></param>
 		/// <returns></returns>
-		public static ulong GetMoves(ulong permutation, int index)
+		internal static ulong GetMoves(ulong permutation, int index)
 		{
 			ulong moves = 0;
 			int target = 0;
@@ -198,38 +221,15 @@ namespace Chess.Bitboard
 			return moves;
 		}
 
-		// --------------------- Bishop Operations ---------------------
+		
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
+		static extern void Bishop_SetupTables();
 
-		[DllImport("..\\..\\..\\FastOps\\x64\\Debug\\FastOps.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
-		public static extern void Bishop_SetupTables();
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
+		static extern int Bishop_Load(int pos, ulong permutation, ulong moveBoard);
 
-		[DllImport("..\\..\\..\\FastOps\\x64\\Debug\\FastOps.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
-		public static extern int Bishop_Load(int pos, ulong permutation, ulong moveBoard);
-
-		[DllImport("..\\..\\..\\FastOps\\x64\\Debug\\FastOps.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
 		public static extern ulong Bishop_Read(int pos, ulong permutation);
 
-		/// <summary>
-		/// This operation generates all permutations and their corresponding moves
-		/// and calls Rook_SetupTables in unmanaged code
-		/// </summary>
-		public static void Initialize()
-		{
-			Bishop_SetupTables();
-
-			for (int i = 0; i < 64; i++)
-			{
-				var perms = Rook.GetPermutations(i);
-				var map = new Dictionary<ulong, ulong>();
-
-				foreach (var perm in perms)
-				{
-					var move = Bishop.GetMoves(perm, i);
-					int err = Bishop_Load(i, perm, move);
-					if (err != 0)
-						throw new Exception("Table is corrupt");
-				}
-			}
-		}
 	}
 }

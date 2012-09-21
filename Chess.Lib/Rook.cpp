@@ -4,7 +4,7 @@
 
 uint64_t** RookTables;
 
-inline int GetIndex(int pos, uint64_t permutation)
+inline int RookIndex(int pos, uint64_t permutation)
 {
 	int index = (int)((permutation * RookMagic[pos]) >> (64 - RookBits[pos]));
 	return index;
@@ -32,7 +32,7 @@ void Rook_SetupTables()
 int Rook_Load(int pos, uint64_t permutation, uint64_t moveBoard)
 {
 	uint64_t* table = RookTables[pos];
-	int index = GetIndex(pos, permutation);
+	int index = RookIndex(pos, permutation);
 
 	if(table[index] == 0 || table[index] == moveBoard)
 	{
@@ -47,7 +47,7 @@ int Rook_Load(int pos, uint64_t permutation, uint64_t moveBoard)
 uint64_t Rook_Read(int pos, uint64_t permutation)
 {
 	uint64_t* table = RookTables[pos];
-	int index = GetIndex(pos, permutation);
+	int index = RookIndex(pos, permutation);
 
 	uint64_t moveBoard = table[index];
 	return moveBoard;

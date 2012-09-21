@@ -19,7 +19,7 @@ extern "C"
 	__declspec(dllexport) int Bitboard_ForwardBit(uint64_t val);
 	__declspec(dllexport) int Bitboard_ReverseBit(uint64_t val);
 	__declspec(dllexport) int Bitboard_PopCount(uint64_t val);
-	__declspec(dllexport) int Bitboard_TryMany();
+	__declspec(dllexport) void Bitboard_BitList(uint64_t val, uint8_t* outputList_s28, int* count);
 }
 
 #endif

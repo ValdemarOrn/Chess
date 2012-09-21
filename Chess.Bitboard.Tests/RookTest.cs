@@ -99,7 +99,7 @@ namespace Chess.Bitboard.Tests
 		[TestMethod]
 		public void TestRookInitializeAndRead()
 		{
-			Rook.Initialize();
+			Rook.Load();
 			var r = Rook.Rook_Read(27, (ulong)0);
 		}
 	}

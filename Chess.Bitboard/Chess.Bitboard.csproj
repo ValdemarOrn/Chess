@@ -50,7 +50,10 @@
   <ItemGroup>
     <Compile Include="Bishop.cs" />
     <Compile Include="Bitboard.cs" />
+    <Compile Include="King.cs" />
+    <Compile Include="Knight.cs" />
     <Compile Include="MagicBitboard.cs" />
+    <Compile Include="Pawn.cs" />
     <Compile Include="Rook.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

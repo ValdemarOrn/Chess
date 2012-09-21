@@ -19,6 +19,29 @@ namespace Chess.Bitboard
 		}
 
 		/// <summary>
+		/// This operation generates all permutations and their corresponding moves
+		/// and calls Rook_SetupTables in unmanaged code
+		/// </summary>
+		public static void Load()
+		{
+			Rook_SetupTables();
+
+			for (int i = 0; i < 64; i++)
+			{
+				var perms = Rook.GetPermutations(i);
+				var map = new Dictionary<ulong, ulong>();
+
+				foreach (var perm in perms)
+				{
+					var move = Rook.GetMoves(perm, i);
+					int err = Rook_Load(i, perm, move);
+					if (err != 0)
+						throw new Exception("Table is corrupt");
+				}
+			}
+		}
+
+		/// <summary>
 		/// creates move vectors with no blockers on the board for all 64 positions of the rook
 		/// </summary>
 		static ulong[] GetRookVectors()
@@ -143,38 +166,15 @@ namespace Chess.Bitboard
 			return moves;
 		}
 
-		// --------------------- Rook Operations ---------------------
+		
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
+		static extern void Rook_SetupTables();
 
-		[DllImport("..\\..\\..\\FastOps\\x64\\Debug\\FastOps.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
-		public static extern void Rook_SetupTables();
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
+		static extern int Rook_Load(int pos, ulong permutation, ulong moveBoard);
 
-		[DllImport("..\\..\\..\\FastOps\\x64\\Debug\\FastOps.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
-		public static extern int Rook_Load(int pos, ulong permutation, ulong moveBoard);
-
-		[DllImport("..\\..\\..\\FastOps\\x64\\Debug\\FastOps.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
 		public static extern ulong Rook_Read(int pos, ulong permutation);
 
-		/// <summary>
-		/// This operation generates all permutations and their corresponding moves
-		/// and calls Rook_SetupTables in unmanaged code
-		/// </summary>
-		public static void Initialize()
-		{
-			Rook_SetupTables();
-
-			for (int i = 0; i < 64; i++)
-			{
-				var perms = Rook.GetPermutations(i);
-				var map = new Dictionary<ulong, ulong>();
-
-				foreach (var perm in perms)
-				{
-					var move = Rook.GetMoves(perm, i);
-					int err = Rook_Load(i, perm, move);
-					if (err != 0)
-						throw new Exception("Table is corrupt");
-				}
-			}
-		}
 	}
 }
