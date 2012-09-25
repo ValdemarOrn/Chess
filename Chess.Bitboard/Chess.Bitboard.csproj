@@ -33,10 +33,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <PlatformTarget>AnyCPU</PlatformTarget>
     <OutputPath>bin\x64\Debug\</OutputPath>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <PlatformTarget>AnyCPU</PlatformTarget>
     <OutputPath>bin\x64\Release\</OutputPath>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -50,9 +52,11 @@
   <ItemGroup>
     <Compile Include="Bishop.cs" />
     <Compile Include="Bitboard.cs" />
+    <Compile Include="Board.cs" />
     <Compile Include="King.cs" />
     <Compile Include="Knight.cs" />
     <Compile Include="MagicBitboard.cs" />
+    <Compile Include="Moves.cs" />
     <Compile Include="Pawn.cs" />
     <Compile Include="Rook.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -36,3 +36,8 @@ Move* Move_Create(
 
 	return move;
 }
+
+void Move_Delete(Move* move)
+{
+	delete move;
+}

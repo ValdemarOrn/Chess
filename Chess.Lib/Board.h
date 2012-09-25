@@ -6,6 +6,16 @@
 
 extern "C"
 {
+	const int COLOR_WHITE = 1 << 4;
+	const int COLOR_BLACK = 2 << 4;
+
+	const int PIECE_PAWN = 1;
+	const int PIECE_ROOK = 2;
+	const int PIECE_BISHOP = 3;
+	const int PIECE_KNIGHT = 4;
+	const int PIECE_QUEEN = 5;
+	const int PIECE_KING = 6;
+
 	#pragma pack(1)
 	typedef struct
 	{
@@ -32,14 +42,17 @@ extern "C"
 
 	} Board;
 
+	__declspec(dllexport) Board* Board_Create();
+	__declspec(dllexport) void Board_Delete(Board* board);
+
 	__declspec(dllexport) Board* Board_Copy(Board* board);
-	__declspec(dllexport) int Board_X(Board* board, int tile);
-	__declspec(dllexport) int Board_Y(Board* board, int tile);
-	__declspec(dllexport) void Board_Color(Board* board, int square);
+	__declspec(dllexport) int Board_X(int tile);
+	__declspec(dllexport) int Board_Y(int tile);
+	__declspec(dllexport) int Board_Color(Board* board, int square);
 	__declspec(dllexport) int Board_Piece(Board* board, int square);
 
 	__declspec(dllexport) int Board_Make(Board* board, int from, int to, int verifyLegalMove);
-	__declspec(dllexport) int Board_Make(Board* board, Move* move, int verifyLegalMove);
+	__declspec(dllexport) int Board_MakeMove(Board* board, Move* move, int verifyLegalMove);
 	__declspec(dllexport) int Board_Unmake(Board* board, Move* move, int verifyLegalMove);
 	__declspec(dllexport) int Board_Promote(Board* board, int square, int pieceType);
 

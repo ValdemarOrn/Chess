@@ -25,7 +25,9 @@
           <Configuration>
             <CodeCoverage xmlns="">
               <Regular>
-                <CodeCoverageItem binaryFile="Chess\bin\Debug\Chess.exe" pdbFile="Chess\bin\Debug\Chess.pdb" instrumentInPlace="true" />
+                <CodeCoverageItem binaryFile="Chess\bin\Debug\Chess.dll" pdbFile="Chess\bin\Debug\Chess.pdb" instrumentInPlace="true" />
+                <CodeCoverageItem binaryFile="Chess.Bitboard\bin\x64\Debug\Chess.Bitboard.dll" pdbFile="Chess.Bitboard\bin\x64\Debug\Chess.Bitboard.pdb" instrumentInPlace="true" />
+                <CodeCoverageItem binaryFile="Chess.Lib\x64\Debug\Chess.Lib.dll" pdbFile="Chess.Lib\x64\Debug\Chess.Lib.pdb" instrumentInPlace="true" />
               </Regular>
             </CodeCoverage>
           </Configuration>

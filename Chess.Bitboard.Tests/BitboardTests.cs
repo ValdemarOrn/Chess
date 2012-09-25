@@ -81,5 +81,33 @@ namespace Chess.Bitboard.Tests
 			cnt = Bitboard.Bitboard_PopCount(val);
 			Assert.AreEqual(17, cnt);
 		}
+
+		[TestMethod]
+		public void TestBitList()
+		{
+			ulong val = (ulong)0xC004003000020003;
+			var list = Bitboard.Bitboard_BitList(val);
+			var list2 = "0,1,17,36,37,50,62,63".Split(',').Select(x => Convert.ToByte(x)).ToList();
+
+			Assert.IsTrue(list2.SequenceEqual(list));	
+		}
+
+		[TestMethod]
+		public void TestBitList2()
+		{
+			ulong val = (ulong)0xC430044A20001204;
+			var list = Bitboard.Bitboard_BitList(val);
+			var list2 = "2,9,12,29,33,35,38,42,52,53,58,62,63".Split(',').Select(x => Convert.ToByte(x)).ToList();
+
+			Assert.IsTrue(list2.SequenceEqual(list));
+		}
+
+		[TestMethod]
+		public void TestMake()
+		{
+			var board = Bitboard.Make(0, 10, 12, 23, 27, 34, 36, 49, 54, 63);
+			Assert.AreEqual(0x8042001408801401, board);
+		}
+		
 	}
 }

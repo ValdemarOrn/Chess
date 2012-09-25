@@ -28,6 +28,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chess.Bitboard.Calculate", 
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Chess.Lib", "Chess.Lib\Chess.Lib.vcxproj", "{A0FB4011-6EB9-4444-8323-84F34A9939BB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chess.Bitboard.Editor", "Chess.Bitboard.Editor\Chess.Bitboard.Editor.csproj", "{CDB74489-AC6B-47B0-878F-F228456F7FA3}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Chess.vsmdi
@@ -149,6 +151,16 @@ Global
 		{A0FB4011-6EB9-4444-8323-84F34A9939BB}.Release|x64.ActiveCfg = Release|x64
 		{A0FB4011-6EB9-4444-8323-84F34A9939BB}.Release|x64.Build.0 = Release|x64
 		{A0FB4011-6EB9-4444-8323-84F34A9939BB}.Release|x86.ActiveCfg = Release|x64
+		{CDB74489-AC6B-47B0-878F-F228456F7FA3}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{CDB74489-AC6B-47B0-878F-F228456F7FA3}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{CDB74489-AC6B-47B0-878F-F228456F7FA3}.Debug|x64.ActiveCfg = Debug|x86
+		{CDB74489-AC6B-47B0-878F-F228456F7FA3}.Debug|x86.ActiveCfg = Debug|x86
+		{CDB74489-AC6B-47B0-878F-F228456F7FA3}.Debug|x86.Build.0 = Debug|x86
+		{CDB74489-AC6B-47B0-878F-F228456F7FA3}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{CDB74489-AC6B-47B0-878F-F228456F7FA3}.Release|Mixed Platforms.Build.0 = Release|x86
+		{CDB74489-AC6B-47B0-878F-F228456F7FA3}.Release|x64.ActiveCfg = Release|x86
+		{CDB74489-AC6B-47B0-878F-F228456F7FA3}.Release|x86.ActiveCfg = Release|x86
+		{CDB74489-AC6B-47B0-878F-F228456F7FA3}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

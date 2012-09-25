@@ -3,6 +3,7 @@
 #include "BishopMagic.h"
 
 uint64_t** BishopTables;
+uint64_t BishopVectors[64];
 
 inline int BishopIndex(int pos, uint64_t permutation)
 {
@@ -44,8 +45,15 @@ int Bishop_Load(int pos, uint64_t permutation, uint64_t moveBoard)
 
 }
 
-uint64_t Bishop_Read(int pos, uint64_t permutation)
+void Bishop_LoadVector(int pos, uint64_t moveBoard)
 {
+	BishopVectors[pos] = moveBoard;
+}
+
+uint64_t Bishop_Read(int pos, uint64_t occupancy)
+{
+	uint64_t permutation = occupancy & BishopVectors[pos];
+
 	uint64_t* table = BishopTables[pos];
 	int index = BishopIndex(pos, permutation);
 

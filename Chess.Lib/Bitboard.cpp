@@ -89,6 +89,7 @@ void Bitboard_BitList(uint64_t val, uint8_t* outputList_s28, int* count)
 		if(fwd == -1)
 			break;
 
+		val = Bitboard_Unset(val, fwd);
 		uint8_t byte = (uint8_t)fwd;
 		outputList_s28[i] = byte;
 		i++;

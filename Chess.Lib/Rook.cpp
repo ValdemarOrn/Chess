@@ -3,6 +3,7 @@
 #include "RookMagic.h"
 
 uint64_t** RookTables;
+uint64_t RookVectors[64];
 
 inline int RookIndex(int pos, uint64_t permutation)
 {
@@ -44,8 +45,15 @@ int Rook_Load(int pos, uint64_t permutation, uint64_t moveBoard)
 
 }
 
-uint64_t Rook_Read(int pos, uint64_t permutation)
+void Rook_LoadVector(int pos, uint64_t moveBoard)
 {
+	RookVectors[pos] = moveBoard;
+}
+
+uint64_t Rook_Read(int pos, uint64_t occupancy)
+{
+	uint64_t permutation = occupancy & RookVectors[pos];
+
 	uint64_t* table = RookTables[pos];
 	int index = RookIndex(pos, permutation);
 

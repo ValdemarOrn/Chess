@@ -25,6 +25,8 @@ namespace Chess.Bitboard
 
 			for (int i = 0; i < 64; i++)
 			{
+				Bishop_LoadVector(i, BishopVectors[i]);
+
 				var perms = Bishop.GetPermutations(i);
 				var map = new Dictionary<ulong, ulong>();
 
@@ -61,7 +63,7 @@ namespace Chess.Bitboard
 				while (true)
 				{
 					target += 9;
-					if (target < 56 && Board.X(target) < 7 && Board.X(target) > Board.X(i))
+					if (target < 56 && Chess.Board.X(target) < 7 && Chess.Board.X(target) > Chess.Board.X(i))
 						Bitboard.Set(ref Move, target);
 					else
 						break;
@@ -72,7 +74,7 @@ namespace Chess.Bitboard
 				while (true)
 				{
 					target += 7;
-					if (target < 56 && Board.X(target) > 0 && Board.X(target) < Board.X(i))
+					if (target < 56 && Chess.Board.X(target) > 0 && Chess.Board.X(target) < Chess.Board.X(i))
 						Bitboard.Set(ref Move, target);
 					else
 						break;
@@ -83,7 +85,7 @@ namespace Chess.Bitboard
 				while (true)
 				{
 					target -= 7;
-					if (target > 7 && Board.X(target) < 7 && Board.X(target) > Board.X(i))
+					if (target > 7 && Chess.Board.X(target) < 7 && Chess.Board.X(target) > Chess.Board.X(i))
 						Bitboard.Set(ref Move, target);
 					else
 						break;
@@ -94,7 +96,7 @@ namespace Chess.Bitboard
 				while (true)
 				{
 					target -= 9;
-					if (target > 7 && Board.X(target) > 0 && Board.X(target) < Board.X(i))
+					if (target > 7 && Chess.Board.X(target) > 0 && Chess.Board.X(target) < Chess.Board.X(i))
 						Bitboard.Set(ref Move, target);
 					else
 						break;
@@ -162,7 +164,7 @@ namespace Chess.Bitboard
 			target = index + 9;
 			while (true)
 			{
-				if (target < 64 && Board.X(target) > Board.X(index))
+				if (target < 64 && Chess.Board.X(target) > Chess.Board.X(index))
 					Bitboard.Set(ref moves, target);
 				else
 					break;
@@ -177,7 +179,7 @@ namespace Chess.Bitboard
 			target = index + 7;
 			while (target >= 0)
 			{
-				if (target < 64 && Board.X(target) < Board.X(index))
+				if (target < 64 && Chess.Board.X(target) < Chess.Board.X(index))
 					Bitboard.Set(ref moves, target);
 				else
 					break;
@@ -190,9 +192,9 @@ namespace Chess.Bitboard
 
 			// Move down right
 			target = index - 7;
-			while (Board.X(target) > Board.X(index))
+			while (Chess.Board.X(target) > Chess.Board.X(index))
 			{
-				if (target >= 0 && Board.X(target) > Board.X(index))
+				if (target >= 0 && Chess.Board.X(target) > Chess.Board.X(index))
 					Bitboard.Set(ref moves, target);
 				else
 					break;
@@ -205,9 +207,9 @@ namespace Chess.Bitboard
 
 			// Move down left
 			target = index - 9;
-			while (Board.X(target) < Board.X(index))
+			while (Chess.Board.X(target) < Chess.Board.X(index))
 			{
-				if (target < 64 && Board.X(target) < Board.X(index))
+				if (target < 64 && Chess.Board.X(target) < Chess.Board.X(index))
 					Bitboard.Set(ref moves, target);
 				else
 					break;
@@ -229,7 +231,10 @@ namespace Chess.Bitboard
 		static extern int Bishop_Load(int pos, ulong permutation, ulong moveBoard);
 
 		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
-		public static extern ulong Bishop_Read(int pos, ulong permutation);
+		static extern int Bishop_LoadVector(int pos, ulong moveBoard);
+
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
+		public static extern ulong Bishop_Read(int pos, ulong occupancy);
 
 	}
 }

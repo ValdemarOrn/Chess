@@ -24,9 +24,9 @@ namespace Chess.Bitboard
 		{
 			// I use the old move generator to create the bitboard moves
 
-			var b = new Board();
+			var b = new Chess.Board();
 			b.State[index] = Pieces.Knight | Colors.White;
-			var moves = Moves.GetMoves(b, index);
+			var moves = Chess.Moves.GetMoves(b, index);
 
 			ulong output = 0;
 			foreach (var move in moves)

@@ -86,8 +86,24 @@ namespace Chess.Bitboard
 		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
 		public static extern int Bitboard_PopCount(ulong value);
 
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl, EntryPoint = "Bitboard_BitList")]
+		public static extern void Bitboard_BitList_IntPtr(ulong value, IntPtr outputList_s28, ref int count);
 
-		
+		public static byte[] Bitboard_BitList(ulong value)
+		{
+			unsafe
+			{
+				byte* list = stackalloc byte[28];
+				int count = 0;
+
+				Bitboard_BitList_IntPtr(value, (IntPtr)list, ref count);
+
+				var output = new byte[count];
+				Marshal.Copy((IntPtr)list, output, 0, count);
+
+				return output;
+			}
+		}
 
 	}
 }

@@ -37,8 +37,8 @@ extern "C"
 		uint8_t queenside,
 		uint8_t kingside);
 
+	__declspec(dllexport) void Move_Delete(Move* move);
+
 }
 
 #endif
-
-int k =23;

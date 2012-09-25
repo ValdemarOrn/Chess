@@ -16,7 +16,7 @@ namespace Chess.Bitboard
 			for (int i = 0; i < 64; i++)
 			{
 				var moveW = GetMovesWhite(i);
-				var moveB = GetMovesWhite(i);
+				var moveB = GetMovesBlack(i);
 				var attackW = GetAttacksWhite(i);
 				var attackB = GetAttacksBlack(i);
 
@@ -30,8 +30,8 @@ namespace Chess.Bitboard
 		static ulong GetMovesWhite(int index)
 		{
 			ulong moves = 0;
-			int x = Board.X(index);
-			int y = Board.Y(index);
+			int x = Chess.Board.X(index);
+			int y = Chess.Board.Y(index);
 
 			if(y == 0 || y == 7) // cannot ever happen
 			{
@@ -54,8 +54,8 @@ namespace Chess.Bitboard
 		static ulong GetMovesBlack(int index)
 		{
 			ulong moves = 0;
-			int x = Board.X(index);
-			int y = Board.Y(index);
+			int x = Chess.Board.X(index);
+			int y = Chess.Board.Y(index);
 
 			if (y == 0 || y == 7) // cannot ever happen
 			{
@@ -78,8 +78,8 @@ namespace Chess.Bitboard
 		static ulong GetAttacksWhite(int index)
 		{
 			ulong moves = 0;
-			int x = Board.X(index);
-			int y = Board.Y(index);
+			int x = Chess.Board.X(index);
+			int y = Chess.Board.Y(index);
 
 			if (y == 0 || y == 7) // cannot ever happen
 			{
@@ -106,8 +106,8 @@ namespace Chess.Bitboard
 		static ulong GetAttacksBlack(int index)
 		{
 			ulong moves = 0;
-			int x = Board.X(index);
-			int y = Board.Y(index);
+			int x = Chess.Board.X(index);
+			int y = Chess.Board.Y(index);
 
 			if (y == 0 || y == 7) // cannot ever happen
 			{

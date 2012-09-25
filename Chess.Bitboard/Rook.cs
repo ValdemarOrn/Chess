@@ -28,6 +28,8 @@ namespace Chess.Bitboard
 
 			for (int i = 0; i < 64; i++)
 			{
+				Rook_LoadVector(i, RookVectors[i]);
+
 				var perms = Rook.GetPermutations(i);
 				var map = new Dictionary<ulong, ulong>();
 
@@ -145,7 +147,7 @@ namespace Chess.Bitboard
 
 			// Move right
 			target = index + 1;
-			while (Board.X(target) > Board.X(index))
+			while (Chess.Board.X(target) > Chess.Board.X(index))
 			{
 				Bitboard.Set(ref moves, target);
 				if (Bitboard.Get(permutation, target)) // check for blockers
@@ -155,7 +157,7 @@ namespace Chess.Bitboard
 
 			// Move left
 			target = index - 1;
-			while (Board.X(target) < Board.X(index))
+			while (Chess.Board.X(target) < Chess.Board.X(index))
 			{
 				Bitboard.Set(ref moves, target);
 				if (Bitboard.Get(permutation, target)) // check for blockers
@@ -174,7 +176,10 @@ namespace Chess.Bitboard
 		static extern int Rook_Load(int pos, ulong permutation, ulong moveBoard);
 
 		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
-		public static extern ulong Rook_Read(int pos, ulong permutation);
+		static extern int Rook_LoadVector(int pos, ulong moveBoard);
+
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
+		public static extern ulong Rook_Read(int pos, ulong occupancy);
 
 	}
 }
