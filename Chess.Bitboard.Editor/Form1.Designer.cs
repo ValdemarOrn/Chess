@@ -1,4 +1,4 @@
-﻿namespace Chess.Bitboard.Editor
+﻿namespace Chess.Lib.BitboardEditor
 {
 	partial class Form1
 	{
@@ -47,7 +47,7 @@
 			this.buttonShiftLeft = new System.Windows.Forms.Button();
 			this.label5 = new System.Windows.Forms.Label();
 			this.textBoxList = new System.Windows.Forms.TextBox();
-			this.boardControl1 = new Chess.Bitboard.Editor.BoardControl();
+			this.boardControl1 = new Chess.Lib.BitboardEditor.BoardControl();
 			this.SuspendLayout();
 			// 
 			// labelBitsUpper

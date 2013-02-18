@@ -1,7 +1,7 @@
 #ifndef BISHOP
 #define BISHOP
 
-#include "inttypes.h"
+#include "../inttypes.h"
 
 extern "C"
 {

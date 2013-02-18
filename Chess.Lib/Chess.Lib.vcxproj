@@ -96,29 +96,31 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Bishop.cpp" />
+    <ClCompile Include="Moves\Bishop.cpp" />
     <ClCompile Include="Bitboard.cpp" />
     <ClCompile Include="Board.cpp" />
-    <ClCompile Include="King.cpp" />
-    <ClCompile Include="Knight.cpp" />
+    <ClCompile Include="Moves\King.cpp" />
+    <ClCompile Include="Moves\Knight.cpp" />
     <ClCompile Include="Move.cpp" />
     <ClCompile Include="Moves.cpp" />
-    <ClCompile Include="Pawn.cpp" />
-    <ClCompile Include="Rook.cpp" />
+    <ClCompile Include="Moves\Pawn.cpp" />
+    <ClCompile Include="Moves\Queen.cpp" />
+    <ClCompile Include="Moves\Rook.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Bishop.h" />
-    <ClInclude Include="BishopMagic.h" />
+    <ClInclude Include="Moves\Bishop.h" />
+    <ClInclude Include="Moves\BishopMagic.h" />
     <ClInclude Include="Bitboard.h" />
     <ClInclude Include="Board.h" />
     <ClInclude Include="inttypes.h" />
-    <ClInclude Include="King.h" />
-    <ClInclude Include="Knight.h" />
+    <ClInclude Include="Moves\King.h" />
+    <ClInclude Include="Moves\Knight.h" />
     <ClInclude Include="Move.h" />
     <ClInclude Include="Moves.h" />
-    <ClInclude Include="Pawn.h" />
-    <ClInclude Include="Rook.h" />
-    <ClInclude Include="RookMagic.h" />
+    <ClInclude Include="Moves\Pawn.h" />
+    <ClInclude Include="Moves\Queen.h" />
+    <ClInclude Include="Moves\Rook.h" />
+    <ClInclude Include="Moves\RookMagic.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

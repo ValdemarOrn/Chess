@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace Chess.Bitboard.Editor
+namespace Chess.Lib.BitboardEditor
 {
 	static class Program
 	{

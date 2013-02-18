@@ -8,7 +8,7 @@
     <ProjectGuid>{79CAA135-2881-4E2D-93E3-45257546E766}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Chess.Bitboard</RootNamespace>
+    <RootNamespace>Chess.Lib</RootNamespace>
     <AssemblyName>Chess.Bitboard</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,16 +30,6 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <OutputPath>bin\x64\Debug\</OutputPath>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <OutputPath>bin\x64\Release\</OutputPath>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -50,15 +41,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bishop.cs" />
+    <Compile Include="MovesClasses\Bishop.cs" />
     <Compile Include="Bitboard.cs" />
     <Compile Include="Board.cs" />
-    <Compile Include="King.cs" />
-    <Compile Include="Knight.cs" />
+    <Compile Include="MovesClasses\King.cs" />
+    <Compile Include="MovesClasses\Knight.cs" />
     <Compile Include="MagicBitboard.cs" />
     <Compile Include="Moves.cs" />
-    <Compile Include="Pawn.cs" />
-    <Compile Include="Rook.cs" />
+    <Compile Include="MovesClasses\Pawn.cs" />
+    <Compile Include="MovesClasses\Queen.cs" />
+    <Compile Include="MovesClasses\Rook.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

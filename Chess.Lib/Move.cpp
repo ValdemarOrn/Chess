@@ -1,4 +1,4 @@
-
+/*
 #include "Move.h"
 
 Move* Move_CreateSimple(uint8_t from, uint8_t to)
@@ -40,4 +40,4 @@ Move* Move_Create(
 void Move_Delete(Move* move)
 {
 	delete move;
-}
+}*/

@@ -4,14 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Runtime.InteropServices;
 
-namespace Chess.Bitboard
+namespace Chess.Lib.MoveClasses
 {
 	public sealed class Knight
 	{
 		/// <summary>
-		/// This operation calculates moves and attacks for all pawn positions and loads them into unmanaged code
+		/// This operation calculates attacks for all pawn positions and loads them into unmanaged code
+        /// Afterwards the Knight_Read operation can be used to query for possible moves
 		/// </summary>
-		public static void Load()
+        static Knight()
 		{
 			for (int i = 0; i < 64; i++)
 			{
@@ -20,10 +21,14 @@ namespace Chess.Bitboard
 			}
 		}
 
+        /// <summary>
+        /// Returns all possible attacks for a knight from the given square.
+        /// Uses the (slow) C# move generator to create the bitboard moves.
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
 		static ulong GetMoves(int index)
 		{
-			// I use the old move generator to create the bitboard moves
-
 			var b = new Chess.Board();
 			b.State[index] = Pieces.Knight | Colors.White;
 			var moves = Chess.Moves.GetMoves(b, index);

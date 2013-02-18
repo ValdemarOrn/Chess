@@ -20,7 +20,7 @@ extern "C"
 		uint8_t Queenside;
 		uint8_t Kingside;
 	} Move;
-
+	/*
 	__declspec(dllexport) Move* Move_CreateSimple(uint8_t from, uint8_t to);
 
 	__declspec(dllexport) Move* Move_Create(
@@ -38,7 +38,7 @@ extern "C"
 		uint8_t kingside);
 
 	__declspec(dllexport) void Move_Delete(Move* move);
-
+	*/
 }
 
 #endif

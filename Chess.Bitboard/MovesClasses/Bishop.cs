@@ -4,39 +4,36 @@ using System.Linq;
 using System.Text;
 using System.Runtime.InteropServices;
 
-[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Chess.Bitboard.Tests")]
-[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Chess.Bitboard.Calculate")]
-
-namespace Chess.Bitboard
+namespace Chess.Lib.MoveClasses
 {
-	public sealed class Rook
+	public sealed class Bishop
 	{
-		internal static ulong[] RookVectors;
+		public static ulong[] BishopVectors;
 
-		static Rook()
+		static Bishop()
 		{
-			RookVectors = GetRookVectors();
+			BishopVectors = GetBishopVectors();
 		}
 
 		/// <summary>
 		/// This operation generates all permutations and their corresponding moves
-		/// and calls Rook_SetupTables in unmanaged code
+		/// and calls Bishop_SetupTables in unmanaged code
 		/// </summary>
 		public static void Load()
 		{
-			Rook_SetupTables();
+			Bishop_SetupTables();
 
 			for (int i = 0; i < 64; i++)
 			{
-				Rook_LoadVector(i, RookVectors[i]);
+				Bishop_LoadVector(i, BishopVectors[i]);
 
-				var perms = Rook.GetPermutations(i);
+				var perms = Bishop.GetPermutations(i);
 				var map = new Dictionary<ulong, ulong>();
 
 				foreach (var perm in perms)
 				{
-					var move = Rook.GetMoves(perm, i);
-					int err = Rook_Load(i, perm, move);
+					var move = Bishop.GetMoves(perm, i);
+					int err = Bishop_Load(i, perm, move);
 					if (err != 0)
 						throw new Exception("Table is corrupt");
 				}
@@ -44,9 +41,9 @@ namespace Chess.Bitboard
 		}
 
 		/// <summary>
-		/// creates move vectors with no blockers on the board for all 64 positions of the rook
+		/// creates move vectors with no blockers on the board for all 64 positions of the bishop
 		/// </summary>
-		static ulong[] GetRookVectors()
+		static ulong[] GetBishopVectors()
 		{
 			var vectors = new ulong[64];
 
@@ -57,22 +54,60 @@ namespace Chess.Bitboard
 				int x = i % 8;
 				int y = i >> 3; // i/8
 
-				// mark all in x direction, from file 2-7
-				for (int k = 1; k < 7; k++)
-					Move |= ((ulong)1) << (y * 8 + k);
+				int target = 0;
 
-				// mark all in y direction, from rank 2-7
-				for (int k = 1; k < 7; k++)
-					Move |= ((ulong)1) << (k * 8 + x);
+				// NOTE: We don't traverse x 0 and 7, or y 0 and 7
 
-				Bitboard.Unset(ref Move, i);
+				// mark up right
+				target = i;
+				while (true)
+				{
+					target += 9;
+					if (target < 56 && Chess.Board.X(target) < 7 && Chess.Board.X(target) > Chess.Board.X(i))
+						Bitboard.Set(ref Move, target);
+					else
+						break;
+				}
+
+				// mark up left
+				target = i;
+				while (true)
+				{
+					target += 7;
+					if (target < 56 && Chess.Board.X(target) > 0 && Chess.Board.X(target) < Chess.Board.X(i))
+						Bitboard.Set(ref Move, target);
+					else
+						break;
+				}
+
+				// mark down right
+				target = i;
+				while (true)
+				{
+					target -= 7;
+					if (target > 7 && Chess.Board.X(target) < 7 && Chess.Board.X(target) > Chess.Board.X(i))
+						Bitboard.Set(ref Move, target);
+					else
+						break;
+				}
+
+				// mark down left
+				target = i;
+				while (true)
+				{
+					target -= 9;
+					if (target > 7 && Chess.Board.X(target) > 0 && Chess.Board.X(target) < Chess.Board.X(i))
+						Bitboard.Set(ref Move, target);
+					else
+						break;
+				}
 
 				vectors[i] = Move;
 			}
 
 			return vectors;
 		}
-
+		
 		/// <summary>
 		/// Gets all permutations possible for a rook in that position.
 		/// checks all possible variations of blockers 
@@ -84,7 +119,7 @@ namespace Chess.Bitboard
 		{
 			var variations = new List<ulong>();
 
-			var vector = RookVectors[pos];
+			var vector = BishopVectors[pos];
 			var str = Bitboard.ToString(vector);
 			List<int> bitlist = new List<int>();
 			for (int i = 0; i < 64; i++)
@@ -113,7 +148,7 @@ namespace Chess.Bitboard
 
 			return variations;
 		}
-
+		
 		/// <summary>
 		/// Convert the bitboard permutation into a valid attack board
 		/// </summary>
@@ -125,44 +160,64 @@ namespace Chess.Bitboard
 			ulong moves = 0;
 			int target = 0;
 
-			// Move up
-			target = index + 8;
-			while (target < 64)
+			// Move up right
+			target = index + 9;
+			while (true)
 			{
-				Bitboard.Set(ref moves, target);
+				if (target < 64 && Chess.Board.X(target) > Chess.Board.X(index))
+					Bitboard.Set(ref moves, target);
+				else
+					break;
+
 				if (Bitboard.Get(permutation, target)) // check for blockers
 					break;
-				target += 8;
+
+				target += 9;
 			}
 
-			// Move down
-			target = index - 8;
+			// Move up left
+			target = index + 7;
 			while (target >= 0)
 			{
-				Bitboard.Set(ref moves, target);
+				if (target < 64 && Chess.Board.X(target) < Chess.Board.X(index))
+					Bitboard.Set(ref moves, target);
+				else
+					break;
+
 				if (Bitboard.Get(permutation, target)) // check for blockers
 					break;
-				target -= 8;
+
+				target += 7;
 			}
 
-			// Move right
-			target = index + 1;
+			// Move down right
+			target = index - 7;
 			while (Chess.Board.X(target) > Chess.Board.X(index))
 			{
-				Bitboard.Set(ref moves, target);
+				if (target >= 0 && Chess.Board.X(target) > Chess.Board.X(index))
+					Bitboard.Set(ref moves, target);
+				else
+					break;
+
 				if (Bitboard.Get(permutation, target)) // check for blockers
 					break;
-				target++;
+
+				target -= 7;
 			}
 
-			// Move left
-			target = index - 1;
+			// Move down left
+			target = index - 9;
 			while (Chess.Board.X(target) < Chess.Board.X(index))
 			{
-				Bitboard.Set(ref moves, target);
+				if (target < 64 && Chess.Board.X(target) < Chess.Board.X(index))
+					Bitboard.Set(ref moves, target);
+				else
+					break;
+
 				if (Bitboard.Get(permutation, target)) // check for blockers
 					break;
-				target--;
+
+				target -= 9;
 			}
 
 			return moves;
@@ -170,16 +225,16 @@ namespace Chess.Bitboard
 
 		
 		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
-		static extern void Rook_SetupTables();
+		static extern void Bishop_SetupTables();
 
 		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
-		static extern int Rook_Load(int pos, ulong permutation, ulong moveBoard);
+		static extern int Bishop_Load(int pos, ulong permutation, ulong moveBoard);
 
 		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
-		static extern int Rook_LoadVector(int pos, ulong moveBoard);
+		static extern int Bishop_LoadVector(int pos, ulong moveBoard);
 
 		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
-		public static extern ulong Rook_Read(int pos, ulong occupancy);
+		public static extern ulong Bishop_Read(int pos, ulong occupancy);
 
 	}
 }

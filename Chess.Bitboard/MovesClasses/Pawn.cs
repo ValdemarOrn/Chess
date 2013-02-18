@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Runtime.InteropServices;
 
-namespace Chess.Bitboard
+namespace Chess.Lib.MoveClasses
 {
 	public sealed class Pawn
 	{
 		/// <summary>
 		/// This operation calculates moves and attacks for all pawn positions and loads them into unmanaged code
 		/// </summary>
-		public static void Load()
+        static Pawn()
 		{
 			for (int i = 0; i < 64; i++)
 			{

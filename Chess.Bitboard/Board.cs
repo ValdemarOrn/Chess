@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Runtime.InteropServices;
 
-namespace Chess.Bitboard
+namespace Chess.Lib
 {
 	[StructLayout(LayoutKind.Sequential, Pack = 1, CharSet = CharSet.Ansi)]
 	public struct BoardStruct
@@ -29,6 +29,9 @@ namespace Chess.Bitboard
 		public byte CastleQW;
 		public byte CastleKB;
 		public byte CastleQB;
+
+        public uint CurrentMove;
+        public IntPtr Moves;
 	}
 
 	public class Board

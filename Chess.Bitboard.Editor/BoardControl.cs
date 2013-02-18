@@ -5,7 +5,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
 
-namespace Chess.Bitboard.Editor
+namespace Chess.Lib.BitboardEditor
 {
 	public class BoardControl : UserControl
 	{

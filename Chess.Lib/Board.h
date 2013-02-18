@@ -16,7 +16,7 @@ extern "C"
 	const int PIECE_QUEEN = 5;
 	const int PIECE_KING = 6;
 
-	#pragma pack(1)
+	#pragma pack(push, 1)
 	typedef struct
 	{
 		uint64_t White;
@@ -40,7 +40,11 @@ extern "C"
 		uint8_t CastleKB;
 		uint8_t CastleQB;
 
+		uint32_t CurrentMove;
+		Move* Moves;
+
 	} Board;
+	#pragma pack(pop)
 
 	__declspec(dllexport) Board* Board_Create();
 	__declspec(dllexport) void Board_Delete(Board* board);
@@ -52,8 +56,8 @@ extern "C"
 	__declspec(dllexport) int Board_Piece(Board* board, int square);
 
 	__declspec(dllexport) int Board_Make(Board* board, int from, int to, int verifyLegalMove);
-	__declspec(dllexport) int Board_MakeMove(Board* board, Move* move, int verifyLegalMove);
-	__declspec(dllexport) int Board_Unmake(Board* board, Move* move, int verifyLegalMove);
+	//__declspec(dllexport) int Board_MakeMove(Board* board, Move* move, int verifyLegalMove);
+	__declspec(dllexport) int Board_Unmake(Board* board, int verifyLegalMove);
 	__declspec(dllexport) int Board_Promote(Board* board, int square, int pieceType);
 
 	__declspec(dllexport) void Board_CheckCastling(Board* board);

@@ -1,7 +1,7 @@
 #ifndef KNIGHT
 #define KNIGHT
 
-#include "inttypes.h"
+#include "../inttypes.h"
 
 extern "C"
 {

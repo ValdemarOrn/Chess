@@ -1,11 +1,12 @@
 
 #include "Moves.h"
 #include "Board.h"
-#include "Pawn.h"
-#include "Knight.h"
-#include "Bishop.h"
-#include "Rook.h"
-#include "King.h"
+#include "Moves/Pawn.h"
+#include "Moves/Knight.h"
+#include "Moves/Bishop.h"
+#include "Moves/Rook.h"
+#include "Moves/King.h"
+#include "Moves/Queen.h"
 
 uint64_t Moves_GetMoves(Board* board, int tile)
 {
@@ -51,8 +52,7 @@ uint64_t Moves_GetMoves(Board* board, int tile)
 		value = Rook_Read(tile, occupancy);
 		break;
 	case(PIECE_QUEEN):
-		value = Rook_Read(tile, occupancy);
-		value = value | Bishop_Read(tile, occupancy);
+		value = Queen_Read(tile, occupancy);
 		break;
 	case(PIECE_KING):
 		value = King_Read(tile);
@@ -60,9 +60,9 @@ uint64_t Moves_GetMoves(Board* board, int tile)
 	}
 
 	if(color == COLOR_WHITE)
-		value = value & ~board->White;
+		value = value & ~(board->White);
 	else
-		value = value & ~board->Black;
+		value = value & ~(board->Black);
 
 	return value;
 }
@@ -103,8 +103,7 @@ uint64_t Moves_GetAttacks(Board* board, int tile)
 		value = Rook_Read(tile, occupancy);
 		break;
 	case(PIECE_QUEEN):
-		value = Rook_Read(tile, occupancy);
-		value = value | Bishop_Read(tile, occupancy);
+		value = Queen_Read(tile, occupancy);
 		break;
 	case(PIECE_KING):
 		value = King_Read(tile);

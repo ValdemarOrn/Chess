@@ -1,7 +1,7 @@
 #ifndef KING
 #define KING
 
-#include "inttypes.h"
+#include "../inttypes.h"
 
 extern "C"
 {

@@ -1,7 +1,7 @@
 #ifndef ROOK
 #define ROOK
 
-#include "inttypes.h"
+#include "../inttypes.h"
 
 extern "C"
 {

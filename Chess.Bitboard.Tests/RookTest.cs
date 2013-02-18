@@ -3,8 +3,9 @@ using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Chess.Lib.MoveClasses;
 
-namespace Chess.Bitboard.Tests
+namespace Chess.Lib.Tests
 {
 	[TestClass]
 	public class RookTest

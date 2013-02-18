@@ -1,7 +1,7 @@
 #ifndef PAWN
 #define PAWN
 
-#include "inttypes.h"
+#include "../inttypes.h"
 
 extern "C"
 {

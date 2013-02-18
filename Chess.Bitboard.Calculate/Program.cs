@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using Chess.Lib.MoveClasses;
 
-namespace Chess.Bitboard.Performance
+namespace Chess.Lib.CalculateMagic
 {
 	class Program
 	{

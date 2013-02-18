@@ -7,33 +7,38 @@ namespace Chess
 {
 	public sealed class Board
 	{
-		public int[] State;
-		public int PlayerTurn;
-		public int MoveCount;
+		public int[] State { get; set; }
+		public int PlayerTurn { get; set; }
+		public int MoveCount { get; set; }
 
-		public int EnPassantTile;
+		public int EnPassantTile { get; set; }
 
 		/// <summary>
 		/// Counts halfmoves since the last pawn move or capture. NOTE: this contains half moves so the
 		/// number must reach 100 before the 50 move rule has been fulfilled
 		/// </summary>
-		public int FiftyMoveRulePlies;
+		public int FiftyMoveRulePlies { get; set; }
 
-		public bool CanCastleQWhite { get { return CastleQW == Moves.CanCastle; } }
-		public bool CanCastleKWhite { get { return CastleKW == Moves.CanCastle; } }
-		public bool CanCastleQBlack { get { return CastleQB == Moves.CanCastle; } }
-		public bool CanCastleKBlack { get { return CastleKB == Moves.CanCastle; } }
+		public bool CanCastleQWhite { get { return CastleQW == Moves.CanCastle; } set { CastleQW = value ? Moves.CanCastle : Moves.CannotCastle; } }
+		public bool CanCastleKWhite { get { return CastleKW == Moves.CanCastle; } set { CastleKW = value ? Moves.CanCastle : Moves.CannotCastle; } }
+		public bool CanCastleQBlack { get { return CastleQB == Moves.CanCastle; } set { CastleQB = value ? Moves.CanCastle : Moves.CannotCastle; } }
+		public bool CanCastleKBlack { get { return CastleKB == Moves.CanCastle; } set { CastleKB = value ? Moves.CanCastle : Moves.CannotCastle; } }
 
-		public int CastleQW;
-		public int CastleKW;
-		public int CastleQB;
-		public int CastleKB;
+		public int CastleQW { get; set; }
+		public int CastleKW { get; set; }
+		public int CastleQB { get; set; }
+		public int CastleKB { get; set; }
+
+		public Board() : this(false)
+		{
+			
+		}
 
 		/// <summary>
 		/// Creates a new board
 		/// </summary>
 		/// <param name="init">If set to true the board will be initialized to the standard chess starting position</param>
-		public Board(bool init = false)
+		public Board(bool init)
 		{
 			MoveCount = 1;
 			State = new int[64];
@@ -183,8 +188,8 @@ namespace Chess
 
 			if (verifyLegalMove)
 			{
-				bool causesSelfCheck = Check.MoveSelfChecks(this, move.From, move.To);
-				if (causesSelfCheck)
+				var validMoves = Moves.GetValidMoves(this, move.From);
+				if(!validMoves.Contains(move.To))
 					return false;
 			}
 

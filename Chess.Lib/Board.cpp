@@ -1,31 +1,38 @@
 
 #include "Board.h"
 #include "Bitboard.h"
+#include <string.h>
 
 Board* Board_Create()
 {
-	return new Board();
+	Board* board = new Board();
+	board->CurrentMove = 0;
+	board->Moves = new Move[512];
+	return board;
 }
 
 void Board_Delete(Board* board)
 {
+	delete board->Moves;
 	delete board;
 }
 
 Board* Board_Copy(Board* board)
 {
-	return 0;
+	Board* newBoard = Board_Create();
+	memcpy(newBoard->Moves, board->Moves, 512);
+	return newBoard;
 }
 
 int Board_X(int tile)
 {
-	// 128 constant prevent negative numbers in modulu output
+	// 128 constant prevent negative numbers in modulo output
 	return (128 + tile) % 8;
 }
 
 int Board_Y(int tile)
 {
-	return tile >> 3;
+	return tile >> 3; // ( x >> 3 == x / 8)
 }
 
 int Board_Color(Board* board, int tile)
@@ -70,36 +77,39 @@ int Board_Piece(Board* board, int tile)
 int Board_Make(Board* board, int from, int to, int verifyLegalMove)
 {
 	return 0;
+	// todo: Implement make
 }
 
-int Board_MakeMove(Board* board, Move* move, int verifyLegalMove)
+/*int Board_MakeMove(Board* board, Move* move, int verifyLegalMove)
 {
 	return 0;
-}
+}*/
 
 int Board_Unmake(Board* board, Move* move, int verifyLegalMove)
 {
 	return 0;
+	// todo: Implement unmake
 }
 
 int Board_Promote(Board* board, int square, int pieceType)
 {
 	return 0;
+	// todo: Implement promote
 }
 
 
 void Board_CheckCastling(Board* board)
 {
-
+	// todo: Implement castling check
 }
 
 void Board_InitBoard(Board* board)
 {
-
+	// todo: Implement init board
 }
 
 void Board_AllowCastlingAll(Board* board)
 {
-
+	// todo: Implement allow castling
 }
 
