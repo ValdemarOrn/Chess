@@ -1,9 +1,12 @@
-
 #include "Rook.h"
 #include "RookMagic.h"
 
 uint64_t** RookTables;
 uint64_t RookVectors[64];
+
+// Todo: Make more effieicnt, use structs to store related data
+// http://chessprogramming.wikispaces.com/Magic+Bitboards#Fancy
+// precalculate (64 - RookBits[pos]) for each pos
 
 inline int RookIndex(int pos, uint64_t permutation)
 {
