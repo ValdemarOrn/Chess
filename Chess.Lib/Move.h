@@ -16,9 +16,9 @@ extern "C"
 		uint8_t Capture;
 		uint8_t CaptureTile; // only differs from "To" in en passant attacks
 		uint8_t Promotion;
-		uint8_t CheckMateState;
+		uint8_t CheckmateState;
 		
-		uint8_t PreviousChecMateState;
+		uint8_t PreviousChecmateState;
 		uint8_t PreviousCastleState;
 		uint8_t PreviousEnPassantTile;
 
