@@ -13,29 +13,29 @@ namespace Chess.Lib.Tests
 		[TestMethod]
 		public void TestSetGet()
 		{
-			var v = Bitboard.Set(0, 8);
+			var v = Bitboard.Bitboard_Set(0, 8);
 			Assert.AreEqual((ulong)256, v);
-			Assert.IsTrue(Bitboard.Get(v, 8));
+			Assert.IsTrue(Bitboard.Bitboard_Get(v, 8));
 
-			v = Bitboard.Set(256, 7);
+			v = Bitboard.Bitboard_Set(256, 7);
 			Assert.AreEqual((ulong)(256+128), v);
-			Assert.IsTrue(Bitboard.Get(v, 7));
+			Assert.IsTrue(Bitboard.Bitboard_Get(v, 7));
 
-			v = Bitboard.Set(563, 12);
+			v = Bitboard.Bitboard_Set(563, 12);
 			Assert.AreEqual((ulong)(563 + 4096), v);
-			Assert.IsTrue(Bitboard.Get(v, 12));
+			Assert.IsTrue(Bitboard.Bitboard_Get(v, 12));
 		}
 
 		[TestMethod]
 		public void TestUnsetGet()
 		{
-			var v = Bitboard.Unset(256, 8);
+			var v = Bitboard.Bitboard_Unset(256, 8);
 			Assert.AreEqual((ulong)0, v);
-			Assert.IsFalse(Bitboard.Get(v, 8));
+			Assert.IsFalse(Bitboard.Bitboard_Get(v, 8));
 
-			v = Bitboard.Unset(256+128, 7);
+			v = Bitboard.Bitboard_Unset(256+128, 7);
 			Assert.AreEqual((ulong)256, v);
-			Assert.IsFalse(Bitboard.Get(v, 7));
+			Assert.IsFalse(Bitboard.Bitboard_Get(v, 7));
 		}
 
 		[TestMethod]
@@ -105,7 +105,7 @@ namespace Chess.Lib.Tests
 		[TestMethod]
 		public void TestMake()
 		{
-			var board = Bitboard.Make(0, 10, 12, 23, 27, 34, 36, 49, 54, 63);
+			var board = Bitboard.Bitboard_Make(0, 10, 12, 23, 27, 34, 36, 49, 54, 63);
 			Assert.AreEqual(0x8042001408801401, board);
 		}
 		

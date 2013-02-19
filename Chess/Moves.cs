@@ -127,7 +127,7 @@ namespace Chess
 
 		public static bool IsCaptureMove(Board board, int from, int to)
 		{
-			if (board.State[to] != 0 || IsEnPassantCapture(board, from, to))
+			if (board.State[to] != 0 || to == board.EnPassantTile)
 				return true;
 
 			return false;

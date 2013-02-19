@@ -36,6 +36,17 @@ namespace Chess.Tests
 		}
 
 		[TestMethod]
+		public void TestCorner()
+		{
+			// test free space
+			var b = new Board();
+			int pos = 7;
+			b.State[pos] = Pieces.Bishop | Chess.Colors.White;
+			var moves = Moves.GetMoves(b, pos);
+			
+		}
+
+		[TestMethod]
 		public void TestSameColor()
 		{
 			var b = new Board();

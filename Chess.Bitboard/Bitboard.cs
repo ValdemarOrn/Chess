@@ -8,41 +8,41 @@ namespace Chess.Lib
 {
 	public class Bitboard
 	{
-		public static ulong Unset(ulong val, int index)
+		public static ulong Bitboard_Unset(ulong val, int index)
 		{
 			ulong inv = ~(ulong)((ulong)1 << index);
 			return val & inv;
 		}
 
-		public static ulong Set(ulong val, int index)
+		public static ulong Bitboard_Set(ulong val, int index)
 		{
 			ulong mask = ((ulong)1 << index);
 			return val | mask;
 		}
 
-		public static void Unset(ref ulong val, int index)
+		public static void Bitboard_UnsetRef(ref ulong val, int index)
 		{
 			ulong inv = ~(ulong)((ulong)1 << index);
 			val = val & inv;
 		}
 
-		public static void Set(ref ulong val, int index)
+		public static void Bitboard_SetRef(ref ulong val, int index)
 		{
 			ulong mask = ((ulong)1 << index);
 			val = val | mask;
 		}
 
-		public static bool Get(ulong val, int index)
+		public static bool Bitboard_Get(ulong val, int index)
 		{
 			ulong mask = ((ulong)1 << index);
 			return (val & mask) > 0;
 		}
 
-		public static ulong Make(params int[] tiles)
+		public static ulong Bitboard_Make(params int[] tiles)
 		{
 			ulong bitboard = 0;
 			foreach (var tile in tiles)
-				Set(ref bitboard, tile);
+				Bitboard_SetRef(ref bitboard, tile);
 
 			return bitboard;
 		}
@@ -87,16 +87,19 @@ namespace Chess.Lib
 		public static extern int Bitboard_PopCount(ulong value);
 
 		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl, EntryPoint = "Bitboard_BitList")]
-		public static extern void Bitboard_BitList_IntPtr(ulong value, IntPtr outputList_s28, ref int count);
+		public static extern int Bitboard_BitList_IntPtr(ulong value, IntPtr outputList_s64);
 
+		/// <summary>
+		/// Returns a list containing the index of all set bits in a bitboard
+		/// </summary>
+		/// <param name="value"></param>
+		/// <returns></returns>
 		public static byte[] Bitboard_BitList(ulong value)
 		{
 			unsafe
 			{
-				byte* list = stackalloc byte[28];
-				int count = 0;
-
-				Bitboard_BitList_IntPtr(value, (IntPtr)list, ref count);
+				byte* list = stackalloc byte[64];
+				int count = Bitboard_BitList_IntPtr(value, (IntPtr)list);
 
 				var output = new byte[count];
 				Marshal.Copy((IntPtr)list, output, 0, count);

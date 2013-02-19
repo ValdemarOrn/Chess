@@ -29,13 +29,13 @@ namespace Chess.Lib.Tests
 		public unsafe void TestBoardColorWhite()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Board_Create();
-			b->Pawns = Bitboard.Set((b->Pawns), 5);
-			b->Pawns = Bitboard.Set((b->Pawns), 7);
-			b->Pawns = Bitboard.Set((b->Pawns), 47);
+			b->Pawns = Bitboard.Bitboard_Set((b->Pawns), 5);
+			b->Pawns = Bitboard.Bitboard_Set((b->Pawns), 7);
+			b->Pawns = Bitboard.Bitboard_Set((b->Pawns), 47);
 
-			b->White = Bitboard.Set((b->White), 5);
-			b->White = Bitboard.Set((b->White), 7);
-			b->White = Bitboard.Set((b->White), 47);
+			b->White = Bitboard.Bitboard_Set((b->White), 5);
+			b->White = Bitboard.Bitboard_Set((b->White), 7);
+			b->White = Bitboard.Bitboard_Set((b->White), 47);
 
 
 			Assert.AreEqual(Colors.White, Board.Board_Color((IntPtr)b, 5));
@@ -51,13 +51,13 @@ namespace Chess.Lib.Tests
 		public unsafe void TestBoardColorBlack()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Board_Create();
-			b->Pawns = Bitboard.Set((b->Pawns), 5);
-			b->Pawns = Bitboard.Set((b->Pawns), 7);
-			b->Pawns = Bitboard.Set((b->Pawns), 47);
+			b->Pawns = Bitboard.Bitboard_Set((b->Pawns), 5);
+			b->Pawns = Bitboard.Bitboard_Set((b->Pawns), 7);
+			b->Pawns = Bitboard.Bitboard_Set((b->Pawns), 47);
 
-			b->Black = Bitboard.Set((b->Black), 5);
-			b->Black = Bitboard.Set((b->Black), 7);
-			b->Black = Bitboard.Set((b->Black), 47);
+			b->Black = Bitboard.Bitboard_Set((b->Black), 5);
+			b->Black = Bitboard.Bitboard_Set((b->Black), 7);
+			b->Black = Bitboard.Bitboard_Set((b->Black), 47);
 
 
 			Assert.AreEqual(Colors.Black, Board.Board_Color((IntPtr)b, 5));

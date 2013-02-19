@@ -87,12 +87,17 @@
     <ClCompile>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <Optimization>Disabled</Optimization>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <GenerateMapFile>true</GenerateMapFile>
       <AssemblyDebug>
       </AssemblyDebug>
+      <OptimizeReferences>
+      </OptimizeReferences>
+      <Profile>
+      </Profile>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

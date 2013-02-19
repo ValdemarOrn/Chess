@@ -3,6 +3,7 @@
 
 #include "inttypes.h"
 #include "Move.h"
+#include "Bitboard.h"
 
 extern "C"
 {
@@ -15,6 +16,11 @@ extern "C"
 	const int PIECE_KNIGHT = 4;
 	const int PIECE_QUEEN = 5;
 	const int PIECE_KING = 6;
+
+	const int CASTLE_WK = 1 << 1;
+	const int CASTLE_WQ = 1 << 2;
+	const int CASTLE_BK = 1 << 3;
+	const int CASTLE_BQ = 1 << 4;
 
 	#pragma pack(push, 1)
 	typedef struct
@@ -35,10 +41,7 @@ extern "C"
 		uint8_t EnPassantTile;
 		uint8_t FiftyMoveRulePlies;
 
-		uint8_t CastleKW;
-		uint8_t CastleQW;
-		uint8_t CastleKB;
-		uint8_t CastleQB;
+		uint8_t Castle;
 
 		uint32_t CurrentMove;
 		Move* Moves;
@@ -55,14 +58,40 @@ extern "C"
 	__declspec(dllexport) int Board_Color(Board* board, int square);
 	__declspec(dllexport) int Board_Piece(Board* board, int square);
 
+	__declspec(dllexport) void Board_SetPiece(Board* board, int square, int pieceType, int color);
+	__declspec(dllexport) void Board_ClearPiece(Board* board, int square);
+
 	__declspec(dllexport) int Board_Make(Board* board, int from, int to, int verifyLegalMove);
-	//__declspec(dllexport) int Board_MakeMove(Board* board, Move* move, int verifyLegalMove);
 	__declspec(dllexport) int Board_Unmake(Board* board, int verifyLegalMove);
 	__declspec(dllexport) int Board_Promote(Board* board, int square, int pieceType);
 
 	__declspec(dllexport) void Board_CheckCastling(Board* board);
 	__declspec(dllexport) void Board_InitBoard(Board* board);
 	__declspec(dllexport) void Board_AllowCastlingAll(Board* board);
+
+	// ------------ Inline function definitions
+
+	inline int Board_X(int tile)
+	{
+		// 128 constant prevent negative numbers in modulo output
+		return (128 + tile) % 8;
+	}
+
+	inline int Board_Y(int tile)
+	{
+		return tile >> 3; // ( x >> 3 == x / 8)
+	}
+
+	inline int Board_Color(Board* board, int tile)
+	{
+		if(Bitboard_Get(board->White, tile) == 1)
+			return COLOR_WHITE;
+	
+		if(Bitboard_Get(board->Black, tile) == 1)
+			return COLOR_BLACK;
+	
+		return 0;
+	}
 }
 
 #endif

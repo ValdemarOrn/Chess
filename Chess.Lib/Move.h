@@ -7,9 +7,11 @@ extern "C"
 {
 	typedef struct
 	{
+		uint32_t PlyCount;
+
 		uint8_t From;
 		uint8_t To;
-		uint8_t MoveCount;
+		
 		uint8_t Color;
 		uint8_t Capture;
 		uint8_t CaptureTile; // only differs from "To" in en passant attacks
@@ -17,8 +19,8 @@ extern "C"
 
 		uint8_t Check;
 		uint8_t Mate;
-		uint8_t Queenside;
-		uint8_t Kingside;
+		uint8_t PreviousCastleState;
+
 	} Move;
 	/*
 	__declspec(dllexport) Move* Move_CreateSimple(uint8_t from, uint8_t to);

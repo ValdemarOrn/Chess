@@ -13,6 +13,7 @@ namespace Chess.Lib.MoveClasses
 		static Bishop()
 		{
 			BishopVectors = GetBishopVectors();
+			Load();
 		}
 
 		/// <summary>
@@ -37,6 +38,7 @@ namespace Chess.Lib.MoveClasses
 					if (err != 0)
 						throw new Exception("Table is corrupt");
 				}
+				
 			}
 		}
 
@@ -64,7 +66,7 @@ namespace Chess.Lib.MoveClasses
 				{
 					target += 9;
 					if (target < 56 && Chess.Board.X(target) < 7 && Chess.Board.X(target) > Chess.Board.X(i))
-						Bitboard.Set(ref Move, target);
+						Bitboard.Bitboard_SetRef(ref Move, target);
 					else
 						break;
 				}
@@ -75,7 +77,7 @@ namespace Chess.Lib.MoveClasses
 				{
 					target += 7;
 					if (target < 56 && Chess.Board.X(target) > 0 && Chess.Board.X(target) < Chess.Board.X(i))
-						Bitboard.Set(ref Move, target);
+						Bitboard.Bitboard_SetRef(ref Move, target);
 					else
 						break;
 				}
@@ -86,7 +88,7 @@ namespace Chess.Lib.MoveClasses
 				{
 					target -= 7;
 					if (target > 7 && Chess.Board.X(target) < 7 && Chess.Board.X(target) > Chess.Board.X(i))
-						Bitboard.Set(ref Move, target);
+						Bitboard.Bitboard_SetRef(ref Move, target);
 					else
 						break;
 				}
@@ -97,7 +99,7 @@ namespace Chess.Lib.MoveClasses
 				{
 					target -= 9;
 					if (target > 7 && Chess.Board.X(target) > 0 && Chess.Board.X(target) < Chess.Board.X(i))
-						Bitboard.Set(ref Move, target);
+						Bitboard.Bitboard_SetRef(ref Move, target);
 					else
 						break;
 				}
@@ -124,7 +126,7 @@ namespace Chess.Lib.MoveClasses
 			List<int> bitlist = new List<int>();
 			for (int i = 0; i < 64; i++)
 			{
-				if (Bitboard.Get(vector, i))
+				if (Bitboard.Bitboard_Get(vector, i))
 					bitlist.Add(i);
 			}
 
@@ -137,10 +139,10 @@ namespace Chess.Lib.MoveClasses
 				// set bits in the variation
 				for (int b = 0; b < bitlist.Count; b++)
 				{
-					if (Bitboard.Get((ulong)val, b))
-						Bitboard.Set(ref permutation, bitlist[b]);
+					if (Bitboard.Bitboard_Get((ulong)val, b))
+						Bitboard.Bitboard_SetRef(ref permutation, bitlist[b]);
 					else
-						Bitboard.Unset(ref permutation, bitlist[b]);
+						Bitboard.Bitboard_UnsetRef(ref permutation, bitlist[b]);
 				}
 
 				variations.Add(permutation);
@@ -161,64 +163,66 @@ namespace Chess.Lib.MoveClasses
 			int target = 0;
 
 			// Move up right
-			target = index + 9;
+			target = index;
 			while (true)
 			{
-				if (target < 64 && Chess.Board.X(target) > Chess.Board.X(index))
-					Bitboard.Set(ref moves, target);
+				if (target < 64 && (Chess.Board.X(target) > Chess.Board.X(index) || target == index))
+					Bitboard.Bitboard_SetRef(ref moves, target);
 				else
 					break;
 
-				if (Bitboard.Get(permutation, target)) // check for blockers
+				if (Bitboard.Bitboard_Get(permutation, target)) // check for blockers
 					break;
 
 				target += 9;
 			}
 
 			// Move up left
-			target = index + 7;
-			while (target >= 0)
+			target = index;
+			while (true)
 			{
-				if (target < 64 && Chess.Board.X(target) < Chess.Board.X(index))
-					Bitboard.Set(ref moves, target);
+				if (target < 64 && (Chess.Board.X(target) < Chess.Board.X(index) || target == index))
+					Bitboard.Bitboard_SetRef(ref moves, target);
 				else
 					break;
 
-				if (Bitboard.Get(permutation, target)) // check for blockers
+				if (Bitboard.Bitboard_Get(permutation, target)) // check for blockers
 					break;
 
 				target += 7;
 			}
 
 			// Move down right
-			target = index - 7;
-			while (Chess.Board.X(target) > Chess.Board.X(index))
+			target = index;
+			while (true)
 			{
-				if (target >= 0 && Chess.Board.X(target) > Chess.Board.X(index))
-					Bitboard.Set(ref moves, target);
+				if (target >= 0 && (Chess.Board.X(target) > Chess.Board.X(index) || target == index))
+					Bitboard.Bitboard_SetRef(ref moves, target);
 				else
 					break;
 
-				if (Bitboard.Get(permutation, target)) // check for blockers
+				if (Bitboard.Bitboard_Get(permutation, target)) // check for blockers
 					break;
 
 				target -= 7;
 			}
 
 			// Move down left
-			target = index - 9;
-			while (Chess.Board.X(target) < Chess.Board.X(index))
+			target = index;
+			while (true)
 			{
-				if (target < 64 && Chess.Board.X(target) < Chess.Board.X(index))
-					Bitboard.Set(ref moves, target);
+				if (target >= 0 && (Chess.Board.X(target) <= Chess.Board.X(index) || target == index))
+					Bitboard.Bitboard_SetRef(ref moves, target);
 				else
 					break;
 
-				if (Bitboard.Get(permutation, target)) // check for blockers
+				if (Bitboard.Bitboard_Get(permutation, target)) // check for blockers
 					break;
 
 				target -= 9;
 			}
+
+			Bitboard.Bitboard_UnsetRef(ref moves, index);
 
 			return moves;
 		}

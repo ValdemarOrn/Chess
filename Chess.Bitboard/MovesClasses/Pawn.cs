@@ -40,12 +40,12 @@ namespace Chess.Lib.MoveClasses
 
 			if(y == 1)
 			{
-				Bitboard.Set(ref moves, index + 8);
-				Bitboard.Set(ref moves, index + 16);
+				Bitboard.Bitboard_SetRef(ref moves, index + 8);
+				Bitboard.Bitboard_SetRef(ref moves, index + 16);
 			}
 			else
 			{
-				Bitboard.Set(ref moves, index + 8);
+				Bitboard.Bitboard_SetRef(ref moves, index + 8);
 			}
 
 			return moves;
@@ -64,12 +64,12 @@ namespace Chess.Lib.MoveClasses
 
 			if (y == 6)
 			{
-				Bitboard.Set(ref moves, index - 8);
-				Bitboard.Set(ref moves, index - 16);
+				Bitboard.Bitboard_SetRef(ref moves, index - 8);
+				Bitboard.Bitboard_SetRef(ref moves, index - 16);
 			}
 			else
 			{
-				Bitboard.Set(ref moves, index - 8);
+				Bitboard.Bitboard_SetRef(ref moves, index - 8);
 			}
 
 			return moves;
@@ -88,16 +88,16 @@ namespace Chess.Lib.MoveClasses
 
 			if (x == 0)
 			{
-				Bitboard.Set(ref moves, index + 9);
+				Bitboard.Bitboard_SetRef(ref moves, index + 9);
 			}
 			else if (x == 7)
 			{
-				Bitboard.Set(ref moves, index + 7);
+				Bitboard.Bitboard_SetRef(ref moves, index + 7);
 			}
 			else
 			{
-				Bitboard.Set(ref moves, index + 7);
-				Bitboard.Set(ref moves, index + 9);
+				Bitboard.Bitboard_SetRef(ref moves, index + 7);
+				Bitboard.Bitboard_SetRef(ref moves, index + 9);
 			}
 
 			return moves;
@@ -116,16 +116,16 @@ namespace Chess.Lib.MoveClasses
 
 			if (x == 0)
 			{
-				Bitboard.Set(ref moves, index - 7);
+				Bitboard.Bitboard_SetRef(ref moves, index - 7);
 			}
 			else if (x == 7)
 			{
-				Bitboard.Set(ref moves, index - 9);
+				Bitboard.Bitboard_SetRef(ref moves, index - 9);
 			}
 			else
 			{
-				Bitboard.Set(ref moves, index - 7);
-				Bitboard.Set(ref moves, index - 9);
+				Bitboard.Bitboard_SetRef(ref moves, index - 7);
+				Bitboard.Bitboard_SetRef(ref moves, index - 9);
 			}
 
 			return moves;

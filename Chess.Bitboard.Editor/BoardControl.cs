@@ -72,7 +72,7 @@ namespace Chess.Lib.BitboardEditor
 				for (int y = 0; y < 8; y++)
 				{
 					int index = x + (7 - y) * 8;
-					if (Bitboard.Get(State, index))
+					if (Bitboard.Bitboard_Get(State, index))
 						g.FillEllipse(Brushes.Black, (x + 0.5f) * TileSize - DotSize / 2, (y + 0.5f) * TileSize - DotSize / 2, DotSize, DotSize);
 				}
 			}
@@ -92,10 +92,10 @@ namespace Chess.Lib.BitboardEditor
 
 			int index = x + y * 8;
 
-			if (Bitboard.Get(State, index))
-				State = Bitboard.Unset(State, index);
+			if (Bitboard.Bitboard_Get(State, index))
+				State = Bitboard.Bitboard_Unset(State, index);
 			else
-				State = Bitboard.Set(State, index);
+				State = Bitboard.Bitboard_Set(State, index);
 
 			UpdateCallback();
 		}

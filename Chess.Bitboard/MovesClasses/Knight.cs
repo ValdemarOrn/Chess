@@ -35,7 +35,7 @@ namespace Chess.Lib.MoveClasses
 
 			ulong output = 0;
 			foreach (var move in moves)
-				Bitboard.Set(ref output, move);
+				Bitboard.Bitboard_SetRef(ref output, move);
 
 			return output;
 		}

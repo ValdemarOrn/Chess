@@ -16,6 +16,7 @@ namespace Chess.Lib.MoveClasses
 		static Rook()
 		{
 			RookVectors = GetRookVectors();
+			Load();
 		}
 
 		/// <summary>
@@ -65,7 +66,7 @@ namespace Chess.Lib.MoveClasses
 				for (int k = 1; k < 7; k++)
 					Move |= ((ulong)1) << (k * 8 + x);
 
-				Bitboard.Unset(ref Move, i);
+				Bitboard.Bitboard_UnsetRef(ref Move, i);
 
 				vectors[i] = Move;
 			}
@@ -89,7 +90,7 @@ namespace Chess.Lib.MoveClasses
 			List<int> bitlist = new List<int>();
 			for (int i = 0; i < 64; i++)
 			{
-				if (Bitboard.Get(vector, i))
+				if (Bitboard.Bitboard_Get(vector, i))
 					bitlist.Add(i);
 			}
 
@@ -102,10 +103,10 @@ namespace Chess.Lib.MoveClasses
 				// set bits in the variation
 				for (int b = 0; b < bitlist.Count; b++)
 				{
-					if (Bitboard.Get((ulong)val, b))
-						Bitboard.Set(ref permutation, bitlist[b]);
+					if (Bitboard.Bitboard_Get((ulong)val, b))
+						Bitboard.Bitboard_SetRef(ref permutation, bitlist[b]);
 					else
-						Bitboard.Unset(ref permutation, bitlist[b]);
+						Bitboard.Bitboard_UnsetRef(ref permutation, bitlist[b]);
 				}
 
 				variations.Add(permutation);
@@ -129,8 +130,8 @@ namespace Chess.Lib.MoveClasses
 			target = index + 8;
 			while (target < 64)
 			{
-				Bitboard.Set(ref moves, target);
-				if (Bitboard.Get(permutation, target)) // check for blockers
+				Bitboard.Bitboard_SetRef(ref moves, target);
+				if (Bitboard.Bitboard_Get(permutation, target)) // check for blockers
 					break;
 				target += 8;
 			}
@@ -139,8 +140,8 @@ namespace Chess.Lib.MoveClasses
 			target = index - 8;
 			while (target >= 0)
 			{
-				Bitboard.Set(ref moves, target);
-				if (Bitboard.Get(permutation, target)) // check for blockers
+				Bitboard.Bitboard_SetRef(ref moves, target);
+				if (Bitboard.Bitboard_Get(permutation, target)) // check for blockers
 					break;
 				target -= 8;
 			}
@@ -149,8 +150,8 @@ namespace Chess.Lib.MoveClasses
 			target = index + 1;
 			while (Chess.Board.X(target) > Chess.Board.X(index))
 			{
-				Bitboard.Set(ref moves, target);
-				if (Bitboard.Get(permutation, target)) // check for blockers
+				Bitboard.Bitboard_SetRef(ref moves, target);
+				if (Bitboard.Bitboard_Get(permutation, target)) // check for blockers
 					break;
 				target++;
 			}
@@ -159,8 +160,8 @@ namespace Chess.Lib.MoveClasses
 			target = index - 1;
 			while (Chess.Board.X(target) < Chess.Board.X(index))
 			{
-				Bitboard.Set(ref moves, target);
-				if (Bitboard.Get(permutation, target)) // check for blockers
+				Bitboard.Bitboard_SetRef(ref moves, target);
+				if (Bitboard.Bitboard_Get(permutation, target)) // check for blockers
 					break;
 				target--;
 			}

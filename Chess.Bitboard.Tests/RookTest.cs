@@ -30,6 +30,26 @@ namespace Chess.Lib.Tests
 		}
 
 		[TestMethod]
+		public void TestRookMovesAll()
+		{
+			for (int i = 0; i < 64; i++)
+			{
+				var b = new Chess.Board(false);
+				b.State[i] = Pieces.Rook | Chess.Colors.White;
+				var movesBasic = Chess.Moves.GetMoves(b, i);
+				movesBasic = movesBasic.OrderBy(x => x).ToArray();
+
+				var movesFast = Rook.Rook_Read(i, 0);
+				var list = Bitboard.Bitboard_BitList(movesFast);
+				list = list.OrderBy(x => x).ToArray();
+
+				Assert.AreEqual(movesBasic.Length, list.Length);
+				for (int j = 0; j < movesBasic.Length; j++)
+					Assert.AreEqual((int)movesBasic[j], (int)list[j]);
+			}
+		}
+
+		[TestMethod]
 		public void TestRookMoves1()
 		{
 			int idx = 27;

@@ -25,12 +25,16 @@ namespace Chess.Lib.MoveClasses
 			// I use the old move generator to create the bitboard moves
 
 			var b = new Chess.Board();
+			b.CanCastleKBlack = false;
+			b.CanCastleKWhite = false;
+			b.CanCastleQBlack = false;
+			b.CanCastleQWhite = false;
 			b.State[index] = Pieces.King | Colors.White;
 			var moves = Chess.Moves.GetMoves(b, index);
 
 			ulong output = 0;
 			foreach (var move in moves)
-				Bitboard.Set(ref output, move);
+				Bitboard.Bitboard_SetRef(ref output, move);
 
 			return output;
 		}
