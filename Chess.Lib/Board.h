@@ -22,6 +22,10 @@ extern "C"
 	const int CASTLE_BK = 1 << 3;
 	const int CASTLE_BQ = 1 << 4;
 	
+	const int CHECK_NONE = 0;
+	const int CHECK_CHECK = 1;
+	const int CHECK_MATE = 2;
+	
 	const int BITBOARD_WHITE = 0;
 	const int BITBOARD_BLACK = 1;
 	const int BITBOARD_PAWN = 2;
@@ -46,15 +50,14 @@ extern "C"
 		uint64_t Queens;
 		uint64_t Kings;
 
-		uint32_t MoveCount;
+		uint32_t CurrentMove;
 
 		uint8_t PlayerTurn;
 		uint8_t EnPassantTile;
 		uint8_t FiftyMoveRulePlies;
-
 		uint8_t Castle;
-
-		uint32_t CurrentMove;
+		uint8_t CheckmateState;
+		
 		Move* Moves;
 
 	} Board;
