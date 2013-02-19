@@ -21,6 +21,17 @@ extern "C"
 	const int CASTLE_WQ = 1 << 2;
 	const int CASTLE_BK = 1 << 3;
 	const int CASTLE_BQ = 1 << 4;
+	
+	const int BITBOARD_WHITE = 0;
+	const int BITBOARD_BLACK = 1;
+	const int BITBOARD_PAWN = 2;
+	const int BITBOARD_KNIGHTS = 3;
+	const int BITBOARD_BISHOPS = 4;
+	const int BITBOARD_ROOKS = 5;
+	const int BITBOARD_QUEENS = 6;
+	const int BITBOARD_KINGS = 7;
+	
+	// Todo: Implement Board struct using an array of uint64_t instead of many fields.
 
 	#pragma pack(push, 1)
 	typedef struct
