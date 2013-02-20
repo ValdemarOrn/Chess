@@ -11,10 +11,13 @@ namespace Chess.Lib
 	{
 		public fixed ulong Boards[8];
 
+		public ulong AttacksWhite;
+		public ulong AttacksBlack;
 		public ulong Hash;
-		public uint CurrentMove;
 
+		public uint CurrentMove;
 		public byte PlayerTurn;
+
 		public byte EnPassantTile;
 		public byte FiftyMoveRulePlies;
 		public byte Castle;

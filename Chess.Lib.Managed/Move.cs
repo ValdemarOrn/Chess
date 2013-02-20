@@ -9,7 +9,7 @@ namespace Chess.Lib
 	[StructLayout(LayoutKind.Sequential, Pack = 1, CharSet = CharSet.Ansi)]
 	public unsafe struct Move
 	{
-		public uint PlyCount;
+		public uint MoveCount;
 
 		public byte From;
 		public byte To;
@@ -19,9 +19,17 @@ namespace Chess.Lib
 		public byte CaptureTile; // only differs from "To" in en passant attacks
 		public byte Promotion;
 		public byte CheckmateState;
-		
-		public byte PreviousChecmateState;
-		public byte PreviousCastleState;
-		public byte PreviousEnPassantTile;
+		public byte Castle;
+
+		public byte PrevAttacksWhite;
+		public byte PrevAttacksBlack;
+		public byte PrevHash;
+
+		public byte PrevEnPassantTile;
+		public byte PrevFiftyMoveRulePlies;
+		public byte PrevCastleState;
+		public byte PrevCheckmateState;
+
+		public byte Unused; // make it multiple of 4 bytes
 	}
 }

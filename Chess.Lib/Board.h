@@ -40,10 +40,13 @@ extern "C"
 	{
 		uint64_t Boards[8];
 
+		uint64_t AttacksWhite;
+		uint64_t AttacksBlack;
 		uint64_t Hash;
-		uint32_t CurrentMove;
 
+		uint32_t CurrentMove;
 		uint8_t PlayerTurn;
+
 		uint8_t EnPassantTile; // set to 0 if not available. tile 0 can never be an en-passant square anyway
 		uint8_t FiftyMoveRulePlies;
 		uint8_t Castle;
