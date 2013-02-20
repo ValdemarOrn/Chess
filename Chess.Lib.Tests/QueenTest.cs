@@ -33,8 +33,8 @@ namespace Chess.Lib.Tests
 		public unsafe void TestWhiteQueen1()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Board_Create();
-			b->Queens = Bitboard.Bitboard_Set((b->Queens), 28);
-			b->White = Bitboard.Bitboard_Set((b->White), 28);
+			b->Boards[Board.BOARD_QUEENS] = Bitboard.Bitboard_Set((b->Boards[Board.BOARD_QUEENS]), 28);
+			b->Boards[Board.BOARD_WHITE] = Bitboard.Bitboard_Set((b->Boards[Board.BOARD_WHITE]), 28);
 
 			var moves = Moves.Moves_GetMoves((IntPtr)b, 28);
 			Assert.AreEqual((ulong)0x11925438EF385492, moves);
@@ -44,17 +44,17 @@ namespace Chess.Lib.Tests
 		public unsafe void TestWhiteQueen2()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Board_Create();
-			b->Queens = Bitboard.Bitboard_Set((b->Queens), 7);
-			b->White = Bitboard.Bitboard_Set((b->White), 7);
+			b->Boards[Board.BOARD_QUEENS] = Bitboard.Bitboard_Set((b->Boards[Board.BOARD_QUEENS]), 7);
+			b->Boards[Board.BOARD_WHITE] = Bitboard.Bitboard_Set((b->Boards[Board.BOARD_WHITE]), 7);
 
-			b->Knights = Bitboard.Bitboard_Set((b->Knights), 4);
-			b->White = Bitboard.Bitboard_Set((b->White), 4);
+			b->Boards[Board.BOARD_KNIGHTS] = Bitboard.Bitboard_Set((b->Boards[Board.BOARD_KNIGHTS]), 4);
+			b->Boards[Board.BOARD_WHITE] = Bitboard.Bitboard_Set((b->Boards[Board.BOARD_WHITE]), 4);
 
-			b->Pawns = Bitboard.Bitboard_Set((b->Pawns), 21);
-			b->White = Bitboard.Bitboard_Set((b->White), 21);
+			b->Boards[Board.BOARD_PAWNS] = Bitboard.Bitboard_Set((b->Boards[Board.BOARD_PAWNS]), 21);
+			b->Boards[Board.BOARD_WHITE] = Bitboard.Bitboard_Set((b->Boards[Board.BOARD_WHITE]), 21);
 
-			b->Pawns = Bitboard.Bitboard_Set((b->Pawns), 31);
-			b->White = Bitboard.Bitboard_Set((b->White), 31);
+			b->Boards[Board.BOARD_PAWNS] = Bitboard.Bitboard_Set((b->Boards[Board.BOARD_PAWNS]), 31);
+			b->Boards[Board.BOARD_WHITE] = Bitboard.Bitboard_Set((b->Boards[Board.BOARD_WHITE]), 31);
 
 			var moves = Moves.Moves_GetMoves((IntPtr)b, 7);
 			Assert.AreEqual((ulong)0x80C060, moves);

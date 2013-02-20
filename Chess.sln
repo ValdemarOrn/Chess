@@ -20,15 +20,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chess.AI.Tests", "Chess.AI.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chess.AI.PerformanceTests", "Chess.AI.PerformanceTests\Chess.AI.PerformanceTests.csproj", "{D4F61961-69B2-4FAD-95FD-916EA6DB2D84}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chess.Lib.Managed", "Chess.Bitboard\Chess.Lib.Managed.csproj", "{79CAA135-2881-4E2D-93E3-45257546E766}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chess.Lib.Managed", "Chess.Lib.Managed\Chess.Lib.Managed.csproj", "{79CAA135-2881-4E2D-93E3-45257546E766}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chess.Lib.Tests", "Chess.Bitboard.Tests\Chess.Lib.Tests.csproj", "{52DE493F-84F8-451B-8D04-BEDD8D5DF586}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chess.Lib.Tests", "Chess.Lib.Tests\Chess.Lib.Tests.csproj", "{52DE493F-84F8-451B-8D04-BEDD8D5DF586}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chess.Lib.CalculateMagic", "Chess.Bitboard.Calculate\Chess.Lib.CalculateMagic.csproj", "{76183A0D-5F8B-44A1-9B32-3270C809F235}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chess.Lib.CalculateMagic", "Chess.Lib.CalculateMagic\Chess.Lib.CalculateMagic.csproj", "{76183A0D-5F8B-44A1-9B32-3270C809F235}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Chess.Lib", "Chess.Lib\Chess.Lib.vcxproj", "{A0FB4011-6EB9-4444-8323-84F34A9939BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chess.Lib.BitboardEditor", "Chess.Bitboard.Editor\Chess.Lib.BitboardEditor.csproj", "{CDB74489-AC6B-47B0-878F-F228456F7FA3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chess.Lib.BitboardEditor", "Chess.Lib.BitboardEditor\Chess.Lib.BitboardEditor.csproj", "{CDB74489-AC6B-47B0-878F-F228456F7FA3}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution

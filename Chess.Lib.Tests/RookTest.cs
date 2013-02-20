@@ -62,6 +62,15 @@ namespace Chess.Lib.Tests
 		}
 
 		[TestMethod]
+		public unsafe void TestRookMoves1x()
+		{
+			BoardStruct* b = (BoardStruct*)Board.Board_Create();
+			Board.Board_SetPiece(b, 28, Board.PIECE_ROOK, Board.COLOR_WHITE);
+
+			ulong attacks = Moves.Moves_GetAttacks((IntPtr)b, 28);
+		}
+
+		[TestMethod]
 		public void TestRookMoves2()
 		{
 			int idx = 0;

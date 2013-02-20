@@ -7,28 +7,20 @@ using System.Runtime.InteropServices;
 namespace Chess.Lib
 {
 	[StructLayout(LayoutKind.Sequential, Pack = 1, CharSet = CharSet.Ansi)]
-	public struct BoardStruct
+	public unsafe struct BoardStruct
 	{
-		public ulong White;
-		public ulong Black;
+		public fixed ulong Boards[8];
 
-		public ulong Pawns;
-		public ulong Knights;
-		public ulong Bishops;
-		public ulong Rooks;
-		public ulong Queens;
-		public ulong Kings;
-
-		public uint MoveCount;
+		public ulong Hash;
+		public uint CurrentMove;
 
 		public byte PlayerTurn;
 		public byte EnPassantTile;
 		public byte FiftyMoveRulePlies;
-
 		public byte Castle;
+		public byte CheckmateState;
 
-        public uint CurrentMove;
-        public IntPtr Moves;
+		public Move* Moves;
 	}
 
 	public class Board
@@ -36,26 +28,42 @@ namespace Chess.Lib
 		public const int COLOR_WHITE = 1 << 4;
 		public const int COLOR_BLACK = 2 << 4;
 
-		public const int PIECE_PAWN = 1;
-		public const int PIECE_ROOK = 2;
-		public const int PIECE_BISHOP = 3;
-		public const int PIECE_KNIGHT = 4;
-		public const int PIECE_QUEEN = 5;
-		public const int PIECE_KING = 6;
+		public const int PIECE_PAWN = 2;
+		public const int PIECE_KNIGHT = 3;
+		public const int PIECE_BISHOP = 4;
+		public const int PIECE_ROOK = 5;
+		public const int PIECE_QUEEN = 6;
+		public const int PIECE_KING = 7;
 
-		public const int CASTLE_WK = 1 << 1;
-		public const int CASTLE_WQ = 1 << 2;
-		public const int CASTLE_BK = 1 << 3;
-		public const int CASTLE_BQ = 1 << 4;
+		public const int CASTLE_WK = 1 << 0;
+		public const int CASTLE_WQ = 1 << 1;
+		public const int CASTLE_BK = 1 << 2;
+		public const int CASTLE_BQ = 1 << 3;
+
+		public const int CHECK_NONE = 0;
+		public const int CHECK_CHECK = 1;
+		public const int CHECK_MATE = 2;
+
+		public const int BOARD_WHITE = 0;
+		public const int BOARD_BLACK = 1;
+		public const int BOARD_PAWNS = 2;
+		public const int BOARD_KNIGHTS = 3;
+		public const int BOARD_BISHOPS = 4;
+		public const int BOARD_ROOKS = 5;
+		public const int BOARD_QUEENS = 6;
+		public const int BOARD_KINGS = 7;
 
 		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
-		public static extern IntPtr Board_Create();
+		public static unsafe extern BoardStruct* Board_Create();
 
 		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
-		public static extern void Board_Delete(IntPtr board);
+		public static unsafe extern void Board_Delete(BoardStruct* board);
 
 		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
-		public static extern IntPtr Board_Copy(IntPtr board);
+		public static unsafe extern IntPtr Board_Copy(BoardStruct* board);
+
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
+		public static unsafe extern void Board_Init(BoardStruct* board, int setPieces);
 
 		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
 		public static extern int Board_X(int tile);
@@ -64,38 +72,35 @@ namespace Chess.Lib
 		public static extern int Board_Y(int tile);
 
 		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
-		public static extern int Board_Color(IntPtr board, int tile);
+		public static unsafe extern int Board_Color(BoardStruct* board, int tile);
 
 		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
-		public static extern int Board_Piece(IntPtr board, int tile);
+		public static unsafe extern int Board_Piece(BoardStruct* board, int tile);
 
 		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
-		public static extern void Board_SetPiece(IntPtr board, int square, int pieceType, int color);
+		public static unsafe extern void Board_SetPiece(BoardStruct* board, int square, int pieceType, int color);
 
 		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
-		public static extern void Board_ClearPiece(IntPtr board, int square);
+		public static unsafe extern void Board_ClearPiece(BoardStruct* board, int square);
 
 		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
-		public static extern int Board_Make(IntPtr board, int from, int to, int verifyLegalMove);
+		public static unsafe extern int Board_Make(BoardStruct* board, int from, int to, int verifyLegalMove);
 
 		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
-		public static extern int Board_MakeMove(IntPtr board, IntPtr move, int verifyLegalMove);
+		public static unsafe extern int Board_MakeMove(BoardStruct* board, IntPtr move, int verifyLegalMove);
 
 		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
-		public static extern int Board_Unmake(IntPtr board, IntPtr move, int verifyLegalMove);
+		public static unsafe extern int Board_Unmake(BoardStruct* board, IntPtr move, int verifyLegalMove);
 
 		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
-		public static extern int Board_Promote(IntPtr board,  int square, int pieceType);
+		public static unsafe extern int Board_Promote(BoardStruct* board, int square, int pieceType);
 
 
 
 		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
-		public static extern void Board_CheckCastling(IntPtr board);
+		public static unsafe extern void Board_CheckCastling(BoardStruct* board);
 
 		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
-		public static extern void Board_InitBoard(IntPtr board);
-
-		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
-		public static extern void Board_Promote(IntPtr board);
+		public static unsafe extern void Board_Promote(BoardStruct* board);
 	}
 }

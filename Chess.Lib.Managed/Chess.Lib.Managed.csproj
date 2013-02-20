@@ -3,17 +3,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>
-    </ProductVersion>
+    <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{52DE493F-84F8-451B-8D04-BEDD8D5DF586}</ProjectGuid>
+    <ProjectGuid>{79CAA135-2881-4E2D-93E3-45257546E766}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Chess.Lib.Tests</RootNamespace>
-    <AssemblyName>Chess.Lib.Tests</AssemblyName>
+    <RootNamespace>Chess.Lib</RootNamespace>
+    <AssemblyName>Chess.Lib.Managed</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -24,7 +22,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -34,46 +31,37 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
-  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
-      <Visible>False</Visible>
-    </CodeAnalysisDependentAssemblyPaths>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="AttackPawnBlackTests.cs" />
-    <Compile Include="AttackPawnWhiteTests.cs" />
-    <Compile Include="BishopTest.cs" />
-    <Compile Include="BoardTests.cs" />
-    <Compile Include="MovePawnBlackTests.cs" />
-    <Compile Include="MovePawnWhiteTests.cs" />
+    <Compile Include="Move.cs" />
+    <Compile Include="MovesClasses\Bishop.cs" />
+    <Compile Include="Bitboard.cs" />
+    <Compile Include="Board.cs" />
+    <Compile Include="MovesClasses\King.cs" />
+    <Compile Include="MovesClasses\Knight.cs" />
+    <Compile Include="MagicBitboard.cs" />
+    <Compile Include="Moves.cs" />
+    <Compile Include="MovesClasses\Pawn.cs" />
+    <Compile Include="MovesClasses\Queen.cs" />
+    <Compile Include="MovesClasses\Rook.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="BitboardTests.cs" />
-    <Compile Include="RookTest.cs" />
-    <Compile Include="KnightTest.cs" />
-    <Compile Include="KingTest.cs" />
-    <Compile Include="QueenTest.cs" />
+    <Compile Include="Zobrist.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Chess.Bitboard\Chess.Lib.Managed.csproj">
-      <Project>{79CAA135-2881-4E2D-93E3-45257546E766}</Project>
-      <Name>Chess.Lib.Managed</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Chess\Chess.csproj">
       <Project>{5C3DE354-EDD4-4377-A3D0-A33A5D2C7C71}</Project>
       <Name>Chess</Name>
     </ProjectReference>
   </ItemGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

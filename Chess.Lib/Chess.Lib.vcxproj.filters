@@ -19,9 +19,6 @@
     <Filter Include="Header Files\Moves">
       <UniqueIdentifier>{96cdd8b9-c227-4a32-abe9-d937481f596d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Moves">
-      <UniqueIdentifier>{5d16dc78-7313-4de3-b0e0-f56648ff59a6}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Bitboard.cpp">
@@ -36,23 +33,8 @@
     <ClCompile Include="Moves.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Moves\Bishop.cpp">
-      <Filter>Source Files\Moves</Filter>
-    </ClCompile>
-    <ClCompile Include="Moves\King.cpp">
-      <Filter>Source Files\Moves</Filter>
-    </ClCompile>
-    <ClCompile Include="Moves\Knight.cpp">
-      <Filter>Source Files\Moves</Filter>
-    </ClCompile>
-    <ClCompile Include="Moves\Pawn.cpp">
-      <Filter>Source Files\Moves</Filter>
-    </ClCompile>
-    <ClCompile Include="Moves\Queen.cpp">
-      <Filter>Source Files\Moves</Filter>
-    </ClCompile>
-    <ClCompile Include="Moves\Rook.cpp">
-      <Filter>Source Files\Moves</Filter>
+    <ClCompile Include="Zobrist.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -64,9 +46,6 @@
     </ClInclude>
     <ClInclude Include="Move.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="inttypes.h">
-      <Filter>Extra</Filter>
     </ClInclude>
     <ClInclude Include="Moves.h">
       <Filter>Header Files</Filter>
@@ -94,6 +73,15 @@
     </ClInclude>
     <ClInclude Include="Moves\RookMagic.h">
       <Filter>Header Files\Moves</Filter>
+    </ClInclude>
+    <ClInclude Include="Zobrist.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Default.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="inttypes.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

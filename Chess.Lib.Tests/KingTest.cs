@@ -10,8 +10,8 @@ namespace Chess.Lib.Tests
 		public unsafe void WhiteKingTest1()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Board_Create();
-			b->Kings = Bitboard.Bitboard_Set((b->Kings), 4);
-			b->White = Bitboard.Bitboard_Set((b->White), 4);
+			b->Boards[Board.BOARD_KINGS] = Bitboard.Bitboard_Set((b->Boards[Board.BOARD_KINGS]), 4);
+			b->Boards[Board.BOARD_WHITE] = Bitboard.Bitboard_Set((b->Boards[Board.BOARD_WHITE]), 4);
 
 			ulong movesKing = MoveClasses.King.King_Read(4);
 			Assert.AreEqual((ulong)0x3828, movesKing);
@@ -35,11 +35,11 @@ namespace Chess.Lib.Tests
 		public unsafe void WhiteCastleKingsideOnly()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Board_Create();
-			b->Kings = Bitboard.Bitboard_Set((b->Kings), 4);
-			b->White = Bitboard.Bitboard_Set((b->White), 4);
+			b->Boards[Board.BOARD_KINGS] = Bitboard.Bitboard_Set((b->Boards[Board.BOARD_KINGS]), 4);
+			b->Boards[Board.BOARD_WHITE] = Bitboard.Bitboard_Set((b->Boards[Board.BOARD_WHITE]), 4);
 
-			b->Knights = Bitboard.Bitboard_Set((b->Knights), 2);
-			b->White = Bitboard.Bitboard_Set((b->White), 2);
+			b->Boards[Board.BOARD_KNIGHTS] = Bitboard.Bitboard_Set((b->Boards[Board.BOARD_KNIGHTS]), 2);
+			b->Boards[Board.BOARD_WHITE] = Bitboard.Bitboard_Set((b->Boards[Board.BOARD_WHITE]), 2);
 
 			// allow all castling
 			b->Castle = Board.CASTLE_BK | Board.CASTLE_BQ | Board.CASTLE_WK | Board.CASTLE_WQ;
@@ -53,8 +53,8 @@ namespace Chess.Lib.Tests
 		public unsafe void BlackKingTest1()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Board_Create();
-			b->Kings = Bitboard.Bitboard_Set((b->Kings), 60);
-			b->Black = Bitboard.Bitboard_Set((b->Black), 60);
+			b->Boards[Board.BOARD_KINGS] = Bitboard.Bitboard_Set((b->Boards[Board.BOARD_KINGS]), 60);
+			b->Boards[Board.BOARD_BLACK] = Bitboard.Bitboard_Set((b->Boards[Board.BOARD_BLACK]), 60);
 
 			ulong movesKing = MoveClasses.King.King_Read(60);
 			Assert.AreEqual((ulong)0x2838000000000000, movesKing);
@@ -78,11 +78,11 @@ namespace Chess.Lib.Tests
 		public unsafe void BlackCastleKingsideOnly()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Board_Create();
-			b->Kings = Bitboard.Bitboard_Set((b->Kings), 60);
-			b->Black = Bitboard.Bitboard_Set((b->Black), 60);
+			b->Boards[Board.BOARD_KINGS] = Bitboard.Bitboard_Set((b->Boards[Board.BOARD_KINGS]), 60);
+			b->Boards[Board.BOARD_BLACK] = Bitboard.Bitboard_Set((b->Boards[Board.BOARD_BLACK]), 60);
 
-			b->Knights = Bitboard.Bitboard_Set((b->Knights), 59);
-			b->Black = Bitboard.Bitboard_Set((b->Black), 59);
+			b->Boards[Board.BOARD_KNIGHTS] = Bitboard.Bitboard_Set((b->Boards[Board.BOARD_KNIGHTS]), 59);
+			b->Boards[Board.BOARD_BLACK] = Bitboard.Bitboard_Set((b->Boards[Board.BOARD_BLACK]), 59);
 
 			// allow all castling
 			b->Castle = Board.CASTLE_BK | Board.CASTLE_BQ | Board.CASTLE_WK | Board.CASTLE_WQ;
@@ -100,12 +100,12 @@ namespace Chess.Lib.Tests
 			// kings on the wrong side, should NOT allow castling
 
 			//white king at 60
-			b->Kings = Bitboard.Bitboard_Set((b->Kings), 60);
-			b->White = Bitboard.Bitboard_Set((b->White), 60);
+			b->Boards[Board.BOARD_KINGS] = Bitboard.Bitboard_Set((b->Boards[Board.BOARD_KINGS]), 60);
+			b->Boards[Board.BOARD_WHITE] = Bitboard.Bitboard_Set((b->Boards[Board.BOARD_WHITE]), 60);
 
 			//black king at 4
-			b->Kings = Bitboard.Bitboard_Set((b->Kings), 4);
-			b->Black= Bitboard.Bitboard_Set((b->Black), 4);
+			b->Boards[Board.BOARD_KINGS] = Bitboard.Bitboard_Set((b->Boards[Board.BOARD_KINGS]), 4);
+			b->Boards[Board.BOARD_BLACK]= Bitboard.Bitboard_Set((b->Boards[Board.BOARD_BLACK]), 4);
 
 			// allow all castling
 			b->Castle = Board.CASTLE_BK | Board.CASTLE_BQ | Board.CASTLE_WK | Board.CASTLE_WQ;

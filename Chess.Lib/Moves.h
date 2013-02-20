@@ -1,7 +1,7 @@
 #ifndef MOVES
 #define MOVES
 
-#include "inttypes.h"
+#include "Default.h"
 #include "Board.h"
 #include "Move.h"
 

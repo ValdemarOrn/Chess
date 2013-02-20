@@ -14,7 +14,7 @@ uint64_t Moves_GetMoves(Board* board, int tile)
 	int piece = Board_Piece(board, tile);
 	int color = Board_Color(board, tile);
 	uint64_t value = 0;
-	uint64_t occupancy = board->White | board->Black;
+	uint64_t occupancy = board->Boards[BOARD_WHITE] | board->Boards[BOARD_BLACK];
 
 	if(piece == 0 || color == 0)
 		return 0;
@@ -25,22 +25,20 @@ uint64_t Moves_GetMoves(Board* board, int tile)
 		{
 			uint64_t moves = Pawn_ReadWhiteMove(tile);
 			uint64_t attacks = Pawn_ReadWhiteAttack(tile);
-
 			uint64_t enPassant = Moves_GetEnPassantMove(board, tile);
 
 			moves = moves & ~occupancy;
-			attacks = attacks & board->Black;
+			attacks = attacks & board->Boards[BOARD_BLACK];
 			return moves | attacks | enPassant;
 		}
 		else
 		{
 			uint64_t moves = Pawn_ReadBlackMove(tile);
 			uint64_t attacks = Pawn_ReadBlackAttack(tile);
-
 			uint64_t enPassant = Moves_GetEnPassantMove(board, tile);
 
 			moves = moves & ~occupancy;
-			attacks = attacks & board->White;
+			attacks = attacks & board->Boards[BOARD_WHITE];
 			return moves | attacks | enPassant;
 		}
 	}
@@ -66,9 +64,9 @@ uint64_t Moves_GetMoves(Board* board, int tile)
 	}
 
 	if(color == COLOR_WHITE)
-		value = value & ~(board->White);
+		value = value & ~(board->Boards[BOARD_WHITE]);
 	else
-		value = value & ~(board->Black);
+		value = value & ~(board->Boards[BOARD_BLACK]);
 
 	return value;
 }
@@ -78,7 +76,7 @@ uint64_t Moves_GetAttacks(Board* board, int tile)
 	int piece = Board_Piece(board, tile);
 	int color = Board_Color(board, tile);
 	uint64_t value = 0;
-	uint64_t occupancy = board->White | board->Black;
+	uint64_t occupancy = board->Boards[BOARD_WHITE] | board->Boards[BOARD_BLACK];
 
 	if(piece == 0 || color == 0)
 		return 0;
@@ -121,10 +119,10 @@ uint64_t Moves_GetAttacks(Board* board, int tile)
 	return value;
 }
 
-uint8_t Moves_IsCastlingMove(Board* board, int from, int to)
+__inline_always uint8_t Moves_IsCastlingMove(Board* board, int from, int to)
 {
 	int color = Board_Color(board, from);
-	int isKing = Bitboard_Get(board->Kings, from);
+	int isKing = Bitboard_Get(board->Boards[BOARD_KINGS], from);
 	
 	if(!isKing)
 	{
@@ -153,21 +151,15 @@ uint8_t Moves_IsCastlingMove(Board* board, int from, int to)
 	return 0;
 }
 
-uint64_t Moves_GetCastlingMoves(Board* board, int from)
+__inline_always uint64_t Moves_GetCastlingMoves(Board* board, int from)
 {
 	if(from != 4 && from != 60)
 		return 0;
 
 	uint64_t output = 0;
-	uint64_t occupancy = board->Black | board->White;
+	uint64_t occupancy = board->Boards[BOARD_BLACK] | board->Boards[BOARD_WHITE];
 
 	int color = Board_Color(board, from);
-	int isKing = Bitboard_Get(board->Kings, from);
-	
-	if(!isKing)
-	{
-		return 0;
-	}
 
 	// Todo: King cannot move over or into checked squares!
 
@@ -194,7 +186,7 @@ uint64_t Moves_GetCastlingMoves(Board* board, int from)
 
 int Moves_CanPromote(Board* board, int square)
 {
-	if(!Bitboard_Get(board->Pawns, square))
+	if(!Bitboard_Get(board->Boards[BOARD_PAWNS], square))
 		return 0;
 
 	int color = Board_Color(board, square);
@@ -210,7 +202,7 @@ int Moves_CanPromote(Board* board, int square)
 
 int Moves_IsCaptureMove(Board* board, int from, int to)
 {
-	uint64_t occupancy = board->White | board->Black;
+	uint64_t occupancy = board->Boards[BOARD_WHITE] | board->Boards[BOARD_BLACK];
 
 	if (Bitboard_Get(occupancy, to) > 0 || to == board->EnPassantTile)
 		return true;
@@ -225,7 +217,7 @@ int Moves_IsEnPassantCapture(Board* board, int from, int to)
 
 	int color = Board_Color(board, from);
 
-	if (Bitboard_Get(board->Pawns, from) == 0)
+	if (Bitboard_Get(board->Boards[BOARD_PAWNS], from) == 0)
 		return false;
 
 	if (color == COLOR_WHITE)
@@ -256,12 +248,12 @@ int Moves_GetEnPassantVictimTile(Board* board, int from, int to)
 	return 0;
 }
 
-int Moves_GetEnPassantTile(Board* board, int from, int to)
+__inline_always int Moves_GetEnPassantTile(Board* board, int from, int to)
 {
 	int color = Board_Color(board, from);
 	int y = Board_Y(from);
 
-	if (Bitboard_Get(board->Pawns, from) == 0)
+	if (Bitboard_Get(board->Boards[BOARD_PAWNS], from) == 0)
 		return 0;
 
 	if (color == COLOR_WHITE && y == 1 && to == (from + 16))
@@ -273,7 +265,7 @@ int Moves_GetEnPassantTile(Board* board, int from, int to)
 	return 0;
 }
 
-uint64_t Moves_GetEnPassantMove(Board* board, int from)
+__inline_always uint64_t Moves_GetEnPassantMove(Board* board, int from)
 {
 	if(board->EnPassantTile < 0)
 		return 0;
