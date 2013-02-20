@@ -11,7 +11,7 @@ namespace Chess.Lib.MoveClasses
 		/// <summary>
 		/// This operation calculates moves and attacks for all pawn positions and loads them into unmanaged code
 		/// </summary>
-        static Pawn()
+		static Pawn()
 		{
 			for (int i = 0; i < 64; i++)
 			{
@@ -20,10 +20,10 @@ namespace Chess.Lib.MoveClasses
 				var attackW = GetAttacksWhite(i);
 				var attackB = GetAttacksBlack(i);
 
-				Pawn_LoadWhiteMove(i, moveW);
-				Pawn_LoadBlackMove(i, moveB);
-				Pawn_LoadWhiteAttack(i, attackW);
-				Pawn_LoadBlackAttack(i, attackB);
+				LoadWhiteMove(i, moveW);
+				LoadBlackMove(i, moveB);
+				LoadWhiteAttack(i, attackW);
+				LoadBlackAttack(i, attackB);
 			}
 		}
 
@@ -40,12 +40,12 @@ namespace Chess.Lib.MoveClasses
 
 			if(y == 1)
 			{
-				Bitboard.Bitboard_SetRef(ref moves, index + 8);
-				Bitboard.Bitboard_SetRef(ref moves, index + 16);
+				Bitboard.SetRef(ref moves, index + 8);
+				Bitboard.SetRef(ref moves, index + 16);
 			}
 			else
 			{
-				Bitboard.Bitboard_SetRef(ref moves, index + 8);
+				Bitboard.SetRef(ref moves, index + 8);
 			}
 
 			return moves;
@@ -64,12 +64,12 @@ namespace Chess.Lib.MoveClasses
 
 			if (y == 6)
 			{
-				Bitboard.Bitboard_SetRef(ref moves, index - 8);
-				Bitboard.Bitboard_SetRef(ref moves, index - 16);
+				Bitboard.SetRef(ref moves, index - 8);
+				Bitboard.SetRef(ref moves, index - 16);
 			}
 			else
 			{
-				Bitboard.Bitboard_SetRef(ref moves, index - 8);
+				Bitboard.SetRef(ref moves, index - 8);
 			}
 
 			return moves;
@@ -88,16 +88,16 @@ namespace Chess.Lib.MoveClasses
 
 			if (x == 0)
 			{
-				Bitboard.Bitboard_SetRef(ref moves, index + 9);
+				Bitboard.SetRef(ref moves, index + 9);
 			}
 			else if (x == 7)
 			{
-				Bitboard.Bitboard_SetRef(ref moves, index + 7);
+				Bitboard.SetRef(ref moves, index + 7);
 			}
 			else
 			{
-				Bitboard.Bitboard_SetRef(ref moves, index + 7);
-				Bitboard.Bitboard_SetRef(ref moves, index + 9);
+				Bitboard.SetRef(ref moves, index + 7);
+				Bitboard.SetRef(ref moves, index + 9);
 			}
 
 			return moves;
@@ -116,46 +116,46 @@ namespace Chess.Lib.MoveClasses
 
 			if (x == 0)
 			{
-				Bitboard.Bitboard_SetRef(ref moves, index - 7);
+				Bitboard.SetRef(ref moves, index - 7);
 			}
 			else if (x == 7)
 			{
-				Bitboard.Bitboard_SetRef(ref moves, index - 9);
+				Bitboard.SetRef(ref moves, index - 9);
 			}
 			else
 			{
-				Bitboard.Bitboard_SetRef(ref moves, index - 7);
-				Bitboard.Bitboard_SetRef(ref moves, index - 9);
+				Bitboard.SetRef(ref moves, index - 7);
+				Bitboard.SetRef(ref moves, index - 9);
 			}
 
 			return moves;
 		}
 
-		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
-		static extern void Pawn_LoadWhiteMove(int pos, ulong moveBoard);
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "Pawn_LoadWhiteMove", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		static extern void LoadWhiteMove(int pos, ulong moveBoard);
 
-		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
-		static extern void Pawn_LoadBlackMove(int pos, ulong moveBoard);
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "Pawn_LoadBlackMove", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		static extern void LoadBlackMove(int pos, ulong moveBoard);
 
-		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
-		static extern void Pawn_LoadWhiteAttack(int pos, ulong moveBoard);
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "Pawn_LoadWhiteAttack", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		static extern void LoadWhiteAttack(int pos, ulong moveBoard);
 
-		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
-		static extern void Pawn_LoadBlackAttack(int pos, ulong moveBoard);
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "Pawn_LoadBlackAttack", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		static extern void LoadBlackAttack(int pos, ulong moveBoard);
 
 		// ---------------------------------------------
 
-		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
-		public static extern ulong Pawn_ReadWhiteMove(int pos);
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "Pawn_ReadWhiteMove", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		public static extern ulong ReadWhiteMove(int pos);
 
-		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
-		public static extern ulong Pawn_ReadBlackMove(int pos);
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "Pawn_ReadBlackMove", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		public static extern ulong ReadBlackMove(int pos);
 
-		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
-		public static extern ulong Pawn_ReadWhiteAttack(int pos);
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "Pawn_ReadWhiteAttack", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		public static extern ulong ReadWhiteAttack(int pos);
 
-		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
-		public static extern ulong Pawn_ReadBlackAttack(int pos);
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "Pawn_ReadBlackAttack", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		public static extern ulong ReadBlackAttack(int pos);
 
 		
 	}

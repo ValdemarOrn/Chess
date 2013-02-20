@@ -9,17 +9,21 @@ namespace Chess.Lib
 	[StructLayout(LayoutKind.Sequential, Pack = 1, CharSet = CharSet.Ansi)]
 	public unsafe struct Move
 	{
-		public uint MoveCount;
-
 		public byte From;
 		public byte To;
-		
-		public byte Color;
-		public byte Capture;
+
+		public byte PlayerColor;
+		public byte CapturePiece;
 		public byte CaptureTile; // only differs from "To" in en passant attacks
 		public byte Promotion;
 		public byte CheckmateState;
 		public byte Castle;
+	}
+
+	[StructLayout(LayoutKind.Sequential, Pack = 1, CharSet = CharSet.Ansi)]
+	public unsafe struct MoveHistory
+	{
+		public Move Move;
 
 		public byte PrevAttacksWhite;
 		public byte PrevAttacksBlack;

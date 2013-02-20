@@ -48,7 +48,7 @@ namespace Chess.Lib.Tests
 				var movesBasic = Chess.Moves.GetMoves(b, i);
 				movesBasic = movesBasic.OrderBy(x => x).ToArray();
 
-				var movesFast = Bishop.Bishop_Read(i, 0);
+				var movesFast = Bishop.Read(i, 0);
 				var list = Bitboard.Bitboard_BitList(movesFast);
 				list = list.OrderBy(x => x).ToArray();
 
@@ -76,7 +76,7 @@ namespace Chess.Lib.Tests
 		public void TestRookInitializeAndRead()
 		{
 			Bishop.Load();
-			var r = Bishop.Bishop_Read(27, (ulong)0);
+			var r = Bishop.Read(27, (ulong)0);
 		}
 	}
 }

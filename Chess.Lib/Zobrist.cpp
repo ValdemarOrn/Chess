@@ -3,6 +3,9 @@
 #include "Board.h"
 #include <stdlib.h>
 
+uint8_t Zobrist_Index[256];
+uint64_t Zobrist_Keys[16][64];
+
 // Create a random 64 bit number
 uint64_t Zobrist_GetRandom()
 {
@@ -43,6 +46,17 @@ void Zobrist_Init()
 	Zobrist_Index[COLOR_BLACK | PIECE_QUEEN]  = 10;
 	Zobrist_Index[COLOR_BLACK | PIECE_KING]   = 11;
 
+	// No piece or color, indexes empty space
+	Zobrist_Index[0]              = 15;
+	Zobrist_Index[PIECE_PAWN]     = 15;
+	Zobrist_Index[PIECE_KNIGHT]   = 15;
+	Zobrist_Index[PIECE_BISHOP]   = 15;
+	Zobrist_Index[PIECE_ROOK]     = 15;
+	Zobrist_Index[PIECE_QUEEN]    = 15;
+	Zobrist_Index[PIECE_KING]     = 15;
+	Zobrist_Index[COLOR_WHITE]    = 15;
+	Zobrist_Index[COLOR_BLACK]    = 15;
+
 	srand(42);
 
 	for(int i=0; i<15; i++)
@@ -51,6 +65,11 @@ void Zobrist_Init()
 		{
 			Zobrist_Keys[i][j] = Zobrist_GetRandom();
 		}
+	}
+
+	for(int j=0; j<64; j++)
+	{
+		Zobrist_Keys[15][j] = 0;
 	}
 
 	// zero out the key for the "no en-passant" square.
@@ -79,7 +98,7 @@ uint64_t Zobrist_Calculate(Board* board)
 	return hash;
 }
 
-uint8_t Zobrist_Index_Read(int pieceAndColor)
+uint8_t Zobrist_IndexRead(int pieceAndColor)
 {
 	return Zobrist_Index[pieceAndColor];
 }

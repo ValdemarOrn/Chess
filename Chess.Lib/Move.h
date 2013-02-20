@@ -5,13 +5,14 @@
 
 extern "C"
 {
+	#pragma pack(push, 1)
 	typedef struct
 	{
 		uint8_t From;
 		uint8_t To;
 		
-		uint8_t Color;
-		uint8_t Capture;
+		uint8_t PlayerColor;
+		uint8_t CapturePiece;
 		uint8_t CaptureTile; // only differs from "To" in en passant attacks
 		uint8_t Promotion;
 		uint8_t CheckmateState;
@@ -35,7 +36,7 @@ extern "C"
 		uint8_t Unused; // make it multiple of 4 bytes
 
 	} MoveHistory;
-
+	#pragma pack(pop)
 }
 
 #endif

@@ -39,7 +39,7 @@ namespace Chess.Lib.Tests
 				var movesBasic = Chess.Moves.GetMoves(b, i);
 				movesBasic = movesBasic.OrderBy(x => x).ToArray();
 
-				var movesFast = Rook.Rook_Read(i, 0);
+				var movesFast = Rook.Read(i, 0);
 				var list = Bitboard.Bitboard_BitList(movesFast);
 				list = list.OrderBy(x => x).ToArray();
 
@@ -64,10 +64,10 @@ namespace Chess.Lib.Tests
 		[TestMethod]
 		public unsafe void TestRookMoves1x()
 		{
-			BoardStruct* b = (BoardStruct*)Board.Board_Create();
-			Board.Board_SetPiece(b, 28, Board.PIECE_ROOK, Board.COLOR_WHITE);
+			BoardStruct* b = (BoardStruct*)Board.Create();
+			Board.SetPiece(b, 28, Board.PIECE_ROOK, Board.COLOR_WHITE);
 
-			ulong attacks = Moves.Moves_GetAttacks((IntPtr)b, 28);
+			ulong attacks = Moves.GetAttacks(b, 28);
 		}
 
 		[TestMethod]
@@ -130,7 +130,7 @@ namespace Chess.Lib.Tests
 		public void TestRookInitializeAndRead()
 		{
 			Rook.Load();
-			var r = Rook.Rook_Read(27, (ulong)0);
+			var r = Rook.Read(27, (ulong)0);
 		}
 	}
 }

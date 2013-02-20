@@ -8,6 +8,9 @@
 
 extern "C"
 {
+
+	__declspec(dllexport) void Moves_Init();
+
 	// ------------- Find moves & attacks -------------
 
 	__declspec(dllexport) uint64_t Moves_GetMoves(Board* board, int tile);
@@ -15,13 +18,18 @@ extern "C"
 
 	// ------------- Specific moves -------------
 
+
 	// Checks if the move is a castling move. Returns the type of castling that is
 	// executed. Returns 0 if not a castling move.
-	__declspec(dllexport) uint8_t Moves_IsCastlingMove(Board* board, int from, int to);
+	__declspec(dllexport) uint8_t Moves_GetCastlingType(Board* board, int from, int to);
 
-	// Finds available castling moves from this position. (only 4 and 60 are valid inputs, anything else returns 0)
+	// Returns the castling types that are currently available to the king
+	__declspec(dllexport) uint8_t Moves_GetAvailableCastlingTypes(Board* board, int color);
+
+	// Finds available castling moves for king of specified color
 	// Returns a bitboard with valid castle moves.
-	__declspec(dllexport) uint64_t Moves_GetCastlingMoves(Board* board, int from);
+	__declspec(dllexport) uint64_t Moves_GetCastlingMoves(Board* board, int color);
+
 
 	// Checks if a piece can be promoted
 	__declspec(dllexport) int Moves_CanPromote(Board* board, int square);

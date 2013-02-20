@@ -9,9 +9,6 @@
 extern "C"
 {
 	// ------------- Bit Twiddling -------------
-
-	// Todo: Implement these operations with bit intrinsics
-	// http://msdn.microsoft.com/en-US/library/z56sc6y4(v=vs.80).aspx
 	
 	// Unset bit at position #index in the input val bitboard. Returns a new bitboard
 	__declspec(dllexport) uint64_t Bitboard_Unset(uint64_t val, int index);
@@ -25,10 +22,10 @@ extern "C"
 	// Set bit at position #index in the input val bitboard. Modifies the given bitboard
 	__declspec(dllexport) void Bitboard_SetRef(uint64_t* val, int index);
 
-	// Todo: Implement with bittest operation
-	// http://msdn.microsoft.com/en-us/library/h65k4tze(v=vs.80).aspx
 	// returns 1 if bit #index is set, 0 if unset
 	__declspec(dllexport) int Bitboard_Get(uint64_t val, int index);
+
+	__declspec(dllexport) int Bitboard_GetRef(uint64_t* val, int index);
 
 	// creates a bitboard where the tiles in the input array are set. count tells how many items the tiles array contains
 	__declspec(dllexport) uint64_t Bitboard_Make(int* tiles, int count);
@@ -56,26 +53,26 @@ extern "C"
 
 	__inline_always uint64_t Bitboard_Unset(uint64_t val, int index)
 	{
-		uint64_t inv = ~(uint64_t)((uint64_t)1 << index);
-		return val & inv;
+		uint64_t output = val;
+		_bittestandreset64((__int64*)&output, index);
+		return output;
 	}
 
 	__inline_always uint64_t Bitboard_Set(uint64_t val, int index)
 	{
-		uint64_t mask = (uint64_t)((uint64_t)1 << index);
-		return val | mask;
+		uint64_t output = val;
+		_bittestandset64((__int64*)&output, index);
+		return output;
 	}
 
 	__inline_always void Bitboard_UnsetRef(uint64_t* val, int index)
 	{
-		uint64_t inv = ~(uint64_t)((uint64_t)1 << index);
-		*val = *val & inv;
+		_bittestandreset64((__int64*)val, index);
 	}
 
 	__inline_always void Bitboard_SetRef(uint64_t* val, int index)
 	{
-		uint64_t mask = ((uint64_t)1 << index);
-		*val = *val | mask;
+		_bittestandset64((__int64*)val, index);
 	}
 
 
@@ -84,8 +81,14 @@ extern "C"
 	// returns 1 if bit #index is set, 0 if unset
 	__inline_always int Bitboard_Get(uint64_t val, int index)
 	{
-		uint64_t mask = ((uint64_t)1 << index);
-		return ((val & mask) > 0) ? 1 : 0;
+		uint8_t value = _bittest64((__int64*)&val, index);
+		return value;
+	}
+
+	__inline_always int Bitboard_GetRef(uint64_t* val, int index)
+	{
+		uint8_t value = _bittest64((__int64*)val, index);
+		return value;
 	}
 
 	// creates a bitboard where the tiles in the input array are set. count tells how many items the tiles array contains
@@ -106,11 +109,7 @@ extern "C"
 		unsigned long index;
 		unsigned char isNonzero = _BitScanForward64(&index, val);
 	
-		// Todo: ternary operators
-		if(isNonzero)
-			return index;
-		else
-			return -1;
+		return (isNonzero) ? index : -1;
 	}
 
 	// Returns the most significant bit (LSB) that is set
@@ -119,10 +118,7 @@ extern "C"
 		unsigned long index;
 		unsigned char isNonzero = _BitScanReverse64(&index, val);
 	
-		if(isNonzero)
-			return index;
-		else
-			return -1;
+		return (isNonzero) ? index : -1;
 	}
 
 	// Counts the number of set bits in a bitboard
@@ -142,7 +138,7 @@ extern "C"
 			if(fwd == -1)
 				break;
 
-			val = Bitboard_Unset(val, fwd);
+			Bitboard_UnsetRef(&val, fwd);
 			uint8_t byte = (uint8_t)fwd;
 			outputList_s64[i] = byte;
 			i++;

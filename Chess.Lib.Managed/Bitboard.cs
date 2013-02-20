@@ -8,41 +8,11 @@ namespace Chess.Lib
 {
 	public class Bitboard
 	{
-		public static ulong Bitboard_Unset(ulong val, int index)
-		{
-			ulong inv = ~(ulong)((ulong)1 << index);
-			return val & inv;
-		}
-
-		public static ulong Bitboard_Set(ulong val, int index)
-		{
-			ulong mask = ((ulong)1 << index);
-			return val | mask;
-		}
-
-		public static void Bitboard_UnsetRef(ref ulong val, int index)
-		{
-			ulong inv = ~(ulong)((ulong)1 << index);
-			val = val & inv;
-		}
-
-		public static void Bitboard_SetRef(ref ulong val, int index)
-		{
-			ulong mask = ((ulong)1 << index);
-			val = val | mask;
-		}
-
-		public static bool Bitboard_Get(ulong val, int index)
-		{
-			ulong mask = ((ulong)1 << index);
-			return (val & mask) > 0;
-		}
-
-		public static ulong Bitboard_Make(params int[] tiles)
+		public static unsafe ulong Bitboard_Make(params int[] tiles)
 		{
 			ulong bitboard = 0;
 			foreach (var tile in tiles)
-				Bitboard_SetRef(ref bitboard, tile);
+				SetRef(ref bitboard, tile);
 
 			return bitboard;
 		}
@@ -77,17 +47,35 @@ namespace Chess.Lib
 
 		// --------------------- Bitscan Operations ---------------------
 
-		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
-		public static extern int Bitboard_ForwardBit(ulong value);
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "Bitboard_Unset", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		public static extern ulong Unset(ulong val, int index);
 
-		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
-		public static extern int Bitboard_ReverseBit(ulong value);
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "Bitboard_Set", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		public static extern ulong Set(ulong val, int index);
 
-		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
-		public static extern int Bitboard_PopCount(ulong value);
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "Bitboard_UnsetRef", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		public static extern void UnsetRef(ref ulong val, int index);
 
-		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl, EntryPoint = "Bitboard_BitList")]
-		public static extern int Bitboard_BitList_IntPtr(ulong value, IntPtr outputList_s64);
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "Bitboard_SetRef", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		public static extern void SetRef(ref ulong val, int index);
+
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "Bitboard_Get", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		public static extern bool Get(ulong val, int index);
+
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "Bitboard_GetRef", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		public static extern bool GetRef(ref ulong val, int index);
+
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "Bitboard_ForwardBit", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		public static extern int ForwardBit(ulong value);
+
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "Bitboard_ReverseBit", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		public static extern int ReverseBit(ulong value);
+
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "Bitboard_PopCount", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		public static extern int PopCount(ulong value);
+
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "Bitboard_BitList", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		public static extern int BitListIntPtr(ulong value, IntPtr outputList_s64);
 
 		/// <summary>
 		/// Returns a list containing the index of all set bits in a bitboard
@@ -99,7 +87,7 @@ namespace Chess.Lib
 			unsafe
 			{
 				byte* list = stackalloc byte[64];
-				int count = Bitboard_BitList_IntPtr(value, (IntPtr)list);
+				int count = BitListIntPtr(value, (IntPtr)list);
 
 				var output = new byte[count];
 				Marshal.Copy((IntPtr)list, output, 0, count);

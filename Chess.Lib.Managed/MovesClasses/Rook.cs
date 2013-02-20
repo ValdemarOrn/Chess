@@ -25,11 +25,11 @@ namespace Chess.Lib.MoveClasses
 		/// </summary>
 		public static void Load()
 		{
-			Rook_SetupTables();
+			SetupTables();
 
 			for (int i = 0; i < 64; i++)
 			{
-				Rook_LoadVector(i, RookVectors[i]);
+				LoadVector(i, RookVectors[i]);
 
 				var perms = Rook.GetPermutations(i);
 				var map = new Dictionary<ulong, ulong>();
@@ -37,7 +37,7 @@ namespace Chess.Lib.MoveClasses
 				foreach (var perm in perms)
 				{
 					var move = Rook.GetMoves(perm, i);
-					int err = Rook_Load(i, perm, move);
+					int err = Load(i, perm, move);
 					if (err != 0)
 						throw new Exception("Table is corrupt");
 				}
@@ -66,7 +66,7 @@ namespace Chess.Lib.MoveClasses
 				for (int k = 1; k < 7; k++)
 					Move |= ((ulong)1) << (k * 8 + x);
 
-				Bitboard.Bitboard_UnsetRef(ref Move, i);
+				Bitboard.UnsetRef(ref Move, i);
 
 				vectors[i] = Move;
 			}
@@ -90,7 +90,7 @@ namespace Chess.Lib.MoveClasses
 			List<int> bitlist = new List<int>();
 			for (int i = 0; i < 64; i++)
 			{
-				if (Bitboard.Bitboard_Get(vector, i))
+				if (Bitboard.Get(vector, i))
 					bitlist.Add(i);
 			}
 
@@ -103,10 +103,10 @@ namespace Chess.Lib.MoveClasses
 				// set bits in the variation
 				for (int b = 0; b < bitlist.Count; b++)
 				{
-					if (Bitboard.Bitboard_Get((ulong)val, b))
-						Bitboard.Bitboard_SetRef(ref permutation, bitlist[b]);
+					if (Bitboard.Get((ulong)val, b))
+						Bitboard.SetRef(ref permutation, bitlist[b]);
 					else
-						Bitboard.Bitboard_UnsetRef(ref permutation, bitlist[b]);
+						Bitboard.UnsetRef(ref permutation, bitlist[b]);
 				}
 
 				variations.Add(permutation);
@@ -130,8 +130,8 @@ namespace Chess.Lib.MoveClasses
 			target = index + 8;
 			while (target < 64)
 			{
-				Bitboard.Bitboard_SetRef(ref moves, target);
-				if (Bitboard.Bitboard_Get(permutation, target)) // check for blockers
+				Bitboard.SetRef(ref moves, target);
+				if (Bitboard.Get(permutation, target)) // check for blockers
 					break;
 				target += 8;
 			}
@@ -140,8 +140,8 @@ namespace Chess.Lib.MoveClasses
 			target = index - 8;
 			while (target >= 0)
 			{
-				Bitboard.Bitboard_SetRef(ref moves, target);
-				if (Bitboard.Bitboard_Get(permutation, target)) // check for blockers
+				Bitboard.SetRef(ref moves, target);
+				if (Bitboard.Get(permutation, target)) // check for blockers
 					break;
 				target -= 8;
 			}
@@ -150,8 +150,8 @@ namespace Chess.Lib.MoveClasses
 			target = index + 1;
 			while (Chess.Board.X(target) > Chess.Board.X(index))
 			{
-				Bitboard.Bitboard_SetRef(ref moves, target);
-				if (Bitboard.Bitboard_Get(permutation, target)) // check for blockers
+				Bitboard.SetRef(ref moves, target);
+				if (Bitboard.Get(permutation, target)) // check for blockers
 					break;
 				target++;
 			}
@@ -160,8 +160,8 @@ namespace Chess.Lib.MoveClasses
 			target = index - 1;
 			while (Chess.Board.X(target) < Chess.Board.X(index))
 			{
-				Bitboard.Bitboard_SetRef(ref moves, target);
-				if (Bitboard.Bitboard_Get(permutation, target)) // check for blockers
+				Bitboard.SetRef(ref moves, target);
+				if (Bitboard.Get(permutation, target)) // check for blockers
 					break;
 				target--;
 			}
@@ -169,18 +169,18 @@ namespace Chess.Lib.MoveClasses
 			return moves;
 		}
 
-		
-		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
-		static extern void Rook_SetupTables();
 
-		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
-		static extern int Rook_Load(int pos, ulong permutation, ulong moveBoard);
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "Rook_SetupTables", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		static extern void SetupTables();
 
-		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
-		static extern int Rook_LoadVector(int pos, ulong moveBoard);
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "Rook_Load", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		static extern int Load(int pos, ulong permutation, ulong moveBoard);
 
-		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
-		public static extern ulong Rook_Read(int pos, ulong occupancy);
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "Rook_LoadVector", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		static extern int LoadVector(int pos, ulong moveBoard);
+
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "Rook_Read", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		public static extern ulong Read(int pos, ulong occupancy);
 
 	}
 }

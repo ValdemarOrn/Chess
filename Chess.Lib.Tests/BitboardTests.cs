@@ -13,44 +13,70 @@ namespace Chess.Lib.Tests
 		[TestMethod]
 		public void TestSetGet()
 		{
-			var v = Bitboard.Bitboard_Set(0, 8);
+			var v = Bitboard.Set(0, 8);
 			Assert.AreEqual((ulong)256, v);
-			Assert.IsTrue(Bitboard.Bitboard_Get(v, 8));
+			Assert.IsTrue(Bitboard.Get(v, 8));
 
-			v = Bitboard.Bitboard_Set(256, 7);
+			v = Bitboard.Set(256, 7);
 			Assert.AreEqual((ulong)(256+128), v);
-			Assert.IsTrue(Bitboard.Bitboard_Get(v, 7));
+			Assert.IsTrue(Bitboard.Get(v, 7));
 
-			v = Bitboard.Bitboard_Set(563, 12);
+			v = Bitboard.Set(563, 12);
 			Assert.AreEqual((ulong)(563 + 4096), v);
-			Assert.IsTrue(Bitboard.Bitboard_Get(v, 12));
+			Assert.IsTrue(Bitboard.Get(v, 12));
 		}
 
 		[TestMethod]
 		public void TestUnsetGet()
 		{
-			var v = Bitboard.Bitboard_Unset(256, 8);
+			var v = Bitboard.Unset(256, 8);
 			Assert.AreEqual((ulong)0, v);
-			Assert.IsFalse(Bitboard.Bitboard_Get(v, 8));
+			Assert.IsFalse(Bitboard.Get(v, 8));
 
-			v = Bitboard.Bitboard_Unset(256+128, 7);
+			v = Bitboard.Unset(256+128, 7);
 			Assert.AreEqual((ulong)256, v);
-			Assert.IsFalse(Bitboard.Bitboard_Get(v, 7));
+			Assert.IsFalse(Bitboard.Get(v, 7));
+		}
+
+		[TestMethod]
+		public void TestUnsetGetTopBit()
+		{
+			ulong max = 0x8000000000000000;
+
+			var bit = Bitboard.Get(max, 63);
+			var bitref = Bitboard.GetRef(ref max, 63);
+
+			Assert.IsTrue(bit);
+			Assert.IsTrue(bitref);
+
+			var unset = Bitboard.Unset(max, 63);
+			Assert.AreEqual((ulong)0, unset);
+			Assert.AreEqual(0x8000000000000000, max);
+
+			Bitboard.UnsetRef(ref max, 63);
+			Assert.AreEqual((ulong)0, max);
+
+			var set = Bitboard.Set(max, 63);
+			Assert.AreEqual(0x8000000000000000, set);
+			Assert.AreEqual((ulong)0, max);
+
+			Bitboard.SetRef(ref max, 63);
+			Assert.AreEqual(0x8000000000000000, max);
 		}
 
 		[TestMethod]
 		public void TestForwardBit()
 		{
 			ulong val = 0x0100100;
-			var fwd = Bitboard.Bitboard_ForwardBit(val);
+			var fwd = Bitboard.ForwardBit(val);
 			Assert.AreEqual(8, fwd);
 
 			val = 0x23000;
-			fwd = Bitboard.Bitboard_ForwardBit(val);
+			fwd = Bitboard.ForwardBit(val);
 			Assert.AreEqual(12, fwd);
 
 			val = 0x2300000000000;
-			fwd = Bitboard.Bitboard_ForwardBit(val);
+			fwd = Bitboard.ForwardBit(val);
 			Assert.AreEqual(44, fwd);
 		}
 
@@ -58,15 +84,15 @@ namespace Chess.Lib.Tests
 		public void TestReverseBit()
 		{
 			ulong val = 0x0100100;
-			var rwd = Bitboard.Bitboard_ReverseBit(val);
+			var rwd = Bitboard.ReverseBit(val);
 			Assert.AreEqual(20, rwd);
 
 			val = 0x23000;
-			rwd = Bitboard.Bitboard_ReverseBit(val);
+			rwd = Bitboard.ReverseBit(val);
 			Assert.AreEqual(17, rwd);
 
 			val = 0x2300000000000;
-			rwd = Bitboard.Bitboard_ReverseBit(val);
+			rwd = Bitboard.ReverseBit(val);
 			Assert.AreEqual(49, rwd);
 		}
 
@@ -74,11 +100,11 @@ namespace Chess.Lib.Tests
 		public void TestPopCount()
 		{
 			ulong val = 0xff010010010030;
-			var cnt = Bitboard.Bitboard_PopCount(val);
+			var cnt = Bitboard.PopCount(val);
 			Assert.AreEqual(13, cnt);
 
 			val = 0xffff000000000001;
-			cnt = Bitboard.Bitboard_PopCount(val);
+			cnt = Bitboard.PopCount(val);
 			Assert.AreEqual(17, cnt);
 		}
 

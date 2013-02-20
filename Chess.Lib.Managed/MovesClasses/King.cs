@@ -16,11 +16,11 @@ namespace Chess.Lib.MoveClasses
 			for (int i = 0; i < 64; i++)
 			{
 				var moves = GetMoves(i);
-				King_Load(i, moves);
+				Load(i, moves);
 			}
 		}
 
-		static ulong GetMoves(int index)
+		static unsafe ulong GetMoves(int index)
 		{
 			// I use the old move generator to create the bitboard moves
 
@@ -34,18 +34,18 @@ namespace Chess.Lib.MoveClasses
 
 			ulong output = 0;
 			foreach (var move in moves)
-				Bitboard.Bitboard_SetRef(ref output, move);
+				Bitboard.SetRef(ref output, move);
 
 			return output;
 		}
 
-		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
-		static extern void King_Load(int pos, ulong moveBoard);
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "King_Load", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		static extern void Load(int pos, ulong moveBoard);
 
 		// ---------------------------------------------
 
-		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", SetLastError = true, CallingConvention = CallingConvention.Cdecl)]
-		public static extern ulong King_Read(int pos);
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "King_Read", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		public static extern ulong Read(int pos);
 
 
 	}

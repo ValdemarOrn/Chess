@@ -63,7 +63,7 @@ namespace Chess.Lib.BitboardEditor
 				var list = new List<int>();
 				for (int i = 0; i < 64; i++)
 				{
-					if (Bitboard.Bitboard_Get(State, i))
+					if (Bitboard.Get(State, i))
 						list.Add(i);
 				}
 
@@ -76,7 +76,7 @@ namespace Chess.Lib.BitboardEditor
 				if ((i+1) % 8 == 0 && i != 63)
 					bitsHigh += ".";
 
-				if (Bitboard.Bitboard_Get(State, i))
+				if (Bitboard.Get(State, i))
 					bitsHigh += "1";
 				else
 					bitsHigh += "0";
@@ -90,7 +90,7 @@ namespace Chess.Lib.BitboardEditor
 				if ((i + 1) % 8 == 0 && i != 31)
 					bitsLow += ".";
 
-				if (Bitboard.Bitboard_Get(State, i))
+				if (Bitboard.Get(State, i))
 					bitsLow += "1";
 				else
 					bitsLow += "0";

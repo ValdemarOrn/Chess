@@ -9,6 +9,43 @@
 #include "Moves/King.h"
 #include "Moves/Queen.h"
 
+// square that can't be attacked during castling
+uint64_t WK_NOATTACK = 0x70;
+uint64_t WQ_NOATTACK = 0x1C;
+uint64_t BK_NOATTACK = 0x7000000000000000;
+uint64_t BQ_NOATTACK = 0x1C00000000000000;
+
+// squares that can't be occupied during castling
+uint64_t WK_CLEAR = 0x60;
+uint64_t WQ_CLEAR = 0xE;
+uint64_t BK_CLEAR = 0x6000000000000000;
+uint64_t BQ_CLEAR = 0xE00000000000000;
+
+// castling lookup table, slightly faster than if/else
+// the key is (from + to) % 15
+int CastlingTableMovesToTypes[15];
+
+// converts castling types to bitboard og possible king moves
+// the key is castling type
+uint64_t CastlingTableTypesToBitboard[16];
+
+void Moves_Init()
+{
+	CastlingTableMovesToTypes[(4 + 2) % 15] = CASTLE_WQ;
+	CastlingTableMovesToTypes[(4 + 6) % 15] = CASTLE_WK;
+	CastlingTableMovesToTypes[(60 + 58) % 15] = CASTLE_BQ;
+	CastlingTableMovesToTypes[(60 + 62) % 15] = CASTLE_BK;
+
+
+	CastlingTableTypesToBitboard[CASTLE_WK]             = 0x40;
+	CastlingTableTypesToBitboard[CASTLE_WQ]             = 0x4;
+	CastlingTableTypesToBitboard[CASTLE_WK | CASTLE_WQ] = 0x44;
+
+	CastlingTableTypesToBitboard[CASTLE_BK]             = 0x4000000000000000;
+	CastlingTableTypesToBitboard[CASTLE_BQ]             = 0x400000000000000;
+	CastlingTableTypesToBitboard[CASTLE_BK | CASTLE_BQ] = 0x4400000000000000;
+}
+
 uint64_t Moves_GetMoves(Board* board, int tile)
 {
 	int piece = Board_Piece(board, tile);
@@ -59,7 +96,7 @@ uint64_t Moves_GetMoves(Board* board, int tile)
 		break;
 	case(PIECE_KING):
 		value = King_Read(tile);
-		value = value | Moves_GetCastlingMoves(board, tile);
+		value |= (tile == 4 || tile == 60) ? Moves_GetCastlingMoves(board, color) : 0;
 		break;
 	}
 
@@ -119,72 +156,43 @@ uint64_t Moves_GetAttacks(Board* board, int tile)
 	return value;
 }
 
-__inline_always uint8_t Moves_IsCastlingMove(Board* board, int from, int to)
+
+__inline_always uint8_t Moves_GetCastlingType(Board* board, int from, int to)
 {
-	int color = Board_Color(board, from);
-	int isKing = Bitboard_Get(board->Boards[BOARD_KINGS], from);
-	
-	if(!isKing)
+	uint8_t isKing = Bitboard_GetRef(&board->Boards[BOARD_KINGS], from);
+	uint8_t castleVal = CastlingTableMovesToTypes[(from + to) % 15];
+	return isKing * castleVal;
+}
+
+// return castling types that can be performed at this moment
+uint8_t Moves_GetAvailableCastlingTypes(Board* board, int color)
+{
+	uint64_t occupancy = board->Boards[BOARD_WHITE] | board->Boards[BOARD_BLACK];
+
+	if(color == COLOR_WHITE)
 	{
-		return 0;
-	}
-	else if(color == COLOR_WHITE && from == 4)
-	{
-		// white kingside
-		if (from == 4 && to == 6)
-			return CASTLE_WK;
+		int wk = (((WK_NOATTACK & board->AttacksBlack) | (WK_CLEAR & occupancy)) == 0) ? 1 : 0;
+		int wq = (((WQ_NOATTACK & board->AttacksBlack) | (WQ_CLEAR & occupancy)) == 0) ? 1 : 0;
 		
-		if (from == 4 && to == 2)
-			return CASTLE_WQ;
+		return (wk * (CASTLE_WK & board->Castle)) | (wq *  (CASTLE_WQ & board->Castle));
 	}
-	else if(color == COLOR_BLACK && from == 60)
+	else
 	{
-		// black kingside
-		if (from == 60 && to == 62)
-			return CASTLE_BK;
+		int bk = (((BK_NOATTACK & board->AttacksWhite) | (BK_CLEAR & occupancy)) == 0) ? 1 : 0;
+		int bq = (((BQ_NOATTACK & board->AttacksWhite) | (BQ_CLEAR & occupancy)) == 0) ? 1 : 0;
 
-		// black queenside
-		if (from == 60 && to == 58)
-			return CASTLE_BQ;
+		return (bk * (CASTLE_BK & board->Castle)) | (bq *  (CASTLE_BQ & board->Castle));
 	}
-
-	return 0;
 }
 
-__inline_always uint64_t Moves_GetCastlingMoves(Board* board, int from)
+uint64_t Moves_GetCastlingMoves(Board* board, int color)
 {
-	if(from != 4 && from != 60)
-		return 0;
-
-	uint64_t output = 0;
-	uint64_t occupancy = board->Boards[BOARD_BLACK] | board->Boards[BOARD_WHITE];
-
-	int color = Board_Color(board, from);
-
-	// Todo: King cannot move over or into checked squares!
-
-	if (color == COLOR_WHITE && from == 4)
-	{
-		if ((board->Castle & CASTLE_WK) > 0 && !Bitboard_Get(occupancy, 5) && !Bitboard_Get(occupancy, 6))
-			Bitboard_SetRef(&output, 6);
-
-		if ((board->Castle & CASTLE_WQ) > 0 && !Bitboard_Get(occupancy, 1) && !Bitboard_Get(occupancy, 2) && !Bitboard_Get(occupancy, 3))
-			Bitboard_SetRef(&output, 2);
-	}
-	else if (color == COLOR_BLACK && from == 60)
-	{
-		if ((board->Castle & CASTLE_BK) > 0 && !Bitboard_Get(occupancy, 61) && !Bitboard_Get(occupancy, 62))
-			Bitboard_SetRef(&output, 62);
-
-		if ((board->Castle & CASTLE_BQ) > 0 && !Bitboard_Get(occupancy, 59) && !Bitboard_Get(occupancy, 58) && !Bitboard_Get(occupancy, 57))
-			Bitboard_SetRef(&output, 58);
-	}
-
-	return output;
+	uint8_t availableTypes = Moves_GetAvailableCastlingTypes(board, color);
+	return CastlingTableTypesToBitboard[availableTypes];
 }
 
 
-int Moves_CanPromote(Board* board, int square)
+__inline_always int Moves_CanPromote(Board* board, int square)
 {
 	if(!Bitboard_Get(board->Boards[BOARD_PAWNS], square))
 		return 0;
@@ -200,7 +208,7 @@ int Moves_CanPromote(Board* board, int square)
 	return 0;
 }
 
-int Moves_IsCaptureMove(Board* board, int from, int to)
+__inline_always int Moves_IsCaptureMove(Board* board, int from, int to)
 {
 	uint64_t occupancy = board->Boards[BOARD_WHITE] | board->Boards[BOARD_BLACK];
 
@@ -210,32 +218,12 @@ int Moves_IsCaptureMove(Board* board, int from, int to)
 	return false;
 }
 
-int Moves_IsEnPassantCapture(Board* board, int from, int to)
+__inline_always int Moves_IsEnPassantCapture(Board* board, int from, int to)
 {
-	if (board->EnPassantTile != to)
-		return false;
-
-	int color = Board_Color(board, from);
-
-	if (Bitboard_Get(board->Boards[BOARD_PAWNS], from) == 0)
-		return false;
-
-	if (color == COLOR_WHITE)
-	{
-		if (to == from + 7 || to == from + 9)
-			return true;
-	}
-
-	if (color == COLOR_BLACK)
-	{
-		if (to == from - 7 || to == from - 9)
-			return true;
-	}
-
-	return false;
+	return (board->EnPassantTile == to) && Bitboard_GetRef(&board->Boards[BOARD_PAWNS], from);
 }
 
-int Moves_GetEnPassantVictimTile(Board* board, int from, int to)
+__inline_always int Moves_GetEnPassantVictimTile(Board* board, int from, int to)
 {
 	int color = Board_Color(board, from);
 

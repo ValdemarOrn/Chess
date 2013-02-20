@@ -1,12 +1,14 @@
 
 #include "Board.h"
 #include "Bitboard.h"
+#include "Zobrist.h"
+#include "Moves.h"
 #include <string.h>
 
 Board* Board_Create()
 {
 	Board* board = new Board();
-	board->Moves = new Move[512];
+	board->MoveHistory = new MoveHistory[512];
 
 	Board_Init(board, 0);
 	return board;
@@ -14,17 +16,17 @@ Board* Board_Create()
 
 void Board_Delete(Board* board)
 {
-	delete board->Moves;
+	delete board->MoveHistory;
 	delete board;
 }
 
 Board* Board_Copy(Board* board)
 {
 	Board* newBoard = new Board();
-	newBoard->Moves = new Move[512];
+	memcpy(newBoard, board, sizeof(board));
 
-	memcpy(newBoard->Boards, board->Boards, 8 * sizeof(uint64_t));
-	memcpy(newBoard->Moves, board->Moves, 512);
+	newBoard->MoveHistory = new MoveHistory[512];
+	memcpy(newBoard->MoveHistory, board->MoveHistory, 512 * sizeof(MoveHistory));
 	return newBoard;
 }
 
@@ -39,7 +41,12 @@ void Board_Init(Board* board, int setPieces)
 	board->PlayerTurn = COLOR_WHITE;
 
 	if(!setPieces)
+	{
+		board->Hash ^= Zobrist_Keys[ZOBRIST_SIDE][board->PlayerTurn];
+		board->Hash ^= Zobrist_Keys[ZOBRIST_CASTLING][board->Castle];
+		board->Hash ^= Zobrist_Keys[ZOBRIST_ENPASSANT][board->EnPassantTile];
 		return;
+	}
 
 	board->Boards[BOARD_WHITE] = 0xFFFF;
 	board->Boards[BOARD_BLACK] = 0xFFFF000000000000;
@@ -50,6 +57,10 @@ void Board_Init(Board* board, int setPieces)
 	board->Boards[BOARD_BISHOPS] = 0x2400000000000024;
 	board->Boards[BOARD_QUEENS] = 0x800000000000008;
 	board->Boards[BOARD_KINGS] = 0x1000000000000010;
+
+	board->Hash = Zobrist_Calculate(board);
+	board->AttacksWhite = Board_AttackMap(board, COLOR_WHITE);
+	board->AttacksBlack = Board_AttackMap(board, COLOR_BLACK);
 }
 
 int Board_Piece(Board* board, int tile)
@@ -85,10 +96,19 @@ void Board_SetPiece(Board* board, int square, int pieceType, int color)
 
 	uint64_t* colorBoard = (color == COLOR_WHITE) ? &board->Boards[BOARD_WHITE] : &board->Boards[BOARD_BLACK];
 	Bitboard_SetRef(colorBoard, square);
+	board->Hash ^= Zobrist_Keys[Zobrist_Index[pieceType | color]][square];
 }
 
 void Board_ClearPiece(Board* board, int square)
 {
+	int color = Board_Color(board, square);
+
+	if(color == 0)
+		return;
+
+	int piece = Board_Piece(board, square);
+	board->Hash ^= Zobrist_Keys[Zobrist_Index[piece | color]][square];
+
 	Bitboard_UnsetRef(&board->Boards[BOARD_PAWNS], square);
 	Bitboard_UnsetRef(&board->Boards[BOARD_KNIGHTS], square);
 	Bitboard_UnsetRef(&board->Boards[BOARD_BISHOPS], square);
@@ -100,32 +120,93 @@ void Board_ClearPiece(Board* board, int square)
 	Bitboard_UnsetRef(&board->Boards[BOARD_BLACK], square);
 }
 
-int Board_Make(Board* board, int from, int to, int verifyLegalMove)
+uint64_t Board_AttackMap(Board* board, int color)
 {
-	return 0;
-	// todo: Implement make
+	uint64_t attackBoard = 0;
+
+	uint8_t positions[20];
+	uint64_t bitboard = (color == COLOR_WHITE) ? board->Boards[BOARD_WHITE] : board->Boards[BOARD_BLACK];
+	int count = Bitboard_BitList(bitboard, positions);
+
+	for(int i = 0; i < count; i++)
+	{
+		int pos = positions[i];
+		uint64_t attacks = Moves_GetAttacks(board, pos);
+		attackBoard |= attacks;
+	}
+
+	return attackBoard;
 }
 
-int Board_Unmake(Board* board, Move* move, int verifyLegalMove)
+int Board_Make(Board* board, int from, int to)
 {
-	return 0;
+	// 0: Check if en passant or castling
+	// 1. put info in history
+	// 2. Create the Move object
+	// 3. Make the move
+	//    3.1 if castling move, check that it's OK
+	//    3.2 if castling move, move the rook
+	//    3.3 If en passant, remove pawn
+	// 4. update board data, enpassant square, castling, check state, 50 move rule, hash
+	// 5. Verify it doesn't self check
+	//    5.1 If it does, unmake
+	
+	// 0: Check if en passant or castling
+	int isEnPassant = Moves_IsEnPassantCapture(board, from, to);
+	int castlingType = Moves_GetCastlingType(board, from, to);
+
+	// 1. put info in history
+	MoveHistory* history = &board->MoveHistory[board->CurrentMove];
+	history->PrevAttacksBlack = board->AttacksBlack;
+	history->PrevAttacksWhite = board->AttacksWhite;
+	history->PrevCastleState = board->Castle;
+	history->PrevCheckmateState = board->CheckmateState;
+	history->PrevEnPassantTile = board->EnPassantTile;
+	history->PrevFiftyMoveRulePlies = board->FiftyMoveRulePlies;
+	history->PrevHash = board->Hash;
+
+	// 2. Create the Move object
+	history->Move.CapturePiece = (isEnPassant) ? PIECE_PAWN : Board_Piece(board, to);
+	history->Move.CaptureTile = (isEnPassant) ? board->EnPassantTile : to;
+	history->Move.Castle = castlingType;
+	// history->Move.CheckmateState = 0; // set later
+	history->Move.From = from;
+	history->Move.PlayerColor = board->PlayerTurn;
+	// history->Move.Promotion = 0; // set outside the Make() function, during search
+	history->Move.To = to;
+
+	// 3. Make the move
+
+	//    3.1 if castling move, check that it's OK
+	if(castlingType > 0)
+	{
+		//uint64_t possibleMoves = Moves_GetCastlingMoves(board, from);
+
+		//    3.2 if castling move, move the rook
+	}
+
+	
+	//    3.3 If en passant, remove pawn
+
+
+
+	return 1;
+}
+
+void Board_Unmake(Board* board, Move* move)
+{
 	// todo: Implement unmake
 }
 
-int Board_Promote(Board* board, int square, int pieceType)
+void Board_Promote(Board* board, int square, int pieceType)
 {
-	return 0;
 	// todo: Implement promote
 }
 
 
-void Board_CheckCastling(Board* board)
+uint8_t Board_GetCastling(Board* board)
 {
+	return 0;
 	// todo: Implement castling check
-}
-
-void Board_AllowCastlingAll(Board* board)
-{
-	// todo: Implement allow castling
 }
 
