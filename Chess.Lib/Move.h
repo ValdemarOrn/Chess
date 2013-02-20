@@ -7,8 +7,6 @@ extern "C"
 {
 	typedef struct
 	{
-		uint32_t MoveCount;
-
 		uint8_t From;
 		uint8_t To;
 		
@@ -18,6 +16,12 @@ extern "C"
 		uint8_t Promotion;
 		uint8_t CheckmateState;
 		uint8_t Castle;
+
+	} Move;
+	
+	typedef struct
+	{
+		Move Move;
 		
 		uint8_t PrevAttacksWhite;
 		uint8_t PrevAttacksBlack;
@@ -30,7 +34,7 @@ extern "C"
 
 		uint8_t Unused; // make it multiple of 4 bytes
 
-	} Move;
+	} MoveHistory;
 
 }
 
