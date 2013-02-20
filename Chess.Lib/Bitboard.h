@@ -10,6 +10,9 @@ extern "C"
 {
 	// ------------- Bit Twiddling -------------
 
+	// Todo: Implement these operations with bit intrinsics
+	// http://msdn.microsoft.com/en-US/library/z56sc6y4(v=vs.80).aspx
+	
 	// Unset bit at position #index in the input val bitboard. Returns a new bitboard
 	__declspec(dllexport) uint64_t Bitboard_Unset(uint64_t val, int index);
 
@@ -22,6 +25,8 @@ extern "C"
 	// Set bit at position #index in the input val bitboard. Modifies the given bitboard
 	__declspec(dllexport) void Bitboard_SetRef(uint64_t* val, int index);
 
+	// Todo: Implement with bittest operation
+	// http://msdn.microsoft.com/en-us/library/h65k4tze(v=vs.80).aspx
 	// returns 1 if bit #index is set, 0 if unset
 	__declspec(dllexport) int Bitboard_Get(uint64_t val, int index);
 
@@ -101,6 +106,7 @@ extern "C"
 		unsigned long index;
 		unsigned char isNonzero = _BitScanForward64(&index, val);
 	
+		// Todo: ternary operators
 		if(isNonzero)
 			return index;
 		else
