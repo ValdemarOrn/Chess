@@ -33,7 +33,7 @@ Board* Board_Copy(Board* board)
 void Board_Init(Board* board, int setPieces)
 {
 	board->Castle = CASTLE_BK | CASTLE_BQ | CASTLE_WK | CASTLE_WQ;
-	board->CheckmateState = CHECK_NONE;
+	board->CheckState = CHECK_NONE;
 	board->CurrentMove = 0;
 	board->EnPassantTile = 0;
 	board->FiftyMoveRulePlies = 0;
@@ -144,15 +144,17 @@ int Board_Make(Board* board, int from, int to)
 	// 1. put info in history
 	// 2. Create the Move object
 	// 3. Make the move
-	//    3.1 if castling move, check that it's OK
-	//    3.2 if castling move, move the rook
-	//    3.3 If en passant, remove pawn
-	// 4. update board data, enpassant square, castling, check state, 50 move rule, hash
+	//    3.1 if castling move, move the rook
+	//    3.2 If en passant, remove pawn
+	// 4. update board data, enpassant square, castling, 50 move rule, hash
 	// 5. Verify it doesn't self check
 	//    5.1 If it does, unmake
 	
+	int piece = Board_Piece(board, to);
+	int color = board->PlayerTurn;
+
 	// 0: Check if en passant or castling
-	int isEnPassant = Moves_IsEnPassantCapture(board, from, to);
+	int isEnPassantCapture = Moves_IsEnPassantCapture(board, from, to);
 	int castlingType = Moves_GetCastlingType(board, from, to);
 
 	// 1. put info in history
@@ -160,40 +162,95 @@ int Board_Make(Board* board, int from, int to)
 	history->PrevAttacksBlack = board->AttacksBlack;
 	history->PrevAttacksWhite = board->AttacksWhite;
 	history->PrevCastleState = board->Castle;
-	history->PrevCheckmateState = board->CheckmateState;
+	history->PrevCheckState = board->CheckState;
 	history->PrevEnPassantTile = board->EnPassantTile;
 	history->PrevFiftyMoveRulePlies = board->FiftyMoveRulePlies;
 	history->PrevHash = board->Hash;
 
 	// 2. Create the Move object
-	history->Move.CapturePiece = (isEnPassant) ? PIECE_PAWN : Board_Piece(board, to);
-	history->Move.CaptureTile = (isEnPassant) ? board->EnPassantTile : to;
+	history->Move.CapturePiece = (isEnPassantCapture) ? PIECE_PAWN : piece;
+	history->Move.CaptureTile = (isEnPassantCapture) ? board->EnPassantTile : to;
 	history->Move.Castle = castlingType;
 	// history->Move.CheckmateState = 0; // set later
 	history->Move.From = from;
-	history->Move.PlayerColor = board->PlayerTurn;
+	history->Move.PlayerColor = color;
 	// history->Move.Promotion = 0; // set outside the Make() function, during search
 	history->Move.To = to;
 
 	// 3. Make the move
+	Board_ClearPiece(board, from);
+	Board_ClearPiece(board, to);
+	Board_SetPiece(board, to, piece, color);
 
-	//    3.1 if castling move, check that it's OK
-	if(castlingType > 0)
+	//    3.1 if castling move, move the rook
+	if(castlingType == 0)
 	{
-		//uint64_t possibleMoves = Moves_GetCastlingMoves(board, from);
-
-		//    3.2 if castling move, move the rook
+		switch(castlingType)
+		{
+		case CASTLE_WK:
+			Board_ClearPiece(board, 7);
+			Board_SetPiece(board, 5, PIECE_ROOK, COLOR_WHITE);
+			break;
+		case CASTLE_WQ:
+			Board_ClearPiece(board, 0);
+			Board_SetPiece(board, 3, PIECE_ROOK, COLOR_WHITE);
+			break;
+		case CASTLE_BK:
+			Board_ClearPiece(board, 63);
+			Board_SetPiece(board, 61, PIECE_ROOK, COLOR_BLACK);
+			break;
+		case CASTLE_BQ:
+			Board_ClearPiece(board, 56);
+			Board_SetPiece(board, 59, PIECE_ROOK, COLOR_BLACK);
+			break;
+		default:
+			break;
+		}
+	}
+	
+	//    3.2 If en passant, remove pawn
+	if(isEnPassantCapture)
+	{
+		int victimTile = Moves_GetEnPassantVictimTile(board, from, to);
+		Board_ClearPiece(board, victimTile);
 	}
 
-	
-	//    3.3 If en passant, remove pawn
+	// 4. update board data, enpassant square, castling, 50 move rule, hash
 
+	board->Castle = Board_GetCastling(board);
+	board->AttacksBlack = Board_AttackMap(board, COLOR_BLACK);
+	board->AttacksWhite = Board_AttackMap(board, COLOR_WHITE);
+	board->CurrentMove += 1;
+	board->CheckState = Board_GetCheckState(board);
 
+	if(piece == PIECE_PAWN)
+	{
+		if(to == from + 16) // white two-square advance
+			board->EnPassantTile = from + 8;
+
+		if(to == from - 16) // black two-square advance
+			board->EnPassantTile = from - 8;
+	}
+	else
+	{
+		board->EnPassantTile = 0;
+	}
+
+	board->FiftyMoveRulePlies = (history->Move.CapturePiece > 0 || piece == PIECE_PAWN) ? 0 : board->FiftyMoveRulePlies + 1;
+	board->PlayerTurn = (board->PlayerTurn == COLOR_WHITE) ? COLOR_BLACK : COLOR_WHITE;
+
+	// 5. Verify it doesn't self check
+	if(Board_IsChecked(board, color))
+	{
+		//    5.1 If it does, unmake
+		Board_Unmake(board);
+		return 0;
+	}
 
 	return 1;
 }
 
-void Board_Unmake(Board* board, Move* move)
+void Board_Unmake(Board* board)
 {
 	// todo: Implement unmake
 }
@@ -206,7 +263,42 @@ void Board_Promote(Board* board, int square, int pieceType)
 
 uint8_t Board_GetCastling(Board* board)
 {
-	return 0;
-	// todo: Implement castling check
+	int whiteKing = Bitboard_Get(board->Boards[COLOR_WHITE] & board->Boards[PIECE_KING], 4);
+	int blackKing = Bitboard_Get(board->Boards[COLOR_BLACK] & board->Boards[PIECE_KING], 60);
+
+	uint64_t whiteRooks = board->Boards[COLOR_WHITE] & board->Boards[PIECE_ROOK];
+	uint64_t blackRooks = board->Boards[COLOR_BLACK] & board->Boards[PIECE_ROOK];
+
+	uint8_t wk = (whiteKing & whiteRooks & 0x80) > 0 ? CASTLE_WK : 0;
+	uint8_t wq = (whiteKing & whiteRooks & 0x1) > 0 ? CASTLE_WQ : 0;
+	uint8_t bk = (blackKing & blackRooks & 0x8000000000000000) > 0 ? CASTLE_BK : 0;
+	uint8_t bq = (blackKing & blackRooks & 0x100000000000000) > 0 ? CASTLE_BQ : 0;
+
+	uint8_t output = (wk | wq | bk | bq) & board->Castle;
+	return output;
 }
 
+int Board_GetCheckState(Board* board)
+{
+	uint64_t whiteKing = board->Boards[COLOR_WHITE] & board->Boards[PIECE_KING];
+	uint64_t blackKing = board->Boards[COLOR_BLACK] & board->Boards[PIECE_KING];
+
+	int output = ((whiteKing & board->AttacksBlack) | (blackKing & board->AttacksWhite)) > 0 ? 1 : 0;
+	return output;
+}
+
+int Board_IsChecked(Board* board, int color)
+{
+	if(color == COLOR_WHITE)
+	{
+		uint64_t whiteKing = board->Boards[COLOR_WHITE] & board->Boards[PIECE_KING];
+		int output = (whiteKing & board->AttacksBlack) > 0 ? 1 : 0;
+		return output;
+	}
+	else
+	{
+		uint64_t blackKing = board->Boards[COLOR_BLACK] & board->Boards[PIECE_KING];
+		int output = (blackKing & board->AttacksWhite) > 0 ? 1 : 0;
+		return output;
+	}
+}

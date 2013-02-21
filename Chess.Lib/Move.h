@@ -15,7 +15,7 @@ extern "C"
 		uint8_t CapturePiece;
 		uint8_t CaptureTile; // only differs from "To" in en passant attacks
 		uint8_t Promotion;
-		uint8_t CheckmateState;
+		uint8_t CheckState;
 		uint8_t Castle;
 
 	} Move;
@@ -31,7 +31,7 @@ extern "C"
 		uint8_t PrevEnPassantTile;
 		uint8_t PrevFiftyMoveRulePlies;
 		uint8_t PrevCastleState;
-		uint8_t PrevCheckmateState;
+		uint8_t PrevCheckState;
 
 		uint8_t Unused; // make it multiple of 4 bytes
 

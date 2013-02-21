@@ -50,7 +50,7 @@ extern "C"
 		uint8_t EnPassantTile; // set to 0 if not available. tile 0 can never be an en-passant square anyway
 		uint8_t FiftyMoveRulePlies;
 		uint8_t Castle;
-		uint8_t CheckmateState;
+		uint8_t CheckState;
 		
 		MoveHistory* MoveHistory;
 
@@ -105,8 +105,15 @@ extern "C"
 	__declspec(dllexport) void Board_Promote(Board* board, int square, int pieceType);
 
 	// returns the castling right that are allowed, given the state of the board
-	// takes into account current castling allowances and location of kings and rooks
+	// checks location of kings and rooks and current castling rights
 	__declspec(dllexport) uint8_t Board_GetCastling(Board* board);
+
+	// REturns the Check/Mate state of the board
+	__declspec(dllexport) int Board_GetCheckState(Board* board);
+
+	// Checks if the king of the specified color is in check
+	__declspec(dllexport) int Board_IsChecked(Board* board, int color);
+
 
 	// ------------ Inline function definitions
 

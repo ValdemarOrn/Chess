@@ -21,7 +21,7 @@ namespace Chess.Lib
 		public byte EnPassantTile;
 		public byte FiftyMoveRulePlies;
 		public byte Castle;
-		public byte CheckmateState;
+		public byte CheckState;
 
 		public MoveHistory* MoveHistory;
 	}
@@ -90,15 +90,21 @@ namespace Chess.Lib
 		public static unsafe extern ulong AttackMap(BoardStruct* board, int color);
 
 		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "Board_Make", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
-		public static unsafe extern int Make(BoardStruct* board, int from, int to, int verifyLegalMove);
+		public static unsafe extern int Make(BoardStruct* board, int from, int to);
 
 		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "Board_Unmake", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
-		public static unsafe extern void Unmake(BoardStruct* board, IntPtr move, int verifyLegalMove);
+		public static unsafe extern void Unmake(BoardStruct* board);
 
 		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "Board_Promote", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static unsafe extern void Promote(BoardStruct* board, int square, int pieceType);
 
 		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "Board_GetCastling", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static unsafe extern byte GetCastling(BoardStruct* board);
+
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "Board_GetCheckState", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		public static unsafe extern byte GetCheckState(BoardStruct* board);
+
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "Board_IsChecked", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		public static unsafe extern int IsChecked(BoardStruct* board, int color);
 	}
 }

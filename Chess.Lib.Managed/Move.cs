@@ -16,7 +16,7 @@ namespace Chess.Lib
 		public byte CapturePiece;
 		public byte CaptureTile; // only differs from "To" in en passant attacks
 		public byte Promotion;
-		public byte CheckmateState;
+		public byte CheckState;
 		public byte Castle;
 	}
 
@@ -32,7 +32,7 @@ namespace Chess.Lib
 		public byte PrevEnPassantTile;
 		public byte PrevFiftyMoveRulePlies;
 		public byte PrevCastleState;
-		public byte PrevCheckmateState;
+		public byte PrevCheckState;
 
 		public byte Unused; // make it multiple of 4 bytes
 	}

@@ -118,11 +118,14 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual((ulong)0xE0A0EA000000000, blackMap);
 		}
 
+		// Todo: Test Board_CheckCastling VERY IMPORTANT
+		// Todo: Test int Board_GetCheckState(Board* board) Important!
+		// Todo: Test IsChecked() Important!
+
 		// Todo: Test Board_Copy
 		// Todo: Test Board_Make
 		// Todo: Test Board_Unmake
 		// Todo: Test Board_Promote
-		// Todo: Test Board_CheckCastling
-		// Todo: Test Board_AllowCastlingAll
+		
 	}
 }
