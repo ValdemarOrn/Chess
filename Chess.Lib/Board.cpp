@@ -23,7 +23,7 @@ void Board_Delete(Board* board)
 Board* Board_Copy(Board* board)
 {
 	Board* newBoard = new Board();
-	memcpy(newBoard, board, sizeof(board));
+	memcpy(newBoard, board, sizeof(Board));
 
 	newBoard->MoveHistory = new MoveHistory[512];
 	memcpy(newBoard->MoveHistory, board->MoveHistory, 512 * sizeof(MoveHistory));
@@ -33,7 +33,7 @@ Board* Board_Copy(Board* board)
 void Board_Init(Board* board, int setPieces)
 {
 	board->Castle = CASTLE_BK | CASTLE_BQ | CASTLE_WK | CASTLE_WQ;
-	board->CheckState = CHECK_NONE;
+	board->CheckState = 0;
 	board->CurrentMove = 0;
 	board->EnPassantTile = 0;
 	board->FiftyMoveRulePlies = 0;
@@ -92,6 +92,9 @@ int Board_Piece(Board* board, int tile)
 
 void Board_SetPiece(Board* board, int square, int pieceType, int color)
 {
+	if(pieceType == 0 || color == 0)
+		return;
+
 	Bitboard_SetRef(&board->Boards[pieceType], square);
 
 	uint64_t* colorBoard = (color == COLOR_WHITE) ? &board->Boards[BOARD_WHITE] : &board->Boards[BOARD_BLACK];
@@ -143,19 +146,27 @@ int Board_Make(Board* board, int from, int to)
 	// 0: Check if en passant or castling
 	// 1. put info in history
 	// 2. Create the Move object
-	// 3. Make the move
+	// 3. Make the move, clear both squares, then set piece
 	//    3.1 if castling move, move the rook
 	//    3.2 If en passant, remove pawn
 	// 4. update board data, enpassant square, castling, 50 move rule, hash
 	// 5. Verify it doesn't self check
 	//    5.1 If it does, unmake
 	
-	int piece = Board_Piece(board, to);
+	int playerPiece = Board_Piece(board, from);
+	int capturePiece = Board_Piece(board, to);
 	int color = board->PlayerTurn;
+
+	// safety check, we are actually moving a piece that belongs to the current player
+	if(board->PlayerTurn != Board_Color(board, from))
+		return 0;
 
 	// 0: Check if en passant or castling
 	int isEnPassantCapture = Moves_IsEnPassantCapture(board, from, to);
 	int castlingType = Moves_GetCastlingType(board, from, to);
+
+	// Set the captured piece to pawn if en passant (otherwise it's zero because the "to" square is empty)
+	capturePiece = (isEnPassantCapture) ? PIECE_PAWN : capturePiece;
 
 	// 1. put info in history
 	MoveHistory* history = &board->MoveHistory[board->CurrentMove];
@@ -168,22 +179,23 @@ int Board_Make(Board* board, int from, int to)
 	history->PrevHash = board->Hash;
 
 	// 2. Create the Move object
-	history->Move.CapturePiece = (isEnPassantCapture) ? PIECE_PAWN : piece;
+	history->Move.CapturePiece = capturePiece;
 	history->Move.CaptureTile = (isEnPassantCapture) ? board->EnPassantTile : to;
 	history->Move.Castle = castlingType;
-	// history->Move.CheckmateState = 0; // set later
+	history->Move.CheckState = 0; // set later
 	history->Move.From = from;
 	history->Move.PlayerColor = color;
-	// history->Move.Promotion = 0; // set outside the Make() function, during search
+	history->Move.PlayerPiece = playerPiece;
+	history->Move.Promotion = 0; // set outside the Make() function, during search
 	history->Move.To = to;
 
 	// 3. Make the move
 	Board_ClearPiece(board, from);
 	Board_ClearPiece(board, to);
-	Board_SetPiece(board, to, piece, color);
+	Board_SetPiece(board, to, playerPiece, color);
 
 	//    3.1 if castling move, move the rook
-	if(castlingType == 0)
+	if(castlingType > 0)
 	{
 		switch(castlingType)
 		{
@@ -222,8 +234,9 @@ int Board_Make(Board* board, int from, int to)
 	board->AttacksWhite = Board_AttackMap(board, COLOR_WHITE);
 	board->CurrentMove += 1;
 	board->CheckState = Board_GetCheckState(board);
+	history->Move.CheckState = board->CheckState;
 
-	if(piece == PIECE_PAWN)
+	if(playerPiece == PIECE_PAWN)
 	{
 		if(to == from + 16) // white two-square advance
 			board->EnPassantTile = from + 8;
@@ -236,11 +249,11 @@ int Board_Make(Board* board, int from, int to)
 		board->EnPassantTile = 0;
 	}
 
-	board->FiftyMoveRulePlies = (history->Move.CapturePiece > 0 || piece == PIECE_PAWN) ? 0 : board->FiftyMoveRulePlies + 1;
+	board->FiftyMoveRulePlies = (history->Move.CapturePiece > 0 || playerPiece == PIECE_PAWN) ? 0 : board->FiftyMoveRulePlies + 1;
 	board->PlayerTurn = (board->PlayerTurn == COLOR_WHITE) ? COLOR_BLACK : COLOR_WHITE;
 
 	// 5. Verify it doesn't self check
-	if(Board_IsChecked(board, color))
+	if(board->CheckState && Board_IsChecked(board, color))
 	{
 		//    5.1 If it does, unmake
 		Board_Unmake(board);
@@ -252,7 +265,71 @@ int Board_Make(Board* board, int from, int to)
 
 void Board_Unmake(Board* board)
 {
-	// todo: Implement unmake
+	if(board->CurrentMove == 0) // no moves to unmake
+		return;
+
+	// 1. Set board data from history, enpassant square, castling, 50 move, hash. Recalculate what's needed
+	// 2. Unmake the move, clear "to", set player piece at old location, then set captured piece
+	//    2.1 If castling move, move the rook back
+	// 3. Pop history off the stack
+	// 4. For debugging, compute new hash and compare with hash from history. must match!
+
+	// 1. Set board data from history, enpassant square, castling, 50 move, hash. Recalculate what's needed
+	MoveHistory* history = &board->MoveHistory[board->CurrentMove - 1];
+	Move* move = &history->Move;
+
+	board->AttacksBlack = history->PrevAttacksBlack;
+	board->AttacksWhite = history->PrevAttacksWhite;
+	board->Castle = history->PrevCastleState;
+	board->CheckState = history->PrevCheckState;
+	board->EnPassantTile = history->PrevEnPassantTile;
+	board->FiftyMoveRulePlies = history->PrevFiftyMoveRulePlies;
+
+	// Can't do this, we must calculate back to the original hash. 
+	// Only use history hash to verify they are the same
+	// board->Hash = history->PrevHash; 
+
+	board->PlayerTurn = move->PlayerColor;
+
+	int capturedColor = (board->PlayerTurn == COLOR_WHITE) ? COLOR_BLACK : COLOR_WHITE;
+
+	// 2. Unmake the move, clear "to", set player piece at old location...
+	Board_ClearPiece(board, move->To);
+	Board_SetPiece(board, move->From, move->PlayerPiece, move->PlayerColor);
+	// 2. ...then set captured piece
+	Board_SetPiece(board, move->CaptureTile, move->CapturePiece, capturedColor);
+
+	//    2.1 If castling move, move the rook back
+	if(move->Castle > 0)
+	{
+		switch(move->Castle)
+		{
+		case CASTLE_WK:
+			Board_ClearPiece(board, 5);
+			Board_SetPiece(board, 7, PIECE_ROOK, COLOR_WHITE);
+			break;
+		case CASTLE_WQ:
+			Board_ClearPiece(board, 3);
+			Board_SetPiece(board, 0, PIECE_ROOK, COLOR_WHITE);
+			break;
+		case CASTLE_BK:
+			Board_ClearPiece(board, 61);
+			Board_SetPiece(board, 63, PIECE_ROOK, COLOR_BLACK);
+			break;
+		case CASTLE_BQ:
+			Board_ClearPiece(board, 59);
+			Board_SetPiece(board, 56, PIECE_ROOK, COLOR_BLACK);
+			break;
+		default:
+			break;
+		}
+	}
+
+	// 3. Pop history off the stack
+	board->CurrentMove--;
+
+	// 4. For debugging, compute new hash and compare with hash from history. must match!
+	//assert(board->Hash == history->PrevHash);
 }
 
 void Board_Promote(Board* board, int square, int pieceType)
@@ -263,42 +340,42 @@ void Board_Promote(Board* board, int square, int pieceType)
 
 uint8_t Board_GetCastling(Board* board)
 {
-	int whiteKing = Bitboard_Get(board->Boards[COLOR_WHITE] & board->Boards[PIECE_KING], 4);
-	int blackKing = Bitboard_Get(board->Boards[COLOR_BLACK] & board->Boards[PIECE_KING], 60);
+	int whiteKing = Bitboard_Get(board->Boards[BOARD_WHITE] & board->Boards[PIECE_KING], 4);
+	int blackKing = Bitboard_Get(board->Boards[BOARD_BLACK] & board->Boards[PIECE_KING], 60);
 
-	uint64_t whiteRooks = board->Boards[COLOR_WHITE] & board->Boards[PIECE_ROOK];
-	uint64_t blackRooks = board->Boards[COLOR_BLACK] & board->Boards[PIECE_ROOK];
+	uint64_t whiteRooks = board->Boards[BOARD_WHITE] & board->Boards[PIECE_ROOK];
+	uint64_t blackRooks = board->Boards[BOARD_BLACK] & board->Boards[PIECE_ROOK];
 
-	uint8_t wk = (whiteKing & whiteRooks & 0x80) > 0 ? CASTLE_WK : 0;
-	uint8_t wq = (whiteKing & whiteRooks & 0x1) > 0 ? CASTLE_WQ : 0;
-	uint8_t bk = (blackKing & blackRooks & 0x8000000000000000) > 0 ? CASTLE_BK : 0;
-	uint8_t bq = (blackKing & blackRooks & 0x100000000000000) > 0 ? CASTLE_BQ : 0;
+	uint8_t wk = (whiteKing * (whiteRooks & 0x80)) > 0 ? CASTLE_WK : 0;
+	uint8_t wq = (whiteKing * (whiteRooks & 0x1)) > 0 ? CASTLE_WQ : 0;
+	uint8_t bk = (blackKing * (blackRooks & 0x8000000000000000)) > 0 ? CASTLE_BK : 0;
+	uint8_t bq = (blackKing * (blackRooks & 0x100000000000000)) > 0 ? CASTLE_BQ : 0;
 
 	uint8_t output = (wk | wq | bk | bq) & board->Castle;
 	return output;
 }
 
-int Board_GetCheckState(Board* board)
+_Bool Board_GetCheckState(Board* board)
 {
-	uint64_t whiteKing = board->Boards[COLOR_WHITE] & board->Boards[PIECE_KING];
-	uint64_t blackKing = board->Boards[COLOR_BLACK] & board->Boards[PIECE_KING];
+	uint64_t whiteKing = board->Boards[BOARD_WHITE] & board->Boards[PIECE_KING];
+	uint64_t blackKing = board->Boards[BOARD_BLACK] & board->Boards[PIECE_KING];
 
-	int output = ((whiteKing & board->AttacksBlack) | (blackKing & board->AttacksWhite)) > 0 ? 1 : 0;
+	int output = ((whiteKing & board->AttacksBlack) | (blackKing & board->AttacksWhite)) > 0 ? TRUE : FALSE;
 	return output;
 }
 
-int Board_IsChecked(Board* board, int color)
+_Bool Board_IsChecked(Board* board, int color)
 {
 	if(color == COLOR_WHITE)
 	{
-		uint64_t whiteKing = board->Boards[COLOR_WHITE] & board->Boards[PIECE_KING];
-		int output = (whiteKing & board->AttacksBlack) > 0 ? 1 : 0;
+		uint64_t whiteKing = board->Boards[BOARD_WHITE] & board->Boards[PIECE_KING];
+		int output = (whiteKing & board->AttacksBlack) > 0 ? TRUE : FALSE;
 		return output;
 	}
 	else
 	{
-		uint64_t blackKing = board->Boards[COLOR_BLACK] & board->Boards[PIECE_KING];
-		int output = (blackKing & board->AttacksWhite) > 0 ? 1 : 0;
+		uint64_t blackKing = board->Boards[BOARD_BLACK] & board->Boards[PIECE_KING];
+		int output = (blackKing & board->AttacksWhite) > 0 ? TRUE : FALSE;
 		return output;
 	}
 }

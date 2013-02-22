@@ -2,6 +2,12 @@
 
 #include "inttypes.h"
 
+//#define NDEBUG
+#include <assert.h>
+
+typedef int _Bool;
+#define TRUE 1
+#define FALSE 0
 
 
 #ifdef _WIN32

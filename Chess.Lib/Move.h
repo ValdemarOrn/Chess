@@ -12,6 +12,7 @@ extern "C"
 		uint8_t To;
 		
 		uint8_t PlayerColor;
+		uint8_t PlayerPiece;
 		uint8_t CapturePiece;
 		uint8_t CaptureTile; // only differs from "To" in en passant attacks
 		uint8_t Promotion;
@@ -24,16 +25,14 @@ extern "C"
 	{
 		Move Move;
 		
-		uint8_t PrevAttacksWhite;
-		uint8_t PrevAttacksBlack;
-		uint8_t PrevHash;
+		uint64_t PrevAttacksWhite;
+		uint64_t PrevAttacksBlack;
+		uint64_t PrevHash;
 
 		uint8_t PrevEnPassantTile;
 		uint8_t PrevFiftyMoveRulePlies;
 		uint8_t PrevCastleState;
 		uint8_t PrevCheckState;
-
-		uint8_t Unused; // make it multiple of 4 bytes
 
 	} MoveHistory;
 	#pragma pack(pop)

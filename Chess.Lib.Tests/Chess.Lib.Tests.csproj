@@ -63,6 +63,7 @@
     <Compile Include="KingTest.cs" />
     <Compile Include="QueenTest.cs" />
     <Compile Include="MovesTest.cs" />
+    <Compile Include="HelperTest.cs" />
     <Compile Include="_Tests.cs" />
     <Compile Include="ZobristTests.cs" />
   </ItemGroup>

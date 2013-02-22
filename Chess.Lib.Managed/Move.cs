@@ -13,8 +13,9 @@ namespace Chess.Lib
 		public byte To;
 
 		public byte PlayerColor;
+		public byte PlayerPiece;
 		public byte CapturePiece;
-		public byte CaptureTile; // only differs from "To" in en passant attacks
+		public byte CaptureTile; // location of capture piece. Only differs from "To" in en passant attacks
 		public byte Promotion;
 		public byte CheckState;
 		public byte Castle;
@@ -25,15 +26,13 @@ namespace Chess.Lib
 	{
 		public Move Move;
 
-		public byte PrevAttacksWhite;
-		public byte PrevAttacksBlack;
-		public byte PrevHash;
+		public ulong PrevAttacksWhite;
+		public ulong PrevAttacksBlack;
+		public ulong PrevHash;
 
 		public byte PrevEnPassantTile;
 		public byte PrevFiftyMoveRulePlies;
 		public byte PrevCastleState;
 		public byte PrevCheckState;
-
-		public byte Unused; // make it multiple of 4 bytes
 	}
 }

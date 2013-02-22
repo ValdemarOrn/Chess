@@ -22,10 +22,6 @@ extern "C"
 	const int CASTLE_BK = 1 << 2;
 	const int CASTLE_BQ = 1 << 3;
 	
-	const int CHECK_NONE = 0;
-	const int CHECK_CHECK = 1;
-	const int CHECK_MATE = 2;
-	
 	const int BOARD_WHITE = 0;
 	const int BOARD_BLACK = 1;
 	const int BOARD_PAWNS = 2;
@@ -44,7 +40,7 @@ extern "C"
 		uint64_t AttacksBlack;
 		uint64_t Hash;
 
-		uint32_t CurrentMove;
+		int CurrentMove;
 		uint8_t PlayerTurn; // color of player to move
 
 		uint8_t EnPassantTile; // set to 0 if not available. tile 0 can never be an en-passant square anyway
@@ -104,15 +100,15 @@ extern "C"
 	// Promotes a pawn at the specified square
 	__declspec(dllexport) void Board_Promote(Board* board, int square, int pieceType);
 
-	// returns the castling right that are allowed, given the state of the board
+	// returns the castling rights that are allowed, given the state of the board
 	// checks location of kings and rooks and current castling rights
 	__declspec(dllexport) uint8_t Board_GetCastling(Board* board);
 
-	// REturns the Check/Mate state of the board
-	__declspec(dllexport) int Board_GetCheckState(Board* board);
+	// Returns the Check/Mate state of the board
+	__declspec(dllexport) _Bool Board_GetCheckState(Board* board);
 
 	// Checks if the king of the specified color is in check
-	__declspec(dllexport) int Board_IsChecked(Board* board, int color);
+	__declspec(dllexport) _Bool Board_IsChecked(Board* board, int color);
 
 
 	// ------------ Inline function definitions

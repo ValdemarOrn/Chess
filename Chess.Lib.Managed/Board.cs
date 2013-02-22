@@ -15,7 +15,7 @@ namespace Chess.Lib
 		public ulong AttacksBlack;
 		public ulong Hash;
 
-		public uint CurrentMove;
+		public int CurrentMove;
 		public byte PlayerTurn;
 
 		public byte EnPassantTile;
@@ -42,10 +42,6 @@ namespace Chess.Lib
 		public const int CASTLE_WQ = 1 << 1;
 		public const int CASTLE_BK = 1 << 2;
 		public const int CASTLE_BQ = 1 << 3;
-
-		public const int CHECK_NONE = 0;
-		public const int CHECK_CHECK = 1;
-		public const int CHECK_MATE = 2;
 
 		public const int BOARD_WHITE = 0;
 		public const int BOARD_BLACK = 1;

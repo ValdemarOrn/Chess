@@ -30,13 +30,13 @@ extern "C"
 
 
 	// Checks if a piece can be promoted
-	__declspec(dllexport) int Moves_CanPromote(Board* board, int square);
+	__declspec(dllexport) _Bool Moves_CanPromote(Board* board, int square);
 
 	// Checks if this move captures another piece
-	__declspec(dllexport) int Moves_IsCaptureMove(Board* board, int from, int to);
+	__declspec(dllexport) _Bool Moves_IsCaptureMove(Board* board, int from, int to);
 
 	// Checks if the move is an en passant move
-	__declspec(dllexport) int Moves_IsEnPassantCapture(Board* board, int from, int to);
+	__declspec(dllexport) _Bool Moves_IsEnPassantCapture(Board* board, int from, int to);
 
 	// Returns the tile of the pawn that is killed in an en passant capture
 	__declspec(dllexport) int Moves_GetEnPassantVictimTile(Board* board, int from, int to);
@@ -66,6 +66,7 @@ extern "C"
 	const uint64_t BQ_CLEAR = 0xE00000000000000;
 
 	// castling lookup table, slightly faster than if/else
+	// Maps moves to a castling type
 	// the key is (from + to) % 15
 	extern int CastlingTableMovesToTypes[15];
 
@@ -108,7 +109,7 @@ extern "C"
 	}
 
 
-	__inline_always int Moves_CanPromote(Board* board, int square)
+	__inline_always _Bool Moves_CanPromote(Board* board, int square)
 	{
 		if(!Bitboard_Get(board->Boards[BOARD_PAWNS], square))
 			return 0;
@@ -124,7 +125,7 @@ extern "C"
 		return 0;
 	}
 
-	__inline_always int Moves_IsCaptureMove(Board* board, int from, int to)
+	__inline_always _Bool Moves_IsCaptureMove(Board* board, int from, int to)
 	{
 		uint64_t occupancy = board->Boards[BOARD_WHITE] | board->Boards[BOARD_BLACK];
 
@@ -134,7 +135,7 @@ extern "C"
 		return false;
 	}
 
-	__inline_always int Moves_IsEnPassantCapture(Board* board, int from, int to)
+	__inline_always _Bool Moves_IsEnPassantCapture(Board* board, int from, int to)
 	{
 		return (board->EnPassantTile == to) && Bitboard_GetRef(&board->Boards[BOARD_PAWNS], from);
 	}
