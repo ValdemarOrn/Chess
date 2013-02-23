@@ -28,10 +28,6 @@ extern "C"
 	// Returns a bitboard with valid castle moves.
 	__declspec(dllexport) uint64_t Moves_GetCastlingMoves(Board* board, int color);
 
-
-	// Checks if a piece can be promoted
-	__declspec(dllexport) _Bool Moves_CanPromote(Board* board, int square);
-
 	// Checks if this move captures another piece
 	__declspec(dllexport) _Bool Moves_IsCaptureMove(Board* board, int from, int to);
 
@@ -65,21 +61,11 @@ extern "C"
 	const uint64_t BK_CLEAR = 0x6000000000000000;
 	const uint64_t BQ_CLEAR = 0xE00000000000000;
 
-	// castling lookup table, slightly faster than if/else
-	// Maps moves to a castling type
-	// the key is (from + to) % 15
-	extern int CastlingTableMovesToTypes[15];
-
 	// converts castling types to bitboard og possible king moves
 	// the key is castling type
 	extern uint64_t CastlingTableTypesToBitboard[16];
 
-	__inline_always uint8_t Moves_GetCastlingType(Board* board, int from, int to)
-	{
-		uint8_t isKing = Bitboard_GetRef(&board->Boards[BOARD_KINGS], from);
-		uint8_t castleVal = CastlingTableMovesToTypes[(from + to) % 15];
-		return isKing * castleVal;
-	}
+	
 
 	// return castling types that can be performed at this moment
 	__inline_always uint8_t Moves_GetAvailableCastlingTypes(Board* board, int color)
@@ -106,23 +92,6 @@ extern "C"
 	{
 		uint8_t availableTypes = Moves_GetAvailableCastlingTypes(board, color);
 		return CastlingTableTypesToBitboard[availableTypes];
-	}
-
-
-	__inline_always _Bool Moves_CanPromote(Board* board, int square)
-	{
-		if(!Bitboard_Get(board->Boards[BOARD_PAWNS], square))
-			return 0;
-
-		int color = Board_Color(board, square);
-
-		if (Board_Y(square) == 7 && color == COLOR_WHITE)
-			return 1;
-
-		if (Board_Y(square) == 0 && color == COLOR_BLACK)
-			return 1;
-
-		return 0;
 	}
 
 	__inline_always _Bool Moves_IsCaptureMove(Board* board, int from, int to)

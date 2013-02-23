@@ -10,6 +10,27 @@ namespace Chess.Tests
 	public class TestABN
 	{
 		[TestMethod]
+		public void TestStripPGN1()
+		{
+			string data = System.IO.File.ReadAllText("..\\..\\..\\TestData\\BobbyFischer.pgn");
+			string[] output = ABN.StripPGN(data);
+			Assert.AreEqual(1, output.Length);
+		}
+
+		[TestMethod]
+		public void TestStripPGNMany()
+		{
+			string data = System.IO.File.ReadAllText("..\\..\\..\\TestData\\HumansVsComputers.pgn");
+			string[] output = ABN.StripPGN(data);
+			Assert.AreEqual(28, output.Length);
+
+			foreach(var game in output)
+			{
+				var moves = ABN.ABNToMoves(new Board(true), game);
+			}
+		}
+
+		[TestMethod]
 		public void TestABN1()
 		{
 			var board = new Board(true);

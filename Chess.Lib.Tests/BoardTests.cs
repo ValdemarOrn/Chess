@@ -385,13 +385,105 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual(0, b->CurrentMove);
 		}
 
-		// Todo: Test unmake en passant
-		// Todo: Test unmake castling
+		[TestMethod]
+		public unsafe void TestMakeUnmakePGNFischer()
+		{
+			string data = System.IO.File.ReadAllText("..\\..\\..\\TestData\\BobbyFischer.pgn");
+			string finalState = "1Q6/5pk1/2p3p1/1p2N2p/1b5P/1bn5/2r3P1/2K5 w - - 16 42";
+			string game = ABN.StripPGN(data)[0];
+			GenericGameTest(game, finalState);
+		}
 
+		[TestMethod]
+		public unsafe void TestMakeUnmakePGNKasparovDeepBlue()
+		{
+			string data = System.IO.File.ReadAllText("..\\..\\..\\TestData\\HumansVsComputers.pgn");
+			string finalState = "4r3/6P1/2p2P1k/1p6/pP2p1R1/P1B5/2P2K2/3r4 b - - 0 45";
+			string game = ABN.StripPGN(data)[0];
+			GenericGameTest(game, finalState);
+		}
 
-		// Todo: Test Board_Copy
-		// Todo: Test Board_Unmake
-		// Todo: Test Board_Promote
-		
+		[TestMethod]
+		public unsafe void TestMakeUnmakePGNKasparovX3DFritz()
+		{
+			string data = System.IO.File.ReadAllText("..\\..\\..\\TestData\\HumansVsComputers.pgn");
+			string finalState = "r6k/1r1qnppp/NPp2n1b/2Pp4/3Pp3/1RB1P1PP/R1Q2P2/K4B2 b - - 4 45";
+			var games = ABN.StripPGN(data);
+			string game = games[games.Length - 2];
+			GenericGameTest(game, finalState);
+		}
+
+		[TestMethod]
+		public unsafe void TestMakeUnmakePGNKasparovX3D()
+		{
+			string data = System.IO.File.ReadAllText("..\\..\\..\\TestData\\HumansVsComputers.pgn");
+			string finalState = "3Q4/6pk/7p/8/8/8/r4qPP/3R3K w - - 2 28";
+			string game = ABN.StripPGN(data).Last();
+			GenericGameTest(game, finalState);
+		}
+
+		[TestMethod]
+		public unsafe void TestMakeUnmakePromotion()
+		{
+			string game = "1. e4 d5 2. exd5 Nf6 3. Bb5+ c6 4. dxc6 Qb6 5. Bf1 Qb4 6. cxb7 Kd7 7. bxc8=Q+ Kd6 8. Qh3 Qb5 9. Qxh7 Qb6 10. Qxh8 ";
+			string finalState = "rn3b1Q/p3ppp1/1q1k1n2/8/8/8/PPPP1PPP/RNBQKBNR b KQ - 0 10";
+			GenericGameTest(game, finalState);
+		}
+
+		private unsafe static void GenericGameTest(string game, string endState)
+		{
+			BoardStruct* b = (BoardStruct*)Board.Create();
+			Board.Init(b, 1);
+
+			var finalBoard = Notation.FENtoBoard(endState);
+			var fBoard = Helpers.ManagedBoardToNative(finalBoard);
+			Assert.AreEqual(Zobrist.Calculate(fBoard), fBoard->Hash);
+			
+			var moves = ABN.ABNToMoves(new Chess.Board(true), game);
+
+			var stateStack = new IntPtr[150];
+			int head = 0;
+
+			for (int i = 0; i < moves.Count; i++)
+			{
+				stateStack[head] = Board.Copy(b);
+				head++;
+				var ok = Board.Make(b, moves[i].From, moves[i].To);
+				if (moves[i].Promotion != 0)
+				{
+					bool promoteOk = Board.Promote(b, moves[i].To, moves[i].Promotion);
+					Assert.AreEqual(true, promoteOk);
+				}
+
+				Assert.AreEqual(true, ok);
+				Assert.AreEqual(Zobrist.Calculate(b), b->Hash);
+			}
+
+			Assert.AreEqual(Zobrist.Calculate(fBoard), b->Hash);
+			Assert.AreEqual(fBoard->Hash, b->Hash);
+			Assert.AreEqual(fBoard->AttacksWhite, b->AttacksWhite);
+			Assert.AreEqual(fBoard->AttacksBlack, b->AttacksBlack);
+			Assert.AreEqual(fBoard->Castle, b->Castle);
+			Assert.AreEqual(fBoard->PlayerTurn, b->PlayerTurn);
+			Assert.AreEqual(fBoard->FiftyMoveRulePlies, b->FiftyMoveRulePlies);
+			Assert.AreEqual(fBoard->CurrentMove, b->CurrentMove);
+
+			while (head > 0)
+			{
+				head--;
+				Board.Unmake(b);
+				var bStack = (BoardStruct*)stateStack[head];
+
+				Assert.AreEqual(Zobrist.Calculate(b), b->Hash);
+				Assert.AreEqual(bStack->Hash, b->Hash);
+				Assert.AreEqual(bStack->AttacksWhite, b->AttacksWhite);
+				Assert.AreEqual(bStack->AttacksBlack, b->AttacksBlack);
+				Assert.AreEqual(bStack->Castle, b->Castle);
+				Assert.AreEqual(bStack->PlayerTurn, b->PlayerTurn);
+				Assert.AreEqual(bStack->FiftyMoveRulePlies, b->FiftyMoveRulePlies);
+				Assert.AreEqual(bStack->CurrentMove, b->CurrentMove);
+			}
+		}
+
 	}
 }

@@ -92,13 +92,16 @@ extern "C"
 	// Makes a move on the board. Updates hash, set castling, verifies move is legal
 	// if illegal it is automatically taken back.
 	// Return 1 if legal, 0 if illegal and no move was made
-	__declspec(dllexport) int Board_Make(Board* board, int from, int to);
+	__declspec(dllexport) _Bool Board_Make(Board* board, int from, int to);
 
 	// Takes back the last move in the move array
 	__declspec(dllexport) void Board_Unmake(Board* board);
 
+	// Checks if a piece can be promoted
+	__declspec(dllexport) _Bool Board_CanPromote(Board* board, int square);
+
 	// Promotes a pawn at the specified square
-	__declspec(dllexport) void Board_Promote(Board* board, int square, int pieceType);
+	__declspec(dllexport) _Bool Board_Promote(Board* board, int square, int pieceType);
 
 	// returns the castling rights that are allowed, given the state of the board
 	// checks location of kings and rooks and current castling rights

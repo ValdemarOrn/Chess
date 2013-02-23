@@ -2,11 +2,106 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Chess
 {
 	public class ABN
 	{
+		/// <summary>
+		/// Strip out comments and annotations in PGN files, make them suitable to parsing by ABNToMoves
+		/// </summary>
+		/// <param name="input"></param>
+		/// <returns></returns>
+		public static string[] StripPGN(string input)
+		{
+			input = input.Replace("\r", " ").Replace("\n", " ");
+			input = Regex.Replace(input, @"( )+", " ");
+
+			List<StringBuilder> gameBuilders = new List<StringBuilder>();
+
+			StringBuilder game = null;
+			int commentLevel = 0;
+
+			char commentChar = '\0';
+			char uncommentChar = '\0'; // the character at which the ignore ends
+
+			// sets to true when we encounter the first move data for the game
+			// used to separate games in files that contain many games
+			bool gameStarting = false;
+
+			for(int i = 0; i < input.Length; i++)
+			{
+				char x = input[i];
+				if (x == '[' && !gameStarting && commentLevel == 0)
+				{
+					gameStarting = true;
+				}
+
+				if(commentChar == '\0' || commentChar == x)
+				{
+					if (x == '[')
+					{
+						commentChar = '[';
+						uncommentChar = ']';
+						commentLevel++;
+						continue;
+					}
+
+					if (x == '(')
+					{
+						commentChar = '(';
+						uncommentChar = ')';
+						commentLevel++;
+						continue;
+					}
+
+					if (x == '{')
+					{
+						commentChar = '{';
+						uncommentChar = '}';
+						commentLevel++;
+						continue;
+					}
+				}
+				else if(uncommentChar == x)
+				{
+					commentLevel--;
+					if (commentLevel == 0)
+						commentChar = '\0';
+
+					continue;
+				}
+
+				if (commentLevel > 0)
+					continue;
+
+				if(gameStarting)
+				{
+					if (Char.IsWhiteSpace(x))
+						continue; // Game can't start with whitespace
+
+					gameStarting = false;
+					game = new StringBuilder();
+					gameBuilders.Add(game);
+				}
+
+				game.Append(x);
+			}
+
+			string[] output = gameBuilders.Select(x => x.ToString()).ToArray();
+
+			for(int i = 0; i < output.Length; i++)
+			{
+				output[i] = Regex.Replace(output[i], @"[0-9]+(\.){2,4}", "");
+				output[i] = Regex.Replace(output[i], @"(\$)[0-9]{0,3}", "");
+				output[i] = Regex.Replace(output[i], @"[\!\?]", "");
+				output[i] = Regex.Replace(output[i], @"( )+", " ");
+			}
+
+			return output;
+		}
+
 		/// <summary>
 		/// Read Algebraic notation and return a list of all moves made
 		/// </summary>
@@ -53,7 +148,9 @@ namespace Chess
 					Move move = GetMove(board, token, board.PlayerTurn);
 					move.MoveCount = MoveCount;
 					moves.Add(move);
-					board.Move(move.From, move.To, true);
+					bool legal = board.Move(move.From, move.To, true);
+					if (!legal)
+						throw new Exception("Illegal move at token " + i + ": " + token + " - Move #" + move.MoveCount);
 
 					// check for promotions
 					if (move.Promotion != 0)

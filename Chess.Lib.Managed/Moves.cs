@@ -36,9 +36,6 @@ namespace Chess.Lib
 		public static unsafe extern ulong GetCastlingMoves(BoardStruct* board, int color);
 
 
-		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "Moves_CanPromote", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
-		public static unsafe extern int CanPromote(BoardStruct* board, int square);
-
 		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "Moves_IsCaptureMove", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static unsafe extern int IsCaptureMove(BoardStruct* board, int from, int to);
 

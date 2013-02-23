@@ -94,8 +94,7 @@
       <GenerateMapFile>true</GenerateMapFile>
       <AssemblyDebug>
       </AssemblyDebug>
-      <OptimizeReferences>
-      </OptimizeReferences>
+      <OptimizeReferences>true</OptimizeReferences>
       <Profile>
       </Profile>
     </Link>

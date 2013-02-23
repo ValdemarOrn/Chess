@@ -141,7 +141,7 @@ uint64_t Board_AttackMap(Board* board, int color)
 	return attackBoard;
 }
 
-int Board_Make(Board* board, int from, int to)
+_Bool Board_Make(Board* board, int from, int to)
 {
 	// 0: Check if en passant or castling
 	// 1. put info in history
@@ -229,13 +229,17 @@ int Board_Make(Board* board, int from, int to)
 
 	// 4. update board data, enpassant square, castling, 50 move rule, hash
 
+	board->Hash ^= Zobrist_Keys[ZOBRIST_CASTLING][board->Castle];
 	board->Castle = Board_GetCastling(board);
+	board->Hash ^= Zobrist_Keys[ZOBRIST_CASTLING][board->Castle];
+
 	board->AttacksBlack = Board_AttackMap(board, COLOR_BLACK);
 	board->AttacksWhite = Board_AttackMap(board, COLOR_WHITE);
 	board->CurrentMove += 1;
 	board->CheckState = Board_GetCheckState(board);
 	history->Move.CheckState = board->CheckState;
 
+	board->Hash ^= Zobrist_Keys[ZOBRIST_ENPASSANT][board->EnPassantTile];
 	if(playerPiece == PIECE_PAWN)
 	{
 		if(to == from + 16) // white two-square advance
@@ -248,9 +252,13 @@ int Board_Make(Board* board, int from, int to)
 	{
 		board->EnPassantTile = 0;
 	}
+	board->Hash ^= Zobrist_Keys[ZOBRIST_ENPASSANT][board->EnPassantTile];
 
 	board->FiftyMoveRulePlies = (history->Move.CapturePiece > 0 || playerPiece == PIECE_PAWN) ? 0 : board->FiftyMoveRulePlies + 1;
+	
+	board->Hash ^= Zobrist_Keys[ZOBRIST_SIDE][board->PlayerTurn];
 	board->PlayerTurn = (board->PlayerTurn == COLOR_WHITE) ? COLOR_BLACK : COLOR_WHITE;
+	board->Hash ^= Zobrist_Keys[ZOBRIST_SIDE][board->PlayerTurn];
 
 	// 5. Verify it doesn't self check
 	if(board->CheckState && Board_IsChecked(board, color))
@@ -280,19 +288,25 @@ void Board_Unmake(Board* board)
 
 	board->AttacksBlack = history->PrevAttacksBlack;
 	board->AttacksWhite = history->PrevAttacksWhite;
+
+	board->Hash ^= Zobrist_Keys[ZOBRIST_CASTLING][board->Castle];
 	board->Castle = history->PrevCastleState;
+	board->Hash ^= Zobrist_Keys[ZOBRIST_CASTLING][board->Castle];
+
 	board->CheckState = history->PrevCheckState;
+
+	board->Hash ^= Zobrist_Keys[ZOBRIST_ENPASSANT][board->EnPassantTile];
 	board->EnPassantTile = history->PrevEnPassantTile;
+	board->Hash ^= Zobrist_Keys[ZOBRIST_ENPASSANT][board->EnPassantTile];
+
 	board->FiftyMoveRulePlies = history->PrevFiftyMoveRulePlies;
 
-	// Can't do this, we must calculate back to the original hash. 
-	// Only use history hash to verify they are the same
-	// board->Hash = history->PrevHash; 
-
+	board->Hash ^= Zobrist_Keys[ZOBRIST_SIDE][board->PlayerTurn];
 	board->PlayerTurn = move->PlayerColor;
+	board->Hash ^=  Zobrist_Keys[ZOBRIST_SIDE][board->PlayerTurn];
 
 	int capturedColor = (board->PlayerTurn == COLOR_WHITE) ? COLOR_BLACK : COLOR_WHITE;
-
+	
 	// 2. Unmake the move, clear "to", set player piece at old location...
 	Board_ClearPiece(board, move->To);
 	Board_SetPiece(board, move->From, move->PlayerPiece, move->PlayerColor);
@@ -332,9 +346,27 @@ void Board_Unmake(Board* board)
 	//assert(board->Hash == history->PrevHash);
 }
 
-void Board_Promote(Board* board, int square, int pieceType)
+_Bool Board_CanPromote(Board* board, int square)
 {
-	// todo: Implement promote
+	if(!Bitboard_Get(board->Boards[BOARD_PAWNS], square))
+		return 0;
+
+	int color = Board_Color(board, square);
+	int y = Board_Y(square);
+
+	return (y == 7 && color == COLOR_WHITE) | (y == 0 && color == COLOR_BLACK);
+}
+
+_Bool Board_Promote(Board* board, int square, int pieceType)
+{
+	if(!Board_CanPromote(board, square))
+		return 0;
+
+	int color = Board_Color(board, square);
+	Board_ClearPiece(board, square);
+	Board_SetPiece(board, square, pieceType, color);
+	board->MoveHistory[board->CurrentMove - 1].Move.Promotion = pieceType;
+	return 1;
 }
 
 

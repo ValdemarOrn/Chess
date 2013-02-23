@@ -9,22 +9,12 @@
 #include "Moves/King.h"
 #include "Moves/Queen.h"
 
-// castling lookup table, slightly faster than if/else
-// the key is (from + to) % 15
-int CastlingTableMovesToTypes[15];
-
 // converts castling types to bitboard og possible king moves
 // the key is castling type
 uint64_t CastlingTableTypesToBitboard[16];
 
 void Moves_Init()
 {
-	CastlingTableMovesToTypes[(4 + 2) % 15] = CASTLE_WQ;
-	CastlingTableMovesToTypes[(4 + 6) % 15] = CASTLE_WK;
-	CastlingTableMovesToTypes[(60 + 58) % 15] = CASTLE_BQ;
-	CastlingTableMovesToTypes[(60 + 62) % 15] = CASTLE_BK;
-
-
 	CastlingTableTypesToBitboard[CASTLE_WK]             = 0x40;
 	CastlingTableTypesToBitboard[CASTLE_WQ]             = 0x4;
 	CastlingTableTypesToBitboard[CASTLE_WK | CASTLE_WQ] = 0x44;
@@ -142,4 +132,23 @@ uint64_t Moves_GetAttacks(Board* board, int tile)
 	}
 
 	return value;
+}
+
+uint8_t Moves_GetCastlingType(Board* board, int from, int to)
+{
+	if(from == 4)
+	{
+		uint64_t whiteKing = board->Boards[BOARD_WHITE] & board->Boards[BOARD_KINGS];
+		int isKing = Bitboard_GetRef(&whiteKing, 4);
+		return isKing * (((to == 2) * CASTLE_WQ) | ((to == 6) * CASTLE_WK));
+	}
+	else if(from == 60)
+	{
+		uint64_t blackKing = board->Boards[BOARD_BLACK] & board->Boards[BOARD_KINGS];
+		int isKing = Bitboard_GetRef(&blackKing, 60);
+
+		return isKing * (((to == 58) * CASTLE_BQ) | ((to == 62) * CASTLE_BK));
+	}
+
+	return 0;
 }
