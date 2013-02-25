@@ -142,12 +142,12 @@ extern "C"
 		if(color == COLOR_WHITE)
 		{
 			if(from + 7 == board->EnPassantTile || from + 9 == board->EnPassantTile)
-				return ((uint64_t)1) << ((uint64_t)board->EnPassantTile);
+				return Bitboard_Set(0, board->EnPassantTile);
 		}
 		else
 		{
 			if(from - 7 == board->EnPassantTile || from - 9 == board->EnPassantTile)
-				return ((uint64_t)1) << ((uint64_t)board->EnPassantTile);
+				return Bitboard_Set(0, board->EnPassantTile);
 		}
 
 		return 0;

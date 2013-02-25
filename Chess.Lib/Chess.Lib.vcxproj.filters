@@ -36,7 +36,10 @@
     <ClCompile Include="Zobrist.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="test.cpp">
+    <ClCompile Include="ZobristKeys.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Eval.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -84,6 +87,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="inttypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Eval.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EvalData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

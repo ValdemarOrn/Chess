@@ -1,8 +1,8 @@
 #ifndef DEFAULT
 
 #include "inttypes.h"
+//#define NDEBUG 
 
-//#define NDEBUG
 #include <assert.h>
 
 typedef int _Bool;
@@ -10,12 +10,13 @@ typedef int _Bool;
 #define FALSE 0
 
 
+// --------- compiler target ---------
+
 #ifdef _WIN32
 
 #define __inline_always __forceinline
 
 #endif
-
 
 
 #ifdef __GNUC__

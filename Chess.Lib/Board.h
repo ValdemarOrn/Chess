@@ -129,13 +129,24 @@ extern "C"
 
 	__inline_always int Board_Color(Board* board, int tile)
 	{
-		if(Bitboard_Get(board->Boards[BOARD_WHITE], tile) == 1)
-			return COLOR_WHITE;
+		return Bitboard_GetRef(&board->Boards[BOARD_WHITE], tile) * COLOR_WHITE 
+			 + Bitboard_GetRef(&board->Boards[BOARD_BLACK], tile) * COLOR_BLACK;
+	}
+
+	__inline_always int Board_Piece(Board* board, int tile)
+	{
+		// check if empty tile
+		if(Bitboard_Get(board->Boards[BOARD_WHITE] | board->Boards[BOARD_BLACK], tile) == 0)
+			return 0;
+
+		int pawn = Bitboard_GetRef(&board->Boards[BOARD_PAWNS], tile);
+		int knight = Bitboard_GetRef(&board->Boards[BOARD_KNIGHTS], tile);
+		int bishop = Bitboard_GetRef(&board->Boards[BOARD_BISHOPS], tile);
+		int rook = Bitboard_GetRef(&board->Boards[BOARD_ROOKS], tile);
+		int queen = Bitboard_GetRef(&board->Boards[BOARD_QUEENS], tile);
+		int king = Bitboard_GetRef(&board->Boards[BOARD_KINGS], tile);
 	
-		if(Bitboard_Get(board->Boards[BOARD_BLACK], tile) == 1)
-			return COLOR_BLACK;
-	
-		return 0;
+		return pawn * PIECE_PAWN + knight * PIECE_KNIGHT + bishop * PIECE_BISHOP + rook * PIECE_ROOK + queen * PIECE_QUEEN + king * PIECE_KING;
 	}
 }
 

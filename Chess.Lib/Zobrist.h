@@ -34,6 +34,7 @@ extern "C"
 
 	// exposed for .NET interop
 	__declspec(dllexport) uint64_t Zobrist_Read(int index, int square);
+
 }
 
 #endif

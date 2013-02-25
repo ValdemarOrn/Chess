@@ -88,6 +88,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <Optimization>Disabled</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <PreprocessorDefinitions>DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -102,12 +103,15 @@
   <ItemGroup>
     <ClCompile Include="Bitboard.cpp" />
     <ClCompile Include="Board.cpp" />
+    <ClCompile Include="Eval.cpp" />
     <ClCompile Include="Move.cpp" />
     <ClCompile Include="Moves.cpp" />
-    <ClCompile Include="test.cpp" />
     <ClCompile Include="Zobrist.cpp" />
+    <ClCompile Include="ZobristKeys.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Eval.h" />
+    <ClInclude Include="EvalData.h" />
     <ClInclude Include="inttypes.h" />
     <ClInclude Include="Moves\Bishop.h" />
     <ClInclude Include="Moves\BishopMagic.h" />

@@ -4,30 +4,6 @@
 #include <stdlib.h>
 
 uint8_t Zobrist_Index[256];
-uint64_t Zobrist_Keys[16][64];
-
-// Create a random 64 bit number
-uint64_t Zobrist_GetRandom()
-{
-	uint64_t rand1 = rand() & 255;
-	uint64_t rand2 = rand() & 255;
-	uint64_t rand3 = rand() & 255;
-	uint64_t rand4 = rand() & 255;
-	uint64_t rand5 = rand() & 255;
-	uint64_t rand6 = rand() & 255;
-	uint64_t rand7 = rand() & 255;
-	uint64_t rand8 = rand() & 255;
-
-	return	(rand1 << 0)  | 
-			(rand2 << 8)  |
-			(rand3 << 16) |
-			(rand4 << 24) |
-			(rand5 << 32) |
-			(rand6 << 40) |
-			(rand7 << 48) |
-			(rand8 << 56) ;
-}
-
 
 void Zobrist_Init()
 {
@@ -56,21 +32,6 @@ void Zobrist_Init()
 	Zobrist_Index[PIECE_KING]     = 15;
 	Zobrist_Index[COLOR_WHITE]    = 15;
 	Zobrist_Index[COLOR_BLACK]    = 15;
-
-	srand(42);
-
-	for(int i=0; i<15; i++)
-	{
-		for(int j=0; j<64; j++)
-		{
-			Zobrist_Keys[i][j] = Zobrist_GetRandom();
-		}
-	}
-
-	for(int j=0; j<64; j++)
-	{
-		Zobrist_Keys[15][j] = 0;
-	}
 
 	// zero out the key for the "no en-passant" square.
 	Zobrist_Keys[ZOBRIST_ENPASSANT][0] = 0;

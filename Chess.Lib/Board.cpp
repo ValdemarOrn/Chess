@@ -63,33 +63,6 @@ void Board_Init(Board* board, int setPieces)
 	board->AttacksBlack = Board_AttackMap(board, COLOR_BLACK);
 }
 
-int Board_Piece(Board* board, int tile)
-{
-	// check if empty tile
-	if(Bitboard_Get(board->Boards[BOARD_WHITE] | board->Boards[BOARD_BLACK], tile) == 0)
-		return 0;
-
-	if(Bitboard_Get(board->Boards[BOARD_PAWNS], tile) == 1)
-		return PIECE_PAWN;
-	
-	if(Bitboard_Get(board->Boards[BOARD_KNIGHTS], tile) == 1)
-		return PIECE_KNIGHT;
-
-	if(Bitboard_Get(board->Boards[BOARD_BISHOPS], tile) == 1)
-		return PIECE_BISHOP;
-
-	if(Bitboard_Get(board->Boards[BOARD_ROOKS], tile) == 1)
-		return PIECE_ROOK;
-
-	if(Bitboard_Get(board->Boards[BOARD_QUEENS], tile) == 1)
-		return PIECE_QUEEN;
-
-	if(Bitboard_Get(board->Boards[BOARD_KINGS], tile) == 1)
-		return PIECE_KING;
-	
-	return 0;
-}
-
 void Board_SetPiece(Board* board, int square, int pieceType, int color)
 {
 	if(pieceType == 0 || color == 0)
@@ -112,12 +85,7 @@ void Board_ClearPiece(Board* board, int square)
 	int piece = Board_Piece(board, square);
 	board->Hash ^= Zobrist_Keys[Zobrist_Index[piece | color]][square];
 
-	Bitboard_UnsetRef(&board->Boards[BOARD_PAWNS], square);
-	Bitboard_UnsetRef(&board->Boards[BOARD_KNIGHTS], square);
-	Bitboard_UnsetRef(&board->Boards[BOARD_BISHOPS], square);
-	Bitboard_UnsetRef(&board->Boards[BOARD_ROOKS], square);
-	Bitboard_UnsetRef(&board->Boards[BOARD_QUEENS], square);
-	Bitboard_UnsetRef(&board->Boards[BOARD_KINGS], square);
+	Bitboard_UnsetRef(&board->Boards[piece], square);
 
 	Bitboard_UnsetRef(&board->Boards[BOARD_WHITE], square);
 	Bitboard_UnsetRef(&board->Boards[BOARD_BLACK], square);
