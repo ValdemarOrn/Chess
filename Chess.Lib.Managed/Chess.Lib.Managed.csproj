@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Eval.cs" />
     <Compile Include="Helpers.cs" />
     <Compile Include="Manager.cs" />
     <Compile Include="Move.cs" />
@@ -55,6 +56,8 @@
     <Compile Include="MovesClasses\Queen.cs" />
     <Compile Include="MovesClasses\Rook.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Search.cs" />
+    <Compile Include="TTable.cs" />
     <Compile Include="Zobrist.cs" />
   </ItemGroup>
   <ItemGroup>

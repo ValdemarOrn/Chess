@@ -38,21 +38,25 @@ uint64_t Moves_GetMoves(Board* board, int tile)
 	{
 		if(color == COLOR_WHITE)
 		{
+			int blocked = Bitboard_GetRef(&occupancy, tile + 8);
 			uint64_t moves = Pawn_ReadWhiteMove(tile);
+			moves = (moves * !blocked) & ~occupancy;
+
 			uint64_t attacks = Pawn_ReadWhiteAttack(tile);
 			uint64_t enPassant = Moves_GetEnPassantMove(board, tile);
 
-			moves = moves & ~occupancy;
 			attacks = attacks & board->Boards[BOARD_BLACK];
 			return moves | attacks | enPassant;
 		}
 		else
 		{
+			int blocked = Bitboard_GetRef(&occupancy, tile - 8);
 			uint64_t moves = Pawn_ReadBlackMove(tile);
+			moves = (moves * !blocked) & ~occupancy;
+
 			uint64_t attacks = Pawn_ReadBlackAttack(tile);
 			uint64_t enPassant = Moves_GetEnPassantMove(board, tile);
-
-			moves = moves & ~occupancy;
+			
 			attacks = attacks & board->Boards[BOARD_WHITE];
 			return moves | attacks | enPassant;
 		}

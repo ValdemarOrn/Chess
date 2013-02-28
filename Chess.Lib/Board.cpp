@@ -5,10 +5,12 @@
 #include "Moves.h"
 #include <string.h>
 
+#define MAX_GAME_LENGTH 1024
+
 Board* Board_Create()
 {
 	Board* board = new Board();
-	board->MoveHistory = new MoveHistory[512];
+	board->MoveHistory = new MoveHistory[MAX_GAME_LENGTH];
 
 	Board_Init(board, 0);
 	return board;
@@ -25,8 +27,8 @@ Board* Board_Copy(Board* board)
 	Board* newBoard = new Board();
 	memcpy(newBoard, board, sizeof(Board));
 
-	newBoard->MoveHistory = new MoveHistory[512];
-	memcpy(newBoard->MoveHistory, board->MoveHistory, 512 * sizeof(MoveHistory));
+	newBoard->MoveHistory = new MoveHistory[MAX_GAME_LENGTH];
+	memcpy(newBoard->MoveHistory, board->MoveHistory, MAX_GAME_LENGTH * sizeof(MoveHistory));
 	return newBoard;
 }
 
@@ -120,10 +122,14 @@ _Bool Board_Make(Board* board, int from, int to)
 	// 4. update board data, enpassant square, castling, 50 move rule, hash
 	// 5. Verify it doesn't self check
 	//    5.1 If it does, unmake
-	
+
+	if(board->Hash == 1274302962912630339 && from == 11 && to == 19)
+		int k = 23;
+
 	int playerPiece = Board_Piece(board, from);
 	int capturePiece = Board_Piece(board, to);
 	int color = board->PlayerTurn;
+	int victimTile = to; // which square to clear. Only differs from the "to" square during en passant attacks
 
 	// safety check, we are actually moving a piece that belongs to the current player
 	if(board->PlayerTurn != Board_Color(board, from))
@@ -134,7 +140,11 @@ _Bool Board_Make(Board* board, int from, int to)
 	int castlingType = Moves_GetCastlingType(board, from, to);
 
 	// Set the captured piece to pawn if en passant (otherwise it's zero because the "to" square is empty)
-	capturePiece = (isEnPassantCapture) ? PIECE_PAWN : capturePiece;
+	if(isEnPassantCapture)
+	{
+		capturePiece = PIECE_PAWN;
+		victimTile = Moves_GetEnPassantVictimTile(board, from, to);
+	}
 
 	// 1. put info in history
 	MoveHistory* history = &board->MoveHistory[board->CurrentMove];
@@ -148,7 +158,7 @@ _Bool Board_Make(Board* board, int from, int to)
 
 	// 2. Create the Move object
 	history->Move.CapturePiece = capturePiece;
-	history->Move.CaptureTile = (isEnPassantCapture) ? board->EnPassantTile : to;
+	history->Move.CaptureTile = victimTile;
 	history->Move.Castle = castlingType;
 	history->Move.CheckState = 0; // set later
 	history->Move.From = from;
@@ -191,7 +201,6 @@ _Bool Board_Make(Board* board, int from, int to)
 	//    3.2 If en passant, remove pawn
 	if(isEnPassantCapture)
 	{
-		int victimTile = Moves_GetEnPassantVictimTile(board, from, to);
 		Board_ClearPiece(board, victimTile);
 	}
 
@@ -212,9 +221,10 @@ _Bool Board_Make(Board* board, int from, int to)
 	{
 		if(to == from + 16) // white two-square advance
 			board->EnPassantTile = from + 8;
-
-		if(to == from - 16) // black two-square advance
+		else if(to == from - 16) // black two-square advance
 			board->EnPassantTile = from - 8;
+		else
+			board->EnPassantTile = 0;
 	}
 	else
 	{
@@ -227,6 +237,15 @@ _Bool Board_Make(Board* board, int from, int to)
 	board->Hash ^= Zobrist_Keys[ZOBRIST_SIDE][board->PlayerTurn];
 	board->PlayerTurn = (board->PlayerTurn == COLOR_WHITE) ? COLOR_BLACK : COLOR_WHITE;
 	board->Hash ^= Zobrist_Keys[ZOBRIST_SIDE][board->PlayerTurn];
+
+	if(Bitboard_PopCount(board->Boards[BOARD_WHITE]) > 16)
+		int k = 23;
+
+	if(Bitboard_PopCount(board->Boards[BOARD_BLACK]) > 16)
+		int k = 23;
+
+	if(Board_Piece(board, to) != playerPiece)
+		int k = 23;
 
 	// 5. Verify it doesn't self check
 	if(board->CheckState && Board_IsChecked(board, color))
@@ -253,6 +272,11 @@ void Board_Unmake(Board* board)
 	// 1. Set board data from history, enpassant square, castling, 50 move, hash. Recalculate what's needed
 	MoveHistory* history = &board->MoveHistory[board->CurrentMove - 1];
 	Move* move = &history->Move;
+
+	#ifdef DEBUG
+	if(Board_Piece(board, move->To) != move->PlayerPiece)
+		int k = 23;
+	#endif
 
 	board->AttacksBlack = history->PrevAttacksBlack;
 	board->AttacksWhite = history->PrevAttacksWhite;
@@ -308,10 +332,13 @@ void Board_Unmake(Board* board)
 	}
 
 	// 3. Pop history off the stack
-	board->CurrentMove--;
+	board->CurrentMove -= 1;
 
 	// 4. For debugging, compute new hash and compare with hash from history. must match!
-	//assert(board->Hash == history->PrevHash);
+	#ifdef DEBUG
+	if(board->Hash != history->PrevHash)
+		int k = 23;
+	#endif
 }
 
 _Bool Board_CanPromote(Board* board, int square)

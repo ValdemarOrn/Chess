@@ -1,13 +1,18 @@
 #ifndef DEFAULT
 
 #include "inttypes.h"
-//#define NDEBUG 
-
-#include <assert.h>
 
 typedef int _Bool;
 #define TRUE 1
 #define FALSE 0
+
+// ---------- Compile Mode ---------
+
+//#define DEBUG
+
+// if NDEBUG (no-debug) is defined then assertions are disabled
+//#define NDEBUG 
+#include <assert.h>
 
 
 // --------- compiler target ---------

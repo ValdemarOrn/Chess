@@ -57,7 +57,10 @@
     <Compile Include="BoardTests.cs" />
     <Compile Include="MovePawnBlackTests.cs" />
     <Compile Include="MovePawnWhiteTests.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="EvalTest.cs" />
+    <Compile Include="TTableTest.cs" />
+    <Compile Include="SearchTest.cs" />
+    <Compile Include="_Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BitboardTests.cs" />
     <Compile Include="RookTest.cs" />

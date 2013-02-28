@@ -22,6 +22,13 @@ namespace Chess.Lib
 	}
 
 	[StructLayout(LayoutKind.Sequential, Pack = 1, CharSet = CharSet.Ansi)]
+	public struct MoveSmall
+	{
+		public byte From;
+		public byte To;
+	}
+
+	[StructLayout(LayoutKind.Sequential, Pack = 1, CharSet = CharSet.Ansi)]
 	public unsafe struct MoveHistory
 	{
 		public Move Move;

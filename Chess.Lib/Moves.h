@@ -106,7 +106,7 @@ extern "C"
 
 	__inline_always _Bool Moves_IsEnPassantCapture(Board* board, int from, int to)
 	{
-		return (board->EnPassantTile == to) && Bitboard_GetRef(&board->Boards[BOARD_PAWNS], from);
+		return (to != 0) && (board->EnPassantTile == to) && Bitboard_GetRef(&board->Boards[BOARD_PAWNS], from);
 	}
 
 	__inline_always int Moves_GetEnPassantVictimTile(Board* board, int from, int to)

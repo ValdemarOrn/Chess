@@ -67,6 +67,11 @@
       <ProjName>Chess.Lib.EGTB</ProjName>
     </ProjBinary>
   </Binaries>
+  <Reports>
+    <Report>
+      <Path>Chess.Lib.EGTB130225.vsp</Path>
+    </Report>
+  </Reports>
   <Launches>
     <ProjBinary>
       <Path>:PB:{8D1947D3-3B39-435A-B471-3A9638524249}|Chess.Lib.EGTB\Chess.Lib.EGTB.csproj</Path>

@@ -30,6 +30,20 @@ namespace Chess.Lib.Tests
 		}
 
 		[TestMethod]
+		public unsafe void TestWhitePawnBlocker1()
+		{
+			BoardStruct* b = (BoardStruct*)Board.Create();
+			Board.SetPiece(b, 8, Board.PIECE_PAWN, Board.COLOR_WHITE);
+			
+			ulong moves = Moves.GetMoves(b, 8);
+			Assert.AreEqual((ulong)0x1010000, moves);
+
+			Board.SetPiece(b, 16, Board.PIECE_KNIGHT, Board.COLOR_WHITE);
+			moves = Moves.GetMoves(b, 8);
+			Assert.AreEqual((ulong)0x0, moves);
+		}
+
+		[TestMethod]
 		public unsafe void TestWhitePawnSingle2()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();

@@ -19,6 +19,9 @@
     <Filter Include="Header Files\Moves">
       <UniqueIdentifier>{96cdd8b9-c227-4a32-abe9-d937481f596d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Moves">
+      <UniqueIdentifier>{9c119ac8-d599-4a76-a7b9-03646c98f073}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Bitboard.cpp">
@@ -40,6 +43,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Eval.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="King.cpp">
+      <Filter>Source Files\Moves</Filter>
+    </ClCompile>
+    <ClCompile Include="Search.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TTable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -93,6 +105,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="EvalData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Search.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TTable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

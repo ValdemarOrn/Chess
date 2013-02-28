@@ -49,7 +49,7 @@ namespace Chess.Lib.EGTB
 		{ 
 			var pieces = new byte[3];
 			pieces[0] = Board.COLOR_WHITE | Board.PIECE_KING;
-			pieces[1] = Board.COLOR_WHITE | Board.PIECE_ROOK;
+			pieces[1] = Board.COLOR_WHITE | Board.PIECE_QUEEN;
 			pieces[2] = Board.COLOR_BLACK | Board.PIECE_KING;
 			States = new Dictionary<ulong, State>();
 
@@ -70,7 +70,7 @@ namespace Chess.Lib.EGTB
 			while (true)
 			{
 				// Todo: Can I re-use the old state set instead of selecting a new set?
-				//stateSet = States.Where(x => x.Value.DepthToMate == searchPly - 1).Select(x => x.Value).ToList();
+				// stateSet = States.Where(x => x.Value.DepthToMate == searchPly - 1).Select(x => x.Value).ToList();
 
 				if (color == Board.COLOR_WHITE)
 				{
@@ -136,16 +136,32 @@ namespace Chess.Lib.EGTB
 
 		private void WriteToFile()
 		{
-			StringBuilder sb = new StringBuilder();
 			var ordered = States.Where(x => x.Value.PlayerTurn == Board.COLOR_WHITE).OrderBy(x => x.Key).Select(x => x.Value).ToArray();
+			
 			var fs = System.IO.File.OpenWrite(@"c:\KR-K.txt");
 			foreach(var state in ordered)
 			{
 				fs.Write(BitConverter.GetBytes(state.Hash), 0, 8);
-				fs.Write(BitConverter.GetBytes(state.NextState), 0, 8);
+				var move = GetMove(state, States[state.NextState]);
+				fs.WriteByte(move[0]);
+				fs.WriteByte(move[1]);
 				fs.WriteByte(state.DepthToMate);
 			}
 			fs.Close();
+		}
+
+		public byte[] GetMove(State a, State b)
+		{
+			if (a.PieceLocation[0] != b.PieceLocation[0])
+				return new byte[] { a.PieceLocation[0], b.PieceLocation[0] };
+			if (a.PieceLocation[1] != b.PieceLocation[1])
+				return new byte[] { a.PieceLocation[1], b.PieceLocation[1] };
+			if (a.PieceLocation[2] != b.PieceLocation[2])
+				return new byte[] { a.PieceLocation[2], b.PieceLocation[2] };
+			if (a.PieceLocation[3] != b.PieceLocation[3])
+				return new byte[] { a.PieceLocation[3], b.PieceLocation[3] };
+
+			return new byte[2]; // no move
 		}
 
 		public bool QueryStates(byte[] pieces)
@@ -164,19 +180,17 @@ namespace Chess.Lib.EGTB
 
 			State state = null;
 
-			var d = States.FirstOrDefault(x => x.Value.PieceLocation[0] == locations[0] && x.Value.PieceLocation[1] == locations[1] && x.Value.PieceLocation[2] == locations[2]);
-
 			if (States.ContainsKey(hash))
 				state = States[hash];
 
 			Console.WriteLine("Hash: " + state.Hash);
 			Console.WriteLine("Depth to Mate: " + state.DepthToMate);
-			Console.WriteLine("Position: " + state.PieceLocation[0] + ", " + state.PieceLocation[1] + ", " + state.PieceLocation[2]);
+			Console.WriteLine("Position: " + state.PieceLocation[0] + ", " + state.PieceLocation[1] + ", " + state.PieceLocation[2] + ", " + state.PieceLocation[3]);
 
 			if (States.ContainsKey(state.NextState))
 			{
 				var next = States[state.NextState];
-				Console.WriteLine("Next Position: " + next.PieceLocation[0] + ", " + next.PieceLocation[1] + ", " + next.PieceLocation[2]);
+				Console.WriteLine("Next Position: " + next.PieceLocation[0] + ", " + next.PieceLocation[1] + ", " + next.PieceLocation[2] + ", " + next.PieceLocation[3]);
 			}
 
 			Console.WriteLine("");
@@ -518,7 +532,52 @@ namespace Chess.Lib.EGTB
 
 		private List<State> Generate4PieceMates(byte[] pieces)
 		{
+			var b = Board.Create();
 			var states = new List<State>();
+
+			byte p0 = pieces[0];
+			byte p1 = pieces[1];
+			byte p2 = pieces[2];
+
+			int i = 0;
+
+			for (byte l0 = 0; l0 < 64; l0++)
+				for (byte l1 = 0; l1 < 64; l1++)
+					for (byte l2 = 0; l2 < 64; l2++)
+						for (byte l3 = 0; l3 < 64; l3++)
+							if (l0 != l1 && l0 != l2 && l0 != l3 && l1 != l2 && l1 != l3 && l2 != l3)
+							{
+								var state = new State();
+								state.Pieces = new byte[4];
+								state.PieceLocation = new byte[4];
+								state.PlayerTurn = Board.COLOR_BLACK;
+
+								// set pieces
+								state.Pieces[0] = p0;
+								state.PieceLocation[0] = l0;
+								state.Pieces[1] = p1;
+								state.PieceLocation[1] = l1;
+								state.Pieces[2] = p2;
+								state.PieceLocation[2] = l2;
+								state.Pieces[3] = p2;
+								state.PieceLocation[3] = l2;
+
+								state.DepthToMate = MAX; // set to max
+								state.Hash = CalcHash(state);
+								CheckIfMate(state, b);
+
+								if (state.DepthToMate != 255)
+									states.Add(state);
+
+								i++;
+							}
+
+			Assert(i == 64 * 63 * 62);
+
+			Board.Delete(b);
+			var mateCount = states.Count(x => x.DepthToMate == 0);
+			var stalemateCount = states.Count(x => x.DepthToMate == STALEMATE);
+
 			return states;
 		}
 
@@ -534,6 +593,8 @@ namespace Chess.Lib.EGTB
 				state.PieceLocation[1] = moveTo;
 			if (state.PieceLocation[2] == moveFrom)
 				state.PieceLocation[2] = moveTo;
+			if (state.PieceLocation[3] == moveFrom)
+				state.PieceLocation[3] = moveTo;
 
 			state.Hash = CalcHash(state);
 		}
@@ -550,8 +611,8 @@ namespace Chess.Lib.EGTB
 			{
 				var newState = newStates[i];
 
-				if (!IsValidState(newState))
-					continue;
+				//if (!IsValidState(newState))
+				//	continue;
 
 				// check for collisions, or if state is already included
 				if (States.ContainsKey(newState.Hash))
@@ -576,7 +637,7 @@ namespace Chess.Lib.EGTB
 
 		BoardStruct* bs = Board.Create();
 
-		private bool IsValidState(State state)
+		/*private bool IsValidState(State state)
 		{
 			SetupBoard(bs, state, state.PlayerTurn);
 			if(AreKingsTouching(bs))
@@ -588,16 +649,21 @@ namespace Chess.Lib.EGTB
 				return false;
 
 			return true;
-		}
+		}*/
 
 		private bool Compare(State state1, State state2)
 		{
 			var a = state1.PieceLocation[0] == state2.PieceLocation[0];
 			var b = state1.PieceLocation[1] == state2.PieceLocation[1];
 			var c = state1.PieceLocation[2] == state2.PieceLocation[2];
-			var d = state1.PlayerTurn == state2.PlayerTurn;
+			var d = true;
 
-			return a & b & c & d;
+			if(state1.Pieces[3] != 0 && state2.Pieces[3] != 0)
+				d = state1.PieceLocation[3] == state2.PieceLocation[3];
+
+			var e = state1.PlayerTurn == state2.PlayerTurn;
+
+			return a & b & c & d & e;
 		}
 		
 		private unsafe void SetupBoard(BoardStruct* b, State state, byte playerTurn)
@@ -616,6 +682,7 @@ namespace Chess.Lib.EGTB
 			Board.SetPiece(b, state.PieceLocation[0], state.Pieces[0] & 0x0F, state.Pieces[0] & 0xF0);
 			Board.SetPiece(b, state.PieceLocation[1], state.Pieces[1] & 0x0F, state.Pieces[1] & 0xF0);
 			Board.SetPiece(b, state.PieceLocation[2], state.Pieces[2] & 0x0F, state.Pieces[2] & 0xF0);
+			Board.SetPiece(b, state.PieceLocation[3], state.Pieces[3] & 0x0F, state.Pieces[3] & 0xF0);
 			b->AttacksBlack = Board.AttackMap(b, Board.COLOR_BLACK);
 			b->AttacksWhite = Board.AttackMap(b, Board.COLOR_WHITE);
 
@@ -631,6 +698,10 @@ namespace Chess.Lib.EGTB
 			hash ^= Zob.Keys[Zob.Index[state.Pieces[0]], state.PieceLocation[0]];
 			hash ^= Zob.Keys[Zob.Index[state.Pieces[1]], state.PieceLocation[1]]; 
 			hash ^= Zob.Keys[Zob.Index[state.Pieces[2]], state.PieceLocation[2]];
+
+			if(state.Pieces[3] != 0)
+				hash ^= Zob.Keys[Zob.Index[state.Pieces[3]], state.PieceLocation[3]];
+
 			hash ^= Zob.Keys[Zobrist.ZOBRIST_SIDE, state.PlayerTurn];
 			return hash;
 		}
@@ -650,6 +721,8 @@ namespace Chess.Lib.EGTB
 				state.PieceLocation[1] = moveTo;
 			if (state.PieceLocation[2] == moveFrom)
 				state.PieceLocation[2] = moveTo;
+			if (state.PieceLocation[3] == moveFrom)
+				state.PieceLocation[3] = moveTo;
 
 			var hash = CalcHash(state);
 
@@ -659,6 +732,8 @@ namespace Chess.Lib.EGTB
 				state.PieceLocation[1] = moveFrom;
 			if (state.PieceLocation[2] == moveTo)
 				state.PieceLocation[2] = moveFrom;
+			if (state.PieceLocation[3] == moveTo)
+				state.PieceLocation[3] = moveFrom;
 
 			return hash;
 		}

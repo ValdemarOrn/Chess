@@ -2,7 +2,6 @@
 #define BITBOARD
 
 #include "Default.h"
-#include "Bitboard.h"
 #include <intrin.h>
 #pragma intrinsic(_BitScanForward)
 
@@ -48,6 +47,27 @@ extern "C"
 	// Returns the number of items in the output list 
 	__declspec(dllexport) int Bitboard_BitList(uint64_t val, uint8_t* outputList_s64);
 	
+	const uint64_t Bitboard_Files[8] = {
+		0x101010101010101,
+		0x202020202020202,
+		0x404040404040404,
+		0x808080808080808,
+		0x1010101010101010,
+		0x2020202020202020,
+		0x4040404040404040,
+		0x8080808080808080
+	};
+
+	const uint64_t Bitboard_Ranks[8] = {
+		0xFF,
+		0xFF00,
+		0xFF0000,
+		0xFF000000,
+		0xFF00000000,
+		0xFF0000000000,
+		0xFF000000000000,
+		0xFF00000000000000
+	};
 
 	// ------------------------ Basic Bitboard twiddling --------------------------
 

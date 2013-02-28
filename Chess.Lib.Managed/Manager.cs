@@ -10,6 +10,7 @@ namespace Chess.Lib
 	{
 		public static void InitLibrary()
 		{
+			new Eval();
 			new Moves();
 			new Zobrist();
 

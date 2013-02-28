@@ -20,6 +20,13 @@ extern "C"
 		uint8_t Castle;
 
 	} Move;
+
+	typedef struct
+	{
+		uint8_t From;
+		uint8_t To;
+
+	} MoveSmall;
 	
 	typedef struct
 	{

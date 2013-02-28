@@ -6,6 +6,7 @@
 
 extern "C"
 {
+	__declspec(dllexport) void Eval_Init();
 	__declspec(dllexport) int Eval_Evaluate(Board* board);
 }
 

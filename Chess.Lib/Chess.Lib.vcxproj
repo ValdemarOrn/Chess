@@ -104,8 +104,11 @@
     <ClCompile Include="Bitboard.cpp" />
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="Eval.cpp" />
+    <ClCompile Include="King.cpp" />
     <ClCompile Include="Move.cpp" />
     <ClCompile Include="Moves.cpp" />
+    <ClCompile Include="Search.cpp" />
+    <ClCompile Include="TTable.cpp" />
     <ClCompile Include="Zobrist.cpp" />
     <ClCompile Include="ZobristKeys.cpp" />
   </ItemGroup>
@@ -126,6 +129,8 @@
     <ClInclude Include="Moves\Queen.h" />
     <ClInclude Include="Moves\Rook.h" />
     <ClInclude Include="Moves\RookMagic.h" />
+    <ClInclude Include="Search.h" />
+    <ClInclude Include="TTable.h" />
     <ClInclude Include="Zobrist.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

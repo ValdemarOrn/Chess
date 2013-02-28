@@ -10,8 +10,8 @@ namespace Chess.Lib.Tests
 		public static void Main()
 		{
 			Manager.InitLibrary();
-			var t = new BoardTests();
-			t.TestMakeUnmakePromotion();
+			var t = new SearchTest();
+			t.TestSearchNodeCount();
 		}
 	}
 }
