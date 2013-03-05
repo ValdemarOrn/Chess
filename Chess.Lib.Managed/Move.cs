@@ -26,6 +26,8 @@ namespace Chess.Lib
 	{
 		public byte From;
 		public byte To;
+		public byte Piece;
+		public int Score;
 	}
 
 	[StructLayout(LayoutKind.Sequential, Pack = 1, CharSet = CharSet.Ansi)]

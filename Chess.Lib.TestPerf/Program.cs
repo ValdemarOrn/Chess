@@ -1,16 +1,14 @@
-﻿using System;
+﻿using Chess.Lib.Tests;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 
-[assembly:InternalsVisibleTo("Chess.Lib.TestPerf")]
-
-namespace Chess.Lib.Tests
+namespace Chess.Lib.TestPerf
 {
 	class Program
 	{
-		public static void Main(string[] args)
+		static void Main(string[] args)
 		{
 			Manager.InitLibrary();
 

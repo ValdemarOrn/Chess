@@ -25,6 +25,8 @@ extern "C"
 	{
 		uint8_t From;
 		uint8_t To;
+		uint8_t Piece;
+		int Score;
 
 	} MoveSmall;
 	
@@ -43,6 +45,10 @@ extern "C"
 
 	} MoveHistory;
 	#pragma pack(pop)
+
+	__declspec(dllexport) void Move_ToString(MoveSmall* move, char* dest);
+	__declspec(dllexport) void Move_SquareToString(int square, char* dest);
+	__declspec(dllexport) void Move_PieceToString(int piece, char* dest);
 }
 
 #endif

@@ -105,6 +105,7 @@
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="Eval.cpp" />
     <ClCompile Include="King.cpp" />
+    <ClCompile Include="Manager.cpp" />
     <ClCompile Include="Move.cpp" />
     <ClCompile Include="Moves.cpp" />
     <ClCompile Include="Search.cpp" />
@@ -116,6 +117,7 @@
     <ClInclude Include="Eval.h" />
     <ClInclude Include="EvalData.h" />
     <ClInclude Include="inttypes.h" />
+    <ClInclude Include="Manager.h" />
     <ClInclude Include="Moves\Bishop.h" />
     <ClInclude Include="Moves\BishopMagic.h" />
     <ClInclude Include="Bitboard.h" />

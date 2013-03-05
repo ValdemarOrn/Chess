@@ -2,45 +2,77 @@
 #include "Search.h"
 #include "Eval.h"
 #include "Moves.h"
+#include "Manager.h"
+#include <stdio.h>
 
-typedef struct
+int Search_AlphaBeta(Search_Context* ctx, int depth, int alpha, int beta);
+
+MoveSmall Search_SearchPos(Board* board, int searchDepth)
 {
-	int TotalNodeCount;
-	int EvalNodeCount;
+	Search_Context ctx;
+	ctx.Board = board;
 
-	int CutNodeCount;
-	int PVNodeCount;
-	int AllNodeCount;
+	// init stats
+	ctx.Stats.AllNodeCount = 0;
+	ctx.Stats.CutNodeCount = 0;
+	ctx.Stats.EvalNodeCount = 0;
+	ctx.Stats.PVNodeCount = 0;
+	ctx.Stats.TotalNodeCount = 0;
 
-} StatsStruct;
+	// create space for the PV table
+	MoveSmall PV[Search_PlyMax][Search_PlyMax];
+	for(int i = 0; i < Search_PlyMax; i++)
+		ctx.PV[i] = PV[i];
 
-MoveSmall Search_PV[Search_PlyMax][Search_PlyMax];
-StatsStruct Stats;
+	char text[8];
+	Manager_Callback("Ply\tScore\tNodes\tPV\n");
 
-int Search_AlphaBeta(Board* board, int depth, int alpha, int beta);
+	for(int i = 1; i <= searchDepth; i++)
+	{
+		ctx.SearchDepth = i;
+		Search_AlphaBeta(&ctx, i, -99999999, 99999999);
 
-MoveSmall bestMove;
-int bestScore;
+		// print PV
 
-void Search_SetDepth(int depth)
-{
-	Search_PlyCount = depth;
+		// ply
+		sprintf(text, "%d\t", i);
+		Manager_Callback(text);
+
+		// score
+		sprintf(text, "%d\t", PV[0][0].Score);
+		Manager_Callback(text);
+
+		// node count
+		sprintf(text, "%d\t", ctx.Stats.TotalNodeCount);
+		Manager_Callback(text);
+
+		// PV
+		for(int j = 0; j < i; j++)
+		{
+			Move_PieceToString(PV[0][j].Piece, text);
+			Manager_Callback(text);
+
+			Move_ToString(&PV[0][j], text);
+			Manager_Callback(text);
+			Manager_Callback(" ");
+		}
+		Manager_Callback("\n");
+	}
+
+	return ctx.PV[0][0];
 }
 
-MoveSmall Search_SearchPos(Board* board)
+int Search_AlphaBeta(Search_Context* ctx, int depth, int alpha, int beta)
 {
-	Search_AlphaBeta(board, Search_PlyCount, -999999, 999999);
-	return bestMove;
-}
+	Board* board = ctx->Board;
+	MoveSmall** PV = ctx->PV;
 
-int Search_AlphaBeta(Board* board, int depth, int alpha, int beta)
-{
-	int ply = Search_PlyCount - depth;
-	Stats.TotalNodeCount++;
+	int ply = ctx->SearchDepth - depth;
+	ctx->Stats.TotalNodeCount++;
 
 	if ( depth == 0 ) 
 	{
-		Stats.EvalNodeCount++;
+		ctx->Stats.EvalNodeCount++;
 		int eval = Eval_Evaluate(board);
 		if(board->PlayerTurn == COLOR_WHITE)
 			return eval;
@@ -49,12 +81,13 @@ int Search_AlphaBeta(Board* board, int depth, int alpha, int beta)
 	}
 
 	// set PV at this ply to zero
-	memset(Search_PV[ply], 0, sizeof(MoveSmall) * Search_PlyMax);
+	memset(PV[ply], 0, sizeof(MoveSmall) * Search_PlyMax);
 
 	uint64_t pieceBoard = (board->PlayerTurn == COLOR_WHITE) ? board->Boards[BOARD_WHITE] : board->Boards[BOARD_BLACK];
 	uint8_t locations[64];
 	int pieceCount = Bitboard_BitList(pieceBoard, locations);
 
+	_Bool hasValidMove = FALSE;
 	_Bool isPVNode = FALSE;
 
 	for (int i=0; i < pieceCount; i++)
@@ -80,7 +113,10 @@ int Search_AlphaBeta(Board* board, int depth, int alpha, int beta)
 			if(valid == FALSE)
 				continue;
 
-			int val = -Search_AlphaBeta(board, depth - 1, -beta, -alpha);
+			// Todo: Handle promotions
+
+			hasValidMove = true;
+			int val = -Search_AlphaBeta(ctx, depth - 1, -beta, -alpha);
 			Board_Unmake(board);
 
 			#ifdef DEBUG
@@ -90,33 +126,37 @@ int Search_AlphaBeta(Board* board, int depth, int alpha, int beta)
 
 			if(val >= beta)
 			{
-				Stats.CutNodeCount++;
+				ctx->Stats.CutNodeCount++;
 				return beta;
 			}
 
 			if(val > alpha)
 			{
 				isPVNode = true;
-				Search_PV[ply][0].From = from;
-				Search_PV[ply][0].To = to;
+				PV[ply][0].From = from;
+				PV[ply][0].To = to;
+				PV[ply][0].Score = val;
+				PV[ply][0].Piece = Board_Piece(board, from);
 
-				memcpy(&(Search_PV[ply][1]), &(Search_PV[ply + 1][0]), Search_PlyMax - ply);
-
+				memcpy(&(PV[ply][1]), &(PV[ply + 1][0]), sizeof(MoveSmall) * (Search_PlyMax - ply));
 				alpha = val;
-				if(ply == 0)
-				{
-					bestMove.From = from;
-					bestMove.To = to;
-					bestScore = val;
-				}
 			}
 		}
 	}
 
+	// checkmate or stalemate
+	if(hasValidMove == FALSE)
+	{
+		if(Board_IsChecked(board, board->PlayerTurn))
+			return Search_Checkmate;
+		else
+			return Search_Stalemate;
+	}
+
 	if(isPVNode)
-		Stats.PVNodeCount++;
+		ctx->Stats.PVNodeCount++;
 	else
-		Stats.AllNodeCount++;
+		ctx->Stats.AllNodeCount++;
 
 	return alpha;
 }
