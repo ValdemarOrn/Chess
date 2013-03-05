@@ -84,10 +84,10 @@ int Eval_Evaluate(Board* board)
 			index = Flip[index];
 		
 		pValue += Eval_PieceValues[piece];
-		pValue += Eval_Positions[piece][index];
-		pValue += Eval_MobilityBonus[piece] * moveCount;
+//		pValue += Eval_Positions[piece][index];
+//		pValue += Eval_MobilityBonus[piece] * moveCount;
 
-		if(color == COLOR_WHITE)
+/*		if(color == COLOR_WHITE)
 		{
 			if(Bitboard_GetRef(&board->AttacksWhite, square) == 0)
 				pValue -= Eval_UndefendedPiecePenalty[piece];
@@ -123,7 +123,7 @@ int Eval_Evaluate(Board* board)
 					pValue -= Eval_Penalty_IsolatedPawn;
 			}
 		}
-
+*/
 		if(color == COLOR_WHITE)
 			whiteValue += pValue;
 		else
@@ -131,10 +131,10 @@ int Eval_Evaluate(Board* board)
 	}
 
 	// slight bonus for current player
-	if(board->PlayerTurn == COLOR_WHITE)
+/*	if(board->PlayerTurn == COLOR_WHITE)
 		whiteValue += Eval_Bonus_CurrentPlayer;
 	else
 		blackValue += Eval_Bonus_CurrentPlayer;
-
+*/
 	return whiteValue - blackValue;
 }

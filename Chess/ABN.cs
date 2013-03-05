@@ -13,10 +13,15 @@ namespace Chess
 		/// </summary>
 		/// <param name="input"></param>
 		/// <returns></returns>
-		public static string[] StripPGN(string input)
+		public static string[] StripPGN(string input, int maxGames = -1)
 		{
+			Console.WriteLine("Replacing...");
 			input = input.Replace("\r", " ").Replace("\n", " ");
-			input = Regex.Replace(input, @"( )+", " ");
+			Console.WriteLine("Replacing...");
+			input = input.Replace("  ", " ");
+			Console.WriteLine("Replacing...");
+			input = input.Replace("  ", " ");
+			Console.WriteLine("Done Replacing...");
 
 			List<StringBuilder> gameBuilders = new List<StringBuilder>();
 
@@ -29,6 +34,7 @@ namespace Chess
 			// sets to true when we encounter the first move data for the game
 			// used to separate games in files that contain many games
 			bool gameStarting = false;
+			int gameNumber = 0;
 
 			for(int i = 0; i < input.Length; i++)
 			{
@@ -36,6 +42,10 @@ namespace Chess
 				if (x == '[' && !gameStarting && commentLevel == 0)
 				{
 					gameStarting = true;
+					Console.WriteLine("Game #" + gameNumber);
+					gameNumber++;
+					if (maxGames > 0 && gameNumber > maxGames)
+						break;
 				}
 
 				if(commentChar == '\0' || commentChar == x)
@@ -89,15 +99,18 @@ namespace Chess
 				game.Append(x);
 			}
 
+			Console.WriteLine("Finished parsing stage 1");
 			string[] output = gameBuilders.Select(x => x.ToString()).ToArray();
+			Console.WriteLine("Finished convertin stringbuilders to strings");
 
-			for(int i = 0; i < output.Length; i++)
+			System.Threading.Tasks.Parallel.ForEach(output.Select((x, n) => n), i =>
 			{
+				Console.WriteLine("Regex for Game #" + i);
 				output[i] = Regex.Replace(output[i], @"[0-9]+(\.){2,4}", "");
 				output[i] = Regex.Replace(output[i], @"(\$)[0-9]{0,3}", "");
 				output[i] = Regex.Replace(output[i], @"[\!\?]", "");
 				output[i] = Regex.Replace(output[i], @"( )+", " ");
-			}
+			});
 
 			return output;
 		}

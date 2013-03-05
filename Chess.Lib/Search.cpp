@@ -35,7 +35,7 @@ MoveSmall Search_SearchPos(Board* board)
 
 int Search_AlphaBeta(Board* board, int depth, int alpha, int beta)
 {
-	int plies = Search_PlyCount - depth;
+	int ply = Search_PlyCount - depth;
 	Stats.TotalNodeCount++;
 
 	if ( depth == 0 ) 
@@ -47,6 +47,9 @@ int Search_AlphaBeta(Board* board, int depth, int alpha, int beta)
 		else
 			return -eval;
 	}
+
+	// set PV at this ply to zero
+	memset(Search_PV[ply], 0, sizeof(MoveSmall) * Search_PlyMax);
 
 	uint64_t pieceBoard = (board->PlayerTurn == COLOR_WHITE) ? board->Boards[BOARD_WHITE] : board->Boards[BOARD_BLACK];
 	uint8_t locations[64];
@@ -91,12 +94,16 @@ int Search_AlphaBeta(Board* board, int depth, int alpha, int beta)
 				return beta;
 			}
 
-			if(val >= alpha)
+			if(val > alpha)
 			{
 				isPVNode = true;
+				Search_PV[ply][0].From = from;
+				Search_PV[ply][0].To = to;
+
+				memcpy(&(Search_PV[ply][1]), &(Search_PV[ply + 1][0]), Search_PlyMax - ply);
 
 				alpha = val;
-				if(plies == 0)
+				if(ply == 0)
 				{
 					bestMove.From = from;
 					bestMove.To = to;

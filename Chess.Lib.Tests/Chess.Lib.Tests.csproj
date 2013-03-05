@@ -60,6 +60,7 @@
     <Compile Include="EvalTest.cs" />
     <Compile Include="TTableTest.cs" />
     <Compile Include="SearchTest.cs" />
+    <Compile Include="OpeningBookTest.cs" />
     <Compile Include="_Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BitboardTests.cs" />

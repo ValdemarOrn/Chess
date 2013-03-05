@@ -7,11 +7,12 @@ namespace Chess.Lib.Tests
 {
 	class Program
 	{
-		public static void Main()
+		public static void Main(string[] args)
 		{
 			Manager.InitLibrary();
+
 			var t = new SearchTest();
-			t.TestSearchNodeCount();
+			t.TestSearchDeeper();
 		}
 	}
 }
