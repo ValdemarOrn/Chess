@@ -14,6 +14,9 @@ extern "C"
 	__declspec(dllexport) uint64_t Moves_GetMoves(Board* board, int tile);
 	__declspec(dllexport) uint64_t Moves_GetAttacks(Board* board, int tile);
 
+	// Fills up the moveList with all possible pseudo-legal moves for the current player
+	__declspec(dllexport) int Moves_GetAllMoves(Board* board, Move* moveList100);
+
 	// ------------- Specific moves -------------
 
 	// Checks if the move is a castling move. Returns the type of castling that is

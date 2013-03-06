@@ -23,6 +23,9 @@ namespace Chess.Lib
 		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "Moves_GetAttacks", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static unsafe extern ulong GetAttacks(BoardStruct* board, int tile);
 
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "Moves_GetAllMoves", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		public static unsafe extern int GetAllMoves(BoardStruct* board, Move* moveList100);
+
 		// ------------- Specific Moves --------------
 
 

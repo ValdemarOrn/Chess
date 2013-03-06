@@ -17,7 +17,6 @@ namespace Chess.Lib
 		public byte CapturePiece;
 		public byte CaptureTile; // location of capture piece. Only differs from "To" in en passant attacks
 		public byte Promotion;
-		public byte CheckState;
 		public byte Castle;
 	}
 
@@ -42,6 +41,5 @@ namespace Chess.Lib
 		public byte PrevEnPassantTile;
 		public byte PrevFiftyMoveRulePlies;
 		public byte PrevCastleState;
-		public byte PrevCheckState;
 	}
 }

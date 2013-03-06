@@ -71,6 +71,9 @@
     <Report>
       <Path>Chess.Lib.TestPerf130305.vsp</Path>
     </Report>
+    <Report>
+      <Path>Chess.Lib.TestPerf130306.vsp</Path>
+    </Report>
   </Reports>
   <Launches>
     <ProjBinary>

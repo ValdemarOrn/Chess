@@ -21,7 +21,6 @@ namespace Chess.Lib
 		public byte EnPassantTile;
 		public byte FiftyMoveRulePlies;
 		public byte Castle;
-		public byte CheckState;
 
 		public MoveHistory* MoveHistory;
 	}

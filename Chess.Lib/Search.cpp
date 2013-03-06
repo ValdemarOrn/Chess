@@ -83,65 +83,59 @@ int Search_AlphaBeta(Search_Context* ctx, int depth, int alpha, int beta)
 	// set PV at this ply to zero
 	memset(PV[ply], 0, sizeof(MoveSmall) * Search_PlyMax);
 
-	uint64_t pieceBoard = (board->PlayerTurn == COLOR_WHITE) ? board->Boards[BOARD_WHITE] : board->Boards[BOARD_BLACK];
-	uint8_t locations[64];
-	int pieceCount = Bitboard_BitList(pieceBoard, locations);
+	// find all the moves
+	Move moveList[100];
+	int moveCount = Moves_GetAllMoves(board, moveList);
+
+	// Todo: order the moves / Give them a rank from best to worst
 
 	_Bool hasValidMove = FALSE;
 	_Bool isPVNode = FALSE;
 
-	for (int i=0; i < pieceCount; i++)
+	for (int i=0; i < moveCount; i++)
 	{
-		int from = locations[i];
+		Move* move = &moveList[i];
+		int from = move->From;
+		int to = move->To;
 
-		uint64_t destBoard = Moves_GetMoves(board, from);
-		uint8_t destinations[64];
-		int destCount = Bitboard_BitList(destBoard, destinations);
+		#ifdef DEBUG
+		int pieceMoving = Board_Piece(board, from);
+		uint64_t hashBefore = board->Hash;
+		#endif
 
-		for(int j=0; j < destCount; j++)
+		_Bool valid = Board_Make(board, from, to);
+		if(valid == FALSE)
+			continue;
+
+		// Todo: Handle promotions
+
+		hasValidMove = true;
+		int val = -Search_AlphaBeta(ctx, depth - 1, -beta, -alpha);
+		Board_Unmake(board);
+
+		#ifdef DEBUG
+		if(hashBefore != board->Hash)
+			int k = 23;
+		#endif
+
+		if(val >= beta)
 		{
-			int to = destinations[j];
-
-			#ifdef DEBUG
-			int pieceMoving = Board_Piece(board, from);
-			uint64_t hashBefore = board->Hash;
-			if(16848271990604920209 == hashBefore)
-				int k = 23;
-			#endif
-
-			_Bool valid = Board_Make(board, from, to);
-			if(valid == FALSE)
-				continue;
-
-			// Todo: Handle promotions
-
-			hasValidMove = true;
-			int val = -Search_AlphaBeta(ctx, depth - 1, -beta, -alpha);
-			Board_Unmake(board);
-
-			#ifdef DEBUG
-			if(hashBefore != board->Hash)
-				int k = 23;
-			#endif
-
-			if(val >= beta)
-			{
-				ctx->Stats.CutNodeCount++;
-				return beta;
-			}
-
-			if(val > alpha)
-			{
-				isPVNode = true;
-				PV[ply][0].From = from;
-				PV[ply][0].To = to;
-				PV[ply][0].Score = val;
-				PV[ply][0].Piece = Board_Piece(board, from);
-
-				memcpy(&(PV[ply][1]), &(PV[ply + 1][0]), sizeof(MoveSmall) * (Search_PlyMax - ply));
-				alpha = val;
-			}
+			ctx->Stats.CutNodeCount++;
+			return beta;
 		}
+
+		if(val > alpha)
+		{
+			isPVNode = true;
+			PV[ply][0].From = from;
+			PV[ply][0].To = to;
+			PV[ply][0].Score = val;
+			PV[ply][0].Piece = Board_Piece(board, from);
+
+			memcpy(&(PV[ply][1]), &(PV[ply + 1][0]), sizeof(MoveSmall) * (Search_PlyMax - ply));
+			alpha = val;
+		}
+		
 	}
 
 	// checkmate or stalemate

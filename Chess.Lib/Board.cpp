@@ -35,7 +35,6 @@ Board* Board_Copy(Board* board)
 void Board_Init(Board* board, int setPieces)
 {
 	board->Castle = CASTLE_BK | CASTLE_BQ | CASTLE_WK | CASTLE_WQ;
-	board->CheckState = 0;
 	board->CurrentMove = 0;
 	board->EnPassantTile = 0;
 	board->FiftyMoveRulePlies = 0;
@@ -123,9 +122,6 @@ _Bool Board_Make(Board* board, int from, int to)
 	// 5. Verify it doesn't self check
 	//    5.1 If it does, unmake
 
-	if(board->Hash == 1274302962912630339 && from == 11 && to == 19)
-		int k = 23;
-
 	int playerPiece = Board_Piece(board, from);
 	int capturePiece = Board_Piece(board, to);
 	int color = board->PlayerTurn;
@@ -151,7 +147,6 @@ _Bool Board_Make(Board* board, int from, int to)
 	history->PrevAttacksBlack = board->AttacksBlack;
 	history->PrevAttacksWhite = board->AttacksWhite;
 	history->PrevCastleState = board->Castle;
-	history->PrevCheckState = board->CheckState;
 	history->PrevEnPassantTile = board->EnPassantTile;
 	history->PrevFiftyMoveRulePlies = board->FiftyMoveRulePlies;
 	history->PrevHash = board->Hash;
@@ -160,7 +155,6 @@ _Bool Board_Make(Board* board, int from, int to)
 	history->Move.CapturePiece = capturePiece;
 	history->Move.CaptureTile = victimTile;
 	history->Move.Castle = castlingType;
-	history->Move.CheckState = 0; // set later
 	history->Move.From = from;
 	history->Move.PlayerColor = color;
 	history->Move.PlayerPiece = playerPiece;
@@ -210,12 +204,8 @@ _Bool Board_Make(Board* board, int from, int to)
 	board->Castle = Board_GetCastling(board);
 	board->Hash ^= Zobrist_Keys[ZOBRIST_CASTLING][board->Castle];
 
-	board->AttacksBlack = Board_AttackMap(board, COLOR_BLACK);
-	board->AttacksWhite = Board_AttackMap(board, COLOR_WHITE);
 	board->CurrentMove += 1;
-	board->CheckState = Board_GetCheckState(board);
-	history->Move.CheckState = board->CheckState;
-
+	
 	board->Hash ^= Zobrist_Keys[ZOBRIST_ENPASSANT][board->EnPassantTile];
 	if(playerPiece == PIECE_PAWN)
 	{
@@ -238,21 +228,36 @@ _Bool Board_Make(Board* board, int from, int to)
 	board->PlayerTurn = (board->PlayerTurn == COLOR_WHITE) ? COLOR_BLACK : COLOR_WHITE;
 	board->Hash ^= Zobrist_Keys[ZOBRIST_SIDE][board->PlayerTurn];
 
-	if(Bitboard_PopCount(board->Boards[BOARD_WHITE]) > 16)
-		int k = 23;
-
-	if(Bitboard_PopCount(board->Boards[BOARD_BLACK]) > 16)
-		int k = 23;
-
-	if(Board_Piece(board, to) != playerPiece)
-		int k = 23;
-
 	// 5. Verify it doesn't self check
-	if(board->CheckState && Board_IsChecked(board, color))
+	//    5.1 If it does, unmake
+
+	// I switch between these two cases because if the move is illegal we can save 50%
+	// of the move generation time by starting with the right color
+	if(board->PlayerTurn == COLOR_WHITE)
 	{
-		//    5.1 If it does, unmake
-		Board_Unmake(board);
-		return 0;
+		board->AttacksWhite = Board_AttackMap(board, COLOR_WHITE);
+		uint64_t blackKing = board->Boards[BOARD_BLACK] & board->Boards[PIECE_KING];
+		if((blackKing & board->AttacksWhite) > 0) // white attacks black king
+		{
+			Board_Unmake(board);
+			return 0;
+		}
+
+		// it's legal, now calculate black's attacks
+		board->AttacksBlack = Board_AttackMap(board, COLOR_BLACK);
+	}
+	else
+	{
+		board->AttacksBlack = Board_AttackMap(board, COLOR_BLACK);
+		uint64_t whiteKing = board->Boards[BOARD_WHITE] & board->Boards[PIECE_KING];
+		if((whiteKing & board->AttacksBlack) > 0) // black attacks white king
+		{
+			Board_Unmake(board);
+			return 0;
+		}
+
+		// it's legal, now calculate white's attacks
+		board->AttacksWhite = Board_AttackMap(board, COLOR_WHITE);
 	}
 
 	return 1;
@@ -284,8 +289,6 @@ void Board_Unmake(Board* board)
 	board->Hash ^= Zobrist_Keys[ZOBRIST_CASTLING][board->Castle];
 	board->Castle = history->PrevCastleState;
 	board->Hash ^= Zobrist_Keys[ZOBRIST_CASTLING][board->Castle];
-
-	board->CheckState = history->PrevCheckState;
 
 	board->Hash ^= Zobrist_Keys[ZOBRIST_ENPASSANT][board->EnPassantTile];
 	board->EnPassantTile = history->PrevEnPassantTile;

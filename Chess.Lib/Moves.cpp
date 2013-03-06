@@ -138,6 +138,57 @@ uint64_t Moves_GetAttacks(Board* board, int tile)
 	return value;
 }
 
+int Moves_GetAllMoves(Board* board, Move* moveList100)
+{
+	int moveCount = 0;
+
+	uint64_t pieceBoard = (board->PlayerTurn == COLOR_WHITE) ? board->Boards[BOARD_WHITE] : board->Boards[BOARD_BLACK];
+	uint8_t locations[64];
+	uint8_t destinations[64];
+	int pieceCount = Bitboard_BitList(pieceBoard, locations);
+
+	// for all pieces
+	for (int i=0; i < pieceCount; i++)
+	{
+		int from = locations[i];
+		int piece = Board_Piece(board, from);
+
+		uint64_t destBoard = Moves_GetMoves(board, from);
+		int destCount = Bitboard_BitList(destBoard, destinations);
+
+		// for all of the piece's moves
+		for(int j=0; j < destCount; j++)
+		{
+			int to = destinations[j];
+
+			Move* move = &moveList100[moveCount];
+
+			// check for en passant captures
+			if(to == board->EnPassantTile && to != 0 && piece == PIECE_PAWN)
+			{
+				move->CapturePiece = PIECE_PAWN;
+				move->CaptureTile = Moves_GetEnPassantVictimTile(board, from, to);
+			}
+			else
+			{
+				move->CapturePiece = Board_Piece(board, to);
+				move->CaptureTile = to;
+			}
+
+			move->Castle = 0;
+			move->From = from;
+			move->PlayerColor = board->PlayerTurn;
+			move->PlayerPiece = piece;
+			move->Promotion = PIECE_QUEEN * Board_CanPromote(board, to);
+			move->To = to;
+
+			moveCount++;
+		}
+	}
+
+	return moveCount;
+}
+
 uint8_t Moves_GetCastlingType(Board* board, int from, int to)
 {
 	if(from == 4)

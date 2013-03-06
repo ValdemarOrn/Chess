@@ -46,7 +46,6 @@ extern "C"
 		uint8_t EnPassantTile; // set to 0 if not available. tile 0 can never be an en-passant square anyway
 		uint8_t FiftyMoveRulePlies;
 		uint8_t Castle;
-		uint8_t CheckState;
 		
 		MoveHistory* MoveHistory;
 

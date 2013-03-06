@@ -42,7 +42,6 @@ namespace Chess.Lib
 
 			b->AttacksBlack = Board.AttackMap(b, Board.COLOR_BLACK);
 			b->AttacksWhite = Board.AttackMap(b, Board.COLOR_WHITE);
-			b->CheckState = Board.GetCheckState(b);
 			b->Hash = Zobrist.Calculate(b);
 			//b->MoveHistory // N/A
 			return b;
