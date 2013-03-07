@@ -11,6 +11,8 @@ namespace Chess.Lib
 	{
 		public fixed ulong Boards[8];
 
+		public fixed byte Tiles[64];
+
 		public ulong AttacksWhite;
 		public ulong AttacksBlack;
 		public ulong Hash;
@@ -51,58 +53,61 @@ namespace Chess.Lib
 		public const int BOARD_QUEENS = 6;
 		public const int BOARD_KINGS = 7;
 
-		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "Board_Create", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Board_Create", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static unsafe extern BoardStruct* Create();
 
-		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "Board_Delete", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Board_Delete", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static unsafe extern void Delete(BoardStruct* board);
 
-		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "Board_Copy", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Board_Copy", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static unsafe extern IntPtr Copy(BoardStruct* board);
 
-		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "Board_Init", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Board_Init", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static unsafe extern void Init(BoardStruct* board, int setPieces);
 
-		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "Board_X", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Board_X", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static extern int X(int tile);
 
-		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "Board_Y", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Board_Y", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static extern int Y(int tile);
 
-		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "Board_Color", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Board_Color", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static unsafe extern int Color(BoardStruct* board, int tile);
 
-		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "Board_Piece", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Board_Piece", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static unsafe extern int Piece(BoardStruct* board, int tile);
 
-		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "Board_SetPiece", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Board_SetPiece", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static unsafe extern void SetPiece(BoardStruct* board, int square, int pieceType, int color);
 
-		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "Board_ClearPiece", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Board_ClearPiece", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static unsafe extern void ClearPiece(BoardStruct* board, int square);
 
-		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "Board_AttackMap", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Board_GenerateTileMap", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		public static unsafe extern void GenerateTileMap(BoardStruct* board);
+
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Board_AttackMap", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static unsafe extern ulong AttackMap(BoardStruct* board, int color);
 
-		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "Board_Make", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Board_Make", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static unsafe extern bool Make(BoardStruct* board, int from, int to);
 
-		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "Board_Unmake", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Board_Unmake", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static unsafe extern void Unmake(BoardStruct* board);
 
-		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "Board_CanPromote", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Board_CanPromote", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static unsafe extern bool CanPromote(BoardStruct* board, int square);
 
-		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "Board_Promote", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Board_Promote", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static unsafe extern bool Promote(BoardStruct* board, int square, int pieceType);
 
-		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "Board_GetCastling", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Board_GetCastling", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static unsafe extern byte GetCastling(BoardStruct* board);
 
-		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "Board_GetCheckState", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Board_GetCheckState", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static unsafe extern byte GetCheckState(BoardStruct* board);
 
-		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "Board_IsChecked", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Board_IsChecked", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static unsafe extern int IsChecked(BoardStruct* board, int color);
 	}
 }

@@ -36,6 +36,7 @@ namespace Chess.Lib.Tests
 			b->Boards[Board.BOARD_WHITE] = Bitboard.Set((b->Boards[Board.BOARD_WHITE]), 5);
 			b->Boards[Board.BOARD_WHITE] = Bitboard.Set((b->Boards[Board.BOARD_WHITE]), 7);
 			b->Boards[Board.BOARD_WHITE] = Bitboard.Set((b->Boards[Board.BOARD_WHITE]), 47);
+			Board.GenerateTileMap(b);
 
 
 			Assert.AreEqual(Colors.White, Board.Color(b, 5));
@@ -58,6 +59,7 @@ namespace Chess.Lib.Tests
 			b->Boards[Board.BOARD_BLACK] = Bitboard.Set((b->Boards[Board.BOARD_BLACK]), 5);
 			b->Boards[Board.BOARD_BLACK] = Bitboard.Set((b->Boards[Board.BOARD_BLACK]), 7);
 			b->Boards[Board.BOARD_BLACK] = Bitboard.Set((b->Boards[Board.BOARD_BLACK]), 47);
+			Board.GenerateTileMap(b);
 
 
 			Assert.AreEqual(Colors.Black, Board.Color(b, 5));

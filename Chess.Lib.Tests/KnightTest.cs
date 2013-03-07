@@ -16,6 +16,7 @@ namespace Chess.Lib.Tests
 			BoardStruct* b = (BoardStruct*)Board.Create();
 			b->Boards[Board.BOARD_KNIGHTS] = Bitboard.Set((b->Boards[Board.BOARD_KNIGHTS]), 27);
 			b->Boards[Board.BOARD_WHITE] = Bitboard.Set((b->Boards[Board.BOARD_WHITE]), 27);
+			Board.GenerateTileMap(b);
 
 			ulong moves = Moves.GetMoves(b, 27);
 			Assert.AreEqual((ulong)0x142200221400, moves);
@@ -27,6 +28,7 @@ namespace Chess.Lib.Tests
 			BoardStruct* b = (BoardStruct*)Board.Create();
 			b->Boards[Board.BOARD_KNIGHTS] = Bitboard.Set((b->Boards[Board.BOARD_KNIGHTS]), 14);
 			b->Boards[Board.BOARD_WHITE] = Bitboard.Set((b->Boards[Board.BOARD_WHITE]), 14);
+			Board.GenerateTileMap(b);
 
 			ulong moves = Moves.GetMoves(b, 14);
 			Assert.AreEqual((ulong)0xA0100010, moves);
@@ -44,6 +46,7 @@ namespace Chess.Lib.Tests
 			b->Boards[Board.BOARD_WHITE] = Bitboard.Set((b->Boards[Board.BOARD_WHITE]), 17);
 			b->Boards[Board.BOARD_PAWNS] = Bitboard.Set((b->Boards[Board.BOARD_PAWNS]), 44);
 			b->Boards[Board.BOARD_WHITE] = Bitboard.Set((b->Boards[Board.BOARD_WHITE]), 44);
+			Board.GenerateTileMap(b);
 
 			ulong moves = Moves.GetMoves(b, 27);
 			Assert.AreEqual((ulong)0x42200201400, moves);
@@ -65,6 +68,7 @@ namespace Chess.Lib.Tests
 			b->Boards[Board.BOARD_WHITE] = Bitboard.Set((b->Boards[Board.BOARD_WHITE]), 20);
 			b->Boards[Board.BOARD_PAWNS] = Bitboard.Set((b->Boards[Board.BOARD_PAWNS]), 29);
 			b->Boards[Board.BOARD_WHITE] = Bitboard.Set((b->Boards[Board.BOARD_WHITE]), 29);
+			Board.GenerateTileMap(b);
 
 			ulong moves = Moves.GetMoves(b, 14);
 			Assert.AreEqual((ulong)0x80000010, moves);
@@ -85,6 +89,7 @@ namespace Chess.Lib.Tests
 			b->Boards[Board.BOARD_BLACK] = Bitboard.Set((b->Boards[Board.BOARD_BLACK]), 17);
 			b->Boards[Board.BOARD_PAWNS] = Bitboard.Set((b->Boards[Board.BOARD_PAWNS]), 44);
 			b->Boards[Board.BOARD_BLACK] = Bitboard.Set((b->Boards[Board.BOARD_BLACK]), 44);
+			Board.GenerateTileMap(b);
 
 			// attacks and moves should be equal
 			ulong moves = Moves.GetMoves(b, 27);
@@ -107,6 +112,7 @@ namespace Chess.Lib.Tests
 			b->Boards[Board.BOARD_BLACK] = Bitboard.Set((b->Boards[Board.BOARD_BLACK]), 20);
 			b->Boards[Board.BOARD_PAWNS] = Bitboard.Set((b->Boards[Board.BOARD_PAWNS]), 29);
 			b->Boards[Board.BOARD_BLACK] = Bitboard.Set((b->Boards[Board.BOARD_BLACK]), 29);
+			Board.GenerateTileMap(b);
 
 			// attacks and moves should be equal
 			ulong moves = Moves.GetMoves(b, 14);
@@ -128,6 +134,7 @@ namespace Chess.Lib.Tests
 			b->Boards[Board.BOARD_BLACK] = Bitboard.Set((b->Boards[Board.BOARD_BLACK]), 51);
 			b->Boards[Board.BOARD_PAWNS] = Bitboard.Set((b->Boards[Board.BOARD_PAWNS]), 35);
 			b->Boards[Board.BOARD_WHITE] = Bitboard.Set((b->Boards[Board.BOARD_WHITE]), 35);
+			Board.GenerateTileMap(b);
 
 			ulong moves = Moves.GetMoves(b, 41);
 			Assert.AreEqual((ulong)0x500000805000000, moves);

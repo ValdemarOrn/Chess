@@ -17,6 +17,7 @@ namespace Chess.Lib.Tests
 			BoardStruct* b = (BoardStruct*)Board.Create();
 			b->Boards[Board.BOARD_PAWNS] = Bitboard.Set((b->Boards[Board.BOARD_PAWNS]), 53);
 			b->Boards[Board.BOARD_BLACK] = Bitboard.Set((b->Boards[Board.BOARD_BLACK]), 53);
+			Board.GenerateTileMap(b);
 
 			ulong moves = Moves.GetMoves(b, 53);
 
@@ -29,6 +30,7 @@ namespace Chess.Lib.Tests
 			BoardStruct* b = (BoardStruct*)Board.Create();
 			b->Boards[Board.BOARD_PAWNS] = Bitboard.Set((b->Boards[Board.BOARD_PAWNS]), 35);
 			b->Boards[Board.BOARD_BLACK] = Bitboard.Set((b->Boards[Board.BOARD_BLACK]), 35);
+			Board.GenerateTileMap(b);
 
 			ulong moves = Moves.GetMoves(b, 35);
 
@@ -41,6 +43,7 @@ namespace Chess.Lib.Tests
 			BoardStruct* b = (BoardStruct*)Board.Create();
 			b->Boards[Board.BOARD_PAWNS] = Bitboard.Set((b->Boards[Board.BOARD_PAWNS]), 15);
 			b->Boards[Board.BOARD_BLACK] = Bitboard.Set((b->Boards[Board.BOARD_BLACK]), 15);
+			Board.GenerateTileMap(b);
 
 			ulong moves = Moves.GetMoves(b, 15);
 
@@ -58,6 +61,7 @@ namespace Chess.Lib.Tests
 
 			b->Boards[Board.BOARD_PAWNS] = Bitboard.Set((b->Boards[Board.BOARD_PAWNS]), 44);
 			b->Boards[Board.BOARD_WHITE] = Bitboard.Set((b->Boards[Board.BOARD_WHITE]), 44);
+			Board.GenerateTileMap(b);
 
 			ulong moves = Moves.GetMoves(b, 53);
 
@@ -76,6 +80,7 @@ namespace Chess.Lib.Tests
 
 			b->Boards[Board.BOARD_PAWNS] = Bitboard.Set((b->Boards[Board.BOARD_PAWNS]), 35 - 9);
 			b->Boards[Board.BOARD_WHITE] = Bitboard.Set((b->Boards[Board.BOARD_WHITE]), 35 - 9);
+			Board.GenerateTileMap(b);
 
 			ulong moves = Moves.GetMoves(b, 35);
 
@@ -91,6 +96,7 @@ namespace Chess.Lib.Tests
 
 			b->Boards[Board.BOARD_PAWNS] = Bitboard.Set((b->Boards[Board.BOARD_PAWNS]), 35 - 7);
 			b->Boards[Board.BOARD_WHITE] = Bitboard.Set((b->Boards[Board.BOARD_WHITE]), 35 - 7);
+			Board.GenerateTileMap(b);
 
 			ulong moves = Moves.GetMoves(b, 35);
 
@@ -109,6 +115,7 @@ namespace Chess.Lib.Tests
 
 			b->Boards[Board.BOARD_PAWNS] = Bitboard.Set((b->Boards[Board.BOARD_PAWNS]), 7);
 			b->Boards[Board.BOARD_WHITE] = Bitboard.Set((b->Boards[Board.BOARD_WHITE]), 7);
+			Board.GenerateTileMap(b);
 
 			ulong moves = Moves.GetMoves(b, 15);
 
@@ -126,6 +133,7 @@ namespace Chess.Lib.Tests
 
 			b->Boards[Board.BOARD_PAWNS] = Bitboard.Set((b->Boards[Board.BOARD_PAWNS]), 46);
 			b->Boards[Board.BOARD_BLACK] = Bitboard.Set((b->Boards[Board.BOARD_BLACK]), 46);
+			Board.GenerateTileMap(b);
 
 			ulong moves = Moves.GetMoves(b, 53);
 
@@ -144,6 +152,7 @@ namespace Chess.Lib.Tests
 
 			b->Boards[Board.BOARD_PAWNS] = Bitboard.Set((b->Boards[Board.BOARD_PAWNS]), 35 - 9);
 			b->Boards[Board.BOARD_BLACK] = Bitboard.Set((b->Boards[Board.BOARD_BLACK]), 35 - 9);
+			Board.GenerateTileMap(b);
 
 			ulong moves = Moves.GetMoves(b, 35);
 
@@ -162,6 +171,7 @@ namespace Chess.Lib.Tests
 
 			b->Boards[Board.BOARD_PAWNS] = Bitboard.Set((b->Boards[Board.BOARD_PAWNS]), 35 - 9);
 			b->Boards[Board.BOARD_WHITE] = Bitboard.Set((b->Boards[Board.BOARD_WHITE]), 35 - 9);
+			Board.GenerateTileMap(b);
 
 			ulong moves = Moves.GetMoves(b, 35);
 
@@ -177,6 +187,7 @@ namespace Chess.Lib.Tests
 
 			b->Boards[Board.BOARD_PAWNS] = Bitboard.Set((b->Boards[Board.BOARD_PAWNS]), 1);
 			b->Boards[Board.BOARD_BLACK] = Bitboard.Set((b->Boards[Board.BOARD_BLACK]), 1);
+			Board.GenerateTileMap(b);
 
 			ulong moves = Moves.GetMoves(b, 8);
 
@@ -192,6 +203,7 @@ namespace Chess.Lib.Tests
 
 			b->Boards[Board.BOARD_PAWNS] = Bitboard.Set((b->Boards[Board.BOARD_PAWNS]), 34);
 			b->Boards[Board.BOARD_WHITE] = Bitboard.Set((b->Boards[Board.BOARD_WHITE]), 34);
+			Board.GenerateTileMap(b);
 
 			ulong moves = Moves.GetMoves(b, 42);
 
@@ -207,6 +219,7 @@ namespace Chess.Lib.Tests
 
 			b->Boards[Board.BOARD_PAWNS] = Bitboard.Set((b->Boards[Board.BOARD_PAWNS]), 34);
 			b->Boards[Board.BOARD_BLACK] = Bitboard.Set((b->Boards[Board.BOARD_BLACK]), 34);
+			Board.GenerateTileMap(b);
 
 			ulong moves = Moves.GetMoves(b, 42);
 

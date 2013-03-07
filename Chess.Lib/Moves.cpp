@@ -97,9 +97,6 @@ uint64_t Moves_GetAttacks(Board* board, int tile)
 	uint64_t value = 0;
 	uint64_t occupancy = board->Boards[BOARD_WHITE] | board->Boards[BOARD_BLACK];
 
-	if(piece == 0 || color == 0)
-		return 0;
-
 	if(piece == PIECE_PAWN)
 	{
 		uint64_t enPassant = Moves_GetEnPassantMove(board, tile);

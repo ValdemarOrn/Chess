@@ -26,7 +26,6 @@
     </PdhSettings>
   </Options>
   <ExcludeSmallFuncs>true</ExcludeSmallFuncs>
-  <InteractionProfilingEnabled>false</InteractionProfilingEnabled>
   <JScriptProfilingEnabled>false</JScriptProfilingEnabled>
   <PreinstrumentEvent>
     <InstrEventExclude>false</InstrEventExclude>
@@ -34,50 +33,4 @@
   <PostinstrumentEvent>
     <InstrEventExclude>false</InstrEventExclude>
   </PostinstrumentEvent>
-  <Binaries>
-    <ProjBinary>
-      <Path>Chess.Lib.TestPerf\obj\Debug\Chess.Lib.TestPerf.exe</Path>
-      <ArgumentTimestamp>01/01/0001 00:00:00</ArgumentTimestamp>
-      <Instrument>true</Instrument>
-      <Sample>true</Sample>
-      <ExternalWebsite>false</ExternalWebsite>
-      <InteractionProfilingEnabled>false</InteractionProfilingEnabled>
-      <IsLocalJavascript>false</IsLocalJavascript>
-      <IsWindowsStoreApp>false</IsWindowsStoreApp>
-      <IsWWA>false</IsWWA>
-      <LaunchProject>true</LaunchProject>
-      <OverrideProjectSettings>false</OverrideProjectSettings>
-      <LaunchMethod>Executable</LaunchMethod>
-      <ExecutablePath>Chess.Lib.TestPerf\bin\Debug\Chess.Lib.TestPerf.exe</ExecutablePath>
-      <StartupDirectory>Chess.Lib.TestPerf\bin\Debug\</StartupDirectory>
-      <Arguments>
-      </Arguments>
-      <NetAppHost>IIS</NetAppHost>
-      <NetBrowser>InternetExplorer</NetBrowser>
-      <ExcludeSmallFuncs>true</ExcludeSmallFuncs>
-      <JScriptProfilingEnabled>false</JScriptProfilingEnabled>
-      <PreinstrumentEvent>
-        <InstrEventExclude>false</InstrEventExclude>
-      </PreinstrumentEvent>
-      <PostinstrumentEvent>
-        <InstrEventExclude>false</InstrEventExclude>
-      </PostinstrumentEvent>
-      <ProjRef>{928975EE-B50F-4D16-88BC-6EC38174763C}|Chess.Lib.TestPerf\Chess.Lib.TestPerf.csproj</ProjRef>
-      <ProjPath>Chess.Lib.TestPerf\Chess.Lib.TestPerf.csproj</ProjPath>
-      <ProjName>Chess.Lib.TestPerf</ProjName>
-    </ProjBinary>
-  </Binaries>
-  <Reports>
-    <Report>
-      <Path>Chess.Lib.TestPerf130305.vsp</Path>
-    </Report>
-    <Report>
-      <Path>Chess.Lib.TestPerf130306.vsp</Path>
-    </Report>
-  </Reports>
-  <Launches>
-    <ProjBinary>
-      <Path>:PB:{928975EE-B50F-4D16-88BC-6EC38174763C}|Chess.Lib.TestPerf\Chess.Lib.TestPerf.csproj</Path>
-    </ProjBinary>
-  </Launches>
 </VSPerformanceSession>

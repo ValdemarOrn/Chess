@@ -137,7 +137,7 @@ extern "C"
 
 	__inline_always uint64_t Moves_GetEnPassantMove(Board* board, int from)
 	{
-		if(board->EnPassantTile < 0)
+		if(board->EnPassantTile == 0)
 			return 0;
 
 		int color = Board_Color(board, from);

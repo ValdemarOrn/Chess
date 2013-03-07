@@ -45,7 +45,7 @@ namespace Chess.Lib
 			Console.Write(str);
 		}
 
-		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "Manager_SetCallback", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Manager_SetCallback", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static extern void SetCallback(IntPtr callbackPtr);
 	}
 }

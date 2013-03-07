@@ -35,6 +35,7 @@ namespace Chess.Lib.Tests
 			BoardStruct* b = (BoardStruct*)Board.Create();
 			b->Boards[Board.BOARD_QUEENS] = Bitboard.Set((b->Boards[Board.BOARD_QUEENS]), 28);
 			b->Boards[Board.BOARD_WHITE] = Bitboard.Set((b->Boards[Board.BOARD_WHITE]), 28);
+			Board.GenerateTileMap(b);
 
 			var moves = Moves.GetMoves(b, 28);
 			Assert.AreEqual((ulong)0x11925438EF385492, moves);
@@ -55,6 +56,7 @@ namespace Chess.Lib.Tests
 
 			b->Boards[Board.BOARD_PAWNS] = Bitboard.Set((b->Boards[Board.BOARD_PAWNS]), 31);
 			b->Boards[Board.BOARD_WHITE] = Bitboard.Set((b->Boards[Board.BOARD_WHITE]), 31);
+			Board.GenerateTileMap(b);
 
 			var moves = Moves.GetMoves(b, 7);
 			Assert.AreEqual((ulong)0x80C060, moves);

@@ -49,15 +49,41 @@ void Board_Init(Board* board, int setPieces)
 		return;
 	}
 
-	board->Boards[BOARD_WHITE] = 0xFFFF;
-	board->Boards[BOARD_BLACK] = 0xFFFF000000000000;
-	
-	board->Boards[BOARD_PAWNS] = 0xFF00000000FF00;
-	board->Boards[BOARD_ROOKS] = 0x8100000000000081;
-	board->Boards[BOARD_KNIGHTS] = 0x4200000000000042;
-	board->Boards[BOARD_BISHOPS] = 0x2400000000000024;
-	board->Boards[BOARD_QUEENS] = 0x800000000000008;
-	board->Boards[BOARD_KINGS] = 0x1000000000000010;
+	Board_SetPiece(board, 0, PIECE_ROOK, COLOR_WHITE);
+	Board_SetPiece(board, 1, PIECE_KNIGHT, COLOR_WHITE);
+	Board_SetPiece(board, 2, PIECE_BISHOP, COLOR_WHITE);
+	Board_SetPiece(board, 3, PIECE_QUEEN, COLOR_WHITE);
+	Board_SetPiece(board, 4, PIECE_KING, COLOR_WHITE);
+	Board_SetPiece(board, 5, PIECE_BISHOP, COLOR_WHITE);
+	Board_SetPiece(board, 6, PIECE_KNIGHT, COLOR_WHITE);
+	Board_SetPiece(board, 7, PIECE_ROOK, COLOR_WHITE);
+
+	Board_SetPiece(board, 8, PIECE_PAWN, COLOR_WHITE);
+	Board_SetPiece(board, 9, PIECE_PAWN, COLOR_WHITE);
+	Board_SetPiece(board, 10, PIECE_PAWN, COLOR_WHITE);
+	Board_SetPiece(board, 11, PIECE_PAWN, COLOR_WHITE);
+	Board_SetPiece(board, 12, PIECE_PAWN, COLOR_WHITE);
+	Board_SetPiece(board, 13, PIECE_PAWN, COLOR_WHITE);
+	Board_SetPiece(board, 14, PIECE_PAWN, COLOR_WHITE);
+	Board_SetPiece(board, 15, PIECE_PAWN, COLOR_WHITE);
+
+	Board_SetPiece(board, 48, PIECE_PAWN, COLOR_BLACK);
+	Board_SetPiece(board, 49, PIECE_PAWN, COLOR_BLACK);
+	Board_SetPiece(board, 50, PIECE_PAWN, COLOR_BLACK);
+	Board_SetPiece(board, 51, PIECE_PAWN, COLOR_BLACK);
+	Board_SetPiece(board, 52, PIECE_PAWN, COLOR_BLACK);
+	Board_SetPiece(board, 53, PIECE_PAWN, COLOR_BLACK);
+	Board_SetPiece(board, 54, PIECE_PAWN, COLOR_BLACK);
+	Board_SetPiece(board, 55, PIECE_PAWN, COLOR_BLACK);
+
+	Board_SetPiece(board, 56, PIECE_ROOK, COLOR_BLACK);
+	Board_SetPiece(board, 57, PIECE_KNIGHT, COLOR_BLACK);
+	Board_SetPiece(board, 58, PIECE_BISHOP, COLOR_BLACK);
+	Board_SetPiece(board, 59, PIECE_QUEEN, COLOR_BLACK);
+	Board_SetPiece(board, 60, PIECE_KING, COLOR_BLACK);
+	Board_SetPiece(board, 61, PIECE_BISHOP, COLOR_BLACK);
+	Board_SetPiece(board, 62, PIECE_KNIGHT, COLOR_BLACK);
+	Board_SetPiece(board, 63, PIECE_ROOK, COLOR_BLACK);
 
 	board->Hash = Zobrist_Calculate(board);
 	board->AttacksWhite = Board_AttackMap(board, COLOR_WHITE);
@@ -74,6 +100,7 @@ void Board_SetPiece(Board* board, int square, int pieceType, int color)
 	uint64_t* colorBoard = (color == COLOR_WHITE) ? &board->Boards[BOARD_WHITE] : &board->Boards[BOARD_BLACK];
 	Bitboard_SetRef(colorBoard, square);
 	board->Hash ^= Zobrist_Keys[Zobrist_Index[pieceType | color]][square];
+	board->Tiles[square] = pieceType | color;
 }
 
 void Board_ClearPiece(Board* board, int square)
@@ -90,6 +117,36 @@ void Board_ClearPiece(Board* board, int square)
 
 	Bitboard_UnsetRef(&board->Boards[BOARD_WHITE], square);
 	Bitboard_UnsetRef(&board->Boards[BOARD_BLACK], square);
+	board->Tiles[square] = 0;
+}
+
+void Board_GenerateTileMap(Board* board)
+{
+	for(int i = 0; i < 64; i++)
+	{
+		int color = 0;
+		int piece = 0;
+
+		if(Bitboard_GetRef(&board->Boards[BOARD_WHITE], i) > 0)
+			color = COLOR_WHITE;
+		else if (Bitboard_GetRef(&board->Boards[BOARD_BLACK], i) > 0)
+			color = COLOR_BLACK;
+
+		if(Bitboard_GetRef(&board->Boards[PIECE_PAWN], i) > 0)
+			piece = PIECE_PAWN;
+		else if(Bitboard_GetRef(&board->Boards[PIECE_KNIGHT], i) > 0)
+			piece = PIECE_KNIGHT;
+		else if(Bitboard_GetRef(&board->Boards[PIECE_BISHOP], i) > 0)
+			piece = PIECE_BISHOP;
+		else if(Bitboard_GetRef(&board->Boards[PIECE_ROOK], i) > 0)
+			piece = PIECE_ROOK;
+		else if(Bitboard_GetRef(&board->Boards[PIECE_QUEEN], i) > 0)
+			piece = PIECE_QUEEN;
+		else if(Bitboard_GetRef(&board->Boards[PIECE_KING], i) > 0)
+			piece = PIECE_KING;
+
+		board->Tiles[i] = color | piece;
+	}
 }
 
 uint64_t Board_AttackMap(Board* board, int color)
@@ -97,14 +154,14 @@ uint64_t Board_AttackMap(Board* board, int color)
 	uint64_t attackBoard = 0;
 
 	uint8_t positions[20];
-	uint64_t bitboard = (color == COLOR_WHITE) ? board->Boards[BOARD_WHITE] : board->Boards[BOARD_BLACK];
-	int count = Bitboard_BitList(bitboard, positions);
 
-	for(int i = 0; i < count; i++)
+	for(int i = 0; i < 64; i++)
 	{
-		int pos = positions[i];
-		uint64_t attacks = Moves_GetAttacks(board, pos);
-		attackBoard |= attacks;
+		if(Board_Color(board, i) == color)
+		{
+			uint64_t attacks = Moves_GetAttacks(board, i);
+			attackBoard |= attacks;
+		}
 	}
 
 	return attackBoard;

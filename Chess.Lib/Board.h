@@ -36,6 +36,8 @@ extern "C"
 	{
 		uint64_t Boards[8];
 
+		uint8_t Tiles[64];
+
 		uint64_t AttacksWhite;
 		uint64_t AttacksBlack;
 		uint64_t Hash;
@@ -85,6 +87,9 @@ extern "C"
 	// Clear the piece from the desired location
 	__declspec(dllexport) void Board_ClearPiece(Board* board, int square);
 
+	// only used for testing. Regenerates the Board.Tiles map from the bitboards
+	__declspec(dllexport) void Board_GenerateTileMap(Board* board);
+
 	// Returns a bitmap of all squares attacked by the specified side
 	__declspec(dllexport) uint64_t Board_AttackMap(Board* board, int color);
 
@@ -128,24 +133,12 @@ extern "C"
 
 	__inline_always int Board_Color(Board* board, int tile)
 	{
-		return Bitboard_GetRef(&board->Boards[BOARD_WHITE], tile) * COLOR_WHITE 
-			 + Bitboard_GetRef(&board->Boards[BOARD_BLACK], tile) * COLOR_BLACK;
+		return board->Tiles[tile] & ((uint8_t)0xF0);
 	}
 
 	__inline_always int Board_Piece(Board* board, int tile)
 	{
-		// check if empty tile
-		if(Bitboard_Get(board->Boards[BOARD_WHITE] | board->Boards[BOARD_BLACK], tile) == 0)
-			return 0;
-
-		int pawn = Bitboard_GetRef(&board->Boards[BOARD_PAWNS], tile);
-		int knight = Bitboard_GetRef(&board->Boards[BOARD_KNIGHTS], tile);
-		int bishop = Bitboard_GetRef(&board->Boards[BOARD_BISHOPS], tile);
-		int rook = Bitboard_GetRef(&board->Boards[BOARD_ROOKS], tile);
-		int queen = Bitboard_GetRef(&board->Boards[BOARD_QUEENS], tile);
-		int king = Bitboard_GetRef(&board->Boards[BOARD_KINGS], tile);
-	
-		return pawn * PIECE_PAWN + knight * PIECE_KNIGHT + bishop * PIECE_BISHOP + rook * PIECE_ROOK + queen * PIECE_QUEEN + king * PIECE_KING;
+		return board->Tiles[tile] & ((uint8_t)0x0F);
 	}
 }
 

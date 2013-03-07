@@ -26,7 +26,6 @@
     </PdhSettings>
   </Options>
   <ExcludeSmallFuncs>true</ExcludeSmallFuncs>
-  <InteractionProfilingEnabled>false</InteractionProfilingEnabled>
   <JScriptProfilingEnabled>false</JScriptProfilingEnabled>
   <PreinstrumentEvent>
     <InstrEventExclude>false</InstrEventExclude>
@@ -34,42 +33,4 @@
   <PostinstrumentEvent>
     <InstrEventExclude>false</InstrEventExclude>
   </PostinstrumentEvent>
-  <Binaries>
-    <ProjBinary>
-      <Path>Chess.Lib.EGTB\obj\Debug\Chess.Lib.EGTB.exe</Path>
-      <ArgumentTimestamp>01/01/0001 00:00:00</ArgumentTimestamp>
-      <Instrument>true</Instrument>
-      <Sample>true</Sample>
-      <ExternalWebsite>false</ExternalWebsite>
-      <InteractionProfilingEnabled>false</InteractionProfilingEnabled>
-      <IsLocalJavascript>false</IsLocalJavascript>
-      <IsWindowsStoreApp>false</IsWindowsStoreApp>
-      <IsWWA>false</IsWWA>
-      <LaunchProject>true</LaunchProject>
-      <OverrideProjectSettings>false</OverrideProjectSettings>
-      <LaunchMethod>Executable</LaunchMethod>
-      <ExecutablePath>Chess.Lib.EGTB\bin\Debug\Chess.Lib.EGTB.exe</ExecutablePath>
-      <StartupDirectory>Chess.Lib.EGTB\bin\Debug\</StartupDirectory>
-      <Arguments>
-      </Arguments>
-      <NetAppHost>IIS</NetAppHost>
-      <NetBrowser>InternetExplorer</NetBrowser>
-      <ExcludeSmallFuncs>true</ExcludeSmallFuncs>
-      <JScriptProfilingEnabled>false</JScriptProfilingEnabled>
-      <PreinstrumentEvent>
-        <InstrEventExclude>false</InstrEventExclude>
-      </PreinstrumentEvent>
-      <PostinstrumentEvent>
-        <InstrEventExclude>false</InstrEventExclude>
-      </PostinstrumentEvent>
-      <ProjRef>{8D1947D3-3B39-435A-B471-3A9638524249}|Chess.Lib.EGTB\Chess.Lib.EGTB.csproj</ProjRef>
-      <ProjPath>Chess.Lib.EGTB\Chess.Lib.EGTB.csproj</ProjPath>
-      <ProjName>Chess.Lib.EGTB</ProjName>
-    </ProjBinary>
-  </Binaries>
-  <Launches>
-    <ProjBinary>
-      <Path>:PB:{8D1947D3-3B39-435A-B471-3A9638524249}|Chess.Lib.EGTB\Chess.Lib.EGTB.csproj</Path>
-    </ProjBinary>
-  </Launches>
 </VSPerformanceSession>

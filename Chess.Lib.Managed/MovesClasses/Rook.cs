@@ -170,16 +170,16 @@ namespace Chess.Lib.MoveClasses
 		}
 
 
-		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "Rook_SetupTables", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Rook_SetupTables", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		static extern void SetupTables();
 
-		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "Rook_Load", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Rook_Load", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		static extern int Load(int pos, ulong permutation, ulong moveBoard);
 
-		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "Rook_LoadVector", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Rook_LoadVector", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		static extern int LoadVector(int pos, ulong moveBoard);
 
-		[DllImport("..\\..\\..\\Chess.Lib\\x64\\Debug\\Chess.Lib.dll", EntryPoint = "Rook_Read", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Rook_Read", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static extern ulong Read(int pos, ulong occupancy);
 
 	}
