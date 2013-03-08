@@ -134,6 +134,9 @@
     <ClCompile Include="Manager.cpp" />
     <ClCompile Include="Move.cpp" />
     <ClCompile Include="Moves.cpp" />
+    <ClCompile Include="Moves\Bishop.cpp" />
+    <ClCompile Include="Moves\Knight.cpp" />
+    <ClCompile Include="Moves\Rook.cpp" />
     <ClCompile Include="Perft.cpp" />
     <ClCompile Include="Search.cpp" />
     <ClCompile Include="TTable.cpp" />

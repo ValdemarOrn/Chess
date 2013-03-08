@@ -104,9 +104,6 @@ namespace Chess.Lib
 		[DllImport("..\\..\\..\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Board_GetCastling", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static unsafe extern byte GetCastling(BoardStruct* board);
 
-		[DllImport("..\\..\\..\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Board_GetCheckState", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
-		public static unsafe extern byte GetCheckState(BoardStruct* board);
-
 		[DllImport("..\\..\\..\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Board_IsChecked", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static unsafe extern int IsChecked(BoardStruct* board, int color);
 	}

@@ -1,7 +1,7 @@
 
 // Magic constants and bit count for rooks
 
-uint64_t Rook_Magic[64] = {
+const uint64_t Rook_Magic[64] = {
 
 	13541429471522672072, // 0
 	11042827246505705989,
@@ -70,7 +70,7 @@ uint64_t Rook_Magic[64] = {
 
 };
 
-uint64_t Rook_Bits[64] = {
+const uint64_t Rook_Bits[64] = {
 
 	13, // 0
 	12,

@@ -11,13 +11,13 @@ extern "C"
 	__declspec(dllexport) void Bishop_LoadVector(int pos, uint64_t moveBoard);
 	__declspec(dllexport) uint64_t Bishop_Read(int pos, uint64_t occupancy);
 
-	uint64_t** Bishop_Tables;
+	extern uint64_t** Bishop_Tables;
 
 	// an array containing bitboard with the unmasked bishop move vectors
-	uint64_t Bishop_Vectors[64];
+	extern uint64_t Bishop_Vectors[64];
 
 	// an array containing the number of bits to shift the magic constant to get the index
-	uint64_t Bishop_Shift[64];
+	extern uint64_t Bishop_Shift[64];
 
 	inline int Bishop_Index(int pos, uint64_t permutation)
 	{
@@ -26,7 +26,7 @@ extern "C"
 	}
 
 	/// Create all lookup tables and initialize them to zeros
-	void Bishop_SetupTables()
+	inline void Bishop_SetupTables()
 	{
 		Bishop_Tables = new uint64_t*[64];
 
@@ -45,7 +45,7 @@ extern "C"
 	/// the function returns 1. Returns 0 on success.
 	/// Note: There should never, ever be a collision if the magic constant is correct. 
 	/// This is only for testing and safety reasons.
-	int Bishop_Load(int pos, uint64_t permutation, uint64_t moveBoard)
+	inline int Bishop_Load(int pos, uint64_t permutation, uint64_t moveBoard)
 	{
 		uint64_t* table = Bishop_Tables[pos];
 		int index = Bishop_Index(pos, permutation);
@@ -60,7 +60,7 @@ extern "C"
 
 	}
 
-	void Bishop_LoadVector(int pos, uint64_t moveBoard)
+	inline void Bishop_LoadVector(int pos, uint64_t moveBoard)
 	{
 		Bishop_Vectors[pos] = moveBoard;
 	}

@@ -241,7 +241,10 @@ namespace Chess.Lib.Tests
 			b->AttacksBlack = Board.AttackMap(b, Board.COLOR_BLACK);
 			b->AttacksWhite = Board.AttackMap(b, Board.COLOR_WHITE);
 
-			var check = Board.GetCheckState(b);
+			var check = Board.IsChecked(b, Board.COLOR_WHITE);
+			Assert.AreEqual(0, check);
+
+			check = Board.IsChecked(b, Board.COLOR_BLACK);
 			Assert.AreEqual(0, check);
 		}
 
@@ -257,7 +260,7 @@ namespace Chess.Lib.Tests
 			b->AttacksBlack = Board.AttackMap(b, Board.COLOR_BLACK);
 			b->AttacksWhite = Board.AttackMap(b, Board.COLOR_WHITE);
 
-			var check = Board.GetCheckState(b);
+			var check = Board.IsChecked(b, Board.COLOR_WHITE);
 			Assert.AreEqual(1, check);
 		}
 
@@ -273,7 +276,7 @@ namespace Chess.Lib.Tests
 			b->AttacksBlack = Board.AttackMap(b, Board.COLOR_BLACK);
 			b->AttacksWhite = Board.AttackMap(b, Board.COLOR_WHITE);
 
-			var check = Board.GetCheckState(b);
+			var check = Board.IsChecked(b, Board.COLOR_BLACK);
 			Assert.AreEqual(1, check);
 		}
 
@@ -370,6 +373,9 @@ namespace Chess.Lib.Tests
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
 			Board.Init(b, 1);
+
+			b->AttacksWhite = Board.AttackMap(b, Board.COLOR_WHITE);
+			b->AttacksBlack = Board.AttackMap(b, Board.COLOR_BLACK);
 
 			Board.Make(b, 6, 21);
 			Board.Make(b, 62, 45);

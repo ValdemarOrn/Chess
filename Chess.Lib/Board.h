@@ -93,6 +93,9 @@ extern "C"
 	// Returns a bitmap of all squares attacked by the specified side
 	__declspec(dllexport) uint64_t Board_AttackMap(Board* board, int color);
 
+	// Checks if a square is under attack by a player
+	//__declspec(dllexport) _Bool Board_IsAttacked(Board* board, int square, int attackerColor);
+
 	// Makes a move on the board. Updates hash, set castling, verifies move is legal
 	// if illegal it is automatically taken back.
 	// Return 1 if legal, 0 if illegal and no move was made
@@ -110,9 +113,6 @@ extern "C"
 	// returns the castling rights that are allowed, given the state of the board
 	// checks location of kings and rooks and current castling rights
 	__declspec(dllexport) uint8_t Board_GetCastling(Board* board);
-
-	// Returns the Check/Mate state of the board
-	__declspec(dllexport) _Bool Board_GetCheckState(Board* board);
 
 	// Checks if the king of the specified color is in check
 	__declspec(dllexport) _Bool Board_IsChecked(Board* board, int color);

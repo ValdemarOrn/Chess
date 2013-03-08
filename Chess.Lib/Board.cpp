@@ -3,6 +3,10 @@
 #include "Bitboard.h"
 #include "Zobrist.h"
 #include "Moves.h"
+#include "Moves\Rook.h"
+#include "Moves\Bishop.h"
+#include "Moves\King.h"
+#include "Moves\Knight.h"
 #include <string.h>
 
 #define MAX_GAME_LENGTH 1024
@@ -86,8 +90,8 @@ void Board_Init(Board* board, int setPieces)
 	Board_SetPiece(board, 63, PIECE_ROOK, COLOR_BLACK);
 
 	board->Hash = Zobrist_Calculate(board);
-	board->AttacksWhite = Board_AttackMap(board, COLOR_WHITE);
-	board->AttacksBlack = Board_AttackMap(board, COLOR_BLACK);
+	board->AttacksWhite = 0; //Board_AttackMap(board, COLOR_WHITE);
+	board->AttacksBlack = 0; //Board_AttackMap(board, COLOR_BLACK);
 }
 
 void Board_SetPiece(Board* board, int square, int pieceType, int color)
@@ -166,6 +170,42 @@ uint64_t Board_AttackMap(Board* board, int color)
 
 	return attackBoard;
 }
+/*
+_Bool Board_IsAttacked(Board* board, int square, int attackerColor)
+{
+	uint64_t occupancy = board->Boards[BOARD_WHITE] | board->Boards[BOARD_BLACK];
+	_Bool attacked = FALSE;
+
+	if(attackerColor == COLOR_WHITE)
+	{
+		uint64_t enemies = board->Boards[BOARD_WHITE];
+
+		// check for rook & queen attacks
+		uint64_t rookAttacks = Rook_Read(square, occupancy);
+		uint64_t rooksAndQueens = board->Boards[PIECE_ROOK] | board->Boards[PIECE_QUEEN];
+		attacked = ((rooksAndQueens & enemies) & rookAttacks) > 0;
+		if(attacked)
+			return TRUE;
+
+		// check for bishop & queen attacks
+		uint64_t bishopAttacks = Bishop_Read(square, occupancy);
+		uint64_t bishopsAndQueens = board->Boards[PIECE_BISHOP] | board->Boards[PIECE_QUEEN];
+		attacked = ((bishopsAndQueens & enemies) & bishopAttacks) > 0;
+		if(attacked)
+			return TRUE;
+
+		// check for knight attacks
+		uint64_t knightAttacks = Knight_Read(square, occupancy);
+		uint64_t bishopsAndQueens = board->Boards[PIECE_BISHOP] | board->Boards[PIECE_QUEEN];
+		attacked = ((bishopsAndQueens & enemies) & bishopAttacks) > 0;
+		if(attacked)
+			return TRUE;
+	}
+	else
+	{
+
+	}
+}*/
 
 _Bool Board_Make(Board* board, int from, int to)
 {
@@ -435,15 +475,6 @@ uint8_t Board_GetCastling(Board* board)
 	uint8_t bq = (blackKing * (blackRooks & 0x100000000000000)) > 0 ? CASTLE_BQ : 0;
 
 	uint8_t output = (wk | wq | bk | bq) & board->Castle;
-	return output;
-}
-
-_Bool Board_GetCheckState(Board* board)
-{
-	uint64_t whiteKing = board->Boards[BOARD_WHITE] & board->Boards[PIECE_KING];
-	uint64_t blackKing = board->Boards[BOARD_BLACK] & board->Boards[PIECE_KING];
-
-	int output = ((whiteKing & board->AttacksBlack) | (blackKing & board->AttacksWhite)) > 0 ? TRUE : FALSE;
 	return output;
 }
 

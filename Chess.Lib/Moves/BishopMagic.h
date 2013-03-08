@@ -1,7 +1,7 @@
 
 // Magic constants and bit count for bishops
 
-uint64_t Bishop_Magic[64] = {
+const uint64_t Bishop_Magic[64] = {
 
 	14218579113840854015, // 0
 	4838420479146720908,
@@ -77,7 +77,7 @@ uint64_t Bishop_Magic[64] = {
 
 };
 
-uint64_t Bishop_Bits[64] = {
+const uint64_t Bishop_Bits[64] = {
 
 	5, // 0
 	4,

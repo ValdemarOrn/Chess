@@ -89,8 +89,8 @@ int Eval_Evaluate(Board* board)
 
 		if(color == COLOR_WHITE)
 		{
-			if(Bitboard_GetRef(&board->AttacksWhite, square) == 0)
-				pValue -= Eval_UndefendedPiecePenalty[piece];
+//			if(Bitboard_GetRef(&board->AttacksWhite, square) == 0)
+//				pValue -= Eval_UndefendedPiecePenalty[piece];
 
 			if(piece == PIECE_PAWN)
 			{
@@ -107,8 +107,8 @@ int Eval_Evaluate(Board* board)
 		}
 		else
 		{
-			if(Bitboard_GetRef(&board->AttacksBlack, square) == 0)
-				pValue -= Eval_UndefendedPiecePenalty[piece];
+//			if(Bitboard_GetRef(&board->AttacksBlack, square) == 0)
+//				pValue -= Eval_UndefendedPiecePenalty[piece];
 
 			if(piece == PIECE_PAWN)
 			{
