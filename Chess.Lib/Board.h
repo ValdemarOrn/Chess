@@ -102,7 +102,7 @@ extern "C"
 	__declspec(dllexport) void Board_Unmake(Board* board);
 
 	// Checks if a piece can be promoted
-	__declspec(dllexport) _Bool Board_CanPromote(Board* board, int square);
+	__declspec(dllexport) _Bool Board_CanPromote(Board* board, int square, int color, int piece);
 
 	// Promotes a pawn at the specified square
 	__declspec(dllexport) _Bool Board_Promote(Board* board, int square, int pieceType);

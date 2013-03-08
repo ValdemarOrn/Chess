@@ -96,7 +96,7 @@ namespace Chess.Lib
 		public static unsafe extern void Unmake(BoardStruct* board);
 
 		[DllImport("..\\..\\..\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Board_CanPromote", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
-		public static unsafe extern bool CanPromote(BoardStruct* board, int square);
+		public static unsafe extern bool CanPromote(BoardStruct* board, int square, int color, int piece);
 
 		[DllImport("..\\..\\..\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Board_Promote", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static unsafe extern bool Promote(BoardStruct* board, int square, int pieceType);

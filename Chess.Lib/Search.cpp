@@ -11,7 +11,7 @@ MoveSmall Search_SearchPos(Board* board, int searchDepth)
 {
 	Search_Context ctx;
 	ctx.Board = board;
-
+	
 	// init stats
 	ctx.Stats.AllNodeCount = 0;
 	ctx.Stats.CutNodeCount = 0;

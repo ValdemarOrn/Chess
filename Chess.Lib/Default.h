@@ -8,10 +8,16 @@ typedef int _Bool;
 
 // ---------- Compile Mode ---------
 
-//#define DEBUG
+#define DEBUG
+//#define _WIN32 // already defined within Visual Studio
+//#define __GNUC__
 
-// if NDEBUG (no-debug) is defined then assertions are disabled
-//#define NDEBUG 
+
+
+#ifndef DEBUG
+#define NDEBUG // if NDEBUG (no-debug) is defined then assertions are disabled
+#endif
+
 #include <assert.h>
 
 

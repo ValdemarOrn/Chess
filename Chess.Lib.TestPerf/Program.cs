@@ -13,21 +13,15 @@ namespace Chess.Lib.TestPerf
 			Manager.InitLibrary();
 
 			//TestSearchCount();
-			PerftTest();
-		}
-
-		private static void PerftTest()
-		{
-			var b = Board.Create();
-			Board.Init(b, 1);
-
-			for (int depth = 1; depth <= 5; depth++)
-			{
-				var start = DateTime.Now;
-				var count = Perft.Search(b, depth);
-				var seconds = (DateTime.Now - start).TotalSeconds;
-				Console.WriteLine("Perft(" + depth + "): " + count + ", Time: " + String.Format("{0:0.000}", seconds));
-			}
+			//PerftTestSuite.RunTests();
+			PerftTestSuite.EnableDebugOutput = false;
+			//PerftTestSuite.TestPosition(new Position("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1", 1, 0));
+			//PerftTestSuite.TestPosition(new Position("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1", 2, 0));
+			//PerftTestSuite.TestPosition(new Position("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1", 3, 0));
+			//PerftTestSuite.TestPosition(new Position("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1", 4, 0));
+			//PerftTestSuite.TestPosition(new Position("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1", 5, 0));
+			PerftTestSuite.RunTests();
+			//Console.ReadLine();
 		}
 
 		private static void TestSearchCount()

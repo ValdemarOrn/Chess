@@ -401,20 +401,16 @@ void Board_Unmake(Board* board)
 	#endif
 }
 
-_Bool Board_CanPromote(Board* board, int square)
+_Bool Board_CanPromote(Board* board, int square, int color, int piece)
 {
-	if(!Bitboard_Get(board->Boards[BOARD_PAWNS], square))
-		return 0;
-
-	int color = Board_Color(board, square);
 	int y = Board_Y(square);
 
-	return (y == 7 && color == COLOR_WHITE) | (y == 0 && color == COLOR_BLACK);
+	return (piece == PIECE_PAWN) && ((y == 7 && color == COLOR_WHITE) | (y == 0 && color == COLOR_BLACK));
 }
 
 _Bool Board_Promote(Board* board, int square, int pieceType)
 {
-	if(!Board_CanPromote(board, square))
+	if(!Board_CanPromote(board, square, Board_Color(board, square), Board_Piece(board, square)))
 		return 0;
 
 	int color = Board_Color(board, square);

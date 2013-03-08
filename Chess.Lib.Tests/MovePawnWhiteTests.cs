@@ -273,5 +273,16 @@ namespace Chess.Lib.Tests
 			// tile 45, 46
 			Assert.AreEqual((ulong)0x600000000000, moves);
 		}
+
+		[TestMethod]
+		public unsafe void TestWhiteProblematicMove()
+		{
+			// this position caused a wrong hit during Perft
+			var x = Notation.FENtoBoard("rnbqkbnr/1ppppppp/8/p7/7P/8/PPPPPPP1/RNBQKBNR w KQkq a6 0 2");
+			var b = Helpers.ManagedBoardToNative(x);
+
+			var moves = Moves.GetMoves(b, 31);
+			Assert.AreEqual((ulong)549755813888, moves);
+		}
 	}
 }

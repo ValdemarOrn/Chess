@@ -15,6 +15,7 @@ extern "C"
 	__declspec(dllexport) uint64_t Moves_GetAttacks(Board* board, int tile);
 
 	// Fills up the moveList with all possible pseudo-legal moves for the current player
+	// This function also handles promotions and creates moves for every promotion possibility
 	__declspec(dllexport) int Moves_GetAllMoves(Board* board, Move* moveList100);
 
 	// ------------- Specific moves -------------
@@ -142,15 +143,23 @@ extern "C"
 
 		int color = Board_Color(board, from);
 
+		int epX = Board_X(board->EnPassantTile);
+		int epY = Board_Y(board->EnPassantTile);
+
+		int fromX = Board_X(from);
+		int fromY = Board_Y(from);
+
 		if(color == COLOR_WHITE)
 		{
-			if(from + 7 == board->EnPassantTile || from + 9 == board->EnPassantTile)
-				return Bitboard_Set(0, board->EnPassantTile);
+			if(fromY + 1 == epY)
+				if(fromX + 1 == epX || fromX - 1 == epX)
+					return Bitboard_Set(0, board->EnPassantTile);
 		}
 		else
 		{
-			if(from - 7 == board->EnPassantTile || from - 9 == board->EnPassantTile)
-				return Bitboard_Set(0, board->EnPassantTile);
+			if(fromY - 1 == epY)
+				if(fromX + 1 == epX || fromX - 1 == epX)
+					return Bitboard_Set(0, board->EnPassantTile);
 		}
 
 		return 0;

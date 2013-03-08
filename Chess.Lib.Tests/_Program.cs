@@ -14,8 +14,8 @@ namespace Chess.Lib.Tests
 		{
 			Manager.InitLibrary();
 
-			var t = new KingTest();
-			t.BlackKingTest1();
+			var t = new MovePawnWhiteTests();
+			t.TestWhiteProblematicMove();
 		}
 	}
 }

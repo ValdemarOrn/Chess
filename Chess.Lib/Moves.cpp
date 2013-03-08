@@ -138,16 +138,15 @@ uint64_t Moves_GetAttacks(Board* board, int tile)
 int Moves_GetAllMoves(Board* board, Move* moveList100)
 {
 	int moveCount = 0;
-
-	uint64_t pieceBoard = (board->PlayerTurn == COLOR_WHITE) ? board->Boards[BOARD_WHITE] : board->Boards[BOARD_BLACK];
-	uint8_t locations[64];
 	uint8_t destinations[64];
-	int pieceCount = Bitboard_BitList(pieceBoard, locations);
 
 	// for all pieces
-	for (int i=0; i < pieceCount; i++)
+	for (int i=0; i < 64; i++)
 	{
-		int from = locations[i];
+		if(Board_Color(board, i) != board->PlayerTurn)
+			continue;
+
+		int from = i;
 		int piece = Board_Piece(board, from);
 
 		uint64_t destBoard = Moves_GetMoves(board, from);
@@ -176,10 +175,26 @@ int Moves_GetAllMoves(Board* board, Move* moveList100)
 			move->From = from;
 			move->PlayerColor = board->PlayerTurn;
 			move->PlayerPiece = piece;
-			move->Promotion = PIECE_QUEEN * Board_CanPromote(board, to);
 			move->To = to;
 
-			moveCount++;
+			if(Board_CanPromote(board, to, board->PlayerTurn, piece))
+			{
+				memcpy(&moveList100[moveCount + 1], move, sizeof(Move));
+				memcpy(&moveList100[moveCount + 2], move, sizeof(Move));
+				memcpy(&moveList100[moveCount + 3], move, sizeof(Move));
+
+				moveList100[moveCount].Promotion = PIECE_KNIGHT;
+				moveList100[moveCount + 1].Promotion = PIECE_BISHOP;
+				moveList100[moveCount + 2].Promotion = PIECE_ROOK;
+				moveList100[moveCount + 3].Promotion = PIECE_QUEEN;
+
+				moveCount += 4;
+			}
+			else
+			{
+				move->Promotion = 0;
+				moveCount += 1;
+			}
 		}
 	}
 
