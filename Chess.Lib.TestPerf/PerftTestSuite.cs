@@ -22,22 +22,22 @@ namespace Chess.Lib.TestPerf
 
 	public unsafe class PerftTestSuite
 	{
-		static List<Position> TestPositions;
+		public static List<Position> Positions;
 		public static bool EnableDebugOutput;
 
 		static PerftTestSuite()
 		{
-			TestPositions = new List<Position>();
-			TestPositions.Add(new Position("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1", 5, 4865609));
-			TestPositions.Add(new Position("r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq -", 4, 4085603));
-			TestPositions.Add(new Position("8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - -", 6, 11030083));
-			TestPositions.Add(new Position("r3k2r/Pppp1ppp/1b3nbN/nP6/BBP1P3/q4N2/Pp1P2PP/R2Q1RK1 w kq - 0 1", 5, 15833292));
-			TestPositions.Add(new Position("rnbqkb1r/pp1p1ppp/2p5/4P3/2B5/8/PPP1NnPP/RNBQK2R w KQkq - 0 6", 4, 1761505));
+			Positions = new List<Position>();
+			Positions.Add(new Position("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1", 5, 4865609));
+			Positions.Add(new Position("r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq -", 4, 4085603));
+			Positions.Add(new Position("8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - -", 6, 11030083));
+			Positions.Add(new Position("r3k2r/Pppp1ppp/1b3nbN/nP6/BBP1P3/q4N2/Pp1P2PP/R2Q1RK1 w kq - 0 1", 5, 15833292));
+			Positions.Add(new Position("rnbqkb1r/pp1p1ppp/2p5/4P3/2B5/8/PPP1NnPP/RNBQK2R w KQkq - 0 6", 4, 1761505));
 		}
 
 		public static void RunTests()
 		{
-			foreach (var position in TestPositions)
+			foreach (var position in Positions)
 			{
 				Console.WriteLine("Searching " + position.Depth + " plies");
 				Console.WriteLine("Expecting " + position.ExpectedCount);
@@ -47,7 +47,7 @@ namespace Chess.Lib.TestPerf
 
 			Console.WriteLine("\n-------------------------------\n");
 
-			foreach (var position in TestPositions)
+			foreach (var position in Positions)
 			{
 				if (position.ActualCount != position.ExpectedCount)
 				{
@@ -56,8 +56,8 @@ namespace Chess.Lib.TestPerf
 				}
 			}
 
-			int failed = TestPositions.Where(x => x.ActualCount != x.ExpectedCount).Count();
-			int success = TestPositions.Where(x => x.ActualCount == x.ExpectedCount).Count();
+			int failed = Positions.Where(x => x.ActualCount != x.ExpectedCount).Count();
+			int success = Positions.Where(x => x.ActualCount == x.ExpectedCount).Count();
 
 			Console.WriteLine("Tests Passed: " + success);
 			Console.WriteLine("Tests Failed: " + failed);

@@ -7,9 +7,18 @@
 #include "Moves\Bishop.h"
 #include "Moves\King.h"
 #include "Moves\Knight.h"
+#include "Moves\Queen.h"
+#include "Moves\Pawn.h"
 #include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 #define MAX_GAME_LENGTH 1024
+
+#ifdef DEBUG
+uint64_t Board_TotalMakes = 0;
+uint64_t Board_MakesThatCanSelfCheck = 0;
+#endif
 
 Board* Board_Create()
 {
@@ -90,8 +99,8 @@ void Board_Init(Board* board, int setPieces)
 	Board_SetPiece(board, 63, PIECE_ROOK, COLOR_BLACK);
 
 	board->Hash = Zobrist_Calculate(board);
-	board->AttacksWhite = 0; //Board_AttackMap(board, COLOR_WHITE);
-	board->AttacksBlack = 0; //Board_AttackMap(board, COLOR_BLACK);
+//	board->AttacksWhite = 0; //Board_AttackMap(board, COLOR_WHITE);
+//	board->AttacksBlack = 0; //Board_AttackMap(board, COLOR_BLACK);
 }
 
 void Board_SetPiece(Board* board, int square, int pieceType, int color)
@@ -170,42 +179,78 @@ uint64_t Board_AttackMap(Board* board, int color)
 
 	return attackBoard;
 }
-/*
+
+_Bool Board_MoveCanSelfCheck(Board* board, int from, int to)
+{
+	int piece = Board_Piece(board, from);
+	int color = Board_Color(board, from);
+
+	// king moves can self check
+	if(piece == PIECE_KING)
+		return TRUE;
+
+	// When we are already checked then not every move gets out of check
+	if(Board_IsChecked(board, color))
+		return TRUE;
+
+	// En Passant moves can self check
+	if(board->EnPassantTile > 0 && piece == PIECE_PAWN && to == board->EnPassantTile)
+		return TRUE;
+
+	// if the king is inside the attack area of a queen at the "from" location, then this
+	// piece might be covering the king from attacks, e.g. it's pinned
+	uint64_t ourPieces = (color == COLOR_WHITE) ? board->Boards[BOARD_WHITE] : board->Boards[BOARD_BLACK];
+	uint64_t occupancy = board->Boards[BOARD_WHITE] | board->Boards[BOARD_BLACK];
+	uint64_t coverage = Queen_Read(from, occupancy);
+	uint64_t ourKing = ourPieces & board->Boards[PIECE_KING];
+	if((coverage & ourKing) > 0)
+		return TRUE;
+
+	return FALSE;
+	
+}
+
 _Bool Board_IsAttacked(Board* board, int square, int attackerColor)
 {
 	uint64_t occupancy = board->Boards[BOARD_WHITE] | board->Boards[BOARD_BLACK];
 	_Bool attacked = FALSE;
 
-	if(attackerColor == COLOR_WHITE)
-	{
-		uint64_t enemies = board->Boards[BOARD_WHITE];
+	uint64_t enemies = (attackerColor == COLOR_WHITE) ? board->Boards[BOARD_WHITE] : board->Boards[BOARD_BLACK];
+	
+	// check for rook & queen attacks
+	uint64_t rookAttacks = Rook_Read(square, occupancy);
+	uint64_t rooksAndQueens = board->Boards[PIECE_ROOK] | board->Boards[PIECE_QUEEN];
+	attacked = ((rooksAndQueens & enemies) & rookAttacks) > 0;
+	if(attacked)
+		return TRUE;
 
-		// check for rook & queen attacks
-		uint64_t rookAttacks = Rook_Read(square, occupancy);
-		uint64_t rooksAndQueens = board->Boards[PIECE_ROOK] | board->Boards[PIECE_QUEEN];
-		attacked = ((rooksAndQueens & enemies) & rookAttacks) > 0;
-		if(attacked)
-			return TRUE;
+	// check for bishop & queen attacks
+	uint64_t bishopAttacks = Bishop_Read(square, occupancy);
+	uint64_t bishopsAndQueens = board->Boards[PIECE_BISHOP] | board->Boards[PIECE_QUEEN];
+	attacked = ((bishopsAndQueens & enemies) & bishopAttacks) > 0;
+	if(attacked)
+		return TRUE;
 
-		// check for bishop & queen attacks
-		uint64_t bishopAttacks = Bishop_Read(square, occupancy);
-		uint64_t bishopsAndQueens = board->Boards[PIECE_BISHOP] | board->Boards[PIECE_QUEEN];
-		attacked = ((bishopsAndQueens & enemies) & bishopAttacks) > 0;
-		if(attacked)
-			return TRUE;
+	// check for knight attacks
+	uint64_t knightAttacks = Knight_Read(square);
+	attacked = ((board->Boards[PIECE_KNIGHT] & enemies) & knightAttacks) > 0;
+	if(attacked)
+		return TRUE;
 
-		// check for knight attacks
-		uint64_t knightAttacks = Knight_Read(square, occupancy);
-		uint64_t bishopsAndQueens = board->Boards[PIECE_BISHOP] | board->Boards[PIECE_QUEEN];
-		attacked = ((bishopsAndQueens & enemies) & bishopAttacks) > 0;
-		if(attacked)
-			return TRUE;
-	}
-	else
-	{
+	// check for pawn attacks
+	uint64_t pawnLocations = (attackerColor == COLOR_WHITE) ? Pawn_ReadBlackAttack(square) : Pawn_ReadWhiteAttack(square);
+	attacked = ((board->Boards[PIECE_PAWN] & enemies) & pawnLocations) > 0;
+	if(attacked)
+		return TRUE;
 
-	}
-}*/
+	// check for other king
+	uint64_t kingAttacks = King_Read(square);
+	attacked = (kingAttacks & board->Boards[PIECE_KING] & enemies) > 0;
+	if(attacked)
+		return TRUE;
+
+	return FALSE;
+}
 
 _Bool Board_Make(Board* board, int from, int to)
 {
@@ -218,6 +263,14 @@ _Bool Board_Make(Board* board, int from, int to)
 	// 4. update board data, enpassant square, castling, 50 move rule, hash
 	// 5. Verify it doesn't self check
 	//    5.1 If it does, unmake
+
+	_Bool canSelfCheck = Board_MoveCanSelfCheck(board, from, to);
+
+	#ifdef DEBUG
+	uint64_t originalHash = board->Hash;
+	Board_TotalMakes++;
+	Board_MakesThatCanSelfCheck += canSelfCheck;
+	#endif
 
 	int playerPiece = Board_Piece(board, from);
 	int capturePiece = Board_Piece(board, to);
@@ -241,8 +294,8 @@ _Bool Board_Make(Board* board, int from, int to)
 
 	// 1. put info in history
 	MoveHistory* history = &board->MoveHistory[board->CurrentMove];
-	history->PrevAttacksBlack = board->AttacksBlack;
-	history->PrevAttacksWhite = board->AttacksWhite;
+//	history->PrevAttacksBlack = board->AttacksBlack;
+//	history->PrevAttacksWhite = board->AttacksWhite;
 	history->PrevCastleState = board->Castle;
 	history->PrevEnPassantTile = board->EnPassantTile;
 	history->PrevFiftyMoveRulePlies = board->FiftyMoveRulePlies;
@@ -328,33 +381,32 @@ _Bool Board_Make(Board* board, int from, int to)
 	// 5. Verify it doesn't self check
 	//    5.1 If it does, unmake
 
+	if(!canSelfCheck)
+		return 1;
+
 	// I switch between these two cases because if the move is illegal we can save 50%
 	// of the move generation time by starting with the right color
 	if(board->PlayerTurn == COLOR_WHITE)
 	{
-		board->AttacksWhite = Board_AttackMap(board, COLOR_WHITE);
 		uint64_t blackKing = board->Boards[BOARD_BLACK] & board->Boards[PIECE_KING];
-		if((blackKing & board->AttacksWhite) > 0) // white attacks black king
+		_Bool isAttacked = Board_IsAttacked(board, Bitboard_ForwardBit(blackKing), COLOR_WHITE);
+
+		if(isAttacked) // white attacks black king
 		{
 			Board_Unmake(board);
 			return 0;
-		}
-
-		// it's legal, now calculate black's attacks
-		board->AttacksBlack = Board_AttackMap(board, COLOR_BLACK);
+		}		
 	}
 	else
 	{
-		board->AttacksBlack = Board_AttackMap(board, COLOR_BLACK);
 		uint64_t whiteKing = board->Boards[BOARD_WHITE] & board->Boards[PIECE_KING];
-		if((whiteKing & board->AttacksBlack) > 0) // black attacks white king
+		_Bool isAttacked = Board_IsAttacked(board, Bitboard_ForwardBit(whiteKing), COLOR_BLACK);
+
+		if(isAttacked) // black attacks white king
 		{
 			Board_Unmake(board);
 			return 0;
 		}
-
-		// it's legal, now calculate white's attacks
-		board->AttacksWhite = Board_AttackMap(board, COLOR_WHITE);
 	}
 
 	return 1;
@@ -375,13 +427,10 @@ void Board_Unmake(Board* board)
 	MoveHistory* history = &board->MoveHistory[board->CurrentMove - 1];
 	Move* move = &history->Move;
 
-	#ifdef DEBUG
-	if(Board_Piece(board, move->To) != move->PlayerPiece)
-		int k = 23;
-	#endif
+	assert(Board_Piece(board, move->To) == ((move->Promotion > 0) ? move->Promotion : move->PlayerPiece));
 
-	board->AttacksBlack = history->PrevAttacksBlack;
-	board->AttacksWhite = history->PrevAttacksWhite;
+//	board->AttacksBlack = history->PrevAttacksBlack;
+//	board->AttacksWhite = history->PrevAttacksWhite;
 
 	board->Hash ^= Zobrist_Keys[ZOBRIST_CASTLING][board->Castle];
 	board->Castle = history->PrevCastleState;
@@ -435,10 +484,7 @@ void Board_Unmake(Board* board)
 	board->CurrentMove -= 1;
 
 	// 4. For debugging, compute new hash and compare with hash from history. must match!
-	#ifdef DEBUG
-	if(board->Hash != history->PrevHash)
-		int k = 23;
-	#endif
+	assert(board->Hash == history->PrevHash);
 }
 
 _Bool Board_CanPromote(Board* board, int square, int color, int piece)
@@ -457,6 +503,8 @@ _Bool Board_Promote(Board* board, int square, int pieceType)
 	Board_ClearPiece(board, square);
 	Board_SetPiece(board, square, pieceType, color);
 	board->MoveHistory[board->CurrentMove - 1].Move.Promotion = pieceType;
+	//board->AttacksWhite = Board_AttackMap(board, COLOR_WHITE);
+	//board->AttacksBlack = Board_AttackMap(board, COLOR_BLACK);
 	return 1;
 }
 
@@ -483,13 +531,146 @@ _Bool Board_IsChecked(Board* board, int color)
 	if(color == COLOR_WHITE)
 	{
 		uint64_t whiteKing = board->Boards[BOARD_WHITE] & board->Boards[PIECE_KING];
-		int output = (whiteKing & board->AttacksBlack) > 0 ? TRUE : FALSE;
+		_Bool output = Board_IsAttacked(board, Bitboard_ForwardBit(whiteKing), COLOR_BLACK);
 		return output;
 	}
 	else
 	{
 		uint64_t blackKing = board->Boards[BOARD_BLACK] & board->Boards[PIECE_KING];
-		int output = (blackKing & board->AttacksWhite) > 0 ? TRUE : FALSE;
+		_Bool output = Board_IsAttacked(board, Bitboard_ForwardBit(blackKing), COLOR_WHITE);
 		return output;
 	}
+}
+
+
+
+void Board_ToFEN(Board* board, char* outputString100)
+{
+	char FENPieces[64];
+	FENPieces[COLOR_WHITE | PIECE_PAWN] = 'P';
+	FENPieces[COLOR_WHITE | PIECE_KNIGHT] = 'N';
+	FENPieces[COLOR_WHITE | PIECE_BISHOP] = 'B';
+	FENPieces[COLOR_WHITE | PIECE_ROOK] = 'R';
+	FENPieces[COLOR_WHITE | PIECE_QUEEN] = 'Q';
+	FENPieces[COLOR_WHITE | PIECE_KING] = 'K';
+	FENPieces[COLOR_BLACK | PIECE_PAWN] = 'p';
+	FENPieces[COLOR_BLACK | PIECE_KNIGHT] = 'n';
+	FENPieces[COLOR_BLACK | PIECE_BISHOP] = 'b';
+	FENPieces[COLOR_BLACK | PIECE_ROOK] = 'r';
+	FENPieces[COLOR_BLACK | PIECE_QUEEN] = 'q';
+	FENPieces[COLOR_BLACK | PIECE_KING] = 'k';
+
+	char str[100];
+
+	int cc = 0; // charCount
+	int empties = 0;
+	for(int i = 0; i < 64; i++)
+	{
+		int rank = 7 - (i / 8);
+		int x = i % 8;
+		int idx = rank * 8 + x;
+
+		if(i % 8 == 0 && i > 0)
+		{
+			if(empties > 0)
+				str[cc++] = ('0' + empties);
+
+			str[cc++] = '/';
+			empties = 0;
+		}
+
+		if(board->Tiles[idx] > 0)
+		{
+			if(empties > 0)
+				str[cc++] = ('0' + empties);
+
+			empties = 0;
+			str[cc++] = FENPieces[board->Tiles[idx]];
+		}
+		else
+			empties++;
+	}
+
+	// add the final empties to the string
+	if(empties > 0)
+		str[cc++] = ('0' + empties);
+
+	str[cc++] = ' ';
+
+	// player turn
+	str[cc++] = (board->PlayerTurn == COLOR_WHITE) ? 'w' : 'b';
+	str[cc++] = ' ';
+
+	// castling rights
+	if(board->Castle == 0)
+	{
+		str[cc++] = '-';
+	}
+	else
+	{
+		if(board->Castle & CASTLE_WK)
+			str[cc++] = 'K';
+		if(board->Castle & CASTLE_WQ)
+			str[cc++] = 'Q';
+		if(board->Castle & CASTLE_BK)
+			str[cc++] = 'k';
+		if(board->Castle & CASTLE_BQ)
+			str[cc++] = 'q';
+	}
+	str[cc++] = ' ';
+
+	// en passant
+	if(board->EnPassantTile == 0)
+	{
+		str[cc++] = '-';
+	}
+	else
+	{
+		char tile[2];
+		Move_SquareToString(board->EnPassantTile, tile);
+		str[cc++] = tile[0];
+		str[cc++] = tile[1];
+	}
+	str[cc++] = ' ';
+
+	// half move count
+	char moves[3];
+	sprintf(moves, "%d", (int)board->FiftyMoveRulePlies);
+	if(board->FiftyMoveRulePlies >= 100)
+	{
+		str[cc++] = moves[0];
+		str[cc++] = moves[1];
+		str[cc++] = moves[2];
+	}
+	if(board->FiftyMoveRulePlies >= 10)
+	{
+		str[cc++] = moves[0];
+		str[cc++] = moves[1];
+	}
+	else
+	{
+		str[cc++] = moves[0];
+	}
+	str[cc++] = ' ';
+
+	// full move count
+	sprintf(moves, "%d", (int)(1 + board->CurrentMove / 2));
+	if((int)(1 + board->CurrentMove / 2) >= 100)
+	{
+		str[cc++] = moves[0];
+		str[cc++] = moves[1];
+		str[cc++] = moves[2];
+	}
+	if((int)(1 + board->CurrentMove / 2) >= 10)
+	{
+		str[cc++] = moves[0];
+		str[cc++] = moves[1];
+	}
+	else
+	{
+		str[cc++] = moves[0];
+	}
+	str[cc++] = '\0';
+
+	memcpy(outputString100, str, 100);
 }

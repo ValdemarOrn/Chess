@@ -54,10 +54,10 @@ extern "C"
 	// ------------- Inline function definitions -----------
 
 	// square that can't be attacked during castling
-	const uint64_t WK_NOATTACK = 0x70;
-	const uint64_t WQ_NOATTACK = 0x1C;
-	const uint64_t BK_NOATTACK = 0x7000000000000000;
-	const uint64_t BQ_NOATTACK = 0x1C00000000000000;
+	//const uint64_t WK_NOATTACK = 0x70;
+	//const uint64_t WQ_NOATTACK = 0x1C;
+	//const uint64_t BK_NOATTACK = 0x7000000000000000;
+	//const uint64_t BQ_NOATTACK = 0x1C00000000000000;
 
 	// squares that can't be occupied during castling
 	const uint64_t WK_CLEAR = 0x60;
@@ -69,7 +69,24 @@ extern "C"
 	// the key is castling type
 	extern uint64_t CastlingTableTypesToBitboard[16];
 
-	
+	__inline_always uint8_t Moves_GetCastlingType(Board* board, int from, int to)
+	{
+		if(from == 4)
+		{
+			uint64_t whiteKing = board->Boards[BOARD_WHITE] & board->Boards[BOARD_KINGS];
+			int isKing = Bitboard_GetRef(&whiteKing, 4);
+			return isKing * (((to == 2) * CASTLE_WQ) | ((to == 6) * CASTLE_WK));
+		}
+		else if(from == 60)
+		{
+			uint64_t blackKing = board->Boards[BOARD_BLACK] & board->Boards[BOARD_KINGS];
+			int isKing = Bitboard_GetRef(&blackKing, 60);
+
+			return isKing * (((to == 58) * CASTLE_BQ) | ((to == 62) * CASTLE_BK));
+		}
+
+		return 0;
+	}
 
 	// return castling types that can be performed at this moment
 	__inline_always uint8_t Moves_GetAvailableCastlingTypes(Board* board, int color)
@@ -78,15 +95,21 @@ extern "C"
 
 		if(color == COLOR_WHITE)
 		{
-			int wk = (((WK_NOATTACK & board->AttacksBlack) | (WK_CLEAR & occupancy)) == 0) ? 1 : 0;
-			int wq = (((WQ_NOATTACK & board->AttacksBlack) | (WQ_CLEAR & occupancy)) == 0) ? 1 : 0;
+			_Bool wkAttacked = Board_IsAttacked(board, 4, COLOR_BLACK) | Board_IsAttacked(board, 5, COLOR_BLACK) | Board_IsAttacked(board, 6, COLOR_BLACK);
+			_Bool wqAttacked = Board_IsAttacked(board, 2, COLOR_BLACK) | Board_IsAttacked(board, 3, COLOR_BLACK) | Board_IsAttacked(board, 4, COLOR_BLACK);
+
+			_Bool wk = !wkAttacked && ((WK_CLEAR & occupancy) == 0);
+			_Bool wq = !wqAttacked && ((WQ_CLEAR & occupancy) == 0);
 		
 			return (wk * (CASTLE_WK & board->Castle)) | (wq *  (CASTLE_WQ & board->Castle));
 		}
 		else
 		{
-			int bk = (((BK_NOATTACK & board->AttacksWhite) | (BK_CLEAR & occupancy)) == 0) ? 1 : 0;
-			int bq = (((BQ_NOATTACK & board->AttacksWhite) | (BQ_CLEAR & occupancy)) == 0) ? 1 : 0;
+			_Bool bkAttacked = Board_IsAttacked(board, 60, COLOR_WHITE) | Board_IsAttacked(board, 61, COLOR_WHITE) | Board_IsAttacked(board, 62, COLOR_WHITE);
+			_Bool bqAttacked = Board_IsAttacked(board, 58, COLOR_WHITE) | Board_IsAttacked(board, 59, COLOR_WHITE) | Board_IsAttacked(board, 60, COLOR_WHITE);
+
+			_Bool bk = !bkAttacked && ((BK_CLEAR & occupancy) == 0);
+			_Bool bq = !bqAttacked && ((BQ_CLEAR & occupancy) == 0);
 
 			return (bk * (CASTLE_BK & board->Castle)) | (bq *  (CASTLE_BQ & board->Castle));
 		}

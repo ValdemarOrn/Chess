@@ -13,8 +13,6 @@ namespace Chess.Lib
 
 		public fixed byte Tiles[64];
 
-		public ulong AttacksWhite;
-		public ulong AttacksBlack;
 		public ulong Hash;
 
 		public int CurrentMove;
@@ -89,6 +87,12 @@ namespace Chess.Lib
 		[DllImport("..\\..\\..\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Board_AttackMap", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static unsafe extern ulong AttackMap(BoardStruct* board, int color);
 
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Board_MoveCanSelfCheck", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		public static unsafe extern bool MoveCanSelfCheck(BoardStruct* board, int from, int to);
+
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Board_IsAttacked", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		public static unsafe extern bool IsAttacked(BoardStruct* board, int square, int attackerColor);
+
 		[DllImport("..\\..\\..\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Board_Make", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static unsafe extern bool Make(BoardStruct* board, int from, int to);
 
@@ -106,5 +110,8 @@ namespace Chess.Lib
 
 		[DllImport("..\\..\\..\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Board_IsChecked", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static unsafe extern int IsChecked(BoardStruct* board, int color);
+
+		[DllImport("..\\..\\..\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Board_ToFEN", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		public static unsafe extern void ToFEN(BoardStruct* board, byte* outputString100);
 	}
 }

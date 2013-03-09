@@ -15,13 +15,9 @@ namespace Chess.Lib.TestPerf
 			//TestSearchCount();
 			//PerftTestSuite.RunTests();
 			PerftTestSuite.EnableDebugOutput = false;
-			//PerftTestSuite.TestPosition(new Position("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1", 1, 0));
-			//PerftTestSuite.TestPosition(new Position("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1", 2, 0));
-			//PerftTestSuite.TestPosition(new Position("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1", 3, 0));
-			//PerftTestSuite.TestPosition(new Position("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1", 4, 0));
-			//PerftTestSuite.TestPosition(new Position("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1", 5, 0));
+			//PerftTestSuite.TestPosition(PerftTestSuite.Positions[1]);
 			PerftTestSuite.RunTests();
-			//Console.ReadLine();
+			Console.ReadLine();
 		}
 
 		private static void TestSearchCount()

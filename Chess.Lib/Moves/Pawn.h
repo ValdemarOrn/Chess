@@ -15,10 +15,10 @@ extern "C"
 	__declspec(dllexport) uint64_t Pawn_ReadWhiteAttack(int pos);
 	__declspec(dllexport) uint64_t Pawn_ReadBlackAttack(int pos);
 
-	uint64_t Pawn_TableWhiteMove[64];
-	uint64_t Pawn_TableBlackMove[64];
-	uint64_t Pawn_TableWhiteAttack[64];
-	uint64_t Pawn_TableBlackAttack[64];
+	extern uint64_t Pawn_TableWhiteMove[64];
+	extern uint64_t Pawn_TableBlackMove[64];
+	extern uint64_t Pawn_TableWhiteAttack[64];
+	extern uint64_t Pawn_TableBlackAttack[64];
 
 	/// Loads a new move board into the array
 	inline void Pawn_LoadWhiteMove(int pos, uint64_t moveBoard)

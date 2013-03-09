@@ -54,8 +54,8 @@ namespace Chess.Lib.Tests
 			Board.SetPiece(b, 4, Board.PIECE_KING, Board.COLOR_WHITE);
 			Board.SetPiece(b, 60, Board.PIECE_KING, Board.COLOR_BLACK);
 
-			b->AttacksWhite = Board.AttackMap(b, Board.COLOR_WHITE);
-			b->AttacksBlack = Board.AttackMap(b, Board.COLOR_BLACK);
+			//b->AttacksWhite = Board.AttackMap(b, Board.COLOR_WHITE);
+			//b->AttacksBlack = Board.AttackMap(b, Board.COLOR_BLACK);
 
 			var whiteCastle = Moves.GetAvailableCastlingTypes(b, Board.COLOR_WHITE);
 			var blackCastle = Moves.GetAvailableCastlingTypes(b, Board.COLOR_BLACK);
@@ -73,8 +73,8 @@ namespace Chess.Lib.Tests
 			Board.SetPiece(b, 60, Board.PIECE_KING, Board.COLOR_BLACK);
 
 			Board.SetPiece(b, 8, Board.PIECE_KNIGHT, Board.COLOR_BLACK);
-			b->AttacksWhite = Board.AttackMap(b, Board.COLOR_WHITE);
-			b->AttacksBlack = Board.AttackMap(b, Board.COLOR_BLACK);
+			//b->AttacksWhite = Board.AttackMap(b, Board.COLOR_WHITE);
+			//b->AttacksBlack = Board.AttackMap(b, Board.COLOR_BLACK);
 
 			var whiteCastle = Moves.GetAvailableCastlingTypes(b, Board.COLOR_WHITE);
 			var blackCastle = Moves.GetAvailableCastlingTypes(b, Board.COLOR_BLACK);
@@ -91,8 +91,8 @@ namespace Chess.Lib.Tests
 			Board.SetPiece(b, 60, Board.PIECE_KING, Board.COLOR_BLACK);
 
 			Board.SetPiece(b, 15, Board.PIECE_KNIGHT, Board.COLOR_BLACK);
-			b->AttacksWhite = Board.AttackMap(b, Board.COLOR_WHITE);
-			b->AttacksBlack = Board.AttackMap(b, Board.COLOR_BLACK);
+			//b->AttacksWhite = Board.AttackMap(b, Board.COLOR_WHITE);
+			//b->AttacksBlack = Board.AttackMap(b, Board.COLOR_BLACK);
 
 			var whiteCastle = Moves.GetAvailableCastlingTypes(b, Board.COLOR_WHITE);
 			var blackCastle = Moves.GetAvailableCastlingTypes(b, Board.COLOR_BLACK);
@@ -109,8 +109,8 @@ namespace Chess.Lib.Tests
 			Board.SetPiece(b, 60, Board.PIECE_KING, Board.COLOR_BLACK);
 
 			Board.SetPiece(b, 48, Board.PIECE_KNIGHT, Board.COLOR_WHITE);
-			b->AttacksWhite = Board.AttackMap(b, Board.COLOR_WHITE);
-			b->AttacksBlack = Board.AttackMap(b, Board.COLOR_BLACK);
+			//b->AttacksWhite = Board.AttackMap(b, Board.COLOR_WHITE);
+			//b->AttacksBlack = Board.AttackMap(b, Board.COLOR_BLACK);
 
 			var whiteCastle = Moves.GetAvailableCastlingTypes(b, Board.COLOR_WHITE);
 			var blackCastle = Moves.GetAvailableCastlingTypes(b, Board.COLOR_BLACK);
@@ -127,8 +127,8 @@ namespace Chess.Lib.Tests
 			Board.SetPiece(b, 60, Board.PIECE_KING, Board.COLOR_BLACK);
 
 			Board.SetPiece(b, 55, Board.PIECE_KNIGHT, Board.COLOR_WHITE);
-			b->AttacksWhite = Board.AttackMap(b, Board.COLOR_WHITE);
-			b->AttacksBlack = Board.AttackMap(b, Board.COLOR_BLACK);
+			//b->AttacksWhite = Board.AttackMap(b, Board.COLOR_WHITE);
+			//b->AttacksBlack = Board.AttackMap(b, Board.COLOR_BLACK);
 
 			var whiteCastle = Moves.GetAvailableCastlingTypes(b, Board.COLOR_WHITE);
 			var blackCastle = Moves.GetAvailableCastlingTypes(b, Board.COLOR_BLACK);
@@ -147,8 +147,8 @@ namespace Chess.Lib.Tests
 			Board.SetPiece(b, 4, Board.PIECE_KING, Board.COLOR_WHITE);
 			Board.SetPiece(b, 60, Board.PIECE_KING, Board.COLOR_BLACK);
 
-			b->AttacksWhite = Board.AttackMap(b, Board.COLOR_WHITE);
-			b->AttacksBlack = Board.AttackMap(b, Board.COLOR_BLACK);
+			//b->AttacksWhite = Board.AttackMap(b, Board.COLOR_WHITE);
+			//b->AttacksBlack = Board.AttackMap(b, Board.COLOR_BLACK);
 
 			var whiteCastleBB = Moves.GetCastlingMoves(b, Board.COLOR_WHITE);
 			var blackCastleBB = Moves.GetCastlingMoves(b, Board.COLOR_BLACK);
@@ -166,8 +166,8 @@ namespace Chess.Lib.Tests
 			Board.SetPiece(b, 60, Board.PIECE_KING, Board.COLOR_BLACK);
 
 			Board.SetPiece(b, 8, Board.PIECE_KNIGHT, Board.COLOR_BLACK);
-			b->AttacksWhite = Board.AttackMap(b, Board.COLOR_WHITE);
-			b->AttacksBlack = Board.AttackMap(b, Board.COLOR_BLACK);
+			//b->AttacksWhite = Board.AttackMap(b, Board.COLOR_WHITE);
+			//b->AttacksBlack = Board.AttackMap(b, Board.COLOR_BLACK);
 
 			var whiteCastleBB = Moves.GetCastlingMoves(b, Board.COLOR_WHITE);
 			var blackCastleBB = Moves.GetCastlingMoves(b, Board.COLOR_BLACK);
@@ -184,8 +184,8 @@ namespace Chess.Lib.Tests
 			Board.SetPiece(b, 60, Board.PIECE_KING, Board.COLOR_BLACK);
 
 			Board.SetPiece(b, 15, Board.PIECE_KNIGHT, Board.COLOR_BLACK);
-			b->AttacksWhite = Board.AttackMap(b, Board.COLOR_WHITE);
-			b->AttacksBlack = Board.AttackMap(b, Board.COLOR_BLACK);
+			//b->AttacksWhite = Board.AttackMap(b, Board.COLOR_WHITE);
+			//b->AttacksBlack = Board.AttackMap(b, Board.COLOR_BLACK);
 
 			var whiteCastleBB = Moves.GetCastlingMoves(b, Board.COLOR_WHITE);
 			var blackCastleBB = Moves.GetCastlingMoves(b, Board.COLOR_BLACK);
@@ -202,8 +202,8 @@ namespace Chess.Lib.Tests
 			Board.SetPiece(b, 60, Board.PIECE_KING, Board.COLOR_BLACK);
 
 			Board.SetPiece(b, 48, Board.PIECE_KNIGHT, Board.COLOR_WHITE);
-			b->AttacksWhite = Board.AttackMap(b, Board.COLOR_WHITE);
-			b->AttacksBlack = Board.AttackMap(b, Board.COLOR_BLACK);
+			//b->AttacksWhite = Board.AttackMap(b, Board.COLOR_WHITE);
+			//b->AttacksBlack = Board.AttackMap(b, Board.COLOR_BLACK);
 
 			var whiteCastleBB = Moves.GetCastlingMoves(b, Board.COLOR_WHITE);
 			var blackCastleBB = Moves.GetCastlingMoves(b, Board.COLOR_BLACK);
@@ -220,8 +220,8 @@ namespace Chess.Lib.Tests
 			Board.SetPiece(b, 60, Board.PIECE_KING, Board.COLOR_BLACK);
 
 			Board.SetPiece(b, 55, Board.PIECE_KNIGHT, Board.COLOR_WHITE);
-			b->AttacksWhite = Board.AttackMap(b, Board.COLOR_WHITE);
-			b->AttacksBlack = Board.AttackMap(b, Board.COLOR_BLACK);
+			//b->AttacksWhite = Board.AttackMap(b, Board.COLOR_WHITE);
+			//b->AttacksBlack = Board.AttackMap(b, Board.COLOR_BLACK);
 
 			var whiteCastleBB = Moves.GetCastlingMoves(b, Board.COLOR_WHITE);
 			var blackCastleBB = Moves.GetCastlingMoves(b, Board.COLOR_BLACK);

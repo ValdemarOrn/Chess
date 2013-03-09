@@ -113,10 +113,7 @@ int Search_AlphaBeta(Search_Context* ctx, int depth, int alpha, int beta)
 		int val = -Search_AlphaBeta(ctx, depth - 1, -beta, -alpha);
 		Board_Unmake(board);
 
-		#ifdef DEBUG
-		if(hashBefore != board->Hash)
-			int k = 23;
-		#endif
+		assert(hashBefore == board->Hash);
 
 		if(val >= beta)
 		{

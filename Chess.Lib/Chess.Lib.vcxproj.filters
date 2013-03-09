@@ -72,6 +72,9 @@
     <ClCompile Include="Moves\Rook.cpp">
       <Filter>Source Files\Moves</Filter>
     </ClCompile>
+    <ClCompile Include="Moves\Pawn.cpp">
+      <Filter>Source Files\Moves</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bitboard.h">

@@ -7,6 +7,11 @@
 
 extern "C"
 {
+	#ifdef DEBUG
+	extern uint64_t Board_TotalMakes;
+	extern uint64_t Board_MakesThatCanSelfCheck;
+	#endif
+
 	const int COLOR_WHITE = 1 << 4;
 	const int COLOR_BLACK = 2 << 4;
 
@@ -38,8 +43,6 @@ extern "C"
 
 		uint8_t Tiles[64];
 
-		uint64_t AttacksWhite;
-		uint64_t AttacksBlack;
 		uint64_t Hash;
 
 		int CurrentMove;
@@ -93,8 +96,12 @@ extern "C"
 	// Returns a bitmap of all squares attacked by the specified side
 	__declspec(dllexport) uint64_t Board_AttackMap(Board* board, int color);
 
+	// tests if a move might cause a self check. Used during legality check in Board_Make.
+	// If a move might cause self check then the kings safety must be evaluated after the move.
+	__declspec(dllexport) _Bool Board_MoveCanSelfCheck(Board* board, int from, int to);
+
 	// Checks if a square is under attack by a player
-	//__declspec(dllexport) _Bool Board_IsAttacked(Board* board, int square, int attackerColor);
+	__declspec(dllexport) _Bool Board_IsAttacked(Board* board, int square, int attackerColor);
 
 	// Makes a move on the board. Updates hash, set castling, verifies move is legal
 	// if illegal it is automatically taken back.
@@ -107,7 +114,7 @@ extern "C"
 	// Checks if a piece can be promoted
 	__declspec(dllexport) _Bool Board_CanPromote(Board* board, int square, int color, int piece);
 
-	// Promotes a pawn at the specified square
+	// Promotes a pawn at the specified square. Returns true if pawn was promoted
 	__declspec(dllexport) _Bool Board_Promote(Board* board, int square, int pieceType);
 
 	// returns the castling rights that are allowed, given the state of the board
@@ -117,6 +124,8 @@ extern "C"
 	// Checks if the king of the specified color is in check
 	__declspec(dllexport) _Bool Board_IsChecked(Board* board, int color);
 
+	// Creates a FEN representation of the board
+	__declspec(dllexport) void Board_ToFEN(Board* board, char* outputString100);
 
 	// ------------ Inline function definitions
 

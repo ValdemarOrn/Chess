@@ -40,11 +40,24 @@ namespace Chess.Lib
 				Board.SetPiece(b, i, piece, color);
 			}
 
-			b->AttacksBlack = Board.AttackMap(b, Board.COLOR_BLACK);
-			b->AttacksWhite = Board.AttackMap(b, Board.COLOR_WHITE);
+			//b->AttacksBlack = Board.AttackMap(b, Board.COLOR_BLACK);
+			//b->AttacksWhite = Board.AttackMap(b, Board.COLOR_WHITE);
 			b->Hash = Zobrist.Calculate(b);
 			//b->MoveHistory // N/A
 			return b;
+		}
+
+		internal static unsafe string GetString(byte* str)
+		{
+			byte[] bytes = new byte[1024];
+			int i = 0;
+			while(*str != 0)
+			{
+				bytes[i] = *str;
+				str++;
+				i++;
+			}
+			return Encoding.UTF8.GetString(bytes, 0, i);
 		}
 	}
 }

@@ -81,7 +81,9 @@ namespace Chess.Lib.MoveClasses
 			int x = Chess.Board.X(index);
 			int y = Chess.Board.Y(index);
 
-			if (y == 0 || y == 7) // cannot ever happen
+			// Note: I actually calculate the "attacks" for a white pawn at y == 0.
+			// While a pawn can never be in that location, the bitboard is used when finding attacking pawns during Board_IsAttacked
+			if (y == 7) // cannot ever happen
 			{
 				return (ulong)0;
 			}
@@ -109,7 +111,9 @@ namespace Chess.Lib.MoveClasses
 			int x = Chess.Board.X(index);
 			int y = Chess.Board.Y(index);
 
-			if (y == 0 || y == 7) // cannot ever happen
+			// Note: I actually calculate the "attacks" for a black pawn at y == 7.
+			// While a pawn can never be in that location, the bitboard is used when finding attacking pawns during Board_IsAttacked
+			if (y == 0) // cannot ever happen
 			{
 				return (ulong)0;
 			}

@@ -14,8 +14,8 @@ namespace Chess.Lib.Tests
 		{
 			Manager.InitLibrary();
 
-			var t = new BoardTests();
-			t.TestMakeRooksUnmake();
+			var t = new KingTest();
+			t.BlackCastleKingsideOnly();
 		}
 	}
 }

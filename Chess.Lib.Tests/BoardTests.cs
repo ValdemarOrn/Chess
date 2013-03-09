@@ -238,8 +238,8 @@ namespace Chess.Lib.Tests
 			Board.SetPiece(b, 0, Board.PIECE_ROOK, Board.COLOR_WHITE);
 			Board.SetPiece(b, 63, Board.PIECE_ROOK, Board.COLOR_BLACK);
 
-			b->AttacksBlack = Board.AttackMap(b, Board.COLOR_BLACK);
-			b->AttacksWhite = Board.AttackMap(b, Board.COLOR_WHITE);
+			//b->AttacksBlack = Board.AttackMap(b, Board.COLOR_BLACK);
+			//b->AttacksWhite = Board.AttackMap(b, Board.COLOR_WHITE);
 
 			var check = Board.IsChecked(b, Board.COLOR_WHITE);
 			Assert.AreEqual(0, check);
@@ -257,8 +257,8 @@ namespace Chess.Lib.Tests
 
 			Board.SetPiece(b, 0, Board.PIECE_ROOK, Board.COLOR_BLACK);
 
-			b->AttacksBlack = Board.AttackMap(b, Board.COLOR_BLACK);
-			b->AttacksWhite = Board.AttackMap(b, Board.COLOR_WHITE);
+			//b->AttacksBlack = Board.AttackMap(b, Board.COLOR_BLACK);
+			//b->AttacksWhite = Board.AttackMap(b, Board.COLOR_WHITE);
 
 			var check = Board.IsChecked(b, Board.COLOR_WHITE);
 			Assert.AreEqual(1, check);
@@ -273,8 +273,8 @@ namespace Chess.Lib.Tests
 
 			Board.SetPiece(b, 63, Board.PIECE_ROOK, Board.COLOR_WHITE);
 
-			b->AttacksBlack = Board.AttackMap(b, Board.COLOR_BLACK);
-			b->AttacksWhite = Board.AttackMap(b, Board.COLOR_WHITE);
+			//b->AttacksBlack = Board.AttackMap(b, Board.COLOR_BLACK);
+			//b->AttacksWhite = Board.AttackMap(b, Board.COLOR_WHITE);
 
 			var check = Board.IsChecked(b, Board.COLOR_BLACK);
 			Assert.AreEqual(1, check);
@@ -290,8 +290,8 @@ namespace Chess.Lib.Tests
 			Board.SetPiece(b, 0, Board.PIECE_ROOK, Board.COLOR_WHITE);
 			Board.SetPiece(b, 63, Board.PIECE_ROOK, Board.COLOR_BLACK);
 
-			b->AttacksBlack = Board.AttackMap(b, Board.COLOR_BLACK);
-			b->AttacksWhite = Board.AttackMap(b, Board.COLOR_WHITE);
+			//b->AttacksBlack = Board.AttackMap(b, Board.COLOR_BLACK);
+			//b->AttacksWhite = Board.AttackMap(b, Board.COLOR_WHITE);
 
 			var check = Board.IsChecked(b, Board.COLOR_WHITE);
 			Assert.AreEqual(0, check);
@@ -308,8 +308,8 @@ namespace Chess.Lib.Tests
 
 			Board.SetPiece(b, 0, Board.PIECE_ROOK, Board.COLOR_BLACK);
 
-			b->AttacksBlack = Board.AttackMap(b, Board.COLOR_BLACK);
-			b->AttacksWhite = Board.AttackMap(b, Board.COLOR_WHITE);
+			//b->AttacksBlack = Board.AttackMap(b, Board.COLOR_BLACK);
+			//b->AttacksWhite = Board.AttackMap(b, Board.COLOR_WHITE);
 
 			var check = Board.IsChecked(b, Board.COLOR_WHITE);
 			Assert.AreEqual(1, check);
@@ -326,8 +326,8 @@ namespace Chess.Lib.Tests
 
 			Board.SetPiece(b, 63, Board.PIECE_ROOK, Board.COLOR_WHITE);
 
-			b->AttacksBlack = Board.AttackMap(b, Board.COLOR_BLACK);
-			b->AttacksWhite = Board.AttackMap(b, Board.COLOR_WHITE);
+			//b->AttacksBlack = Board.AttackMap(b, Board.COLOR_BLACK);
+			//b->AttacksWhite = Board.AttackMap(b, Board.COLOR_WHITE);
 
 			var check = Board.IsChecked(b, Board.COLOR_WHITE);
 			Assert.AreEqual(0, check);
@@ -374,8 +374,8 @@ namespace Chess.Lib.Tests
 			BoardStruct* b = (BoardStruct*)Board.Create();
 			Board.Init(b, 1);
 
-			b->AttacksWhite = Board.AttackMap(b, Board.COLOR_WHITE);
-			b->AttacksBlack = Board.AttackMap(b, Board.COLOR_BLACK);
+			//b->AttacksWhite = Board.AttackMap(b, Board.COLOR_WHITE);
+			//b->AttacksBlack = Board.AttackMap(b, Board.COLOR_BLACK);
 
 			Board.Make(b, 6, 21);
 			Board.Make(b, 62, 45);
@@ -386,8 +386,8 @@ namespace Chess.Lib.Tests
 			Board.Unmake(b);
 
 			Assert.AreEqual(Zobrist.Calculate(b), b->Hash);
-			Assert.AreEqual(Board.AttackMap(b, Board.COLOR_WHITE), b->AttacksWhite);
-			Assert.AreEqual(Board.AttackMap(b, Board.COLOR_BLACK), b->AttacksBlack);
+			//Assert.AreEqual(Board.AttackMap(b, Board.COLOR_WHITE), b->AttacksWhite);
+			//Assert.AreEqual(Board.AttackMap(b, Board.COLOR_BLACK), b->AttacksBlack);
 			Assert.AreEqual(Board.CASTLE_BK | Board.CASTLE_BQ | Board.CASTLE_WK | Board.CASTLE_WQ, b->Castle);
 			Assert.AreEqual(Board.COLOR_WHITE, b->PlayerTurn);
 			Assert.AreEqual(0, b->CurrentMove);
@@ -469,8 +469,8 @@ namespace Chess.Lib.Tests
 
 			Assert.AreEqual(Zobrist.Calculate(fBoard), b->Hash);
 			Assert.AreEqual(fBoard->Hash, b->Hash);
-			Assert.AreEqual(fBoard->AttacksWhite, b->AttacksWhite);
-			Assert.AreEqual(fBoard->AttacksBlack, b->AttacksBlack);
+			//Assert.AreEqual(fBoard->AttacksWhite, b->AttacksWhite);
+			//Assert.AreEqual(fBoard->AttacksBlack, b->AttacksBlack);
 			Assert.AreEqual(fBoard->Castle, b->Castle);
 			Assert.AreEqual(fBoard->PlayerTurn, b->PlayerTurn);
 			Assert.AreEqual(fBoard->FiftyMoveRulePlies, b->FiftyMoveRulePlies);
@@ -484,13 +484,139 @@ namespace Chess.Lib.Tests
 
 				Assert.AreEqual(Zobrist.Calculate(b), b->Hash);
 				Assert.AreEqual(bStack->Hash, b->Hash);
-				Assert.AreEqual(bStack->AttacksWhite, b->AttacksWhite);
-				Assert.AreEqual(bStack->AttacksBlack, b->AttacksBlack);
+				//Assert.AreEqual(bStack->AttacksWhite, b->AttacksWhite);
+				//Assert.AreEqual(bStack->AttacksBlack, b->AttacksBlack);
 				Assert.AreEqual(bStack->Castle, b->Castle);
 				Assert.AreEqual(bStack->PlayerTurn, b->PlayerTurn);
 				Assert.AreEqual(bStack->FiftyMoveRulePlies, b->FiftyMoveRulePlies);
 				Assert.AreEqual(bStack->CurrentMove, b->CurrentMove);
 			}
+		}
+
+		[TestMethod]
+		public unsafe void TestMoveCanSelfCheck1()
+		{
+			// Can self check because of coverage
+			var b = Board.Create();
+			Board.SetPiece(b, 36, Board.PIECE_KING, Board.COLOR_WHITE);
+			Board.SetPiece(b, 34, Board.PIECE_PAWN, Board.COLOR_WHITE);
+			var canSelfCheck = Board.MoveCanSelfCheck(b, 34, 42);
+			Assert.IsTrue(canSelfCheck);
+		}
+
+		[TestMethod]
+		public unsafe void TestMoveCanSelfCheck2()
+		{
+			// Cannot self check because of coverage 2
+			var b = Board.Create();
+			Board.SetPiece(b, 36, Board.PIECE_KING, Board.COLOR_WHITE);
+			Board.SetPiece(b, 32, Board.PIECE_PAWN, Board.COLOR_WHITE);
+			Board.SetPiece(b, 33, Board.PIECE_PAWN, Board.COLOR_BLACK);
+			var canSelfCheck = Board.MoveCanSelfCheck(b, 32, 40);
+			Assert.IsFalse(canSelfCheck);
+		}
+
+		[TestMethod]
+		public unsafe void TestMoveCanSelfCheck3()
+		{
+			// Can always self check when moving the king
+			var b = Board.Create();
+			Board.SetPiece(b, 36, Board.PIECE_KING, Board.COLOR_WHITE);
+			Board.SetPiece(b, 32, Board.PIECE_PAWN, Board.COLOR_WHITE);
+			Board.SetPiece(b, 33, Board.PIECE_PAWN, Board.COLOR_BLACK);
+			var canSelfCheck = Board.MoveCanSelfCheck(b, 36, 44);
+			Assert.IsTrue(canSelfCheck);
+		}
+
+		[TestMethod]
+		public unsafe void TestMoveCanSelfCheck4()
+		{
+			// Can self check because of En passant
+			var b = Board.Create();
+			b->PlayerTurn = Board.COLOR_BLACK;
+			Board.SetPiece(b, 0, Board.PIECE_KING, Board.COLOR_WHITE);
+			Board.SetPiece(b, 63, Board.PIECE_KING, Board.COLOR_BLACK);
+
+			Board.SetPiece(b, 49, Board.PIECE_PAWN, Board.COLOR_BLACK);
+			Board.SetPiece(b, 34, Board.PIECE_PAWN, Board.COLOR_WHITE);
+
+			var valid = Board.Make(b, 49, 33);
+
+			Assert.AreEqual(true, valid);
+			Assert.AreEqual(41, b->EnPassantTile);
+
+			var canSelfCheck = Board.MoveCanSelfCheck(b, 34, 41);
+			Assert.IsTrue(canSelfCheck);
+		}
+
+		[TestMethod]
+		public unsafe void TestFen1()
+		{
+			string fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+
+			byte* str = stackalloc byte[100];
+			var bb = Notation.FENtoBoard(fen);
+			var b = Helpers.ManagedBoardToNative(bb);
+
+			Board.ToFEN(b, str);
+			string fen2 = Helpers.GetString(str);
+			Assert.AreEqual(fen, fen2);
+		}
+
+		[TestMethod]
+		public unsafe void TestFen2()
+		{
+			string fen = "r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq - 0 1";
+
+			byte* str = stackalloc byte[100];
+			var bb = Notation.FENtoBoard(fen);
+			var b = Helpers.ManagedBoardToNative(bb);
+
+			Board.ToFEN(b, str);
+			string fen2 = Helpers.GetString(str);
+			Assert.AreEqual(fen, fen2);
+		}
+
+		[TestMethod]
+		public unsafe void TestFen3()
+		{
+			string fen = "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - - 0 1";
+
+			byte* str = stackalloc byte[100];
+			var bb = Notation.FENtoBoard(fen);
+			var b = Helpers.ManagedBoardToNative(bb);
+
+			Board.ToFEN(b, str);
+			string fen2 = Helpers.GetString(str);
+			Assert.AreEqual(fen, fen2);
+		}
+
+		[TestMethod]
+		public unsafe void TestFen4()
+		{
+			string fen = "r3k2r/Pppp1ppp/1b3nbN/nP6/BBP1P3/q4N2/Pp1P2PP/R2Q1RK1 w kq - 0 1";
+
+			byte* str = stackalloc byte[100];
+			var bb = Notation.FENtoBoard(fen);
+			var b = Helpers.ManagedBoardToNative(bb);
+
+			Board.ToFEN(b, str);
+			string fen2 = Helpers.GetString(str);
+			Assert.AreEqual(fen, fen2);
+		}
+
+		[TestMethod]
+		public unsafe void TestFen5()
+		{
+			string fen = "rnbqkb1r/pp1p1ppp/2p5/4P3/2B5/8/PPP1NnPP/RNBQK2R w KQkq - 0 6";
+
+			byte* str = stackalloc byte[100];
+			var bb = Notation.FENtoBoard(fen);
+			var b = Helpers.ManagedBoardToNative(bb);
+
+			Board.ToFEN(b, str);
+			string fen2 = Helpers.GetString(str);
+			Assert.AreEqual(fen, fen2);
 		}
 
 	}
