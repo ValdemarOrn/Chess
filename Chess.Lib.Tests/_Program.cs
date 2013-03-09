@@ -14,8 +14,8 @@ namespace Chess.Lib.Tests
 		{
 			Manager.InitLibrary();
 
-			var t = new KingTest();
-			t.BlackCastleKingsideOnly();
+			var t = new SearchTest();
+			t.TestSearchCapture5();
 		}
 	}
 }

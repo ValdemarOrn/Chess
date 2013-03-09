@@ -58,9 +58,33 @@ void Eval_Init()
 	Eval_Positions[PIECE_KING] = Eval_PositionKing;
 }
 
+#ifdef DEBUG
+EvalStats EStats[33];
+#endif
+
 int Eval_Evaluate(Board* board)
 {
+	#ifdef DEBUG
+	EStats[COLOR_WHITE].DoublePawnPenalty = 0;
+	EStats[COLOR_WHITE].IsolatedPawnPenalty = 0;
+	EStats[COLOR_WHITE].Material = 0;
+	EStats[COLOR_WHITE].MobilityBonus = 0;
+	EStats[COLOR_WHITE].PositionalBonus = 0;
+	EStats[COLOR_WHITE].TempoBonus = 0;
+	EStats[COLOR_WHITE].UndefendedPenalty = 0;
+	EStats[COLOR_BLACK].DoublePawnPenalty = 0;
+	EStats[COLOR_BLACK].IsolatedPawnPenalty = 0;
+	EStats[COLOR_BLACK].Material = 0;
+	EStats[COLOR_BLACK].MobilityBonus = 0;
+	EStats[COLOR_BLACK].PositionalBonus = 0;
+	EStats[COLOR_BLACK].TempoBonus = 0;
+	EStats[COLOR_BLACK].UndefendedPenalty = 0;
+	#endif
+
 	uint8_t locations[64];
+	uint64_t whiteAttacks = Board_AttackMap(board, COLOR_WHITE);
+	uint64_t blackAttacks = Board_AttackMap(board, COLOR_BLACK);
+
 	uint64_t occupancy = board->Boards[BOARD_WHITE] | board->Boards[BOARD_BLACK];
 	int count = Bitboard_BitList(occupancy, locations);
 
@@ -87,40 +111,74 @@ int Eval_Evaluate(Board* board)
 		pValue += Eval_Positions[piece][index];
 		pValue += Eval_MobilityBonus[piece] * moveCount;
 
+		#ifdef DEBUG
+		EStats[color].Material += Eval_PieceValues[piece];
+		EStats[color].PositionalBonus += Eval_Positions[piece][index];
+		EStats[color].MobilityBonus += Eval_MobilityBonus[piece] * moveCount;
+		#endif
+
 		if(color == COLOR_WHITE)
 		{
-//			if(Bitboard_GetRef(&board->AttacksWhite, square) == 0)
-//				pValue -= Eval_UndefendedPiecePenalty[piece];
+			if(Bitboard_GetRef(&whiteAttacks, square) == 0)
+				pValue -= Eval_UndefendedPiecePenalty[piece];
+
+			#ifdef DEBUG
+			EStats[color].UndefendedPenalty -= Eval_UndefendedPiecePenalty[piece];
+			#endif
 
 			if(piece == PIECE_PAWN)
 			{
 				uint64_t whitePawns = board->Boards[BOARD_WHITE] & board->Boards[BOARD_PAWNS];
 				uint64_t pawnsOnFile = Bitboard_Files[x] & whitePawns;
 				if(Bitboard_PopCount(pawnsOnFile) > 1)
+				{
 					pValue -= Eval_Penalty_DoublePawn;
+					#ifdef DEBUG
+					EStats[color].DoublePawnPenalty -= Eval_Penalty_DoublePawn;
+					#endif
+				}
 
 				// get all the squares around the pawn, I just use the King_Move table for that
 				uint64_t pawnAreaBoard = King_Read(square);
 				if(whitePawns & pawnAreaBoard == 0)
+				{
 					pValue -= Eval_Penalty_IsolatedPawn;
+					#ifdef DEBUG
+					EStats[color].IsolatedPawnPenalty -= Eval_Penalty_IsolatedPawn;
+					#endif
+				}
 			}
 		}
 		else
 		{
-//			if(Bitboard_GetRef(&board->AttacksBlack, square) == 0)
-//				pValue -= Eval_UndefendedPiecePenalty[piece];
+			if(Bitboard_GetRef(&blackAttacks, square) == 0)
+				pValue -= Eval_UndefendedPiecePenalty[piece];
+
+			#ifdef DEBUG
+			EStats[color].UndefendedPenalty -= Eval_UndefendedPiecePenalty[piece];
+			#endif
 
 			if(piece == PIECE_PAWN)
 			{
 				uint64_t blackPawns = board->Boards[BOARD_BLACK] & board->Boards[BOARD_PAWNS];
 				uint64_t pawnsOnFile = Bitboard_Files[x] & blackPawns;
 				if(Bitboard_PopCount(pawnsOnFile) > 1)
+				{
 					pValue -= Eval_Penalty_DoublePawn;
+					#ifdef DEBUG
+					EStats[color].DoublePawnPenalty -= Eval_Penalty_DoublePawn;
+					#endif
+				}
 
 				// get all the squares around the pawn, I just use the King_Move table for that
 				uint64_t pawnAreaBoard = King_Read(square);
 				if(blackPawns & pawnAreaBoard == 0)
+				{
 					pValue -= Eval_Penalty_IsolatedPawn;
+					#ifdef DEBUG
+					EStats[color].IsolatedPawnPenalty -= Eval_Penalty_IsolatedPawn;
+					#endif
+				}
 			}
 		}
 
@@ -136,5 +194,14 @@ int Eval_Evaluate(Board* board)
 	else
 		blackValue += Eval_Bonus_CurrentPlayer;
 
+	#ifdef DEBUG
+	EStats[board->PlayerTurn].TempoBonus += Eval_Bonus_CurrentPlayer;
+	#endif
+
 	return whiteValue - blackValue;
+}
+
+EvalStats* Eval_GetEvalStats(int color)
+{
+	return &EStats[color];
 }

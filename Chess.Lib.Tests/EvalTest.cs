@@ -16,5 +16,20 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual(20, result);
 
 		}
+
+		[TestMethod]
+		public void TestEvalStats()
+		{
+			var b = Board.Create();
+			Board.Init(b, 1);
+
+			var result = Eval.Evaluate(b);
+			var statsWhite = Eval.GetEvalStats(Board.COLOR_WHITE);
+			var statsBlack = Eval.GetEvalStats(Board.COLOR_BLACK);
+
+			Assert.AreEqual(104000, statsWhite->Material);
+			Assert.AreEqual(104000, statsBlack->Material);
+
+		}
 	}
 }

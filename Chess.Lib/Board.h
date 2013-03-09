@@ -142,12 +142,12 @@ extern "C"
 
 	__inline_always int Board_Color(Board* board, int tile)
 	{
-		return board->Tiles[tile] & ((uint8_t)0xF0);
+		return board->Tiles[tile] & 0xF0;
 	}
 
 	__inline_always int Board_Piece(Board* board, int tile)
 	{
-		return board->Tiles[tile] & ((uint8_t)0x0F);
+		return board->Tiles[tile] & 0x0F;
 	}
 }
 
