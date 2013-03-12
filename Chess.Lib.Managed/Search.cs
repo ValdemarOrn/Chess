@@ -18,8 +18,8 @@ namespace Chess.Lib
 		public ulong PVNodeCount;
 		public ulong AllNodeCount;
 
-		public ulong BestMoveIndexSum;
-		public ulong CutMoveIndexSum;
+		public fixed int BestMoveIndex[100];
+		public fixed int CutMoveIndex[100];
 
 		public fixed ulong NodesAtPly[Search.Search_PlyMax];
 		public fixed ulong MovesAtPly[Search.Search_PlyMax];

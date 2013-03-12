@@ -23,7 +23,7 @@ namespace Chess.Lib.TestPerf
 		private static void TestSearchCount()
 		{
 			var t = new SearchTest();
-			t.TestSearchNodeCount();
+			t.TestSearch6();
 		}
 	}
 }

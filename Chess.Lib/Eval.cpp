@@ -203,5 +203,10 @@ int Eval_Evaluate(Board* board)
 
 EvalStats* Eval_GetEvalStats(int color)
 {
+	#ifdef DEBUG
 	return &EStats[color];
+	#endif
+	#ifndef DEBUG
+	return 0;
+	#endif
 }

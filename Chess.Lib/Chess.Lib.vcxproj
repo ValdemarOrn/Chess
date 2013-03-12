@@ -123,6 +123,7 @@
     </ClCompile>
     <Link>
       <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -138,6 +139,7 @@
     <ClCompile Include="Moves\Knight.cpp" />
     <ClCompile Include="Moves\Pawn.cpp" />
     <ClCompile Include="Moves\Rook.cpp" />
+    <ClCompile Include="Order.cpp" />
     <ClCompile Include="Perft.cpp" />
     <ClCompile Include="Search.cpp" />
     <ClCompile Include="TTable.cpp" />
@@ -162,6 +164,7 @@
     <ClInclude Include="Moves\Queen.h" />
     <ClInclude Include="Moves\Rook.h" />
     <ClInclude Include="Moves\RookMagic.h" />
+    <ClInclude Include="Order.h" />
     <ClInclude Include="Perft.h" />
     <ClInclude Include="Search.h" />
     <ClInclude Include="TTable.h" />

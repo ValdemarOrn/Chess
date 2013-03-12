@@ -35,10 +35,8 @@ extern "C"
 		uint64_t AllNodeCount;
 
 		// the index of best moves for PV nodes and cut moves for Cut nodes
-		// divide these number by the number of Cut nodes / PV nodes to evaluate
-		// move ordering
-		uint64_t BestMoveIndexSum;
-		uint64_t CutMoveIndexSum;
+		int BestMoveIndex[100];
+		int CutMoveIndex[100];
 
 		// number of nodes at each ply. Total sum should equal TotalNodeCount
 		uint64_t NodesAtPly[Search_PlyMax];
@@ -53,7 +51,9 @@ extern "C"
 	{
 		Board* Board;
 		uint8_t SearchDepth;
-		MoveSmall* PV[Search_PlyMax];
+		MoveSmall PV[Search_PlyMax][Search_PlyMax];
+		MoveSmall KillerMoves[Search_PlyMax][3];
+		uint32_t History[64][64];
 
 	} SearchContext;
 

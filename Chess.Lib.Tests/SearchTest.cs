@@ -98,12 +98,28 @@ namespace Chess.Lib.Tests
 		}
 
 		//[TestMethod]
-		public void TestSearchNodeCount()
+		public void TestSearch6()
 		{
-			var bx = new Chess.Board(true);
+			var bx = Chess.Notation.FENtoBoard("4k3/8/2r5/8/4N3/3P1Q2/7K/8 w - - 0 1");//new Chess.Board(true);
 			var b = Helpers.ManagedBoardToNative(bx);
 
-			var bestMove = Search.SearchPos(b, 6);
+			var bestMove = Search.SearchPos(b, 8);
+			var stats = Search.GetSearchStats();
+		}
+
+		public void TestSearch7()
+		{
+			var bx = Chess.Notation.FENtoBoard("r3n1k1/p2n1pp1/1p5p/2p1P3/3p4/P4N1P/BPP2PP1/5RK1 w KQkq - 0 1");
+			var b = Helpers.ManagedBoardToNative(bx);
+
+			//var b = Board.Create();
+			//Board.Init(b, 1);
+
+			DateTime start = DateTime.Now;
+			var bestMove = Search.SearchPos(b, 8);
+			var time = (DateTime.Now - start).TotalSeconds;
+			Console.WriteLine(String.Format("Time: {0:0.00} seconds", time));
+			var stats = Search.GetSearchStats();
 		}
 	}
 }

@@ -1,16 +1,29 @@
 #ifndef DEFAULT
 
+// ----------- Typedefs -----------
+
 #include "inttypes.h"
 
 typedef int _Bool;
 #define TRUE 1
 #define FALSE 0
 
-// ---------- Compile Mode ---------
 
-#define DEBUG
-//#define _WIN32 // already defined within Visual Studio
+// ---------- Compile Mode: Change these settings to affect how the engine runs ----------
+
+
+// enables assertions and other debugging code
+#define DEBUG 
+
+// enables statistics in the search module (node count, cutoff metrics, etc)
+#define STATS_SEARCH
+
+// Compile for a Windows target already defined within Visual Studio
+//#define _WIN32 
+
+// Compile for a Linux target (not currently implemented, but will be soon)
 //#define __GNUC__
+
 
 
 
@@ -19,7 +32,6 @@ typedef int _Bool;
 #endif
 
 #include <assert.h>
-
 
 // --------- compiler target ---------
 
