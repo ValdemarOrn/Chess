@@ -152,18 +152,19 @@ int Search_AlphaBeta(SearchContext* ctx, int depth, int alpha, int beta)
 	Board* board = ctx->Board;
 	int ply = ctx->SearchDepth - depth;
 
-//	_Bool addtoHashTable = TRUE;
+	_Bool addtoHashTable = TRUE;
 	int nodeType = NODE_ALL;
 	int score = 0;
 	int moveCount = 0;
-//	TTableEntry* tableEntry = 0;
+	TTableEntry* tableEntry = 0;
 
 	int bestMoveIndex = -1;
 	int cutMoveIndex = -1;
-//	_Bool hashHitPartial = FALSE;
-//	_Bool hashHitFull = FALSE;
+	_Bool hashHitPartial = FALSE;
+	_Bool hashHitFull = FALSE;
 	Move bestMove;
-	bestMove.PlayerPiece = 0;
+	bestMove.From = 0;
+	bestMove.To = 0;
 
 	_Bool hasValidMove = FALSE;
 
@@ -179,7 +180,7 @@ int Search_AlphaBeta(SearchContext* ctx, int depth, int alpha, int beta)
 	_Bool repeat = Search_DrawByRepetition(ctx->Board);
 	if(repeat)
 	{
-//		addtoHashTable = FALSE;
+		addtoHashTable = FALSE;
 		score = Search_Draw;
 
 		if(score >= beta)
@@ -218,35 +219,29 @@ int Search_AlphaBeta(SearchContext* ctx, int depth, int alpha, int beta)
 	// ---------------------- Check for Transposition Table entry ----------------------
 	// ----------------------------------------------------------------------------------
 
-/*	tableEntry = TTable_Read(ctx->Board->Hash);
+	tableEntry = TTable_Read(ctx->Board->Hash);
 	if(tableEntry != 0)
 	{
 		hashHitPartial = TRUE;
-		if(tableEntry->Depth >= depth && (tableEntry->NodeType == NODE_PV || tableEntry->NodeType == NODE_ALL))
+		if(tableEntry->Depth >= depth && (tableEntry->NodeType == NODE_CUT))
 		{
 			hashHitFull = TRUE;
 			score = tableEntry->Score;
-			
+			addtoHashTable = FALSE;
+
 			if(score >= beta)
 			{
 				cutMoveIndex = 0;
-				bestMove.From = tableEntry->BestMoveFrom;
-				bestMove.To = tableEntry->BestMoveTo;
-				bestMove.PlayerPiece = 100; // just some value other than 0, so it gets added to the TT
-
 				nodeType = NODE_CUT;
 				score = beta;
 				goto Finalize;
 			}
-
+			
 			if(score > alpha)
 			{
 				bestMoveIndex = 0;
-				//bestMove.From = tableEntry->BestMoveFrom;
-				//bestMove.To = tableEntry->BestMoveTo;
-				//bestMove.PlayerPiece = 100; // just some value other than 0, so it gets added to the TT
-
 				nodeType = NODE_PV;
+				hasValidMove = TRUE;
 				ctx->PV[ply][0].From = tableEntry->BestMoveFrom;
 				ctx->PV[ply][0].To = tableEntry->BestMoveTo;
 				ctx->PV[ply][0].Score = score;
@@ -254,11 +249,10 @@ int Search_AlphaBeta(SearchContext* ctx, int depth, int alpha, int beta)
 
 				memset(&(ctx->PV[ply][1]), 0, sizeof(MoveSmall) * (Search_PlyMax - 1));
 				alpha = tableEntry->Score;
-				score = tableEntry->Score;
 			}
 		}
 	}
-*/
+
 	Order order;
 	order.OrderedMoves = 0;
 	order.OrderStage = Order_StageInit;
@@ -272,8 +266,8 @@ int Search_AlphaBeta(SearchContext* ctx, int depth, int alpha, int beta)
 	moveCount = order.MoveCount;
 
 	// set the hash move if it is known
-//	if(hashHitPartial)
-//		Order_SetHashMove(ctx, &order, tableEntry->BestMoveFrom, tableEntry->BestMoveTo);
+	if(hashHitPartial)
+		Order_SetHashMove(ctx, &order, tableEntry->BestMoveFrom, tableEntry->BestMoveTo);
 
 	#ifdef STATS_SEARCH
 	SStats.MovesAtPly[ply] += order.MoveCount;
@@ -377,8 +371,11 @@ Finalize:
 
 	#ifdef STATS_SEARCH
 
-//	if(hashHitPartial)
-//		SStats.HashHitsCount++;
+	if(hashHitPartial)
+		SStats.HashHitsCount++;
+
+	if(hashHitFull)
+		SStats.HashFullHitCount++;
 
 	switch(nodeType)
 	{
@@ -404,7 +401,7 @@ Finalize:
 
 	if(nodeType == NODE_CUT && !(bestMove.From == 0 && bestMove.To == 0))
 	{
-		if(bestMove.PlayerPiece != 0 && bestMove.CapturePiece == 0)
+		if(bestMove.CapturePiece == 0)
 		{
 			Order_SetKillerMove(ctx, ply, bestMove.From, bestMove.To, bestMove.PlayerPiece);
 			ctx->History[bestMove.From][bestMove.To] += ply * ply;
@@ -415,10 +412,10 @@ Finalize:
 	// ------------------------ Add node to transposition table ------------------------
 	// ----------------------------------------------------------------------------------
 
-/*	if(addtoHashTable)
+	if(addtoHashTable)
 	{
 		TTableEntry newEntry;
-		if(bestMove.PlayerPiece != 0)
+		if(!(bestMove.From == 0 && bestMove.To == 0))
 		{
 			newEntry.BestMoveFrom = bestMove.From;
 			newEntry.BestMoveTo = bestMove.To;
@@ -434,7 +431,7 @@ Finalize:
 		newEntry.Score = score;
 		TTable_Insert(&newEntry);
 	}
-*/
+
 
 	return score;
 }

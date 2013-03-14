@@ -120,6 +120,17 @@ namespace Chess.Lib.Tests
 			var time = (DateTime.Now - start).TotalSeconds;
 			Console.WriteLine(String.Format("Time: {0:0.00} seconds", time));
 			var stats = Search.GetSearchStats();
+
+			double first = stats->CutMoveIndex[0] / (double)stats->CutNodeCount;
+			double first3 = (stats->CutMoveIndex[0] + stats->CutMoveIndex[1] + stats->CutMoveIndex[2]) / (double)stats->CutNodeCount;
+
+			double qNodeCount = stats->QuiescentNodeCount / (double)stats->TotalNodeCount;
+
+			Console.WriteLine("1. Move Cuts: " + first);
+			Console.WriteLine("3. Move Cuts: " + first3);
+			Console.WriteLine("Quiesce nodes: " + stats->QuiescentNodeCount);
+			Console.WriteLine("Quiesce Ratio: " + qNodeCount);
+			Console.WriteLine("Total Eval: " + stats->EvalTotal);
 		}
 	}
 }
