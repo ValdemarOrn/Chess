@@ -10,23 +10,33 @@ namespace Chess.Lib
 	public unsafe struct SearchStats
 	{
 		public ulong TotalNodeCount;
-		public ulong EvalNodeCount;
 		public ulong QuiescentNodeCount;
-		public ulong HashHitsCount;
-		public ulong HashEvalHitsCount;
+		public ulong EvalNodeCount;
 
 		public ulong CutNodeCount;
 		public ulong PVNodeCount;
 		public ulong AllNodeCount;
 
+		public ulong QCutNodeCount;
+		public ulong QPVNodeCount;
+		public ulong QAllNodeCount;
+
+		public ulong HashHitsCount;
+		public ulong HashFullHitCount;
+
+		public ulong EvalHits;
+		public ulong EvalTotal;
+
 		public fixed int BestMoveIndex[100];
 		public fixed int CutMoveIndex[100];
+
+		public fixed int QBestMoveIndex[100];
+		public fixed int QCutMoveIndex[100];
 
 		public fixed ulong NodesAtPly[Search.Search_PlyMax];
 		public fixed ulong MovesAtPly[Search.Search_PlyMax];
 
-		public ulong EvalHits;
-		public ulong EvalTotal;
+		
 	}
 
 	public class Search

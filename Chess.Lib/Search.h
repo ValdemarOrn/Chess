@@ -26,18 +26,30 @@ extern "C"
 	typedef struct
 	{
 		uint64_t TotalNodeCount;
+		uint64_t QuiescentNodeCount;		
 		uint64_t EvalNodeCount;
-		uint64_t QuiescentNodeCount;
-		uint64_t HashHitsCount;
-		uint64_t HashEvalHitsCount;
 
 		uint64_t CutNodeCount;
 		uint64_t PVNodeCount;
 		uint64_t AllNodeCount;
 
+		uint64_t QCutNodeCount;
+		uint64_t QPVNodeCount;
+		uint64_t QAllNodeCount;
+
+		uint64_t HashHitsCount;
+		uint64_t HashFullHitCount;
+
+		uint64_t EvalHits;
+		uint64_t EvalTotal;
+
 		// the index of best moves for PV nodes and cut moves for Cut nodes
 		int BestMoveIndex[100];
 		int CutMoveIndex[100];
+
+		// the index of best moves in Quiescence nodes
+		int QBestMoveIndex[100];
+		int QCutMoveIndex[100];
 
 		// number of nodes at each ply. Total sum should equal TotalNodeCount
 		uint64_t NodesAtPly[Search_PlyMax];
@@ -45,9 +57,6 @@ extern "C"
 		// Number of total moves found at ply (counting all potential moves)
 		// Note that most of these moves never get played, they get cut
 		uint64_t MovesAtPly[Search_PlyMax];
-
-		uint64_t EvalHits;
-		uint64_t EvalTotal;
 
 	} SearchStats;
 
