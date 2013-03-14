@@ -8,6 +8,7 @@
 #include <stdio.h>
 
 int Search_AlphaBeta(SearchContext* ctx, int depth, int alpha, int beta);
+int Search_Quiesce(SearchContext* ctx, int depth, int alpha, int beta);
 
 #ifdef STATS_SEARCH
 SearchStats SStats;
@@ -205,14 +206,19 @@ int Search_AlphaBeta(SearchContext* ctx, int depth, int alpha, int beta)
 
 	if(depth <= 0)
 	{
-		nodeType = NODE_EVAL;
+		/*nodeType = NODE_EVAL;
 		int eval = Eval_Evaluate(board);
 		if(board->PlayerTurn == COLOR_WHITE)
 			score = eval;
 		else
 			score = -eval;
 
-		goto Finalize;
+		goto Finalize;*/
+
+		// the Quiescence search takes care of all the bookkeeping, incl.
+		// everything that needs to be done in Finalize!
+		return Search_Quiesce(ctx, depth, alpha, beta);
+		
 	}
 
 	// ----------------------------------------------------------------------------------
@@ -253,14 +259,14 @@ int Search_AlphaBeta(SearchContext* ctx, int depth, int alpha, int beta)
 		}
 	}
 
+	// ----------------------------------------------------------------------------------
+	// ----------------------- Generate a list of all valid moves -----------------------
+	// ----------------------------------------------------------------------------------
+
 	Order order;
 	order.OrderedMoves = 0;
 	order.OrderStage = Order_StageInit;
 	memset(order.MoveRank, 0, 100 * sizeof(int));
-
-	// ----------------------------------------------------------------------------------
-	// ----------------------- Generate a list of all valid moves -----------------------
-	// ----------------------------------------------------------------------------------
 
 	order.MoveCount = Moves_GetAllMoves(board, order.MoveList);
 	moveCount = order.MoveCount;
@@ -403,9 +409,13 @@ Finalize:
 	{
 		if(bestMove.CapturePiece == 0)
 		{
-			Order_SetKillerMove(ctx, ply, bestMove.From, bestMove.To, bestMove.PlayerPiece);
+			Order_SetKillerMove(ctx->KillerMoves[ply], bestMove.From, bestMove.To, bestMove.PlayerPiece);
 			ctx->History[bestMove.From][bestMove.To] += ply * ply;
 		}
+		/*else
+		{
+			Order_SetKillerMove(ctx->KillerCaptures[ply, bestMove.From, bestMove.To, bestMove.PlayerPiece);
+		}*/
 	}
 
 	// ----------------------------------------------------------------------------------
@@ -440,6 +450,7 @@ int Search_Quiesce(SearchContext* ctx, int depth, int alpha, int beta)
 {
 	Board* board = ctx->Board;
 	int ply = ctx->SearchDepth - depth;
+	_Bool quiesce = (depth < 0);
 
 	int nodeType = NODE_ALL;
 	int score = 0;
@@ -453,10 +464,14 @@ int Search_Quiesce(SearchContext* ctx, int depth, int alpha, int beta)
 	Move bestMove;
 	bestMove.PlayerPiece = 0;
 	_Bool hasValidMove = FALSE;
+	_Bool isChecked = FALSE;
 
 	#ifdef STATS_SEARCH
-	SStats.TotalNodeCount++;
-	SStats.NodesAtPly[ply]++;
+	if(quiesce)
+	{
+		SStats.TotalNodeCount++;
+		SStats.NodesAtPly[ply]++;
+	}
 	#endif
 
 	// ----------------------------------------------------------------------------------
@@ -504,22 +519,18 @@ int Search_Quiesce(SearchContext* ctx, int depth, int alpha, int beta)
 		}
 	}*/
 
-	Order order;
-	order.OrderedMoves = 0;
-	order.OrderStage = Order_StageInit;
-	memset(order.MoveRank, 0, 100 * sizeof(int));
-
-
+	
 	// ----------------------------------------------------------------------------------
 	// --------------------------------- Run Evaluate  ---------------------------------
 	// ----------------------------------------------------------------------------------
 
+	nodeType = NODE_EVAL;
 	int eval = Eval_Evaluate(board);
 	if(board->PlayerTurn == COLOR_WHITE)
 		score = eval;
 	else
 		score = -eval;
-		
+
 	if(score >= beta)
 	{
 		nodeType = NODE_EVAL;
@@ -540,18 +551,41 @@ int Search_Quiesce(SearchContext* ctx, int depth, int alpha, int beta)
 		nodeType = NODE_EVAL;
 		goto Finalize;
 	}
-		
 
+	// ----------------------------------------------------------------------------------
+	// --------------------------------- Delta Pruning ---------------------------------
+	// ----------------------------------------------------------------------------------
+
+	/*// check that there's any hope. If not ever capturing a queen will improve alpha, then we're fucked
+	if(eval + Eval_PieceValues[PIECE_QUEEN] <= alpha)
+	{
+		#ifdef STATS_SEARCH
+		SStats.PruneDelta++;
+		#endif
+
+		nodeType = NODE_EVAL;
+		score = alpha;
+		goto Finalize;
+	}*/
+	
 	// ----------------------------------------------------------------------------------
 	// ----------------------- Generate a list of all valid moves -----------------------
 	// ----------------------------------------------------------------------------------
+
+	Order order;
+	order.OrderedMoves = 0;
+	order.OrderStage = Order_StageInit;
+	memset(order.MoveRank, 0, 100 * sizeof(int));
 
 	order.MoveCount = Moves_GetAllMoves(board, order.MoveList);
 	moveCount = order.MoveCount;
 
 	// filter out all moves except captures and promotions
 	// no moves get filtered if side to move is checked
-	moveCount = Order_QuiesceFilter(ctx, &order);
+	isChecked = Board_IsChecked(ctx->Board, ctx->Board->PlayerTurn);
+
+	if(!isChecked)
+		moveCount = Order_QuiesceFilter(ctx, &order);
 
 	// check if the move is quiet
 	if(moveCount == 0)
@@ -574,6 +608,19 @@ int Search_Quiesce(SearchContext* ctx, int depth, int alpha, int beta)
 		Move* move = Order_GetMove(ctx, &order, ply);
 
 		assert(move != 0);
+
+		// Delta pruning
+		if(!isChecked)
+		{
+			if(eval + Eval_PieceValues[move->CapturePiece] + Eval_PieceValues[move->Promotion] + DELTA_PRUNING_MARGIN <= alpha)
+			{
+				#ifdef STATS_SEARCH
+				SStats.PruneDelta++;
+				#endif
+
+				continue;
+			}
+		}
 
 		int from = move->From;
 		int to = move->To;
@@ -625,6 +672,8 @@ int Search_Quiesce(SearchContext* ctx, int depth, int alpha, int beta)
 	// ------------------------ Checkmate and stalemate handling ------------------------
 	// ----------------------------------------------------------------------------------
 
+MateCheck:
+
 	if(!hasValidMove)
 	{
 		bestMove.PlayerPiece = 0;
@@ -666,7 +715,7 @@ Finalize:
 //	if(hashHitPartial)
 //		SStats.HashHitsCount++;
 
-	if(depth < 0)
+	if(quiesce)
 		SStats.QuiescentNodeCount++;
 
 	switch(nodeType)

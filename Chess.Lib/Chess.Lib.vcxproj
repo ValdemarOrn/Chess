@@ -148,7 +148,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Eval.h" />
-    <ClInclude Include="EvalData.h" />
+    <ClInclude Include="EvalData.cpp" />
     <ClInclude Include="inttypes.h" />
     <ClInclude Include="Manager.h" />
     <ClInclude Include="Moves\Bishop.h" />

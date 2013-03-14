@@ -27,6 +27,8 @@ namespace Chess.Lib
 		public ulong EvalHits;
 		public ulong EvalTotal;
 
+		public ulong PruneDelta;
+
 		public fixed int BestMoveIndex[100];
 		public fixed int CutMoveIndex[100];
 

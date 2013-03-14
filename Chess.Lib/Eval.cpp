@@ -1,10 +1,105 @@
 
 #include "Eval.h"
-#include "EvalData.h"
 #include "Moves.h"
 #include "Moves/King.h"
 #include "Search.h"
 #include <string.h>
+
+int Eval_PieceValues[8];
+int Eval_MobilityBonus[8];
+int Eval_UndefendedPiecePenalty[8];
+int* Eval_Positions[8];
+
+// NOTE: These arrays are not in the correct order
+// they are written so that they are easy to read by humans
+// Eval_ReverseArray() is used to flip each line so that they are correct
+int Eval_PositionPawn[64] = {
+	  0,   0,   0,   0,   0,   0,   0,   0,
+	 25,  25,  30,  35,  35,  30,  25,  25,
+	  4,   8,  15,  20,  20,  15,   8,   4,
+	  0,   6,   8,  15,  15,   8,   6,   0,
+	 -3,   4,   5,  10,  10,   5,   4,  -3,
+	 -5,   2,   2, -10, -10,   2,   2,  -5,
+	  5,   5,   5, -30, -30,   5,   5,   5,
+	  0,   0,   0,   0,   0,   0,   0,   0
+};
+
+int Eval_PositionKnight[64] = {
+	-10, -10, -10, -10, -10, -10, -10, -10,
+	-10,   0,   0,   0,   0,   0,   0, -10,
+	-10,   0,   5,   5,   5,   5,   0, -10,
+	-10,   0,   5,  15,  15,   5,   0, -10,
+	-10,   0,   8,  15,  15,   8,   0, -10,
+	-10,   0,  15,   5,   5,  15,   0, -10,
+	-10,   0,   0,   0,   0,   0,   0, -10,
+	-10, -30, -10, -10, -10, -10, -30, -10
+};
+
+int Eval_PositionBishop[64] = {
+	-10, -10, -10, -10, -10, -10, -10, -10,
+	-10,   0,   0,   0,   0,   0,   0, -10,
+	-10,   0,   3,   5,   5,   3,   0, -10,
+	-10,   0,   5,  12,  12,   5,   0, -10,
+	-10,   0,   5,  15,  15,   5,   0, -10,
+	-10,   0,   3,   5,   5,   3,   0, -10,
+	-10,   0,   0,   0,   0,   0,   0, -10,
+	-10, -10, -20, -10, -10, -20, -10, -10
+};
+
+int Eval_PositionRook[64] = {
+	  0,   0,   0,   0,   0,   0,   0,   0,
+	  0,   0,   0,   0,   0,   0,   0,   0,
+	  0,   0,   0,   0,   0,   0,   0,   0,
+	  0,   0,   0,   0,   0,   0,   0,   0,
+	  0,   0,   0,   0,   0,   0,   0,   0,
+	  0,   0,   0,   0,   0,   0,   0,   0,
+	  0,   0,   0,   0,   0,   0,   0,   0,
+	-10,  -5,   0,  10,  10,   0,  -5, -10
+};
+
+int Eval_PositionQueen[64] = {
+	  0,   0,   0,   0,   0,   0,   0,   0,
+	  0,   0,   0,   0,   0,   0,   0,   0,
+	  0,   0,   0,   0,   0,   0,   0,   0,
+	  0,   0,   0,   0,   0,   0,   0,   0,
+	  0,   0,   0,   0,   0,   0,   0,   0,
+	  0,   0,   0,   0,   0,   0,   0,   0,
+	  0,   0,   0,   0,   0,   0,   0,   0,
+	  0,   0,   0,   0,   0,   0,   0,   0
+};
+
+int Eval_PositionKing[64] = {
+	-10, -10, -10, -10, -10, -10, -10, -10,
+	-10, -10, -10, -10, -10, -10, -10, -10,
+	-10, -10, -10, -10, -10, -10, -10, -10,
+	-10, -10, -10, -10, -10, -10, -10, -10,
+	-10, -10, -10, -10, -10, -10, -10, -10,
+	-10, -10, -10, -10, -10, -10, -10, -10,
+	 10,  10, -10, -10, -10, -10,  10,  10,
+	 15,  10,  30, -10,   0, -10,  30,  15
+};
+
+int Eval_PositionKingEndgame[64] = {
+	-50, -30,  -5,   0,   0,  -5, -30, -50,
+	-30,  -5,   0,   0,   0,   0,  -5, -30,
+	 -5,   0,   8,   5,   5,   8,   0,  -5,
+	  0,   0,   5,  10,  10,   5,   0,   0,
+	  0,   0,   5,  10,  10,   5,   0,   0,
+	 -5,   0,   8,   5,   5,   8,   0,  -5,
+	-30,  -5,   0,   0,   0,   0,  -5, -30,
+	-50, -30,  -5,   0,   0,  -5, -30, -50,
+};
+
+int Eval_Flip[64] = {
+	 56,  57,  58,  59,  60,  61,  62,  63,
+	 48,  49,  50,  51,  52,  53,  54,  55,
+	 40,  41,  42,  43,  44,  45,  46,  47,
+	 32,  33,  34,  35,  36,  37,  38,  39,
+	 24,  25,  26,  27,  28,  29,  30,  31,
+	 16,  17,  18,  19,  20,  21,  22,  23,
+	  8,   9,  10,  11,  12,  13,  14,  15,
+	  0,   1,   2,   3,   4,   5,   6,   7
+};
 
 // Reverse the array for the evaluation tables into the correct format
 void Eval_ReverseArray(int* array64)
@@ -24,6 +119,8 @@ void Eval_ReverseArray(int* array64)
 
 void Eval_Init()
 {
+	Eval_PieceValues[0]            = 0;
+	Eval_PieceValues[1]            = 0;
 	Eval_PieceValues[PIECE_PAWN]   = 100;
 	Eval_PieceValues[PIECE_KNIGHT] = 320;
 	Eval_PieceValues[PIECE_BISHOP] = 330;
@@ -140,22 +237,20 @@ int Eval_Evaluate(Board* board)
 		int y = Board_Y(square);
 		int piece = Board_Piece(board, square);
 		int color = Board_Color(board, square);
-		uint64_t moveMap = Moves_GetMoves(board, square);
-		int moveCount = Bitboard_PopCount(moveMap);
 
 		// index to read position tables
 		int index = square;
 		if(color == COLOR_BLACK)
-			index = Flip[index];
+			index = Eval_Flip[index];
 		
 		pValue += Eval_PieceValues[piece];
 		pValue += Eval_Positions[piece][index];
-		pValue += Eval_MobilityBonus[piece] * moveCount;
+//		pValue += Eval_MobilityBonus[piece] * moveCount;
 
 		#ifdef DEBUG
 		EStats[color].Material += Eval_PieceValues[piece];
 		EStats[color].PositionalBonus += Eval_Positions[piece][index];
-		EStats[color].MobilityBonus += Eval_MobilityBonus[piece] * moveCount;
+//		EStats[color].MobilityBonus += Eval_MobilityBonus[piece] * moveCount;
 		#endif
 
 		if(color == COLOR_WHITE)
@@ -228,6 +323,17 @@ int Eval_Evaluate(Board* board)
 		else
 			blackValue += pValue;
 	}
+
+	int whiteAttackCount = Bitboard_PopCount(whiteAttacks);
+	int blackAttackCount = Bitboard_PopCount(blackAttacks);
+
+	whiteValue += whiteAttackCount * 3;
+	blackValue += blackAttackCount * 3;
+
+	#ifdef DEBUG
+	EStats[COLOR_WHITE].MobilityBonus = whiteAttackCount * 3;
+	EStats[COLOR_BLACK].MobilityBonus = blackAttackCount * 3;
+	#endif
 
 	// slight bonus for current player
 	if(board->PlayerTurn == COLOR_WHITE)

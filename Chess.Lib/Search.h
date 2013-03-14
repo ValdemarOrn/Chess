@@ -22,6 +22,8 @@ extern "C"
 	const int Search_Checkmate = -100000;
 	const int Search_Draw = 0;
 
+	const int DELTA_PRUNING_MARGIN = 200;
+
 	#pragma pack(push, 1)
 	typedef struct
 	{
@@ -42,6 +44,8 @@ extern "C"
 
 		uint64_t EvalHits;
 		uint64_t EvalTotal;
+
+		uint64_t PruneDelta;
 
 		// the index of best moves for PV nodes and cut moves for Cut nodes
 		int BestMoveIndex[100];
@@ -66,6 +70,7 @@ extern "C"
 		int8_t SearchDepth;
 		MoveSmall PV[Search_PlyMax][Search_PlyMax];
 		MoveSmall KillerMoves[Search_PlyMax][3];
+		MoveSmall KillerCaptures[Search_PlyMax][3];
 		uint32_t History[64][64];
 
 	} SearchContext;

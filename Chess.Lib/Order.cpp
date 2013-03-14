@@ -18,7 +18,51 @@ int Order_PV(SearchContext* ctx, Order* order, int ply)
 	}
 	return count;
 }
+/*
+int Order_KillerCaptures(SearchContext* ctx, Order* order, int ply)
+{
+	// don't search first and last ply
+	if(ply < 2 || ply > Search_PlyMax - 2)
+		return 0;
 
+	MoveSmall* killerPly = ctx->KillerCaptures[ply];
+	MoveSmall* killerPrev = ctx->KillerCaptures[ply - 2];
+	MoveSmall* killerNext = ctx->KillerCaptures[ply + 2];
+
+	int count = 0;
+	for(int i = 0; i < order->MoveCount; i++)
+	{
+		Move* move = &order->MoveList[i];
+		int captureScore = move->CapturePiece * 10 - move->PlayerPiece;
+
+		if(move->CapturePiece == 0)
+			continue;
+
+		if(order->MoveRank[i] != 0)
+			continue;
+
+		for(int m = 0; m < 3; m++)
+		{
+			if(Move_Equal(move, &killerPly[m]))
+			{
+				order->MoveRank[i] = Order_StageKillerMoves + killerPly[m].Score + captureScore;
+				count++;
+			}
+			else if(Move_Equal(move, &killerPrev[m]))
+			{
+				order->MoveRank[i] = Order_StageKillerMoves + killerPrev[m].Score + captureScore - 1;
+				count++;
+			}
+			else if(Move_Equal(move, &killerNext[m]))
+			{
+				order->MoveRank[i] = Order_StageKillerMoves + killerNext[m].Score + captureScore - 1;
+				count++;
+			}
+		}
+	}
+	return count;
+}
+*/
 int Order_Captures(SearchContext* ctx, Order* order, int ply)
 {
 	int count = 0;
@@ -71,6 +115,9 @@ int Order_KillerMoves(SearchContext* ctx, Order* order, int ply)
 	{
 		Move* move = &order->MoveList[i];
 
+		if(order->MoveRank[i] != 0)
+			continue;
+
 		for(int m = 0; m < 3; m++)
 		{
 			if(Move_Equal(move, &killerPly[m]))
@@ -91,7 +138,6 @@ int Order_KillerMoves(SearchContext* ctx, Order* order, int ply)
 		}
 	}
 	return count;
-	return 0;
 }
 
 int Order_History(SearchContext* ctx, Order* order, int ply)
@@ -179,6 +225,10 @@ void Order_NextStage(SearchContext* ctx, Order* order, int ply)
 			order->OrderStage = Order_StagePV;
 			break;
 		case (Order_StagePV):
+		/*	count = Order_KillerCaptures(ctx, order, ply);
+			order->OrderStage = Order_StageKillerCaptures;
+			break;
+		case (Order_StageKillerCaptures):*/
 			count = Order_Captures(ctx, order, ply);
 			order->OrderStage = Order_StageCaptures;
 			break;
@@ -258,10 +308,6 @@ void Order_SetHashMove(SearchContext* ctx, Order* moves, int from, int to)
 
 int Order_QuiesceFilter(SearchContext* ctx, Order* moves)
 {
-	_Bool isChecked = Board_IsChecked(ctx->Board, ctx->Board->PlayerTurn);
-	if(isChecked)
-		return moves->MoveCount;
-
 	int quiesceMoves = 0;
 
 	// block all moves except captures
@@ -278,9 +324,9 @@ int Order_QuiesceFilter(SearchContext* ctx, Order* moves)
 
 
 
-void Order_SetKillerMove(SearchContext* ctx, int ply, int from, int to, int piece)
+void Order_SetKillerMove(MoveSmall* killerArray, int from, int to, int piece)
 {
-	MoveSmall* moves = ctx->KillerMoves[ply];
+	MoveSmall* moves = killerArray;
 	_Bool exists = false;
 
 	int lowestScore = 10000000;
@@ -313,49 +359,4 @@ void Order_SetKillerMove(SearchContext* ctx, int ply, int from, int to, int piec
 	moves[index].To = to;
 	moves[index].Piece = piece;
 	moves[index].Score = Order_MinKillerScore;
-	/*
-	if(moves[0].From == from && moves[0].To == to && moves[0].Piece == piece)
-	{
-		moves[0].Score++;
-		exists = TRUE;
-	}
-	else if(moves[1].From == from && moves[1].To == to && moves[1].Piece == piece)
-	{
-		moves[1].Score++;
-		exists = TRUE;
-	}
-	else if(moves[2].From == from && moves[2].To == to && moves[2].Piece == piece)
-	{
-		moves[2].Score++;
-		exists = TRUE;
-	}
-
-	if(exists)
-		return;
-
-	moves[0].Score--;
-	moves[1].Score--;
-	moves[2].Score--;
-
-	if(moves[0].Score <= 0)
-	{
-		moves[0].From = from;
-		moves[0].To = to;
-		moves[0].Piece = piece;
-		moves[0].Score = 1;
-	}
-	else if(moves[1].Score <= 0)
-	{
-		moves[1].From = from;
-		moves[1].To = to;
-		moves[1].Piece = piece;
-		moves[1].Score = 1;
-	}
-	else if(moves[2].Score <= 0)
-	{
-		moves[2].From = from;
-		moves[2].To = to;
-		moves[2].Piece = piece;
-		moves[2].Score = 1;
-	}*/
 }

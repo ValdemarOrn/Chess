@@ -121,10 +121,10 @@ namespace Chess.Lib.Tests
 			Console.WriteLine(String.Format("Time: {0:0.00} seconds", time));
 			var stats = Search.GetSearchStats();
 
-			double first = stats->CutMoveIndex[0] / (double)stats->CutNodeCount;
-			double first3 = (stats->CutMoveIndex[0] + stats->CutMoveIndex[1] + stats->CutMoveIndex[2]) / (double)stats->CutNodeCount;
+			double first = stats->CutMoveIndex[0] / (double)stats->CutNodeCount * 100;
+			double first3 = (stats->CutMoveIndex[0] + stats->CutMoveIndex[1] + stats->CutMoveIndex[2]) / (double)stats->CutNodeCount * 100;
 
-			double qNodeCount = stats->QuiescentNodeCount / (double)stats->TotalNodeCount;
+			double qNodeCount = stats->QuiescentNodeCount / (double)stats->TotalNodeCount * 100;
 
 			Console.WriteLine("1. Move Cuts: " + first);
 			Console.WriteLine("3. Move Cuts: " + first3);

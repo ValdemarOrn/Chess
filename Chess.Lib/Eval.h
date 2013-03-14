@@ -6,6 +6,25 @@
 
 extern "C"
 {
+	extern int Eval_PieceValues[8];
+	extern int Eval_MobilityBonus[8];
+	extern int Eval_UndefendedPiecePenalty[8];
+	extern int* Eval_Positions[8];
+
+	const int Eval_Bonus_CurrentPlayer = 20;
+	const int Eval_Penalty_TrappedRook = 50;
+	const int Eval_Penalty_DoublePawn = 20;
+	const int Eval_Penalty_IsolatedPawn = 30;
+
+	extern int Eval_PositionPawn[64];
+	extern int Eval_PositionKnight[64];
+	extern int Eval_PositionBishop[64];
+	extern int Eval_PositionRook[64];
+	extern int Eval_PositionQueen[64];
+	extern int Eval_PositionKing[64];
+	extern int Eval_PositionKingEndgame[64];
+	extern int Eval_Flip[64];
+
 	#pragma pack(push, 1)
 	typedef struct
 	{
