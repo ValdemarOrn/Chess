@@ -164,6 +164,7 @@ int Search_AlphaBeta(SearchContext* ctx, int depth, int alpha, int beta)
 //	_Bool hashHitFull = FALSE;
 	Move bestMove;
 	bestMove.PlayerPiece = 0;
+
 	_Bool hasValidMove = FALSE;
 
 	#ifdef STATS_SEARCH
@@ -203,13 +204,14 @@ int Search_AlphaBeta(SearchContext* ctx, int depth, int alpha, int beta)
 
 	if(depth <= 0)
 	{
+		nodeType = NODE_EVAL;
 		int eval = Eval_Evaluate(board);
 		if(board->PlayerTurn == COLOR_WHITE)
 			score = eval;
 		else
 			score = -eval;
 
-		return score;
+		goto Finalize;
 	}
 
 	// ----------------------------------------------------------------------------------
