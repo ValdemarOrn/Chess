@@ -109,11 +109,11 @@ namespace Chess.Lib.Tests
 
 		public void TestSearch7()
 		{
-			var bx = Chess.Notation.FENtoBoard("r3n1k1/p2n1pp1/1p5p/2p1P3/3p4/P4N1P/BPP2PP1/5RK1 w KQkq - 0 1");
-			var b = Helpers.ManagedBoardToNative(bx);
+			//var bx = Chess.Notation.FENtoBoard("r3n1k1/p2n1pp1/1p5p/2p1P3/3p4/P4N1P/BPP2PP1/5RK1 w KQkq - 0 1");
+			//var b = Helpers.ManagedBoardToNative(bx);
 
-			//var b = Board.Create();
-			//Board.Init(b, 1);
+			var b = Board.Create();
+			Board.Init(b, 1);
 
 			DateTime start = DateTime.Now;
 			var bestMove = Search.SearchPos(b, 8);

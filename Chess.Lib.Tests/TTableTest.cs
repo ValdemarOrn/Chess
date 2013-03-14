@@ -9,8 +9,7 @@ namespace Chess.Lib.Tests
 		[TestMethod]
 		public void TesTTable1()
 		{
-			TTable.Init(64);
-			Assert.AreEqual(3947580, TTable.GetTableSize());
+			Assert.AreEqual(16777216, TTable.GetTableSize());
 		}
 	}
 }

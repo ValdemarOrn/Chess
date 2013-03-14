@@ -4,6 +4,7 @@
 #include "Moves.h"
 #include "Manager.h"
 #include "Order.h"
+#include "TTable.h"
 #include <stdio.h>
 
 int Search_AlphaBeta(SearchContext* ctx, int depth, int alpha, int beta);
@@ -18,7 +19,6 @@ void ResetStats()
 	SStats.AllNodeCount = 0;
 	SStats.CutNodeCount = 0;
 	SStats.EvalNodeCount = 0;
-	SStats.NoneNodeCount = 0;
 	SStats.QuiescentNodeCount = 0;
 	SStats.PVNodeCount = 0;
 	SStats.TotalNodeCount = 0;
@@ -34,6 +34,10 @@ void ResetStats()
 		SStats.CutMoveIndex[i] = 0;
 		SStats.BestMoveIndex[i] = 0;
 	}
+
+	SStats.EvalHits = 0;
+	SStats.EvalTotal = 0;
+
 	#endif
 }
 
@@ -124,19 +128,43 @@ MoveSmall Search_SearchPos(Board* board, int searchDepth)
 	return ctx.PV[0][0];
 }
 
+_Bool Search_DrawByRepetition(Board* board)
+{
+	uint64_t currentHash = board->Hash;
+	int occurences = 1;
+	int i = board->CurrentMove - 1;
+	while(i >= 0)
+	{
+		if(board->MoveHistory[i].PrevHash == currentHash)
+			occurences++;
+
+		if(occurences >= 3)
+			return TRUE;
+
+		i--;
+	}
+
+	return FALSE;
+}
+
 int Search_AlphaBeta(SearchContext* ctx, int depth, int alpha, int beta)
 {
 	Board* board = ctx->Board;
 	int ply = ctx->SearchDepth - depth;
 
+	_Bool quiesce = (depth <= 0);
+	_Bool addtoHashTable = TRUE;
 	int nodeType = NODE_ALL;
 	int score = 0;
+	int moveCount = 0;
+	TTableEntry* tableEntry = 0;
 
 	int bestMoveIndex = -1;
 	int cutMoveIndex = -1;
-	Move* move;
-
-	// cehcks for checkmate or stalemate
+	_Bool hashHitPartial = FALSE;
+	_Bool hashHitFull = FALSE;
+	Move bestMove;
+	bestMove.PlayerPiece = 0;
 	_Bool hasValidMove = FALSE;
 
 	#ifdef STATS_SEARCH
@@ -144,42 +172,162 @@ int Search_AlphaBeta(SearchContext* ctx, int depth, int alpha, int beta)
 	SStats.NodesAtPly[ply]++;
 	#endif
 
-	if ( depth == 0 ) 
+	// ----------------------------------------------------------------------------------
+	// --------------------- Check for draw by threefold repetition ---------------------
+	// ----------------------------------------------------------------------------------
+
+	_Bool repeat = Search_DrawByRepetition(ctx->Board);
+	if(repeat)
 	{
-		nodeType = NODE_EVAL;
-		int eval = Eval_Evaluate(board);
-		if(board->PlayerTurn == COLOR_WHITE)
-			score = eval;
-		else
-			score = -eval;
+		addtoHashTable = FALSE;
+		score = Search_Draw;
+
+		if(score >= beta)
+		{
+			nodeType = NODE_CUT;
+			score = beta;
+		}
+
+		if(score > alpha)
+		{
+			nodeType = NODE_PV;
+			memset(&(ctx->PV[ply][0]), 0, sizeof(MoveSmall) * Search_PlyMax);
+			alpha = score;
+		}
 
 		goto Finalize;
 	}
 
-	// set PV at this ply to zero
-	//memset(PV[ply], 0, sizeof(MoveSmall) * Search_PlyMax);
+	// ----------------------------------------------------------------------------------
+	// ---------------------- Check for Transposition Table entry ----------------------
+	// ----------------------------------------------------------------------------------
 
-	// Todo: if we get a hash hit, we need to clean up the PV table because it won't contain all the moves
+	tableEntry = TTable_Read(ctx->Board->Hash);
+	if(tableEntry != 0)
+	{
+		hashHitPartial = TRUE;
+		if(tableEntry->Depth >= depth && (tableEntry->NodeType == NODE_PV || tableEntry->NodeType == NODE_ALL))
+		{
+			/*hashHitFull = TRUE;
+			score = tableEntry->Score;
+			
+			if(score >= beta)
+			{
+				cutMoveIndex = 0;
+				bestMove.From = tableEntry->BestMoveFrom;
+				bestMove.To = tableEntry->BestMoveTo;
+				bestMove.PlayerPiece = 100; // just some value other than 0, so it gets added to the TT
+
+				nodeType = NODE_CUT;
+				score = beta;
+				goto Finalize;
+			}
+
+			if(score > alpha)
+			{
+				bestMoveIndex = 0;
+				//bestMove.From = tableEntry->BestMoveFrom;
+				//bestMove.To = tableEntry->BestMoveTo;
+				//bestMove.PlayerPiece = 100; // just some value other than 0, so it gets added to the TT
+
+				nodeType = NODE_PV;
+				ctx->PV[ply][0].From = tableEntry->BestMoveFrom;
+				ctx->PV[ply][0].To = tableEntry->BestMoveTo;
+				ctx->PV[ply][0].Score = score;
+				ctx->PV[ply][0].Piece = Board_Piece(board, tableEntry->BestMoveFrom);
+
+				memset(&(ctx->PV[ply][1]), 0, sizeof(MoveSmall) * (Search_PlyMax - 1));
+				alpha = tableEntry->Score;
+				score = tableEntry->Score;
+			}*/
+		}
+	}
 
 	Order order;
 	order.OrderedMoves = 0;
 	order.OrderStage = Order_StageInit;
 	memset(order.MoveRank, 0, 100 * sizeof(int));
 
-	// find all the moves
+
+	// ----------------------------------------------------------------------------------
+	// ----------------- Run Evaluate and limit quiescence search moves -----------------
+	// ----------------------------------------------------------------------------------
+
+	if(quiesce)
+	{
+		addtoHashTable = FALSE;
+
+		int eval = Eval_Evaluate(board);
+		if(board->PlayerTurn == COLOR_WHITE)
+			score = eval;
+		else
+			score = -eval;
+		
+		if(score >= beta)
+		{
+			nodeType = NODE_EVAL;
+			score = beta;
+			goto Finalize;
+		}
+
+		if(score > alpha)
+		{
+			nodeType = NODE_PV;
+			memset(&(ctx->PV[ply][0]), 0, sizeof(MoveSmall) * Search_PlyMax);
+			alpha = score;
+		}
+
+		// check if we're too deep
+		if(ply >= Search_PlyMax - 1)
+		{
+			nodeType = NODE_EVAL;
+			goto Finalize;
+		}
+		
+		
+	}
+
+	// ----------------------------------------------------------------------------------
+	// ----------------------- Generate a list of all valid moves -----------------------
+	// ----------------------------------------------------------------------------------
+
 	order.MoveCount = Moves_GetAllMoves(board, order.MoveList);
+	moveCount = order.MoveCount;
+
+	// ----------------------------------------------------------------------------------
+	// ------------------------- Filter out non-quiescent moves -------------------------
+	// ----------------------------------------------------------------------------------
+
+	if(quiesce)
+	{
+		// filter out all moves except captures and promotions
+		// no moves get filtered if side to move is checked
+		moveCount = Order_QuiesceFilter(ctx, &order);
+		
+		// check if the move is quiet
+		if(moveCount == 0)
+		{
+			// score already contains the eval score
+			nodeType = NODE_EVAL;
+			goto Finalize;
+		}
+	}
+
+	// set the hash move if it is known
+	if(hashHitPartial)
+		Order_SetHashMove(ctx, &order, tableEntry->BestMoveFrom, tableEntry->BestMoveTo);
 
 	#ifdef STATS_SEARCH
 	SStats.MovesAtPly[ply] += order.MoveCount;
 	#endif
 
-	for (int i=0; i < order.MoveCount; i++)
-	{
-		// without move ordering
-		//Move* move = &(order.MoveList[i]);
+	// ----------------------------------------------------------------------------------
+	// ------------------------- Search through all the moves --------------------------
+	// ----------------------------------------------------------------------------------
 
-		// WITH move ordering
-		move = Order_GetMove(ctx, &order, ply);
+	for (int i=0; i < moveCount; i++)
+	{
+		Move* move = Order_GetMove(ctx, &order, ply);
 
 		assert(move != 0);
 
@@ -206,6 +354,7 @@ int Search_AlphaBeta(SearchContext* ctx, int depth, int alpha, int beta)
 		if(val >= beta)
 		{
 			cutMoveIndex = i;
+			bestMove = *move;
 			nodeType = NODE_CUT;
 			score = beta;
 			goto Finalize;
@@ -214,69 +363,128 @@ int Search_AlphaBeta(SearchContext* ctx, int depth, int alpha, int beta)
 		if(val > alpha)
 		{
 			bestMoveIndex = i;
+			bestMove = *move;
 			nodeType = NODE_PV;
 			ctx->PV[ply][0].From = from;
 			ctx->PV[ply][0].To = to;
 			ctx->PV[ply][0].Score = val;
 			ctx->PV[ply][0].Piece = Board_Piece(board, from);
 
-			memcpy(&(ctx->PV[ply][1]), &(ctx->PV[ply + 1][0]), sizeof(MoveSmall) * (Search_PlyMax - ply));
+			memcpy(&(ctx->PV[ply][1]), &(ctx->PV[ply + 1][0]), sizeof(MoveSmall) * (Search_PlyMax - 1));
 			alpha = val;
 			score = val;
 		}
 		
 	}
 
-	// checkmate or stalemate		
-	if(hasValidMove == FALSE)
+	// ----------------------------------------------------------------------------------
+	// ------------------------ Checkmate and stalemate handling ------------------------
+	// ----------------------------------------------------------------------------------
+
+	if(!hasValidMove)
 	{
-		nodeType = NODE_NONE;
+		bestMove.PlayerPiece = 0;
 
 		if(Board_IsChecked(board, board->PlayerTurn))
 			score = Search_Checkmate;
 		else
 			score = Search_Stalemate;
+
+		if(score >= beta)
+		{
+			cutMoveIndex = order.MoveCount;
+			nodeType = NODE_CUT;
+			score = beta;
+			goto Finalize;
+		}
+
+		if(score > alpha)
+		{
+			bestMoveIndex = order.MoveCount;
+			nodeType = NODE_PV;
+			memset(&(ctx->PV[ply][0]), 0, sizeof(MoveSmall) * Search_PlyMax);
+			alpha = score;
+		}
 	}
+
+	// ----------------------------------------------------------------------------------
+	// ------------------------------- All-node handling -------------------------------
+	// ----------------------------------------------------------------------------------
 
 	if(nodeType == NODE_ALL)
 		score = alpha;
 
+
 Finalize:
 
 	#ifdef STATS_SEARCH
+
+	if(hashHitPartial)
+		SStats.HashHitsCount++;
+
+	if(depth <= 0)
+		SStats.QuiescentNodeCount++;
+
 	switch(nodeType)
 	{
 	case (NODE_PV):
 		SStats.PVNodeCount++;
-		SStats.BestMoveIndex[bestMoveIndex]++;
+		if(bestMoveIndex >= 0)
+			SStats.BestMoveIndex[bestMoveIndex]++;
 		break;
 	case (NODE_ALL):
 		SStats.AllNodeCount++;
 		break;
 	case (NODE_CUT):
 		SStats.CutNodeCount++;
-		SStats.CutMoveIndex[cutMoveIndex]++;
+		if(cutMoveIndex >= 0)
+			SStats.CutMoveIndex[cutMoveIndex]++;
 		break;
 	case (NODE_EVAL):
 		SStats.EvalNodeCount++;
-		break;
-	case (NODE_NONE):
-		SStats.NoneNodeCount++;
+		if(hashHitFull)
+			SStats.HashEvalHitsCount++;
 		break;
 	}
 	#endif
 
-	// killer moves and history
-	if(nodeType == NODE_CUT)
+	// ----------------------------------------------------------------------------------
+	// --------------------- Store killer moves and update history ---------------------
+	// ----------------------------------------------------------------------------------
+
+	if(nodeType == NODE_CUT && !(bestMove.From == 0 && bestMove.To == 0))
 	{
-		if(move->CapturePiece == 0)
+		if(bestMove.PlayerPiece != 0 && bestMove.CapturePiece == 0)
 		{
-			Order_SetKillerMove(ctx, ply, move->From, move->To, move->PlayerPiece);
-			ctx->History[move->From][move->To] += ply * ply;
+			Order_SetKillerMove(ctx, ply, bestMove.From, bestMove.To, bestMove.PlayerPiece);
+			ctx->History[bestMove.From][bestMove.To] += ply * ply;
 		}
 	}
 
-	// Todo: Add Hashtable entry
+	// ----------------------------------------------------------------------------------
+	// ------------------------ Add node to transposition table ------------------------
+	// ----------------------------------------------------------------------------------
+
+	if(addtoHashTable)
+	{
+		TTableEntry newEntry;
+		if(bestMove.PlayerPiece != 0)
+		{
+			newEntry.BestMoveFrom = bestMove.From;
+			newEntry.BestMoveTo = bestMove.To;
+		}
+		else
+		{
+			newEntry.BestMoveFrom = 0;
+			newEntry.BestMoveTo = 0;
+		}
+		newEntry.Depth = depth;
+		newEntry.Hash = ctx->Board->Hash;
+		newEntry.NodeType = nodeType;
+		newEntry.Score = score;
+		TTable_Insert(&newEntry);
+	}
+
 
 	return score;
 }

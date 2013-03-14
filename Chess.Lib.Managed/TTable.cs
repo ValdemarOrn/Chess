@@ -9,13 +9,15 @@ namespace Chess.Lib
 	[StructLayout(LayoutKind.Sequential, Pack = 1, CharSet = CharSet.Ansi)]
 	public unsafe struct TTableEntry
 	{
-		ulong Hash;
+		public ulong Hash;
 
-		Int16 Score;
-		UInt16 BestMove;
-		byte NodeType;
-		byte Depth;
-		byte Age;
+		public byte BestMoveFrom;
+		public byte BestMoveTo;
+
+		public byte NodeType;
+		public byte Depth;
+
+		public int Score;
 	}
 
 	public class TTable

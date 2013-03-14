@@ -221,7 +221,7 @@ void Order_NextStage(SearchContext* ctx, Order* order, int ply)
 Move* Order_GetMove(SearchContext* ctx, Order* moves, int ply)
 {
 	// if there are no ordered moves ready, order the next batch of moves
-	if(moves->OrderedMoves == 0)
+	if(moves->OrderedMoves == 0 || moves->OrderStage == Order_StageInit)
 		Order_NextStage(ctx, moves, ply);
 
 	int bestScore = -1;
@@ -243,7 +243,40 @@ Move* Order_GetMove(SearchContext* ctx, Order* moves, int ply)
 	return &moves->MoveList[bestMove];
 }
 
-const int Order_MinKillerScore = 5;
+void Order_SetHashMove(SearchContext* ctx, Order* moves, int from, int to)
+{
+	for(int i=0; i<moves->MoveCount; i++)
+	{
+		if(moves->MoveList[i].From == from && moves->MoveList[i].To == to)
+		{
+			moves->MoveRank[i] = Order_StageHash;
+			moves->OrderedMoves++;
+			return;
+		}
+	}
+}
+
+int Order_QuiesceFilter(SearchContext* ctx, Order* moves)
+{
+	_Bool isChecked = Board_IsChecked(ctx->Board, ctx->Board->PlayerTurn);
+	if(isChecked)
+		return moves->MoveCount;
+
+	int quiesceMoves = 0;
+
+	// block all moves except captures
+	for(int i=0; i<moves->MoveCount; i++)
+	{
+		if(moves->MoveList[i].CapturePiece > 0 || moves->MoveList[i].Promotion > 0)
+			quiesceMoves++;
+		else
+			moves->MoveRank[i] = -1;
+	}
+
+	return quiesceMoves;
+}
+
+
 
 void Order_SetKillerMove(SearchContext* ctx, int ply, int from, int to, int piece)
 {

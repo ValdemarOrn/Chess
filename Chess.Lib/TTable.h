@@ -16,15 +16,14 @@ extern "C"
 
 		uint8_t NodeType;
 		uint8_t Depth;
-		uint8_t Age;
 
-		int16_t Score;
+		int Score;
 		
 	} TTableEntry;
 	#pragma pack(pop)
 
-	TTableEntry* TTable;
-	uint32_t TTableSize;
+	extern TTableEntry* TTable;
+	extern uint32_t TTableSize;
 
 	__declspec(dllexport) int TTable_GetTableSize();
 
@@ -44,11 +43,18 @@ extern "C"
 
 	__inline_always TTableEntry* TTable_Read(uint64_t hash)
 	{
-		return &(TTable[hash % TTableSize]);
+		if(TTableSize != 16777216)
+			int k = 23;
+
+		TTableEntry* entry = &(TTable[hash % TTableSize]);
+		return (entry->Hash == hash) ? entry : 0;
 	}
 
 	__inline_always _Bool TTable_Insert(TTableEntry* entry)
 	{
+		if(TTableSize != 16777216)
+			int k = 23;
+
 		uint64_t index = entry->Hash % TTableSize;
 		TTableEntry* existing = &TTable[index];
 
@@ -56,11 +62,14 @@ extern "C"
 
 		if(existing->Hash == 0)
 			copy = TRUE;
-		else if(existing->Depth <= entry->Depth)
+		else if(existing->Depth < entry->Depth)
 			copy = TRUE;
 
 		if(copy == TRUE)
 			memcpy(&TTable[index], entry, sizeof(TTableEntry));	
+
+		if(TTableSize != 16777216)
+			int k = 23;
 
 		return copy;
 	}

@@ -2,6 +2,9 @@
 #include "TTable.h"
 #include "Bitboard.h"
 
+TTableEntry* TTable;
+uint32_t TTableSize;
+
 void TTable_Init(int sizeMB)
 {
 	uint64_t count = sizeMB * 1024 * 1024;

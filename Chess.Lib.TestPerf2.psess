@@ -67,6 +67,14 @@
       <ProjName>Chess.Lib.TestPerf</ProjName>
     </ProjBinary>
   </Binaries>
+  <Reports>
+    <Report>
+      <Path>Chess.Lib.TestPerf130314.vsp</Path>
+    </Report>
+    <Report>
+      <Path>Chess.Lib.TestPerf130314(1).vsp</Path>
+    </Report>
+  </Reports>
   <Launches>
     <ProjBinary>
       <Path>:PB:{928975EE-B50F-4D16-88BC-6EC38174763C}|Chess.Lib.TestPerf\Chess.Lib.TestPerf.csproj</Path>

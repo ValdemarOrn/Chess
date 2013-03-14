@@ -12,12 +12,8 @@ namespace Chess.Lib.TestPerf
 		{
 			Manager.InitLibrary();
 
-			//TestSearchCount();
-			//PerftTestSuite.RunTests();
-			PerftTestSuite.EnableDebugOutput = false;
-			//PerftTestSuite.TestPosition(PerftTestSuite.Positions[1]);
-			PerftTestSuite.RunTests();
-			Console.ReadLine();
+			var t = new SearchTest();
+			t.TestSearch7();
 		}
 
 		private static void TestSearchCount()

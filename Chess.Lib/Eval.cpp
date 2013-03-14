@@ -3,6 +3,7 @@
 #include "EvalData.h"
 #include "Moves.h"
 #include "Moves/King.h"
+#include "Search.h"
 #include <string.h>
 
 // Reverse the array for the evaluation tables into the correct format
@@ -62,8 +63,48 @@ void Eval_Init()
 EvalStats EStats[33];
 #endif
 
+typedef struct
+{
+	uint64_t Hash;
+	int Score;
+	
+} EvalEntry;
+
+const int Eval_EntryCount = 2000000;
+const int Eval_NoEntry = 1000000000;
+EvalEntry Eval_Entries[Eval_EntryCount];
+
+int Eval_ReadEntry(uint64_t hash)
+{
+	int index = hash % Eval_EntryCount;
+	EvalEntry* entry = &Eval_Entries[index];
+	return (entry->Hash == hash) ? entry->Score : 1000000000;
+}
+
+void Eval_WriteEntry(uint64_t hash, int score)
+{
+	int index = hash % Eval_EntryCount;
+	EvalEntry* entry = &Eval_Entries[index];
+	entry->Hash = hash;
+	entry->Score = score;
+}
+
 int Eval_Evaluate(Board* board)
 {
+	#ifdef STATS_SEARCH
+	SStats.EvalTotal++;
+	#endif
+
+	int stored = Eval_ReadEntry(board->Hash);
+	if(stored != Eval_NoEntry)
+	{
+		#ifdef STATS_SEARCH
+		SStats.EvalHits++;
+		#endif
+
+		return stored;
+	}
+
 	#ifdef DEBUG
 	EStats[COLOR_WHITE].DoublePawnPenalty = 0;
 	EStats[COLOR_WHITE].IsolatedPawnPenalty = 0;
@@ -198,7 +239,9 @@ int Eval_Evaluate(Board* board)
 	EStats[board->PlayerTurn].TempoBonus += Eval_Bonus_CurrentPlayer;
 	#endif
 
-	return whiteValue - blackValue;
+	int output = whiteValue - blackValue;
+	Eval_WriteEntry(board->Hash, output);
+	return output;
 }
 
 EvalStats* Eval_GetEvalStats(int color)

@@ -12,7 +12,8 @@ namespace Chess.Lib
 		public ulong TotalNodeCount;
 		public ulong EvalNodeCount;
 		public ulong QuiescentNodeCount;
-		public ulong NoneNodeCount;
+		public ulong HashHitsCount;
+		public ulong HashEvalHitsCount;
 
 		public ulong CutNodeCount;
 		public ulong PVNodeCount;
@@ -23,11 +24,14 @@ namespace Chess.Lib
 
 		public fixed ulong NodesAtPly[Search.Search_PlyMax];
 		public fixed ulong MovesAtPly[Search.Search_PlyMax];
+
+		public ulong EvalHits;
+		public ulong EvalTotal;
 	}
 
 	public class Search
 	{
-		public const int Search_PlyMax = 20;		
+		public const int Search_PlyMax = 40;		
 
 		[DllImport("..\\..\\..\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Search_SearchPos", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static unsafe extern MoveSmall SearchPos(BoardStruct* board, int searchDepth);

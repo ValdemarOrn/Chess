@@ -22,6 +22,8 @@ namespace Chess.Lib
 			new King();
 			new Queen();
 
+			TTable.Init(256);
+
 			cb = Callback;
 			var ptr = Marshal.GetFunctionPointerForDelegate(cb);
 			Manager.SetCallback(ptr);
