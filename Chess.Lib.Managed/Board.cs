@@ -10,8 +10,10 @@ namespace Chess.Lib
 	public unsafe struct BoardStruct
 	{
 		public fixed ulong Boards[8];
-
 		public fixed byte Tiles[64];
+
+		public ulong AttacksWhite;
+		public ulong AttacksBlack;
 
 		public ulong Hash;
 

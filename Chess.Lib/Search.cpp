@@ -7,8 +7,8 @@
 #include "TTable.h"
 #include <stdio.h>
 
-int Search_AlphaBeta(SearchContext* ctx, int depth, int alpha, int beta);
-int Search_Quiesce(SearchContext* ctx, int depth, int alpha, int beta);
+int Search_AlphaBeta(SearchContext* ctx, int alpha, int beta, SearchParams params);
+int Search_Quiesce(SearchContext* ctx, int alpha, int beta, SearchParams params);
 
 #ifdef STATS_SEARCH
 SearchStats SStats;
@@ -17,12 +17,26 @@ SearchStats SStats;
 void ResetStats()
 {
 	#ifdef STATS_SEARCH
-	SStats.AllNodeCount = 0;
-	SStats.CutNodeCount = 0;
-	SStats.EvalNodeCount = 0;
-	SStats.QuiescentNodeCount = 0;
-	SStats.PVNodeCount = 0;
 	SStats.TotalNodeCount = 0;
+	SStats.QuiescentNodeCount = 0;
+	SStats.EvalNodeCount = 0;
+
+	SStats.CutNodeCount = 0;
+	SStats.PVNodeCount = 0;
+	SStats.AllNodeCount = 0;
+	
+	SStats.QCutNodeCount = 0;
+	SStats.QPVNodeCount = 0;
+	SStats.QAllNodeCount = 0;
+	
+	SStats.HashHitsCount = 0;
+	SStats.HashFullHitCount = 0;
+	
+	SStats.EvalHits = 0;
+	SStats.EvalTotal = 0;
+
+	SStats.PruneDelta = 0;
+	SStats.PruneBadCaptures = 0;
 	
 	for(int i = 0; i < Search_PlyMax; i++)
 	{
@@ -34,10 +48,9 @@ void ResetStats()
 	{
 		SStats.CutMoveIndex[i] = 0;
 		SStats.BestMoveIndex[i] = 0;
+		SStats.QBestMoveIndex[i] = 0;
+		SStats.QCutMoveIndex[i] = 0;
 	}
-
-	SStats.EvalHits = 0;
-	SStats.EvalTotal = 0;
 
 	#endif
 }
@@ -78,6 +91,7 @@ MoveSmall Search_SearchPos(Board* board, int searchDepth)
 	SearchContext ctx;
 	Search_InitContext(&ctx);
 	ctx.Board = board;
+	SearchParams params;
 
 	char text[80];
 	Manager_Callback("Ply\tScore\tNodes\tPV\n");
@@ -95,7 +109,10 @@ MoveSmall Search_SearchPos(Board* board, int searchDepth)
 				ctx.History[i][j] = (int)(ctx.History[i][j] >> 1); // divide by 2
 
 		ctx.SearchDepth = i;
-		Search_AlphaBeta(&ctx, i, -99999999, 99999999);
+		params.Depth = i;
+		params.Flags = 0;
+		params.Ply = 0;
+		Search_AlphaBeta(&ctx, -99999999, 99999999, params);
 
 		// print PV
 
@@ -148,10 +165,12 @@ _Bool Search_DrawByRepetition(Board* board)
 	return FALSE;
 }
 
-int Search_AlphaBeta(SearchContext* ctx, int depth, int alpha, int beta)
+int Search_AlphaBeta(SearchContext* ctx, int alpha, int beta, SearchParams params)
 {
 	Board* board = ctx->Board;
-	int ply = ctx->SearchDepth - depth;
+	int ply = params.Ply;
+	int depth = params.Depth;
+	SearchParams callingParams = params;
 
 	_Bool addtoHashTable = TRUE;
 	int nodeType = NODE_ALL;
@@ -206,18 +225,12 @@ int Search_AlphaBeta(SearchContext* ctx, int depth, int alpha, int beta)
 
 	if(depth <= 0)
 	{
-		/*nodeType = NODE_EVAL;
-		int eval = Eval_Evaluate(board);
-		if(board->PlayerTurn == COLOR_WHITE)
-			score = eval;
-		else
-			score = -eval;
-
-		goto Finalize;*/
-
 		// the Quiescence search takes care of all the bookkeeping, incl.
 		// everything that needs to be done in Finalize!
-		return Search_Quiesce(ctx, depth, alpha, beta);
+		// Assume the worst and set both side as potentially checked when we enter QS search
+		Search_SetFlags(&callingParams, SEARCH_FLAGS_QS_ALLOW_CHECK_EVADE_WHITE, 1);
+		Search_SetFlags(&callingParams, SEARCH_FLAGS_QS_ALLOW_CHECK_EVADE_BLACK, 1);
+		return Search_Quiesce(ctx, alpha, beta, callingParams);
 		
 	}
 
@@ -304,7 +317,9 @@ int Search_AlphaBeta(SearchContext* ctx, int depth, int alpha, int beta)
 		// Todo: Handle promotions
 
 		hasValidMove = true;
-		int val = -Search_AlphaBeta(ctx, depth - 1, -beta, -alpha);
+		callingParams.Depth = depth - 1;
+		callingParams.Ply = ply + 1;
+		int val = -Search_AlphaBeta(ctx, -beta, -alpha, callingParams);
 		Board_Unmake(board);
 
 		assert(hashBefore == board->Hash);
@@ -446,15 +461,18 @@ Finalize:
 	return score;
 }
 
-int Search_Quiesce(SearchContext* ctx, int depth, int alpha, int beta)
+int Search_Quiesce(SearchContext* ctx, int alpha, int beta, SearchParams params)
 {
 	Board* board = ctx->Board;
-	int ply = ctx->SearchDepth - depth;
+	int ply = params.Ply;
+	int depth = params.Depth;
+	SearchParams callingParams = params;
 	_Bool quiesce = (depth < 0);
 
 	int nodeType = NODE_ALL;
 	int score = 0;
 	int moveCount = 0;
+	int eval = 0;
 //	TTableEntry* tableEntry = 0;
 
 	int bestMoveIndex = -1;
@@ -465,6 +483,7 @@ int Search_Quiesce(SearchContext* ctx, int depth, int alpha, int beta)
 	bestMove.PlayerPiece = 0;
 	_Bool hasValidMove = FALSE;
 	_Bool isChecked = FALSE;
+	_Bool generateAllMoves = FALSE;
 
 	#ifdef STATS_SEARCH
 	if(quiesce)
@@ -519,54 +538,63 @@ int Search_Quiesce(SearchContext* ctx, int depth, int alpha, int beta)
 		}
 	}*/
 
+	// We can't stand pat if checked. Also, if checked, we try check evasion (generate all moves), but only once for each player!
+	// otherwise, search explosion might occur.
+	isChecked = Board_IsChecked(ctx->Board, ctx->Board->PlayerTurn);
 	
+	if(board->PlayerTurn == COLOR_WHITE)
+	{
+		if(isChecked && Search_GetFlags(&params, SEARCH_FLAGS_QS_ALLOW_CHECK_EVADE_WHITE))
+			generateAllMoves = TRUE;
+	}
+	else
+	{
+		if(isChecked && Search_GetFlags(&params, SEARCH_FLAGS_QS_ALLOW_CHECK_EVADE_BLACK))
+			generateAllMoves = TRUE;
+	}
+
+	if(isChecked)
+	{
+		// we have used up our check evasion
+		if(board->PlayerTurn == COLOR_WHITE)
+			Search_SetFlags(&callingParams, SEARCH_FLAGS_QS_ALLOW_CHECK_EVADE_WHITE, 0);
+		else
+			Search_SetFlags(&callingParams, SEARCH_FLAGS_QS_ALLOW_CHECK_EVADE_BLACK, 0);
+	}
+
 	// ----------------------------------------------------------------------------------
 	// --------------------------------- Run Evaluate  ---------------------------------
 	// ----------------------------------------------------------------------------------
-
-	nodeType = NODE_EVAL;
-	int eval = Eval_Evaluate(board);
-	if(board->PlayerTurn == COLOR_WHITE)
-		score = eval;
-	else
-		score = -eval;
-
-	if(score >= beta)
-	{
-		nodeType = NODE_EVAL;
-		score = beta;
-		goto Finalize;
-	}
-
-	if(score > alpha)
-	{
-		nodeType = NODE_PV;
-		memset(&(ctx->PV[ply][0]), 0, sizeof(MoveSmall) * Search_PlyMax);
-		alpha = score;
-	}
 
 	// check if we're too deep
 	if(ply >= Search_PlyMax - 1)
 	{
 		nodeType = NODE_EVAL;
+		eval = Eval_Evaluate(board);
+		score = eval;
 		goto Finalize;
 	}
 
-	// ----------------------------------------------------------------------------------
-	// --------------------------------- Delta Pruning ---------------------------------
-	// ----------------------------------------------------------------------------------
-
-	/*// check that there's any hope. If not ever capturing a queen will improve alpha, then we're fucked
-	if(eval + Eval_PieceValues[PIECE_QUEEN] <= alpha)
+	// Stand pat test
+	if(!isChecked)
 	{
-		#ifdef STATS_SEARCH
-		SStats.PruneDelta++;
-		#endif
+		eval = Eval_Evaluate(board);
+		score = eval;
 
-		nodeType = NODE_EVAL;
-		score = alpha;
-		goto Finalize;
-	}*/
+		if(score >= beta)
+		{
+			nodeType = NODE_EVAL;
+			score = beta;
+			goto Finalize;
+		}
+
+		if(score > alpha)
+		{
+			nodeType = NODE_PV;
+			memset(&(ctx->PV[ply][0]), 0, sizeof(MoveSmall) * Search_PlyMax);
+			alpha = score;
+		}
+	}
 	
 	// ----------------------------------------------------------------------------------
 	// ----------------------- Generate a list of all valid moves -----------------------
@@ -580,11 +608,8 @@ int Search_Quiesce(SearchContext* ctx, int depth, int alpha, int beta)
 	order.MoveCount = Moves_GetAllMoves(board, order.MoveList);
 	moveCount = order.MoveCount;
 
-	// filter out all moves except captures and promotions
-	// no moves get filtered if side to move is checked
-	isChecked = Board_IsChecked(ctx->Board, ctx->Board->PlayerTurn);
-
-	if(!isChecked)
+	// If we're not doing check evasion, then filter away all moves except promotions and captures
+	if(!generateAllMoves)
 		moveCount = Order_QuiesceFilter(ctx, &order);
 
 	// check if the move is quiet
@@ -608,6 +633,16 @@ int Search_Quiesce(SearchContext* ctx, int depth, int alpha, int beta)
 		Move* move = Order_GetMove(ctx, &order, ply);
 
 		assert(move != 0);
+
+		// Bad capture detection
+		/*if(Board_BadCapture(board, move))
+		{
+			#ifdef STATS_SEARCH
+			SStats.PruneBadCaptures++;
+			#endif
+
+			continue;
+		}*/
 
 		// Delta pruning
 		if(!isChecked)
@@ -637,7 +672,9 @@ int Search_Quiesce(SearchContext* ctx, int depth, int alpha, int beta)
 		// Todo: Handle promotions
 
 		hasValidMove = true;
-		int val = -Search_Quiesce(ctx, depth - 1, -beta, -alpha);
+		callingParams.Depth = depth - 1;
+		callingParams.Ply = ply + 1;
+		int val = -Search_Quiesce(ctx, -beta, -alpha, callingParams);
 		Board_Unmake(board);
 
 		assert(hashBefore == board->Hash);
@@ -672,33 +709,8 @@ int Search_Quiesce(SearchContext* ctx, int depth, int alpha, int beta)
 	// ------------------------ Checkmate and stalemate handling ------------------------
 	// ----------------------------------------------------------------------------------
 
-MateCheck:
-
 	if(!hasValidMove)
-	{
-		bestMove.PlayerPiece = 0;
-
-		if(Board_IsChecked(board, board->PlayerTurn))
-			score = Search_Checkmate;
-		else
-			score = Search_Stalemate;
-
-		if(score >= beta)
-		{
-			cutMoveIndex = order.MoveCount;
-			nodeType = NODE_CUT;
-			score = beta;
-			goto Finalize;
-		}
-
-		if(score > alpha)
-		{
-			bestMoveIndex = order.MoveCount;
-			nodeType = NODE_PV;
-			memset(&(ctx->PV[ply][0]), 0, sizeof(MoveSmall) * Search_PlyMax);
-			alpha = score;
-		}
-	}
+		nodeType = NODE_ALL;
 
 	// ----------------------------------------------------------------------------------
 	// ------------------------------- All-node handling -------------------------------

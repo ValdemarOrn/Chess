@@ -75,7 +75,8 @@ int Order_Captures(SearchContext* ctx, Order* order, int ply)
 			
 			if (order->MoveRank[i] == 0)
 			{
-				order->MoveRank[i] = Order_StageCaptures + (10 * victim - attacker);
+				_Bool badCapture = Board_BadCapture(ctx->Board, &order->MoveList[i]);
+				order->MoveRank[i] = Order_StageCaptures + (10 * victim - attacker) - badCapture * 1000;
 				count++;
 			}
 		}

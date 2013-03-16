@@ -99,8 +99,14 @@ void Board_Init(Board* board, int setPieces)
 	Board_SetPiece(board, 63, PIECE_ROOK, COLOR_BLACK);
 
 	board->Hash = Zobrist_Calculate(board);
-//	board->AttacksWhite = 0; //Board_AttackMap(board, COLOR_WHITE);
-//	board->AttacksBlack = 0; //Board_AttackMap(board, COLOR_BLACK);
+
+	#ifdef CALCULATE_ATTACKBOARDS
+	board->AttacksWhite = Board_AttackMap(board, COLOR_WHITE);
+	board->AttacksBlack = Board_AttackMap(board, COLOR_BLACK);
+	#else
+	board->AttacksWhite = 0;
+	board->AttacksBlack = 0;
+	#endif
 }
 
 void Board_SetPiece(Board* board, int square, int pieceType, int color)
@@ -294,8 +300,8 @@ _Bool Board_Make(Board* board, int from, int to)
 
 	// 1. put info in history
 	MoveHistory* history = &board->MoveHistory[board->CurrentMove];
-//	history->PrevAttacksBlack = board->AttacksBlack;
-//	history->PrevAttacksWhite = board->AttacksWhite;
+	history->PrevAttacksBlack = board->AttacksBlack;
+	history->PrevAttacksWhite = board->AttacksWhite;
 	history->PrevCastleState = board->Castle;
 	history->PrevEnPassantTile = board->EnPassantTile;
 	history->PrevFiftyMoveRulePlies = board->FiftyMoveRulePlies;
@@ -409,6 +415,14 @@ _Bool Board_Make(Board* board, int from, int to)
 		}
 	}
 
+	#ifdef CALCULATE_ATTACKBOARDS
+	board->AttacksWhite = Board_AttackMap(board, COLOR_WHITE);
+	board->AttacksBlack = Board_AttackMap(board, COLOR_BLACK);
+	#else
+	board->AttacksWhite = 0;
+	board->AttacksBlack = 0;
+	#endif
+
 	return 1;
 }
 
@@ -429,8 +443,8 @@ void Board_Unmake(Board* board)
 
 	assert(Board_Piece(board, move->To) == ((move->Promotion > 0) ? move->Promotion : move->PlayerPiece));
 
-//	board->AttacksBlack = history->PrevAttacksBlack;
-//	board->AttacksWhite = history->PrevAttacksWhite;
+	board->AttacksBlack = history->PrevAttacksBlack;
+	board->AttacksWhite = history->PrevAttacksWhite;
 
 	board->Hash ^= Zobrist_Keys[ZOBRIST_CASTLING][board->Castle];
 	board->Castle = history->PrevCastleState;
@@ -503,8 +517,14 @@ _Bool Board_Promote(Board* board, int square, int pieceType)
 	Board_ClearPiece(board, square);
 	Board_SetPiece(board, square, pieceType, color);
 	board->MoveHistory[board->CurrentMove - 1].Move.Promotion = pieceType;
-	//board->AttacksWhite = Board_AttackMap(board, COLOR_WHITE);
-	//board->AttacksBlack = Board_AttackMap(board, COLOR_BLACK);
+
+	#ifdef CALCULATE_ATTACKBOARDS
+	board->AttacksWhite = Board_AttackMap(board, COLOR_WHITE);
+	board->AttacksBlack = Board_AttackMap(board, COLOR_BLACK);
+	#else
+	board->AttacksWhite = 0;
+	board->AttacksBlack = 0;
+	#endif
 	return 1;
 }
 

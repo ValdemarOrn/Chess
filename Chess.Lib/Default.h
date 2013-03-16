@@ -18,6 +18,9 @@ typedef int _Bool;
 // enables statistics in the search module (node count, cutoff metrics, etc)
 #define STATS_SEARCH
 
+// define this if you want to update the attack boards during make/unmake/promote
+#define CALCULATE_ATTACKBOARDS
+
 // Compile for a Windows target already defined within Visual Studio
 //#define _WIN32 
 

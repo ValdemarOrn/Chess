@@ -40,8 +40,10 @@ extern "C"
 	typedef struct
 	{
 		uint64_t Boards[8];
-
 		uint8_t Tiles[64];
+
+		uint64_t AttacksWhite;
+		uint64_t AttacksBlack;
 
 		uint64_t Hash;
 
@@ -124,6 +126,9 @@ extern "C"
 	// Checks if the king of the specified color is in check
 	__declspec(dllexport) _Bool Board_IsChecked(Board* board, int color);
 
+	// Checks if a piece is attacking a lesser piece that is defended
+	__declspec(dllexport) _Bool Board_BadCapture(Board* board, Move* move);
+
 	// Creates a FEN representation of the board
 	__declspec(dllexport) void Board_ToFEN(Board* board, char* outputString100);
 
@@ -148,6 +153,20 @@ extern "C"
 	__inline_always int Board_Piece(Board* board, int tile)
 	{
 		return board->Tiles[tile] & 0x0F;
+	}
+
+	__inline_always _Bool Board_BadCapture(Board* board, Move* move)
+	{
+		// Note: This function REQUIRED attack board to be calculated.
+		// This is used in the QS search, and Eval should have calculated the attacks already
+
+		int playerColor = Board_Color(board, move->From);
+		int attacker = move->PlayerPiece;
+		int victim = Board_Piece(board, move->To);
+
+		int isDefended = (playerColor == COLOR_WHITE) ? Bitboard_GetRef(&board->AttacksBlack, move->To) : Bitboard_GetRef(&board->AttacksWhite, move->To);
+
+		return (isDefended && (attacker > victim));
 	}
 }
 

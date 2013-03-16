@@ -167,7 +167,7 @@ typedef struct
 	
 } EvalEntry;
 
-const int Eval_EntryCount = 2000000;
+const int Eval_EntryCount = 10000000;
 const int Eval_NoEntry = 1000000000;
 EvalEntry Eval_Entries[Eval_EntryCount];
 
@@ -220,8 +220,12 @@ int Eval_Evaluate(Board* board)
 	#endif
 
 	uint8_t locations[64];
-	uint64_t whiteAttacks = Board_AttackMap(board, COLOR_WHITE);
-	uint64_t blackAttacks = Board_AttackMap(board, COLOR_BLACK);
+
+	if(board->AttacksWhite == 0)
+	{
+		board->AttacksWhite = Board_AttackMap(board, COLOR_WHITE);
+		board->AttacksBlack = Board_AttackMap(board, COLOR_BLACK);
+	}
 
 	uint64_t occupancy = board->Boards[BOARD_WHITE] | board->Boards[BOARD_BLACK];
 	int count = Bitboard_BitList(occupancy, locations);
@@ -255,7 +259,7 @@ int Eval_Evaluate(Board* board)
 
 		if(color == COLOR_WHITE)
 		{
-			if(Bitboard_GetRef(&whiteAttacks, square) == 0)
+			if(Bitboard_GetRef(&board->AttacksWhite, square) == 0)
 				pValue -= Eval_UndefendedPiecePenalty[piece];
 
 			#ifdef DEBUG
@@ -287,7 +291,7 @@ int Eval_Evaluate(Board* board)
 		}
 		else
 		{
-			if(Bitboard_GetRef(&blackAttacks, square) == 0)
+			if(Bitboard_GetRef(&board->AttacksBlack, square) == 0)
 				pValue -= Eval_UndefendedPiecePenalty[piece];
 
 			#ifdef DEBUG
@@ -324,8 +328,8 @@ int Eval_Evaluate(Board* board)
 			blackValue += pValue;
 	}
 
-	int whiteAttackCount = Bitboard_PopCount(whiteAttacks);
-	int blackAttackCount = Bitboard_PopCount(blackAttacks);
+	int whiteAttackCount = Bitboard_PopCount(board->AttacksWhite);
+	int blackAttackCount = Bitboard_PopCount(board->AttacksBlack);
 
 	whiteValue += whiteAttackCount * 3;
 	blackValue += blackAttackCount * 3;
@@ -346,6 +350,10 @@ int Eval_Evaluate(Board* board)
 	#endif
 
 	int output = whiteValue - blackValue;
+
+	if(board->PlayerTurn == COLOR_BLACK)
+		output = -output;
+
 	Eval_WriteEntry(board->Hash, output);
 	return output;
 }

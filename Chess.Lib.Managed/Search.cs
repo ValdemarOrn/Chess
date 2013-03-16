@@ -28,6 +28,7 @@ namespace Chess.Lib
 		public ulong EvalTotal;
 
 		public ulong PruneDelta;
+		public ulong PruneBadCaptures;
 
 		public fixed int BestMoveIndex[100];
 		public fixed int CutMoveIndex[100];
