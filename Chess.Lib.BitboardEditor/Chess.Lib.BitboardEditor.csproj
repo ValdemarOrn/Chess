@@ -6,7 +6,7 @@
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{CDB74489-AC6B-47B0-878F-F228456F7FA3}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Chess.Lib.BitboardEditor</RootNamespace>
     <AssemblyName>Chess.Lib.BitboardEditor</AssemblyName>
@@ -51,19 +51,38 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BitboardControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BitboardControlPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BitboardControlPanel.Designer.cs">
+      <DependentUpon>BitboardControlPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="BoardControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Form1.cs">
+    <Compile Include="BoardControlPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BoardControlPanel.Designer.cs">
+      <DependentUpon>BoardControlPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Main.Designer.cs">
+      <DependentUpon>Main.cs</DependentUpon>
     </Compile>
+    <Compile Include="PieceBitmaps.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="BoardControlPanel.resx">
+      <DependentUpon>BoardControlPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main.resx">
+      <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -90,6 +109,10 @@
     <ProjectReference Include="..\Chess.Lib.Managed\Chess.Lib.Managed.csproj">
       <Project>{79CAA135-2881-4E2D-93E3-45257546E766}</Project>
       <Name>Chess.Lib.Managed</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Chess\Chess.csproj">
+      <Project>{5c3de354-edd4-4377-a3d0-a33a5d2c7c71}</Project>
+      <Name>Chess</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

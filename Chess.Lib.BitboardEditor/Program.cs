@@ -15,7 +15,11 @@ namespace Chess.Lib.BitboardEditor
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new Form1());
+
+			Manager.InitLibrary();
+			PieceBitmaps.Dir = "..\\..\\..\\Pieces\\";
+
+			Application.Run(new Main());
 		}
 	}
 }

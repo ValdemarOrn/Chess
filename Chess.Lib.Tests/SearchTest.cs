@@ -109,17 +109,28 @@ namespace Chess.Lib.Tests
 
 		public void TestSearch7()
 		{
-			var bx = Chess.Notation.FENtoBoard("r3n1k1/p2n1pp1/1p5p/2p1P3/3p4/P4N1P/BPP2PP1/5RK1 w KQkq - 0 1");
-			var b = Helpers.ManagedBoardToNative(bx);
+			//var bx = Chess.Notation.FENtoBoard("r3n1k1/p2n1pp1/1p5p/2p1P3/3p4/P4N1P/BPP2PP1/5RK1 w KQkq - 0 1");
+			//var b = Helpers.ManagedBoardToNative(bx);
 
-			//var b = Board.Create();
-			//Board.Init(b, 1);
+			var b = Board.Create();
+			Board.Init(b, 1);
 
 			DateTime start = DateTime.Now;
 			var bestMove = Search.SearchPos(b, 8);
 			var time = (DateTime.Now - start).TotalSeconds;
 			Console.WriteLine(String.Format("Time: {0:0.00} seconds", time));
 			var stats = Search.GetSearchStats();
+
+			var table = TTable.GetTable();
+			var tableSize = TTable.GetTableSize();
+			int used = 0;
+			for(int i = 0; i < tableSize; i++)
+			{
+				if (table[i].Hash != 0)
+					used++;
+			}
+
+			var fill = used / (double)tableSize;
 
 			double first = stats->CutMoveIndex[0] / (double)stats->CutNodeCount * 100;
 			double first3 = (stats->CutMoveIndex[0] + stats->CutMoveIndex[1] + stats->CutMoveIndex[2]) / (double)stats->CutNodeCount * 100;

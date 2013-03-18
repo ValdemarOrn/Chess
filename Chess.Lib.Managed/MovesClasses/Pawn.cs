@@ -135,30 +135,30 @@ namespace Chess.Lib.MoveClasses
 			return moves;
 		}
 
-		[DllImport("..\\..\\..\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Pawn_LoadWhiteMove", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("C:\\Src\\_Tree\\Applications\\Chess\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Pawn_LoadWhiteMove", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		static extern void LoadWhiteMove(int pos, ulong moveBoard);
 
-		[DllImport("..\\..\\..\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Pawn_LoadBlackMove", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("C:\\Src\\_Tree\\Applications\\Chess\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Pawn_LoadBlackMove", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		static extern void LoadBlackMove(int pos, ulong moveBoard);
 
-		[DllImport("..\\..\\..\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Pawn_LoadWhiteAttack", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("C:\\Src\\_Tree\\Applications\\Chess\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Pawn_LoadWhiteAttack", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		static extern void LoadWhiteAttack(int pos, ulong moveBoard);
 
-		[DllImport("..\\..\\..\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Pawn_LoadBlackAttack", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("C:\\Src\\_Tree\\Applications\\Chess\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Pawn_LoadBlackAttack", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		static extern void LoadBlackAttack(int pos, ulong moveBoard);
 
 		// ---------------------------------------------
 
-		[DllImport("..\\..\\..\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Pawn_ReadWhiteMove", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("C:\\Src\\_Tree\\Applications\\Chess\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Pawn_ReadWhiteMove", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static extern ulong ReadWhiteMove(int pos);
 
-		[DllImport("..\\..\\..\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Pawn_ReadBlackMove", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("C:\\Src\\_Tree\\Applications\\Chess\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Pawn_ReadBlackMove", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static extern ulong ReadBlackMove(int pos);
 
-		[DllImport("..\\..\\..\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Pawn_ReadWhiteAttack", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("C:\\Src\\_Tree\\Applications\\Chess\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Pawn_ReadWhiteAttack", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static extern ulong ReadWhiteAttack(int pos);
 
-		[DllImport("..\\..\\..\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Pawn_ReadBlackAttack", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("C:\\Src\\_Tree\\Applications\\Chess\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Pawn_ReadBlackAttack", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static extern ulong ReadBlackAttack(int pos);
 
 		

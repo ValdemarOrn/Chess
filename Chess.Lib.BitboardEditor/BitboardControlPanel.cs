@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace Chess.Lib.BitboardEditor
 {
-	public partial class Form1 : Form
+	public partial class BitboardControlPanel : UserControl
 	{
 		ulong _state;
 		public ulong State
@@ -19,7 +19,7 @@ namespace Chess.Lib.BitboardEditor
 			{ 
 				_state = value;
 				if (boardControl1 != null)
-					boardControl1.State = value;
+					boardControl1.BitState = value;
 
 				SetTexboxes();
 			}
@@ -28,10 +28,12 @@ namespace Chess.Lib.BitboardEditor
 		ulong[] States;
 		int Index;
 
-		public Form1()
+		public BitboardControlPanel()
 		{
 			InitializeComponent();
 			boardControl1.UpdateCallback = BoardUpdated;
+			boardControl1.LabeledTiles = true;
+			boardControl1.CreateTiles();
 
 			States = new ulong[10];
 			Index = 0;
@@ -40,62 +42,67 @@ namespace Chess.Lib.BitboardEditor
 
 		public void BoardUpdated()
 		{
-			if (boardControl1 == null || State == boardControl1.State)
+			if (boardControl1 == null || State == boardControl1.BitState)
 				return;
 
-			State = boardControl1.State;
+			State = boardControl1.BitState;
 			SetTexboxes();
 		}
 
 		void SetTexboxes()
 		{
-			if (State == (ulong)0)
+			try
 			{
-				textBoxHex.Text = "";
-				textBoxDec.Text = "";
-				textBoxList.Text = "";
-			}
-			else
-			{
-				textBoxHex.Text = "0x" + String.Format("{0:X}", State);
-				textBoxDec.Text = String.Format("{0:G}", State);
-
-				var list = new List<int>();
-				for (int i = 0; i < 64; i++)
+				if (State == (ulong)0)
 				{
-					if (Bitboard.Get(State, i))
-						list.Add(i);
+					textBoxHex.Text = "";
+					textBoxDec.Text = "";
+					textBoxList.Text = "";
+				}
+				else
+				{
+					textBoxHex.Text = "0x" + String.Format("{0:X}", State);
+					textBoxDec.Text = String.Format("{0:G}", State);
+
+					var list = new List<int>();
+					for (int i = 0; i < 64; i++)
+					{
+						if (Bitboard.Get(State, i))
+							list.Add(i);
+					}
+
+					textBoxList.Text = list.Select(k => k.ToString()).Aggregate((x, y) => x + "," + y);
 				}
 
-				textBoxList.Text = list.Select(k => k.ToString()).Aggregate((x, y) => x + "," + y);
+				string bitsHigh = "";
+				for (int i = 63; i > 31; i--)
+				{
+					if ((i + 1) % 8 == 0 && i != 63)
+						bitsHigh += ".";
+
+					if (Bitboard.Get(State, i))
+						bitsHigh += "1";
+					else
+						bitsHigh += "0";
+				}
+				labelBitsUpper.Text = bitsHigh;
+
+
+				string bitsLow = "";
+				for (int i = 31; i >= 0; i--)
+				{
+					if ((i + 1) % 8 == 0 && i != 31)
+						bitsLow += ".";
+
+					if (Bitboard.Get(State, i))
+						bitsLow += "1";
+					else
+						bitsLow += "0";
+				}
+				labelBitsLower.Text = bitsLow;
 			}
-
-			string bitsHigh = "";
-			for (int i = 63; i > 31; i--)
-			{
-				if ((i+1) % 8 == 0 && i != 63)
-					bitsHigh += ".";
-
-				if (Bitboard.Get(State, i))
-					bitsHigh += "1";
-				else
-					bitsHigh += "0";
-			}
-			labelBitsUpper.Text = bitsHigh;
-
-
-			string bitsLow = "";
-			for (int i = 31; i >= 0; i--)
-			{
-				if ((i + 1) % 8 == 0 && i != 31)
-					bitsLow += ".";
-
-				if (Bitboard.Get(State, i))
-					bitsLow += "1";
-				else
-					bitsLow += "0";
-			}
-			labelBitsLower.Text = bitsLow;
+			catch (Exception)
+			{ }
 		}
 
 		private void textBoxHex_TextChanged(object sender, EventArgs e)
@@ -121,7 +128,6 @@ namespace Chess.Lib.BitboardEditor
 			{
 			}
 		}
-
 
 		private void buttonClear_Click(object sender, EventArgs e)
 		{
@@ -168,11 +174,5 @@ namespace Chess.Lib.BitboardEditor
 		{
 			State = State >> 1;
 		}
-
-		
-
-		
-
-
 	}
 }

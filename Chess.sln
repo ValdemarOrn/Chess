@@ -12,8 +12,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chess.UI", "Chess.UI\Chess.UI.csproj", "{C764D7D5-9FF3-474D-92C7-133CA1589C65}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chess.Lib.Managed", "Chess.Lib.Managed\Chess.Lib.Managed.csproj", "{79CAA135-2881-4E2D-93E3-45257546E766}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chess.Lib.Tests", "Chess.Lib.Tests\Chess.Lib.Tests.csproj", "{52DE493F-84F8-451B-8D04-BEDD8D5DF586}"
@@ -49,9 +47,6 @@ Global
 		{DB6292BE-67D3-48D3-90A6-8C9A37974CDE}.Debug|x64.Build.0 = Debug|Any CPU
 		{DB6292BE-67D3-48D3-90A6-8C9A37974CDE}.Release|x64.ActiveCfg = Release|Any CPU
 		{DB6292BE-67D3-48D3-90A6-8C9A37974CDE}.Release|x64.Build.0 = Release|Any CPU
-		{C764D7D5-9FF3-474D-92C7-133CA1589C65}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{C764D7D5-9FF3-474D-92C7-133CA1589C65}.Debug|x64.Build.0 = Debug|Any CPU
-		{C764D7D5-9FF3-474D-92C7-133CA1589C65}.Release|x64.ActiveCfg = Release|Any CPU
 		{79CAA135-2881-4E2D-93E3-45257546E766}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{79CAA135-2881-4E2D-93E3-45257546E766}.Debug|x64.Build.0 = Debug|Any CPU
 		{79CAA135-2881-4E2D-93E3-45257546E766}.Release|x64.ActiveCfg = Release|Any CPU

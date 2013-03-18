@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Drawing;
 
-namespace Chess.UI
+namespace Chess.Lib.BitboardEditor
 {
 	public class PieceBitmaps
 	{
@@ -33,10 +33,9 @@ namespace Chess.UI
 				LoadBitmaps();
 			}
 		}
-		
+
 		static void LoadBitmaps()
 		{
-
 			WhiteBishop = new Bitmap(Dir + "white\\bishop.png");
 			WhiteKing = new Bitmap(Dir + "white\\king.png");
 			WhiteKnight = new Bitmap(Dir + "white\\knight.png");
@@ -59,7 +58,7 @@ namespace Chess.UI
 
 			if (color == Colors.White)
 			{
-				switch(type)
+				switch (type)
 				{
 					case Pieces.Bishop:
 						return WhiteBishop;

@@ -47,7 +47,7 @@ namespace Chess.Lib
 			return b;
 		}
 
-		internal static unsafe string GetString(byte* str)
+		public static unsafe string GetString(byte* str)
 		{
 			byte[] bytes = new byte[1024];
 			int i = 0;

@@ -68,7 +68,6 @@ extern "C"
 	typedef struct
 	{
 		Board* Board;
-		int8_t SearchDepth;
 		MoveSmall PV[Search_PlyMax][Search_PlyMax];
 		MoveSmall KillerMoves[Search_PlyMax][3];
 		MoveSmall KillerCaptures[Search_PlyMax][3];
@@ -78,8 +77,8 @@ extern "C"
 
 	typedef struct
 	{
-		char Ply;
-		char Depth;
+		int8_t Ply;
+		int8_t Depth;
 		uint16_t Flags;
 
 	} SearchParams;

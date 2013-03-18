@@ -26,7 +26,7 @@ namespace Chess.Lib
 
 	public class Perft
 	{
-		[DllImport("..\\..\\..\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Perft_Search", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("C:\\Src\\_Tree\\Applications\\Chess\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Perft_Search", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static unsafe extern PerftResults* Search(BoardStruct* board, int depth);
 	}
 }

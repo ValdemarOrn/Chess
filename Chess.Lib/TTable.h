@@ -15,7 +15,7 @@ extern "C"
 		uint8_t BestMoveTo;
 
 		uint8_t NodeType;
-		uint8_t Depth;
+		int8_t Depth;
 
 		int Score;
 		
@@ -26,6 +26,7 @@ extern "C"
 	extern uint32_t TTableSize;
 
 	__declspec(dllexport) int TTable_GetTableSize();
+	__declspec(dllexport) TTableEntry* TTable_GetTable();
 
 	__declspec(dllexport) void TTable_Init(int sizeMB);
 	__declspec(dllexport) void TTable_Delete();
@@ -39,6 +40,11 @@ extern "C"
 	__inline_always int TTable_GetTableSize()
 	{
 		return TTableSize;
+	}
+
+	__inline_always TTableEntry* TTable_GetTable()
+	{
+		return TTable;
 	}
 
 	__inline_always TTableEntry* TTable_Read(uint64_t hash)

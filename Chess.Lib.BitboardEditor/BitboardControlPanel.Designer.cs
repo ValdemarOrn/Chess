@@ -1,6 +1,6 @@
 ﻿namespace Chess.Lib.BitboardEditor
 {
-	partial class Form1
+	partial class BitboardControlPanel
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -47,7 +47,7 @@
 			this.buttonShiftLeft = new System.Windows.Forms.Button();
 			this.label5 = new System.Windows.Forms.Label();
 			this.textBoxList = new System.Windows.Forms.TextBox();
-			this.boardControl1 = new Chess.Lib.BitboardEditor.BoardControl();
+			this.boardControl1 = new Chess.Lib.BitboardEditor.BitboardControl();
 			this.SuspendLayout();
 			// 
 			// labelBitsUpper
@@ -240,13 +240,11 @@
 			this.boardControl1.Location = new System.Drawing.Point(12, 12);
 			this.boardControl1.Name = "boardControl1";
 			this.boardControl1.Size = new System.Drawing.Size(402, 402);
-			this.boardControl1.State = ((ulong)(0ul));
+			this.boardControl1.BitState = ((ulong)(0ul));
 			this.boardControl1.TabIndex = 0;
 			// 
 			// Form1
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(713, 428);
 			this.Controls.Add(this.label5);
 			this.Controls.Add(this.textBoxList);
@@ -268,7 +266,6 @@
 			this.Controls.Add(this.labelBitsLower);
 			this.Controls.Add(this.labelBitsUpper);
 			this.Controls.Add(this.boardControl1);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.Name = "Form1";
 			this.Text = "Bitboard Editor";
 			this.ResumeLayout(false);
@@ -278,7 +275,7 @@
 
 		#endregion
 
-		private BoardControl boardControl1;
+		private BitboardControl boardControl1;
 		private System.Windows.Forms.Label labelBitsUpper;
 		private System.Windows.Forms.Label labelBitsLower;
 		private System.Windows.Forms.Label label4;

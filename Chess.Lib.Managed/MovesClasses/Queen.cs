@@ -14,7 +14,7 @@ namespace Chess.Lib.MoveClasses
 			new Bishop();
 		}
 
-		[DllImport("..\\..\\..\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Queen_Read", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("C:\\Src\\_Tree\\Applications\\Chess\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Queen_Read", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static extern ulong Read(int pos, ulong occupancy);
 
 

@@ -18,51 +18,7 @@ int Order_PV(SearchContext* ctx, Order* order, int ply)
 	}
 	return count;
 }
-/*
-int Order_KillerCaptures(SearchContext* ctx, Order* order, int ply)
-{
-	// don't search first and last ply
-	if(ply < 2 || ply > Search_PlyMax - 2)
-		return 0;
 
-	MoveSmall* killerPly = ctx->KillerCaptures[ply];
-	MoveSmall* killerPrev = ctx->KillerCaptures[ply - 2];
-	MoveSmall* killerNext = ctx->KillerCaptures[ply + 2];
-
-	int count = 0;
-	for(int i = 0; i < order->MoveCount; i++)
-	{
-		Move* move = &order->MoveList[i];
-		int captureScore = move->CapturePiece * 10 - move->PlayerPiece;
-
-		if(move->CapturePiece == 0)
-			continue;
-
-		if(order->MoveRank[i] != 0)
-			continue;
-
-		for(int m = 0; m < 3; m++)
-		{
-			if(Move_Equal(move, &killerPly[m]))
-			{
-				order->MoveRank[i] = Order_StageKillerMoves + killerPly[m].Score + captureScore;
-				count++;
-			}
-			else if(Move_Equal(move, &killerPrev[m]))
-			{
-				order->MoveRank[i] = Order_StageKillerMoves + killerPrev[m].Score + captureScore - 1;
-				count++;
-			}
-			else if(Move_Equal(move, &killerNext[m]))
-			{
-				order->MoveRank[i] = Order_StageKillerMoves + killerNext[m].Score + captureScore - 1;
-				count++;
-			}
-		}
-	}
-	return count;
-}
-*/
 int Order_Captures(SearchContext* ctx, Order* order, int ply)
 {
 	int count = 0;
@@ -226,10 +182,6 @@ void Order_NextStage(SearchContext* ctx, Order* order, int ply)
 			order->OrderStage = Order_StagePV;
 			break;
 		case (Order_StagePV):
-		/*	count = Order_KillerCaptures(ctx, order, ply);
-			order->OrderStage = Order_StageKillerCaptures;
-			break;
-		case (Order_StageKillerCaptures):*/
 			count = Order_Captures(ctx, order, ply);
 			order->OrderStage = Order_StageCaptures;
 			break;
@@ -314,7 +266,7 @@ int Order_QuiesceFilter(SearchContext* ctx, Order* moves)
 	// block all moves except captures
 	for(int i=0; i<moves->MoveCount; i++)
 	{
-		if(moves->MoveList[i].CapturePiece > 0 || moves->MoveList[i].Promotion > 0)
+		if(moves->MoveList[i].CapturePiece > 0 || moves->MoveList[i].Promotion == PIECE_QUEEN)
 			quiesceMoves++;
 		else
 			moves->MoveRank[i] = -1;

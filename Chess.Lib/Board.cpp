@@ -53,6 +53,20 @@ void Board_Init(Board* board, int setPieces)
 	board->FiftyMoveRulePlies = 0;
 	board->Hash = 0;
 	board->PlayerTurn = COLOR_WHITE;
+	board->AttacksBlack = 0;
+	board->AttacksWhite = 0;
+	
+	for(int i = 0; i < 64; i++)
+		board->Tiles[i] = 0;
+
+	board->Boards[0] = 0;
+	board->Boards[1] = 0;
+	board->Boards[2] = 0;
+	board->Boards[3] = 0;
+	board->Boards[4] = 0;
+	board->Boards[5] = 0;
+	board->Boards[6] = 0;
+	board->Boards[7] = 0;
 
 	if(!setPieces)
 	{
@@ -256,6 +270,53 @@ _Bool Board_IsAttacked(Board* board, int square, int attackerColor)
 		return TRUE;
 
 	return FALSE;
+}
+
+int Board_GetSmallestAttacker(Board* board, int square, int attackerColor, uint64_t pinnedPieces)
+{
+	uint64_t notPinned = ~pinnedPieces;
+	uint64_t occupancy = board->Boards[BOARD_WHITE] | board->Boards[BOARD_BLACK];
+	uint64_t attackers = 0;
+
+	uint64_t enemies = (attackerColor == COLOR_WHITE) ? board->Boards[BOARD_WHITE] : board->Boards[BOARD_BLACK];
+	
+	// check for pawn attacks
+	uint64_t pawnLocations = (attackerColor == COLOR_WHITE) ? Pawn_ReadBlackAttack(square) : Pawn_ReadWhiteAttack(square);
+	attackers = (board->Boards[PIECE_PAWN] & enemies) & pawnLocations & notPinned;
+	if(attackers > 0)
+		return Bitboard_ForwardBit(attackers);
+
+	// check for knight attacks
+	uint64_t knightAttacks = Knight_Read(square);
+	attackers = (board->Boards[PIECE_KNIGHT] & enemies) & knightAttacks & notPinned;
+	if(attackers > 0)
+		return Bitboard_ForwardBit(attackers);
+
+	// check for bishop attacks
+	uint64_t bishopAttacks = Bishop_Read(square, occupancy);
+	attackers = (board->Boards[PIECE_BISHOP] & enemies) & bishopAttacks & notPinned;
+	if(attackers > 0)
+		return Bitboard_ForwardBit(attackers);
+
+	// check for rook attacks
+	uint64_t rookAttacks = Rook_Read(square, occupancy);
+	attackers = (board->Boards[PIECE_ROOK] & enemies) & rookAttacks & notPinned;
+	if(attackers > 0)
+		return Bitboard_ForwardBit(attackers);
+
+	// check for queen attacks
+	uint64_t queenAttacks = bishopAttacks | rookAttacks;
+	attackers = (board->Boards[PIECE_QUEEN] & enemies) & queenAttacks & notPinned;
+	if(attackers > 0)
+		return Bitboard_ForwardBit(attackers);
+
+	// check for other king
+	uint64_t kingAttacks = King_Read(square);
+	attackers = (board->Boards[PIECE_KING] & enemies) & kingAttacks & notPinned;
+	if(attackers > 0)
+		return Bitboard_ForwardBit(attackers);
+
+	return -1;
 }
 
 _Bool Board_Make(Board* board, int from, int to)
@@ -501,12 +562,7 @@ void Board_Unmake(Board* board)
 	assert(board->Hash == history->PrevHash);
 }
 
-_Bool Board_CanPromote(Board* board, int square, int color, int piece)
-{
-	int y = Board_Y(square);
 
-	return (piece == PIECE_PAWN) && ((y == 7 && color == COLOR_WHITE) | (y == 0 && color == COLOR_BLACK));
-}
 
 _Bool Board_Promote(Board* board, int square, int pieceType)
 {

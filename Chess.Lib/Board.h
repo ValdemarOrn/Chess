@@ -105,6 +105,10 @@ extern "C"
 	// Checks if a square is under attack by a player
 	__declspec(dllexport) _Bool Board_IsAttacked(Board* board, int square, int attackerColor);
 
+	// the the least valuable piece that attacks a square, and is not pinned.
+	// returns the square of the attacker. Returns -1 if no valid attacker is found
+	__declspec(dllexport) int Board_GetSmallestAttacker(Board* board, int square, int attackerColor, uint64_t pinnedPieces);
+
 	// Makes a move on the board. Updates hash, set castling, verifies move is legal
 	// if illegal it is automatically taken back.
 	// Return 1 if legal, 0 if illegal and no move was made
@@ -153,6 +157,13 @@ extern "C"
 	__inline_always int Board_Piece(Board* board, int tile)
 	{
 		return board->Tiles[tile] & 0x0F;
+	}
+
+	__inline_always _Bool Board_CanPromote(Board* board, int square, int color, int piece)
+	{
+		int y = Board_Y(square);
+
+		return (piece == PIECE_PAWN) && ((y == 7 && color == COLOR_WHITE) | (y == 0 && color == COLOR_BLACK));
 	}
 
 	__inline_always _Bool Board_BadCapture(Board* board, Move* move)
