@@ -85,6 +85,7 @@
 			this.buttonLoadFEN.TabIndex = 11;
 			this.buttonLoadFEN.Text = "Load";
 			this.buttonLoadFEN.UseVisualStyleBackColor = true;
+			this.buttonLoadFEN.Click += new System.EventHandler(this.buttonLoadFEN_Click);
 			// 
 			// buttonClear
 			// 
@@ -350,6 +351,7 @@
 			this.boardControl1.LabeledTiles = false;
 			this.boardControl1.Location = new System.Drawing.Point(12, 12);
 			this.boardControl1.Name = "boardControl1";
+			this.boardControl1.SelectedTile = 0;
 			this.boardControl1.Size = new System.Drawing.Size(402, 402);
 			this.boardControl1.State = new int[] {
         0,
@@ -417,6 +419,7 @@
         0,
         0};
 			this.boardControl1.TabIndex = 0;
+			this.boardControl1.Click += new System.EventHandler(this.boardControl1_Click);
 			// 
 			// BoardControlPanel
 			// 

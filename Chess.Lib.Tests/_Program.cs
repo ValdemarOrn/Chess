@@ -15,7 +15,7 @@ namespace Chess.Lib.Tests
 			Manager.InitLibrary();
 
 			var t = new SearchTest();
-			t.TestSearch7();
+			t.TestSearches();
 		}
 	}
 }

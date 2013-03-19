@@ -69,6 +69,9 @@ extern "C"
 		0xFF00000000000000
 	};
 
+	const uint64_t Bitboard_DarkSquares = 0xAA55AA55AA55AA55;
+	const uint64_t Bitboard_LightSquares = 0x55AA55AA55AA55AA;
+
 	// ------------------------ Basic Bitboard twiddling --------------------------
 
 	__inline_always uint64_t Bitboard_Unset(uint64_t val, int index)

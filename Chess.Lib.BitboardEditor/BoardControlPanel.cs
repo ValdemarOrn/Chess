@@ -94,14 +94,13 @@ namespace Chess.Lib.BitboardEditor
 
 		private unsafe void UpdateFEN()
 		{
-			try
-			{
-				byte* str = stackalloc byte[100];
-				Board.ToFEN((BoardStruct*)boardStr, str);
-				string fenString = Helpers.GetString(str);
-				textBoxFEN.Text = fenString;
-			}
-			catch (Exception) { }
+			if (textBoxFEN.Focused)
+				return;
+
+			byte* str = stackalloc byte[100];
+			Board.ToFEN((BoardStruct*)boardStr, str);
+			string fenString = Helpers.GetString(str);
+			textBoxFEN.Text = fenString;
 		}
 
 		private void StateChanged(object sender, EventArgs e)
@@ -130,6 +129,27 @@ namespace Chess.Lib.BitboardEditor
 
 			RefreshBoard();
 			UpdateFEN();
+		}
+
+		private void boardControl1_Click(object sender, EventArgs e)
+		{
+			boardControl1.Focus();
+		}
+
+		private void buttonLoadFEN_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				var newBoard = Notation.FENtoBoard(textBoxFEN.Text);
+				boardControl1.State = newBoard.State;
+				checkBoxCastlingBK.Checked = newBoard.CastleKB > 0;
+				checkBoxCastlingBQ.Checked = newBoard.CastleQB > 0;
+				checkBoxCastlingWK.Checked = newBoard.CastleKW > 0;
+				checkBoxCastlingWQ.Checked = newBoard.CastleQW > 0;
+
+				RefreshBoard();
+			}
+			catch (Exception) { }
 		}
 
 	}

@@ -607,12 +607,16 @@ _Bool Board_IsChecked(Board* board, int color)
 	if(color == COLOR_WHITE)
 	{
 		uint64_t whiteKing = board->Boards[BOARD_WHITE] & board->Boards[PIECE_KING];
+		if(whiteKing == 0)
+			return TRUE;
 		_Bool output = Board_IsAttacked(board, Bitboard_ForwardBit(whiteKing), COLOR_BLACK);
 		return output;
 	}
 	else
 	{
 		uint64_t blackKing = board->Boards[BOARD_BLACK] & board->Boards[PIECE_KING];
+		if(blackKing == 0)
+			return TRUE;
 		_Bool output = Board_IsAttacked(board, Bitboard_ForwardBit(blackKing), COLOR_WHITE);
 		return output;
 	}

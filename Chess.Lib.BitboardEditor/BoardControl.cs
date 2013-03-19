@@ -108,31 +108,30 @@ namespace Chess.Lib.BitboardEditor
 
 			g.DrawImageUnscaled(Tiles, 0, 0);
 
-			try
+			for (int x = 0; x < 8; x++)
 			{
-				for (int x = 0; x < 8; x++)
+				for (int y = 0; y < 8; y++)
 				{
-					for (int y = 0; y < 8; y++)
-					{
-						int index = x + (7 - y) * 8;
+					int index = x + (7 - y) * 8;
 
-						if (index == SelectedTile)
-							g.FillRectangle(BrushSelected, x * TileSize, y * TileSize, TileSize, TileSize);
+					if (index == SelectedTile)
+						g.FillRectangle(BrushSelected, x * TileSize, y * TileSize, TileSize, TileSize);
 
-						if (MoveArray != null && MoveArray.Contains(index))
-							g.FillRectangle(BrushMove, x * TileSize, y * TileSize, TileSize, TileSize);
+					if (MoveArray != null && MoveArray.Contains(index))
+						g.FillRectangle(BrushMove, x * TileSize, y * TileSize, TileSize, TileSize);
 
-						var piece = State[index];
-						if (piece == 0)
-							continue;
+					var piece = State[index];
+					if (piece == 0 || (piece & 0xF0) == 0 || (piece & 0x0F) == 0)
+						continue;
 
-						Bitmap map = PieceBitmaps.GetBitmap(piece);
-						g.DrawImage(map, 2 + x * TileSize, 2 + y * TileSize, 45, 45);
+					Bitmap map = PieceBitmaps.GetBitmap(piece);
+					if (map == null)
+						continue;
+
+					g.DrawImage(map, 2 + x * TileSize, 2 + y * TileSize, 45, 45);
 						
-					}
 				}
 			}
-			catch (Exception) { }
 
 			this.Invalidate();
 

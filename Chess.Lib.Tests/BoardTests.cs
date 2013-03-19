@@ -619,5 +619,27 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual(fen, fen2);
 		}
 
+		[TestMethod]
+		public unsafe void TestSmallestAttacker()
+		{
+			string fen = @"2kq4/8/2p5/3b3R/8/4N3/8/2R3K1 w KQkq - 0 1";
+			var bb = Notation.FENtoBoard(fen);
+			var b = Helpers.ManagedBoardToNative(bb);
+
+			var attacker = Board.GetSmallestAttacker(b, 35, Board.COLOR_BLACK, 0);
+			Assert.AreEqual(42, attacker);
+		}
+
+		[TestMethod]
+		public unsafe void TestSmallestAttackerPinned()
+		{
+			string fen = @"2kq4/8/2p5/3b3R/8/4N3/8/2R3K1 w KQkq - 0 1";
+			var bb = Notation.FENtoBoard(fen);
+			var b = Helpers.ManagedBoardToNative(bb);
+
+			var attacker = Board.GetSmallestAttacker(b, 35, Board.COLOR_BLACK, 0x40000000000);
+			Assert.AreEqual(59, attacker);
+		}
+
 	}
 }

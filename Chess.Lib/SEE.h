@@ -6,11 +6,12 @@
 
 extern "C"
 {
-	// define a constant that gets returned when SEE is unable to resolve the value due to a pinned piece
-	const int SEE_Failed = 100;
+	// calculates Static exchange evaluation. Checks for pinned pieces
+	__declspec(dllexport) int SEE_Square(Board* board, int square);
 
-	// performs a very basic SEE. Checks for pinned pieces but does not attempt to resolve them
-	__declspec(dllexport) int SEE_Basic(Board* board, int from, int to);
+	// evaluate if a capture is good or bad. Starts by making the capture
+	// and then performs standard SEE on the "to" square
+	__declspec(dllexport) int SEE_Capture(Board* board, int from, int to);
 }
 
 #endif

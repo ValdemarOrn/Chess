@@ -107,16 +107,24 @@ namespace Chess.Lib.Tests
 			var stats = Search.GetSearchStats();
 		}
 
-		public void TestSearch7()
+		public void TestSearches()
 		{
-			//var bx = Chess.Notation.FENtoBoard("r3n1k1/p2n1pp1/1p5p/2p1P3/3p4/P4N1P/BPP2PP1/5RK1 w KQkq - 0 1");
-			//var b = Helpers.ManagedBoardToNative(bx);
+			GenericSearchTest("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1", 8);
+			GenericSearchTest("r3n1k1/p2n1pp1/1p5p/2p1P3/3p4/P4N1P/BPP2PP1/5RK1 w KQkq - 0 1", 8);
+			GenericSearchTest("r1b1k2r/2q1bppp/p2ppn2/1p4P1/3NPP2/2N2Q2/PPP4P/2KR1B1R b kq", 7);
+		}
 
-			var b = Board.Create();
-			Board.Init(b, 1);
+		public void GenericSearchTest(string fen, int depth)
+		{
+			Console.WriteLine("-------------------------------------------");
+			Console.WriteLine("Position: " + fen);
+			Console.WriteLine("");
+
+			var bx = Chess.Notation.FENtoBoard(fen);
+			var b = Helpers.ManagedBoardToNative(bx);
 
 			DateTime start = DateTime.Now;
-			var bestMove = Search.SearchPos(b, 8);
+			var bestMove = Search.SearchPos(b, depth);
 			var time = (DateTime.Now - start).TotalSeconds;
 			Console.WriteLine(String.Format("Time: {0:0.00} seconds", time));
 			var stats = Search.GetSearchStats();
@@ -142,6 +150,8 @@ namespace Chess.Lib.Tests
 			Console.WriteLine("Quiesce nodes: " + stats->QuiescentNodeCount);
 			Console.WriteLine("Quiesce Ratio: " + qNodeCount);
 			Console.WriteLine("Total Eval: " + stats->EvalTotal);
+
+			Board.Delete(b);
 		}
 	}
 }

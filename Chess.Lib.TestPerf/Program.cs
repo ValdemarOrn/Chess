@@ -13,7 +13,7 @@ namespace Chess.Lib.TestPerf
 			Manager.InitLibrary();
 
 			var t = new SearchTest();
-			t.TestSearch7();
+			t.TestSearches();
 		}
 
 		private static void TestSearchCount()

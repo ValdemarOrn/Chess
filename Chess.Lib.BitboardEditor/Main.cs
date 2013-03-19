@@ -20,7 +20,8 @@ namespace Chess.Lib.BitboardEditor
 
 		void Main_KeyPress(object sender, KeyPressEventArgs e)
 		{
-			boardControlPanel1.boardControl1.HandleKeyPress(e.KeyChar);
+			if(boardControlPanel1.boardControl1.Focused)
+				boardControlPanel1.boardControl1.HandleKeyPress(e.KeyChar);
 		}
 
 	}

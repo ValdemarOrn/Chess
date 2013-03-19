@@ -5,6 +5,7 @@
 #include "Manager.h"
 #include "Order.h"
 #include "TTable.h"
+#include "SEE.h"
 #include <stdio.h>
 
 int Search_AlphaBeta(SearchContext* ctx, int alpha, int beta, SearchParams params);
@@ -658,13 +659,19 @@ int Search_Quiesce(SearchContext* ctx, int alpha, int beta, SearchParams params)
 		assert(move != 0);
 
 		// Bad capture detection
-		if(Board_BadCapture(board, move))
+		if(move->PlayerPiece > move->CapturePiece)
 		{
-			#ifdef STATS_SEARCH
-			SStats.PruneBadCaptures++;
-			#endif
+			char fen[100];
+			Board_ToFEN(board, fen);
+			int seeExchange = SEE_Capture(board, move->From, move->To);
+			if(seeExchange < 0)
+			{
+				#ifdef STATS_SEARCH
+				SStats.PruneBadCaptures++;
+				#endif
 
-			continue;
+				continue;
+			}
 		}
 
 		// Delta pruning
