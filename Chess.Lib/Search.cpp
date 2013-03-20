@@ -36,6 +36,8 @@ void ResetStats()
 	SStats.EvalHits = 0;
 	SStats.EvalTotal = 0;
 
+	SStats.AttackMapCount = 0;
+
 	SStats.PruneDelta = 0;
 	SStats.PruneBadCaptures = 0;
 	
@@ -321,6 +323,10 @@ int Search_AlphaBeta(SearchContext* ctx, int alpha, int beta, SearchParams param
 		#ifdef DEBUG
 		int pieceMoving = Board_Piece(board, from);
 		uint64_t hashBefore = board->Hash;
+		#endif
+
+		#ifdef DEBUG
+		uint64_t hashPrev = board->Hash;
 		#endif
 
 		_Bool valid = Board_Make(board, from, to);
@@ -661,8 +667,6 @@ int Search_Quiesce(SearchContext* ctx, int alpha, int beta, SearchParams params)
 		// Bad capture detection
 		if(move->PlayerPiece > move->CapturePiece)
 		{
-			char fen[100];
-			Board_ToFEN(board, fen);
 			int seeExchange = SEE_Capture(board, move->From, move->To);
 			if(seeExchange < 0)
 			{

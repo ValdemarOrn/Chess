@@ -36,7 +36,7 @@
   </PostinstrumentEvent>
   <Binaries>
     <ProjBinary>
-      <Path>Chess.Lib.TestPerf\obj\Debug\Chess.Lib.TestPerf.exe</Path>
+      <Path>Chess.Lib.TestPerf\obj\Release\Chess.Lib.TestPerf.exe</Path>
       <ArgumentTimestamp>01/01/0001 00:00:00</ArgumentTimestamp>
       <Instrument>true</Instrument>
       <Sample>true</Sample>
@@ -48,8 +48,8 @@
       <LaunchProject>true</LaunchProject>
       <OverrideProjectSettings>false</OverrideProjectSettings>
       <LaunchMethod>Executable</LaunchMethod>
-      <ExecutablePath>Chess.Lib.TestPerf\bin\Debug\Chess.Lib.TestPerf.exe</ExecutablePath>
-      <StartupDirectory>Chess.Lib.TestPerf\bin\Debug\</StartupDirectory>
+      <ExecutablePath>Chess.Lib.TestPerf\bin\Release\Chess.Lib.TestPerf.exe</ExecutablePath>
+      <StartupDirectory>Chess.Lib.TestPerf\bin\Release\</StartupDirectory>
       <Arguments>
       </Arguments>
       <NetAppHost>IIS</NetAppHost>
@@ -69,19 +69,7 @@
   </Binaries>
   <Reports>
     <Report>
-      <Path>Chess.Lib.TestPerf130314.vsp</Path>
-    </Report>
-    <Report>
-      <Path>Chess.Lib.TestPerf130314(1).vsp</Path>
-    </Report>
-    <Report>
-      <Path>Chess.Lib.TestPerf130316.vsp</Path>
-    </Report>
-    <Report>
-      <Path>Chess.Lib.TestPerf130318.vsp</Path>
-    </Report>
-    <Report>
-      <Path>Chess.Lib.TestPerf130318(1).vsp</Path>
+      <Path>Chess.Lib.TestPerf130320(1).vsp</Path>
     </Report>
   </Reports>
   <Launches>

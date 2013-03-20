@@ -14,6 +14,7 @@ namespace Chess.Lib
 
 		public ulong AttacksWhite;
 		public ulong AttacksBlack;
+		public byte IsChecked;
 
 		public ulong Hash;
 

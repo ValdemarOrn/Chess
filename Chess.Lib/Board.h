@@ -42,8 +42,9 @@ extern "C"
 		uint64_t Boards[8];
 		uint8_t Tiles[64];
 
-		uint64_t AttacksWhite;
-		uint64_t AttacksBlack;
+		uint64_t _AttacksWhite; // Lazy Eval, can be zero
+		uint64_t _AttacksBlack; // Lazy Eval, can be zero
+		uint8_t _IsChecked; // Lazy Eval, can be UNKNOWN
 
 		uint64_t Hash;
 
@@ -168,16 +169,24 @@ extern "C"
 
 	__inline_always _Bool Board_BadCapture(Board* board, Move* move)
 	{
-		// Note: This function REQUIRED attack board to be calculated.
-		// This is used in the QS search, and Eval should have calculated the attacks already
+		// Note: This function needs attack board to be calculated.
 
 		int playerColor = Board_Color(board, move->From);
 		int attacker = move->PlayerPiece;
 		int victim = Board_Piece(board, move->To);
-
-		int isDefended = (playerColor == COLOR_WHITE) ? Bitboard_GetRef(&board->AttacksBlack, move->To) : Bitboard_GetRef(&board->AttacksWhite, move->To);
-
-		return (isDefended && (attacker > victim));
+		
+		if (playerColor == COLOR_WHITE)
+		{
+			uint64_t blackAttacks = (board->_AttacksBlack > 0) ? board->_AttacksBlack : Board_AttackMap(board, COLOR_BLACK);
+			int isDefended = Bitboard_GetRef(&blackAttacks, move->To);
+			return (isDefended && (attacker > victim));
+		}
+		else
+		{
+			uint64_t whiteAttacks = (board->_AttacksWhite > 0) ? board->_AttacksWhite : Board_AttackMap(board, COLOR_WHITE);
+			int isDefended = Bitboard_GetRef(&whiteAttacks, move->To);
+			return (isDefended && (attacker > victim));
+		}
 	}
 }
 

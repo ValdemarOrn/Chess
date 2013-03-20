@@ -49,18 +49,12 @@ extern "C"
 
 	__inline_always TTableEntry* TTable_Read(uint64_t hash)
 	{
-		if(TTableSize != 16777216)
-			int k = 23;
-
 		TTableEntry* entry = &(TTable[hash % TTableSize]);
 		return (entry->Hash == hash) ? entry : 0;
 	}
 
 	__inline_always _Bool TTable_Insert(TTableEntry* entry)
 	{
-		if(TTableSize != 16777216)
-			int k = 23;
-
 		uint64_t index = entry->Hash % TTableSize;
 		TTableEntry* existing = &TTable[index];
 
@@ -73,9 +67,6 @@ extern "C"
 
 		if(copy == TRUE)
 			memcpy(&TTable[index], entry, sizeof(TTableEntry));	
-
-		if(TTableSize != 16777216)
-			int k = 23;
 
 		return copy;
 	}

@@ -27,6 +27,8 @@ namespace Chess.Lib
 		public ulong EvalHits;
 		public ulong EvalTotal;
 
+		public ulong AttackMapCount;
+
 		public ulong PruneDelta;
 		public ulong PruneBadCaptures;
 

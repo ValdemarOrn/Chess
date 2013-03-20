@@ -37,6 +37,7 @@ extern "C"
 		uint64_t PrevAttacksBlack;
 		uint64_t PrevHash;
 
+		uint8_t PrevIsChecked;
 		uint8_t PrevEnPassantTile;
 		uint8_t PrevFiftyMoveRulePlies;
 		uint8_t PrevCastleState;

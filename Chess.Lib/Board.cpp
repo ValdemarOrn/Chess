@@ -9,6 +9,7 @@
 #include "Moves\Knight.h"
 #include "Moves\Queen.h"
 #include "Moves\Pawn.h"
+#include "Search.h"
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -53,8 +54,8 @@ void Board_Init(Board* board, int setPieces)
 	board->FiftyMoveRulePlies = 0;
 	board->Hash = 0;
 	board->PlayerTurn = COLOR_WHITE;
-	board->AttacksBlack = 0;
-	board->AttacksWhite = 0;
+	board->_AttacksBlack = 0;
+	board->_AttacksWhite = 0;
 	
 	for(int i = 0; i < 64; i++)
 		board->Tiles[i] = 0;
@@ -114,13 +115,11 @@ void Board_Init(Board* board, int setPieces)
 
 	board->Hash = Zobrist_Calculate(board);
 
-	#ifdef CALCULATE_ATTACKBOARDS
-	board->AttacksWhite = Board_AttackMap(board, COLOR_WHITE);
-	board->AttacksBlack = Board_AttackMap(board, COLOR_BLACK);
-	#else
-	board->AttacksWhite = 0;
-	board->AttacksBlack = 0;
-	#endif
+//	board->_AttacksWhite = Board_AttackMap(board, COLOR_WHITE);
+//	board->_AttacksBlack = Board_AttackMap(board, COLOR_BLACK);
+
+	board->_AttacksWhite = 0;
+	board->_AttacksBlack = 0;
 }
 
 void Board_SetPiece(Board* board, int square, int pieceType, int color)
@@ -182,10 +181,13 @@ void Board_GenerateTileMap(Board* board)
 	}
 }
 
-uint64_t Board_AttackMap(Board* board, int color)
+uint64_t Board_CalculateAttackMap(Board* board, int color)
 {
-	uint64_t attackBoard = 0;
+	#ifdef STATS_SEARCH
+	SStats.AttackMapCount++;
+	#endif
 
+	uint64_t attackBoard = 0;
 	uint8_t positions[20];
 
 	for(int i = 0; i < 64; i++)
@@ -200,6 +202,27 @@ uint64_t Board_AttackMap(Board* board, int color)
 	return attackBoard;
 }
 
+uint64_t Board_AttackMap(Board* board, int color)
+{
+	// return value if it already exists
+
+	if(color == COLOR_WHITE && board->_AttacksWhite != 0)
+		return board->_AttacksWhite;
+
+	if(color == COLOR_BLACK && board->_AttacksBlack != 0)
+		return board->_AttacksBlack;
+		
+	uint64_t attackBoard = Board_CalculateAttackMap(board, color);
+
+	// store value (lazy eval)
+	if(color == COLOR_WHITE)
+		board->_AttacksWhite = attackBoard;
+	else
+		board->_AttacksBlack = attackBoard;
+
+	return attackBoard;
+}
+
 _Bool Board_MoveCanSelfCheck(Board* board, int from, int to)
 {
 	int piece = Board_Piece(board, from);
@@ -208,6 +231,8 @@ _Bool Board_MoveCanSelfCheck(Board* board, int from, int to)
 	// king moves can self check
 	if(piece == PIECE_KING)
 		return TRUE;
+
+	assert(board->_IsChecked == UNKNOWN || board->_IsChecked == Board_IsChecked(board, color));
 
 	// When we are already checked then not every move gets out of check
 	if(Board_IsChecked(board, color))
@@ -321,6 +346,10 @@ int Board_GetSmallestAttacker(Board* board, int square, int attackerColor, uint6
 
 _Bool Board_Make(Board* board, int from, int to)
 {
+	assert(board->_IsChecked == UNKNOWN || board->_IsChecked == Board_IsChecked(board, board->PlayerTurn));
+	assert(board->_AttacksWhite == 0 || board->_AttacksWhite == Board_CalculateAttackMap(board, COLOR_WHITE));
+	assert(board->_AttacksBlack == 0 || board->_AttacksBlack == Board_CalculateAttackMap(board, COLOR_BLACK));
+
 	// 0: Check if en passant or castling
 	// 1. put info in history
 	// 2. Create the Move object
@@ -361,9 +390,10 @@ _Bool Board_Make(Board* board, int from, int to)
 
 	// 1. put info in history
 	MoveHistory* history = &board->MoveHistory[board->CurrentMove];
-	history->PrevAttacksBlack = board->AttacksBlack;
-	history->PrevAttacksWhite = board->AttacksWhite;
+	history->PrevAttacksBlack = board->_AttacksBlack;
+	history->PrevAttacksWhite = board->_AttacksWhite;
 	history->PrevCastleState = board->Castle;
+	history->PrevIsChecked = board->_IsChecked;
 	history->PrevEnPassantTile = board->EnPassantTile;
 	history->PrevFiftyMoveRulePlies = board->FiftyMoveRulePlies;
 	history->PrevHash = board->Hash;
@@ -445,6 +475,14 @@ _Bool Board_Make(Board* board, int from, int to)
 	board->PlayerTurn = (board->PlayerTurn == COLOR_WHITE) ? COLOR_BLACK : COLOR_WHITE;
 	board->Hash ^= Zobrist_Keys[ZOBRIST_SIDE][board->PlayerTurn];
 
+	board->_IsChecked = UNKNOWN;
+
+//	board->_AttacksWhite = Board_AttackMap(board, COLOR_WHITE);
+//	board->_AttacksBlack = Board_AttackMap(board, COLOR_BLACK);
+
+	board->_AttacksWhite = 0;
+	board->_AttacksBlack = 0;
+
 	// 5. Verify it doesn't self check
 	//    5.1 If it does, unmake
 
@@ -476,13 +514,8 @@ _Bool Board_Make(Board* board, int from, int to)
 		}
 	}
 
-	#ifdef CALCULATE_ATTACKBOARDS
-	board->AttacksWhite = Board_AttackMap(board, COLOR_WHITE);
-	board->AttacksBlack = Board_AttackMap(board, COLOR_BLACK);
-	#else
-	board->AttacksWhite = 0;
-	board->AttacksBlack = 0;
-	#endif
+	
+
 
 	return 1;
 }
@@ -504,8 +537,8 @@ void Board_Unmake(Board* board)
 
 	assert(Board_Piece(board, move->To) == ((move->Promotion > 0) ? move->Promotion : move->PlayerPiece));
 
-	board->AttacksBlack = history->PrevAttacksBlack;
-	board->AttacksWhite = history->PrevAttacksWhite;
+	board->_AttacksBlack = history->PrevAttacksBlack;
+	board->_AttacksWhite = history->PrevAttacksWhite;
 
 	board->Hash ^= Zobrist_Keys[ZOBRIST_CASTLING][board->Castle];
 	board->Castle = history->PrevCastleState;
@@ -515,6 +548,7 @@ void Board_Unmake(Board* board)
 	board->EnPassantTile = history->PrevEnPassantTile;
 	board->Hash ^= Zobrist_Keys[ZOBRIST_ENPASSANT][board->EnPassantTile];
 
+	board->_IsChecked = history->PrevIsChecked;
 	board->FiftyMoveRulePlies = history->PrevFiftyMoveRulePlies;
 
 	board->Hash ^= Zobrist_Keys[ZOBRIST_SIDE][board->PlayerTurn];
@@ -574,13 +608,12 @@ _Bool Board_Promote(Board* board, int square, int pieceType)
 	Board_SetPiece(board, square, pieceType, color);
 	board->MoveHistory[board->CurrentMove - 1].Move.Promotion = pieceType;
 
-	#ifdef CALCULATE_ATTACKBOARDS
-	board->AttacksWhite = Board_AttackMap(board, COLOR_WHITE);
-	board->AttacksBlack = Board_AttackMap(board, COLOR_BLACK);
-	#else
-	board->AttacksWhite = 0;
-	board->AttacksBlack = 0;
-	#endif
+//	board->_AttacksWhite = Board_AttackMap(board, COLOR_WHITE);
+//	board->_AttacksBlack = Board_AttackMap(board, COLOR_BLACK);
+
+	board->_AttacksWhite = 0;
+	board->_AttacksBlack = 0;
+
 	return 1;
 }
 
@@ -604,12 +637,19 @@ uint8_t Board_GetCastling(Board* board)
 
 _Bool Board_IsChecked(Board* board, int color)
 {
+	if(color == board->PlayerTurn && board->_IsChecked != UNKNOWN)
+		return board->_IsChecked; // check for existing memoized result
+
 	if(color == COLOR_WHITE)
 	{
 		uint64_t whiteKing = board->Boards[BOARD_WHITE] & board->Boards[PIECE_KING];
 		if(whiteKing == 0)
 			return TRUE;
 		_Bool output = Board_IsAttacked(board, Bitboard_ForwardBit(whiteKing), COLOR_BLACK);
+
+		if(board->PlayerTurn == COLOR_WHITE) // memoize the results
+			board->_IsChecked = output;
+
 		return output;
 	}
 	else
@@ -618,6 +658,10 @@ _Bool Board_IsChecked(Board* board, int color)
 		if(blackKing == 0)
 			return TRUE;
 		_Bool output = Board_IsAttacked(board, Bitboard_ForwardBit(blackKing), COLOR_WHITE);
+
+		if(board->PlayerTurn == COLOR_BLACK) // memoize the results
+			board->_IsChecked = output;
+
 		return output;
 	}
 }

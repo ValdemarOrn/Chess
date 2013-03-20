@@ -45,6 +45,8 @@ extern "C"
 		uint64_t EvalHits;
 		uint64_t EvalTotal;
 
+		uint64_t AttackMapCount;
+
 		uint64_t PruneDelta;
 		uint64_t PruneBadCaptures;
 

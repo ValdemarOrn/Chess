@@ -219,24 +219,21 @@ int Eval_Evaluate(Board* board)
 	EStats[COLOR_BLACK].UndefendedPenalty = 0;
 	#endif
 
-	uint8_t locations[64];
-
-	if(board->AttacksWhite == 0)
-	{
-		board->AttacksWhite = Board_AttackMap(board, COLOR_WHITE);
-		board->AttacksBlack = Board_AttackMap(board, COLOR_BLACK);
-	}
-
-	uint64_t occupancy = board->Boards[BOARD_WHITE] | board->Boards[BOARD_BLACK];
-	int count = Bitboard_BitList(occupancy, locations);
+	uint64_t attacksWhite = Board_AttackMap(board, COLOR_WHITE);
+	uint64_t attacksBlack = Board_AttackMap(board, COLOR_BLACK);
 
 	int whiteValue = 0;
 	int blackValue = 0;
 
-	for(int i = 0; i < count; i++)
+	uint8_t* tiles = board->Tiles;
+
+	for(int i = 0; i < 64; i++)
 	{
+		if(tiles[i] == 0)
+			continue;
+
 		int pValue = 0;
-		int square = locations[i];
+		int square = i;
 		int x = Board_X(square);
 		int y = Board_Y(square);
 		int piece = Board_Piece(board, square);
@@ -259,7 +256,7 @@ int Eval_Evaluate(Board* board)
 
 		if(color == COLOR_WHITE)
 		{
-			if(Bitboard_GetRef(&board->AttacksWhite, square) == 0)
+			if(Bitboard_GetRef(&attacksWhite, square) == 0)
 				pValue -= Eval_UndefendedPiecePenalty[piece];
 
 			#ifdef DEBUG
@@ -291,7 +288,7 @@ int Eval_Evaluate(Board* board)
 		}
 		else
 		{
-			if(Bitboard_GetRef(&board->AttacksBlack, square) == 0)
+			if(Bitboard_GetRef(&attacksBlack, square) == 0)
 				pValue -= Eval_UndefendedPiecePenalty[piece];
 
 			#ifdef DEBUG
@@ -328,8 +325,8 @@ int Eval_Evaluate(Board* board)
 			blackValue += pValue;
 	}
 
-	int whiteAttackCount = Bitboard_PopCount(board->AttacksWhite);
-	int blackAttackCount = Bitboard_PopCount(board->AttacksBlack);
+	int whiteAttackCount = Bitboard_PopCount(attacksWhite);
+	int blackAttackCount = Bitboard_PopCount(attacksBlack);
 
 	whiteValue += whiteAttackCount * 3;
 	blackValue += blackAttackCount * 3;
