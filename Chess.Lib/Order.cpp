@@ -60,7 +60,7 @@ int Order_Promotions(SearchContext* ctx, Order* order, int ply)
 int Order_KillerMoves(SearchContext* ctx, Order* order, int ply)
 {
 	// don't search first and last ply
-	if(ply < 2 || ply > Search_PlyMax - 2)
+	if(ply < 2 || ply > SEARCH_PLY_MAX - 2)
 		return 0;
 
 	MoveSmall* killerPly = ctx->KillerMoves[ply];

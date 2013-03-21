@@ -41,7 +41,7 @@ void ResetStats()
 	SStats.PruneDelta = 0;
 	SStats.PruneBadCaptures = 0;
 	
-	for(int i = 0; i < Search_PlyMax; i++)
+	for(int i = 0; i < SEARCH_PLY_MAX; i++)
 	{
 		SStats.MovesAtPly[i] = 0;
 		SStats.NodesAtPly[i] = 0;
@@ -66,7 +66,7 @@ void Search_InitContext(SearchContext* ctx)
 		for(int j = 0; j < 64; j++)
 			ctx->History[i][j] = 0;
 
-	for(int i = 0; i < Search_PlyMax; i++)
+	for(int i = 0; i < SEARCH_PLY_MAX; i++)
 	{
 		for(int j = 0; j < 3; j++)
 		{
@@ -77,9 +77,9 @@ void Search_InitContext(SearchContext* ctx)
 		}
 	}
 
-	for(int i = 0; i < Search_PlyMax; i++)
+	for(int i = 0; i < SEARCH_PLY_MAX; i++)
 	{
-		for(int j = 0; j < Search_PlyMax; j++)
+		for(int j = 0; j < SEARCH_PLY_MAX; j++)
 		{
 			ctx->PV[i][j].From = 0;
 			ctx->PV[i][j].Piece = 0;
@@ -214,7 +214,7 @@ int Search_AlphaBeta(SearchContext* ctx, int alpha, int beta, SearchParams param
 		if(score > alpha)
 		{
 			nodeType = NODE_PV;
-			memset(&(ctx->PV[ply][0]), 0, sizeof(MoveSmall) * Search_PlyMax);
+			memset(&(ctx->PV[ply][0]), 0, sizeof(MoveSmall) * SEARCH_PLY_MAX);
 			alpha = score;
 		}
 
@@ -270,7 +270,7 @@ int Search_AlphaBeta(SearchContext* ctx, int alpha, int beta, SearchParams param
 					ctx->PV[ply][0].Score = score;
 					ctx->PV[ply][0].Piece = Board_Piece(board, tableEntry->BestMoveFrom);
 
-					memset(&(ctx->PV[ply][1]), 0, sizeof(MoveSmall) * (Search_PlyMax - 1));
+					memset(&(ctx->PV[ply][1]), 0, sizeof(MoveSmall) * (SEARCH_PLY_MAX - 1));
 					alpha = tableEntry->Score;
 				}
 			}
@@ -338,7 +338,24 @@ int Search_AlphaBeta(SearchContext* ctx, int alpha, int beta, SearchParams param
 		hasValidMove = true;
 		callingParams.Depth = depth - 1;
 		callingParams.Ply = ply + 1;
-		int val = -Search_AlphaBeta(ctx, -beta, -alpha, callingParams);
+
+		int val = 0;
+
+		if(i == 0 || depth < SEARCH_MIN_SCOUT_DEPTH)
+		{
+			val = -Search_AlphaBeta(ctx, -beta, -alpha, callingParams);
+		}
+		else // scout search
+		{
+			int b = alpha + 1;
+			val = -Search_AlphaBeta(ctx, -b, -alpha, callingParams);
+
+			// if search fails high, then do a re-search
+			// the reason for val < beta because if val >= beta we can just fail high
+			if(val > alpha && val < beta) 
+				val = -Search_AlphaBeta(ctx, -beta, -alpha, callingParams);
+		}
+
 		Board_Unmake(board);
 
 		assert(hashBefore == board->Hash);
@@ -362,7 +379,7 @@ int Search_AlphaBeta(SearchContext* ctx, int alpha, int beta, SearchParams param
 			ctx->PV[ply][0].Score = val;
 			ctx->PV[ply][0].Piece = Board_Piece(board, from);
 
-			memcpy(&(ctx->PV[ply][1]), &(ctx->PV[ply + 1][0]), sizeof(MoveSmall) * (Search_PlyMax - 1));
+			memcpy(&(ctx->PV[ply][1]), &(ctx->PV[ply + 1][0]), sizeof(MoveSmall) * (SEARCH_PLY_MAX - 1));
 			alpha = val;
 			score = val;
 		}
@@ -394,7 +411,7 @@ int Search_AlphaBeta(SearchContext* ctx, int alpha, int beta, SearchParams param
 		{
 			bestMoveIndex = order.MoveCount;
 			nodeType = NODE_PV;
-			memset(&(ctx->PV[ply][0]), 0, sizeof(MoveSmall) * Search_PlyMax);
+			memset(&(ctx->PV[ply][0]), 0, sizeof(MoveSmall) * SEARCH_PLY_MAX);
 			alpha = score;
 		}
 	}
@@ -593,7 +610,7 @@ int Search_Quiesce(SearchContext* ctx, int alpha, int beta, SearchParams params)
 	// ----------------------------------------------------------------------------------
 
 	// check if we're too deep
-	if(ply >= Search_PlyMax - 1)
+	if(ply >= SEARCH_PLY_MAX - 1)
 	{
 		nodeType = NODE_EVAL;
 		eval = Eval_Evaluate(board);
@@ -617,7 +634,7 @@ int Search_Quiesce(SearchContext* ctx, int alpha, int beta, SearchParams params)
 		if(score > alpha)
 		{
 			nodeType = NODE_PV;
-			memset(&(ctx->PV[ply][0]), 0, sizeof(MoveSmall) * Search_PlyMax);
+			memset(&(ctx->PV[ply][0]), 0, sizeof(MoveSmall) * SEARCH_PLY_MAX);
 			alpha = score;
 		}
 	}
@@ -732,7 +749,7 @@ int Search_Quiesce(SearchContext* ctx, int alpha, int beta, SearchParams params)
 			ctx->PV[ply][0].Score = val;
 			ctx->PV[ply][0].Piece = Board_Piece(board, from);
 
-			memcpy(&(ctx->PV[ply][1]), &(ctx->PV[ply + 1][0]), sizeof(MoveSmall) * (Search_PlyMax - 1));
+			memcpy(&(ctx->PV[ply][1]), &(ctx->PV[ply + 1][0]), sizeof(MoveSmall) * (SEARCH_PLY_MAX - 1));
 			alpha = val;
 			score = val;
 		}

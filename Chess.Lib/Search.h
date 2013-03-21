@@ -8,8 +8,8 @@
 extern "C"
 {
 	// Absolute maximum depth, including quiescence search and extensions
-	const int Search_PlyMax = 40;
-
+	const int SEARCH_PLY_MAX = 40;
+	const int SEARCH_MIN_SCOUT_DEPTH = 3;
 	// node types
 	const int NODE_UNKNOWN = 0;
 	const int NODE_PV = 1; // exact score
@@ -59,20 +59,19 @@ extern "C"
 		int QCutMoveIndex[100];
 
 		// number of nodes at each ply. Total sum should equal TotalNodeCount
-		uint64_t NodesAtPly[Search_PlyMax];
+		uint64_t NodesAtPly[SEARCH_PLY_MAX];
 
 		// Number of total moves found at ply (counting all potential moves)
 		// Note that most of these moves never get played, they get cut
-		uint64_t MovesAtPly[Search_PlyMax];
+		uint64_t MovesAtPly[SEARCH_PLY_MAX];
 
 	} SearchStats;
 
 	typedef struct
 	{
 		Board* Board;
-		MoveSmall PV[Search_PlyMax][Search_PlyMax];
-		MoveSmall KillerMoves[Search_PlyMax][3];
-		MoveSmall KillerCaptures[Search_PlyMax][3];
+		MoveSmall PV[SEARCH_PLY_MAX][SEARCH_PLY_MAX];
+		MoveSmall KillerMoves[SEARCH_PLY_MAX][3];
 		uint32_t History[64][64];
 
 	} SearchContext;

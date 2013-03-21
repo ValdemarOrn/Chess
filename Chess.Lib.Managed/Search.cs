@@ -38,15 +38,15 @@ namespace Chess.Lib
 		public fixed int QBestMoveIndex[100];
 		public fixed int QCutMoveIndex[100];
 
-		public fixed ulong NodesAtPly[Search.Search_PlyMax];
-		public fixed ulong MovesAtPly[Search.Search_PlyMax];
+		public fixed ulong NodesAtPly[Search.SEARCH_PLY_MAX];
+		public fixed ulong MovesAtPly[Search.SEARCH_PLY_MAX];
 
 		
 	}
 
 	public class Search
 	{
-		public const int Search_PlyMax = 40;		
+		public const int SEARCH_PLY_MAX = 40;		
 
 		[DllImport("C:\\Src\\_Tree\\Applications\\Chess\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Search_SearchPos", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static unsafe extern MoveSmall SearchPos(BoardStruct* board, int searchDepth);
