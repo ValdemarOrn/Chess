@@ -186,7 +186,7 @@ int Search_AlphaBeta(SearchContext* ctx, int alpha, int beta, SearchParams param
 	Move bestMove;
 	bestMove.From = 0;
 	bestMove.To = 0;
-	_Bool useScout = false;
+	_Bool useScout = FALSE;
 
 	_Bool hasValidMove = FALSE;
 
@@ -368,7 +368,7 @@ int Search_AlphaBeta(SearchContext* ctx, int alpha, int beta, SearchParams param
 
 		if(val > alpha)
 		{
-			useScout = true; // we have improved alpha, turn the scout window on
+			useScout = TRUE; // we have improved alpha, turn the scout window on
 			bestMoveIndex = i;
 			bestMove = *move;
 			nodeType = NODE_PV;
