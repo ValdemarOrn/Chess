@@ -9,7 +9,13 @@ extern "C"
 {
 	// Absolute maximum depth, including quiescence search and extensions
 	const int SEARCH_PLY_MAX = 40;
+
+	// minimum depth for using scout windows. Scout doesn't provide a lot of benefit at bery shallow depth
 	const int SEARCH_MIN_SCOUT_DEPTH = 3;
+
+	const int SEARCH_MIN_SCORE = -99999999;
+	const int SEARCH_MAX_SCORE = 99999999;
+
 	// node types
 	const int NODE_UNKNOWN = 0;
 	const int NODE_PV = 1; // exact score

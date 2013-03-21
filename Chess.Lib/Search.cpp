@@ -113,7 +113,7 @@ MoveSmall Search_SearchPos(Board* board, int searchDepth)
 
 		params.Depth = i;
 		params.Ply = 0;
-		Search_AlphaBeta(&ctx, -99999999, 99999999, params);
+		Search_AlphaBeta(&ctx, SEARCH_MIN_SCORE, SEARCH_MAX_SCORE, params);
 
 		// print PV
 
@@ -187,6 +187,7 @@ int Search_AlphaBeta(SearchContext* ctx, int alpha, int beta, SearchParams param
 	bestMove.From = 0;
 	bestMove.To = 0;
 	_Bool useScout = FALSE;
+	int bestScore = SEARCH_MIN_SCORE; // track All-node score, needed for fail-soft
 
 	_Bool hasValidMove = FALSE;
 
@@ -208,7 +209,7 @@ int Search_AlphaBeta(SearchContext* ctx, int alpha, int beta, SearchParams param
 		if(score >= beta)
 		{
 			nodeType = NODE_CUT;
-			score = beta;
+//			score = beta;
 		}
 
 		if(score > alpha)
@@ -252,7 +253,7 @@ int Search_AlphaBeta(SearchContext* ctx, int alpha, int beta, SearchParams param
 					addtoHashTable = FALSE;
 					cutMoveIndex = 0;
 					nodeType = NODE_CUT;
-					score = beta;
+//					score = beta;
 					goto Finalize;
 				}
 			
@@ -276,7 +277,7 @@ int Search_AlphaBeta(SearchContext* ctx, int alpha, int beta, SearchParams param
 				{
 					addtoHashTable = FALSE;
 					nodeType = NODE_ALL;
-					score = alpha;
+//					score = alpha;
 					goto Finalize;
 				}
 			}
@@ -347,8 +348,7 @@ int Search_AlphaBeta(SearchContext* ctx, int alpha, int beta, SearchParams param
 			val = -Search_AlphaBeta(ctx, -b, -alpha, callingParams);
 
 			// if search fails high, then do a re-search
-			// the reason for val < beta is just there because I'm thinking about switching to fail-soft
-			// for fail-hard it's not needed
+			// if val >= beta then there's no need to re-search, we'll just fail high
 			if(val > alpha && val < beta) 
 				val = -Search_AlphaBeta(ctx, -beta, -alpha, callingParams);
 		}
@@ -357,12 +357,16 @@ int Search_AlphaBeta(SearchContext* ctx, int alpha, int beta, SearchParams param
 
 		assert(hashBefore == board->Hash);
 
+		if(val > bestScore) // track all-node best score
+			bestScore = val;
+
 		if(val >= beta)
 		{
 			cutMoveIndex = i;
 			bestMove = *move;
 			nodeType = NODE_CUT;
-			score = beta;
+			score = val;
+//			score = beta;
 			goto Finalize;
 		}
 
@@ -378,8 +382,8 @@ int Search_AlphaBeta(SearchContext* ctx, int alpha, int beta, SearchParams param
 			ctx->PV[ply][0].Piece = Board_Piece(board, from);
 
 			memcpy(&(ctx->PV[ply][1]), &(ctx->PV[ply + 1][0]), sizeof(MoveSmall) * (SEARCH_PLY_MAX - 1));
-			alpha = val;
 			score = val;
+			alpha = val;
 		}
 		
 	}
@@ -397,11 +401,14 @@ int Search_AlphaBeta(SearchContext* ctx, int alpha, int beta, SearchParams param
 		else
 			score = Search_Stalemate;
 
+		if(score > bestScore)
+			bestScore = score;
+
 		if(score >= beta)
 		{
 			cutMoveIndex = order.MoveCount;
 			nodeType = NODE_CUT;
-			score = beta;
+//			score = beta;
 			goto Finalize;
 		}
 
@@ -419,7 +426,12 @@ int Search_AlphaBeta(SearchContext* ctx, int alpha, int beta, SearchParams param
 	// ----------------------------------------------------------------------------------
 
 	if(nodeType == NODE_ALL)
-		score = alpha;
+	{
+		if(bestScore == SEARCH_MIN_SCORE)
+			score = alpha;
+		else
+			score = bestScore;
+	}
 
 	#ifdef DEBUG
 	if(score < alpha)
@@ -494,7 +506,7 @@ Finalize:
 		newEntry.Depth = depth;
 		newEntry.Hash = ctx->Board->Hash;
 		newEntry.NodeType = nodeType;
-		newEntry.Score = score;
+		newEntry.Score = score; //(nodeType == NODE_CUT) ? beta : score;
 		TTable_Insert(&newEntry);
 	}
 
@@ -525,6 +537,7 @@ int Search_Quiesce(SearchContext* ctx, int alpha, int beta, SearchParams params)
 	_Bool hasValidMove = FALSE;
 	_Bool isChecked = FALSE;
 	_Bool generateAllMoves = FALSE;
+	int bestScore = SEARCH_MIN_SCORE; // track all-node best score
 
 	#ifdef STATS_SEARCH
 	if(quiesce)
@@ -561,8 +574,8 @@ int Search_Quiesce(SearchContext* ctx, int alpha, int beta, SearchParams params)
 
 		if(score >= beta)
 		{
-			nodeType = NODE_EVAL;
-			score = beta;
+			nodeType = NODE_CUT;
+//			score = beta;
 			goto Finalize;
 		}
 
@@ -661,12 +674,16 @@ int Search_Quiesce(SearchContext* ctx, int alpha, int beta, SearchParams params)
 
 		assert(hashBefore == board->Hash);
 
+		if(val > bestScore)
+			bestScore = val; // track all-node best move
+
 		if(val >= beta)
 		{
 			cutMoveIndex = i;
 			bestMove = *move;
 			nodeType = NODE_CUT;
-			score = beta;
+			score = val;
+//			score = beta;
 			goto Finalize;
 		}
 
@@ -681,8 +698,8 @@ int Search_Quiesce(SearchContext* ctx, int alpha, int beta, SearchParams params)
 			ctx->PV[ply][0].Piece = Board_Piece(board, from);
 
 			memcpy(&(ctx->PV[ply][1]), &(ctx->PV[ply + 1][0]), sizeof(MoveSmall) * (SEARCH_PLY_MAX - 1));
-			alpha = val;
 			score = val;
+			alpha = val;
 		}
 		
 	}
@@ -698,10 +715,13 @@ int Search_Quiesce(SearchContext* ctx, int alpha, int beta, SearchParams params)
 		else
 			score = Search_Checkmate;
 		
+		if(score > bestScore)
+			bestScore = score;
+
 		if(score >= beta)
 		{
 			nodeType = NODE_CUT;
-			score = beta;
+//			score = beta;
 			goto Finalize;
 		}
 
@@ -717,7 +737,12 @@ int Search_Quiesce(SearchContext* ctx, int alpha, int beta, SearchParams params)
 	// ----------------------------------------------------------------------------------
 
 	if(nodeType == NODE_ALL)
-		score = alpha;
+	{
+		if(bestScore == SEARCH_MIN_SCORE)
+			score = alpha; // returning eval as the lowest bound seemed to cause errors
+		else
+			score = bestScore;
+	}
 
 	#ifdef DEBUG
 	if(score < alpha)
