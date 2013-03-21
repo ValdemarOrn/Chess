@@ -112,7 +112,6 @@ MoveSmall Search_SearchPos(Board* board, int searchDepth)
 				ctx.History[i][j] = (int)(ctx.History[i][j] >> 1); // divide by 2
 
 		params.Depth = i;
-		params.Flags = 0;
 		params.Ply = 0;
 		Search_AlphaBeta(&ctx, -99999999, 99999999, params);
 
@@ -187,6 +186,7 @@ int Search_AlphaBeta(SearchContext* ctx, int alpha, int beta, SearchParams param
 	Move bestMove;
 	bestMove.From = 0;
 	bestMove.To = 0;
+	_Bool useScout = false;
 
 	_Bool hasValidMove = FALSE;
 
@@ -229,9 +229,6 @@ int Search_AlphaBeta(SearchContext* ctx, int alpha, int beta, SearchParams param
 	{
 		// the Quiescence search takes care of all the bookkeeping, incl.
 		// everything that needs to be done in Finalize!
-		// Assume the worst and set both side as potentially checked when we enter QS search
-		Search_SetFlags(&callingParams, SEARCH_FLAGS_QS_ALLOW_CHECK_EVADE_WHITE, 1);
-		Search_SetFlags(&callingParams, SEARCH_FLAGS_QS_ALLOW_CHECK_EVADE_BLACK, 1);
 		return Search_Quiesce(ctx, alpha, beta, callingParams);
 	}
 
@@ -340,7 +337,7 @@ int Search_AlphaBeta(SearchContext* ctx, int alpha, int beta, SearchParams param
 
 		int val = 0;
 
-		if(i == 0 || depth < SEARCH_MIN_SCOUT_DEPTH)
+		if(i == 0 || (depth < SEARCH_MIN_SCOUT_DEPTH) || !useScout)
 		{
 			val = -Search_AlphaBeta(ctx, -beta, -alpha, callingParams);
 		}
@@ -350,7 +347,8 @@ int Search_AlphaBeta(SearchContext* ctx, int alpha, int beta, SearchParams param
 			val = -Search_AlphaBeta(ctx, -b, -alpha, callingParams);
 
 			// if search fails high, then do a re-search
-			// the reason for val < beta because if val >= beta we can just fail high
+			// the reason for val < beta is just there because I'm thinking about switching to fail-soft
+			// for fail-hard it's not needed
 			if(val > alpha && val < beta) 
 				val = -Search_AlphaBeta(ctx, -beta, -alpha, callingParams);
 		}
@@ -370,6 +368,7 @@ int Search_AlphaBeta(SearchContext* ctx, int alpha, int beta, SearchParams param
 
 		if(val > alpha)
 		{
+			useScout = true; // we have improved alpha, turn the scout window on
 			bestMoveIndex = i;
 			bestMove = *move;
 			nodeType = NODE_PV;

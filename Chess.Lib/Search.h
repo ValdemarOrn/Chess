@@ -80,16 +80,11 @@ extern "C"
 	{
 		int8_t Ply;
 		int8_t Depth;
-		uint16_t Flags;
+		uint8_t NullMovePly;
+		uint8_t Extensions;
 
 	} SearchParams;
 	#pragma pack(pop)
-
-	// flags that indicate that side to move has been in check ever since it entered QS search
-	const int SEARCH_FLAGS_QS_ALLOW_CHECK_EVADE_WHITE = 0x01;
-	const int SEARCH_FLAGS_QS_ALLOW_CHECK_EVADE_BLACK = 0x02;
-	// how many plies is this search extended
-	const int SEARCH_FLAGS_EXTENSIONS = 0x0C;
 
 	#ifdef STATS_SEARCH
 	extern SearchStats SStats;
@@ -100,47 +95,6 @@ extern "C"
 
 	// get some detailed statistics for the last search performed
 	__declspec(dllexport) SearchStats* Search_GetSearchStats();
-
-	__declspec(dllexport) int Search_GetFlags(SearchParams* params, int flagType);
-	__declspec(dllexport) void Search_SetFlags(SearchParams* params, int flagType, int value);
-
-	// Read the search flags in the SearchParams struct
-	__inline_always int Search_GetFlags(SearchParams* params, int flagType)
-	{
-		switch(flagType)
-		{
-		case SEARCH_FLAGS_QS_ALLOW_CHECK_EVADE_WHITE:
-			return params->Flags & SEARCH_FLAGS_QS_ALLOW_CHECK_EVADE_WHITE;
-		case SEARCH_FLAGS_QS_ALLOW_CHECK_EVADE_BLACK:
-			return params->Flags & SEARCH_FLAGS_QS_ALLOW_CHECK_EVADE_BLACK >> 1;
-		case SEARCH_FLAGS_EXTENSIONS:
-			return (params->Flags & SEARCH_FLAGS_EXTENSIONS) >> 2;
-		}
-
-		return 0;
-	}
-
-	// Write flags in the SearchParams struct
-	__inline_always void Search_SetFlags(SearchParams* params, int flagType, int value)
-	{
-		int newFlags = 0;
-
-		switch(flagType)
-		{
-		case SEARCH_FLAGS_QS_ALLOW_CHECK_EVADE_WHITE:
-			newFlags = SEARCH_FLAGS_QS_ALLOW_CHECK_EVADE_WHITE & value;
-			params->Flags = (params->Flags & ~SEARCH_FLAGS_QS_ALLOW_CHECK_EVADE_WHITE) | newFlags;
-			break;
-		case SEARCH_FLAGS_QS_ALLOW_CHECK_EVADE_BLACK:
-			newFlags = SEARCH_FLAGS_QS_ALLOW_CHECK_EVADE_BLACK & (value << 1);
-			params->Flags = (params->Flags & ~SEARCH_FLAGS_QS_ALLOW_CHECK_EVADE_BLACK) | newFlags;
-			break;
-		case SEARCH_FLAGS_EXTENSIONS:
-			newFlags = SEARCH_FLAGS_EXTENSIONS & (value << 2);
-			params->Flags = (params->Flags & ~SEARCH_FLAGS_EXTENSIONS) | newFlags;
-			break;
-		}
-	}
 }
 
 #endif
