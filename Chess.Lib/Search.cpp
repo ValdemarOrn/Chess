@@ -209,7 +209,6 @@ int Search_AlphaBeta(SearchContext* ctx, int alpha, int beta, SearchParams param
 		if(score >= beta)
 		{
 			nodeType = NODE_CUT;
-//			score = beta;
 		}
 
 		if(score > alpha)
@@ -253,7 +252,6 @@ int Search_AlphaBeta(SearchContext* ctx, int alpha, int beta, SearchParams param
 					addtoHashTable = FALSE;
 					cutMoveIndex = 0;
 					nodeType = NODE_CUT;
-//					score = beta;
 					goto Finalize;
 				}
 			
@@ -277,7 +275,6 @@ int Search_AlphaBeta(SearchContext* ctx, int alpha, int beta, SearchParams param
 				{
 					addtoHashTable = FALSE;
 					nodeType = NODE_ALL;
-//					score = alpha;
 					goto Finalize;
 				}
 			}
@@ -366,7 +363,6 @@ int Search_AlphaBeta(SearchContext* ctx, int alpha, int beta, SearchParams param
 			bestMove = *move;
 			nodeType = NODE_CUT;
 			score = val;
-//			score = beta;
 			goto Finalize;
 		}
 
@@ -408,7 +404,6 @@ int Search_AlphaBeta(SearchContext* ctx, int alpha, int beta, SearchParams param
 		{
 			cutMoveIndex = order.MoveCount;
 			nodeType = NODE_CUT;
-//			score = beta;
 			goto Finalize;
 		}
 
@@ -575,7 +570,6 @@ int Search_Quiesce(SearchContext* ctx, int alpha, int beta, SearchParams params)
 		if(score >= beta)
 		{
 			nodeType = NODE_CUT;
-//			score = beta;
 			goto Finalize;
 		}
 
@@ -683,7 +677,6 @@ int Search_Quiesce(SearchContext* ctx, int alpha, int beta, SearchParams params)
 			bestMove = *move;
 			nodeType = NODE_CUT;
 			score = val;
-//			score = beta;
 			goto Finalize;
 		}
 
@@ -721,7 +714,6 @@ int Search_Quiesce(SearchContext* ctx, int alpha, int beta, SearchParams params)
 		if(score >= beta)
 		{
 			nodeType = NODE_CUT;
-//			score = beta;
 			goto Finalize;
 		}
 

@@ -81,6 +81,7 @@ namespace Chess.Lib.TestPerf
 			var results = Perft.Search(b, depth);
 			var seconds = (DateTime.Now - start).TotalSeconds;
 			Console.WriteLine("Perft(" + depth + "): " + (results->Total) + ", Time: " + String.Format("{0:0.000}", seconds));
+			Console.WriteLine("NPS: " + String.Format("{0:0} kNodes/sec", (results->Total / seconds / 1000)));
 			Console.WriteLine("");
 
 			if (EnableDebugOutput)

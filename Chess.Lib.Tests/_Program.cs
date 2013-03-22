@@ -14,8 +14,8 @@ namespace Chess.Lib.Tests
 		{
 			Manager.InitLibrary();
 
-			var t = new SearchTest();
-			t.TestSearches();
+			var t = new BoardTests();
+			t.TestIsCheckedWhite();
 		}
 	}
 }

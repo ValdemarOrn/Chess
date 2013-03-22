@@ -8,18 +8,20 @@ namespace Chess.Lib.TestPerf
 {
 	unsafe class Program
 	{
-		static void Main(string[] args)
+		static Program()
 		{
 			Manager.InitLibrary();
-
-			var t = new SearchTest();
-			t.TestSearches();
 		}
 
-		private static void TestSearchCount()
+		static void Main(string[] args)
+		{
+			PerftTestSuite.RunTests();
+		}
+
+		private static void TestSearch()
 		{
 			var t = new SearchTest();
-			t.TestSearch6();
+			t.TestSearches();
 		}
 	}
 }

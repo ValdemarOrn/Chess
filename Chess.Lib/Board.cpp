@@ -56,6 +56,7 @@ void Board_Init(Board* board, int setPieces)
 	board->PlayerTurn = COLOR_WHITE;
 	board->_AttacksBlack = 0;
 	board->_AttacksWhite = 0;
+	board->_IsChecked = UNKNOWN;
 	
 	for(int i = 0; i < 64; i++)
 		board->Tiles[i] = 0;
@@ -112,6 +113,8 @@ void Board_Init(Board* board, int setPieces)
 	Board_SetPiece(board, 61, PIECE_BISHOP, COLOR_BLACK);
 	Board_SetPiece(board, 62, PIECE_KNIGHT, COLOR_BLACK);
 	Board_SetPiece(board, 63, PIECE_ROOK, COLOR_BLACK);
+
+	board->_IsChecked = FALSE;
 
 	board->Hash = Zobrist_Calculate(board);
 
