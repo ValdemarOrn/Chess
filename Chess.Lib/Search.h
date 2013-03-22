@@ -13,6 +13,12 @@ extern "C"
 	// minimum depth for using scout windows. Scout doesn't provide a lot of benefit at bery shallow depth
 	const int SEARCH_MIN_SCOUT_DEPTH = 3;
 
+	// how much to reduce the search depth if null reduction fails high
+	const int SEARCH_NULL_REDUCE_R = 4;
+
+	// minimum number of plies to keep after null reduction
+	const int SEARCH_NULL_REDUCE_MIN_PLY = 2;
+
 	const int SEARCH_MIN_SCORE = -99999999;
 	const int SEARCH_MAX_SCORE = 99999999;
 
@@ -56,6 +62,8 @@ extern "C"
 		uint64_t PruneDelta;
 		uint64_t PruneBadCaptures;
 
+		uint64_t NullMoveReductions;
+
 		// the index of best moves for PV nodes and cut moves for Cut nodes
 		int BestMoveIndex[100];
 		int CutMoveIndex[100];
@@ -86,8 +94,12 @@ extern "C"
 	{
 		int8_t Ply;
 		int8_t Depth;
-		uint8_t NullMovePly;
-		uint8_t Extensions;
+		
+		uint8_t AllowReductions;
+		uint8_t AllowExtensions;
+
+		uint8_t Extension;
+		uint8_t Reductions;
 
 	} SearchParams;
 	#pragma pack(pop)
@@ -101,6 +113,21 @@ extern "C"
 
 	// get some detailed statistics for the last search performed
 	__declspec(dllexport) SearchStats* Search_GetSearchStats();
+
+	// calculate how many plies to reduce
+	__declspec(dllexport) int Search_GetNullReduction(int depth);
+
+	
+	__inline_always int Search_GetNullReduction(int depth)
+	{
+		if(depth < SEARCH_NULL_REDUCE_MIN_PLY)
+			return 0;
+
+		if(depth >= SEARCH_NULL_REDUCE_R + SEARCH_NULL_REDUCE_MIN_PLY)
+			return SEARCH_NULL_REDUCE_R;
+		else
+			return depth - SEARCH_NULL_REDUCE_MIN_PLY;
+	}
 }
 
 #endif

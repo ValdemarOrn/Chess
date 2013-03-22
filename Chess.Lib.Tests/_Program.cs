@@ -15,7 +15,7 @@ namespace Chess.Lib.Tests
 			Manager.InitLibrary();
 
 			var t = new BoardTests();
-			t.TestIsCheckedWhite();
+			t.TestMakeNullMove();
 		}
 	}
 }

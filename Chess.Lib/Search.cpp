@@ -40,6 +40,8 @@ void ResetStats()
 
 	SStats.PruneDelta = 0;
 	SStats.PruneBadCaptures = 0;
+
+	SStats.NullMoveReductions = 0;
 	
 	for(int i = 0; i < SEARCH_PLY_MAX; i++)
 	{
@@ -113,6 +115,8 @@ MoveSmall Search_SearchPos(Board* board, int searchDepth)
 
 		params.Depth = i;
 		params.Ply = 0;
+		params.Reductions = 0;
+		params.AllowReductions = TRUE;
 		Search_AlphaBeta(&ctx, SEARCH_MIN_SCORE, SEARCH_MAX_SCORE, params);
 
 		// print PV
@@ -188,8 +192,10 @@ int Search_AlphaBeta(SearchContext* ctx, int alpha, int beta, SearchParams param
 	bestMove.To = 0;
 	_Bool useScout = FALSE;
 	int bestScore = SEARCH_MIN_SCORE; // track All-node score, needed for fail-soft
-
+	int nullReduction = 0;
 	_Bool hasValidMove = FALSE;
+
+	_Bool doNullMoveReduction = (depth > SEARCH_NULL_REDUCE_MIN_PLY && params.AllowReductions == TRUE);
 
 	#ifdef STATS_SEARCH
 	SStats.TotalNodeCount++;
@@ -257,6 +263,9 @@ int Search_AlphaBeta(SearchContext* ctx, int alpha, int beta, SearchParams param
 			
 				if(score > alpha)
 				{
+					if(tableEntry->BestMoveFrom == 0 && tableEntry->BestMoveTo == 0)
+						int k = 23;
+
 					bestMoveIndex = 0;
 					nodeType = NODE_PV;
 					hasValidMove = TRUE;
@@ -302,6 +311,49 @@ int Search_AlphaBeta(SearchContext* ctx, int alpha, int beta, SearchParams param
 	#endif
 
 	// ----------------------------------------------------------------------------------
+	// ------------------------------ Null Move Reduction ------------------------------
+	// ----------------------------------------------------------------------------------
+	
+	if(doNullMoveReduction)
+	{
+		_Bool nullValid = Board_MakeNullMove(board);
+		if(nullValid)
+		{
+			callingParams.Depth = depth - 1 - Search_GetNullReduction(depth);
+			callingParams.Ply = ply + 1;
+			callingParams.AllowReductions = FALSE;
+			callingParams.Reductions = params.Reductions;
+
+			// instead of -alpha, use -beta+1
+			int val = -Search_AlphaBeta(ctx, -beta, -beta+1, callingParams);
+			Board_Unmake(board);
+			
+			if(val >= beta)
+			{
+				#ifdef STATS_SEARCH
+				SStats.NullMoveReductions++;
+				#endif
+
+				nullReduction = Search_GetNullReduction(depth);
+				callingParams.AllowReductions = FALSE;
+				callingParams.Reductions = nullReduction;
+			}
+			else
+			{
+				nullReduction = 0;
+				callingParams.AllowReductions = TRUE;
+				callingParams.Reductions = params.Reductions;
+			}
+		}
+	}
+	else
+	{
+		nullReduction = 0;
+		callingParams.AllowReductions = FALSE;
+		callingParams.Reductions = 0;
+	}
+
+	// ----------------------------------------------------------------------------------
 	// ------------------------- Search through all the moves --------------------------
 	// ----------------------------------------------------------------------------------
 
@@ -330,11 +382,11 @@ int Search_AlphaBeta(SearchContext* ctx, int alpha, int beta, SearchParams param
 		// Todo: Handle promotions
 
 		hasValidMove = true;
-		callingParams.Depth = depth - 1;
+
+		callingParams.Depth = depth - 1 - nullReduction;
 		callingParams.Ply = ply + 1;
 
 		int val = 0;
-
 		if(i == 0 || (depth < SEARCH_MIN_SCOUT_DEPTH) || !useScout)
 		{
 			val = -Search_AlphaBeta(ctx, -beta, -alpha, callingParams);
@@ -498,7 +550,7 @@ Finalize:
 			newEntry.BestMoveFrom = 0;
 			newEntry.BestMoveTo = 0;
 		}
-		newEntry.Depth = depth;
+		newEntry.Depth = depth - nullReduction;
 		newEntry.Hash = ctx->Board->Hash;
 		newEntry.NodeType = nodeType;
 		newEntry.Score = score; //(nodeType == NODE_CUT) ? beta : score;

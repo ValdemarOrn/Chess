@@ -517,8 +517,84 @@ _Bool Board_Make(Board* board, int from, int to)
 		}
 	}
 
-	
+	#ifdef DEBUG
+	assert(board->Hash == Zobrist_Calculate(board));
+	#endif
 
+	return 1;
+}
+
+_Bool Board_MakeNullMove(Board* board)
+{
+	assert(board->_IsChecked == UNKNOWN || board->_IsChecked == Board_IsChecked(board, board->PlayerTurn));
+	assert(board->_AttacksWhite == 0 || board->_AttacksWhite == Board_CalculateAttackMap(board, COLOR_WHITE));
+	assert(board->_AttacksBlack == 0 || board->_AttacksBlack == Board_CalculateAttackMap(board, COLOR_BLACK));
+
+	#ifdef DEBUG
+	uint64_t originalHash = board->Hash;
+	Board_TotalMakes++;
+	#endif
+
+	// can't do null move if checked
+	if(Board_IsChecked(board, board->PlayerTurn))
+		return FALSE;
+
+	// I use the king for null move
+	int playerPiece = PIECE_KING;
+	int color = board->PlayerTurn;
+
+	uint64_t kingBoard = (color == COLOR_WHITE) ? board->Boards[BOARD_WHITE] : board->Boards[BOARD_BLACK];
+	kingBoard = kingBoard & board->Boards[PIECE_KING];
+
+	int from = Bitboard_ForwardBit(kingBoard);
+	int to = from;
+	int victimTile = to; // which square to clear. Only differs from the "to" square during en passant attacks
+
+	// safety check, we are actually moving a piece that belongs to the current player
+	if(board->PlayerTurn != Board_Color(board, from))
+		return 0;
+
+	// 1. put info in history
+	MoveHistory* history = &board->MoveHistory[board->CurrentMove];
+	history->PrevAttacksBlack = board->_AttacksBlack;
+	history->PrevAttacksWhite = board->_AttacksWhite;
+	history->PrevCastleState = board->Castle;
+	history->PrevIsChecked = board->_IsChecked;
+	history->PrevEnPassantTile = board->EnPassantTile;
+	history->PrevFiftyMoveRulePlies = board->FiftyMoveRulePlies;
+	history->PrevHash = board->Hash;
+
+	// 2. Create the Move object
+	history->Move.CapturePiece = 0;
+	history->Move.CaptureTile = to;
+	history->Move.Castle = 0;
+	history->Move.From = from;
+	history->Move.PlayerColor = color;
+	history->Move.PlayerPiece = playerPiece;
+	history->Move.Promotion = 0; // set outside the Make() function, during search
+	history->Move.To = to;
+
+	// 4. update board data, enpassant square, castling, 50 move rule, hash
+
+	board->CurrentMove += 1;
+	
+	board->Hash ^= Zobrist_Keys[ZOBRIST_ENPASSANT][board->EnPassantTile];
+	board->EnPassantTile = 0;
+	board->Hash ^= Zobrist_Keys[ZOBRIST_ENPASSANT][board->EnPassantTile];
+
+	board->FiftyMoveRulePlies = (history->Move.CapturePiece > 0 || playerPiece == PIECE_PAWN) ? 0 : board->FiftyMoveRulePlies + 1;
+	
+	board->Hash ^= Zobrist_Keys[ZOBRIST_SIDE][board->PlayerTurn];
+	board->PlayerTurn = (board->PlayerTurn == COLOR_WHITE) ? COLOR_BLACK : COLOR_WHITE;
+	board->Hash ^= Zobrist_Keys[ZOBRIST_SIDE][board->PlayerTurn];
+
+	board->_IsChecked = UNKNOWN;
+	board->_AttacksWhite = 0;
+	board->_AttacksBlack = 0;
+
+	#ifdef DEBUG
+	assert(board->Hash == Zobrist_Calculate(board));
+	#endif
 
 	return 1;
 }

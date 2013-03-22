@@ -102,6 +102,9 @@ namespace Chess.Lib
 		[DllImport("C:\\Src\\_Tree\\Applications\\Chess\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Board_Make", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static unsafe extern bool Make(BoardStruct* board, int from, int to);
 
+		[DllImport("C:\\Src\\_Tree\\Applications\\Chess\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Board_MakeNullMove", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		public static unsafe extern bool MakeNullMove(BoardStruct* board);
+
 		[DllImport("C:\\Src\\_Tree\\Applications\\Chess\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Board_Unmake", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static unsafe extern void Unmake(BoardStruct* board);
 

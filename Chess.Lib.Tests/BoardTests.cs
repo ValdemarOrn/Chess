@@ -641,5 +641,20 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual(59, attacker);
 		}
 
+		[TestMethod]
+		public unsafe void TestMakeNullMove()
+		{
+			string fen = @"2kq4/8/2p5/3b3R/8/4N3/8/2R3K1 w KQkq - 0 1";
+			var bb = Notation.FENtoBoard(fen);
+			var b = Helpers.ManagedBoardToNative(bb);
+
+			var hash = b->Hash;
+			var player = b->PlayerTurn;
+			Board.MakeNullMove(b);
+			Assert.AreNotEqual(player, b->PlayerTurn);
+			Board.Unmake(b);
+			Assert.AreEqual(hash, b->Hash);
+		}
+
 	}
 }

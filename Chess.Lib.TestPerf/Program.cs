@@ -15,7 +15,9 @@ namespace Chess.Lib.TestPerf
 
 		static void Main(string[] args)
 		{
-			PerftTestSuite.RunTests();
+			//PerftTestSuite.RunTests();
+			TestSearch();
+			//SearchTest.GenericSearchTest("r1b1k2r/2q1bppp/p2ppn2/1p4P1/3NPP2/2N2Q2/PPP4P/2KR1B1R b kq", 10);
 		}
 
 		private static void TestSearch()

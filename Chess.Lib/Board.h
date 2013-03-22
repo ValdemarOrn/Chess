@@ -114,6 +114,9 @@ extern "C"
 	// if illegal it is automatically taken back.
 	// Return 1 if legal, 0 if illegal and no move was made
 	__declspec(dllexport) _Bool Board_Make(Board* board, int from, int to);
+	
+	// Do a null (pass) move
+	__declspec(dllexport) _Bool Board_MakeNullMove(Board* board);
 
 	// Takes back the last move in the move array
 	__declspec(dllexport) void Board_Unmake(Board* board);

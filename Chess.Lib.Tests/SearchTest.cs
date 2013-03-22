@@ -109,12 +109,12 @@ namespace Chess.Lib.Tests
 
 		public void TestSearches()
 		{
-			GenericSearchTest("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1", 8);
-			GenericSearchTest("r3n1k1/p2n1pp1/1p5p/2p1P3/3p4/P4N1P/BPP2PP1/5RK1 w KQkq - 0 1", 8);
-			GenericSearchTest("r1b1k2r/2q1bppp/p2ppn2/1p4P1/3NPP2/2N2Q2/PPP4P/2KR1B1R b kq", 7);
+			GenericSearchTest("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1", 10);
+			GenericSearchTest("r3n1k1/p2n1pp1/1p5p/2p1P3/3p4/P4N1P/BPP2PP1/5RK1 w KQkq - 0 1", 10);
+			GenericSearchTest("r1b1k2r/2q1bppp/p2ppn2/1p4P1/3NPP2/2N2Q2/PPP4P/2KR1B1R b kq", 9);
 		}
 
-		public void GenericSearchTest(string fen, int depth)
+		public static void GenericSearchTest(string fen, int depth)
 		{
 			Console.WriteLine("-------------------------------------------");
 			Console.WriteLine("Position: " + fen);
