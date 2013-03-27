@@ -12,7 +12,7 @@ namespace Chess.Uci
 		/// </summary>
 		/// <param name="command"></param>
 		/// <returns></returns>
-		public static UciToEngine? GetUciCommand(string command)
+		public static UciToEngine? GetEngineCommand(string command)
 		{
 			if (command == null || String.IsNullOrWhiteSpace(command))
 				return null;
@@ -25,6 +25,29 @@ namespace Chess.Uci
 			{
 				if (e.ToLower() == command)
 					return (UciToEngine)Enum.Parse(typeof(UciToEngine), e);
+			}
+
+			return null;
+		}
+
+		/// <summary>
+		/// Convert a string to a UciToGui enum
+		/// </summary>
+		/// <param name="command"></param>
+		/// <returns></returns>
+		public static UciToGui? GetGuiCommand(string command)
+		{
+			if (command == null || String.IsNullOrWhiteSpace(command))
+				return null;
+
+			command = command.ToLower().Trim();
+
+			var enumStrings = Enum.GetNames(typeof(UciToGui));
+
+			foreach (var e in enumStrings)
+			{
+				if (e.ToLower() == command)
+					return (UciToGui)Enum.Parse(typeof(UciToGui), e);
 			}
 
 			return null;

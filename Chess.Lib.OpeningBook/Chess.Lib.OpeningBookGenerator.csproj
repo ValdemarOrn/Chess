@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E726D463-F406-41D1-918C-F37E5301C64F}</ProjectGuid>
+    <ProjectGuid>{84CF1E15-5D40-429A-8A80-8FA4D3F61ABB}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Chess.Lib.ZobristGen</RootNamespace>
-    <AssemblyName>Chess.Lib.ZobristGen</AssemblyName>
+    <RootNamespace>Chess.Lib.OpeningBookGenerator</RootNamespace>
+    <AssemblyName>Chess.Lib.OpeningBookGenerator</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -43,6 +43,16 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Chess.Lib.Managed\Chess.Lib.Managed.csproj">
+      <Project>{79caa135-2881-4e2d-93e3-45257546e766}</Project>
+      <Name>Chess.Lib.Managed</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Chess\Chess.csproj">
+      <Project>{5c3de354-edd4-4377-a3d0-a33a5d2c7c71}</Project>
+      <Name>Chess</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

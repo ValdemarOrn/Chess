@@ -14,7 +14,7 @@ typedef int _Bool;
 
 
 // enables assertions and other debugging code
-//#define DEBUG 
+#define DEBUG 
 
 // enables statistics in the search module (node count, cutoff metrics, etc)
 #define STATS_SEARCH

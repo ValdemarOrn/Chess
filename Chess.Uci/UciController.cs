@@ -22,7 +22,7 @@ namespace Chess.Uci
 		/// <returns></returns>
 		public bool ReadCommand(string commandString)
 		{
-			var command = GetCommand(commandString);
+			var command = GetCommand<UciToEngine>(commandString);
 
 			if (command.Item1 == null)
 				return false;
@@ -142,16 +142,22 @@ namespace Chess.Uci
 			p = p.ToLower();
 			Engine.SetDebug(UciUtils.ParseBool(p));
 		}
-		
-		private static Tuple<UciToEngine?, string> GetCommand(string command)
+
+		/// <summary>
+		/// Returns a struct containing the UciToEngine or UciToGui command and the argument string that follows it
+		/// </summary>
+		/// <typeparam name="T">Must be either UciToEngine or UciToGui</typeparam>
+		/// <param name="command"></param>
+		/// <returns></returns>
+		private static Tuple<T?, string> GetCommand<T>(string command) where T : struct, IConvertible
 		{
-			UciToEngine? engineCommand;
+			Nullable<T> engineCommand;
 			string values = null;
 
 			var parts = command.Split(new char[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
 			
 			if (parts.Length == 0)
-				return new Tuple<UciToEngine?, string>(null, null);
+				return new Tuple<T?, string>(null, null);
 
 			// search through the tokens, looking for a valid UCI command string
 			engineCommand = null;
@@ -159,7 +165,12 @@ namespace Chess.Uci
 
 			while (i < parts.Length)
 			{
-				engineCommand = UciUtils.GetUciCommand(parts[i]);
+				if(typeof(T) == typeof(UciToEngine))
+					engineCommand = (Nullable<T>)(object)UciUtils.GetEngineCommand(parts[i]);
+				else if (typeof(T) == typeof(UciToGui))
+					engineCommand = (Nullable<T>)(object)UciUtils.GetEngineCommand(parts[i]);
+				else
+					throw new Exception("Wrong argument type");
 
 				if (engineCommand != null)
 				{
@@ -171,49 +182,131 @@ namespace Chess.Uci
 				i++;
 			}
 
-			return new Tuple<UciToEngine?, string>(engineCommand, values);
+			return new Tuple<T?, string>(engineCommand, values);
 		}
 
 		// ---------------------------------Interface Methods ---------------------------------
 
 		public void ID(string name, string author)
 		{
-			
+			name = name ?? "";
+			author = author ?? "";
+			UciCallback("id name " + name);
+			UciCallback("id author " + author);
 		}
 
 		public void UciOk()
 		{
-			
+			UciCallback("uciok");
 		}
 
 		public void ReadyOk()
 		{
-			
+			UciCallback("readyok");
 		}
 
 		public void BestMove(UciMove bestMove, UciMove ponderMove)
 		{
-			
+			string text = "bestmove " + bestMove.ToString();
+			if (ponderMove != null)
+				text += " " + ponderMove.ToString();
+
+			UciCallback(text);
 		}
 
 		public void CopyProtection(bool protectionIsOk)
 		{
-			
+			UciCallback("copyprotection checking");
+
+			if(protectionIsOk)
+				UciCallback("copyprotection ok");
+			else
+				UciCallback("copyprotection error");
 		}
 
 		public void Registration(bool registrationIsOk)
 		{
-			
+			UciCallback("registration checking");
+
+			if (registrationIsOk)
+				UciCallback("registration ok");
+			else
+				UciCallback("registration error");
 		}
 
 		public void Info(Dictionary<UciInfo, string> infoValues)
 		{
-			
+			var sb = new StringBuilder();
+
+			sb.Append("info");
+
+			foreach(var val in infoValues)
+			{
+				string info = val.Key.ToString().ToLower();
+
+				sb.Append(' ');
+				sb.Append(info);
+				sb.Append(' ');
+				sb.Append(val.Value);
+			}
+
+			var output = sb.ToString();
+			UciCallback(output);
 		}
 
 		public void Option(string name, UciOptionType type, object defaultValue, object min, object max, List<object> values)
 		{
-			
+			var sb = new StringBuilder();
+			sb.Append("option name ");
+			sb.Append(name);
+			sb.Append(" type ");
+			sb.Append(type.ToString().ToLower());
+
+			if(defaultValue != null)
+			{
+				sb.Append(" default ");
+
+				if(defaultValue.GetType() == typeof(bool))
+					sb.Append(defaultValue.ToString().ToLower());
+				else
+					sb.Append(defaultValue.ToString());
+			}
+
+			if (min != null)
+			{
+				sb.Append(" min ");
+
+				if (min.GetType() == typeof(bool))
+					sb.Append(min.ToString().ToLower());
+				else
+					sb.Append(min.ToString());
+			}
+
+			if (max != null)
+			{
+				sb.Append(" max ");
+
+				if (max.GetType() == typeof(bool))
+					sb.Append(max.ToString().ToLower());
+				else
+					sb.Append(max.ToString());
+			}
+
+			if(values != null)
+			{
+				foreach(var v in values)
+				{
+					sb.Append(" var ");
+
+					if (v.GetType() == typeof(bool))
+						sb.Append(v.ToString().ToLower());
+					else
+						sb.Append(v.ToString());
+				}
+			}
+
+			var output = sb.ToString();
+			UciCallback(output);
 		}
 	}
 }

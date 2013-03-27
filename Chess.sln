@@ -22,11 +22,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Chess.Lib", "Chess.Lib\Ches
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chess.Lib.BitboardEditor", "Chess.Lib.BitboardEditor\Chess.Lib.BitboardEditor.csproj", "{CDB74489-AC6B-47B0-878F-F228456F7FA3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chess.Lib.ZobristGen", "Chess.Lib.ZobristGen\Chess.Lib.ZobristGen.csproj", "{E726D463-F406-41D1-918C-F37E5301C64F}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chess.Lib.EGTB", "Chess.Lib.EGTB\Chess.Lib.EGTB.csproj", "{8D1947D3-3B39-435A-B471-3A9638524249}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chess.Lib.OpeningBookGen", "Chess.Lib.OpeningBook\Chess.Lib.OpeningBookGen.csproj", "{84CF1E15-5D40-429A-8A80-8FA4D3F61ABB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chess.Lib.OpeningBookGenerator", "Chess.Lib.OpeningBook\Chess.Lib.OpeningBookGenerator.csproj", "{84CF1E15-5D40-429A-8A80-8FA4D3F61ABB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chess.Lib.TestPerf", "Chess.Lib.TestPerf\Chess.Lib.TestPerf.csproj", "{928975EE-B50F-4D16-88BC-6EC38174763C}"
 EndProject
@@ -71,10 +69,6 @@ Global
 		{CDB74489-AC6B-47B0-878F-F228456F7FA3}.Debug|x64.Build.0 = Debug|Any CPU
 		{CDB74489-AC6B-47B0-878F-F228456F7FA3}.Release|x64.ActiveCfg = Release|Any CPU
 		{CDB74489-AC6B-47B0-878F-F228456F7FA3}.Release|x64.Build.0 = Release|Any CPU
-		{E726D463-F406-41D1-918C-F37E5301C64F}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{E726D463-F406-41D1-918C-F37E5301C64F}.Debug|x64.Build.0 = Debug|Any CPU
-		{E726D463-F406-41D1-918C-F37E5301C64F}.Release|x64.ActiveCfg = Release|Any CPU
-		{E726D463-F406-41D1-918C-F37E5301C64F}.Release|x64.Build.0 = Release|Any CPU
 		{8D1947D3-3B39-435A-B471-3A9638524249}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{8D1947D3-3B39-435A-B471-3A9638524249}.Debug|x64.Build.0 = Debug|Any CPU
 		{8D1947D3-3B39-435A-B471-3A9638524249}.Release|x64.ActiveCfg = Release|Any CPU

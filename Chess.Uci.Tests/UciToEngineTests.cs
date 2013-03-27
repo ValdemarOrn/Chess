@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace Chess.Uci.Tests
 {
 	[TestClass]
-	public class ControllerToEngineTests
+	public class UciToEngineTests
 	{
 		MockUciEngine engine;
 		UciController ctrl;
@@ -115,6 +115,8 @@ namespace Chess.Uci.Tests
 			Assert.AreEqual(true, goParams.Infinite);
 			Assert.AreEqual("e2e4", goParams.SearchMoves[0].ToString());
 			Assert.AreEqual("d2d4", goParams.SearchMoves[1].ToString());
+			Assert.AreEqual(null, goParams.BlackInc);
+			Assert.AreEqual(null, goParams.WhiteInc);
 		}
 
 		[TestMethod]
