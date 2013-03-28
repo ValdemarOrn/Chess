@@ -99,7 +99,6 @@ MoveSmall Search_SearchPos(Board* board, int searchDepth)
 	SearchParams params;
 
 	char text[80];
-	Manager_Callback("Ply\tScore\tNodes\tPV\n");
 
 	for(int i = 1; i <= searchDepth; i++)
 	{
@@ -119,33 +118,37 @@ MoveSmall Search_SearchPos(Board* board, int searchDepth)
 		params.AllowReductions = TRUE;
 		Search_AlphaBeta(&ctx, SEARCH_MIN_SCORE, SEARCH_MAX_SCORE, params);
 
-		// print PV
+		// ----------- print PV -----------
+
+		Manager_BeginMessage(Message_SearchData);
 
 		// ply
-		sprintf(text, "%d\t", i);
-		Manager_Callback(text);
+		sprintf(text, "%d", i);
+		Manager_Write(Message_Ply, text);
 
 		// score
-		sprintf(text, "%d\t", ctx.PV[0][0].Score);
-		Manager_Callback(text);
+		sprintf(text, "%d", ctx.PV[0][0].Score);
+		Manager_Write(Message_Score, text);
 
 		// node count
 		#ifdef STATS_SEARCH
-		sprintf(text, "%d\t", SStats.TotalNodeCount);
-		Manager_Callback(text);
+		sprintf(text, "%d", SStats.TotalNodeCount);
+		Manager_Write(Message_Nodes, text);
 		#endif
 
 		// PV
 		for(int j = 0; j < i; j++)
 		{
 			Move_PieceToString(ctx.PV[0][j].Piece, text);
-			Manager_Callback(text);
+			Manager_Write(Message_PV, text);
 
 			Move_ToString(&(ctx.PV[0][j]), text);
-			Manager_Callback(text);
-			Manager_Callback(" ");
+			Manager_Write(Message_PV, text);
+
+			Manager_Write(Message_PV, " ");
 		}
-		Manager_Callback("\n");
+
+		Manager_EndMessage();
 	}
 
 	return ctx.PV[0][0];

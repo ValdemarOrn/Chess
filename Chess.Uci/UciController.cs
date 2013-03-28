@@ -209,7 +209,7 @@ namespace Chess.Uci
 		{
 			string text = "bestmove " + bestMove.ToString();
 			if (ponderMove != null)
-				text += " " + ponderMove.ToString();
+				text += " ponder " + ponderMove.ToString();
 
 			UciCallback(text);
 		}

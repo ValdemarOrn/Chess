@@ -32,6 +32,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chess.Uci", "Chess.Uci\Ches
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chess.Uci.Tests", "Chess.Uci.Tests\Chess.Uci.Tests.csproj", "{2A6A6D70-9EA5-4E42-817B-334CFE9003C6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chess.Vladivostok", "Vladivostok\Chess.Vladivostok.csproj", "{ACD1F6F8-C33E-4399-A4AA-93053DB35B93}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Chess.vsmdi
@@ -89,6 +91,10 @@ Global
 		{2A6A6D70-9EA5-4E42-817B-334CFE9003C6}.Debug|x64.Build.0 = Debug|Any CPU
 		{2A6A6D70-9EA5-4E42-817B-334CFE9003C6}.Release|x64.ActiveCfg = Release|Any CPU
 		{2A6A6D70-9EA5-4E42-817B-334CFE9003C6}.Release|x64.Build.0 = Release|Any CPU
+		{ACD1F6F8-C33E-4399-A4AA-93053DB35B93}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{ACD1F6F8-C33E-4399-A4AA-93053DB35B93}.Debug|x64.Build.0 = Debug|Any CPU
+		{ACD1F6F8-C33E-4399-A4AA-93053DB35B93}.Release|x64.ActiveCfg = Release|Any CPU
+		{ACD1F6F8-C33E-4399-A4AA-93053DB35B93}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

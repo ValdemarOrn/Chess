@@ -131,7 +131,6 @@
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="Eval.cpp" />
     <ClCompile Include="King.cpp" />
-    <ClCompile Include="main.cpp" />
     <ClCompile Include="Manager.cpp" />
     <ClCompile Include="Move.cpp" />
     <ClCompile Include="Moves.cpp" />

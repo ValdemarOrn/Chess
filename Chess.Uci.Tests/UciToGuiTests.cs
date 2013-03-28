@@ -70,7 +70,7 @@ namespace Chess.Uci.Tests
 		{
 			ctrl.BestMove(UciMove.FromString("b7b8q"), UciMove.FromString("a2a4"));
 			Assert.AreEqual(1, Commands.Count);
-			Assert.AreEqual("bestmove b7b8q a2a4", Commands[0]);
+			Assert.AreEqual("bestmove b7b8q ponder a2a4", Commands[0]);
 		}
 
 		[TestMethod]

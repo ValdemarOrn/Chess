@@ -49,7 +49,10 @@ namespace Chess.Lib
 
 		public static unsafe string GetString(byte* str)
 		{
-			byte[] bytes = new byte[1024];
+			if (str == (byte*)0)
+				return null;
+
+			byte[] bytes = new byte[1024*8];
 			int i = 0;
 			while(*str != 0)
 			{

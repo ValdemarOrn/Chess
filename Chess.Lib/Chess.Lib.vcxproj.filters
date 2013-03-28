@@ -60,9 +60,6 @@
     <ClCompile Include="Perft.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Moves\Bishop.cpp">
       <Filter>Source Files\Moves</Filter>
     </ClCompile>
