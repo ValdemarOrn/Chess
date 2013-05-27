@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Chess.Base;
 
 namespace Chess.Lib
 {
@@ -40,7 +41,7 @@ namespace Chess.Lib
 			var text = System.IO.File.ReadAllText(inputFile);
 			Console.WriteLine("Read all text");
 
-			var moveStrings = Chess.ABN.StripPGN(text, maxNumberOfGames);
+			var moveStrings = ABN.StripPGN(text, maxNumberOfGames);
 			Console.WriteLine("Stripped PGN");
 
 			System.IO.File.WriteAllLines(outputFile, moveStrings);
@@ -54,7 +55,7 @@ namespace Chess.Lib
 			var splitter = new char[] { ' ' };
 			var sb = new StringBuilder();
 
-			var board = new Chess.Board(true);
+			var board = new Chess.Base.Board(true);
 
 			foreach(var m in moveStrings)
 			{

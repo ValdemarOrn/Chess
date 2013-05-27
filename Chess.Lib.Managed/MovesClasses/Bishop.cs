@@ -65,7 +65,7 @@ namespace Chess.Lib.MoveClasses
 				while (true)
 				{
 					target += 9;
-					if (target < 56 && Chess.Board.X(target) < 7 && Chess.Board.X(target) > Chess.Board.X(i))
+					if (target < 56 && Chess.Base.Board.X(target) < 7 && Chess.Base.Board.X(target) > Chess.Base.Board.X(i))
 						Bitboard.SetRef(ref Move, target);
 					else
 						break;
@@ -76,7 +76,7 @@ namespace Chess.Lib.MoveClasses
 				while (true)
 				{
 					target += 7;
-					if (target < 56 && Chess.Board.X(target) > 0 && Chess.Board.X(target) < Chess.Board.X(i))
+					if (target < 56 && Chess.Base.Board.X(target) > 0 && Chess.Base.Board.X(target) < Chess.Base.Board.X(i))
 						Bitboard.SetRef(ref Move, target);
 					else
 						break;
@@ -87,7 +87,7 @@ namespace Chess.Lib.MoveClasses
 				while (true)
 				{
 					target -= 7;
-					if (target > 7 && Chess.Board.X(target) < 7 && Chess.Board.X(target) > Chess.Board.X(i))
+					if (target > 7 && Chess.Base.Board.X(target) < 7 && Chess.Base.Board.X(target) > Chess.Base.Board.X(i))
 						Bitboard.SetRef(ref Move, target);
 					else
 						break;
@@ -98,7 +98,7 @@ namespace Chess.Lib.MoveClasses
 				while (true)
 				{
 					target -= 9;
-					if (target > 7 && Chess.Board.X(target) > 0 && Chess.Board.X(target) < Chess.Board.X(i))
+					if (target > 7 && Chess.Base.Board.X(target) > 0 && Chess.Base.Board.X(target) < Chess.Base.Board.X(i))
 						Bitboard.SetRef(ref Move, target);
 					else
 						break;
@@ -166,7 +166,7 @@ namespace Chess.Lib.MoveClasses
 			target = index;
 			while (true)
 			{
-				if (target < 64 && (Chess.Board.X(target) > Chess.Board.X(index) || target == index))
+				if (target < 64 && (Chess.Base.Board.X(target) > Chess.Base.Board.X(index) || target == index))
 					Bitboard.SetRef(ref moves, target);
 				else
 					break;
@@ -181,7 +181,7 @@ namespace Chess.Lib.MoveClasses
 			target = index;
 			while (true)
 			{
-				if (target < 64 && (Chess.Board.X(target) < Chess.Board.X(index) || target == index))
+				if (target < 64 && (Chess.Base.Board.X(target) < Chess.Base.Board.X(index) || target == index))
 					Bitboard.SetRef(ref moves, target);
 				else
 					break;
@@ -196,7 +196,7 @@ namespace Chess.Lib.MoveClasses
 			target = index;
 			while (true)
 			{
-				if (target >= 0 && (Chess.Board.X(target) > Chess.Board.X(index) || target == index))
+				if (target >= 0 && (Chess.Base.Board.X(target) > Chess.Base.Board.X(index) || target == index))
 					Bitboard.SetRef(ref moves, target);
 				else
 					break;
@@ -211,7 +211,7 @@ namespace Chess.Lib.MoveClasses
 			target = index;
 			while (true)
 			{
-				if (target >= 0 && (Chess.Board.X(target) <= Chess.Board.X(index) || target == index))
+				if (target >= 0 && (Chess.Base.Board.X(target) <= Chess.Base.Board.X(index) || target == index))
 					Bitboard.SetRef(ref moves, target);
 				else
 					break;

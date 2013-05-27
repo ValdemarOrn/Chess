@@ -7,18 +7,18 @@ namespace Chess.Lib
 {
 	public class Helpers
 	{
-		public static unsafe BoardStruct* ManagedBoardToNative(Chess.Board board)
+		public static unsafe BoardStruct* ManagedBoardToNative(Chess.Base.Board board)
 		{
 			var b = Board.Create();
 			b->Castle = 0;
 
-			if (board.CastleKB == Chess.Moves.CanCastle)
+			if (board.CastleKB == Chess.Base.Moves.CanCastle)
 				b->Castle |= Board.CASTLE_BK;
-			if (board.CastleQB == Chess.Moves.CanCastle)
+			if (board.CastleQB == Chess.Base.Moves.CanCastle)
 				b->Castle |= Board.CASTLE_BQ;
-			if (board.CastleKW == Chess.Moves.CanCastle)
+			if (board.CastleKW == Chess.Base.Moves.CanCastle)
 				b->Castle |= Board.CASTLE_WK;
-			if (board.CastleQW == Chess.Moves.CanCastle)
+			if (board.CastleQW == Chess.Base.Moves.CanCastle)
 				b->Castle |= Board.CASTLE_WQ;
 
 			b->EnPassantTile = (byte)board.EnPassantTile;

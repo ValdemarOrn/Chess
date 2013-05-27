@@ -49,9 +49,9 @@
       <Project>{79caa135-2881-4e2d-93e3-45257546e766}</Project>
       <Name>Chess.Lib.Managed</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Chess\Chess.csproj">
+    <ProjectReference Include="..\Chess\Chess.Base.csproj">
       <Project>{5c3de354-edd4-4377-a3d0-a33a5d2c7c71}</Project>
-      <Name>Chess</Name>
+      <Name>Chess.Base</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

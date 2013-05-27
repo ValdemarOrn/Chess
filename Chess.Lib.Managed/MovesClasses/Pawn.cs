@@ -30,8 +30,8 @@ namespace Chess.Lib.MoveClasses
 		static ulong GetMovesWhite(int index)
 		{
 			ulong moves = 0;
-			int x = Chess.Board.X(index);
-			int y = Chess.Board.Y(index);
+			int x = Chess.Base.Board.X(index);
+			int y = Chess.Base.Board.Y(index);
 
 			if(y == 0 || y == 7) // cannot ever happen
 			{
@@ -54,8 +54,8 @@ namespace Chess.Lib.MoveClasses
 		static ulong GetMovesBlack(int index)
 		{
 			ulong moves = 0;
-			int x = Chess.Board.X(index);
-			int y = Chess.Board.Y(index);
+			int x = Chess.Base.Board.X(index);
+			int y = Chess.Base.Board.Y(index);
 
 			if (y == 0 || y == 7) // cannot ever happen
 			{
@@ -78,8 +78,8 @@ namespace Chess.Lib.MoveClasses
 		static ulong GetAttacksWhite(int index)
 		{
 			ulong moves = 0;
-			int x = Chess.Board.X(index);
-			int y = Chess.Board.Y(index);
+			int x = Chess.Base.Board.X(index);
+			int y = Chess.Base.Board.Y(index);
 
 			// Note: I actually calculate the "attacks" for a white pawn at y == 0.
 			// While a pawn can never be in that location, the bitboard is used when finding attacking pawns during Board_IsAttacked
@@ -108,8 +108,8 @@ namespace Chess.Lib.MoveClasses
 		static ulong GetAttacksBlack(int index)
 		{
 			ulong moves = 0;
-			int x = Chess.Board.X(index);
-			int y = Chess.Board.Y(index);
+			int x = Chess.Base.Board.X(index);
+			int y = Chess.Base.Board.Y(index);
 
 			// Note: I actually calculate the "attacks" for a black pawn at y == 7.
 			// While a pawn can never be in that location, the bitboard is used when finding attacking pawns during Board_IsAttacked

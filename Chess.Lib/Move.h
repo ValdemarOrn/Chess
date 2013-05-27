@@ -25,6 +25,7 @@ extern "C"
 		uint8_t From;
 		uint8_t To;
 		uint8_t Piece;
+		uint8_t Promotion;
 		int Score;
 
 	} MoveSmall;

@@ -278,7 +278,7 @@ namespace Chess.Lib.Tests
 		public unsafe void TestWhiteProblematicMove()
 		{
 			// this position caused a wrong hit during Perft
-			var x = Notation.FENtoBoard("rnbqkbnr/1ppppppp/8/p7/7P/8/PPPPPPP1/RNBQKBNR w KQkq a6 0 2");
+			var x = Chess.Base.Notation.FENtoBoard("rnbqkbnr/1ppppppp/8/p7/7P/8/PPPPPPP1/RNBQKBNR w KQkq a6 0 2");
 			var b = Helpers.ManagedBoardToNative(x);
 
 			var moves = Moves.GetMoves(b, 31);

@@ -13,6 +13,7 @@ namespace Chess.Lib
 
 		public byte BestMoveFrom;
 		public byte BestMoveTo;
+		public byte Promotion;
 
 		public byte NodeType;
 		public sbyte Depth;

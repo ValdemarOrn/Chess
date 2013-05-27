@@ -1,4 +1,5 @@
-﻿using Chess.Uci;
+﻿using Chess.Lib;
+using Chess.Uci;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,26 +7,41 @@ using System.Text;
 
 namespace Chess.Vladivostok
 {
-	public class Engine : IUciEngine
+	public unsafe class Engine : IUciEngine
 	{
 		// ------------------------ UCI Interface --------------------------
 
 		public IUciGui UciGui { get; set; }
 		public Action QuitCallback { get; set; }
+		BoardStruct* BoardPtr;
+
+		public Engine()
+		{
+			BoardPtr = (BoardStruct*)0;
+		}
+
+		~Engine()
+		{
+			Board.Delete(BoardPtr);
+		}
 
 		public void Uci()
 		{
-			UciGui.ID("Vladivostok", "Valdemar Erlingsson");
-			UciGui.Option("Hash", UciOptionType.Spin, 32, 1, 512, null);
-			UciGui.Option("UCI_Opponent", UciOptionType.String, null, null, null, null);
-			UciGui.Option("My Custom Field", UciOptionType.Combo, "Great", null, null, new List<object>() { "1", "xyz", "Great" });
-
 			bool debug = false;
-			while(debug)
+			while (debug)
 			{
 				System.Threading.Thread.Sleep(100);
 			}
-			
+
+			UciGui.ID("Vladivostok", "Valdemar Erlingsson");
+			UciGui.Option("Hash", UciOptionType.Spin, 32, 1, 2048, null);
+			UciGui.Option("UCI_Opponent", UciOptionType.String, null, null, null, null);
+			UciGui.Option("Nullmove", UciOptionType.Check, true, null, null, null);
+			//UciGui.Option("Ponder", UciOptionType.Check, false, null, null, null);
+			//UciGui.Option("OwnBook", UciOptionType.Check, true, null, null, null);
+
+			Manager.InitLibrary();
+			Manager.SendMessage = EngineHandler;
 			UciGui.UciOk();
 		}
 
@@ -53,21 +69,45 @@ namespace Chess.Vladivostok
 		public void UciNewGame()
 		{
 			SendInfo("Starting new game");
+			BoardPtr = Chess.Lib.Board.Create();
+			Chess.Lib.Board.Init(BoardPtr, 1);
 		}
 
 		public void Position(string fenString, List<UciMove> moves)
 		{
 			SendInfo("Reading position");
+
+			if ((long)BoardPtr != 0)
+				Chess.Lib.Board.Delete(BoardPtr);
+
+			if (fenString == null)
+			{
+				BoardPtr = Chess.Lib.Board.Create();
+				Chess.Lib.Board.Init(BoardPtr, 1);
+			}
+			else
+			{
+				var bx = Chess.Base.Notation.FENtoBoard(fenString);
+				BoardPtr = Helpers.ManagedBoardToNative(bx);
+			}
+
+			foreach(var move in moves)
+				Board.Make(BoardPtr, move.From, move.To);
 		}
+
+		MoveSmall BestMove;
 
 		public void Go(UciGoParameters parameters)
 		{
+			BestMove = new MoveSmall() { From = 0, Piece = 0, Score = 0, To = 0 };
+			BestMove = Search.SearchPos(BoardPtr, 8);
 			//UciGui.BestMove(UciMove.FromString("e2e4"), UciMove.FromString("a7a5"));
 		}
 
 		public void Stop()
 		{
-			UciGui.BestMove(UciMove.FromString("e2e4"), null);
+			var uciMove = new UciMove(BestMove.From, BestMove.To);
+			UciGui.BestMove(uciMove, null);
 		}
 
 		public void PonderHit()
@@ -88,6 +128,15 @@ namespace Chess.Vladivostok
 			var vars = new Dictionary<UciInfo, string>();
 			vars[UciInfo.String] = data;
 			UciGui.Info(vars);
+		}
+
+		private void EngineHandler(string type, Dictionary<string, string> data)
+		{
+			var sb = new StringBuilder();
+			foreach (var kvp in data)
+				sb.Append(kvp.Key + " " + kvp.Value + " ");
+
+			SendInfo(sb.ToString());
 		}
 
 	}

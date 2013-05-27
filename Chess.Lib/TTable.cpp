@@ -12,10 +12,15 @@ void TTable_Init(int sizeMB)
 	TTable = new TTableEntry[count];
 	TTableSize = count;
 
-	memset(TTable, 0, count * sizeof(TTableEntry));
+	memset(TTable, 0, sizeof(TTableEntry) * TTableSize);
 }
 
 void TTable_Delete()
 {
 	delete TTable;
+}
+
+void TTable_ClearAll()
+{
+	memset(TTable, 0, sizeof(TTableEntry) * TTableSize);
 }

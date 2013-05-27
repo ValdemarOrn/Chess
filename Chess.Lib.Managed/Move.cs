@@ -26,6 +26,7 @@ namespace Chess.Lib
 		public byte From;
 		public byte To;
 		public byte Piece;
+		public byte Promotion;
 		public int Score;
 	}
 

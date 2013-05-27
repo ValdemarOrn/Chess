@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Chess
+namespace Chess.Base
 {
 	/// <summary>
 	/// Methods to find out where a piece can legally move

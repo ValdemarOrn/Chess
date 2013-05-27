@@ -29,9 +29,9 @@ namespace Chess.Lib.MoveClasses
         /// <returns></returns>
 		static ulong GetMoves(int index)
 		{
-			var b = new Chess.Board();
-			b.State[index] = Pieces.Knight | Colors.White;
-			var moves = Chess.Moves.GetMoves(b, index);
+			var b = new Chess.Base.Board();
+			b.State[index] = Chess.Base.Pieces.Knight | Chess.Base.Colors.White;
+			var moves = Chess.Base.Moves.GetMoves(b, index);
 
 			ulong output = 0;
 			foreach (var move in moves)

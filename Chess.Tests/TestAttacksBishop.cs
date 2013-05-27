@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Chess.Tests
+namespace Chess.Base.Tests
 {
 	[TestClass]
 	public class TestAttacksBishop
@@ -15,7 +15,7 @@ namespace Chess.Tests
 			// test free space
 			var b = new Board();
 			int pos = 4 * 8 + 4;
-			b.State[pos] = Pieces.Bishop | Chess.Colors.White;
+			b.State[pos] = Pieces.Bishop | Colors.White;
 			var moves = Attacks.GetAttacks(b, pos);
 			Assert.AreEqual(13, moves.Length);
 
@@ -40,11 +40,11 @@ namespace Chess.Tests
 		{
 			var b = new Board();
 			int pos = 4 * 8 + 4;
-			b.State[pos] = Pieces.Bishop | Chess.Colors.White;
-			b.State[pos + 18] = Pieces.Pawn | Chess.Colors.White;
-			b.State[pos - 18] = Pieces.Pawn | Chess.Colors.White;
-			b.State[pos + 14] = Pieces.Pawn | Chess.Colors.White;
-			b.State[pos - 14] = Pieces.Pawn | Chess.Colors.White;
+			b.State[pos] = Pieces.Bishop | Colors.White;
+			b.State[pos + 18] = Pieces.Pawn | Colors.White;
+			b.State[pos - 18] = Pieces.Pawn | Colors.White;
+			b.State[pos + 14] = Pieces.Pawn | Colors.White;
+			b.State[pos - 14] = Pieces.Pawn | Colors.White;
 
 			var moves = Attacks.GetAttacks(b, pos);
 			Assert.AreEqual(8, moves.Length);
@@ -64,11 +64,11 @@ namespace Chess.Tests
 		{
 			var b = new Board();
 			int pos = 4 * 8 + 4;
-			b.State[pos] = Pieces.Bishop | Chess.Colors.White;
-			b.State[pos + 18] = Pieces.Pawn | Chess.Colors.Black;
-			b.State[pos - 18] = Pieces.Pawn | Chess.Colors.Black;
-			b.State[pos + 14] = Pieces.Pawn | Chess.Colors.Black;
-			b.State[pos - 14] = Pieces.Pawn | Chess.Colors.Black;
+			b.State[pos] = Pieces.Bishop | Colors.White;
+			b.State[pos + 18] = Pieces.Pawn | Colors.Black;
+			b.State[pos - 18] = Pieces.Pawn | Colors.Black;
+			b.State[pos + 14] = Pieces.Pawn | Colors.Black;
+			b.State[pos - 14] = Pieces.Pawn | Colors.Black;
 
 			var moves = Attacks.GetAttacks(b, pos);
 			Assert.AreEqual(8, moves.Length);

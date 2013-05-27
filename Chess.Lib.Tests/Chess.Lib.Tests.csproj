@@ -82,9 +82,9 @@
       <Project>{79CAA135-2881-4E2D-93E3-45257546E766}</Project>
       <Name>Chess.Lib.Managed</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Chess\Chess.csproj">
+    <ProjectReference Include="..\Chess\Chess.Base.csproj">
       <Project>{5C3DE354-EDD4-4377-A3D0-A33A5D2C7C71}</Project>
-      <Name>Chess</Name>
+      <Name>Chess.Base</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

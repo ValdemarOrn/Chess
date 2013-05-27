@@ -9,8 +9,8 @@
     <ProjectGuid>{DB6292BE-67D3-48D3-90A6-8C9A37974CDE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Chess.Tests</RootNamespace>
-    <AssemblyName>Chess.Tests</AssemblyName>
+    <RootNamespace>Chess.Base.Tests</RootNamespace>
+    <AssemblyName>Chess.Base.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -74,9 +74,9 @@
     <Compile Include="TestValidMove.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Chess\Chess.csproj">
+    <ProjectReference Include="..\Chess\Chess.Base.csproj">
       <Project>{5C3DE354-EDD4-4377-A3D0-A33A5D2C7C71}</Project>
-      <Name>Chess</Name>
+      <Name>Chess.Base</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

@@ -100,6 +100,10 @@ MoveSmall Search_SearchPos(Board* board, int searchDepth)
 
 	char text[80];
 
+	// clears the Transposition Table before every search
+	// Todo: Stop doing this and implement TTable entry "generation" / "age"
+	TTable_ClearAll();
+
 	for(int i = 1; i <= searchDepth; i++)
 	{
 		// init stats
@@ -274,6 +278,7 @@ int Search_AlphaBeta(SearchContext* ctx, int alpha, int beta, SearchParams param
 					hasValidMove = TRUE;
 					ctx->PV[ply][0].From = tableEntry->BestMoveFrom;
 					ctx->PV[ply][0].To = tableEntry->BestMoveTo;
+					ctx->PV[ply][0].Promotion = tableEntry->Promotion;
 					ctx->PV[ply][0].Score = score;
 					ctx->PV[ply][0].Piece = Board_Piece(board, tableEntry->BestMoveFrom);
 
@@ -331,7 +336,7 @@ int Search_AlphaBeta(SearchContext* ctx, int alpha, int beta, SearchParams param
 			int val = -Search_AlphaBeta(ctx, -beta, -beta+1, callingParams);
 			Board_Unmake(board);
 			
-			if(val >= beta)
+			if(val >= beta) // Null move failed high. Reduce search depth
 			{
 				#ifdef STATS_SEARCH
 				SStats.NullMoveReductions++;
@@ -341,7 +346,7 @@ int Search_AlphaBeta(SearchContext* ctx, int alpha, int beta, SearchParams param
 				callingParams.AllowReductions = FALSE;
 				callingParams.Reductions = nullReduction;
 			}
-			else
+			else // Null move failed low. Do not readuce
 			{
 				nullReduction = 0;
 				callingParams.AllowReductions = TRUE;
@@ -363,7 +368,7 @@ int Search_AlphaBeta(SearchContext* ctx, int alpha, int beta, SearchParams param
 	for (int i=0; i < moveCount; i++)
 	{
 		Move* move = Order_GetMove(ctx, &order, ply);
-
+		
 		assert(move != 0);
 
 		int from = move->From;
@@ -382,7 +387,10 @@ int Search_AlphaBeta(SearchContext* ctx, int alpha, int beta, SearchParams param
 		if(valid == FALSE)
 			continue;
 
-		// Todo: Handle promotions
+		// tries to promote the piece, if it can
+		// Currenty, no under-promotions tried
+		if(move->Promotion > 0)
+			Board_Promote(board, to, move->Promotion);
 
 		hasValidMove = true;
 
@@ -390,7 +398,7 @@ int Search_AlphaBeta(SearchContext* ctx, int alpha, int beta, SearchParams param
 		callingParams.Ply = ply + 1;
 
 		int val = 0;
-		if(i == 0 || (depth < SEARCH_MIN_SCOUT_DEPTH) || !useScout)
+		if(i == 0 || (depth < SEARCH_MIN_SCOUT_DEPTH) || !useScout) // normal search
 		{
 			val = -Search_AlphaBeta(ctx, -beta, -alpha, callingParams);
 		}
@@ -399,7 +407,7 @@ int Search_AlphaBeta(SearchContext* ctx, int alpha, int beta, SearchParams param
 			int b = alpha + 1;
 			val = -Search_AlphaBeta(ctx, -b, -alpha, callingParams);
 
-			// if search fails high, then do a re-search
+			// if search fails high, then do a re-search (normal search)
 			// if val >= beta then there's no need to re-search, we'll just fail high
 			if(val > alpha && val < beta) 
 				val = -Search_AlphaBeta(ctx, -beta, -alpha, callingParams);
@@ -431,6 +439,7 @@ int Search_AlphaBeta(SearchContext* ctx, int alpha, int beta, SearchParams param
 			ctx->PV[ply][0].To = to;
 			ctx->PV[ply][0].Score = val;
 			ctx->PV[ply][0].Piece = Board_Piece(board, from);
+			ctx->PV[ply][0].Promotion = move->Promotion;
 
 			memcpy(&(ctx->PV[ply][1]), &(ctx->PV[ply + 1][0]), sizeof(MoveSmall) * (SEARCH_PLY_MAX - 1));
 			score = val;
@@ -547,11 +556,13 @@ Finalize:
 		{
 			newEntry.BestMoveFrom = bestMove.From;
 			newEntry.BestMoveTo = bestMove.To;
+			newEntry.Promotion = bestMove.Promotion;
 		}
 		else
 		{
 			newEntry.BestMoveFrom = 0;
 			newEntry.BestMoveTo = 0;
+			newEntry.Promotion = 0;
 		}
 		newEntry.Depth = depth - nullReduction;
 		newEntry.Hash = ctx->Board->Hash;
@@ -675,7 +686,7 @@ int Search_Quiesce(SearchContext* ctx, int alpha, int beta, SearchParams params)
 		assert(move != 0);
 
 		// Bad capture detection
-		if(move->PlayerPiece > move->CapturePiece)
+		if(move->CapturePiece > 0 && move->PlayerPiece > move->CapturePiece)
 		{
 			int seeExchange = SEE_Capture(board, move->From, move->To);
 			if(seeExchange < 0)
@@ -713,11 +724,16 @@ int Search_Quiesce(SearchContext* ctx, int alpha, int beta, SearchParams params)
 		if(valid == FALSE)
 			continue;
 
-		// Todo: Handle promotions
+		// tries to promote the piece, if it can
+		// Currenty, no under-promotions tried
+		if(move->Promotion > 0)
+			Board_Promote(board, to, move->Promotion);
 
 		hasValidMove = true;
+
 		callingParams.Depth = depth - 1;
 		callingParams.Ply = ply + 1;
+
 		int val = -Search_Quiesce(ctx, -beta, -alpha, callingParams);
 		Board_Unmake(board);
 
@@ -744,6 +760,7 @@ int Search_Quiesce(SearchContext* ctx, int alpha, int beta, SearchParams params)
 			ctx->PV[ply][0].To = to;
 			ctx->PV[ply][0].Score = val;
 			ctx->PV[ply][0].Piece = Board_Piece(board, from);
+			ctx->PV[ply][0].Promotion = move->Promotion;
 
 			memcpy(&(ctx->PV[ply][1]), &(ctx->PV[ply + 1][0]), sizeof(MoveSmall) * (SEARCH_PLY_MAX - 1));
 			score = val;
@@ -759,9 +776,9 @@ int Search_Quiesce(SearchContext* ctx, int alpha, int beta, SearchParams params)
 	if(!hasValidMove && (isChecked || moveCount == 0))
 	{
 		if(isChecked)
-			score = Search_Stalemate + ply;
+			score = Search_Checkmate + ply;
 		else
-			score = Search_Checkmate;
+			score = Search_Stalemate;
 		
 		if(score > bestScore)
 			bestScore = score;

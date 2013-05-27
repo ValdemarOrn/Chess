@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Chess.Tests
+namespace Chess.Base.Tests
 {
 	[TestClass]
 	public class TestBoard

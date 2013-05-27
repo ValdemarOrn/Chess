@@ -13,6 +13,7 @@ extern "C"
 		
 		uint8_t BestMoveFrom;
 		uint8_t BestMoveTo;
+		uint8_t Promotion;
 
 		uint8_t NodeType;
 		int8_t Depth;
@@ -36,6 +37,8 @@ extern "C"
 	// Attempt to insert a new entry. resolves conflicts if any.
 	// Returns true if entry gets added, false if not
 	__declspec(dllexport) _Bool TTable_Insert(TTableEntry* entry);
+
+	__declspec(dllexport) void TTable_ClearAll();
 
 	__inline_always int TTable_GetTableSize()
 	{

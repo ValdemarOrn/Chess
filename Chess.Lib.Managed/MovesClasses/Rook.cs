@@ -148,7 +148,7 @@ namespace Chess.Lib.MoveClasses
 
 			// Move right
 			target = index + 1;
-			while (Chess.Board.X(target) > Chess.Board.X(index))
+			while (Chess.Base.Board.X(target) > Chess.Base.Board.X(index))
 			{
 				Bitboard.SetRef(ref moves, target);
 				if (Bitboard.Get(permutation, target)) // check for blockers
@@ -158,7 +158,7 @@ namespace Chess.Lib.MoveClasses
 
 			// Move left
 			target = index - 1;
-			while (Chess.Board.X(target) < Chess.Board.X(index))
+			while (Chess.Base.Board.X(target) < Chess.Base.Board.X(index))
 			{
 				Bitboard.SetRef(ref moves, target);
 				if (Bitboard.Get(permutation, target)) // check for blockers

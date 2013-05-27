@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Chess.Base;
 
 namespace Chess.Lib.BitboardEditor
 {
@@ -33,7 +34,7 @@ namespace Chess.Lib.BitboardEditor
 		private void buttonInit_Click(object sender, EventArgs e)
 		{
 			EnableStateChange = false;
-			boardControl1.State = new Chess.Board(true).State;
+			boardControl1.State = new Chess.Base.Board(true).State;
 			radioButtonWhitePlayer.Checked = true;
 			checkBoxCastlingBK.Checked = true;
 			checkBoxCastlingBQ.Checked = true;

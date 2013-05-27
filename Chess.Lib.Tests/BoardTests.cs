@@ -39,9 +39,9 @@ namespace Chess.Lib.Tests
 			Board.GenerateTileMap(b);
 
 
-			Assert.AreEqual(Colors.White, Board.Color(b, 5));
-			Assert.AreEqual(Colors.White, Board.Color(b, 7));
-			Assert.AreEqual(Colors.White, Board.Color(b, 47));
+			Assert.AreEqual(Chess.Base.Colors.White, Board.Color(b, 5));
+			Assert.AreEqual(Chess.Base.Colors.White, Board.Color(b, 7));
+			Assert.AreEqual(Chess.Base.Colors.White, Board.Color(b, 47));
 
 			Assert.AreEqual(0, Board.Color(b, 3));
 			Assert.AreEqual(0, Board.Color(b, 8));
@@ -62,9 +62,9 @@ namespace Chess.Lib.Tests
 			Board.GenerateTileMap(b);
 
 
-			Assert.AreEqual(Colors.Black, Board.Color(b, 5));
-			Assert.AreEqual(Colors.Black, Board.Color(b, 7));
-			Assert.AreEqual(Colors.Black, Board.Color(b, 47));
+			Assert.AreEqual(Chess.Base.Colors.Black, Board.Color(b, 5));
+			Assert.AreEqual(Chess.Base.Colors.Black, Board.Color(b, 7));
+			Assert.AreEqual(Chess.Base.Colors.Black, Board.Color(b, 47));
 
 			Assert.AreEqual(0, Board.Color(b, 3));
 			Assert.AreEqual(0, Board.Color(b, 8));
@@ -398,7 +398,7 @@ namespace Chess.Lib.Tests
 		{
 			string data = System.IO.File.ReadAllText("..\\..\\..\\TestData\\BobbyFischer.pgn");
 			string finalState = "1Q6/5pk1/2p3p1/1p2N2p/1b5P/1bn5/2r3P1/2K5 w - - 16 42";
-			string game = ABN.StripPGN(data)[0];
+			string game = Chess.Base.ABN.StripPGN(data)[0];
 			GenericGameTest(game, finalState);
 		}
 
@@ -407,7 +407,7 @@ namespace Chess.Lib.Tests
 		{
 			string data = System.IO.File.ReadAllText("..\\..\\..\\TestData\\HumansVsComputers.pgn");
 			string finalState = "4r3/6P1/2p2P1k/1p6/pP2p1R1/P1B5/2P2K2/3r4 b - - 0 45";
-			string game = ABN.StripPGN(data)[0];
+			string game = Chess.Base.ABN.StripPGN(data)[0];
 			GenericGameTest(game, finalState);
 		}
 
@@ -416,7 +416,7 @@ namespace Chess.Lib.Tests
 		{
 			string data = System.IO.File.ReadAllText("..\\..\\..\\TestData\\HumansVsComputers.pgn");
 			string finalState = "r6k/1r1qnppp/NPp2n1b/2Pp4/3Pp3/1RB1P1PP/R1Q2P2/K4B2 b - - 4 45";
-			var games = ABN.StripPGN(data);
+			var games = Chess.Base.ABN.StripPGN(data);
 			string game = games[games.Length - 2];
 			GenericGameTest(game, finalState);
 		}
@@ -426,7 +426,7 @@ namespace Chess.Lib.Tests
 		{
 			string data = System.IO.File.ReadAllText("..\\..\\..\\TestData\\HumansVsComputers.pgn");
 			string finalState = "3Q4/6pk/7p/8/8/8/r4qPP/3R3K w - - 2 28";
-			string game = ABN.StripPGN(data).Last();
+			string game = Chess.Base.ABN.StripPGN(data).Last();
 			GenericGameTest(game, finalState);
 		}
 
@@ -443,11 +443,11 @@ namespace Chess.Lib.Tests
 			BoardStruct* b = (BoardStruct*)Board.Create();
 			Board.Init(b, 1);
 
-			var finalBoard = Notation.FENtoBoard(endState);
+			var finalBoard = Chess.Base.Notation.FENtoBoard(endState);
 			var fBoard = Helpers.ManagedBoardToNative(finalBoard);
 			Assert.AreEqual(Zobrist.Calculate(fBoard), fBoard->Hash);
-			
-			var moves = ABN.ABNToMoves(new Chess.Board(true), game);
+
+			var moves = Chess.Base.ABN.ABNToMoves(new Chess.Base.Board(true), game);
 
 			var stateStack = new IntPtr[150];
 			int head = 0;
@@ -555,7 +555,7 @@ namespace Chess.Lib.Tests
 			string fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 
 			byte* str = stackalloc byte[100];
-			var bb = Notation.FENtoBoard(fen);
+			var bb = Chess.Base.Notation.FENtoBoard(fen);
 			var b = Helpers.ManagedBoardToNative(bb);
 
 			Board.ToFEN(b, str);
@@ -569,7 +569,7 @@ namespace Chess.Lib.Tests
 			string fen = "r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq - 0 1";
 
 			byte* str = stackalloc byte[100];
-			var bb = Notation.FENtoBoard(fen);
+			var bb = Chess.Base.Notation.FENtoBoard(fen);
 			var b = Helpers.ManagedBoardToNative(bb);
 
 			Board.ToFEN(b, str);
@@ -583,7 +583,7 @@ namespace Chess.Lib.Tests
 			string fen = "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - - 0 1";
 
 			byte* str = stackalloc byte[100];
-			var bb = Notation.FENtoBoard(fen);
+			var bb = Chess.Base.Notation.FENtoBoard(fen);
 			var b = Helpers.ManagedBoardToNative(bb);
 
 			Board.ToFEN(b, str);
@@ -597,7 +597,7 @@ namespace Chess.Lib.Tests
 			string fen = "r3k2r/Pppp1ppp/1b3nbN/nP6/BBP1P3/q4N2/Pp1P2PP/R2Q1RK1 w kq - 0 1";
 
 			byte* str = stackalloc byte[100];
-			var bb = Notation.FENtoBoard(fen);
+			var bb = Chess.Base.Notation.FENtoBoard(fen);
 			var b = Helpers.ManagedBoardToNative(bb);
 
 			Board.ToFEN(b, str);
@@ -611,7 +611,7 @@ namespace Chess.Lib.Tests
 			string fen = "rnbqkb1r/pp1p1ppp/2p5/4P3/2B5/8/PPP1NnPP/RNBQK2R w KQkq - 0 6";
 
 			byte* str = stackalloc byte[100];
-			var bb = Notation.FENtoBoard(fen);
+			var bb = Chess.Base.Notation.FENtoBoard(fen);
 			var b = Helpers.ManagedBoardToNative(bb);
 
 			Board.ToFEN(b, str);
@@ -623,7 +623,7 @@ namespace Chess.Lib.Tests
 		public unsafe void TestSmallestAttacker()
 		{
 			string fen = @"2kq4/8/2p5/3b3R/8/4N3/8/2R3K1 w KQkq - 0 1";
-			var bb = Notation.FENtoBoard(fen);
+			var bb = Chess.Base.Notation.FENtoBoard(fen);
 			var b = Helpers.ManagedBoardToNative(bb);
 
 			var attacker = Board.GetSmallestAttacker(b, 35, Board.COLOR_BLACK, 0);
@@ -634,7 +634,7 @@ namespace Chess.Lib.Tests
 		public unsafe void TestSmallestAttackerPinned()
 		{
 			string fen = @"2kq4/8/2p5/3b3R/8/4N3/8/2R3K1 w KQkq - 0 1";
-			var bb = Notation.FENtoBoard(fen);
+			var bb = Chess.Base.Notation.FENtoBoard(fen);
 			var b = Helpers.ManagedBoardToNative(bb);
 
 			var attacker = Board.GetSmallestAttacker(b, 35, Board.COLOR_BLACK, 0x40000000000);
@@ -645,7 +645,7 @@ namespace Chess.Lib.Tests
 		public unsafe void TestMakeNullMove()
 		{
 			string fen = @"2kq4/8/2p5/3b3R/8/4N3/8/2R3K1 w KQkq - 0 1";
-			var bb = Notation.FENtoBoard(fen);
+			var bb = Chess.Base.Notation.FENtoBoard(fen);
 			var b = Helpers.ManagedBoardToNative(bb);
 
 			var hash = b->Hash;

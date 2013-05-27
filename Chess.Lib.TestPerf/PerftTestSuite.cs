@@ -74,7 +74,7 @@ namespace Chess.Lib.TestPerf
 			int depth = pos.Depth;
 			ulong expectedCount = pos.ExpectedCount;
 
-			var x = Notation.FENtoBoard(fenString);
+			var x = Chess.Base.Notation.FENtoBoard(fenString);
 			var b = Helpers.ManagedBoardToNative(x);
 
 			var start = DateTime.Now;
@@ -92,8 +92,8 @@ namespace Chess.Lib.TestPerf
 					int to = results->Entries[i].To;
 					ulong count = results->Entries[i].Count;
 
-					string sfrom = Notation.TileToText(from);
-					string sto = Notation.TileToText(to);
+					string sfrom = Chess.Base.Notation.TileToText(from);
+					string sto = Chess.Base.Notation.TileToText(to);
 					Console.WriteLine(sfrom + " " + sto + " : " + count);
 				}
 			}
