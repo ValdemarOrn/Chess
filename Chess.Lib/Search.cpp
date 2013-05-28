@@ -11,9 +11,16 @@
 int Search_AlphaBeta(SearchContext* ctx, int alpha, int beta, SearchParams params);
 int Search_Quiesce(SearchContext* ctx, int alpha, int beta, SearchParams params);
 
+_Bool SearchStopped;
+
 #ifdef STATS_SEARCH
 SearchStats SStats;
 #endif
+
+void Search_StopSearch()
+{
+	SearchStopped = TRUE;
+}
 
 void ResetStats()
 {
@@ -97,6 +104,8 @@ MoveSmall Search_SearchPos(Board* board, int searchDepth)
 	Search_InitContext(&ctx);
 	ctx.Board = board;
 	SearchParams params;
+	SearchStopped = FALSE;
+	MoveSmall bestMove;
 
 	char text[80];
 
@@ -121,6 +130,11 @@ MoveSmall Search_SearchPos(Board* board, int searchDepth)
 		params.Reductions = 0;
 		params.AllowReductions = TRUE;
 		Search_AlphaBeta(&ctx, SEARCH_MIN_SCORE, SEARCH_MAX_SCORE, params);
+
+		if(SearchStopped)
+			return bestMove;
+		else
+			bestMove = ctx.PV[0][0];
 
 		// ----------- print PV -----------
 
@@ -155,7 +169,7 @@ MoveSmall Search_SearchPos(Board* board, int searchDepth)
 		Manager_EndMessage();
 	}
 
-	return ctx.PV[0][0];
+	return bestMove;
 }
 
 _Bool Search_DrawByRepetition(Board* board)
@@ -179,6 +193,9 @@ _Bool Search_DrawByRepetition(Board* board)
 
 int Search_AlphaBeta(SearchContext* ctx, int alpha, int beta, SearchParams params)
 {
+	if(SearchStopped)
+		return 0;
+
 	Board* board = ctx->Board;
 	int ply = params.Ply;
 	int depth = params.Depth;
@@ -335,6 +352,9 @@ int Search_AlphaBeta(SearchContext* ctx, int alpha, int beta, SearchParams param
 			// instead of -alpha, use -beta+1
 			int val = -Search_AlphaBeta(ctx, -beta, -beta+1, callingParams);
 			Board_Unmake(board);
+
+			if(SearchStopped)
+				return 0;
 			
 			if(val >= beta) // Null move failed high. Reduce search depth
 			{
@@ -414,8 +434,10 @@ int Search_AlphaBeta(SearchContext* ctx, int alpha, int beta, SearchParams param
 		}
 
 		Board_Unmake(board);
-
 		assert(hashBefore == board->Hash);
+
+		if(SearchStopped)
+			return 0;
 
 		if(val > bestScore) // track all-node best score
 			bestScore = val;
@@ -576,6 +598,9 @@ Finalize:
 
 int Search_Quiesce(SearchContext* ctx, int alpha, int beta, SearchParams params)
 {
+	if(SearchStopped)
+		return 0;
+
 	Board* board = ctx->Board;
 	int ply = params.Ply;
 	int depth = params.Depth;

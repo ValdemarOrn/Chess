@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Chess.Vladivostok
 {
@@ -34,9 +36,9 @@ namespace Chess.Vladivostok
 			}
 
 			UciGui.ID("Vladivostok", "Valdemar Erlingsson");
-			UciGui.Option("Hash", UciOptionType.Spin, 32, 1, 2048, null);
+			UciGui.Option("Hash", UciOptionType.Spin, 256, 1, 2048, null);
 			UciGui.Option("UCI_Opponent", UciOptionType.String, null, null, null, null);
-			UciGui.Option("Nullmove", UciOptionType.Check, true, null, null, null);
+			//UciGui.Option("Nullmove", UciOptionType.Check, true, null, null, null);
 			//UciGui.Option("Ponder", UciOptionType.Check, false, null, null, null);
 			//UciGui.Option("OwnBook", UciOptionType.Check, true, null, null, null);
 
@@ -59,6 +61,15 @@ namespace Chess.Vladivostok
 		{
 			var str = "Setting option " + name + " - " + value;
 			SendInfo(str);
+
+			name = name.ToLower();
+
+			if(name == "hash")
+			{
+				var sizeMB = Convert.ToInt32(value);
+				TTable.Delete();
+				TTable.Init(sizeMB);
+			}
 		}
 
 		public void Register(bool later, string name, string code)
@@ -99,15 +110,46 @@ namespace Chess.Vladivostok
 
 		public void Go(UciGoParameters parameters)
 		{
-			BestMove = new MoveSmall() { From = 0, Piece = 0, Score = 0, To = 0 };
-			BestMove = Search.SearchPos(BoardPtr, 8);
-			//UciGui.BestMove(UciMove.FromString("e2e4"), UciMove.FromString("a7a5"));
+			var player = BoardPtr->PlayerTurn;
+			
+			int depth = parameters.Depth ?? 99;
+			long time = Int32.MaxValue;
+			
+			if(player == Board.COLOR_WHITE && parameters.WhiteTime != null)
+			{
+				var toGo = parameters.MovesToGo ?? 100;
+				time = (long)(parameters.WhiteTime.Value / (double)toGo + parameters.WhiteInc.GetValueOrDefault());
+			}
+			else if (player == Board.COLOR_BLACK && parameters.BlackTime != null)
+			{
+				var toGo = parameters.MovesToGo ?? 100;
+				time = (long)(parameters.BlackTime.Value / (double)toGo + parameters.BlackInc.GetValueOrDefault());
+			}
+
+			time = parameters.MoveTime ?? time;
+
+			BestMove = new MoveSmall();
+
+			// Stop searching after time has passed
+			Task.Factory.StartNew(() =>
+			{
+				Thread.Sleep((int)time);
+				Search.StopSearch();
+			});
+
+			// Start the search
+			Task.Factory.StartNew(() =>
+			{
+				BestMove = Search.SearchPos(BoardPtr, depth);
+				UciGui.BestMove(new UciMove(BestMove.From, BestMove.To, BestMove.Promotion), null);
+			});
 		}
 
 		public void Stop()
 		{
-			var uciMove = new UciMove(BestMove.From, BestMove.To);
-			UciGui.BestMove(uciMove, null);
+			Search.StopSearch();
+			// We don't need to do anything further here, the Search Task started in Go() will now stop
+			// and invoke UciGui.BestMove().
 		}
 
 		public void PonderHit()

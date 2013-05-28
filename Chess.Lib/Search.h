@@ -114,6 +114,8 @@ extern "C"
 	// get some detailed statistics for the last search performed
 	__declspec(dllexport) SearchStats* Search_GetSearchStats();
 
+	__declspec(dllexport) void Search_StopSearch();
+
 	// calculate how many plies to reduce
 	__declspec(dllexport) int Search_GetNullReduction(int depth);
 

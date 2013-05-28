@@ -18,6 +18,7 @@ void TTable_Init(int sizeMB)
 void TTable_Delete()
 {
 	delete TTable;
+	TTableSize = 0;
 }
 
 void TTable_ClearAll()
