@@ -5,14 +5,19 @@ using System.Text;
 
 namespace Chess.Base
 {
+	public enum Color
+	{
+		None = 0,
+
+		White = 1 << 4,
+		Black = 2 << 4
+	}
+
 	public sealed class Colors
 	{
-		public const int White = 1 << 4;
-		public const int Black = 2 << 4;
-
-		public static int Get(int piece)
+		public static Color Get(int piece)
 		{
-			return piece & 0xF0;
+			return (Color)(piece & 0xF0);
 		}
 
 		/// <summary>
@@ -20,21 +25,31 @@ namespace Chess.Base
 		/// </summary>
 		/// <param name="color"></param>
 		/// <returns></returns>
-		public static int Opposite(int color)
+		public static Color Opposite(Color color)
 		{
-			if (color == White)
-				return Black;
-			if (color == Black)
-				return White;
+			if (color == Color.White)
+				return Color.Black;
+			if (color == Color.Black)
+				return Color.White;
 
-			return 0;
+			return Color.None;
 		}
 
-		public static string ToString(int color)
+		public static byte Val(Color color, int piece)
 		{
-			if (color == White)
+			return (byte)((int)color | piece);
+		}
+
+		public static byte Val(int piece, Color color)
+		{
+			return (byte)((int)color | piece);
+		}
+
+		public static string ToString(Color color)
+		{
+			if (color == Color.White)
 				return "White";
-			if (color == Black)
+			if (color == Color.Black)
 				return "Black";
 
 			return "";

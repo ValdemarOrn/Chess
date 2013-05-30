@@ -303,7 +303,7 @@ namespace Chess.Base.Tests
 			var str = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR W Kq";
 			var b2 = Notation.FENtoBoard(str);
 
-			Assert.AreEqual(Colors.White, b2.PlayerTurn);
+			Assert.AreEqual(Color.White, b2.PlayerTurn);
 		}
 
 		[TestMethod]
@@ -314,7 +314,7 @@ namespace Chess.Base.Tests
 			var str = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR b Kq";
 			var b2 = Notation.FENtoBoard(str);
 
-			Assert.AreEqual(Colors.Black, b2.PlayerTurn);
+			Assert.AreEqual(Color.Black, b2.PlayerTurn);
 		}
 
 		[TestMethod]

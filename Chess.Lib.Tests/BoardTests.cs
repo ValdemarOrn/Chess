@@ -39,9 +39,9 @@ namespace Chess.Lib.Tests
 			Board.GenerateTileMap(b);
 
 
-			Assert.AreEqual(Chess.Base.Colors.White, Board.Color(b, 5));
-			Assert.AreEqual(Chess.Base.Colors.White, Board.Color(b, 7));
-			Assert.AreEqual(Chess.Base.Colors.White, Board.Color(b, 47));
+			Assert.AreEqual((int)Chess.Base.Color.White, Board.Color(b, 5));
+			Assert.AreEqual((int)Chess.Base.Color.White, Board.Color(b, 7));
+			Assert.AreEqual((int)Chess.Base.Color.White, Board.Color(b, 47));
 
 			Assert.AreEqual(0, Board.Color(b, 3));
 			Assert.AreEqual(0, Board.Color(b, 8));
@@ -62,9 +62,9 @@ namespace Chess.Lib.Tests
 			Board.GenerateTileMap(b);
 
 
-			Assert.AreEqual(Chess.Base.Colors.Black, Board.Color(b, 5));
-			Assert.AreEqual(Chess.Base.Colors.Black, Board.Color(b, 7));
-			Assert.AreEqual(Chess.Base.Colors.Black, Board.Color(b, 47));
+			Assert.AreEqual((int)Chess.Base.Color.Black, Board.Color(b, 5));
+			Assert.AreEqual((int)Chess.Base.Color.Black, Board.Color(b, 7));
+			Assert.AreEqual((int)Chess.Base.Color.Black, Board.Color(b, 47));
 
 			Assert.AreEqual(0, Board.Color(b, 3));
 			Assert.AreEqual(0, Board.Color(b, 8));

@@ -15,7 +15,7 @@ namespace Chess.Base.Tests
 			// test free space
 			var b = new Board();
 			int pos = 4 * 8 + 4;
-			b.State[pos] = Pieces.King | Colors.White;
+			b.State[pos] = Colors.Val(Pieces.King, Color.White);
 
 			var moves = Moves.GetMoves(b, pos);
 
@@ -38,18 +38,18 @@ namespace Chess.Base.Tests
 		{
 			var b = new Board();
 			int pos = 4 * 8 + 4;
-			b.State[pos] = Pieces.King | Colors.White;
+			b.State[pos] = Colors.Val(Pieces.King, Color.White);
 
-			b.State[pos + 7] = Pieces.Pawn | Colors.White;
-			b.State[pos + 8] = Pieces.Pawn | Colors.White;
-			b.State[pos + 9] = Pieces.Pawn | Colors.White;
+			b.State[pos + 7] = Colors.Val(Pieces.Pawn, Color.White);
+			b.State[pos + 8] = Colors.Val(Pieces.Pawn, Color.White);
+			b.State[pos + 9] = Colors.Val(Pieces.Pawn, Color.White);
 
-			b.State[pos + 1] = Pieces.Pawn | Colors.White;
-			b.State[pos - 1] = Pieces.Pawn | Colors.White;
+			b.State[pos + 1] = Colors.Val(Pieces.Pawn, Color.White);
+			b.State[pos - 1] = Colors.Val(Pieces.Pawn, Color.White);
 
-			b.State[pos - 7] = Pieces.Pawn | Colors.White;
-			b.State[pos - 8] = Pieces.Pawn | Colors.White;
-			b.State[pos - 9] = Pieces.Pawn | Colors.White;
+			b.State[pos - 7] = Colors.Val(Pieces.Pawn, Color.White);
+			b.State[pos - 8] = Colors.Val(Pieces.Pawn, Color.White);
+			b.State[pos - 9] = Colors.Val(Pieces.Pawn, Color.White);
 			
 			var moves = Moves.GetMoves(b, pos);
 
@@ -61,18 +61,18 @@ namespace Chess.Base.Tests
 		{
 			var b = new Board();
 			int pos = 4 * 8 + 4;
-			b.State[pos] = Pieces.King | Colors.White;
+			b.State[pos] = Colors.Val(Pieces.King, Color.White);
 
-			b.State[pos + 7] = Pieces.Pawn | Colors.Black;
-			b.State[pos + 8] = Pieces.Pawn | Colors.Black;
-			b.State[pos + 9] = Pieces.Pawn | Colors.Black;
+			b.State[pos + 7] = Colors.Val(Pieces.Pawn, Color.Black);
+			b.State[pos + 8] = Colors.Val(Pieces.Pawn, Color.Black);
+			b.State[pos + 9] = Colors.Val(Pieces.Pawn, Color.Black);
 
-			b.State[pos + 1] = Pieces.Pawn | Colors.Black;
-			b.State[pos - 1] = Pieces.Pawn | Colors.Black;
+			b.State[pos + 1] = Colors.Val(Pieces.Pawn, Color.Black);
+			b.State[pos - 1] = Colors.Val(Pieces.Pawn, Color.Black);
 
-			b.State[pos - 7] = Pieces.Pawn | Colors.Black;
-			b.State[pos - 8] = Pieces.Pawn | Colors.Black;
-			b.State[pos - 9] = Pieces.Pawn | Colors.Black;
+			b.State[pos - 7] = Colors.Val(Pieces.Pawn, Color.Black);
+			b.State[pos - 8] = Colors.Val(Pieces.Pawn, Color.Black);
+			b.State[pos - 9] = Colors.Val(Pieces.Pawn, Color.Black);
 
 			var moves = Moves.GetMoves(b, pos);
 
@@ -130,7 +130,7 @@ namespace Chess.Base.Tests
 
 			bool ok = b.Move(7, 6);
 			Assert.IsTrue(ok);
-			b.PlayerTurn = Colors.White;
+			b.PlayerTurn = Color.White;
 			ok = b.Move(6, 7);
 			Assert.IsTrue(ok);
 
@@ -184,7 +184,7 @@ namespace Chess.Base.Tests
 			b.State[1] = 0;
 			bool ok = b.Move(0, 1);
 			Assert.IsTrue(ok);
-			b.PlayerTurn = Colors.White;
+			b.PlayerTurn = Color.White;
 			ok = b.Move(1, 0);
 			Assert.IsTrue(ok);
 
@@ -232,10 +232,10 @@ namespace Chess.Base.Tests
 			b.InitBoard();
 			b.State[61] = 0;
 			b.State[62] = 0;
-			b.PlayerTurn = Colors.Black;
+			b.PlayerTurn = Color.Black;
 			bool ok = b.Move(63, 62);
 			Assert.IsTrue(ok);
-			b.PlayerTurn = Colors.Black;
+			b.PlayerTurn = Color.Black;
 			b.Move(62, 63);
 			Assert.IsTrue(ok);
 
@@ -287,10 +287,10 @@ namespace Chess.Base.Tests
 			b.State[59] = 0;
 			b.State[58] = 0;
 			b.State[57] = 0;
-			b.PlayerTurn = Colors.Black;
+			b.PlayerTurn = Color.Black;
 			bool ok = b.Move(56, 57);
 			Assert.IsTrue(ok);
-			b.PlayerTurn = Colors.Black;
+			b.PlayerTurn = Color.Black;
 			ok = b.Move(57, 58);
 			Assert.IsTrue(ok);
 

@@ -54,10 +54,10 @@ namespace Chess.Lib.BitboardEditor
 
 		public static Bitmap GetBitmap(int piece)
 		{
-			int color = Colors.Get(piece);
+			Chess.Base.Color color = Colors.Get(piece);
 			int type = Pieces.Get(piece);
 
-			if (color == Colors.White)
+			if (color == Chess.Base.Color.White)
 			{
 				switch (type)
 				{
@@ -75,7 +75,7 @@ namespace Chess.Lib.BitboardEditor
 						return WhiteRook;
 				}
 			}
-			if (color == Colors.Black)
+			if (color == Chess.Base.Color.Black)
 			{
 				switch (type)
 				{

@@ -49,9 +49,9 @@ namespace Chess.Base
 		{
 			int x = Board.X(square);
 			int y = Board.Y(square);
-			int color = board.Color(square);
+			Color color = board.GetColor(square);
 
-			if (color == Colors.White)
+			if (color == Color.White)
 			{
 				// capture left
 				int target = square + 7;
@@ -71,7 +71,7 @@ namespace Chess.Base
 
 				// en passant left
 				target = square + 7;
-				if (y == 4 && x > 0 && board.EnPassantTile == target && board.State[target - 8] == (Pieces.Pawn | Colors.Black))
+				if (y == 4 && x > 0 && board.EnPassantTile == target && board.State[target - 8] == Colors.Val(Pieces.Pawn, Color.Black))
 				{
 					moves[count] = target - 8; // I'm ATTACKING the pawn at target-8 even though I move to target
 					count++;
@@ -79,7 +79,7 @@ namespace Chess.Base
 
 				// en passant right
 				target = square + 9;
-				if (y == 4 && x < 7 && board.EnPassantTile == target && board.State[target - 8] == (Pieces.Pawn | Colors.Black))
+				if (y == 4 && x < 7 && board.EnPassantTile == target && board.State[target - 8] == Colors.Val(Pieces.Pawn, Color.Black))
 				{
 					moves[count] = target - 8; // I'm ATTACKING the pawn at target-8 even though I move to target
 					count++;
@@ -105,7 +105,7 @@ namespace Chess.Base
 
 				// en passant left
 				target = square - 9;
-				if (y == 3 && x > 0 && board.EnPassantTile == target && board.State[target + 8] == (Pieces.Pawn | Colors.White))
+				if (y == 3 && x > 0 && board.EnPassantTile == target && board.State[target + 8] == Colors.Val(Pieces.Pawn, Color.White))
 				{
 					moves[count] = target+8; // I'm ATTACKING the pawn at target+8 even though I move to target
 					count++;
@@ -113,7 +113,7 @@ namespace Chess.Base
 
 				// en passant right
 				target = square - 7;
-				if (y == 3 && x < 7 && board.EnPassantTile == target && board.State[target + 8] == (Pieces.Pawn | Colors.White))
+				if (y == 3 && x < 7 && board.EnPassantTile == target && board.State[target + 8] == Colors.Val(Pieces.Pawn, Color.White))
 				{
 					moves[count] = target + 8; // I'm ATTACKING the pawn at target+8 even though I move to target
 					count++;
@@ -133,7 +133,7 @@ namespace Chess.Base
 
 			int x = Board.X(square);
 			int y = Board.Y(square);
-			int color = board.Color(square);
+			Color color = board.GetColor(square);
 
 			// 0
 			if (x > 0 && y < 6)
@@ -204,7 +204,7 @@ namespace Chess.Base
 
 		private static void GetRookAttacks(Board board, int square, int[] moves, ref int count)
 		{
-			int color = board.Color(square);
+			Color color = board.GetColor(square);
 			int target = 0;
 
 			// Move up
@@ -256,7 +256,7 @@ namespace Chess.Base
 		{
 			int x = Board.X(square);
 			int y = Board.Y(square);
-			int color = board.Color(square);
+			Color color = board.GetColor(square);
 			int target = 0;
 
 			// Move up right
@@ -314,7 +314,7 @@ namespace Chess.Base
 		{
 			int x = Board.X(square);
 			int y = Board.Y(square);
-			int color = board.Color(square);
+			Color color = board.GetColor(square);
 			int target = 0;
 
 			if (y < 7)

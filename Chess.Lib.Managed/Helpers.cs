@@ -12,13 +12,13 @@ namespace Chess.Lib
 			var b = Board.Create();
 			b->Castle = 0;
 
-			if (board.CastleKB == Chess.Base.Moves.CanCastle)
+			if (board.CastlingRights.Contains(Base.Castling.KingsideBlack))
 				b->Castle |= Board.CASTLE_BK;
-			if (board.CastleQB == Chess.Base.Moves.CanCastle)
+			if (board.CastlingRights.Contains(Base.Castling.QueensideBlack))
 				b->Castle |= Board.CASTLE_BQ;
-			if (board.CastleKW == Chess.Base.Moves.CanCastle)
+			if (board.CastlingRights.Contains(Base.Castling.KingsideWhite))
 				b->Castle |= Board.CASTLE_WK;
-			if (board.CastleQW == Chess.Base.Moves.CanCastle)
+			if (board.CastlingRights.Contains(Base.Castling.QueensideWhite))
 				b->Castle |= Board.CASTLE_WQ;
 
 			b->EnPassantTile = (byte)board.EnPassantTile;
@@ -31,13 +31,13 @@ namespace Chess.Lib
 			
 			for(int i = 0; i < 64; i++)
 			{
-				int color = board.Color(i);
-				int piece = board.Piece(i);
+				Chess.Base.Color color = board.GetColor(i);
+				int piece = board.GetPiece(i);
 
 				if(color == 0 || piece == 0)
 					continue;
 
-				Board.SetPiece(b, i, piece, color);
+				Board.SetPiece(b, i, piece, (int)color);
 			}
 
 			//b->AttacksBlack = Board.AttackMap(b, Board.COLOR_BLACK);

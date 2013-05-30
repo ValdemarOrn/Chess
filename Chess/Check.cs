@@ -13,15 +13,15 @@ namespace Chess.Base
 		/// <param name="board"></param>
 		/// <param name="attackerColor"></param>
 		/// <returns></returns>
-		public static int[] GetAttackBoard(Board board, int attackerColor)
+		public static int[] GetAttackBoard(Board board, Color attackerColor)
 		{
-			int color = attackerColor;
+			Color color = attackerColor;
 			var attackBoard = new int[64];
 
 			// Search for all pieces of the attacker's color
 			for (int i = 0; i < 64; i++)
 			{
-				if (board.Color(i) != color)
+				if (board.GetColor(i) != color)
 					continue;
 
 				// find all the moves this piece can make
@@ -41,9 +41,9 @@ namespace Chess.Base
 		/// <param name="board"></param>
 		/// <param name="kingColor"></param>
 		/// <returns></returns>
-		public static bool IsChecked(Board board, int kingColor, int kingLocation = -1)
+		public static bool IsChecked(Board board, Color kingColor, int kingLocation = -1)
 		{
-			var attackerColor = (kingColor == Colors.White) ? Colors.Black : Colors.White;
+			var attackerColor = (kingColor == Color.White) ? Color.Black : Color.White;
 			var attacks = GetAttackBoard(board, attackerColor);
 			
 			if(kingLocation == -1)
@@ -62,9 +62,9 @@ namespace Chess.Base
 		/// <param name="board"></param>
 		/// <param name="kingColor"></param>
 		/// <returns></returns>
-		public static bool IsCheckMate(Board board, int kingColor)
+		public static bool IsCheckMate(Board board, Color kingColor)
 		{
-			var attackerColor = (kingColor == Colors.White) ? Colors.Black : Colors.White;
+			var attackerColor = (kingColor == Color.White) ? Color.Black : Color.White;
 			var attacks = GetAttackBoard(board, attackerColor);
 			var kingLocation = board.KingLocation(kingColor);
 
@@ -76,7 +76,7 @@ namespace Chess.Base
 			// If there are any valid moves, then the defender can break the check.
 			for (int i = 0; i < 64; i++)
 			{
-				if (board.Color(i) != kingColor)
+				if (board.GetColor(i) != kingColor)
 					continue;
 
 				var moves = Moves.GetValidMoves(board, i);
@@ -94,7 +94,7 @@ namespace Chess.Base
 		/// <param name="board"></param>
 		/// <param name="kingColor"></param>
 		/// <returns></returns>
-		public static bool IsStalemate(Board board, int kingColor)
+		public static bool IsStalemate(Board board, Color kingColor)
 		{
 			// It's not a stalemate if he's in check
 			if (IsChecked(board, kingColor))
@@ -105,7 +105,7 @@ namespace Chess.Base
 			// Note: pawns are the only pieces that can be blocked from moving, aside from king
 			for (int i = 0; i < 64; i++)
 			{
-				if (board.Color(i) != kingColor)
+				if (board.GetColor(i) != kingColor)
 					continue;
 
 				var moves = Moves.GetValidMoves(board, i);
@@ -126,7 +126,7 @@ namespace Chess.Base
 		/// <returns></returns>
 		public static bool MoveSelfChecks(Board board, int from, int to)
 		{
-			int colorToMove = board.Color(from);
+			Color colorToMove = board.GetColor(from);
 
 			board = board.Copy();
 			board.Move(from, to, false);

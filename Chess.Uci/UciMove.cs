@@ -5,16 +5,28 @@ using System.Text;
 
 namespace Chess.Uci
 {
+	public enum UciPiece
+	{
+		None = 0,
+
+		Pawn = 2,
+		Knight = 3,
+		Bishop = 4,
+		Rook = 5,
+		Queen = 6,
+		King = 7
+	}
+
 	public class UciMove
 	{
 		public int From;
 		public int To;
-		public int Promotion;
+		public UciPiece Promotion;
 
 		public UciMove()
 		{ }
 
-		public UciMove(int from, int to, int promotion = 0)
+		public UciMove(int from, int to, UciPiece promotion = UciPiece.None)
 		{
 			From = from;
 			To = to;
@@ -28,7 +40,8 @@ namespace Chess.Uci
 
 			move = move.ToLower();
 
-			int fx, fy, tx, ty, promo = 0;
+			int fx, fy, tx, ty = 0;
+			var promo = UciPiece.None;
 
 			fx = move[0] - 'a';
 			fy = move[1] - '1';
@@ -39,13 +52,13 @@ namespace Chess.Uci
 			if (move.Length > 4)
 			{
 				if (move[4] == 'n')
-					promo = 2;
+					promo = UciPiece.Knight;
 				else if (move[4] == 'b')
-					promo = 3;
+					promo = UciPiece.Bishop;
 				else if (move[4] == 'r')
-					promo = 4;
+					promo = UciPiece.Rook;
 				else if (move[4] == 'q')
-					promo = 5;
+					promo = UciPiece.Queen;
 			}
 
 			return new UciMove(fx + fy * 8, tx + ty * 8, promo);
@@ -64,13 +77,13 @@ namespace Chess.Uci
 
 			if (Promotion == 0)
 				return output;
-			else if (Promotion == 2)
+			else if (Promotion == UciPiece.Knight)
 				output += "n";
-			else if (Promotion == 3)
+			else if (Promotion == UciPiece.Bishop)
 				output += "b";
-			else if (Promotion == 4)
+			else if (Promotion == UciPiece.Rook)
 				output += "r";
-			else if (Promotion == 5)
+			else if (Promotion == UciPiece.Queen)
 				output += "q";
 
 			return output;

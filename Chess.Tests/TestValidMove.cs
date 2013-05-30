@@ -13,16 +13,16 @@ namespace Chess.Base.Tests
 		public void TestMoveCausesCheck()
 		{
 			var b = new Board();
-			b.PlayerTurn = Colors.Black;
+			b.PlayerTurn = Color.Black;
 			int pos = 5*8 + 4;
 
-			b.State[7*8 + 4] = Pieces.King | Colors.Black;
-			b.State[pos] = Pieces.Rook | Colors.Black;
+			b.State[7*8 + 4] = Colors.Val(Pieces.King, Color.Black);
+			b.State[pos] = Colors.Val(Pieces.Rook, Color.Black);
 
-			b.State[0*8 + 4] = Pieces.Queen| Colors.White;
-			b.State[7] = Pieces.King | Colors.White;
+			b.State[0 * 8 + 4] = Colors.Val(Pieces.Queen, Color.White);
+			b.State[7] = Colors.Val(Pieces.King, Color.White);
 
-			bool check = Check.IsChecked(b, Colors.Black);
+			bool check = Check.IsChecked(b, Color.Black);
 			Assert.IsFalse(check);
 
 			bool causesCheck;
@@ -44,16 +44,16 @@ namespace Chess.Base.Tests
 		public void TestValidMoves()
 		{
 			var b = new Board();
-			b.PlayerTurn = Colors.Black;
+			b.PlayerTurn = Color.Black;
 			int pos = 5 * 8 + 4;
 
-			b.State[pos + 16] = Pieces.King | Colors.Black;
-			b.State[pos] = Pieces.Rook | Colors.Black;
+			b.State[pos + 16] = Colors.Val(Pieces.King, Color.Black);
+			b.State[pos] = Colors.Val(Pieces.Rook, Color.Black);
 
-			b.State[pos - 24] = Pieces.Queen | Colors.White;
-			b.State[7] = Pieces.King | Colors.White;
+			b.State[pos - 24] = Colors.Val(Pieces.Queen, Color.White);
+			b.State[7] = Colors.Val(Pieces.King, Color.White);
 
-			bool check = Check.IsChecked(b, Colors.Black);
+			bool check = Check.IsChecked(b, Color.Black);
 			Assert.IsFalse(check);
 
 			// rook is covering the king

@@ -56,8 +56,8 @@ namespace Chess.Lib.BitboardEditor
 
 			BrushWhite = Brushes.White;
 			BrushBlack = Brushes.LightGray;
-			BrushSelected = new SolidBrush(Color.FromArgb(40, 20, 50, 255));
-			BrushMove = new SolidBrush(Color.FromArgb(40, 200, 30, 30));
+			BrushSelected = new SolidBrush(System.Drawing.Color.FromArgb(40, 20, 50, 255));
+			BrushMove = new SolidBrush(System.Drawing.Color.FromArgb(40, 200, 30, 30));
 
 			CreateTiles();
 

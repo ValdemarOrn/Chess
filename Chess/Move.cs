@@ -10,7 +10,7 @@ namespace Chess.Base
 		public int From;
 		public int To;
 		public int MoveCount;
-		public int Color;
+		public Color Color;
 		public int Capture;
 		public int CaptureTile; // only differs from "To" in en passant attacks
 		public int Promotion;
@@ -24,7 +24,7 @@ namespace Chess.Base
 			int from,
 			int to,
 			int moveCount = 0,
-			int color = 0,
+			Color color = 0,
 			int capture = 0,
 			int captureTile = 0,
 			int promotion = 0,

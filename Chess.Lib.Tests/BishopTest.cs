@@ -44,7 +44,7 @@ namespace Chess.Lib.Tests
 			for (int i = 0; i < 64; i++)
 			{
 				var b = new Chess.Base.Board(false);
-				b.State[i] = Chess.Base.Pieces.Bishop | Chess.Base.Colors.White;
+				b.State[i] = Chess.Base.Colors.Val(Chess.Base.Pieces.Bishop, Chess.Base.Color.White);
 				var movesBasic = Chess.Base.Moves.GetMoves(b, i);
 				movesBasic = movesBasic.OrderBy(x => x).ToArray();
 

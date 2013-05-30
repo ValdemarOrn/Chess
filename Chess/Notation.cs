@@ -136,30 +136,30 @@ namespace Chess.Base
 					switch (c)
 					{
 						case 'p':
-							b.State[tile] = Pieces.Pawn | Colors.Black; break;
+							b.State[tile] = (int)Pieces.Pawn | (int)Color.Black; break;
 						case 'r':
-							b.State[tile] = Pieces.Rook | Colors.Black; break;
+							b.State[tile] = (int)Pieces.Rook | (int)Color.Black; break;
 						case 'n':
-							b.State[tile] = Pieces.Knight | Colors.Black; break;
+							b.State[tile] = (int)Pieces.Knight | (int)Color.Black; break;
 						case 'b':
-							b.State[tile] = Pieces.Bishop | Colors.Black; break;
+							b.State[tile] = (int)Pieces.Bishop | (int)Color.Black; break;
 						case 'q':
-							b.State[tile] = Pieces.Queen | Colors.Black; break;
+							b.State[tile] = (int)Pieces.Queen | (int)Color.Black; break;
 						case 'k':
-							b.State[tile] = Pieces.King | Colors.Black; break;
+							b.State[tile] = (int)Pieces.King | (int)Color.Black; break;
 
 						case 'P':
-							b.State[tile] = Pieces.Pawn | Colors.White; break;
+							b.State[tile] = (int)Pieces.Pawn | (int)Color.White; break;
 						case 'R':
-							b.State[tile] = Pieces.Rook | Colors.White; break;
+							b.State[tile] = (int)Pieces.Rook | (int)Color.White; break;
 						case 'N':
-							b.State[tile] = Pieces.Knight | Colors.White; break;
+							b.State[tile] = (int)Pieces.Knight | (int)Color.White; break;
 						case 'B':
-							b.State[tile] = Pieces.Bishop | Colors.White; break;
+							b.State[tile] = (int)Pieces.Bishop | (int)Color.White; break;
 						case 'Q':
-							b.State[tile] = Pieces.Queen | Colors.White; break;
+							b.State[tile] = (int)Pieces.Queen | (int)Color.White; break;
 						case 'K':
-							b.State[tile] = Pieces.King | Colors.White; break;
+							b.State[tile] = (int)Pieces.King | (int)Color.White; break;
 
 						default:
 							throw new Exception("Malformed FEN string. Error at character " + strpos);
@@ -172,21 +172,21 @@ namespace Chess.Base
 
 			// Process whose turn
 			if (turn.ToLower().Contains('w'))
-				b.PlayerTurn = Colors.White;
+				b.PlayerTurn = Color.White;
 			else if (turn.ToLower().Contains('b'))
-				b.PlayerTurn = Colors.Black;
+				b.PlayerTurn = Color.Black;
 			else
 				throw new Exception("Malformed FEN string. Turn color not recognized");
 
 			// Process Castling
 			if (castle.Contains('K'))
-				b.CastleKW = Moves.CanCastle;
+				b.CastlingRights.Add(Castling.KingsideWhite);
 			if (castle.Contains('Q'))
-				b.CastleQW = Moves.CanCastle;
+				b.CastlingRights.Add(Castling.QueensideWhite);
 			if (castle.Contains('k'))
-				b.CastleKB = Moves.CanCastle;
+				b.CastlingRights.Add(Castling.KingsideBlack);
 			if (castle.Contains('q'))
-				b.CastleQB = Moves.CanCastle;
+				b.CastlingRights.Add(Castling.QueensideBlack);
 
 			// Process en passant
 			if (parts.Length >= 4)
@@ -198,10 +198,10 @@ namespace Chess.Base
 				{
 					int tile = Notation.TextToTile(enp);
 
-					if(b.PlayerTurn == Colors.White)
+					if(b.PlayerTurn == Color.White)
 						throw new Exception("Malformed FEN string. En passant shows white moved last, but it's also his turn");
 
-					if (b.State[tile+8] != (Pieces.Pawn | Colors.White))
+					if (b.State[tile + 8] != ((int)Pieces.Pawn | (int)Color.White))
 						throw new Exception("Malformed FEN string. En passant expected white pawn at tile " + Notation.TileToText(tile + 8));
 
 					b.EnPassantTile = tile;
@@ -210,10 +210,10 @@ namespace Chess.Base
 				{
 					int tile = Notation.TextToTile(enp);
 
-					if (b.PlayerTurn == Colors.Black)
+					if (b.PlayerTurn == Color.Black)
 						throw new Exception("Malformed FEN string. En passant shows black moved last, but it's also his turn");
 
-					if (b.State[tile - 8] != (Pieces.Pawn | Colors.Black))
+					if (b.State[tile - 8] != ((int)Pieces.Pawn | (int)Color.Black))
 						throw new Exception("Malformed FEN string. En passant expected black pawn at tile " + Notation.TileToText(tile + 8));
 
 					b.EnPassantTile = tile;

@@ -14,9 +14,9 @@ namespace Chess.Base.Tests
 		{
 			// test free space
 			var b = new Board();
-			b.PlayerTurn = Colors.Black;
+			b.PlayerTurn = Color.Black;
 			int pos = 6 * 8 + 4;
-			b.State[pos] = Pieces.Pawn | Colors.Black;
+			b.State[pos] = Colors.Val(Pieces.Pawn, Color.Black);
 			var moves = Attacks.GetAttacks(b, pos);
 			Assert.AreEqual(2, moves.Length);
 			Assert.IsTrue(moves.Contains(pos - 7));
@@ -28,18 +28,18 @@ namespace Chess.Base.Tests
 		{
 			// Test left edge of board
 			var b = new Board();
-			b.PlayerTurn = Colors.Black;
+			b.PlayerTurn = Color.Black;
 			int pos = 24;
-			b.State[pos] = Pieces.Pawn | Colors.Black;
+			b.State[pos] = Colors.Val(Pieces.Pawn, Color.Black);
 			var moves = Attacks.GetAttacks(b, pos);
 			Assert.AreEqual(1, moves.Length);
 			Assert.IsTrue(moves.Contains(pos - 7));
 
 			// test right edge of board
 			b = new Board();
-			b.PlayerTurn = Colors.Black;
+			b.PlayerTurn = Color.Black;
 			pos = 24 + 7;
-			b.State[pos] = Pieces.Pawn | Colors.Black;
+			b.State[pos] = Colors.Val(Pieces.Pawn, Color.Black);
 			moves = Attacks.GetAttacks(b, pos);
 			Assert.AreEqual(1, moves.Length);
 			Assert.IsTrue(moves.Contains(pos - 9));
@@ -49,10 +49,10 @@ namespace Chess.Base.Tests
 		public void TestCaptureLeft()
 		{
 			var b = new Board();
-			b.PlayerTurn = Colors.Black;
+			b.PlayerTurn = Color.Black;
 			int pos = 6 * 8 + 4;
-			b.State[pos] = Pieces.Pawn | Colors.Black;
-			b.State[pos - 9] = Pieces.Pawn | Colors.White;
+			b.State[pos] = Colors.Val(Pieces.Pawn, Color.Black);
+			b.State[pos - 9] = Colors.Val(Pieces.Pawn, Color.White);
 			var moves = Attacks.GetAttacks(b, pos);
 			Assert.AreEqual(2, moves.Length);
 			Assert.IsTrue(moves.Contains(pos - 9));
@@ -63,10 +63,10 @@ namespace Chess.Base.Tests
 		public void TestCaptureRight()
 		{
 			var b = new Board();
-			b.PlayerTurn = Colors.Black;
+			b.PlayerTurn = Color.Black;
 			int pos = 6 * 8 + 4;
-			b.State[pos] = Pieces.Pawn | Colors.Black;
-			b.State[pos - 7] = Pieces.Pawn | Colors.White;
+			b.State[pos] = Colors.Val(Pieces.Pawn, Color.Black);
+			b.State[pos - 7] = Colors.Val(Pieces.Pawn, Color.White);
 			var moves = Attacks.GetAttacks(b, pos);
 			Assert.AreEqual(2, moves.Length);
 			Assert.IsTrue(moves.Contains(pos - 7));
@@ -77,11 +77,11 @@ namespace Chess.Base.Tests
 		public void TestCaptureSameColor()
 		{
 			var b = new Board();
-			b.PlayerTurn = Colors.Black;
+			b.PlayerTurn = Color.Black;
 			int pos = 6 * 8 + 4;
-			b.State[pos] = Pieces.Pawn | Colors.Black;
-			b.State[pos - 7] = Pieces.Pawn | Colors.Black;
-			b.State[pos - 9] = Pieces.Pawn | Colors.Black;
+			b.State[pos] = Colors.Val(Pieces.Pawn, Color.Black);
+			b.State[pos - 7] = Colors.Val(Pieces.Pawn, Color.Black);
+			b.State[pos - 9] = Colors.Val(Pieces.Pawn, Color.Black);
 			var moves = Attacks.GetAttacks(b, pos);
 			Assert.AreEqual(2, moves.Length);
 		}
@@ -90,13 +90,13 @@ namespace Chess.Base.Tests
 		public void TestEnPassantLeft()
 		{
 			var b = new Board();
-			b.PlayerTurn = Colors.White;
+			b.PlayerTurn = Color.White;
 
 			int posBlack = Notation.TextToTile("e4");
 			int posWhite = Notation.TextToTile("d2");
 
-			b.State[posBlack] = Pieces.Pawn | Colors.Black;
-			b.State[posWhite] = Pieces.Pawn | Colors.White;
+			b.State[posBlack] = Colors.Val(Pieces.Pawn, Color.Black);
+			b.State[posWhite] = Colors.Val(Pieces.Pawn, Color.White);
 
 			b.Move(posWhite, posWhite + 16);
 
@@ -109,13 +109,13 @@ namespace Chess.Base.Tests
 		public void TestEnPassantRight()
 		{
 			var b = new Board();
-			b.PlayerTurn = Colors.White;
+			b.PlayerTurn = Color.White;
 
 			int posBlack = Notation.TextToTile("e4");
 			int posWhite = Notation.TextToTile("f2");
 
-			b.State[posBlack] = Pieces.Pawn | Colors.Black;
-			b.State[posWhite] = Pieces.Pawn | Colors.White;
+			b.State[posBlack] = Colors.Val(Pieces.Pawn, Color.Black);
+			b.State[posWhite] = Colors.Val(Pieces.Pawn, Color.White);
 
 			b.Move(posWhite, posWhite + 16);
 

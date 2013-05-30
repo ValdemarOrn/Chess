@@ -36,7 +36,7 @@ namespace Chess.Vladivostok
 			}
 
 			UciGui.ID("Vladivostok", "Valdemar Erlingsson");
-			UciGui.Option("Hash", UciOptionType.Spin, 256, 1, 2048, null);
+			UciGui.Option("Hash", UciOptionType.Spin, 32, 1, 2048, null);
 			UciGui.Option("UCI_Opponent", UciOptionType.String, null, null, null, null);
 			//UciGui.Option("Nullmove", UciOptionType.Check, true, null, null, null);
 			//UciGui.Option("Ponder", UciOptionType.Check, false, null, null, null);
@@ -102,8 +102,19 @@ namespace Chess.Vladivostok
 				BoardPtr = Helpers.ManagedBoardToNative(bx);
 			}
 
-			foreach(var move in moves)
-				Board.Make(BoardPtr, move.From, move.To);
+			foreach (var move in moves)
+			{
+				var moved = Board.Make(BoardPtr, move.From, move.To);
+				if (!moved)
+					SendInfo("Illegal move: " + move.ToString());
+
+				if (move.Promotion != UciPiece.None)
+				{
+					var promoted = Board.Promote(BoardPtr, move.To, (int)move.Promotion);
+					if (!promoted)
+						SendInfo("Illegal promotion: " + move.ToString());
+				}
+			}
 		}
 
 		MoveSmall BestMove;
@@ -141,7 +152,7 @@ namespace Chess.Vladivostok
 			Task.Factory.StartNew(() =>
 			{
 				BestMove = Search.SearchPos(BoardPtr, depth);
-				UciGui.BestMove(new UciMove(BestMove.From, BestMove.To, BestMove.Promotion), null);
+				UciGui.BestMove(new UciMove(BestMove.From, BestMove.To, (UciPiece)BestMove.Promotion), null);
 			});
 		}
 

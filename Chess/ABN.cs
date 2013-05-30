@@ -187,7 +187,7 @@ namespace Chess.Base
 			return moves;
 		}
 
-		private static Move GetMove(Board board, string token, int color)
+		private static Move GetMove(Board board, string token, Color color)
 		{
 			// Process captures - Done after we find target
 			int capture = 0;
@@ -218,31 +218,31 @@ namespace Chess.Base
 
 			// Return move if castled
 
-			if (kingside && color == Colors.White)
+			if (kingside && color == Color.White)
 			{
-				if (board.CanCastleKWhite && board.State[4] == (Pieces.King | Colors.White) && board.State[5] == 0 && board.State[6] == 0 && board.State[7] == (Pieces.Rook | Colors.White))
+				if (board.CanCastleKWhite && board.State[4] == ((int)Pieces.King | (int)Color.White) && board.State[5] == 0 && board.State[6] == 0 && board.State[7] == ((int)Pieces.Rook | (int)Color.White))
 					return new Move(4, 6, 0, color, capture, captureTile, 0, check, mate, queenside, kingside);
 				else
 					throw new Exception("Kingside castling for white should not be allowed at this point");
 			}
-			if (queenside && color == Colors.White)
+			if (queenside && color == Color.White)
 			{
-				if (board.CanCastleQWhite && board.State[4] == (Pieces.King | Colors.White) && board.State[3] == 0 && board.State[2] == 0 && board.State[1] == 0 && board.State[0] == (Pieces.Rook | Colors.White))
+				if (board.CanCastleQWhite && board.State[4] == ((int)Pieces.King | (int)Color.White) && board.State[3] == 0 && board.State[2] == 0 && board.State[1] == 0 && board.State[0] == ((int)Pieces.Rook | (int)Color.White))
 					return new Move(4, 2, 0, color, capture, captureTile, 0, check, mate, queenside, kingside);
 				else
 					throw new Exception("Queenside castling for white should not be allowed at this point");
 			}
 
-			if (kingside && color == Colors.Black)
+			if (kingside && color == Color.Black)
 			{
-				if (board.CanCastleKBlack && board.State[60] == (Pieces.King | Colors.Black) && board.State[61] == 0 && board.State[62] == 0 && board.State[63] == (Pieces.Rook | Colors.Black))
+				if (board.CanCastleKBlack && board.State[60] == ((int)Pieces.King | (int)Color.Black) && board.State[61] == 0 && board.State[62] == 0 && board.State[63] == ((int)Pieces.Rook | (int)Color.Black))
 					return new Move(60, 62, 0, color, capture, captureTile, 0, check, mate, queenside, kingside);
 				else
 					throw new Exception("Kingside castling for black should not be allowed at this point");
 			}
-			if (queenside && color == Colors.Black)
+			if (queenside && color == Color.Black)
 			{
-				if (board.CanCastleQBlack && board.State[60] == (Pieces.King | Colors.Black) && board.State[59] == 0 && board.State[58] == 0 && board.State[57] == 0 && board.State[56] == (Pieces.Rook | Colors.Black))
+				if (board.CanCastleQBlack && board.State[60] == ((int)Pieces.King | (int)Color.Black) && board.State[59] == 0 && board.State[58] == 0 && board.State[57] == 0 && board.State[56] == ((int)Pieces.Rook | (int)Color.Black))
 					return new Move(60, 58, 0, color, capture, captureTile, 0, check, mate, queenside, kingside);
 				else
 					throw new Exception("Queenside castling for black should not be allowed at this point");
@@ -292,7 +292,7 @@ namespace Chess.Base
 
 			// figure out which piece is moving
 			int from = -1;
-			var pieces = board.FindByPieceAndColor(color | piece);
+			var pieces = board.FindByPieceAndColor(piece, color);
 			var possible = new List<int>();
 			foreach (var p in pieces)
 			{

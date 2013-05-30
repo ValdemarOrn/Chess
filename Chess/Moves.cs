@@ -10,15 +10,6 @@ namespace Chess.Base
 	/// </summary>
 	public sealed class Moves
 	{
-		public const int HasCastled = -1;
-		public const int CannotCastle = 0;
-		public const int CanCastle = 1;
-
-		public const int CastleKingsideWhite = 1;
-		public const int CastleQueensideWhite = 2;
-		public const int CastleKingsideBlack = 3;
-		public const int CastleQueensideBlack = 4;
-
 		/// <summary>
 		/// Checks if the move is a castling move. Returns the type of castling that is
 		/// executed. Returns 0 if not a castling move. See Moves.CastleXXX constants in the Moves class
@@ -27,25 +18,25 @@ namespace Chess.Base
 		/// <param name="from"></param>
 		/// <param name="to"></param>
 		/// <returns></returns>
-		public static int IsCastlingMove(Board board, int from, int to)
+		public static Castling IsCastlingMove(Board board, int from, int to)
 		{
 			// white kingside
-			if (from == 4 && to == 6 && board.State[from] == (Pieces.King | Colors.White))
-				return CastleKingsideWhite;
+			if (from == 4 && to == 6 && board.State[from] == ((int)Pieces.King | (int)Color.White))
+				return Castling.KingsideWhite;
 
 			// white queenside
-			if (from == 4 && to == 2 && board.State[from] == (Pieces.King | Colors.White))
-				return CastleQueensideWhite;
+			if (from == 4 && to == 2 && board.State[from] == ((int)Pieces.King | (int)Color.White))
+				return Castling.QueensideWhite;
 
 			// black kingside
-			if (from == 60 && to == 62 && board.State[from] == (Pieces.King | Colors.Black))
-				return CastleKingsideBlack;
+			if (from == 60 && to == 62 && board.State[from] == ((int)Pieces.King | (int)Color.Black))
+				return Castling.KingsideBlack;
 
 			// black queenside
-			if (from == 60 && to == 58 && board.State[from] == (Pieces.King | Colors.Black))
-				return CastleQueensideBlack;
+			if (from == 60 && to == 58 && board.State[from] == ((int)Pieces.King | (int)Color.Black))
+				return Castling.QueensideBlack;
 
-			return 0;
+			return Castling.None;
 		}
 
 		/// <summary>
@@ -57,19 +48,19 @@ namespace Chess.Base
 		/// <returns></returns>
 		public static bool IsEnPassantCapture(Board board, int from, int to)
 		{
-			var color = board.Color(from);
+			var color = board.GetColor(from);
 
-			if (board.Piece(from) != Pieces.Pawn)
+			if (board.GetPiece(from) != Pieces.Pawn)
 				return false;
 
-			if (color == Colors.White)
+			if (color == Color.White)
 			{
 				if (to == from + 7 || to == from + 9)
 					if (board.EnPassantTile == to)
 						return true;
 			}
 
-			if (color == Colors.Black)
+			if (color == Color.Black)
 			{
 				if (to == from - 7 || to == from - 9)
 					if (board.EnPassantTile == to)
@@ -88,12 +79,12 @@ namespace Chess.Base
 		/// <returns></returns>
 		public static int EnPassantVictim(Board board, int from, int to)
 		{
-			var color = board.Color(from);
+			var color = board.GetColor(from);
 
-			if (color == Colors.White)
+			if (color == Color.White)
 				return to - 8;
 
-			if (color == Colors.Black)
+			if (color == Color.Black)
 				return to + 8;
 
 			throw new Exception("Unrecognized color");
@@ -109,17 +100,17 @@ namespace Chess.Base
 		/// <returns></returns>
 		public static int EnPassantTile(Board board, int from, int to)
 		{
-			var color = board.Color(from);
-			var piece = board.Piece(from);
+			var color = board.GetColor(from);
+			var piece = board.GetPiece(from);
 			var y = Board.Y(from);
 
 			if (piece != Pieces.Pawn)
 				return 0;
 
-			if (color == Colors.White && y == 1 && to == (from + 16))
+			if (color == Color.White && y == 1 && to == (from + 16))
 				return from + 8;
 
-			if (color == Colors.Black && y == 6 && to == (from - 16))
+			if (color == Color.Black && y == 6 && to == (from - 16))
 				return from - 8;
 
 			return 0;
@@ -142,15 +133,15 @@ namespace Chess.Base
 		public static bool CanPromote(Board board, int square)
 		{
 			// Can only promote pawns
-			if (board.Piece(square) != Pieces.Pawn)
+			if (board.GetPiece(square) != Pieces.Pawn)
 				return false;
 
-			int color = board.Color(square);
+			Color color = board.GetColor(square);
 
-			if (Board.Y(square) == 7 && color == Colors.White)
+			if (Board.Y(square) == 7 && color == Color.White)
 				return true;
 
-			if (Board.Y(square) == 0 && color == Colors.Black)
+			if (Board.Y(square) == 0 && color == Color.Black)
 				return true;
 
 			return false;
@@ -246,12 +237,12 @@ namespace Chess.Base
 		{
 			int x = Board.X(square);
 			int y = Board.Y(square);
-			int color = board.Color(square);
+			Color color = board.GetColor(square);
 
 			if (y == 0 || y == 7) // cannot ever happen
 				return;
 
-			if(color == Colors.White)
+			if(color == Color.White)
 			{
 				// move forward
 				int target = square + 8;
@@ -270,7 +261,7 @@ namespace Chess.Base
 
 				// capture left
 				target = square + 7;
-				if (x > 0 && y < 7 && board.Color(target) == Colors.Black)
+				if (x > 0 && y < 7 && board.GetColor(target) == Color.Black)
 				{
 					moves[count] = target;
 					count++;
@@ -278,7 +269,7 @@ namespace Chess.Base
 
 				// capture right
 				target = square + 9;
-				if (x < 7 && y < 7 && board.Color(target) == Colors.Black)
+				if (x < 7 && y < 7 && board.GetColor(target) == Color.Black)
 				{
 					moves[count] = target;
 					count++;
@@ -286,7 +277,7 @@ namespace Chess.Base
 
 				// en passant left
 				target = square + 7;
-				if (y == 4 && x > 0 && board.EnPassantTile == target && board.State[target - 8] == (Pieces.Pawn | Colors.Black))
+				if (y == 4 && x > 0 && board.EnPassantTile == target && board.State[target - 8] == ((int)Pieces.Pawn | (int)Color.Black))
 				{
 					moves[count] = target;
 					count++;
@@ -294,7 +285,7 @@ namespace Chess.Base
 
 				// en passant right
 				target = square + 9;
-				if (y == 4 && x < 7 && board.EnPassantTile == target && board.State[target - 8] == (Pieces.Pawn | Colors.Black))
+				if (y == 4 && x < 7 && board.EnPassantTile == target && board.State[target - 8] == ((int)Pieces.Pawn | (int)Color.Black))
 				{
 					moves[count] = target;
 					count++;
@@ -318,7 +309,7 @@ namespace Chess.Base
 
 				// capture left
 				target = square - 9;
-				if (x > 0 && y > 0 && board.Color(target) == Colors.White)
+				if (x > 0 && y > 0 && board.GetColor(target) == Color.White)
 				{
 					moves[count] = target;
 					count++;
@@ -326,7 +317,7 @@ namespace Chess.Base
 
 				// capture right
 				target = square - 7;
-				if (x < 7 && y > 0 && board.Color(target) == Colors.White)
+				if (x < 7 && y > 0 && board.GetColor(target) == Color.White)
 				{
 					moves[count] = target;
 					count++;
@@ -334,7 +325,7 @@ namespace Chess.Base
 
 				// en passant left
 				target = square - 9;
-				if (y == 3 && x > 0 && board.EnPassantTile == target && board.State[target + 8] == (Pieces.Pawn | Colors.White))
+				if (y == 3 && x > 0 && board.EnPassantTile == target && board.State[target + 8] == ((int)Pieces.Pawn | (int)Color.White))
 				{
 					moves[count] = target;
 					count++;
@@ -342,7 +333,7 @@ namespace Chess.Base
 
 				// en passant right
 				target = square - 7;
-				if (y == 3 && x < 7 && board.EnPassantTile == target && board.State[target + 8] == (Pieces.Pawn | Colors.White))
+				if (y == 3 && x < 7 && board.EnPassantTile == target && board.State[target + 8] == (Pieces.Pawn | (int)Color.White))
 				{
 					moves[count] = target;
 					count++;
@@ -362,13 +353,13 @@ namespace Chess.Base
 
 			int x = Board.X(square);
 			int y = Board.Y(square);
-			int color = board.Color(square);
+			Color color = board.GetColor(square);
 
 			// 0
 			if (x > 0 && y < 6)
 			{
 				target = square + 15;
-				if (board.Color(target) != color)
+				if (board.GetColor(target) != color)
 				{
 					moves[count] = target;
 					count++;
@@ -378,7 +369,7 @@ namespace Chess.Base
 			if (x < 7 && y < 6)
 			{
 				target = square + 17;
-				if (board.Color(target) != color)
+				if (board.GetColor(target) != color)
 				{
 					moves[count] = target;
 					count++;
@@ -389,7 +380,7 @@ namespace Chess.Base
 			if (x > 1 && y < 7)
 			{
 				target = square + 6;
-				if (board.Color(target) != color)
+				if (board.GetColor(target) != color)
 				{
 					moves[count] = target;
 					count++;
@@ -399,7 +390,7 @@ namespace Chess.Base
 			if (x < 6 && y < 7)
 			{
 				target = square + 10;
-				if (board.Color(target) != color)
+				if (board.GetColor(target) != color)
 				{
 					moves[count] = target;
 					count++;
@@ -416,7 +407,7 @@ namespace Chess.Base
 			if (x > 1 && y > 0)
 			{
 				target = square - 10;
-				if (board.Color(target) != color)
+				if (board.GetColor(target) != color)
 				{
 					moves[count] = target;
 					count++;
@@ -426,7 +417,7 @@ namespace Chess.Base
 			if (x < 6 && y > 0)
 			{
 				target = square - 6;
-				if (board.Color(target) != color)
+				if (board.GetColor(target) != color)
 				{
 					moves[count] = target;
 					count++;
@@ -437,7 +428,7 @@ namespace Chess.Base
 			if (x > 0 && y > 1)
 			{
 				target = square - 17;
-				if (board.Color(target) != color)
+				if (board.GetColor(target) != color)
 				{
 					moves[count] = target;
 					count++;
@@ -447,7 +438,7 @@ namespace Chess.Base
 			if (x < 7 && y > 1)
 			{
 				target = square - 15;
-				if (board.Color(target) != color)
+				if (board.GetColor(target) != color)
 				{
 					moves[count] = target;
 					count++;
@@ -457,12 +448,12 @@ namespace Chess.Base
 
 		private static void GetRookMoves(Board board, int square, int[] moves, ref int count)
 		{
-			int color = board.Color(square);
+			Color color = board.GetColor(square);
 			int target = 0;
 
 			// Move up
 			target = square + 8;
-			while (target < 64 && board.Color(target) != color)
+			while (target < 64 && board.GetColor(target) != color)
 			{
 				moves[count] = target;
 				count++;
@@ -473,7 +464,7 @@ namespace Chess.Base
 
 			// Move down
 			target = square - 8;
-			while (target >= 0 && board.Color(target) != color)
+			while (target >= 0 && board.GetColor(target) != color)
 			{
 				moves[count] = target;
 				count++;
@@ -484,7 +475,7 @@ namespace Chess.Base
 
 			// Move right
 			target = square + 1;
-			while (Board.X(target) > Board.X(square) && board.Color(target) != color)
+			while (Board.X(target) > Board.X(square) && board.GetColor(target) != color)
 			{
 				moves[count] = target;
 				count++;
@@ -495,7 +486,7 @@ namespace Chess.Base
 
 			// Move left
 			target = square - 1;
-			while (Board.X(target) < Board.X(square) && board.Color(target) != color)
+			while (Board.X(target) < Board.X(square) && board.GetColor(target) != color)
 			{
 				moves[count] = target;
 				count++;
@@ -509,12 +500,12 @@ namespace Chess.Base
 		{
 			int x = Board.X(square);
 			int y = Board.Y(square);
-			int color = board.Color(square);
+			Color color = board.GetColor(square);
 			int target = 0;
 
 			// Move up right
 			target = square + 9;
-			while (target < 64 && Board.X(target) > x && board.Color(target) != color)
+			while (target < 64 && Board.X(target) > x && board.GetColor(target) != color)
 			{
 				moves[count] = target;
 				count++;
@@ -525,7 +516,7 @@ namespace Chess.Base
 
 			// Move up left
 			target = square + 7;
-			while (target < 64 && Board.X(target) < x && board.Color(target) != color)
+			while (target < 64 && Board.X(target) < x && board.GetColor(target) != color)
 			{
 				moves[count] = target;
 				count++;
@@ -536,7 +527,7 @@ namespace Chess.Base
 
 			// Move down right
 			target = square - 7;
-			while (target >= 0 && Board.X(target) > x && board.Color(target) != color)
+			while (target >= 0 && Board.X(target) > x && board.GetColor(target) != color)
 			{
 				moves[count] = target;
 				count++;
@@ -547,7 +538,7 @@ namespace Chess.Base
 
 			// Move down left
 			target = square - 9;
-			while (target >= 0 && Board.X(target) < x && board.Color(target) != color)
+			while (target >= 0 && Board.X(target) < x && board.GetColor(target) != color)
 			{
 				moves[count] = target;
 				count++;
@@ -568,27 +559,27 @@ namespace Chess.Base
 		{
 			int x = Board.X(square);
 			int y = Board.Y(square);
-			int color = board.Color(square);
+			Color color = board.GetColor(square);
 			int target = 0;
 
 			if (y < 7)
 			{
 				target = square + 7;
-				if (x > 0 && board.Color(target) != color)
+				if (x > 0 && board.GetColor(target) != color)
 				{
 					moves[count] = target;
 					count++;
 				}
 
 				target = square + 8;
-				if (board.Color(target) != color)
+				if (board.GetColor(target) != color)
 				{
 					moves[count] = target;
 					count++;
 				}
 
 				target = square + 9;
-				if (x < 7 && board.Color(target) != color)
+				if (x < 7 && board.GetColor(target) != color)
 				{
 					moves[count] = target;
 					count++;
@@ -596,14 +587,14 @@ namespace Chess.Base
 			}
 
 			target = square - 1;
-			if (x > 0 && board.Color(target) != color)
+			if (x > 0 && board.GetColor(target) != color)
 			{
 				moves[count] = target;
 				count++;
 			}
 
 			target = square + 1;
-			if (x < 7 && board.Color(target) != color)
+			if (x < 7 && board.GetColor(target) != color)
 			{
 				moves[count] = target;
 				count++;
@@ -612,21 +603,21 @@ namespace Chess.Base
 			if (y > 0)
 			{
 				target = square - 9;
-				if (x > 0 && board.Color(target) != color)
+				if (x > 0 && board.GetColor(target) != color)
 				{
 					moves[count] = target;
 					count++;
 				}
 
 				target = square - 8;
-				if (board.Color(target) != color)
+				if (board.GetColor(target) != color)
 				{
 					moves[count] = target;
 					count++;
 				}
 
 				target = square - 7;
-				if (x < 7 && board.Color(target) != color)
+				if (x < 7 && board.GetColor(target) != color)
 				{
 					moves[count] = target;
 					count++;
@@ -634,7 +625,7 @@ namespace Chess.Base
 			}
 
 			// castling
-			if (color == Colors.White && square == 4)
+			if (color == Color.White && square == 4)
 			{
 				if (board.CanCastleKWhite && board.State[5] == 0 && board.State[6] == 0)
 				{
@@ -647,7 +638,7 @@ namespace Chess.Base
 					count++;
 				}
 			}
-			else if (color == Colors.Black && square == 60)
+			else if (color == Color.Black && square == 60)
 			{
 				if (board.CanCastleKBlack && board.State[61] == 0 && board.State[62] == 0)
 				{

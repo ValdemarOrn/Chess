@@ -30,7 +30,7 @@ namespace Chess.Lib.MoveClasses
 		static ulong GetMoves(int index)
 		{
 			var b = new Chess.Base.Board();
-			b.State[index] = Chess.Base.Pieces.Knight | Chess.Base.Colors.White;
+			b.State[index] = Chess.Base.Colors.Val(Chess.Base.Pieces.Knight, Chess.Base.Color.White);
 			var moves = Chess.Base.Moves.GetMoves(b, index);
 
 			ulong output = 0;

@@ -111,6 +111,31 @@ namespace Chess.Lib.Tests
 			var stats = Search.GetSearchStats();
 		}
 
+		[TestMethod]
+		public void TestForStalemate()
+		{
+			// This position caused a stalemate as the engine did not choose the mate in one
+			// instead it moved the king and blundered a win
+			// Edit: It was actually a bug in the UCI interface. Still, a good test
+
+			var bx = Notation.FENtoBoard("7K/8/1k5b/6n1/6P1/8/p7/8 b - - 3 61 ");
+			var b = Helpers.ManagedBoardToNative(bx);
+
+			var bestMove = Search.SearchPos(b, 8);
+			Board.Make(b, bestMove.From, bestMove.To);
+			Board.Promote(b, bestMove.To, Board.PIECE_QUEEN);
+			Board.Make(b, 63, 62);
+
+			bestMove = Search.SearchPos(b, 8);
+
+			// assert that we move the queen, not the king!
+			Assert.AreEqual(0, bestMove.From);
+
+			Board.Make(b, bestMove.From, bestMove.To);
+			// assert check
+			Assert.AreEqual(1, Board.IsChecked(b, Board.COLOR_WHITE));
+		}
+
 		//[TestMethod]
 		public void TestSearch6()
 		{

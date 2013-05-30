@@ -59,7 +59,7 @@ namespace Chess.Base.Tests
 			var board2 = Notation.FENtoBoard("rnbqkb1r/pp2pppp/2p2n2/3p4/2B1P3/2N5/PPPP1PPP/R1BQK1NR w KQkq");
 
 			Assert.IsTrue(board2.State.SequenceEqual(board.State));
-			Assert.AreEqual(Colors.White, board.PlayerTurn);
+			Assert.AreEqual(Color.White, board.PlayerTurn);
 		}
 
 		[TestMethod]
@@ -77,7 +77,7 @@ namespace Chess.Base.Tests
 			var board2 = Notation.FENtoBoard("rnbqk2r/pppp1ppp/3b1n2/4p3/4P3/3B1N2/PPPP1PPP/RNBQ1RK1 b kq");
 
 			Assert.IsTrue(board2.State.SequenceEqual(board.State));
-			Assert.AreEqual(Colors.Black, board.PlayerTurn);
+			Assert.AreEqual(Color.Black, board.PlayerTurn);
 		}
 
 		[TestMethod]
@@ -95,7 +95,7 @@ namespace Chess.Base.Tests
 			var board2 = Notation.FENtoBoard("rnbq1rk1/pppp1ppp/3b1n2/4p3/4P3/3B1N2/PPPP1PPP/RNBQ1RK1 w -");
 
 			Assert.IsTrue(board2.State.SequenceEqual(board.State));
-			Assert.AreEqual(Colors.White, board.PlayerTurn);
+			Assert.AreEqual(Color.White, board.PlayerTurn);
 		}
 
 		[TestMethod]
@@ -115,7 +115,7 @@ namespace Chess.Base.Tests
 			Assert.IsTrue(moves[6].Capture > 0);
 			Assert.IsTrue(moves[9].Capture > 0);
 			Assert.IsTrue(board2.State.SequenceEqual(board.State));
-			Assert.AreEqual(Colors.White, board.PlayerTurn);
+			Assert.AreEqual(Color.White, board.PlayerTurn);
 		}
 
 		[TestMethod]
@@ -130,7 +130,7 @@ namespace Chess.Base.Tests
 				board.Move(move.From, move.To, true);
 			}
 
-			Assert.AreEqual((Pieces.Pawn | Colors.Black), moves[4].Capture);
+			Assert.AreEqual(Colors.Val(Pieces.Pawn, Color.Black), moves[4].Capture);
 			Assert.AreEqual(moves[4].CaptureTile, 35);
 			Assert.AreEqual(moves[4].To, 43);
 		}
@@ -147,7 +147,7 @@ namespace Chess.Base.Tests
 				board.Move(move.From, move.To, true);
 			}
 
-			Assert.AreEqual((Pieces.Pawn | Colors.White), moves[5].Capture);
+			Assert.AreEqual(Colors.Val(Pieces.Pawn, Color.White), moves[5].Capture);
 			Assert.AreEqual(moves[5].CaptureTile, 27);
 			Assert.AreEqual(moves[5].To, 19);
 		}

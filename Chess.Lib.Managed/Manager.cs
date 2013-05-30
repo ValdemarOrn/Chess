@@ -33,7 +33,7 @@ namespace Chess.Lib
 			new King();
 			new Queen();
 
-			TTable.Init(256);
+			TTable.Init(32);
 
 			cb = Callback;
 			var ptr = Marshal.GetFunctionPointerForDelegate(cb);

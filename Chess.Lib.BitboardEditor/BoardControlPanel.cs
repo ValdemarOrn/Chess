@@ -143,10 +143,10 @@ namespace Chess.Lib.BitboardEditor
 			{
 				var newBoard = Notation.FENtoBoard(textBoxFEN.Text);
 				boardControl1.State = newBoard.State;
-				checkBoxCastlingBK.Checked = newBoard.CastleKB > 0;
-				checkBoxCastlingBQ.Checked = newBoard.CastleQB > 0;
-				checkBoxCastlingWK.Checked = newBoard.CastleKW > 0;
-				checkBoxCastlingWQ.Checked = newBoard.CastleQW > 0;
+				checkBoxCastlingBK.Checked = newBoard.CanCastleKBlack;
+				checkBoxCastlingBQ.Checked = newBoard.CanCastleQBlack;
+				checkBoxCastlingWK.Checked = newBoard.CanCastleKWhite;
+				checkBoxCastlingWQ.Checked = newBoard.CanCastleQBlack;
 
 				RefreshBoard();
 			}

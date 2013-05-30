@@ -7,8 +7,10 @@ namespace Chess.Lib.Tests
 	public unsafe class TTableTest
 	{
 		[TestMethod]
-		public void TesTTable1()
+		public void TestTable1()
 		{
+			TTable.Delete();
+			TTable.Init(256);
 			Assert.AreEqual(15790320, TTable.GetTableSize());
 		}
 	}

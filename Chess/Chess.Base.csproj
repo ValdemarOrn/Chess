@@ -60,6 +60,7 @@
     <Compile Include="ABN.cs" />
     <Compile Include="Attacks.cs" />
     <Compile Include="Board.cs" />
+    <Compile Include="Castling.cs" />
     <Compile Include="Colors.cs" />
     <Compile Include="Move.cs" />
     <Compile Include="Notation.cs" />

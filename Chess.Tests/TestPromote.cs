@@ -14,11 +14,11 @@ namespace Chess.Base.Tests
 		{
 			var b = new Board();
 			int pos = 7 * 8 + 4;
-			b.State[pos] = Pieces.Pawn | Colors.White;
+			b.State[pos] = Colors.Val(Pieces.Pawn, Color.White);
 			bool success = b.Promote(pos, Pieces.Queen);
 
 			Assert.IsTrue(success);
-			Assert.AreEqual(Pieces.Queen, b.Piece(pos));
+			Assert.AreEqual(Pieces.Queen, b.GetPiece(pos));
 		}
 
 		[TestMethod]
@@ -26,11 +26,11 @@ namespace Chess.Base.Tests
 		{
 			var b = new Board();
 			int pos = 0 + 4;
-			b.State[pos] = Pieces.Pawn | Colors.Black;
+			b.State[pos] = Colors.Val(Pieces.Pawn, Color.Black);
 			bool success = b.Promote(pos, Pieces.Queen);
 
 			Assert.IsTrue(success);
-			Assert.AreEqual(Pieces.Queen, b.Piece(pos));
+			Assert.AreEqual(Pieces.Queen, b.GetPiece(pos));
 		}
 
 		[TestMethod]
@@ -38,11 +38,11 @@ namespace Chess.Base.Tests
 		{
 			var b = new Board();
 			int pos = 6 * 8 + 4;
-			b.State[pos] = Pieces.Pawn | Colors.White;
+			b.State[pos] = Colors.Val(Pieces.Pawn, Color.White);
 			bool success = b.Promote(pos, Pieces.Queen);
 
 			Assert.IsFalse(success);
-			Assert.AreEqual(Pieces.Pawn, b.Piece(pos));
+			Assert.AreEqual(Pieces.Pawn, b.GetPiece(pos));
 		}
 
 		[TestMethod]
@@ -50,11 +50,11 @@ namespace Chess.Base.Tests
 		{
 			var b = new Board();
 			int pos = 1 * 8 + 4;
-			b.State[pos] = Pieces.Pawn | Colors.Black;
+			b.State[pos] = Colors.Val(Pieces.Pawn, Color.Black);
 			bool success = b.Promote(pos, Pieces.Queen);
 
 			Assert.IsFalse(success);
-			Assert.AreEqual(Pieces.Pawn, b.Piece(pos));
+			Assert.AreEqual(Pieces.Pawn, b.GetPiece(pos));
 		}
 
 		[TestMethod]
@@ -62,11 +62,11 @@ namespace Chess.Base.Tests
 		{
 			var b = new Board();
 			int pos = 7 * 8 + 4;
-			b.State[pos] = Pieces.Rook | Colors.White;
+			b.State[pos] = Colors.Val(Pieces.Rook, Color.White);
 			bool success = b.Promote(pos, Pieces.Queen);
 
 			Assert.IsFalse(success);
-			Assert.AreEqual(Pieces.Rook, b.Piece(pos));
+			Assert.AreEqual(Pieces.Rook, b.GetPiece(pos));
 		}
 
 		[TestMethod]
@@ -74,11 +74,11 @@ namespace Chess.Base.Tests
 		{
 			var b = new Board();
 			int pos = 0 + 4;
-			b.State[pos] = Pieces.Bishop | Colors.Black;
+			b.State[pos] = Colors.Val(Pieces.Bishop, Color.Black);
 			bool success = b.Promote(pos, Pieces.Queen);
 
 			Assert.IsFalse(success);
-			Assert.AreEqual(Pieces.Bishop, b.Piece(pos));
+			Assert.AreEqual(Pieces.Bishop, b.GetPiece(pos));
 		}
 	}
 }

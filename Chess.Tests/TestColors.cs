@@ -12,18 +12,18 @@ namespace Chess.Base.Tests
 		[TestMethod]
 		public void TesttoString()
 		{
-			Assert.AreEqual("Black", Colors.ToString(Colors.Black));
-			Assert.AreEqual("White", Colors.ToString(Colors.White));
+			Assert.AreEqual("Black", Colors.ToString(Color.Black));
+			Assert.AreEqual("White", Colors.ToString(Color.White));
 
-			Assert.AreEqual("", Colors.ToString(45645654));
+			Assert.AreEqual("", Colors.ToString((Color)45645654));
 		}
 
 		[TestMethod]
 		public void TestOpposite()
 		{
-			Assert.AreEqual(Colors.Black, Colors.Opposite(Colors.White));
-			Assert.AreEqual(Colors.White, Colors.Opposite(Colors.Black));
-			Assert.AreEqual(0, Colors.Opposite(4564));
+			Assert.AreEqual(Color.Black, Colors.Opposite(Color.White));
+			Assert.AreEqual(Color.White, Colors.Opposite(Color.Black));
+			Assert.AreEqual(Color.None, Colors.Opposite((Color)4564));
 		}
 	}
 }

@@ -29,7 +29,7 @@ namespace Chess.Lib.MoveClasses
 			b.CanCastleKWhite = false;
 			b.CanCastleQBlack = false;
 			b.CanCastleQWhite = false;
-			b.State[index] = Chess.Base.Pieces.King | Chess.Base.Colors.White;
+			b.State[index] = Chess.Base.Colors.Val(Chess.Base.Pieces.King, Chess.Base.Color.White);
 			var moves = Chess.Base.Moves.GetMoves(b, index);
 
 			ulong output = 0;
