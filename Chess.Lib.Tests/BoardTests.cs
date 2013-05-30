@@ -459,7 +459,7 @@ namespace Chess.Lib.Tests
 				var ok = Board.Make(b, moves[i].From, moves[i].To);
 				if (moves[i].Promotion != 0)
 				{
-					bool promoteOk = Board.Promote(b, moves[i].To, moves[i].Promotion);
+					bool promoteOk = Board.Promote(b, moves[i].To, (int)moves[i].Promotion);
 					Assert.AreEqual(true, promoteOk);
 				}
 

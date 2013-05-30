@@ -32,12 +32,12 @@ namespace Chess.Lib
 			for(int i = 0; i < 64; i++)
 			{
 				Chess.Base.Color color = board.GetColor(i);
-				int piece = board.GetPiece(i);
+				Chess.Base.Piece piece = board.GetPiece(i);
 
 				if(color == 0 || piece == 0)
 					continue;
 
-				Board.SetPiece(b, i, piece, (int)color);
+				Board.SetPiece(b, i, (int)piece, (int)color);
 			}
 
 			//b->AttacksBlack = Board.AttackMap(b, Board.COLOR_BLACK);

@@ -15,7 +15,7 @@ namespace Chess.Base.Tests
 			// test free space
 			var b = new Board();
 			int pos = 4 * 8 + 4;
-			b.State[pos] = Colors.Val(Pieces.King, Color.White);
+			b.State[pos] = Colors.Val(Piece.King, Color.White);
 
 			var moves = Moves.GetMoves(b, pos);
 
@@ -38,18 +38,18 @@ namespace Chess.Base.Tests
 		{
 			var b = new Board();
 			int pos = 4 * 8 + 4;
-			b.State[pos] = Colors.Val(Pieces.King, Color.White);
+			b.State[pos] = Colors.Val(Piece.King, Color.White);
 
-			b.State[pos + 7] = Colors.Val(Pieces.Pawn, Color.White);
-			b.State[pos + 8] = Colors.Val(Pieces.Pawn, Color.White);
-			b.State[pos + 9] = Colors.Val(Pieces.Pawn, Color.White);
+			b.State[pos + 7] = Colors.Val(Piece.Pawn, Color.White);
+			b.State[pos + 8] = Colors.Val(Piece.Pawn, Color.White);
+			b.State[pos + 9] = Colors.Val(Piece.Pawn, Color.White);
 
-			b.State[pos + 1] = Colors.Val(Pieces.Pawn, Color.White);
-			b.State[pos - 1] = Colors.Val(Pieces.Pawn, Color.White);
+			b.State[pos + 1] = Colors.Val(Piece.Pawn, Color.White);
+			b.State[pos - 1] = Colors.Val(Piece.Pawn, Color.White);
 
-			b.State[pos - 7] = Colors.Val(Pieces.Pawn, Color.White);
-			b.State[pos - 8] = Colors.Val(Pieces.Pawn, Color.White);
-			b.State[pos - 9] = Colors.Val(Pieces.Pawn, Color.White);
+			b.State[pos - 7] = Colors.Val(Piece.Pawn, Color.White);
+			b.State[pos - 8] = Colors.Val(Piece.Pawn, Color.White);
+			b.State[pos - 9] = Colors.Val(Piece.Pawn, Color.White);
 			
 			var moves = Moves.GetMoves(b, pos);
 
@@ -61,18 +61,18 @@ namespace Chess.Base.Tests
 		{
 			var b = new Board();
 			int pos = 4 * 8 + 4;
-			b.State[pos] = Colors.Val(Pieces.King, Color.White);
+			b.State[pos] = Colors.Val(Piece.King, Color.White);
 
-			b.State[pos + 7] = Colors.Val(Pieces.Pawn, Color.Black);
-			b.State[pos + 8] = Colors.Val(Pieces.Pawn, Color.Black);
-			b.State[pos + 9] = Colors.Val(Pieces.Pawn, Color.Black);
+			b.State[pos + 7] = Colors.Val(Piece.Pawn, Color.Black);
+			b.State[pos + 8] = Colors.Val(Piece.Pawn, Color.Black);
+			b.State[pos + 9] = Colors.Val(Piece.Pawn, Color.Black);
 
-			b.State[pos + 1] = Colors.Val(Pieces.Pawn, Color.Black);
-			b.State[pos - 1] = Colors.Val(Pieces.Pawn, Color.Black);
+			b.State[pos + 1] = Colors.Val(Piece.Pawn, Color.Black);
+			b.State[pos - 1] = Colors.Val(Piece.Pawn, Color.Black);
 
-			b.State[pos - 7] = Colors.Val(Pieces.Pawn, Color.Black);
-			b.State[pos - 8] = Colors.Val(Pieces.Pawn, Color.Black);
-			b.State[pos - 9] = Colors.Val(Pieces.Pawn, Color.Black);
+			b.State[pos - 7] = Colors.Val(Piece.Pawn, Color.Black);
+			b.State[pos - 8] = Colors.Val(Piece.Pawn, Color.Black);
+			b.State[pos - 9] = Colors.Val(Piece.Pawn, Color.Black);
 
 			var moves = Moves.GetMoves(b, pos);
 

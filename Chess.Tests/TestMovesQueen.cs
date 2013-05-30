@@ -15,7 +15,7 @@ namespace Chess.Base.Tests
 			// test free space
 			var b = new Board();
 			int pos = 4 * 8 + 4;
-			b.State[pos] = Colors.Val(Pieces.Queen, Color.White);
+			b.State[pos] = Colors.Val(Piece.Queen, Color.White);
 			var moves = Moves.GetMoves(b, pos);
 			Assert.AreEqual(13 + 14, moves.Length);
 
@@ -58,15 +58,15 @@ namespace Chess.Base.Tests
 		{
 			var b = new Board();
 			int pos = 4 * 8 + 4;
-			b.State[pos] = Colors.Val(Pieces.Queen, Color.White);
-			b.State[pos + 14] = Colors.Val(Pieces.Pawn, Color.White);
-			b.State[pos + 16] = Colors.Val(Pieces.Pawn, Color.White);
-			b.State[pos + 18] = Colors.Val(Pieces.Pawn, Color.White);
-			b.State[pos + 2] = Colors.Val(Pieces.Pawn, Color.White);
-			b.State[pos - 2] = Colors.Val(Pieces.Pawn, Color.White);
-			b.State[pos - 14] = Colors.Val(Pieces.Pawn, Color.White);
-			b.State[pos - 16] = Colors.Val(Pieces.Pawn, Color.White);
-			b.State[pos - 18] = Colors.Val(Pieces.Pawn, Color.White);
+			b.State[pos] = Colors.Val(Piece.Queen, Color.White);
+			b.State[pos + 14] = Colors.Val(Piece.Pawn, Color.White);
+			b.State[pos + 16] = Colors.Val(Piece.Pawn, Color.White);
+			b.State[pos + 18] = Colors.Val(Piece.Pawn, Color.White);
+			b.State[pos + 2] = Colors.Val(Piece.Pawn, Color.White);
+			b.State[pos - 2] = Colors.Val(Piece.Pawn, Color.White);
+			b.State[pos - 14] = Colors.Val(Piece.Pawn, Color.White);
+			b.State[pos - 16] = Colors.Val(Piece.Pawn, Color.White);
+			b.State[pos - 18] = Colors.Val(Piece.Pawn, Color.White);
 
 			var moves = Moves.GetMoves(b, pos);
 			Assert.AreEqual(8, moves.Length);
@@ -88,15 +88,15 @@ namespace Chess.Base.Tests
 		{
 			var b = new Board();
 			int pos = 4 * 8 + 4;
-			b.State[pos] = Colors.Val(Pieces.Queen, Color.White);
-			b.State[pos + 14] = Colors.Val(Pieces.Pawn, Color.Black);
-			b.State[pos + 16] = Colors.Val(Pieces.Pawn, Color.Black);
-			b.State[pos + 18] = Colors.Val(Pieces.Pawn, Color.Black);
-			b.State[pos + 2] = Colors.Val(Pieces.Pawn, Color.Black);
-			b.State[pos - 2] = Colors.Val(Pieces.Pawn, Color.Black);
-			b.State[pos - 14] = Colors.Val(Pieces.Pawn, Color.Black);
-			b.State[pos - 16] = Colors.Val(Pieces.Pawn, Color.Black);
-			b.State[pos - 18] = Colors.Val(Pieces.Pawn, Color.Black);
+			b.State[pos] = Colors.Val(Piece.Queen, Color.White);
+			b.State[pos + 14] = Colors.Val(Piece.Pawn, Color.Black);
+			b.State[pos + 16] = Colors.Val(Piece.Pawn, Color.Black);
+			b.State[pos + 18] = Colors.Val(Piece.Pawn, Color.Black);
+			b.State[pos + 2] = Colors.Val(Piece.Pawn, Color.Black);
+			b.State[pos - 2] = Colors.Val(Piece.Pawn, Color.Black);
+			b.State[pos - 14] = Colors.Val(Piece.Pawn, Color.Black);
+			b.State[pos - 16] = Colors.Val(Piece.Pawn, Color.Black);
+			b.State[pos - 18] = Colors.Val(Piece.Pawn, Color.Black);
 
 			var moves = Moves.GetMoves(b, pos);
 			Assert.AreEqual(16, moves.Length);

@@ -21,19 +21,19 @@ namespace Chess.Base
 		public static Castling IsCastlingMove(Board board, int from, int to)
 		{
 			// white kingside
-			if (from == 4 && to == 6 && board.State[from] == ((int)Pieces.King | (int)Color.White))
+			if (from == 4 && to == 6 && board.State[from] == ((int)Piece.King | (int)Color.White))
 				return Castling.KingsideWhite;
 
 			// white queenside
-			if (from == 4 && to == 2 && board.State[from] == ((int)Pieces.King | (int)Color.White))
+			if (from == 4 && to == 2 && board.State[from] == ((int)Piece.King | (int)Color.White))
 				return Castling.QueensideWhite;
 
 			// black kingside
-			if (from == 60 && to == 62 && board.State[from] == ((int)Pieces.King | (int)Color.Black))
+			if (from == 60 && to == 62 && board.State[from] == ((int)Piece.King | (int)Color.Black))
 				return Castling.KingsideBlack;
 
 			// black queenside
-			if (from == 60 && to == 58 && board.State[from] == ((int)Pieces.King | (int)Color.Black))
+			if (from == 60 && to == 58 && board.State[from] == ((int)Piece.King | (int)Color.Black))
 				return Castling.QueensideBlack;
 
 			return Castling.None;
@@ -48,26 +48,7 @@ namespace Chess.Base
 		/// <returns></returns>
 		public static bool IsEnPassantCapture(Board board, int from, int to)
 		{
-			var color = board.GetColor(from);
-
-			if (board.GetPiece(from) != Pieces.Pawn)
-				return false;
-
-			if (color == Color.White)
-			{
-				if (to == from + 7 || to == from + 9)
-					if (board.EnPassantTile == to)
-						return true;
-			}
-
-			if (color == Color.Black)
-			{
-				if (to == from - 7 || to == from - 9)
-					if (board.EnPassantTile == to)
-						return true;
-			}
-
-			return false;
+			return (to != 0) && (board.EnPassantTile == to) && (board.GetPiece(from) == Piece.Pawn);
 		}
 
 		/// <summary>
@@ -104,7 +85,7 @@ namespace Chess.Base
 			var piece = board.GetPiece(from);
 			var y = Board.Y(from);
 
-			if (piece != Pieces.Pawn)
+			if (piece != Piece.Pawn)
 				return 0;
 
 			if (color == Color.White && y == 1 && to == (from + 16))
@@ -125,7 +106,7 @@ namespace Chess.Base
 		}
 
 		/// <summary>
-		/// Checks if a piece can be promoted
+		/// Checks if a piece on the board can be promoted
 		/// </summary>
 		/// <param name="square"></param>
 		/// <param name="pieceType"></param>
@@ -133,7 +114,7 @@ namespace Chess.Base
 		public static bool CanPromote(Board board, int square)
 		{
 			// Can only promote pawns
-			if (board.GetPiece(square) != Pieces.Pawn)
+			if (board.GetPiece(square) != Piece.Pawn)
 				return false;
 
 			Color color = board.GetColor(square);
@@ -145,6 +126,18 @@ namespace Chess.Base
 				return true;
 
 			return false;
+		}
+
+		/// <summary>
+		/// Checks if a piece can be promoted
+		/// </summary>
+		/// <param name="square"></param>
+		/// <param name="pieceType"></param>
+		/// <returns></returns>
+		public static bool CanPromote(int square, Color color, Piece piece)
+		{
+			int y = Board.Y(square);
+			return (piece == Piece.Pawn) && ((y == 7 && color == Color.White) || (y == 0 && color == Color.Black));
 		}
 
 		/// <summary>
@@ -171,6 +164,51 @@ namespace Chess.Base
 		}
 
 		/// <summary>
+		/// Returns all valid moves for the current player
+		/// </summary>
+		/// <param name="board"></param>
+		/// <returns></returns>
+		public static Move[] GetMoves(Board board)
+		{
+			var moves = new List<Move>();
+			var player = board.PlayerTurn;
+			for(int i = 0; i < 64; i++)
+			{
+				if (board.GetColor(i) != player)
+					continue;
+
+				Piece piece = board.GetPiece(i);
+
+				var dest = GetMoves(board, i);
+				for (int j = 0; j < dest.Length; j++)
+				{
+					var move = new Move();
+					move.From = i;
+					move.To = dest[j];
+					moves.Add(move);
+
+					if(CanPromote(move.To, player, piece))
+					{
+						var move2 = move.Copy();
+						var move3 = move.Copy();
+						var move4 = move.Copy();
+
+						move.Promotion = Piece.Knight;
+						move2.Promotion = Piece.Bishop;
+						move3.Promotion = Piece.Rook;
+						move4.Promotion = Piece.Queen;
+						
+						moves.Add(move2);
+						moves.Add(move3);
+						moves.Add(move4);
+					}
+				}
+			}
+
+			return moves.ToArray();
+		}
+
+		/// <summary>
 		/// Finds all moves for the piece that are legal and valid (do not leave your own king in check)
 		/// </summary>
 		/// <param name="board"></param>
@@ -183,7 +221,7 @@ namespace Chess.Base
 			var targets = GetMoves(board, square);
 			foreach (var target in targets)
 			{
-				bool causesCheck = Check.MoveSelfChecks(board, square, target);
+				bool causesCheck = board.MoveSelfChecks(square, target);
 				if (!causesCheck)
 					output.Add(target);
 			}
@@ -202,26 +240,26 @@ namespace Chess.Base
 		{
 			int movecount = 0;
 			int[] moves = new int[28];
-			int pieceType = Pieces.Get(board.State[square]);
+			Piece pieceType = Pieces.Get(board.State[square]);
 
 			switch(pieceType)
 			{
-				case Pieces.Pawn:
+				case Piece.Pawn:
 					GetPawnMoves(board, square, moves, ref movecount);
 					break;
-				case Pieces.Knight:
+				case Piece.Knight:
 					GetKnightMoves(board, square, moves, ref movecount);
 					break;
-				case Pieces.Rook:
+				case Piece.Rook:
 					GetRookMoves(board, square, moves, ref movecount);
 					break;
-				case Pieces.Bishop:
+				case Piece.Bishop:
 					GetBishopMoves(board, square, moves, ref movecount);
 					break;
-				case Pieces.Queen:
+				case Piece.Queen:
 					GetQueenMoves(board, square, moves, ref movecount);
 					break;
-				case Pieces.King:
+				case Piece.King:
 					GetKingMoves(board, square, moves, ref movecount);
 					break;
 			}
@@ -277,7 +315,7 @@ namespace Chess.Base
 
 				// en passant left
 				target = square + 7;
-				if (y == 4 && x > 0 && board.EnPassantTile == target && board.State[target - 8] == ((int)Pieces.Pawn | (int)Color.Black))
+				if (y == 4 && x > 0 && board.EnPassantTile == target && board.State[target - 8] == ((int)Piece.Pawn | (int)Color.Black))
 				{
 					moves[count] = target;
 					count++;
@@ -285,7 +323,7 @@ namespace Chess.Base
 
 				// en passant right
 				target = square + 9;
-				if (y == 4 && x < 7 && board.EnPassantTile == target && board.State[target - 8] == ((int)Pieces.Pawn | (int)Color.Black))
+				if (y == 4 && x < 7 && board.EnPassantTile == target && board.State[target - 8] == ((int)Piece.Pawn | (int)Color.Black))
 				{
 					moves[count] = target;
 					count++;
@@ -325,7 +363,7 @@ namespace Chess.Base
 
 				// en passant left
 				target = square - 9;
-				if (y == 3 && x > 0 && board.EnPassantTile == target && board.State[target + 8] == ((int)Pieces.Pawn | (int)Color.White))
+				if (y == 3 && x > 0 && board.EnPassantTile == target && board.State[target + 8] == Colors.Val(Piece.Pawn, Color.White))
 				{
 					moves[count] = target;
 					count++;
@@ -333,7 +371,7 @@ namespace Chess.Base
 
 				// en passant right
 				target = square - 7;
-				if (y == 3 && x < 7 && board.EnPassantTile == target && board.State[target + 8] == (Pieces.Pawn | (int)Color.White))
+				if (y == 3 && x < 7 && board.EnPassantTile == target && board.State[target + 8] == Colors.Val(Piece.Pawn, Color.White))
 				{
 					moves[count] = target;
 					count++;
@@ -625,30 +663,47 @@ namespace Chess.Base
 			}
 
 			// castling
+			// no quares between rook and king can be occupied, the king cannot pass through any checked attacked squares
 			if (color == Color.White && square == 4)
 			{
 				if (board.CanCastleKWhite && board.State[5] == 0 && board.State[6] == 0)
 				{
-					moves[count] = 6;
-					count++;
+					var attacks = board.GetAttackBoard(Color.Black);
+					if (attacks[4] == 0 && attacks[5] == 0 && attacks[6] == 0)
+					{
+						moves[count] = 6;
+						count++;
+					}
 				}
 				if (board.CanCastleQWhite && board.State[3] == 0 && board.State[2] == 0 && board.State[1] == 0)
 				{
-					moves[count] = 2;
-					count++;
+					var attacks = board.GetAttackBoard(Color.Black);
+					if (attacks[2] == 0 && attacks[3] == 0 && attacks[4] == 0)
+					{
+						moves[count] = 2;
+						count++;
+					}
 				}
 			}
 			else if (color == Color.Black && square == 60)
 			{
 				if (board.CanCastleKBlack && board.State[61] == 0 && board.State[62] == 0)
 				{
-					moves[count] = 62;
-					count++;
+					var attacks = board.GetAttackBoard(Color.White);
+					if (attacks[60] == 0 && attacks[61] == 0 && attacks[62] == 0)
+					{
+						moves[count] = 62;
+						count++;
+					}
 				}
 				if (board.CanCastleQBlack && board.State[59] == 0 && board.State[58] == 0 && board.State[57] == 0)
 				{
-					moves[count] = 58;
-					count++;
+					var attacks = board.GetAttackBoard(Color.White);
+					if (attacks[58] == 0 && attacks[59] == 0 && attacks[60] == 0)
+					{
+						moves[count] = 58;
+						count++;
+					}
 				}
 			}
 		}

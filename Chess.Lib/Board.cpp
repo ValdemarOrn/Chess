@@ -679,7 +679,7 @@ void Board_Unmake(Board* board)
 
 _Bool Board_Promote(Board* board, int square, int pieceType)
 {
-	if(!Board_CanPromote(board, square, Board_Color(board, square), Board_Piece(board, square)))
+	if(!Board_CanPromote(square, Board_Color(board, square), Board_Piece(board, square)))
 		return 0;
 
 	int color = Board_Color(board, square);

@@ -121,13 +121,13 @@ namespace Chess.Base
 		/// <param name="initBoard"></param>
 		/// <param name="ANString"></param>
 		/// <returns></returns>
-		public static List<Move> ABNToMoves(Board initBoard, string ANString)
+		public static List<MoveData> ABNToMoves(Board initBoard, string ANString)
 		{
 			ANString = ANString.Replace(".", ". ");
 			ANString = ANString.Replace("  ", " ");
 
 			var board = initBoard.Copy();
-			var moves = new List<Move>();
+			var moves = new List<MoveData>();
 
 			var tokens = ANString.Split(' ').Select(x => x.Trim()).Where(x => !String.IsNullOrWhiteSpace(x)).ToList();
 			int MoveCount = 0;
@@ -158,7 +158,7 @@ namespace Chess.Base
 						continue;
 
 					// ---------------------- Parse the move ----------------------
-					Move move = GetMove(board, token, board.PlayerTurn);
+					MoveData move = GetMove(board, token, board.PlayerTurn);
 					move.MoveCount = MoveCount;
 					moves.Add(move);
 					bool legal = board.Move(move.From, move.To, true);
@@ -187,7 +187,7 @@ namespace Chess.Base
 			return moves;
 		}
 
-		private static Move GetMove(Board board, string token, Color color)
+		private static MoveData GetMove(Board board, string token, Color color)
 		{
 			// Process captures - Done after we find target
 			int capture = 0;
@@ -195,10 +195,10 @@ namespace Chess.Base
 			token = token.Replace("x", "");
 
 			// find the piece
-			int piece = GetPiece(token[0]);
+			Piece piece = GetPiece(token[0]);
 
 			// remove the piece identifier from the string
-			if (piece != Pieces.Pawn)
+			if (piece != Piece.Pawn)
 				token = token.Substring(1);
 
 			// Is check
@@ -220,52 +220,52 @@ namespace Chess.Base
 
 			if (kingside && color == Color.White)
 			{
-				if (board.CanCastleKWhite && board.State[4] == ((int)Pieces.King | (int)Color.White) && board.State[5] == 0 && board.State[6] == 0 && board.State[7] == ((int)Pieces.Rook | (int)Color.White))
-					return new Move(4, 6, 0, color, capture, captureTile, 0, check, mate, queenside, kingside);
+				if (board.CanCastleKWhite && board.State[4] == ((int)Piece.King | (int)Color.White) && board.State[5] == 0 && board.State[6] == 0 && board.State[7] == ((int)Piece.Rook | (int)Color.White))
+					return new MoveData(4, 6, 0, color, capture, captureTile, 0, check, mate, queenside, kingside);
 				else
 					throw new Exception("Kingside castling for white should not be allowed at this point");
 			}
 			if (queenside && color == Color.White)
 			{
-				if (board.CanCastleQWhite && board.State[4] == ((int)Pieces.King | (int)Color.White) && board.State[3] == 0 && board.State[2] == 0 && board.State[1] == 0 && board.State[0] == ((int)Pieces.Rook | (int)Color.White))
-					return new Move(4, 2, 0, color, capture, captureTile, 0, check, mate, queenside, kingside);
+				if (board.CanCastleQWhite && board.State[4] == ((int)Piece.King | (int)Color.White) && board.State[3] == 0 && board.State[2] == 0 && board.State[1] == 0 && board.State[0] == ((int)Piece.Rook | (int)Color.White))
+					return new MoveData(4, 2, 0, color, capture, captureTile, 0, check, mate, queenside, kingside);
 				else
 					throw new Exception("Queenside castling for white should not be allowed at this point");
 			}
 
 			if (kingside && color == Color.Black)
 			{
-				if (board.CanCastleKBlack && board.State[60] == ((int)Pieces.King | (int)Color.Black) && board.State[61] == 0 && board.State[62] == 0 && board.State[63] == ((int)Pieces.Rook | (int)Color.Black))
-					return new Move(60, 62, 0, color, capture, captureTile, 0, check, mate, queenside, kingside);
+				if (board.CanCastleKBlack && board.State[60] == ((int)Piece.King | (int)Color.Black) && board.State[61] == 0 && board.State[62] == 0 && board.State[63] == ((int)Piece.Rook | (int)Color.Black))
+					return new MoveData(60, 62, 0, color, capture, captureTile, 0, check, mate, queenside, kingside);
 				else
 					throw new Exception("Kingside castling for black should not be allowed at this point");
 			}
 			if (queenside && color == Color.Black)
 			{
-				if (board.CanCastleQBlack && board.State[60] == ((int)Pieces.King | (int)Color.Black) && board.State[59] == 0 && board.State[58] == 0 && board.State[57] == 0 && board.State[56] == ((int)Pieces.Rook | (int)Color.Black))
-					return new Move(60, 58, 0, color, capture, captureTile, 0, check, mate, queenside, kingside);
+				if (board.CanCastleQBlack && board.State[60] == ((int)Piece.King | (int)Color.Black) && board.State[59] == 0 && board.State[58] == 0 && board.State[57] == 0 && board.State[56] == ((int)Piece.Rook | (int)Color.Black))
+					return new MoveData(60, 58, 0, color, capture, captureTile, 0, check, mate, queenside, kingside);
 				else
 					throw new Exception("Queenside castling for black should not be allowed at this point");
 			}
 
 
 			// promotion
-			int promotion = 0;
+			Piece promotion = 0;
 
-			if (piece == Pieces.Pawn)
+			if (piece == Piece.Pawn)
 			{
 				// I don't use the = sign
 				token = token.Replace("=", "");
 
 				// check if there are any piece specifiers in the string
 				if (token.Contains("Q"))
-					promotion = Pieces.Queen;
+					promotion = Piece.Queen;
 				if (token.Contains("N"))
-					promotion = Pieces.Knight;
+					promotion = Piece.Knight;
 				if (token.Contains("B"))
-					promotion = Pieces.Bishop;
+					promotion = Piece.Bishop;
 				if (token.Contains("R"))
-					promotion = Pieces.Rook;
+					promotion = Piece.Rook;
 
 				// Remove promotion specifier from string
 				token = token.Replace("Q", "");
@@ -325,7 +325,7 @@ namespace Chess.Base
 				capture = board.State[captureTile];
 			}
 
-			return new Move(from, to, 0, color, capture, captureTile, promotion, check, mate, queenside, kingside);
+			return new MoveData(from, to, 0, color, capture, captureTile, promotion, check, mate, queenside, kingside);
 		}
 
 		private static Tuple<int, int> GetHint(string token)
@@ -354,7 +354,7 @@ namespace Chess.Base
 			return new Tuple<int, int>(x, y);
 		}
 
-		private static int GetPiece(char p)
+		private static Piece GetPiece(char p)
 		{
 			if (p == (char)0)
 				return 0;
@@ -362,17 +362,17 @@ namespace Chess.Base
 			switch (p)
 			{
 				case 'N':
-					return Pieces.Knight;
+					return Piece.Knight;
 				case 'B':
-					return Pieces.Bishop;
+					return Piece.Bishop;
 				case 'K':
-					return Pieces.King;
+					return Piece.King;
 				case 'Q':
-					return Pieces.Queen;
+					return Piece.Queen;
 				case 'R':
-					return Pieces.Rook;
+					return Piece.Rook;
 				default:
-					return Pieces.Pawn;
+					return Piece.Pawn;
 			}
 		}
 	}

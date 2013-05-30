@@ -29,11 +29,12 @@ uint64_t Perft(Board* board, int depth)
 	for (int i = 0; i < moveCount; i++) {
 		Move* move = &moveList[i];
 		_Bool valid = Board_Make(board, move->From, move->To);
-		if(move->Promotion > 0)
-			Board_Promote(board, move->To, move->Promotion);
-
+		
 		if(!valid)
 			continue;
+
+		if(move->Promotion > 0)
+			Board_Promote(board, move->To, move->Promotion);
 
 		uint64_t cnt = (depth == 1) ? 1 : Perft(board, depth - 1);
 		total += cnt;

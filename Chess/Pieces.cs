@@ -5,35 +5,61 @@ using System.Text;
 
 namespace Chess.Base
 {
-	public sealed class Pieces
+	public enum Piece
 	{
-		public const int Pawn = 2;
-		public const int Knight = 3;
-		public const int Bishop = 4;
-		public const int Rook = 5;
-		public const int Queen = 6;
-		public const int King = 7;
+		None = 0,
 
-		public static int Get(int piece)
+		Pawn = 2,
+		Knight = 3,
+		Bishop = 4,
+		Rook = 5,
+		Queen = 6,
+		King = 7
+	}
+
+	public static class Pieces
+	{
+		public static Piece Get(int piece)
 		{
-			return piece & 0x0F;
+			return (Piece)(piece & 0x0F);
 		}
 
-		public static string ToString(int piece)
+		public static string GetLetter(this Piece piece)
 		{
 			switch (piece)
 			{
-				case Pawn:
+				case Piece.Pawn:
+					return "";
+				case Piece.Rook:
+					return "R";
+				case Piece.Bishop:
+					return "B";
+				case Piece.Knight:
+					return "N";
+				case Piece.Queen:
+					return "Q";
+				case Piece.King:
+					return "K";
+				default:
+					return "";
+			}
+		}
+
+		public static string ToString(this Piece piece)
+		{
+			switch (piece)
+			{
+				case Piece.Pawn:
 					return "Pawn";
-				case Rook:
+				case Piece.Rook:
 					return "Rook";
-				case Bishop:
+				case Piece.Bishop:
 					return "Bishop";
-				case Knight:
+				case Piece.Knight:
 					return "Knight";
-				case Queen:
+				case Piece.Queen:
 					return "Queen";
-				case King:
+				case Piece.King:
 					return "King";
 				default:
 					return "";

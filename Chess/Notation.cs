@@ -136,30 +136,30 @@ namespace Chess.Base
 					switch (c)
 					{
 						case 'p':
-							b.State[tile] = (int)Pieces.Pawn | (int)Color.Black; break;
+							b.State[tile] = (int)Piece.Pawn | (int)Color.Black; break;
 						case 'r':
-							b.State[tile] = (int)Pieces.Rook | (int)Color.Black; break;
+							b.State[tile] = (int)Piece.Rook | (int)Color.Black; break;
 						case 'n':
-							b.State[tile] = (int)Pieces.Knight | (int)Color.Black; break;
+							b.State[tile] = (int)Piece.Knight | (int)Color.Black; break;
 						case 'b':
-							b.State[tile] = (int)Pieces.Bishop | (int)Color.Black; break;
+							b.State[tile] = (int)Piece.Bishop | (int)Color.Black; break;
 						case 'q':
-							b.State[tile] = (int)Pieces.Queen | (int)Color.Black; break;
+							b.State[tile] = (int)Piece.Queen | (int)Color.Black; break;
 						case 'k':
-							b.State[tile] = (int)Pieces.King | (int)Color.Black; break;
+							b.State[tile] = (int)Piece.King | (int)Color.Black; break;
 
 						case 'P':
-							b.State[tile] = (int)Pieces.Pawn | (int)Color.White; break;
+							b.State[tile] = (int)Piece.Pawn | (int)Color.White; break;
 						case 'R':
-							b.State[tile] = (int)Pieces.Rook | (int)Color.White; break;
+							b.State[tile] = (int)Piece.Rook | (int)Color.White; break;
 						case 'N':
-							b.State[tile] = (int)Pieces.Knight | (int)Color.White; break;
+							b.State[tile] = (int)Piece.Knight | (int)Color.White; break;
 						case 'B':
-							b.State[tile] = (int)Pieces.Bishop | (int)Color.White; break;
+							b.State[tile] = (int)Piece.Bishop | (int)Color.White; break;
 						case 'Q':
-							b.State[tile] = (int)Pieces.Queen | (int)Color.White; break;
+							b.State[tile] = (int)Piece.Queen | (int)Color.White; break;
 						case 'K':
-							b.State[tile] = (int)Pieces.King | (int)Color.White; break;
+							b.State[tile] = (int)Piece.King | (int)Color.White; break;
 
 						default:
 							throw new Exception("Malformed FEN string. Error at character " + strpos);
@@ -201,7 +201,7 @@ namespace Chess.Base
 					if(b.PlayerTurn == Color.White)
 						throw new Exception("Malformed FEN string. En passant shows white moved last, but it's also his turn");
 
-					if (b.State[tile + 8] != ((int)Pieces.Pawn | (int)Color.White))
+					if (b.State[tile + 8] != ((int)Piece.Pawn | (int)Color.White))
 						throw new Exception("Malformed FEN string. En passant expected white pawn at tile " + Notation.TileToText(tile + 8));
 
 					b.EnPassantTile = tile;
@@ -213,7 +213,7 @@ namespace Chess.Base
 					if (b.PlayerTurn == Color.Black)
 						throw new Exception("Malformed FEN string. En passant shows black moved last, but it's also his turn");
 
-					if (b.State[tile - 8] != ((int)Pieces.Pawn | (int)Color.Black))
+					if (b.State[tile - 8] != ((int)Piece.Pawn | (int)Color.Black))
 						throw new Exception("Malformed FEN string. En passant expected black pawn at tile " + Notation.TileToText(tile + 8));
 
 					b.EnPassantTile = tile;

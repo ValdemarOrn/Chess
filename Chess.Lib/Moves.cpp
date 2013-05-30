@@ -177,7 +177,7 @@ int Moves_GetAllMoves(Board* board, Move* moveList100)
 			move->PlayerPiece = piece;
 			move->To = to;
 
-			if(Board_CanPromote(board, to, board->PlayerTurn, piece))
+			if(Board_CanPromote(to, board->PlayerTurn, piece))
 			{
 				memcpy(&moveList100[moveCount + 1], move, sizeof(Move));
 				memcpy(&moveList100[moveCount + 2], move, sizeof(Move));

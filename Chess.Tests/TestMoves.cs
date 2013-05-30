@@ -42,8 +42,8 @@ namespace Chess.Base.Tests
 			int posWhite = Notation.TextToTile("e5");
 			int posBlack = Notation.TextToTile("d7");
 
-			b.State[posWhite] = Colors.Val(Pieces.Pawn, Color.White);
-			b.State[posBlack] = Colors.Val(Pieces.Pawn, Color.Black);
+			b.State[posWhite] = Colors.Val(Piece.Pawn, Color.White);
+			b.State[posBlack] = Colors.Val(Piece.Pawn, Color.Black);
 
 			b.Move(posBlack, posBlack - 16);
 
@@ -64,8 +64,8 @@ namespace Chess.Base.Tests
 			int posWhite = Notation.TextToTile("e5");
 			int posBlack = Notation.TextToTile("f7");
 
-			b.State[posWhite] = Colors.Val(Pieces.Pawn, Color.White);
-			b.State[posBlack] = Colors.Val(Pieces.Pawn, Color.Black);
+			b.State[posWhite] = Colors.Val(Piece.Pawn, Color.White);
+			b.State[posBlack] = Colors.Val(Piece.Pawn, Color.Black);
 
 			b.Move(posBlack, posBlack - 16);
 
@@ -86,8 +86,8 @@ namespace Chess.Base.Tests
 			int posBlack = Notation.TextToTile("e4");
 			int posWhite = Notation.TextToTile("d2");
 
-			b.State[posBlack] = Colors.Val(Pieces.Pawn, Color.Black);
-			b.State[posWhite] = Colors.Val(Pieces.Pawn, Color.White);
+			b.State[posBlack] = Colors.Val(Piece.Pawn, Color.Black);
+			b.State[posWhite] = Colors.Val(Piece.Pawn, Color.White);
 
 			b.Move(posWhite, posWhite + 16);
 
@@ -108,8 +108,8 @@ namespace Chess.Base.Tests
 			int posBlack = Notation.TextToTile("e4");
 			int posWhite = Notation.TextToTile("f2");
 
-			b.State[posBlack] = Colors.Val(Pieces.Pawn, Color.Black);
-			b.State[posWhite] = Colors.Val(Pieces.Pawn, Color.White);
+			b.State[posBlack] = Colors.Val(Piece.Pawn, Color.Black);
+			b.State[posWhite] = Colors.Val(Piece.Pawn, Color.White);
 
 			b.Move(posWhite, posWhite + 16);
 
@@ -130,8 +130,8 @@ namespace Chess.Base.Tests
 			int posWhite = Notation.TextToTile("e5");
 			int posBlack = Notation.TextToTile("f7");
 
-			b.State[posWhite] = Colors.Val(Pieces.Pawn, Color.White);
-			b.State[posBlack] = Colors.Val(Pieces.Pawn, Color.Black);
+			b.State[posWhite] = Colors.Val(Piece.Pawn, Color.White);
+			b.State[posBlack] = Colors.Val(Piece.Pawn, Color.Black);
 
 			b.Move(posBlack, posBlack - 16);
 
@@ -151,8 +151,8 @@ namespace Chess.Base.Tests
 			int posBlack = Notation.TextToTile("e4");
 			int posWhite = Notation.TextToTile("d2");
 
-			b.State[posBlack] = Colors.Val(Pieces.Pawn, Color.Black);
-			b.State[posWhite] = Colors.Val(Pieces.Pawn, Color.White);
+			b.State[posBlack] = Colors.Val(Piece.Pawn, Color.Black);
+			b.State[posWhite] = Colors.Val(Piece.Pawn, Color.White);
 
 			b.Move(posWhite, posWhite + 16);
 
@@ -172,8 +172,8 @@ namespace Chess.Base.Tests
 			int posWhite = Notation.TextToTile("e5");
 			int posBlack = Notation.TextToTile("d7");
 
-			b.State[posWhite] = Colors.Val(Pieces.Pawn, Color.White);
-			b.State[posBlack] = Colors.Val(Pieces.Pawn, Color.Black);
+			b.State[posWhite] = Colors.Val(Piece.Pawn, Color.White);
+			b.State[posBlack] = Colors.Val(Piece.Pawn, Color.Black);
 
 			b.Move(posBlack, posBlack - 16);
 
@@ -190,8 +190,8 @@ namespace Chess.Base.Tests
 			int posWhite = Notation.TextToTile("d2");
 			int posBlack = Notation.TextToTile("d6");
 
-			b.State[posWhite] = Colors.Val(Pieces.Rook, Color.White);
-			b.State[posBlack] = Colors.Val(Pieces.Pawn, Color.Black);
+			b.State[posWhite] = Colors.Val(Piece.Rook, Color.White);
+			b.State[posBlack] = Colors.Val(Piece.Pawn, Color.Black);
 
 			bool capture = Moves.IsCaptureMove(b, posWhite, posBlack);
 			Assert.IsTrue(capture);

@@ -34,10 +34,10 @@ namespace Chess.Base.Tests
 		{
 			var b = new Board(true);
 
-			var c = b.FindByPiece(Pieces.Pawn);
+			var c = b.FindByPiece(Piece.Pawn);
 			Assert.AreEqual(16, c.Count);
 
-			c = b.FindByPiece(Pieces.Rook);
+			c = b.FindByPiece(Piece.Rook);
 			Assert.AreEqual(4, c.Count);
 			Assert.IsTrue(c.Contains(0));
 			Assert.IsTrue(c.Contains(7));
@@ -50,15 +50,15 @@ namespace Chess.Base.Tests
 		{
 			var b = new Board(true);
 
-			var c = b.FindByPieceAndColor(Pieces.Pawn, Color.White);
+			var c = b.FindByPieceAndColor(Piece.Pawn, Color.White);
 			Assert.AreEqual(8, c.Count);
 
-			c = b.FindByPieceAndColor(Pieces.Bishop, Color.Black);
+			c = b.FindByPieceAndColor(Piece.Bishop, Color.Black);
 			Assert.AreEqual(2, c.Count);
 			Assert.IsTrue(c.Contains(58));
 			Assert.IsTrue(c.Contains(61));
 
-			c = b.FindByPieceAndColor(Pieces.Queen, Color.White);
+			c = b.FindByPieceAndColor(Piece.Queen, Color.White);
 			Assert.AreEqual(1, c.Count);
 			Assert.IsTrue(c.Contains(3));
 		}
@@ -67,8 +67,8 @@ namespace Chess.Base.Tests
 		public void TestKingLocation()
 		{
 			var b = new Board(false);
-			b.State[16] = Colors.Val(Pieces.King, Color.White);
-			b.State[53] = Colors.Val(Pieces.King, Color.Black);
+			b.State[16] = Colors.Val(Piece.King, Color.White);
+			b.State[53] = Colors.Val(Piece.King, Color.Black);
 
 			Assert.AreEqual(16, b.KingLocation(Color.White));
 			Assert.AreEqual(53, b.KingLocation(Color.Black));
@@ -89,13 +89,13 @@ namespace Chess.Base.Tests
 		public void TestCastlingOK()
 		{
 			var b = new Board(false);
-			b.State[0] = Colors.Val(Pieces.Rook, Color.White);
-			b.State[7] = Colors.Val(Pieces.Rook, Color.White);
-			b.State[4] = Colors.Val(Pieces.King, Color.White);
+			b.State[0] = Colors.Val(Piece.Rook, Color.White);
+			b.State[7] = Colors.Val(Piece.Rook, Color.White);
+			b.State[4] = Colors.Val(Piece.King, Color.White);
 
-			b.State[56] = Colors.Val(Pieces.Rook, Color.Black);
-			b.State[63] = Colors.Val(Pieces.Rook, Color.Black);
-			b.State[60] = Colors.Val(Pieces.King, Color.Black);
+			b.State[56] = Colors.Val(Piece.Rook, Color.Black);
+			b.State[63] = Colors.Val(Piece.Rook, Color.Black);
+			b.State[60] = Colors.Val(Piece.King, Color.Black);
 
 			b.AllowCastlingAll();
 			Assert.IsTrue(b.CanCastleKBlack);
@@ -108,13 +108,13 @@ namespace Chess.Base.Tests
 		public void TestCastlingNoQueensideWhite()
 		{
 			var b = new Board(false);
-			b.State[0] = Colors.Val(Pieces.Rook, Color.White);
-			b.State[7] = Colors.Val(Pieces.Rook, Color.White);
-			b.State[4] = Colors.Val(Pieces.King, Color.White);
+			b.State[0] = Colors.Val(Piece.Rook, Color.White);
+			b.State[7] = Colors.Val(Piece.Rook, Color.White);
+			b.State[4] = Colors.Val(Piece.King, Color.White);
 
-			b.State[56] = Colors.Val(Pieces.Rook, Color.Black);
-			b.State[63] = Colors.Val(Pieces.Rook, Color.Black);
-			b.State[60] = Colors.Val(Pieces.King, Color.Black);
+			b.State[56] = Colors.Val(Piece.Rook, Color.Black);
+			b.State[63] = Colors.Val(Piece.Rook, Color.Black);
+			b.State[60] = Colors.Val(Piece.King, Color.Black);
 
 			b.AllowCastlingAll();
 
@@ -140,13 +140,13 @@ namespace Chess.Base.Tests
 		public void TestCastlingNoKingsideWhite()
 		{
 			var b = new Board(false);
-			b.State[0] = Colors.Val(Pieces.Rook, Color.White);
-			b.State[7] = Colors.Val(Pieces.Rook, Color.White);
-			b.State[4] = Colors.Val(Pieces.King, Color.White);
+			b.State[0] = Colors.Val(Piece.Rook, Color.White);
+			b.State[7] = Colors.Val(Piece.Rook, Color.White);
+			b.State[4] = Colors.Val(Piece.King, Color.White);
 
-			b.State[56] = Colors.Val(Pieces.Rook, Color.Black);
-			b.State[63] = Colors.Val(Pieces.Rook, Color.Black);
-			b.State[60] = Colors.Val(Pieces.King, Color.Black);
+			b.State[56] = Colors.Val(Piece.Rook, Color.Black);
+			b.State[63] = Colors.Val(Piece.Rook, Color.Black);
+			b.State[60] = Colors.Val(Piece.King, Color.Black);
 
 			b.AllowCastlingAll();
 
@@ -173,13 +173,13 @@ namespace Chess.Base.Tests
 		public void TestCastlingNoQueensideBlack()
 		{
 			var b = new Board(false);
-			b.State[0] = Colors.Val(Pieces.Rook, Color.White);
-			b.State[7] = Colors.Val(Pieces.Rook, Color.White);
-			b.State[4] = Colors.Val(Pieces.King, Color.White);
+			b.State[0] = Colors.Val(Piece.Rook, Color.White);
+			b.State[7] = Colors.Val(Piece.Rook, Color.White);
+			b.State[4] = Colors.Val(Piece.King, Color.White);
 
-			b.State[56] = Colors.Val(Pieces.Rook, Color.Black);
-			b.State[63] = Colors.Val(Pieces.Rook, Color.Black);
-			b.State[60] = Colors.Val(Pieces.King, Color.Black);
+			b.State[56] = Colors.Val(Piece.Rook, Color.Black);
+			b.State[63] = Colors.Val(Piece.Rook, Color.Black);
+			b.State[60] = Colors.Val(Piece.King, Color.Black);
 
 			b.AllowCastlingAll();
 
@@ -205,13 +205,13 @@ namespace Chess.Base.Tests
 		public void TestCastlingNoKingsideBlack()
 		{
 			var b = new Board(false);
-			b.State[0] = Colors.Val(Pieces.Rook, Color.White);
-			b.State[7] = Colors.Val(Pieces.Rook, Color.White);
-			b.State[4] = Colors.Val(Pieces.King, Color.White);
+			b.State[0] = Colors.Val(Piece.Rook, Color.White);
+			b.State[7] = Colors.Val(Piece.Rook, Color.White);
+			b.State[4] = Colors.Val(Piece.King, Color.White);
 
-			b.State[56] = Colors.Val(Pieces.Rook, Color.Black);
-			b.State[63] = Colors.Val(Pieces.Rook, Color.Black);
-			b.State[60] = Colors.Val(Pieces.King, Color.Black);
+			b.State[56] = Colors.Val(Piece.Rook, Color.Black);
+			b.State[63] = Colors.Val(Piece.Rook, Color.Black);
+			b.State[60] = Colors.Val(Piece.King, Color.Black);
 
 			b.AllowCastlingAll();
 

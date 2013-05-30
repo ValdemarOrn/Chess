@@ -67,10 +67,7 @@ namespace Chess.Base
 			} 
 		}
 
-		public Board() : this(false)
-		{
-			CastlingRights = new HashSet<Castling>();
-		}
+		public Board() : this(false) { }
 
 		/// <summary>
 		/// Creates a new board
@@ -142,14 +139,14 @@ namespace Chess.Base
 		/// </summary>
 		/// <param name="square"></param>
 		/// <returns></returns>
-		public int GetPiece(int square)
+		public Piece GetPiece(int square)
 		{
-			return State[square] & 0x0F;
+			return (Piece)(State[square] & 0x0F);
 		}
 
 		public int KingLocation(Color kingColor)
 		{
-			var val = Pieces.King | (int)kingColor;
+			var val = Colors.Val(Piece.King, kingColor);
 			for (int i = 0; i < State.Length; i++)
 			{
 				if (State[i] == val)
@@ -172,7 +169,7 @@ namespace Chess.Base
 			return output;
 		}
 
-		public List<int> FindByPiece(int piece)
+		public List<int> FindByPiece(Piece piece)
 		{
 			var output = new List<int>();
 
@@ -185,9 +182,9 @@ namespace Chess.Base
 			return output;
 		}
 
-		public List<int> FindByPieceAndColor(int piece, Color color)
+		public List<int> FindByPieceAndColor(Piece piece, Color color)
 		{
-			return FindByPieceAndColor(piece | (int)color);
+			return FindByPieceAndColor((int)piece | (int)color);
 		}
 
 		public List<int> FindByPieceAndColor(int pieceAndColor)
@@ -214,12 +211,12 @@ namespace Chess.Base
 		/// <returns></returns>
 		public bool Move(int from, int to, bool verifyLegalMove = false)
 		{
-			Move m = new Move(from, to);
-			bool complete = Move(ref m, verifyLegalMove);
+			var m = new Move(from, to);
+			bool complete = Move(m, verifyLegalMove);
 			return complete;
 		}
 		
-		private bool Move(ref Move move, bool verifyLegalMove = false)
+		private bool Move(Move move, bool verifyLegalMove = false)
 		{
 			if (GetColor(move.From) != this.PlayerTurn)
 				return false;
@@ -231,11 +228,7 @@ namespace Chess.Base
 					return false;
 			}
 
-			move.Color = this.PlayerTurn;
-			move.MoveCount = this.MoveCount;
-
 			// Move the rook if we are castling
-			// Note: Only moves the ROOK, we still need to move the king like any other move.
 			var castling = Moves.IsCastlingMove(this, move.From, move.To);
 			switch(castling)
 			{
@@ -247,7 +240,6 @@ namespace Chess.Base
 						return false;
 					State[5] = State[7];
 					State[7] = 0;
-					move.Kingside = true;
 					break;
 
 				case Castling.QueensideWhite:
@@ -255,7 +247,6 @@ namespace Chess.Base
 						return false;
 					State[3] = State[0];
 					State[0] = 0;
-					move.Queenside = true;
 					break;
 
 				case Castling.KingsideBlack:
@@ -263,7 +254,6 @@ namespace Chess.Base
 						return false;
 					State[61] = State[63];
 					State[63] = 0;
-					move.Kingside = true;
 					break;
 
 				case Castling.QueensideBlack:
@@ -271,7 +261,6 @@ namespace Chess.Base
 						return false;
 					State[59] = State[56];
 					State[56] = 0;
-					move.Queenside = true;
 					break;
 			}
 
@@ -281,21 +270,21 @@ namespace Chess.Base
 			{
 
 				int victim = Moves.EnPassantVictim(this, move.From, move.To);
-				move.CaptureTile = victim;
-				move.Capture = State[victim];
+//				move.CaptureTile = victim;
+//				move.Capture = State[victim];
 				State[victim] = 0;
 			}
 			else
 			{
-				move.Capture = State[move.To];
-				move.CaptureTile = move.To;
+//				move.Capture = State[move.To];
+//				move.CaptureTile = move.To;
 			}
 
 			// If this is a pawn move two squares out, it can be capture with an en passant attack.
 			EnPassantTile = Moves.EnPassantTile(this, move.From, move.To);
 
 			// Check if this move resets the 50 move position
-			if (GetPiece(move.From) == Pieces.Pawn || Moves.IsCaptureMove(this, move.From, move.To))
+			if (GetPiece(move.From) == Piece.Pawn || Moves.IsCaptureMove(this, move.From, move.To))
 				FiftyMoveRulePlies = 0;
 			else
 				FiftyMoveRulePlies++;
@@ -320,18 +309,16 @@ namespace Chess.Base
 		/// Promotes a pawn at the edge of the board to a new piece
 		/// </summary>
 		/// <param name="square"></param>
-		/// <param name="pieceType"></param>
+		/// <param name="pieceType">New piece type to promote to</param>
 		/// <returns></returns>
-		public bool Promote(int square, int pieceType)
+		public bool Promote(int square, Piece pieceType)
 		{
-			pieceType = Pieces.Get(pieceType);
-
 			// Can only promote pawns
-			if (GetPiece(square) != Pieces.Pawn)
+			if (GetPiece(square) != Piece.Pawn)
 				return false;
 
 			// Can't promote to king or pawn
-			if (pieceType != Pieces.Bishop && pieceType != Pieces.Knight && pieceType != Pieces.Queen && pieceType != Pieces.Rook)
+			if (pieceType != Piece.Bishop && pieceType != Piece.Knight && pieceType != Piece.Queen && pieceType != Piece.Rook)
 				return false;
 			
 			int piece = State[square];
@@ -358,14 +345,14 @@ namespace Chess.Base
 		/// </summary>
 		public void CheckCastling()
 		{
-			bool whiteKing = State[4] == ((int)Pieces.King | (int)Color.White);
-			bool blackKing = State[8 * 7 + 4] == ((int)Pieces.King | (int)Color.Black);
+			bool whiteKing = State[4] == ((int)Piece.King | (int)Color.White);
+			bool blackKing = State[8 * 7 + 4] == ((int)Piece.King | (int)Color.Black);
 
-			bool whiteRookL = State[0] == ((int)Pieces.Rook | (int)Color.White);
-			bool whiteRookR = State[7] == ((int)Pieces.Rook | (int)Color.White);
+			bool whiteRookL = State[0] == ((int)Piece.Rook | (int)Color.White);
+			bool whiteRookR = State[7] == ((int)Piece.Rook | (int)Color.White);
 
-			bool blackRookL = State[8 * 7 + 0] == ((int)Pieces.Rook | (int)Color.Black);
-			bool blackRookR = State[8 * 7 + 7] == ((int)Pieces.Rook | (int)Color.Black);
+			bool blackRookL = State[8 * 7 + 0] == ((int)Piece.Rook | (int)Color.Black);
+			bool blackRookR = State[8 * 7 + 7] == ((int)Piece.Rook | (int)Color.Black);
 
 			if (!whiteKing || !whiteRookL)
 				CastlingRights.Remove(Castling.QueensideWhite);
@@ -392,41 +379,41 @@ namespace Chess.Base
 
 			PlayerTurn = Color.White;
 
-			State[1 * 8 + 0] = (int)Color.White | (int)Pieces.Pawn;
-			State[1 * 8 + 1] = (int)Color.White | (int)Pieces.Pawn;
-			State[1 * 8 + 2] = (int)Color.White | (int)Pieces.Pawn;
-			State[1 * 8 + 3] = (int)Color.White | (int)Pieces.Pawn;
-			State[1 * 8 + 4] = (int)Color.White | (int)Pieces.Pawn;
-			State[1 * 8 + 5] = (int)Color.White | (int)Pieces.Pawn;
-			State[1 * 8 + 6] = (int)Color.White | (int)Pieces.Pawn;
-			State[1 * 8 + 7] = (int)Color.White | (int)Pieces.Pawn;
+			State[1 * 8 + 0] = (int)Color.White | (int)Piece.Pawn;
+			State[1 * 8 + 1] = (int)Color.White | (int)Piece.Pawn;
+			State[1 * 8 + 2] = (int)Color.White | (int)Piece.Pawn;
+			State[1 * 8 + 3] = (int)Color.White | (int)Piece.Pawn;
+			State[1 * 8 + 4] = (int)Color.White | (int)Piece.Pawn;
+			State[1 * 8 + 5] = (int)Color.White | (int)Piece.Pawn;
+			State[1 * 8 + 6] = (int)Color.White | (int)Piece.Pawn;
+			State[1 * 8 + 7] = (int)Color.White | (int)Piece.Pawn;
 
-			State[6 * 8 + 0] = (int)Color.Black | (int)Pieces.Pawn;
-			State[6 * 8 + 1] = (int)Color.Black | (int)Pieces.Pawn;
-			State[6 * 8 + 2] = (int)Color.Black | (int)Pieces.Pawn;
-			State[6 * 8 + 3] = (int)Color.Black | (int)Pieces.Pawn;
-			State[6 * 8 + 4] = (int)Color.Black | (int)Pieces.Pawn;
-			State[6 * 8 + 5] = (int)Color.Black | (int)Pieces.Pawn;
-			State[6 * 8 + 6] = (int)Color.Black | (int)Pieces.Pawn;
-			State[6 * 8 + 7] = (int)Color.Black | (int)Pieces.Pawn;
+			State[6 * 8 + 0] = (int)Color.Black | (int)Piece.Pawn;
+			State[6 * 8 + 1] = (int)Color.Black | (int)Piece.Pawn;
+			State[6 * 8 + 2] = (int)Color.Black | (int)Piece.Pawn;
+			State[6 * 8 + 3] = (int)Color.Black | (int)Piece.Pawn;
+			State[6 * 8 + 4] = (int)Color.Black | (int)Piece.Pawn;
+			State[6 * 8 + 5] = (int)Color.Black | (int)Piece.Pawn;
+			State[6 * 8 + 6] = (int)Color.Black | (int)Piece.Pawn;
+			State[6 * 8 + 7] = (int)Color.Black | (int)Piece.Pawn;
 
-			State[0 * 8 + 0] = (int)Color.White | (int)Pieces.Rook;
-			State[0 * 8 + 1] = (int)Color.White | (int)Pieces.Knight;
-			State[0 * 8 + 2] = (int)Color.White | (int)Pieces.Bishop;
-			State[0 * 8 + 3] = (int)Color.White | (int)Pieces.Queen;
-			State[0 * 8 + 4] = (int)Color.White | (int)Pieces.King;
-			State[0 * 8 + 5] = (int)Color.White | (int)Pieces.Bishop;
-			State[0 * 8 + 6] = (int)Color.White | (int)Pieces.Knight;
-			State[0 * 8 + 7] = (int)Color.White | (int)Pieces.Rook;
+			State[0 * 8 + 0] = (int)Color.White | (int)Piece.Rook;
+			State[0 * 8 + 1] = (int)Color.White | (int)Piece.Knight;
+			State[0 * 8 + 2] = (int)Color.White | (int)Piece.Bishop;
+			State[0 * 8 + 3] = (int)Color.White | (int)Piece.Queen;
+			State[0 * 8 + 4] = (int)Color.White | (int)Piece.King;
+			State[0 * 8 + 5] = (int)Color.White | (int)Piece.Bishop;
+			State[0 * 8 + 6] = (int)Color.White | (int)Piece.Knight;
+			State[0 * 8 + 7] = (int)Color.White | (int)Piece.Rook;
 
-			State[7 * 8 + 0] = (int)Color.Black | (int)Pieces.Rook;
-			State[7 * 8 + 1] = (int)Color.Black | (int)Pieces.Knight;
-			State[7 * 8 + 2] = (int)Color.Black | (int)Pieces.Bishop;
-			State[7 * 8 + 3] = (int)Color.Black | (int)Pieces.Queen;
-			State[7 * 8 + 4] = (int)Color.Black | (int)Pieces.King;
-			State[7 * 8 + 5] = (int)Color.Black | (int)Pieces.Bishop;
-			State[7 * 8 + 6] = (int)Color.Black | (int)Pieces.Knight;
-			State[7 * 8 + 7] = (int)Color.Black | (int)Pieces.Rook;
+			State[7 * 8 + 0] = (int)Color.Black | (int)Piece.Rook;
+			State[7 * 8 + 1] = (int)Color.Black | (int)Piece.Knight;
+			State[7 * 8 + 2] = (int)Color.Black | (int)Piece.Bishop;
+			State[7 * 8 + 3] = (int)Color.Black | (int)Piece.Queen;
+			State[7 * 8 + 4] = (int)Color.Black | (int)Piece.King;
+			State[7 * 8 + 5] = (int)Color.Black | (int)Piece.Bishop;
+			State[7 * 8 + 6] = (int)Color.Black | (int)Piece.Knight;
+			State[7 * 8 + 7] = (int)Color.Black | (int)Piece.Rook;
 
 			AllowCastlingAll();
 		}
@@ -441,6 +428,140 @@ namespace Chess.Base
 			CastlingRights.Add(Castling.QueensideBlack);
 			CastlingRights.Add(Castling.QueensideWhite);
 			CheckCastling();
+		}
+
+		/// <summary>
+		/// Evaluates how many pieces can attack each tile
+		/// </summary>
+		/// <param name="board"></param>
+		/// <param name="attackerColor"></param>
+		/// <returns></returns>
+		public int[] GetAttackBoard(Color attackerColor)
+		{
+			Board board = this;
+
+			Color color = attackerColor;
+			var attackBoard = new int[64];
+
+			// Search for all pieces of the attacker's color
+			for (int i = 0; i < 64; i++)
+			{
+				if (board.GetColor(i) != color)
+					continue;
+
+				// find all the moves this piece can make
+				var moves = Attacks.GetAttacks(board, i);
+
+				// mark them on the attack board
+				foreach (int move in moves)
+					attackBoard[move]++;
+			}
+
+			return attackBoard;
+		}
+
+		/// <summary>
+		/// Checks if the king of the specified color is in check
+		/// </summary>
+		/// <param name="board"></param>
+		/// <param name="kingColor"></param>
+		/// <returns></returns>
+		public bool IsChecked(Color kingColor)
+		{
+			Board board = this;
+
+			int kingLocation = board.KingLocation(kingColor);
+			var attackerColor = (kingColor == Color.White) ? Color.Black : Color.White;
+			var attacks = board.GetAttackBoard(attackerColor);
+
+			// king is not in check
+			if (attacks[kingLocation] == 0)
+				return false;
+			else
+				return true;
+		}
+
+		/// <summary>
+		/// Check if there is a checkmate
+		/// </summary>
+		/// <param name="board"></param>
+		/// <param name="kingColor"></param>
+		/// <returns></returns>
+		public bool IsCheckMate(Color kingColor)
+		{
+			Board board = this;
+
+			var attackerColor = (kingColor == Color.White) ? Color.Black : Color.White;
+			var attacks = board.GetAttackBoard(attackerColor);
+			var kingLocation = board.KingLocation(kingColor);
+
+			// king is not in check
+			if (attacks[kingLocation] == 0)
+				return false;
+
+			// Try all possible moves for the defenders pieces
+			// If there are any valid moves, then the defender can break the check.
+			for (int i = 0; i < 64; i++)
+			{
+				if (board.GetColor(i) != kingColor)
+					continue;
+
+				var moves = Moves.GetValidMoves(board, i);
+				if (moves.Length > 0)
+					return false;
+			}
+
+			// King could not get out of check, he has been check mated
+			return true;
+		}
+
+		/// <summary>
+		/// Checks for stale mate, where there are no valid moves
+		/// </summary>
+		/// <param name="board"></param>
+		/// <param name="kingColor"></param>
+		/// <returns></returns>
+		public bool IsStalemate(Color kingColor)
+		{
+			Board board = this;
+
+			// It's not a stalemate if he's in check
+			if (IsChecked(kingColor))
+				return false;
+
+			// Try all possible moves for the defenders pieces
+			// If there are any valid moves, then the defender is not in a stalemate
+			// Note: pawns are the only pieces that can be blocked from moving, aside from king
+			for (int i = 0; i < 64; i++)
+			{
+				if (board.GetColor(i) != kingColor)
+					continue;
+
+				var moves = Moves.GetValidMoves(board, i);
+				if (moves.Length > 0)
+					return false;
+			}
+
+			// King could not get out of check, he has been check mated
+			return true;
+		}
+
+		/// <summary>
+		/// Figures out if the specified move puts or keeps your own king in check, which is illegal
+		/// </summary>
+		/// <param name="board"></param>
+		/// <param name="from"></param>
+		/// <param name="to"></param>
+		/// <returns></returns>
+		public bool MoveSelfChecks(int from, int to)
+		{
+			Board board = this;
+			Color colorToMove = board.GetColor(from);
+
+			board = board.Copy();
+			board.Move(from, to, false);
+			bool ok = board.IsChecked(colorToMove);
+			return ok;
 		}
 	}
 }

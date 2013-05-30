@@ -12,14 +12,14 @@ namespace Chess.Base.Tests
 		[TestMethod]
 		public void TestToString()
 		{
-			Assert.AreEqual("Bishop", Pieces.ToString(Pieces.Bishop));
-			Assert.AreEqual("King", Pieces.ToString(Pieces.King));
-			Assert.AreEqual("Knight", Pieces.ToString(Pieces.Knight));
-			Assert.AreEqual("Pawn", Pieces.ToString(Pieces.Pawn));
-			Assert.AreEqual("Queen", Pieces.ToString(Pieces.Queen));
-			Assert.AreEqual("Rook", Pieces.ToString(Pieces.Rook));
+			Assert.AreEqual("Bishop", Pieces.ToString(Piece.Bishop));
+			Assert.AreEqual("King", Pieces.ToString(Piece.King));
+			Assert.AreEqual("Knight", Pieces.ToString(Piece.Knight));
+			Assert.AreEqual("Pawn", Pieces.ToString(Piece.Pawn));
+			Assert.AreEqual("Queen", Pieces.ToString(Piece.Queen));
+			Assert.AreEqual("Rook", Pieces.ToString(Piece.Rook));
 
-			Assert.AreEqual("", Pieces.ToString(9865));
+			Assert.AreEqual("", Pieces.ToString((Piece)9865));
 		}
 	}
 }

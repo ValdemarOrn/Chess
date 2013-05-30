@@ -14,11 +14,11 @@ namespace Chess.Base.Tests
 		{
 			var b = new Board();
 			int pos = 7 * 8 + 4;
-			b.State[pos] = Colors.Val(Pieces.Pawn, Color.White);
-			bool success = b.Promote(pos, Pieces.Queen);
+			b.State[pos] = Colors.Val(Piece.Pawn, Color.White);
+			bool success = b.Promote(pos, Piece.Queen);
 
 			Assert.IsTrue(success);
-			Assert.AreEqual(Pieces.Queen, b.GetPiece(pos));
+			Assert.AreEqual(Piece.Queen, b.GetPiece(pos));
 		}
 
 		[TestMethod]
@@ -26,11 +26,11 @@ namespace Chess.Base.Tests
 		{
 			var b = new Board();
 			int pos = 0 + 4;
-			b.State[pos] = Colors.Val(Pieces.Pawn, Color.Black);
-			bool success = b.Promote(pos, Pieces.Queen);
+			b.State[pos] = Colors.Val(Piece.Pawn, Color.Black);
+			bool success = b.Promote(pos, Piece.Queen);
 
 			Assert.IsTrue(success);
-			Assert.AreEqual(Pieces.Queen, b.GetPiece(pos));
+			Assert.AreEqual(Piece.Queen, b.GetPiece(pos));
 		}
 
 		[TestMethod]
@@ -38,11 +38,11 @@ namespace Chess.Base.Tests
 		{
 			var b = new Board();
 			int pos = 6 * 8 + 4;
-			b.State[pos] = Colors.Val(Pieces.Pawn, Color.White);
-			bool success = b.Promote(pos, Pieces.Queen);
+			b.State[pos] = Colors.Val(Piece.Pawn, Color.White);
+			bool success = b.Promote(pos, Piece.Queen);
 
 			Assert.IsFalse(success);
-			Assert.AreEqual(Pieces.Pawn, b.GetPiece(pos));
+			Assert.AreEqual(Piece.Pawn, b.GetPiece(pos));
 		}
 
 		[TestMethod]
@@ -50,11 +50,11 @@ namespace Chess.Base.Tests
 		{
 			var b = new Board();
 			int pos = 1 * 8 + 4;
-			b.State[pos] = Colors.Val(Pieces.Pawn, Color.Black);
-			bool success = b.Promote(pos, Pieces.Queen);
+			b.State[pos] = Colors.Val(Piece.Pawn, Color.Black);
+			bool success = b.Promote(pos, Piece.Queen);
 
 			Assert.IsFalse(success);
-			Assert.AreEqual(Pieces.Pawn, b.GetPiece(pos));
+			Assert.AreEqual(Piece.Pawn, b.GetPiece(pos));
 		}
 
 		[TestMethod]
@@ -62,11 +62,11 @@ namespace Chess.Base.Tests
 		{
 			var b = new Board();
 			int pos = 7 * 8 + 4;
-			b.State[pos] = Colors.Val(Pieces.Rook, Color.White);
-			bool success = b.Promote(pos, Pieces.Queen);
+			b.State[pos] = Colors.Val(Piece.Rook, Color.White);
+			bool success = b.Promote(pos, Piece.Queen);
 
 			Assert.IsFalse(success);
-			Assert.AreEqual(Pieces.Rook, b.GetPiece(pos));
+			Assert.AreEqual(Piece.Rook, b.GetPiece(pos));
 		}
 
 		[TestMethod]
@@ -74,11 +74,11 @@ namespace Chess.Base.Tests
 		{
 			var b = new Board();
 			int pos = 0 + 4;
-			b.State[pos] = Colors.Val(Pieces.Bishop, Color.Black);
-			bool success = b.Promote(pos, Pieces.Queen);
+			b.State[pos] = Colors.Val(Piece.Bishop, Color.Black);
+			bool success = b.Promote(pos, Piece.Queen);
 
 			Assert.IsFalse(success);
-			Assert.AreEqual(Pieces.Bishop, b.GetPiece(pos));
+			Assert.AreEqual(Piece.Bishop, b.GetPiece(pos));
 		}
 	}
 }

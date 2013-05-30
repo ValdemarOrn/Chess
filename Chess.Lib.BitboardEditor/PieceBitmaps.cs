@@ -55,23 +55,23 @@ namespace Chess.Lib.BitboardEditor
 		public static Bitmap GetBitmap(int piece)
 		{
 			Chess.Base.Color color = Colors.Get(piece);
-			int type = Pieces.Get(piece);
+			Piece type = Pieces.Get(piece);
 
 			if (color == Chess.Base.Color.White)
 			{
 				switch (type)
 				{
-					case Pieces.Bishop:
+					case Piece.Bishop:
 						return WhiteBishop;
-					case Pieces.King:
+					case Piece.King:
 						return WhiteKing;
-					case Pieces.Knight:
+					case Piece.Knight:
 						return WhiteKnight;
-					case Pieces.Pawn:
+					case Piece.Pawn:
 						return WhitePawn;
-					case Pieces.Queen:
+					case Piece.Queen:
 						return WhiteQueen;
-					case Pieces.Rook:
+					case Piece.Rook:
 						return WhiteRook;
 				}
 			}
@@ -79,17 +79,17 @@ namespace Chess.Lib.BitboardEditor
 			{
 				switch (type)
 				{
-					case Pieces.Bishop:
+					case Piece.Bishop:
 						return BlackBishop;
-					case Pieces.King:
+					case Piece.King:
 						return BlackKing;
-					case Pieces.Knight:
+					case Piece.Knight:
 						return BlackKnight;
-					case Pieces.Pawn:
+					case Piece.Pawn:
 						return BlackPawn;
-					case Pieces.Queen:
+					case Piece.Queen:
 						return BlackQueen;
-					case Pieces.Rook:
+					case Piece.Rook:
 						return BlackRook;
 				}
 			}

@@ -130,7 +130,7 @@ namespace Chess.Base.Tests
 				board.Move(move.From, move.To, true);
 			}
 
-			Assert.AreEqual(Colors.Val(Pieces.Pawn, Color.Black), moves[4].Capture);
+			Assert.AreEqual(Colors.Val(Piece.Pawn, Color.Black), moves[4].Capture);
 			Assert.AreEqual(moves[4].CaptureTile, 35);
 			Assert.AreEqual(moves[4].To, 43);
 		}
@@ -147,7 +147,7 @@ namespace Chess.Base.Tests
 				board.Move(move.From, move.To, true);
 			}
 
-			Assert.AreEqual(Colors.Val(Pieces.Pawn, Color.White), moves[5].Capture);
+			Assert.AreEqual(Colors.Val(Piece.Pawn, Color.White), moves[5].Capture);
 			Assert.AreEqual(moves[5].CaptureTile, 27);
 			Assert.AreEqual(moves[5].To, 19);
 		}

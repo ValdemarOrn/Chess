@@ -122,7 +122,7 @@ extern "C"
 	__declspec(dllexport) void Board_Unmake(Board* board);
 
 	// Checks if a piece can be promoted
-	__declspec(dllexport) _Bool Board_CanPromote(Board* board, int square, int color, int piece);
+	__declspec(dllexport) _Bool Board_CanPromote(int square, int color, int piece);
 
 	// Promotes a pawn at the specified square. Returns true if pawn was promoted
 	__declspec(dllexport) _Bool Board_Promote(Board* board, int square, int pieceType);
@@ -163,7 +163,7 @@ extern "C"
 		return board->Tiles[tile] & 0x0F;
 	}
 
-	__inline_always _Bool Board_CanPromote(Board* board, int square, int color, int piece)
+	__inline_always _Bool Board_CanPromote(int square, int color, int piece)
 	{
 		int y = Board_Y(square);
 

@@ -45,6 +45,16 @@ namespace Chess.Base
 			return (byte)((int)color | piece);
 		}
 
+		public static byte Val(Color color, Piece piece)
+		{
+			return (byte)((int)color | (int)piece);
+		}
+
+		public static byte Val(Piece piece, Color color)
+		{
+			return (byte)((int)color | (int)piece);
+		}
+
 		public static string ToString(Color color)
 		{
 			if (color == Color.White)

@@ -14,26 +14,26 @@ namespace Chess.Base
 		{
 			int movecount = 0;
 			int[] moves = new int[28];
-			int pieceType = Pieces.Get(board.State[square]);
+			Piece pieceType = Pieces.Get(board.State[square]);
 
 			switch (pieceType)
 			{
-				case Pieces.Pawn:
+				case Piece.Pawn:
 					GetPawnAttacks(board, square, moves, ref movecount);
 					break;
-				case Pieces.Knight:
+				case Piece.Knight:
 					GetKnightAttacks(board, square, moves, ref movecount);
 					break;
-				case Pieces.Rook:
+				case Piece.Rook:
 					GetRookAttacks(board, square, moves, ref movecount);
 					break;
-				case Pieces.Bishop:
+				case Piece.Bishop:
 					GetBishopAttacks(board, square, moves, ref movecount);
 					break;
-				case Pieces.Queen:
+				case Piece.Queen:
 					GetQueenAttacks(board, square, moves, ref movecount);
 					break;
-				case Pieces.King:
+				case Piece.King:
 					GetKingAttacks(board, square, moves, ref movecount);
 					break;
 			}
@@ -71,7 +71,7 @@ namespace Chess.Base
 
 				// en passant left
 				target = square + 7;
-				if (y == 4 && x > 0 && board.EnPassantTile == target && board.State[target - 8] == Colors.Val(Pieces.Pawn, Color.Black))
+				if (y == 4 && x > 0 && board.EnPassantTile == target && board.State[target - 8] == Colors.Val(Piece.Pawn, Color.Black))
 				{
 					moves[count] = target - 8; // I'm ATTACKING the pawn at target-8 even though I move to target
 					count++;
@@ -79,7 +79,7 @@ namespace Chess.Base
 
 				// en passant right
 				target = square + 9;
-				if (y == 4 && x < 7 && board.EnPassantTile == target && board.State[target - 8] == Colors.Val(Pieces.Pawn, Color.Black))
+				if (y == 4 && x < 7 && board.EnPassantTile == target && board.State[target - 8] == Colors.Val(Piece.Pawn, Color.Black))
 				{
 					moves[count] = target - 8; // I'm ATTACKING the pawn at target-8 even though I move to target
 					count++;
@@ -105,7 +105,7 @@ namespace Chess.Base
 
 				// en passant left
 				target = square - 9;
-				if (y == 3 && x > 0 && board.EnPassantTile == target && board.State[target + 8] == Colors.Val(Pieces.Pawn, Color.White))
+				if (y == 3 && x > 0 && board.EnPassantTile == target && board.State[target + 8] == Colors.Val(Piece.Pawn, Color.White))
 				{
 					moves[count] = target+8; // I'm ATTACKING the pawn at target+8 even though I move to target
 					count++;
@@ -113,7 +113,7 @@ namespace Chess.Base
 
 				// en passant right
 				target = square - 7;
-				if (y == 3 && x < 7 && board.EnPassantTile == target && board.State[target + 8] == Colors.Val(Pieces.Pawn, Color.White))
+				if (y == 3 && x < 7 && board.EnPassantTile == target && board.State[target + 8] == Colors.Val(Piece.Pawn, Color.White))
 				{
 					moves[count] = target + 8; // I'm ATTACKING the pawn at target+8 even though I move to target
 					count++;
