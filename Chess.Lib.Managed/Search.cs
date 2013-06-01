@@ -50,13 +50,13 @@ namespace Chess.Lib
 	{
 		public const int SEARCH_PLY_MAX = 40;		
 
-		[DllImport("C:\\Src\\_Tree\\Applications\\Chess\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Search_SearchPos", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("Chess.Lib.dll", EntryPoint = "Search_SearchPos", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static unsafe extern MoveSmall SearchPos(BoardStruct* board, int searchDepth);
 
-		[DllImport("C:\\Src\\_Tree\\Applications\\Chess\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Search_GetSearchStats", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("Chess.Lib.dll", EntryPoint = "Search_GetSearchStats", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static unsafe extern SearchStats* GetSearchStats();
 
-		[DllImport("C:\\Src\\_Tree\\Applications\\Chess\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Search_StopSearch", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("Chess.Lib.dll", EntryPoint = "Search_StopSearch", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static unsafe extern void StopSearch();
 	}
 }

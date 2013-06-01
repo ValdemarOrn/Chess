@@ -1,9 +1,9 @@
 
+#include <string.h>
 #include "Eval.h"
 #include "Moves.h"
 #include "Moves/King.h"
 #include "Search.h"
-#include <string.h>
 
 int Eval_PieceValues[8];
 int Eval_MobilityBonus[8];
@@ -235,7 +235,7 @@ int Eval_Evaluate(Board* board)
 		int pValue = 0;
 		int square = i;
 		int x = Board_X(square);
-		int y = Board_Y(square);
+		//int y = Board_Y(square);
 		int piece = Board_Piece(board, square);
 		int color = Board_Color(board, square);
 
@@ -277,7 +277,7 @@ int Eval_Evaluate(Board* board)
 
 				// get all the squares around the pawn, I just use the King_Move table for that
 				uint64_t pawnAreaBoard = King_Read(square);
-				if(whitePawns & pawnAreaBoard == 0)
+				if((whitePawns & pawnAreaBoard) == 0)
 				{
 					pValue -= Eval_Penalty_IsolatedPawn;
 					#ifdef DEBUG
@@ -309,7 +309,7 @@ int Eval_Evaluate(Board* board)
 
 				// get all the squares around the pawn, I just use the King_Move table for that
 				uint64_t pawnAreaBoard = King_Read(square);
-				if(blackPawns & pawnAreaBoard == 0)
+				if((blackPawns & pawnAreaBoard) == 0)
 				{
 					pValue -= Eval_Penalty_IsolatedPawn;
 					#ifdef DEBUG

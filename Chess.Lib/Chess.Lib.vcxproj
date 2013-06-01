@@ -27,19 +27,22 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>
+    </CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>
+    </CharacterSet>
   </PropertyGroup>
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
   </PropertyGroup>
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -52,23 +55,51 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(Platform)\bin\</OutDir>
+    <OutDir>bin\$(Platform)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IntDir>$(Platform)\intermediate\</IntDir>
+    <IntDir>bin\$(Platform)\intermediate\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(Platform)\bin\</OutDir>
-    <IntDir>$(Platform)\intermediate\</IntDir>
+    <OutDir>bin\$(Platform)\</OutDir>
+    <IntDir>bin\$(Platform)\intermediate\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>bin\$(Platform)\</OutDir>
+    <IntDir>bin\$(Platform)\intermediate\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>bin\$(Platform)\</OutDir>
+    <IntDir>bin\$(Platform)\intermediate\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <ExceptionHandling>false</ExceptionHandling>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <DisableLanguageExtensions>true</DisableLanguageExtensions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateMapFile>true</GenerateMapFile>
+      <OptimizeReferences>true</OptimizeReferences>
+      <Profile />
     </Link>
+    <PostBuildEvent>
+      <Command>cp $(TargetPath) $(SolutionDir)\Chess.Lib.BitboardEditor\bin\$(Configuration)\$(TargetName)$(TargetExt)
+cp $(TargetPath) $(SolutionDir)\Chess.Lib.CalculateMagic\bin\$(Configuration)\$(TargetName)$(TargetExt)
+cp $(TargetPath) $(SolutionDir)\Chess.Lib.EGTB\bin\$(Configuration)\$(TargetName)$(TargetExt)
+cp $(TargetPath) $(SolutionDir)\Chess.Lib.OpeningBook\bin\$(Configuration)\$(TargetName)$(TargetExt)
+cp $(TargetPath) $(SolutionDir)\Chess.Lib.TestPerf\bin\$(Configuration)\$(TargetName)$(TargetExt)
+cp $(TargetPath) $(SolutionDir)\Chess.Lib.Tests\bin\$(Configuration)\$(TargetName)$(TargetExt)
+cp $(TargetPath) $(SolutionDir)\Vladivostok\bin\$(Configuration)\$(TargetName)$(TargetExt)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -76,21 +107,42 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <OmitFramePointers />
+      <ExceptionHandling>false</ExceptionHandling>
+      <MinimalRebuild>false</MinimalRebuild>
+      <DisableLanguageExtensions>true</DisableLanguageExtensions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
+    <PostBuildEvent>
+      <Command>cp $(TargetPath) $(SolutionDir)\Chess.Lib.BitboardEditor\bin\$(Configuration)\$(TargetName)$(TargetExt)
+cp $(TargetPath) $(SolutionDir)\Chess.Lib.CalculateMagic\bin\$(Configuration)\$(TargetName)$(TargetExt)
+cp $(TargetPath) $(SolutionDir)\Chess.Lib.EGTB\bin\$(Configuration)\$(TargetName)$(TargetExt)
+cp $(TargetPath) $(SolutionDir)\Chess.Lib.OpeningBook\bin\$(Configuration)\$(TargetName)$(TargetExt)
+cp $(TargetPath) $(SolutionDir)\Chess.Lib.TestPerf\bin\$(Configuration)\$(TargetName)$(TargetExt)
+cp $(TargetPath) $(SolutionDir)\Chess.Lib.Tests\bin\$(Configuration)\$(TargetName)$(TargetExt)
+cp $(TargetPath) $(SolutionDir)\Vladivostok\bin\$(Configuration)\$(TargetName)$(TargetExt)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <Optimization>Disabled</Optimization>
       <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ExceptionHandling>false</ExceptionHandling>
       <DisableLanguageExtensions>true</DisableLanguageExtensions>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <WarningLevel>Level3</WarningLevel>
+      <OmitFramePointers>
+      </OmitFramePointers>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -101,6 +153,15 @@
       <Profile>
       </Profile>
     </Link>
+    <PostBuildEvent>
+      <Command>cp $(TargetPath) $(SolutionDir)\Chess.Lib.BitboardEditor\bin\$(Configuration)\$(TargetName)$(TargetExt)
+cp $(TargetPath) $(SolutionDir)\Chess.Lib.CalculateMagic\bin\$(Configuration)\$(TargetName)$(TargetExt)
+cp $(TargetPath) $(SolutionDir)\Chess.Lib.EGTB\bin\$(Configuration)\$(TargetName)$(TargetExt)
+cp $(TargetPath) $(SolutionDir)\Chess.Lib.OpeningBook\bin\$(Configuration)\$(TargetName)$(TargetExt)
+cp $(TargetPath) $(SolutionDir)\Chess.Lib.TestPerf\bin\$(Configuration)\$(TargetName)$(TargetExt)
+cp $(TargetPath) $(SolutionDir)\Chess.Lib.Tests\bin\$(Configuration)\$(TargetName)$(TargetExt)
+cp $(TargetPath) $(SolutionDir)\Vladivostok\bin\$(Configuration)\$(TargetName)$(TargetExt)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -117,24 +178,35 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <WholeProgramOptimization>true</WholeProgramOptimization>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ExceptionHandling>false</ExceptionHandling>
       <DisableLanguageExtensions>true</DisableLanguageExtensions>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
     </ClCompile>
     <Link>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>cp $(TargetPath) $(SolutionDir)\Chess.Lib.BitboardEditor\bin\$(Configuration)\$(TargetName)$(TargetExt)
+cp $(TargetPath) $(SolutionDir)\Chess.Lib.CalculateMagic\bin\$(Configuration)\$(TargetName)$(TargetExt)
+cp $(TargetPath) $(SolutionDir)\Chess.Lib.EGTB\bin\$(Configuration)\$(TargetName)$(TargetExt)
+cp $(TargetPath) $(SolutionDir)\Chess.Lib.OpeningBook\bin\$(Configuration)\$(TargetName)$(TargetExt)
+cp $(TargetPath) $(SolutionDir)\Chess.Lib.TestPerf\bin\$(Configuration)\$(TargetName)$(TargetExt)
+cp $(TargetPath) $(SolutionDir)\Chess.Lib.Tests\bin\$(Configuration)\$(TargetName)$(TargetExt)
+cp $(TargetPath) $(SolutionDir)\Vladivostok\bin\$(Configuration)\$(TargetName)$(TargetExt)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Bitboard.cpp" />
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="Eval.cpp" />
-    <ClCompile Include="King.cpp" />
     <ClCompile Include="Manager.cpp" />
     <ClCompile Include="Move.cpp" />
     <ClCompile Include="Moves.cpp" />
     <ClCompile Include="Moves\Bishop.cpp" />
+    <ClCompile Include="Moves\King.cpp" />
     <ClCompile Include="Moves\Knight.cpp" />
     <ClCompile Include="Moves\Pawn.cpp" />
     <ClCompile Include="Moves\Rook.cpp" />
@@ -149,7 +221,8 @@
   <ItemGroup>
     <ClInclude Include="Eval.h" />
     <ClInclude Include="EvalData.cpp" />
-    <ClInclude Include="inttypes.h" />
+    <ClInclude Include="Intrinsics.h" />
+    <ClInclude Include="Inttypes.h" />
     <ClInclude Include="Manager.h" />
     <ClInclude Include="Moves\Bishop.h" />
     <ClInclude Include="Moves\BishopMagic.h" />

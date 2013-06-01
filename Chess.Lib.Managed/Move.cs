@@ -33,7 +33,7 @@ namespace Chess.Lib
 	[StructLayout(LayoutKind.Sequential, Pack = 1, CharSet = CharSet.Ansi)]
 	public unsafe struct MoveHistory
 	{
-		public Move Move;
+		public Move HistoryMove;
 
 		public ulong PrevAttacksWhite;
 		public ulong PrevAttacksBlack;

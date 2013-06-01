@@ -1,4 +1,5 @@
 
+#include <string.h>
 #include "Moves.h"
 #include "Bitboard.h"
 #include "Board.h"

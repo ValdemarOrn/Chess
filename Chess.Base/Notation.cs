@@ -70,34 +70,13 @@ namespace Chess.Base
 
 			return y * 8 + x;
 		}
-		/*
-		public static char File(int tile)
-		{
-			if (tile < 0 || tile >= 64)
-				return (char)0;
 
-			int x = Board.X(tile);
-			char xx = (char)('a' + x);
-			return xx;
-		}
-
-		public static int Rank(int tile)
-		{
-			if (tile < 0 || tile >= 64)
-				return (char)0;
-
-			int y = Board.Y(tile);
-
-			y++;
-			return y;
-		}
-		*/
 		/// <summary>
 		/// Convert a FEN string into a Board object
 		/// </summary>
 		/// <param name="fenString"></param>
 		/// <returns></returns>
-		public static Board FENtoBoard(string fenString)
+		public static Board ReadFEN(string fenString)
 		{
 			string[] parts = fenString.Split(' ');
 			if (parts.Length < 3)

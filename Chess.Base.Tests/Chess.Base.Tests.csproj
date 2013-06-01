@@ -72,9 +72,10 @@
     <Compile Include="TestPieces.cs" />
     <Compile Include="TestPromote.cs" />
     <Compile Include="TestValidMove.cs" />
+    <Compile Include="TestZobrist.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Chess\Chess.Base.csproj">
+    <ProjectReference Include="..\Chess.Base\Chess.Base.csproj">
       <Project>{5C3DE354-EDD4-4377-A3D0-A33A5D2C7C71}</Project>
       <Name>Chess.Base</Name>
     </ProjectReference>

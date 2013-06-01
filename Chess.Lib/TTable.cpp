@@ -8,9 +8,10 @@ uint32_t TTableSize;
 void TTable_Init(int sizeMB)
 {
 	uint64_t count = sizeMB * 1024 * 1024;
-	count = count / sizeof(TTableEntry);
-	TTable = new TTableEntry[count];
-	TTableSize = count;
+	int entrySize = sizeof(TTableEntry);
+	count = count / entrySize;
+	TTable = new TTableEntry[(int)count];
+	TTableSize = (int)count;
 
 	memset(TTable, 0, sizeof(TTableEntry) * TTableSize);
 }

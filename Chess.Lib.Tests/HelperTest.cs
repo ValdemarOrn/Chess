@@ -21,7 +21,7 @@ namespace Chess.Lib.Tests
 		[TestMethod]
 		public unsafe void TestManagedBoardToNativeFEN()
 		{
-			var board = Chess.Base.Notation.FENtoBoard("rnbqkb1r/pp2pppp/3p1n2/2p5/2B1P3/5N2/PPPP1PPP/RNBQ1RK1 b kq");
+			var board = Chess.Base.Notation.ReadFEN("rnbqkb1r/pp2pppp/3p1n2/2p5/2B1P3/5N2/PPPP1PPP/RNBQ1RK1 b kq");
 			var b = Helpers.ManagedBoardToNative(board);
 
 			Assert.AreEqual((ulong)0x1000000000000040, b->Boards[Board.BOARD_KINGS]);

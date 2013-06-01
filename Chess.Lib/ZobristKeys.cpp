@@ -1,3 +1,4 @@
+
 #include "Zobrist.h"
 
 uint64_t Zobrist_Keys[16][64] = {

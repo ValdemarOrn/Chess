@@ -98,7 +98,7 @@ namespace Chess.Vladivostok
 			}
 			else
 			{
-				var bx = Chess.Base.Notation.FENtoBoard(fenString);
+				var bx = Chess.Base.Notation.ReadFEN(fenString);
 				BoardPtr = Helpers.ManagedBoardToNative(bx);
 			}
 

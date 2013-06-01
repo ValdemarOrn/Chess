@@ -39,12 +39,12 @@ namespace Chess.Lib.MoveClasses
 			return output;
 		}
 
-		[DllImport("C:\\Src\\_Tree\\Applications\\Chess\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "King_Load", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("Chess.Lib.dll", EntryPoint = "King_Load", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		static extern void Load(int pos, ulong moveBoard);
 
 		// ---------------------------------------------
 
-		[DllImport("C:\\Src\\_Tree\\Applications\\Chess\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "King_Read", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("Chess.Lib.dll", EntryPoint = "King_Read", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static extern ulong Read(int pos);
 
 

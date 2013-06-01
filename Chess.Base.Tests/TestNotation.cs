@@ -114,7 +114,7 @@ namespace Chess.Base.Tests
 			var b1 = new Board(true);
 
 			var str = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq";
-			var b2 = Notation.FENtoBoard(str);
+			var b2 = Notation.ReadFEN(str);
 			
 			bool equal = b1.State.SequenceEqual(b2.State);
 			Assert.IsTrue(equal);
@@ -129,7 +129,7 @@ namespace Chess.Base.Tests
 			b1.Move(12+16, 12 + 16 + 8);
 
 			var str = "rnbqkbnr/pp1ppppp/8/2p1P3/8/8/PPPP1PPP/RNBQKBNR b KQkq";
-			var b2 = Notation.FENtoBoard(str);
+			var b2 = Notation.ReadFEN(str);
 
 			bool equal = b1.State.SequenceEqual(b2.State);
 			Assert.IsTrue(equal);
@@ -139,7 +139,7 @@ namespace Chess.Base.Tests
 		public void TestFENEnPassantBlank()
 		{
 			var str = "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq -";
-			var b2 = Notation.FENtoBoard(str);
+			var b2 = Notation.ReadFEN(str);
 			Assert.AreEqual(0, b2.EnPassantTile);
 		}
 
@@ -147,7 +147,7 @@ namespace Chess.Base.Tests
 		public void TestFENEnPassantWhite()
 		{
 			var str = "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3";
-			var b2 = Notation.FENtoBoard(str);
+			var b2 = Notation.ReadFEN(str);
 
 			Assert.AreEqual(Notation.TextToTile("e3"), b2.EnPassantTile);
 
@@ -162,7 +162,7 @@ namespace Chess.Base.Tests
 		public void TestFENEnPassantBlack()
 		{
 			var str = "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq c6";
-			var b2 = Notation.FENtoBoard(str);
+			var b2 = Notation.ReadFEN(str);
 
 			Assert.AreEqual(Notation.TextToTile("c6"), b2.EnPassantTile);
 
@@ -182,7 +182,7 @@ namespace Chess.Base.Tests
 			bool ex = false;
 			try
 			{
-				var b2 = Notation.FENtoBoard(str);
+				var b2 = Notation.ReadFEN(str);
 			}
 			catch (Exception e)
 			{
@@ -201,7 +201,7 @@ namespace Chess.Base.Tests
 			bool ex = false;
 			try
 			{
-				var b2 = Notation.FENtoBoard(str);
+				var b2 = Notation.ReadFEN(str);
 			}
 			catch (Exception e)
 			{
@@ -220,7 +220,7 @@ namespace Chess.Base.Tests
 			bool ex = false;
 			try
 			{
-				var b2 = Notation.FENtoBoard(str);
+				var b2 = Notation.ReadFEN(str);
 			}
 			catch (Exception e)
 			{
@@ -239,7 +239,7 @@ namespace Chess.Base.Tests
 			bool ex = false;
 			try
 			{
-				var b2 = Notation.FENtoBoard(str);
+				var b2 = Notation.ReadFEN(str);
 			}
 			catch (Exception e)
 			{
@@ -256,7 +256,7 @@ namespace Chess.Base.Tests
 			var b1 = new Board(true);
 
 			var str = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq";
-			var b2 = Notation.FENtoBoard(str);
+			var b2 = Notation.ReadFEN(str);
 
 			Assert.IsTrue(b2.CanCastleQWhite);
 			Assert.IsTrue(b2.CanCastleKWhite);
@@ -271,7 +271,7 @@ namespace Chess.Base.Tests
 			var b1 = new Board(true);
 
 			var str = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w Kq";
-			var b2 = Notation.FENtoBoard(str);
+			var b2 = Notation.ReadFEN(str);
 
 			Assert.IsFalse(b2.CanCastleQWhite);
 			Assert.IsTrue(b2.CanCastleKWhite);
@@ -286,7 +286,7 @@ namespace Chess.Base.Tests
 			var b1 = new Board(true);
 
 			var str = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w -";
-			var b2 = Notation.FENtoBoard(str);
+			var b2 = Notation.ReadFEN(str);
 
 			Assert.IsFalse(b2.CanCastleQWhite);
 			Assert.IsFalse(b2.CanCastleKWhite);
@@ -301,7 +301,7 @@ namespace Chess.Base.Tests
 			var b1 = new Board(true);
 
 			var str = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR W Kq";
-			var b2 = Notation.FENtoBoard(str);
+			var b2 = Notation.ReadFEN(str);
 
 			Assert.AreEqual(Color.White, b2.PlayerTurn);
 		}
@@ -312,7 +312,7 @@ namespace Chess.Base.Tests
 			var b1 = new Board(true);
 
 			var str = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR b Kq";
-			var b2 = Notation.FENtoBoard(str);
+			var b2 = Notation.ReadFEN(str);
 
 			Assert.AreEqual(Color.Black, b2.PlayerTurn);
 		}
@@ -323,7 +323,7 @@ namespace Chess.Base.Tests
 			var b1 = new Board(true);
 
 			var str = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR b Kq - 12 18";
-			var b2 = Notation.FENtoBoard(str);
+			var b2 = Notation.ReadFEN(str);
 
 			Assert.AreEqual(12, b2.FiftyMoveRulePlies);
 			Assert.AreEqual(18, b2.MoveCount);

@@ -1,4 +1,5 @@
 
+#include <string.h>
 #include "SEE.h"
 #include "Eval.h"
 

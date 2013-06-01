@@ -83,7 +83,7 @@ extern "C"
 
 	typedef struct
 	{
-		Board* Board;
+		Board* SearchBoard;
 		MoveSmall PV[SEARCH_PLY_MAX][SEARCH_PLY_MAX];
 		MoveSmall KillerMoves[SEARCH_PLY_MAX][3];
 		uint32_t History[64][64];

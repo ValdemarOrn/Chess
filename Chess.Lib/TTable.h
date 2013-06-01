@@ -1,8 +1,8 @@
 #ifndef TTABLE
 #define TTABLE
 
-#include "Default.h"
 #include <string.h>
+#include "Default.h"
 
 extern "C"
 {

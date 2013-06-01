@@ -1,4 +1,5 @@
 
+#include <stdio.h>
 #include "Search.h"
 #include "Eval.h"
 #include "Moves.h"
@@ -6,7 +7,6 @@
 #include "Order.h"
 #include "TTable.h"
 #include "SEE.h"
-#include <stdio.h>
 
 int Search_AlphaBeta(SearchContext* ctx, int alpha, int beta, SearchParams params);
 int Search_Quiesce(SearchContext* ctx, int alpha, int beta, SearchParams params);
@@ -69,7 +69,7 @@ void ResetStats()
 
 void Search_InitContext(SearchContext* ctx)
 {
-	ctx->Board = 0;
+	ctx->SearchBoard = 0;
 
 	for(int i = 0; i < 64; i++)
 		for(int j = 0; j < 64; j++)
@@ -102,7 +102,7 @@ MoveSmall Search_SearchPos(Board* board, int searchDepth)
 {
 	SearchContext ctx;
 	Search_InitContext(&ctx);
-	ctx.Board = board;
+	ctx.SearchBoard = board;
 	SearchParams params;
 	SearchStopped = FALSE;
 	MoveSmall bestMove;
@@ -121,9 +121,9 @@ MoveSmall Search_SearchPos(Board* board, int searchDepth)
 		#endif
 
 		// Cut the history table every cycle
-		for(int i = 0; i < 64; i++)
-			for(int j = 0; j < 64; j++)
-				ctx.History[i][j] = (int)(ctx.History[i][j] >> 1); // divide by 2
+		for(int p = 0; p < 64; p++)
+			for(int q = 0; q < 64; q++)
+				ctx.History[p][q] = (int)(ctx.History[p][q] >> 1); // divide by 2
 
 		params.Depth = i;
 		params.Ply = 0;
@@ -150,7 +150,7 @@ MoveSmall Search_SearchPos(Board* board, int searchDepth)
 
 		// node count
 		#ifdef STATS_SEARCH
-		sprintf(text, "%d", SStats.TotalNodeCount);
+		sprintf(text, "%d", (int)SStats.TotalNodeCount);
 		Manager_Write(Message_Nodes, text);
 		#endif
 
@@ -179,7 +179,7 @@ _Bool Search_DrawByRepetition(Board* board)
 	int i = board->CurrentMove - 1;
 	while(i >= 0)
 	{
-		if(board->MoveHistory[i].PrevHash == currentHash)
+		if(board->History[i].PrevHash == currentHash)
 			occurences++;
 
 		if(occurences >= 3)
@@ -196,7 +196,7 @@ int Search_AlphaBeta(SearchContext* ctx, int alpha, int beta, SearchParams param
 	if(SearchStopped)
 		return 0;
 
-	Board* board = ctx->Board;
+	Board* board = ctx->SearchBoard;
 	int ply = params.Ply;
 	int depth = params.Depth;
 	SearchParams callingParams = params;
@@ -230,7 +230,7 @@ int Search_AlphaBeta(SearchContext* ctx, int alpha, int beta, SearchParams param
 	// --------------------- Check for draw by threefold repetition ---------------------
 	// ----------------------------------------------------------------------------------
 
-	_Bool repeat = Search_DrawByRepetition(ctx->Board);
+	_Bool repeat = Search_DrawByRepetition(ctx->SearchBoard);
 	if(repeat)
 	{
 		addtoHashTable = FALSE;
@@ -266,7 +266,7 @@ int Search_AlphaBeta(SearchContext* ctx, int alpha, int beta, SearchParams param
 	// ---------------------- Check for Transposition Table entry ----------------------
 	// ----------------------------------------------------------------------------------
 
-	tableEntry = TTable_Read(ctx->Board->Hash);
+	tableEntry = TTable_Read(ctx->SearchBoard->Hash);
 	if(tableEntry != 0)
 	{
 		hashHitPartial = TRUE;
@@ -287,9 +287,6 @@ int Search_AlphaBeta(SearchContext* ctx, int alpha, int beta, SearchParams param
 			
 				if(score > alpha)
 				{
-					if(tableEntry->BestMoveFrom == 0 && tableEntry->BestMoveTo == 0)
-						int k = 23;
-
 					bestMoveIndex = 0;
 					nodeType = NODE_PV;
 					hasValidMove = TRUE;
@@ -397,10 +394,6 @@ int Search_AlphaBeta(SearchContext* ctx, int alpha, int beta, SearchParams param
 		#ifdef DEBUG
 		int pieceMoving = Board_Piece(board, from);
 		uint64_t hashBefore = board->Hash;
-		#endif
-
-		#ifdef DEBUG
-		uint64_t hashPrev = board->Hash;
 		#endif
 
 		_Bool valid = Board_Make(board, from, to);
@@ -587,7 +580,7 @@ Finalize:
 			newEntry.Promotion = 0;
 		}
 		newEntry.Depth = depth - nullReduction;
-		newEntry.Hash = ctx->Board->Hash;
+		newEntry.Hash = ctx->SearchBoard->Hash;
 		newEntry.NodeType = nodeType;
 		newEntry.Score = score; //(nodeType == NODE_CUT) ? beta : score;
 		TTable_Insert(&newEntry);
@@ -601,23 +594,19 @@ int Search_Quiesce(SearchContext* ctx, int alpha, int beta, SearchParams params)
 	if(SearchStopped)
 		return 0;
 
-	Board* board = ctx->Board;
+	Board* board = ctx->SearchBoard;
 	int ply = params.Ply;
 	int depth = params.Depth;
 	SearchParams callingParams = params;
 	_Bool quiesce = (depth < 0);
 
-	_Bool addtoHashTable = TRUE;
 	int nodeType = NODE_ALL;
 	int score = 0;
 	int moveCount = 0;
 	int eval = 0;
-	TTableEntry* tableEntry = 0;
 
 	int bestMoveIndex = -1;
 	int cutMoveIndex = -1;
-	_Bool hashHitPartial = FALSE;
-	_Bool hashHitFull = FALSE;
 	Move bestMove;
 	bestMove.PlayerPiece = 0;
 	_Bool hasValidMove = FALSE;
@@ -634,7 +623,7 @@ int Search_Quiesce(SearchContext* ctx, int alpha, int beta, SearchParams params)
 	#endif
 
 	// We can't stand pat if checked. Also, if checked, we try check evasion (generate all moves).
-	isChecked = Board_IsChecked(ctx->Board, ctx->Board->PlayerTurn);
+	isChecked = Board_IsChecked(ctx->SearchBoard, ctx->SearchBoard->PlayerTurn);
 	
 	if(isChecked)
 		generateAllMoves = TRUE;
@@ -848,9 +837,6 @@ int Search_Quiesce(SearchContext* ctx, int alpha, int beta, SearchParams params)
 Finalize:
 
 	#ifdef STATS_SEARCH
-
-	if(hashHitPartial)
-		SStats.HashHitsCount++;
 
 	if(quiesce)
 		SStats.QuiescentNodeCount++;

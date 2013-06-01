@@ -1,7 +1,7 @@
-	
+
+#include <stdlib.h>
 #include "Zobrist.h"
 #include "Board.h"
-#include <stdlib.h>
 
 uint8_t Zobrist_Index[256];
 

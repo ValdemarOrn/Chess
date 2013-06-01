@@ -23,22 +23,22 @@ namespace Chess.Lib
 
 	public class TTable
 	{
-		[DllImport("C:\\Src\\_Tree\\Applications\\Chess\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "TTable_GetTableSize", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("Chess.Lib.dll", EntryPoint = "TTable_GetTableSize", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static unsafe extern int GetTableSize();
 
-		[DllImport("C:\\Src\\_Tree\\Applications\\Chess\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "TTable_GetTable", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("Chess.Lib.dll", EntryPoint = "TTable_GetTable", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static unsafe extern TTableEntry* GetTable();
 
-		[DllImport("C:\\Src\\_Tree\\Applications\\Chess\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "TTable_Init", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("Chess.Lib.dll", EntryPoint = "TTable_Init", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static unsafe extern void Init(int sizeMB);
 
-		[DllImport("C:\\Src\\_Tree\\Applications\\Chess\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "TTable_Delete", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("Chess.Lib.dll", EntryPoint = "TTable_Delete", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static unsafe extern void Delete();
 
-		[DllImport("C:\\Src\\_Tree\\Applications\\Chess\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "TTable_Read", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("Chess.Lib.dll", EntryPoint = "TTable_Read", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static unsafe extern TTableEntry* Read(ulong hash);
 
-		[DllImport("C:\\Src\\_Tree\\Applications\\Chess\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "TTable_Insert", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("Chess.Lib.dll", EntryPoint = "TTable_Insert", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static unsafe extern bool Insert(TTableEntry* entry);
 	}
 }

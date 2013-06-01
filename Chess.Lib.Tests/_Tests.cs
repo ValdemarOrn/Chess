@@ -13,5 +13,11 @@ namespace Chess.Lib.Tests
 			Manager.InitLibrary();
 		}
 
+		[AssemblyCleanup()]
+		public static void Cleanup()
+		{
+			TTable.Delete();
+		}
+
 	}
 }

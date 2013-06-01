@@ -33,6 +33,19 @@
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <OutputPath>bin\Debug\</OutputPath>
+    <PlatformTarget>x86</PlatformTarget>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -56,7 +69,7 @@
       <Project>{c69f5f4a-0b82-4689-8e54-df39f61eddff}</Project>
       <Name>Chess.Uci</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Chess\Chess.Base.csproj">
+    <ProjectReference Include="..\Chess.Base\Chess.Base.csproj">
       <Project>{5c3de354-edd4-4377-a3d0-a33a5d2c7c71}</Project>
       <Name>Chess.Base</Name>
     </ProjectReference>

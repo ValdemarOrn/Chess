@@ -32,7 +32,7 @@ extern "C"
 	
 	typedef struct
 	{
-		Move Move;
+		Move HistoryMove;
 		
 		uint64_t PrevAttacksWhite;
 		uint64_t PrevAttacksBlack;

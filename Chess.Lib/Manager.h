@@ -5,7 +5,7 @@
 
 extern "C"
 {
-	typedef void (*callbackFunction)(const char* key, const char* value);
+	typedef void (__stdcall *callbackFunction)(const char* key, const char* value);
 
 	const char* const Message_BeginMessage = "%%BEGIN%%";
 	const char* const Message_EndMessage = "%%END%%";

@@ -21,7 +21,9 @@ extern "C"
 
 	inline int Rook_Index(int pos, uint64_t permutation)
 	{
-		int index = (int)((permutation * Rook_Magic[pos]) >> Rook_Shift[pos]);
+		uint64_t val = (permutation * Rook_Magic[pos]);
+		uint32_t shift = (int)Rook_Shift[pos];
+		int index = (int)(val >> shift);
 		return index;
 	}
 
@@ -32,7 +34,7 @@ extern "C"
 
 		for(int i=0; i<64; i++)
 		{
-			int bits = Rook_Bits[i];
+			uint64_t bits = Rook_Bits[i];
 			Rook_Shift[i] = 64 - Rook_Bits[i];
 			int len = 1 << bits;
 			Rook_Tables[i] = new uint64_t[len];

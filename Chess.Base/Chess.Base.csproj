@@ -2,7 +2,7 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{5C3DE354-EDD4-4377-A3D0-A33A5D2C7C71}</ProjectGuid>
@@ -68,6 +68,8 @@
     <Compile Include="Perft.cs" />
     <Compile Include="Pieces.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Zobrist.cs" />
+    <Compile Include="ZobristKeys.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

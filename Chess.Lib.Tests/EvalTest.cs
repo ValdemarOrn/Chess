@@ -14,7 +14,6 @@ namespace Chess.Lib.Tests
 
 			var result = Eval.Evaluate(b);
 			Assert.AreEqual(20, result);
-
 		}
 
 		[TestMethod]

@@ -2,8 +2,8 @@
 #define BITBOARD
 
 #include "Default.h"
-#include <intrin.h>
-#pragma intrinsic(_BitScanForward)
+#include "Intrinsics.h"
+//#pragma intrinsic(_BitScanForward)
 
 extern "C"
 {
@@ -77,25 +77,25 @@ extern "C"
 	__inline_always uint64_t Bitboard_Unset(uint64_t val, int index)
 	{
 		uint64_t output = val;
-		_bittestandreset64((__int64*)&output, index);
+		Intrin_BitTestAndReset64(&output, index);
 		return output;
 	}
 
 	__inline_always uint64_t Bitboard_Set(uint64_t val, int index)
 	{
 		uint64_t output = val;
-		_bittestandset64((__int64*)&output, index);
+		Intrin_BitTestAndSet64(&output, index);
 		return output;
 	}
 
 	__inline_always void Bitboard_UnsetRef(uint64_t* val, int index)
 	{
-		_bittestandreset64((__int64*)val, index);
+		Intrin_BitTestAndReset64(val, index);
 	}
 
 	__inline_always void Bitboard_SetRef(uint64_t* val, int index)
 	{
-		_bittestandset64((__int64*)val, index);
+		Intrin_BitTestAndSet64(val, index);
 	}
 
 
@@ -104,13 +104,13 @@ extern "C"
 	// returns 1 if bit #index is set, 0 if unset
 	__inline_always int Bitboard_Get(uint64_t val, int index)
 	{
-		uint8_t value = _bittest64((__int64*)&val, index);
+		uint8_t value = Intrin_BitTest64(&val, index);
 		return value;
 	}
 
 	__inline_always int Bitboard_GetRef(uint64_t* val, int index)
 	{
-		uint8_t value = _bittest64((__int64*)val, index);
+		uint8_t value = Intrin_BitTest64(val, index);
 		return value;
 	}
 
@@ -129,25 +129,26 @@ extern "C"
 	// Returns the least significant bit (LSB) that is set
 	__inline_always int Bitboard_ForwardBit(uint64_t val)
 	{
-		unsigned long index;
-		unsigned char isNonzero = _BitScanForward64(&index, val);
+		uint32_t index;
+		unsigned char isNonzero = Intrin_BitScanForward64(&index, val);
 	
-		return (isNonzero) ? index : -1;
+		return (isNonzero) ? (int)index : -1;
 	}
 
 	// Returns the most significant bit (LSB) that is set
 	__inline_always int Bitboard_ReverseBit(uint64_t val)
 	{
-		unsigned long index;
-		unsigned char isNonzero = _BitScanReverse64(&index, val);
+		uint32_t index;
+		unsigned char isNonzero = Intrin_BitScanReverse64(&index, val);
 	
-		return (isNonzero) ? index : -1;
+		return (isNonzero) ? (int)index : -1;
 	}
 
 	// Counts the number of set bits in a bitboard
 	__inline_always int Bitboard_PopCount(uint64_t val)
 	{
-		unsigned long count = __popcnt64(val);
+		unsigned long count = 0;
+		count = (unsigned long)Intrin_PopCnt64(val);
 		return (int)count;
 	}
 

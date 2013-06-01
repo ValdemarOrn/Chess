@@ -56,7 +56,7 @@ namespace Chess.Base.Tests
 				board.Move(move.From, move.To, true);
 			}
 
-			var board2 = Notation.FENtoBoard("rnbqkb1r/pp2pppp/2p2n2/3p4/2B1P3/2N5/PPPP1PPP/R1BQK1NR w KQkq");
+			var board2 = Notation.ReadFEN("rnbqkb1r/pp2pppp/2p2n2/3p4/2B1P3/2N5/PPPP1PPP/R1BQK1NR w KQkq");
 
 			Assert.IsTrue(board2.State.SequenceEqual(board.State));
 			Assert.AreEqual(Color.White, board.PlayerTurn);
@@ -74,7 +74,7 @@ namespace Chess.Base.Tests
 				board.Move(move.From, move.To, true);
 			}
 
-			var board2 = Notation.FENtoBoard("rnbqk2r/pppp1ppp/3b1n2/4p3/4P3/3B1N2/PPPP1PPP/RNBQ1RK1 b kq");
+			var board2 = Notation.ReadFEN("rnbqk2r/pppp1ppp/3b1n2/4p3/4P3/3B1N2/PPPP1PPP/RNBQ1RK1 b kq");
 
 			Assert.IsTrue(board2.State.SequenceEqual(board.State));
 			Assert.AreEqual(Color.Black, board.PlayerTurn);
@@ -92,7 +92,7 @@ namespace Chess.Base.Tests
 				board.Move(move.From, move.To, true);
 			}
 
-			var board2 = Notation.FENtoBoard("rnbq1rk1/pppp1ppp/3b1n2/4p3/4P3/3B1N2/PPPP1PPP/RNBQ1RK1 w -");
+			var board2 = Notation.ReadFEN("rnbq1rk1/pppp1ppp/3b1n2/4p3/4P3/3B1N2/PPPP1PPP/RNBQ1RK1 w -");
 
 			Assert.IsTrue(board2.State.SequenceEqual(board.State));
 			Assert.AreEqual(Color.White, board.PlayerTurn);
@@ -110,7 +110,7 @@ namespace Chess.Base.Tests
 				board.Move(move.From, move.To, true);
 			}
 
-			var board2 = Notation.FENtoBoard("2kr1b1r/ppq1pp1p/2npbnp1/8/4P3/N1PBBN2/PP1Q1PPP/2KR3R w -");
+			var board2 = Notation.ReadFEN("2kr1b1r/ppq1pp1p/2npbnp1/8/4P3/N1PBBN2/PP1Q1PPP/2KR3R w -");
 
 			Assert.IsTrue(moves[6].Capture > 0);
 			Assert.IsTrue(moves[9].Capture > 0);
@@ -164,7 +164,7 @@ namespace Chess.Base.Tests
 				board.Move(move.From, move.To, true);
 			}
 
-			var board2 = Notation.FENtoBoard("8/8/1p5P/p2R4/6r1/1Pkn2P1/P2p2K1/8 w - - 0 55");
+			var board2 = Notation.ReadFEN("8/8/1p5P/p2R4/6r1/1Pkn2P1/P2p2K1/8 w - - 0 55");
 
 			Assert.IsTrue(board2.State.SequenceEqual(board.State));
 		}
@@ -188,7 +188,7 @@ namespace Chess.Base.Tests
 				}
 			}
 
-			var board2 = Notation.FENtoBoard("7Q/8/1p6/p2R4/6r1/1P1n2P1/P1k3K1/3q4 w - - 0 57");
+			var board2 = Notation.ReadFEN("7Q/8/1p6/p2R4/6r1/1P1n2P1/P1k3K1/3q4 w - - 0 57");
 
 			Assert.IsTrue(board2.State.SequenceEqual(board.State));
 		}
@@ -212,7 +212,7 @@ namespace Chess.Base.Tests
 				}
 			}
 
-			var board2 = Notation.FENtoBoard("8/8/1p3Q2/p2R4/4r1q1/1P1n2PK/P2k4/8 w - - 0 61");
+			var board2 = Notation.ReadFEN("8/8/1p3Q2/p2R4/4r1q1/1P1n2PK/P2k4/8 w - - 0 61");
 
 			Assert.IsTrue(board2.State.SequenceEqual(board.State));
 		}
@@ -236,7 +236,7 @@ namespace Chess.Base.Tests
 				}
 			}
 
-			var board2 = Notation.FENtoBoard("8/pp2kpp1/3pq2p/8/3P3P/P1P1Q1P1/5P2/6K1 w - - 0 36");
+			var board2 = Notation.ReadFEN("8/pp2kpp1/3pq2p/8/3P3P/P1P1Q1P1/5P2/6K1 w - - 0 36");
 
 			Assert.IsTrue(board2.State.SequenceEqual(board.State));
 		}

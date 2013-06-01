@@ -31,7 +31,7 @@ int Order_Captures(SearchContext* ctx, Order* order, int ply)
 			
 			if (order->MoveRank[i] == 0)
 			{
-				_Bool badCapture = Board_BadCapture(ctx->Board, &order->MoveList[i]);
+				_Bool badCapture = Board_BadCapture(ctx->SearchBoard, &order->MoveList[i]);
 				order->MoveRank[i] = Order_StageCaptures + (10 * victim - attacker) - badCapture * 1000;
 				count++;
 			}
@@ -280,7 +280,6 @@ int Order_QuiesceFilter(SearchContext* ctx, Order* moves)
 void Order_SetKillerMove(MoveSmall* killerArray, int from, int to, int piece)
 {
 	MoveSmall* moves = killerArray;
-	_Bool exists = false;
 
 	int lowestScore = 10000000;
 	int index = -1;

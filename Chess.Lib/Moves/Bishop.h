@@ -21,7 +21,9 @@ extern "C"
 
 	inline int Bishop_Index(int pos, uint64_t permutation)
 	{
-		int index = (int)((permutation * Bishop_Magic[pos]) >> Bishop_Shift[pos]);
+		uint64_t val = (permutation * Bishop_Magic[pos]);
+		uint32_t shift = (int)Bishop_Shift[pos];
+		int index = (int)(val >> shift);
 		return index;
 	}
 
@@ -32,7 +34,7 @@ extern "C"
 
 		for(int i=0; i<64; i++)
 		{
-			int bits = Bishop_Bits[i];
+			uint64_t bits = Bishop_Bits[i];
 			Bishop_Shift[i] = 64 - Bishop_Bits[i];
 			int len = 1 << bits;
 			Bishop_Tables[i] = new uint64_t[len];

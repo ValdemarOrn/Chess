@@ -55,7 +55,7 @@ extern "C"
 		uint8_t FiftyMoveRulePlies;
 		uint8_t Castle;
 		
-		MoveHistory* MoveHistory;
+		MoveHistory* History;
 
 	} Board;
 	#pragma pack(pop)

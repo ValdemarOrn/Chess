@@ -76,7 +76,7 @@ namespace Chess.Lib.TestPerf
 			int depth = pos.Depth;
 			ulong expectedCount = pos.ExpectedCount;
 
-			var x = Chess.Base.Notation.FENtoBoard(fenString);
+			var x = Chess.Base.Notation.ReadFEN(fenString);
 			var b = Helpers.ManagedBoardToNative(x);
 
 			var start = DateTime.Now;

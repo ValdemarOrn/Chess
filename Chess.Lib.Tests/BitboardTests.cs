@@ -56,12 +56,16 @@ namespace Chess.Lib.Tests
 			Bitboard.UnsetRef(ref max, 63);
 			Assert.AreEqual((ulong)0, max);
 
-			var set = Bitboard.Set(max, 63);
-			Assert.AreEqual(0x8000000000000000, set);
+			var set = Bitboard.Set(max, 55);
+			Assert.AreEqual((ulong)0x80000000000000, set);
+			Assert.AreEqual((ulong)0, max);
+
+			set = Bitboard.Set(max, 63);
+			Assert.AreEqual((ulong)0x8000000000000000, set);
 			Assert.AreEqual((ulong)0, max);
 
 			Bitboard.SetRef(ref max, 63);
-			Assert.AreEqual(0x8000000000000000, max);
+			Assert.AreEqual((ulong)0x8000000000000000, max);
 		}
 
 		[TestMethod]
@@ -113,7 +117,7 @@ namespace Chess.Lib.Tests
 		{
 			ulong val = (ulong)0xC004003000020003;
 			var list = Bitboard.Bitboard_BitList(val);
-			var list2 = "0,1,17,36,37,50,62,63".Split(',').Select(x => Convert.ToByte(x)).ToList();
+			var list2 = new byte[] { 0, 1, 17, 36, 37, 50, 62, 63 }.Select(x => Convert.ToByte(x)).ToList();
 
 			Assert.IsTrue(list2.SequenceEqual(list));	
 		}
@@ -123,7 +127,7 @@ namespace Chess.Lib.Tests
 		{
 			ulong val = (ulong)0xC430044A20001204;
 			var list = Bitboard.Bitboard_BitList(val);
-			var list2 = "2,9,12,29,33,35,38,42,52,53,58,62,63".Split(',').Select(x => Convert.ToByte(x)).ToList();
+			var list2 = new byte[] { 2, 9, 12, 29, 33, 35, 38, 42, 52, 53, 58, 62, 63 }.Select(x => Convert.ToByte(x)).ToList();
 
 			Assert.IsTrue(list2.SequenceEqual(list));
 		}

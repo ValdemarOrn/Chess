@@ -141,7 +141,7 @@ namespace Chess.Lib.BitboardEditor
 		{
 			try
 			{
-				var newBoard = Notation.FENtoBoard(textBoxFEN.Text);
+				var newBoard = Notation.ReadFEN(textBoxFEN.Text);
 				boardControl1.State = newBoard.State;
 				checkBoxCastlingBK.Checked = newBoard.CanCastleKBlack;
 				checkBoxCastlingBQ.Checked = newBoard.CanCastleQBlack;

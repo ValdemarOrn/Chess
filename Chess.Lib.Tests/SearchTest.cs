@@ -10,7 +10,7 @@ namespace Chess.Lib.Tests
 		[TestMethod]
 		public void TestSearchSimple()
 		{
-			var bx = Notation.FENtoBoard("3k4/8/8/8/2q5/3P4/7K/7Q w - - 0 1");
+			var bx = Notation.ReadFEN("3k4/8/8/8/2q5/3P4/7K/7Q w - - 0 1");
 			var b = Helpers.ManagedBoardToNative(bx);
 
 			var bestMove = Search.SearchPos(b, 1);
@@ -23,7 +23,7 @@ namespace Chess.Lib.Tests
 		[TestMethod]
 		public void TestSearchCapture()
 		{
-			var bx = Notation.FENtoBoard("4k3/8/5r2/8/8/3P1Q2/7K/8 w - - 0 1");
+			var bx = Notation.ReadFEN("4k3/8/5r2/8/8/3P1Q2/7K/8 w - - 0 1");
 			var b = Helpers.ManagedBoardToNative(bx);
 
 			var bestMove = Search.SearchPos(b, 1);
@@ -36,7 +36,7 @@ namespace Chess.Lib.Tests
 		[TestMethod]
 		public void TestSearchCapture2()
 		{
-			var bx = Notation.FENtoBoard("4k3/8/2r2N2/8/8/3P1Q2/7K/8 b - - 0 1");
+			var bx = Notation.ReadFEN("4k3/8/2r2N2/8/8/3P1Q2/7K/8 b - - 0 1");
 			var b = Helpers.ManagedBoardToNative(bx);
 
 			var bestMove = Search.SearchPos(b, 1);
@@ -49,7 +49,7 @@ namespace Chess.Lib.Tests
 		[TestMethod]
 		public void TestSearchCapture3()
 		{
-			var bx = Notation.FENtoBoard("4k3/8/2r2N2/8/8/3P1Q2/7K/8 b - - 0 1");
+			var bx = Notation.ReadFEN("4k3/8/2r2N2/8/8/3P1Q2/7K/8 b - - 0 1");
 			var b = Helpers.ManagedBoardToNative(bx);
 
 			var bestMove = Search.SearchPos(b, 2);
@@ -62,7 +62,7 @@ namespace Chess.Lib.Tests
 		[TestMethod]
 		public void TestSearchCapture4()
 		{
-			var bx = Notation.FENtoBoard("4k3/8/2r5/8/4N3/3P1Q2/7K/8 w - - 0 1");
+			var bx = Notation.ReadFEN("4k3/8/2r5/8/4N3/3P1Q2/7K/8 w - - 0 1");
 			var b = Helpers.ManagedBoardToNative(bx);
 
 			var bestMove = Search.SearchPos(b, 3);
@@ -75,7 +75,7 @@ namespace Chess.Lib.Tests
 		[TestMethod]
 		public void TestSearchCapture5()
 		{
-			var bx = Notation.FENtoBoard("4k3/8/2r5/8/4N3/3P1Q2/7K/8 w - - 0 1");
+			var bx = Notation.ReadFEN("4k3/8/2r5/8/4N3/3P1Q2/7K/8 w - - 0 1");
 			var b = Helpers.ManagedBoardToNative(bx);
 
 			var bestMove = Search.SearchPos(b, 4); // should be the same result as TestSearchCapture4
@@ -88,7 +88,7 @@ namespace Chess.Lib.Tests
 		[TestMethod]
 		public void TestSearchDeeper()
 		{
-			var bx = Notation.FENtoBoard("4k3/8/2r5/8/4N3/3P1Q2/7K/8 w - - 0 1");
+			var bx = Notation.ReadFEN("4k3/8/2r5/8/4N3/3P1Q2/7K/8 w - - 0 1");
 			var b = Helpers.ManagedBoardToNative(bx);
 
 			var bestMove = Search.SearchPos(b, 4);
@@ -101,7 +101,7 @@ namespace Chess.Lib.Tests
 		[TestMethod]
 		public void TestPromotion()
 		{
-			var bx = Notation.FENtoBoard("k7/pp5P/8/8/8/8/8/7K w - - 0 1");
+			var bx = Notation.ReadFEN("k7/pp5P/8/8/8/8/8/7K w - - 0 1");
 			var b = Helpers.ManagedBoardToNative(bx);
 
 			var bestMove = Search.SearchPos(b, 1);
@@ -118,7 +118,7 @@ namespace Chess.Lib.Tests
 			// instead it moved the king and blundered a win
 			// Edit: It was actually a bug in the UCI interface. Still, a good test
 
-			var bx = Notation.FENtoBoard("7K/8/1k5b/6n1/6P1/8/p7/8 b - - 3 61 ");
+			var bx = Notation.ReadFEN("7K/8/1k5b/6n1/6P1/8/p7/8 b - - 3 61 ");
 			var b = Helpers.ManagedBoardToNative(bx);
 
 			var bestMove = Search.SearchPos(b, 8);
@@ -139,7 +139,7 @@ namespace Chess.Lib.Tests
 		//[TestMethod]
 		public void TestSearch6()
 		{
-			var bx = Notation.FENtoBoard("4k3/8/2r5/8/4N3/3P1Q2/7K/8 w - - 0 1");//new Chess.Board(true);
+			var bx = Notation.ReadFEN("4k3/8/2r5/8/4N3/3P1Q2/7K/8 w - - 0 1");//new Chess.Board(true);
 			var b = Helpers.ManagedBoardToNative(bx);
 
 			var bestMove = Search.SearchPos(b, 8);
@@ -159,7 +159,7 @@ namespace Chess.Lib.Tests
 			Console.WriteLine("Position: " + fen);
 			Console.WriteLine("");
 
-			var bx = Notation.FENtoBoard(fen);
+			var bx = Notation.ReadFEN(fen);
 			var b = Helpers.ManagedBoardToNative(bx);
 
 			DateTime start = DateTime.Now;

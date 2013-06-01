@@ -228,16 +228,16 @@ namespace Chess.Lib.MoveClasses
 		}
 
 
-		[DllImport("C:\\Src\\_Tree\\Applications\\Chess\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Bishop_SetupTables", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("Chess.Lib.dll", EntryPoint = "Bishop_SetupTables", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		static extern void SetupTables();
 
-		[DllImport("C:\\Src\\_Tree\\Applications\\Chess\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Bishop_Load", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("Chess.Lib.dll", EntryPoint = "Bishop_Load", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		static extern int Load(int pos, ulong permutation, ulong moveBoard);
 
-		[DllImport("C:\\Src\\_Tree\\Applications\\Chess\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Bishop_LoadVector", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("Chess.Lib.dll", EntryPoint = "Bishop_LoadVector", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		static extern int LoadVector(int pos, ulong moveBoard);
 
-		[DllImport("C:\\Src\\_Tree\\Applications\\Chess\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Bishop_Read", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("Chess.Lib.dll", EntryPoint = "Bishop_Read", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static extern ulong Read(int pos, ulong occupancy);
 
 	}

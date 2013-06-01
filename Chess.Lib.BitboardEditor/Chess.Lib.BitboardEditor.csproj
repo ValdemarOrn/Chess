@@ -2,7 +2,7 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{CDB74489-AC6B-47B0-878F-F228456F7FA3}</ProjectGuid>
@@ -110,7 +110,7 @@
       <Project>{79CAA135-2881-4E2D-93E3-45257546E766}</Project>
       <Name>Chess.Lib.Managed</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Chess\Chess.Base.csproj">
+    <ProjectReference Include="..\Chess.Base\Chess.Base.csproj">
       <Project>{5c3de354-edd4-4377-a3d0-a33a5d2c7c71}</Project>
       <Name>Chess.Base</Name>
     </ProjectReference>

@@ -1,4 +1,8 @@
 
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+
 #include "Board.h"
 #include "Bitboard.h"
 #include "Zobrist.h"
@@ -10,9 +14,6 @@
 #include "Moves\Queen.h"
 #include "Moves\Pawn.h"
 #include "Search.h"
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
 
 #define MAX_GAME_LENGTH 1024
 
@@ -24,7 +25,7 @@ uint64_t Board_MakesThatCanSelfCheck = 0;
 Board* Board_Create()
 {
 	Board* board = new Board();
-	board->MoveHistory = new MoveHistory[MAX_GAME_LENGTH];
+	board->History = new MoveHistory[MAX_GAME_LENGTH];
 
 	Board_Init(board, 0);
 	return board;
@@ -32,7 +33,7 @@ Board* Board_Create()
 
 void Board_Delete(Board* board)
 {
-	delete board->MoveHistory;
+	delete board->History;
 	delete board;
 }
 
@@ -41,8 +42,8 @@ Board* Board_Copy(Board* board)
 	Board* newBoard = new Board();
 	memcpy(newBoard, board, sizeof(Board));
 
-	newBoard->MoveHistory = new MoveHistory[MAX_GAME_LENGTH];
-	memcpy(newBoard->MoveHistory, board->MoveHistory, MAX_GAME_LENGTH * sizeof(MoveHistory));
+	newBoard->History = new MoveHistory[MAX_GAME_LENGTH];
+	memcpy(newBoard->History, board->History, MAX_GAME_LENGTH * sizeof(MoveHistory));
 	return newBoard;
 }
 
@@ -191,7 +192,6 @@ uint64_t Board_CalculateAttackMap(Board* board, int color)
 	#endif
 
 	uint64_t attackBoard = 0;
-	uint8_t positions[20];
 
 	for(int i = 0; i < 64; i++)
 	{
@@ -392,7 +392,7 @@ _Bool Board_Make(Board* board, int from, int to)
 	}
 
 	// 1. put info in history
-	MoveHistory* history = &board->MoveHistory[board->CurrentMove];
+	MoveHistory* history = &board->History[board->CurrentMove];
 	history->PrevAttacksBlack = board->_AttacksBlack;
 	history->PrevAttacksWhite = board->_AttacksWhite;
 	history->PrevCastleState = board->Castle;
@@ -402,14 +402,14 @@ _Bool Board_Make(Board* board, int from, int to)
 	history->PrevHash = board->Hash;
 
 	// 2. Create the Move object
-	history->Move.CapturePiece = capturePiece;
-	history->Move.CaptureTile = victimTile;
-	history->Move.Castle = castlingType;
-	history->Move.From = from;
-	history->Move.PlayerColor = color;
-	history->Move.PlayerPiece = playerPiece;
-	history->Move.Promotion = 0; // set outside the Make() function, during search
-	history->Move.To = to;
+	history->HistoryMove.CapturePiece = capturePiece;
+	history->HistoryMove.CaptureTile = victimTile;
+	history->HistoryMove.Castle = castlingType;
+	history->HistoryMove.From = from;
+	history->HistoryMove.PlayerColor = color;
+	history->HistoryMove.PlayerPiece = playerPiece;
+	history->HistoryMove.Promotion = 0; // set outside the Make() function, during search
+	history->HistoryMove.To = to;
 
 	// 3. Make the move
 	Board_ClearPiece(board, from);
@@ -472,7 +472,7 @@ _Bool Board_Make(Board* board, int from, int to)
 	}
 	board->Hash ^= Zobrist_Keys[ZOBRIST_ENPASSANT][board->EnPassantTile];
 
-	board->FiftyMoveRulePlies = (history->Move.CapturePiece > 0 || playerPiece == PIECE_PAWN) ? 0 : board->FiftyMoveRulePlies + 1;
+	board->FiftyMoveRulePlies = (history->HistoryMove.CapturePiece > 0 || playerPiece == PIECE_PAWN) ? 0 : board->FiftyMoveRulePlies + 1;
 	
 	board->Hash ^= Zobrist_Keys[ZOBRIST_SIDE][board->PlayerTurn];
 	board->PlayerTurn = (board->PlayerTurn == COLOR_WHITE) ? COLOR_BLACK : COLOR_WHITE;
@@ -548,14 +548,13 @@ _Bool Board_MakeNullMove(Board* board)
 
 	int from = Bitboard_ForwardBit(kingBoard);
 	int to = from;
-	int victimTile = to; // which square to clear. Only differs from the "to" square during en passant attacks
 
 	// safety check, we are actually moving a piece that belongs to the current player
 	if(board->PlayerTurn != Board_Color(board, from))
 		return 0;
 
 	// 1. put info in history
-	MoveHistory* history = &board->MoveHistory[board->CurrentMove];
+	MoveHistory* history = &board->History[board->CurrentMove];
 	history->PrevAttacksBlack = board->_AttacksBlack;
 	history->PrevAttacksWhite = board->_AttacksWhite;
 	history->PrevCastleState = board->Castle;
@@ -565,14 +564,14 @@ _Bool Board_MakeNullMove(Board* board)
 	history->PrevHash = board->Hash;
 
 	// 2. Create the Move object
-	history->Move.CapturePiece = 0;
-	history->Move.CaptureTile = to;
-	history->Move.Castle = 0;
-	history->Move.From = from;
-	history->Move.PlayerColor = color;
-	history->Move.PlayerPiece = playerPiece;
-	history->Move.Promotion = 0; // set outside the Make() function, during search
-	history->Move.To = to;
+	history->HistoryMove.CapturePiece = 0;
+	history->HistoryMove.CaptureTile = to;
+	history->HistoryMove.Castle = 0;
+	history->HistoryMove.From = from;
+	history->HistoryMove.PlayerColor = color;
+	history->HistoryMove.PlayerPiece = playerPiece;
+	history->HistoryMove.Promotion = 0; // set outside the Make() function, during search
+	history->HistoryMove.To = to;
 
 	// 4. update board data, enpassant square, castling, 50 move rule, hash
 
@@ -582,7 +581,7 @@ _Bool Board_MakeNullMove(Board* board)
 	board->EnPassantTile = 0;
 	board->Hash ^= Zobrist_Keys[ZOBRIST_ENPASSANT][board->EnPassantTile];
 
-	board->FiftyMoveRulePlies = (history->Move.CapturePiece > 0 || playerPiece == PIECE_PAWN) ? 0 : board->FiftyMoveRulePlies + 1;
+	board->FiftyMoveRulePlies = (history->HistoryMove.CapturePiece > 0 || playerPiece == PIECE_PAWN) ? 0 : board->FiftyMoveRulePlies + 1;
 	
 	board->Hash ^= Zobrist_Keys[ZOBRIST_SIDE][board->PlayerTurn];
 	board->PlayerTurn = (board->PlayerTurn == COLOR_WHITE) ? COLOR_BLACK : COLOR_WHITE;
@@ -611,8 +610,8 @@ void Board_Unmake(Board* board)
 	// 4. For debugging, compute new hash and compare with hash from history. must match!
 
 	// 1. Set board data from history, enpassant square, castling, 50 move, hash. Recalculate what's needed
-	MoveHistory* history = &board->MoveHistory[board->CurrentMove - 1];
-	Move* move = &history->Move;
+	MoveHistory* history = &board->History[board->CurrentMove - 1];
+	Move* move = &history->HistoryMove;
 
 	assert(Board_Piece(board, move->To) == ((move->Promotion > 0) ? move->Promotion : move->PlayerPiece));
 
@@ -685,7 +684,7 @@ _Bool Board_Promote(Board* board, int square, int pieceType)
 	int color = Board_Color(board, square);
 	Board_ClearPiece(board, square);
 	Board_SetPiece(board, square, pieceType, color);
-	board->MoveHistory[board->CurrentMove - 1].Move.Promotion = pieceType;
+	board->History[board->CurrentMove - 1].HistoryMove.Promotion = pieceType;
 
 //	board->_AttacksWhite = Board_AttackMap(board, COLOR_WHITE);
 //	board->_AttacksBlack = Board_AttackMap(board, COLOR_BLACK);

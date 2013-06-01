@@ -47,34 +47,34 @@ namespace Chess.Lib
 
 		// --------------------- Bitscan Operations ---------------------
 
-		[DllImport("C:\\Src\\_Tree\\Applications\\Chess\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Bitboard_Unset", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("Chess.Lib.dll", EntryPoint = "Bitboard_Unset", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static extern ulong Unset(ulong val, int index);
 
-		[DllImport("C:\\Src\\_Tree\\Applications\\Chess\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Bitboard_Set", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("Chess.Lib.dll", EntryPoint = "Bitboard_Set", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static extern ulong Set(ulong val, int index);
 
-		[DllImport("C:\\Src\\_Tree\\Applications\\Chess\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Bitboard_UnsetRef", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("Chess.Lib.dll", EntryPoint = "Bitboard_UnsetRef", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static extern void UnsetRef(ref ulong val, int index);
 
-		[DllImport("C:\\Src\\_Tree\\Applications\\Chess\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Bitboard_SetRef", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("Chess.Lib.dll", EntryPoint = "Bitboard_SetRef", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static extern void SetRef(ref ulong val, int index);
 
-		[DllImport("C:\\Src\\_Tree\\Applications\\Chess\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Bitboard_Get", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("Chess.Lib.dll", EntryPoint = "Bitboard_Get", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static extern bool Get(ulong val, int index);
 
-		[DllImport("C:\\Src\\_Tree\\Applications\\Chess\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Bitboard_GetRef", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("Chess.Lib.dll", EntryPoint = "Bitboard_GetRef", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static extern bool GetRef(ref ulong val, int index);
 
-		[DllImport("C:\\Src\\_Tree\\Applications\\Chess\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Bitboard_ForwardBit", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("Chess.Lib.dll", EntryPoint = "Bitboard_ForwardBit", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static extern int ForwardBit(ulong value);
 
-		[DllImport("C:\\Src\\_Tree\\Applications\\Chess\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Bitboard_ReverseBit", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("Chess.Lib.dll", EntryPoint = "Bitboard_ReverseBit", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static extern int ReverseBit(ulong value);
 
-		[DllImport("C:\\Src\\_Tree\\Applications\\Chess\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Bitboard_PopCount", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("Chess.Lib.dll", EntryPoint = "Bitboard_PopCount", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static extern int PopCount(ulong value);
 
-		[DllImport("C:\\Src\\_Tree\\Applications\\Chess\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Bitboard_BitList", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("Chess.Lib.dll", EntryPoint = "Bitboard_BitList", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static extern int BitListIntPtr(ulong value, IntPtr outputList_s64);
 
 		/// <summary>

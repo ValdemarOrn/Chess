@@ -443,7 +443,7 @@ namespace Chess.Lib.Tests
 			BoardStruct* b = (BoardStruct*)Board.Create();
 			Board.Init(b, 1);
 
-			var finalBoard = Chess.Base.Notation.FENtoBoard(endState);
+			var finalBoard = Chess.Base.Notation.ReadFEN(endState);
 			var fBoard = Helpers.ManagedBoardToNative(finalBoard);
 			Assert.AreEqual(Zobrist.Calculate(fBoard), fBoard->Hash);
 
@@ -555,7 +555,7 @@ namespace Chess.Lib.Tests
 			string fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 
 			byte* str = stackalloc byte[100];
-			var bb = Chess.Base.Notation.FENtoBoard(fen);
+			var bb = Chess.Base.Notation.ReadFEN(fen);
 			var b = Helpers.ManagedBoardToNative(bb);
 
 			Board.ToFEN(b, str);
@@ -569,7 +569,7 @@ namespace Chess.Lib.Tests
 			string fen = "r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq - 0 1";
 
 			byte* str = stackalloc byte[100];
-			var bb = Chess.Base.Notation.FENtoBoard(fen);
+			var bb = Chess.Base.Notation.ReadFEN(fen);
 			var b = Helpers.ManagedBoardToNative(bb);
 
 			Board.ToFEN(b, str);
@@ -583,7 +583,7 @@ namespace Chess.Lib.Tests
 			string fen = "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - - 0 1";
 
 			byte* str = stackalloc byte[100];
-			var bb = Chess.Base.Notation.FENtoBoard(fen);
+			var bb = Chess.Base.Notation.ReadFEN(fen);
 			var b = Helpers.ManagedBoardToNative(bb);
 
 			Board.ToFEN(b, str);
@@ -597,7 +597,7 @@ namespace Chess.Lib.Tests
 			string fen = "r3k2r/Pppp1ppp/1b3nbN/nP6/BBP1P3/q4N2/Pp1P2PP/R2Q1RK1 w kq - 0 1";
 
 			byte* str = stackalloc byte[100];
-			var bb = Chess.Base.Notation.FENtoBoard(fen);
+			var bb = Chess.Base.Notation.ReadFEN(fen);
 			var b = Helpers.ManagedBoardToNative(bb);
 
 			Board.ToFEN(b, str);
@@ -611,7 +611,7 @@ namespace Chess.Lib.Tests
 			string fen = "rnbqkb1r/pp1p1ppp/2p5/4P3/2B5/8/PPP1NnPP/RNBQK2R w KQkq - 0 6";
 
 			byte* str = stackalloc byte[100];
-			var bb = Chess.Base.Notation.FENtoBoard(fen);
+			var bb = Chess.Base.Notation.ReadFEN(fen);
 			var b = Helpers.ManagedBoardToNative(bb);
 
 			Board.ToFEN(b, str);
@@ -623,7 +623,7 @@ namespace Chess.Lib.Tests
 		public unsafe void TestSmallestAttacker()
 		{
 			string fen = @"2kq4/8/2p5/3b3R/8/4N3/8/2R3K1 w KQkq - 0 1";
-			var bb = Chess.Base.Notation.FENtoBoard(fen);
+			var bb = Chess.Base.Notation.ReadFEN(fen);
 			var b = Helpers.ManagedBoardToNative(bb);
 
 			var attacker = Board.GetSmallestAttacker(b, 35, Board.COLOR_BLACK, 0);
@@ -634,7 +634,7 @@ namespace Chess.Lib.Tests
 		public unsafe void TestSmallestAttackerPinned()
 		{
 			string fen = @"2kq4/8/2p5/3b3R/8/4N3/8/2R3K1 w KQkq - 0 1";
-			var bb = Chess.Base.Notation.FENtoBoard(fen);
+			var bb = Chess.Base.Notation.ReadFEN(fen);
 			var b = Helpers.ManagedBoardToNative(bb);
 
 			var attacker = Board.GetSmallestAttacker(b, 35, Board.COLOR_BLACK, 0x40000000000);
@@ -645,7 +645,7 @@ namespace Chess.Lib.Tests
 		public unsafe void TestMakeNullMove()
 		{
 			string fen = @"2kq4/8/2p5/3b3R/8/4N3/8/2R3K1 w KQkq - 0 1";
-			var bb = Chess.Base.Notation.FENtoBoard(fen);
+			var bb = Chess.Base.Notation.ReadFEN(fen);
 			var b = Helpers.ManagedBoardToNative(bb);
 
 			var hash = b->Hash;

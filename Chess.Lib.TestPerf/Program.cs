@@ -8,15 +8,12 @@ namespace Chess.Lib.TestPerf
 {
 	unsafe class Program
 	{
-		static Program()
-		{
-			Manager.InitLibrary();
-		}
-
 		static void Main(string[] args)
 		{
+			Manager.InitLibrary();
+
 			PerftTestSuite.RunTests();
-			BasePerftTests.RunBasePerft();
+			//BasePerftTests.RunBasePerft();
 
 			//TestSearch();
 			//SearchTest.GenericSearchTest("r1b1k2r/2q1bppp/p2ppn2/1p4P1/3NPP2/2N2Q2/PPP4P/2KR1B1R b kq", 10);

@@ -25,13 +25,13 @@ namespace Chess.Lib
 			Init();
 		}
 
-		[DllImport("C:\\Src\\_Tree\\Applications\\Chess\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Eval_Init", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("Chess.Lib.dll", EntryPoint = "Eval_Init", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static extern void Init();
 
-		[DllImport("C:\\Src\\_Tree\\Applications\\Chess\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Eval_Evaluate", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("Chess.Lib.dll", EntryPoint = "Eval_Evaluate", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static unsafe extern int Evaluate(BoardStruct* board);
 
-		[DllImport("C:\\Src\\_Tree\\Applications\\Chess\\Chess.Lib\\x64\\bin\\Chess.Lib.dll", EntryPoint = "Eval_GetEvalStats", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("Chess.Lib.dll", EntryPoint = "Eval_GetEvalStats", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static unsafe extern EvalStats* GetEvalStats(int color);
 	}
 }
