@@ -108,16 +108,16 @@ extern "C"
 	extern SearchStats SStats;
 	#endif
 
-	__declspec(dllexport) MoveSmall Search_SearchPos(Board* board, int searchDepth);
-	__declspec(dllexport) _Bool Search_DrawByRepetition(Board* board);
+	__dllexport MoveSmall Search_SearchPos(Board* board, int searchDepth);
+	__dllexport _Bool Search_DrawByRepetition(Board* board);
 
 	// get some detailed statistics for the last search performed
-	__declspec(dllexport) SearchStats* Search_GetSearchStats();
+	__dllexport SearchStats* Search_GetSearchStats();
 
-	__declspec(dllexport) void Search_StopSearch();
+	__dllexport void Search_StopSearch();
 
 	// calculate how many plies to reduce
-	__declspec(dllexport) int Search_GetNullReduction(int depth);
+	__dllexport int Search_GetNullReduction(int depth);
 
 	
 	__inline_always int Search_GetNullReduction(int depth)

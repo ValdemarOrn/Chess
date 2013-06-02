@@ -6,10 +6,10 @@
 
 extern "C"
 {
-	__declspec(dllexport) void Rook_SetupTables();
-	__declspec(dllexport) int Rook_Load(int pos, uint64_t permutation, uint64_t moveBoard);
-	__declspec(dllexport) void Rook_LoadVector(int pos, uint64_t moveBoard);
-	__declspec(dllexport) uint64_t Rook_Read(int pos, uint64_t occupancy);
+	__dllexport void Rook_SetupTables();
+	__dllexport int Rook_Load(int pos, uint64_t permutation, uint64_t moveBoard);
+	__dllexport void Rook_LoadVector(int pos, uint64_t moveBoard);
+	__dllexport uint64_t Rook_Read(int pos, uint64_t occupancy);
 
 	extern uint64_t** Rook_Tables;
 

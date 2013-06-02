@@ -11,8 +11,8 @@
 #define Intrin_BitTestAndReset64(a, bit) _bittestandreset64((__int64*)a, bit)
 #define Intrin_BitTestAndSet64(a, bit) _bittestandset64((__int64*)a, bit)
 #define Intrin_BitTest64(a, bit) _bittest64((__int64*)a, bit)
-#define Intrin_BitScanForward64(index, input) _BitScanForward64(index, input)
-#define Intrin_BitScanReverse64(index, input) _BitScanReverse64(index, input)
+#define Intrin_BitScanForward64(index, input) _BitScanForward64((unsigned long*)index, input)
+#define Intrin_BitScanReverse64(index, input) _BitScanReverse64((unsigned long*)index, input)
 #define Intrin_PopCnt64(value) __popcnt64(value)
 
 #else

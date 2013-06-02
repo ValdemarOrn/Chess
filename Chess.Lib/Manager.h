@@ -16,11 +16,11 @@ extern "C"
 	const char* const Message_Nodes = "Nodes";
 	const char* const Message_PV = "PV";
 
-	__declspec(dllexport) void Manager_SetCallback(callbackFunction callback);
+	__dllexport void Manager_SetCallback(callbackFunction callback);
 
-	__declspec(dllexport) void Manager_BeginMessage(const char* messageType);
-	__declspec(dllexport) void Manager_Write(const char* key, const char* value);
-	__declspec(dllexport) void Manager_EndMessage();
+	__dllexport void Manager_BeginMessage(const char* messageType);
+	__dllexport void Manager_Write(const char* key, const char* value);
+	__dllexport void Manager_EndMessage();
 
 }
 

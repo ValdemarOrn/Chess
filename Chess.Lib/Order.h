@@ -38,8 +38,8 @@ extern "C"
 	} Order;
 	#pragma pack(pop)
 
-	__declspec(dllexport) void Order_NextStage(SearchContext* ctx, Order* order, int ply);
-	__declspec(dllexport) Move* Order_GetMove(SearchContext* ctx, Order* moves, int ply);
+	__dllexport void Order_NextStage(SearchContext* ctx, Order* order, int ply);
+	__dllexport Move* Order_GetMove(SearchContext* ctx, Order* moves, int ply);
 
 	// Sets the hash move for the order structure
 	void Order_SetHashMove(SearchContext* ctx, Order* moves, int from, int to);

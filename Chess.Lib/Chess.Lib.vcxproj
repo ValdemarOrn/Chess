@@ -82,7 +82,7 @@
       <ExceptionHandling>false</ExceptionHandling>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <DisableLanguageExtensions>true</DisableLanguageExtensions>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
@@ -135,7 +135,7 @@ cp $(TargetPath) $(SolutionDir)\Vladivostok\bin\$(Configuration)\$(TargetName)$(
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <Optimization>Disabled</Optimization>
       <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ExceptionHandling>false</ExceptionHandling>
       <DisableLanguageExtensions>true</DisableLanguageExtensions>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -143,6 +143,7 @@ cp $(TargetPath) $(SolutionDir)\Vladivostok\bin\$(Configuration)\$(TargetName)$(
       <OmitFramePointers>
       </OmitFramePointers>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/favor:AMD64 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

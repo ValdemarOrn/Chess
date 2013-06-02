@@ -3,49 +3,48 @@
 
 #include "Default.h"
 #include "Intrinsics.h"
-//#pragma intrinsic(_BitScanForward)
 
 extern "C"
 {
 	// ------------- Bit Twiddling -------------
 	
 	// Unset bit at position #index in the input val bitboard. Returns a new bitboard
-	__declspec(dllexport) uint64_t Bitboard_Unset(uint64_t val, int index);
+	__dllexport uint64_t Bitboard_Unset(uint64_t val, int index);
 
 	// Set bit at position #index in the input val bitboard. Returns a new bitboard
-	__declspec(dllexport) uint64_t Bitboard_Set(uint64_t val, int index);
+	__dllexport uint64_t Bitboard_Set(uint64_t val, int index);
 
 	// Unset bit at position #index in the input val bitboard. Modifies the given bitboard
-	__declspec(dllexport) void Bitboard_UnsetRef(uint64_t* val, int index);
+	__dllexport void Bitboard_UnsetRef(uint64_t* val, int index);
 
 	// Set bit at position #index in the input val bitboard. Modifies the given bitboard
-	__declspec(dllexport) void Bitboard_SetRef(uint64_t* val, int index);
+	__dllexport void Bitboard_SetRef(uint64_t* val, int index);
 
 	// returns 1 if bit #index is set, 0 if unset
-	__declspec(dllexport) int Bitboard_Get(uint64_t val, int index);
+	__dllexport int Bitboard_Get(uint64_t val, int index);
 
-	__declspec(dllexport) int Bitboard_GetRef(uint64_t* val, int index);
+	__dllexport int Bitboard_GetRef(uint64_t* val, int index);
 
 	// creates a bitboard where the tiles in the input array are set. count tells how many items the tiles array contains
-	__declspec(dllexport) uint64_t Bitboard_Make(int* tiles, int count);
+	__dllexport uint64_t Bitboard_Make(int* tiles, int count);
 
 	// ------------- Bitscan functions -------------
 
 	// Returns the least significant bit (LSB) that is set
 	// Returns -1 if no bits are set
-	__declspec(dllexport) int Bitboard_ForwardBit(uint64_t val);
+	__dllexport int Bitboard_ForwardBit(uint64_t val);
 
 	// Returns the most significant bit (LSB) that is set
 	// Returns -1 if no bits are set
-	__declspec(dllexport) int Bitboard_ReverseBit(uint64_t val);
+	__dllexport int Bitboard_ReverseBit(uint64_t val);
 
 	// Counts the number of set bits in a bitboard
-	__declspec(dllexport) int Bitboard_PopCount(uint64_t val);
+	__dllexport int Bitboard_PopCount(uint64_t val);
 
 	// Returns a list containing the index of all set bits in a bitboard.
 	// outputList_s64 must be an allocated list of 64 bytes.
 	// Returns the number of items in the output list 
-	__declspec(dllexport) int Bitboard_BitList(uint64_t val, uint8_t* outputList_s64);
+	__dllexport int Bitboard_BitList(uint64_t val, uint8_t* outputList_s64);
 	
 	const uint64_t Bitboard_Files[8] = {
 		0x101010101010101,
@@ -129,7 +128,7 @@ extern "C"
 	// Returns the least significant bit (LSB) that is set
 	__inline_always int Bitboard_ForwardBit(uint64_t val)
 	{
-		uint32_t index;
+		unsigned int index;
 		unsigned char isNonzero = Intrin_BitScanForward64(&index, val);
 	
 		return (isNonzero) ? (int)index : -1;

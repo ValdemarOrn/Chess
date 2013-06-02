@@ -7,12 +7,12 @@
 #include "Bitboard.h"
 #include "Zobrist.h"
 #include "Moves.h"
-#include "Moves\Rook.h"
-#include "Moves\Bishop.h"
-#include "Moves\King.h"
-#include "Moves\Knight.h"
-#include "Moves\Queen.h"
-#include "Moves\Pawn.h"
+#include "Moves/Rook.h"
+#include "Moves/Bishop.h"
+#include "Moves/King.h"
+#include "Moves/Knight.h"
+#include "Moves/Queen.h"
+#include "Moves/Pawn.h"
 #include "Search.h"
 
 #define MAX_GAME_LENGTH 1024

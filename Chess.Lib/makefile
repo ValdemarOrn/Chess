@@ -1,11 +1,9 @@
-# I am a comment, and I want to say that the variable CC will be
-# the compiler to use.
-CC=g++
-# Hey!, I am comment number 2. I want to say that CFLAGS will be the
-# options I'll pass to the compiler.
-CFLAGS=-c -Wall -m64
 
-OUTPUT=Chess.Lib.dll
+CC=g++
+CFLAGS=-c -Wall -m64
+LFLAGS=-shared -fpic -m64
+
+OUTPUT=Chess.Lib.so
 
 SRC=Moves/Bishop.cpp \
 	Moves/King.cpp \
@@ -31,7 +29,7 @@ all: Chess.Lib
 
 Chess.Lib: Objects
 	mkdir -p bin
-	$(CC) -shared $(SRC) -o bin/$(OUTPUT)
+	$(CC) $(LFLAGS) $(SRC) -o bin/$(OUTPUT)
 
 Objects:
 	$(CC) $(CFLAGS) $(SRC)

@@ -62,83 +62,83 @@ extern "C"
 
 	// Allocate memory for board and move array, initializes the new board.
 	// Calculates Zobrist hash for empty board, but with castling rights
-	__declspec(dllexport) Board* Board_Create();
+	__dllexport Board* Board_Create();
 
 	// unallocates board struct and move array
-	__declspec(dllexport) void Board_Delete(Board* board);
+	__dllexport void Board_Delete(Board* board);
 
 	// Makes a deep copy of the board
-	__declspec(dllexport) Board* Board_Copy(Board* board);
+	__dllexport Board* Board_Copy(Board* board);
 
 	// Initializes the board structure with castling rights, turn, etc.
 	// if setPieces = 1 then pieces are set to standard initial chess position
-	__declspec(dllexport) void Board_Init(Board* board, int setPieces);
+	__dllexport void Board_Init(Board* board, int setPieces);
 
 	// Get X coordinate (file - 1)
-	__declspec(dllexport) int Board_X(int tile);
+	__dllexport int Board_X(int tile);
 
 	// Get Y coordinate (rank - 1)
-	__declspec(dllexport) int Board_Y(int tile);
+	__dllexport int Board_Y(int tile);
 
 	// Get color of desired square. returns 0 if empty
-	__declspec(dllexport) int Board_Color(Board* board, int square);
+	__dllexport int Board_Color(Board* board, int square);
 
 	// Get piece at current square. returns 0 if empty
-	__declspec(dllexport) int Board_Piece(Board* board, int square);
+	__dllexport int Board_Piece(Board* board, int square);
 
 	// Set a piece at the desired location and update the hash.
 	// square MUST be empty! Otherwise hash gets corrupted
-	__declspec(dllexport) void Board_SetPiece(Board* board, int square, int pieceType, int color);
+	__dllexport void Board_SetPiece(Board* board, int square, int pieceType, int color);
 
 	// Clear the piece from the desired location
-	__declspec(dllexport) void Board_ClearPiece(Board* board, int square);
+	__dllexport void Board_ClearPiece(Board* board, int square);
 
 	// only used for testing. Regenerates the Board.Tiles map from the bitboards
-	__declspec(dllexport) void Board_GenerateTileMap(Board* board);
+	__dllexport void Board_GenerateTileMap(Board* board);
 
 	// Returns a bitmap of all squares attacked by the specified side
-	__declspec(dllexport) uint64_t Board_AttackMap(Board* board, int color);
+	__dllexport uint64_t Board_AttackMap(Board* board, int color);
 
 	// tests if a move might cause a self check. Used during legality check in Board_Make.
 	// If a move might cause self check then the kings safety must be evaluated after the move.
-	__declspec(dllexport) _Bool Board_MoveCanSelfCheck(Board* board, int from, int to);
+	__dllexport _Bool Board_MoveCanSelfCheck(Board* board, int from, int to);
 
 	// Checks if a square is under attack by a player
-	__declspec(dllexport) _Bool Board_IsAttacked(Board* board, int square, int attackerColor);
+	__dllexport _Bool Board_IsAttacked(Board* board, int square, int attackerColor);
 
 	// the the least valuable piece that attacks a square, and is not pinned.
 	// returns the square of the attacker. Returns -1 if no valid attacker is found
-	__declspec(dllexport) int Board_GetSmallestAttacker(Board* board, int square, int attackerColor, uint64_t pinnedPieces);
+	__dllexport int Board_GetSmallestAttacker(Board* board, int square, int attackerColor, uint64_t pinnedPieces);
 
 	// Makes a move on the board. Updates hash, set castling, verifies move is legal
 	// if illegal it is automatically taken back.
 	// Return 1 if legal, 0 if illegal and no move was made
-	__declspec(dllexport) _Bool Board_Make(Board* board, int from, int to);
+	__dllexport _Bool Board_Make(Board* board, int from, int to);
 	
 	// Do a null (pass) move
-	__declspec(dllexport) _Bool Board_MakeNullMove(Board* board);
+	__dllexport _Bool Board_MakeNullMove(Board* board);
 
 	// Takes back the last move in the move array
-	__declspec(dllexport) void Board_Unmake(Board* board);
+	__dllexport void Board_Unmake(Board* board);
 
 	// Checks if a piece can be promoted
-	__declspec(dllexport) _Bool Board_CanPromote(int square, int color, int piece);
+	__dllexport _Bool Board_CanPromote(int square, int color, int piece);
 
 	// Promotes a pawn at the specified square. Returns true if pawn was promoted
-	__declspec(dllexport) _Bool Board_Promote(Board* board, int square, int pieceType);
+	__dllexport _Bool Board_Promote(Board* board, int square, int pieceType);
 
 	// returns the castling rights that are allowed, given the state of the board
 	// checks location of kings and rooks and current castling rights
-	__declspec(dllexport) uint8_t Board_GetCastling(Board* board);
+	__dllexport uint8_t Board_GetCastling(Board* board);
 
 	// Checks if the king of the specified color is in check
-	__declspec(dllexport) _Bool Board_IsChecked(Board* board, int color);
+	__dllexport _Bool Board_IsChecked(Board* board, int color);
 
 	// Checks if a piece is attacking a lesser piece that is defended
-	__declspec(dllexport) _Bool Board_BadCapture(Board* board, Move* move);
+	__dllexport _Bool Board_BadCapture(Board* board, Move* move);
 
 	// Creates a FEN representation of the board
-	__declspec(dllexport) void Board_ToFEN(Board* board, char* outputString100);
+	__dllexport void Board_ToFEN(Board* board, char* outputString100);
 
 	// ------------ Inline function definitions
 

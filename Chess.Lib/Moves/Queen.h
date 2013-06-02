@@ -7,7 +7,7 @@
 
 extern "C"
 {
-	__declspec(dllexport) uint64_t Queen_Read(int pos, uint64_t occupancy);
+	__dllexport uint64_t Queen_Read(int pos, uint64_t occupancy);
 
 	__inline_always uint64_t Queen_Read(int pos, uint64_t occupancy)
 	{

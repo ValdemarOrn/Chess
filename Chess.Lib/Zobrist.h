@@ -25,15 +25,15 @@ extern "C"
 	extern uint64_t Zobrist_Keys[16][64];
 
 	// initialize random values and the zobrist piece index
-	__declspec(dllexport) void Zobrist_Init();
+	__dllexport void Zobrist_Init();
 
-	__declspec(dllexport) uint64_t Zobrist_Calculate(Board* board);
-
-	// exposed for .NET interop
-	__declspec(dllexport) uint8_t Zobrist_IndexRead(int pieceAndColor);
+	__dllexport uint64_t Zobrist_Calculate(Board* board);
 
 	// exposed for .NET interop
-	__declspec(dllexport) uint64_t Zobrist_Read(int index, int square);
+	__dllexport uint8_t Zobrist_IndexRead(int pieceAndColor);
+
+	// exposed for .NET interop
+	__dllexport uint64_t Zobrist_Read(int index, int square);
 
 }
 

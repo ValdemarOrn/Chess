@@ -5,8 +5,8 @@
 
 extern "C"
 {
-	__declspec(dllexport) void King_Load(int pos, uint64_t moveBoard);
-	__declspec(dllexport) uint64_t King_Read(int pos);
+	__dllexport void King_Load(int pos, uint64_t moveBoard);
+	__dllexport uint64_t King_Read(int pos);
 
 	extern uint64_t King_Table[64];
 

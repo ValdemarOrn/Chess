@@ -46,11 +46,11 @@ extern "C"
 	} MoveHistory;
 	#pragma pack(pop)
 
-	__declspec(dllexport) void Move_ToString(MoveSmall* move, char* dest);
-	__declspec(dllexport) void Move_SquareToString(int square, char* dest);
-	__declspec(dllexport) void Move_PieceToString(int piece, char* dest);
+	__dllexport void Move_ToString(MoveSmall* move, char* dest);
+	__dllexport void Move_SquareToString(int square, char* dest);
+	__dllexport void Move_PieceToString(int piece, char* dest);
 
-	__declspec(dllexport) _Bool Move_Equal(Move* move, MoveSmall* moveSmall);
+	__dllexport _Bool Move_Equal(Move* move, MoveSmall* moveSmall);
 
 	__inline_always _Bool Move_Equal(Move* move, MoveSmall* moveSmall)
 	{

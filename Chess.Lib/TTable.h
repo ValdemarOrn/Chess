@@ -26,19 +26,19 @@ extern "C"
 	extern TTableEntry* TTable;
 	extern uint32_t TTableSize;
 
-	__declspec(dllexport) int TTable_GetTableSize();
-	__declspec(dllexport) TTableEntry* TTable_GetTable();
+	__dllexport int TTable_GetTableSize();
+	__dllexport TTableEntry* TTable_GetTable();
 
-	__declspec(dllexport) void TTable_Init(int sizeMB);
-	__declspec(dllexport) void TTable_Delete();
+	__dllexport void TTable_Init(int sizeMB);
+	__dllexport void TTable_Delete();
 
-	__declspec(dllexport) TTableEntry* TTable_Read(uint64_t hash);
+	__dllexport TTableEntry* TTable_Read(uint64_t hash);
 
 	// Attempt to insert a new entry. resolves conflicts if any.
 	// Returns true if entry gets added, false if not
-	__declspec(dllexport) _Bool TTable_Insert(TTableEntry* entry);
+	__dllexport _Bool TTable_Insert(TTableEntry* entry);
 
-	__declspec(dllexport) void TTable_ClearAll();
+	__dllexport void TTable_ClearAll();
 
 	__inline_always int TTable_GetTableSize()
 	{

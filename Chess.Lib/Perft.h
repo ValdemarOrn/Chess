@@ -28,7 +28,7 @@ extern "C"
 
 	#pragma pack(pop)
 
-	__declspec(dllexport) PerftResults* Perft_Search(Board* board, int depth);
+	__dllexport PerftResults* Perft_Search(Board* board, int depth);
 }
 
 #endif

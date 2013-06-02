@@ -1,11 +1,6 @@
 #ifndef DEFAULT
 
 // ----------- Typedefs -----------
-
-#if !defined(_STDINT_H) && !defined(_GCC_STDINT_H)
-	#include "inttypes.h"
-#endif
-
 typedef int _Bool;
 #define TRUE 1
 #define FALSE 0
@@ -14,19 +9,17 @@ typedef int _Bool;
 
 // ---------- Compile Mode: Change these settings to affect how the engine runs ----------
 
-// enables assertions and other debugging code
-#define DEBUG 
-
 // enables statistics in the search module (node count, cutoff metrics, etc)
 #define STATS_SEARCH
+
+// enables assertions and other debugging code
+//#define DEBUG 
 
 // Compile for a Windows target, defined by Visual Studio
 //#define _WIN32 
 
 // Compile for a Linux target, defined by g++
 //#define __GNUC__
-
-
 
 
 #ifndef DEBUG
@@ -39,6 +32,10 @@ typedef int _Bool;
 
 #ifdef _WIN32
 
+	#include "inttypes.h"
+
+	#define __dllexport __declspec(dllexport)
+
 	#ifdef DEBUG
 		#define __inline_always inline
 	#else
@@ -49,6 +46,11 @@ typedef int _Bool;
 
 
 #ifdef __GNUC__
+
+	#include<stdint.h>
+
+	#define __dllexport 
+	#define __stdcall __attribute__((stdcall))
 
 	#ifdef DEBUG
 		#define __inline_always inline
