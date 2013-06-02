@@ -62,7 +62,7 @@ namespace Chess.Lib.Tests
 		public void TestBishopMoves2()
 		{
 			int idx = 0;
-			var vex = Bishop.BishopVectors;
+			ulong[] vex = Bishop.BishopVectors;
 			var perms = Bishop.GetPermutations(idx);
 			var moves = perms.Select(x => Bishop.GetMoves(x, idx)).ToList();
 

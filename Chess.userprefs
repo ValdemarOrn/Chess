@@ -1,8 +1,72 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x64" />
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Chess.Lib.TestPerf/PerftTestSuite.cs">
+    <Files>
+      <File FileName="Vladivostok/Engine.cs" Line="32" Column="3" />
+      <File FileName="Chess.Lib.Managed/Eval.cs" Line="25" Column="1" />
+      <File FileName="Vladivostok/Program.cs" Line="17" Column="1" />
+      <File FileName="Chess.Lib.Tests/BitboardTests.cs" Line="28" Column="3" />
+      <File FileName="Chess.Lib.Tests/OpeningBookTest.cs" Line="9" Column="3" />
+      <File FileName="Chess.Lib.Tests/EvalTest.cs" Line="20" Column="30" />
+      <File FileName="Chess.Lib.TestPerf/Program.cs" Line="15" Column="23" />
+      <File FileName="Chess.Lib.TestPerf/PerftTestSuite.cs" Line="84" Column="1" />
+      <File FileName="Chess.Lib.Tests/AttackPawnWhiteTests.cs" Line="205" Column="32" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="Chess.Lib.TestPerf" expanded="True">
+            <Node name="PerftTestSuite.cs" selected="True" />
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="ClassPad">
+        <State expanded="True" selected="True" />
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State>
+          <Value>fwd</Value>
+          <Value>rwd</Value>
+          <Value>b</Value>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.NUnit.TestPad">
+        <State expanded="True">
+          <Node name="Chess.Lib.Tests" expanded="True">
+            <Node name="Chess" expanded="True">
+              <Node name="Lib" expanded="True">
+                <Node name="Tests" expanded="True">
+                  <Node name="AttackPawnWhiteTests" expanded="True">
+                    <Node name="TestWhiteEnPassantAttack" selected="True" />
+                  </Node>
+                  <Node name="BishopTest" expanded="True" />
+                  <Node name="OpeningBookTest" expanded="True" />
+                </Node>
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/media/sf_Src/_Tree/Applications/Chess/Vladivostok/Engine.cs" line="45" />
+      <Breakpoint file="/media/sf_Src/_Tree/Applications/Chess/Chess.Lib.Tests/BitboardTests.cs" line="118" />
+      <Breakpoint file="/media/sf_Src/_Tree/Applications/Chess/Chess.Lib.Tests/BitboardTests.cs" line="106" />
+      <Breakpoint file="/media/sf_Src/_Tree/Applications/Chess/Chess.Lib.Tests/BitboardTests.cs" line="16" />
+      <Breakpoint file="/media/sf_Src/_Tree/Applications/Chess/Chess.Lib.Tests/BitboardTests.cs" line="17" />
+      <Breakpoint file="/media/sf_Src/_Tree/Applications/Chess/Chess.Lib.Tests/BitboardTests.cs" line="18" />
+      <Breakpoint file="/media/sf_Src/_Tree/Applications/Chess/Chess.Lib.Tests/BitboardTests.cs" line="20" />
+      <Breakpoint file="/media/sf_Src/_Tree/Applications/Chess/Chess.Lib.Tests/BitboardTests.cs" line="21" />
+      <Breakpoint file="/media/sf_Src/_Tree/Applications/Chess/Chess.Lib.Tests/BitboardTests.cs" line="22" />
+      <Breakpoint file="/media/sf_Src/_Tree/Applications/Chess/Chess.Lib.Tests/BitboardTests.cs" line="24" />
+      <Breakpoint file="/media/sf_Src/_Tree/Applications/Chess/Chess.Lib.Tests/BitboardTests.cs" line="25" />
+      <Breakpoint file="/media/sf_Src/_Tree/Applications/Chess/Chess.Lib.Tests/BitboardTests.cs" line="26" />
+      <Breakpoint file="/media/sf_Src/_Tree/Applications/Chess/Chess.Lib.Tests/BitboardTests.cs" line="32" />
+      <Breakpoint file="/media/sf_Src/_Tree/Applications/Chess/Chess.Lib.Tests/EvalTest.cs" line="25" />
+      <Breakpoint file="/media/sf_Src/_Tree/Applications/Chess/Chess.Lib.Tests/AttackPawnWhiteTests.cs" line="200" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

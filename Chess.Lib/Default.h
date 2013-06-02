@@ -6,11 +6,12 @@ typedef int _Bool;
 #define FALSE 0
 #define UNKNOWN 2
 
-
 // ---------- Compile Mode: Change these settings to affect how the engine runs ----------
 
 // enables statistics in the search module (node count, cutoff metrics, etc)
 #define STATS_SEARCH
+// enables statistic in the eval module
+#define STATS_EVAL
 
 // enables assertions and other debugging code
 //#define DEBUG 
@@ -28,9 +29,16 @@ typedef int _Bool;
 
 #include <assert.h>
 
+
+
 // --------- compiler target ---------
 
-#ifdef _WIN32
+#ifdef _MSC_VER
+
+	// ---------- Define #pragma WARNING -----------
+	#define STRINGIZE_HELPER(x) #x
+	#define STRINGIZE(x) STRINGIZE_HELPER(x)
+	#define WARNING(desc) message(__FILE__ "(" STRINGIZE(__LINE__) ") : Warning: " #desc)
 
 	#include "inttypes.h"
 

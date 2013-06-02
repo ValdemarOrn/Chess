@@ -116,6 +116,8 @@ extern "C"
 
 	__dllexport void Search_StopSearch();
 
+	__dllexport void Search_ResetStats();
+
 	// calculate how many plies to reduce
 	__dllexport int Search_GetNullReduction(int depth);
 

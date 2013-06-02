@@ -58,5 +58,8 @@ namespace Chess.Lib
 
 		[DllImport("Chess.Lib.dll", EntryPoint = "Search_StopSearch", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
 		public static unsafe extern void StopSearch();
+
+		[DllImport("Chess.Lib.dll", EntryPoint = "Search_ResetStats", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		public static unsafe extern void ResetStats();
 	}
 }

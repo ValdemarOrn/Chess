@@ -19,8 +19,10 @@ Thumbs.db
 *.log
 *.sdf
 *.vsp
+*.o
 [Bb]in
 [Dd]ebug*/
+test-results/
 *.lib
 *.sbr
 obj/

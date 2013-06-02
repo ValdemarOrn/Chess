@@ -156,7 +156,7 @@ void Eval_Init()
 	Eval_Positions[PIECE_KING] = Eval_PositionKing;
 }
 
-#ifdef DEBUG
+#ifdef STATS_EVAL
 EvalStats EStats[33];
 #endif
 
@@ -202,7 +202,7 @@ int Eval_Evaluate(Board* board)
 		return stored;
 	}
 
-	#ifdef DEBUG
+	#ifdef STATS_EVAL
 	EStats[COLOR_WHITE].DoublePawnPenalty = 0;
 	EStats[COLOR_WHITE].IsolatedPawnPenalty = 0;
 	EStats[COLOR_WHITE].Material = 0;
@@ -248,7 +248,7 @@ int Eval_Evaluate(Board* board)
 		pValue += Eval_Positions[piece][index];
 //		pValue += Eval_MobilityBonus[piece] * moveCount;
 
-		#ifdef DEBUG
+		#ifdef STATS_EVAL
 		EStats[color].Material += Eval_PieceValues[piece];
 		EStats[color].PositionalBonus += Eval_Positions[piece][index];
 //		EStats[color].MobilityBonus += Eval_MobilityBonus[piece] * moveCount;
@@ -259,7 +259,7 @@ int Eval_Evaluate(Board* board)
 			if(Bitboard_GetRef(&attacksWhite, square) == 0)
 				pValue -= Eval_UndefendedPiecePenalty[piece];
 
-			#ifdef DEBUG
+			#ifdef STATS_EVAL
 			EStats[color].UndefendedPenalty -= Eval_UndefendedPiecePenalty[piece];
 			#endif
 
@@ -270,7 +270,7 @@ int Eval_Evaluate(Board* board)
 				if(Bitboard_PopCount(pawnsOnFile) > 1)
 				{
 					pValue -= Eval_Penalty_DoublePawn;
-					#ifdef DEBUG
+					#ifdef STATS_EVAL
 					EStats[color].DoublePawnPenalty -= Eval_Penalty_DoublePawn;
 					#endif
 				}
@@ -280,7 +280,7 @@ int Eval_Evaluate(Board* board)
 				if((whitePawns & pawnAreaBoard) == 0)
 				{
 					pValue -= Eval_Penalty_IsolatedPawn;
-					#ifdef DEBUG
+					#ifdef STATS_EVAL
 					EStats[color].IsolatedPawnPenalty -= Eval_Penalty_IsolatedPawn;
 					#endif
 				}
@@ -291,7 +291,7 @@ int Eval_Evaluate(Board* board)
 			if(Bitboard_GetRef(&attacksBlack, square) == 0)
 				pValue -= Eval_UndefendedPiecePenalty[piece];
 
-			#ifdef DEBUG
+			#ifdef STATS_EVAL
 			EStats[color].UndefendedPenalty -= Eval_UndefendedPiecePenalty[piece];
 			#endif
 
@@ -302,7 +302,7 @@ int Eval_Evaluate(Board* board)
 				if(Bitboard_PopCount(pawnsOnFile) > 1)
 				{
 					pValue -= Eval_Penalty_DoublePawn;
-					#ifdef DEBUG
+					#ifdef STATS_EVAL
 					EStats[color].DoublePawnPenalty -= Eval_Penalty_DoublePawn;
 					#endif
 				}
@@ -312,7 +312,7 @@ int Eval_Evaluate(Board* board)
 				if((blackPawns & pawnAreaBoard) == 0)
 				{
 					pValue -= Eval_Penalty_IsolatedPawn;
-					#ifdef DEBUG
+					#ifdef STATS_EVAL
 					EStats[color].IsolatedPawnPenalty -= Eval_Penalty_IsolatedPawn;
 					#endif
 				}
@@ -331,7 +331,7 @@ int Eval_Evaluate(Board* board)
 	whiteValue += whiteAttackCount * 3;
 	blackValue += blackAttackCount * 3;
 
-	#ifdef DEBUG
+	#ifdef STATS_EVAL
 	EStats[COLOR_WHITE].MobilityBonus = whiteAttackCount * 3;
 	EStats[COLOR_BLACK].MobilityBonus = blackAttackCount * 3;
 	#endif
@@ -342,7 +342,7 @@ int Eval_Evaluate(Board* board)
 	else
 		blackValue += Eval_Bonus_CurrentPlayer;
 
-	#ifdef DEBUG
+	#ifdef STATS_EVAL
 	EStats[board->PlayerTurn].TempoBonus += Eval_Bonus_CurrentPlayer;
 	#endif
 
@@ -357,10 +357,9 @@ int Eval_Evaluate(Board* board)
 
 EvalStats* Eval_GetEvalStats(int color)
 {
-	#ifdef DEBUG
+#ifdef STATS_EVAL
 	return &EStats[color];
-	#endif
-	#ifndef DEBUG
+#else
 	return 0;
-	#endif
+#endif
 }

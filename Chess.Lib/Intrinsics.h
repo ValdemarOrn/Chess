@@ -6,8 +6,10 @@
 
 #ifdef _M_X64
 
+// MSVC has compiler intrinsics for these operations. Map macros that use them
+#define INTRIN_OK
+
 #include <intrin.h>
-// define macros that point to the intrinsic functinos in MSVC
 #define Intrin_BitTestAndReset64(a, bit) _bittestandreset64((__int64*)a, bit)
 #define Intrin_BitTestAndSet64(a, bit) _bittestandset64((__int64*)a, bit)
 #define Intrin_BitTest64(a, bit) _bittest64((__int64*)a, bit)
@@ -15,9 +17,79 @@
 #define Intrin_BitScanReverse64(index, input) _BitScanReverse64((unsigned long*)index, input)
 #define Intrin_PopCnt64(value) __popcnt64(value)
 
-#else
+#endif
+
+#if defined(__GNUC__) && defined(__x86_64__)
+
+// GCC has some intrinsics, but needs assembly instructions in some cases
+#define INTRIN_OK
+
+__inline_always unsigned char Intrin_BitTestAndReset64(uint64_t* a, uint64_t bit)
+{
+	unsigned char flag = 0; 
+	asm("btr %2, %1;\n\t"
+		"setb %0" 
+		: "=q" (flag) 
+		: "m" (*a), "r" (bit)
+		);
+	return flag;
+}
+
+__inline_always unsigned char Intrin_BitTestAndSet64(uint64_t* a, uint64_t bit)
+{
+	unsigned char flag = 0; 
+	asm("bts %2, %1;\n\t"
+		"setb %0" 
+		: "=q" (flag) 
+		: "m" (*a), "r" (bit)
+		);
+	return flag;
+}
+
+__inline_always unsigned char Intrin_BitTest64(uint64_t* a, uint64_t bit)
+{
+	unsigned char flag = 0;
+	asm("bt %2, %1;\n\t"
+		"setb %0" 
+		: "=q" (flag) 
+		: "m" (*a), "r" (bit)
+		); 
+	return flag; 
+}
+
+__inline_always unsigned char Intrin_BitScanForward64(uint32_t* index, uint64_t input)
+{
+	int pos = __builtin_ffsll(input);
+	_Bool valid = (input > 0);
+	*index = valid ? (pos - 1) : 0;
+	return valid;
+}
+
+__inline_always unsigned char Intrin_BitScanReverse64(uint32_t* index, uint64_t input)
+{
+	int pos = __builtin_clzll(input);
+	_Bool valid = (input > 0);
+	*index = valid ? (63 - pos) : 0;
+	return valid;
+}
+
+__inline_always uint64_t Intrin_PopCnt64(uint64_t value)
+{
+	return __builtin_popcountll(value);
+}
+
+
+#endif
 
 // fall back to software emulation
+
+#ifndef INTRIN_OK
+
+#ifdef __GNUC__
+	#warning "Compiler intrinsics not used. Falling back to SLOW software emulated bit operations."
+#else
+	#pragma WARNING("Compiler intrinsics not used. Falling back to SLOW software emulated bit operations.")
+#endif
 
 __inline_always unsigned char Intrin_BitTestAndReset64(uint64_t* a, uint64_t bit)
 {

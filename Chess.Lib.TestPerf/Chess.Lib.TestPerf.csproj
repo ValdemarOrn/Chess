@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Chess.Lib.TestPerf</RootNamespace>
     <AssemblyName>Chess.Lib.TestPerf</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -39,12 +40,17 @@
     <DefineConstants>TRACE</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Optimize>true</Optimize>
+    <DebugType>none</DebugType>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <PlatformTarget>x86</PlatformTarget>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>TRACE;DEBUG</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DebugType>none</DebugType>
+    <WarningLevel>4</WarningLevel>
+    <Optimize>false</Optimize>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -63,15 +69,15 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Chess.Lib.Managed\Chess.Lib.Managed.csproj">
-      <Project>{79caa135-2881-4e2d-93e3-45257546e766}</Project>
+      <Project>{79CAA135-2881-4E2D-93E3-45257546E766}</Project>
       <Name>Chess.Lib.Managed</Name>
     </ProjectReference>
     <ProjectReference Include="..\Chess.Lib.Tests\Chess.Lib.Tests.csproj">
-      <Project>{52de493f-84f8-451b-8d04-bedd8d5df586}</Project>
+      <Project>{52DE493F-84F8-451B-8D04-BEDD8D5DF586}</Project>
       <Name>Chess.Lib.Tests</Name>
     </ProjectReference>
     <ProjectReference Include="..\Chess.Base\Chess.Base.csproj">
-      <Project>{5c3de354-edd4-4377-a3d0-a33a5d2c7c71}</Project>
+      <Project>{5C3DE354-EDD4-4377-A3D0-A33A5D2C7C71}</Project>
       <Name>Chess.Base</Name>
     </ProjectReference>
   </ItemGroup>

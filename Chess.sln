@@ -18,8 +18,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chess.Lib.Tests", "Chess.Li
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chess.Lib.CalculateMagic", "Chess.Lib.CalculateMagic\Chess.Lib.CalculateMagic.csproj", "{76183A0D-5F8B-44A1-9B32-3270C809F235}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Chess.Lib", "Chess.Lib\Chess.Lib.vcxproj", "{A0FB4011-6EB9-4444-8323-84F34A9939BB}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chess.Lib.BitboardEditor", "Chess.Lib.BitboardEditor\Chess.Lib.BitboardEditor.csproj", "{CDB74489-AC6B-47B0-878F-F228456F7FA3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chess.Lib.EGTB", "Chess.Lib.EGTB\Chess.Lib.EGTB.csproj", "{8D1947D3-3B39-435A-B471-3A9638524249}"
@@ -33,6 +31,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chess.Uci.Tests", "Chess.Uci.Tests\Chess.Uci.Tests.csproj", "{2A6A6D70-9EA5-4E42-817B-334CFE9003C6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chess.Vladivostok", "Vladivostok\Chess.Vladivostok.csproj", "{ACD1F6F8-C33E-4399-A4AA-93053DB35B93}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Chess.Lib", "Chess.Lib\Chess.Lib.vcxproj", "{A0FB4011-6EB9-4444-8323-84F34A9939BB}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
@@ -79,20 +79,12 @@ Global
 		{52DE493F-84F8-451B-8D04-BEDD8D5DF586}.Release|x86.Build.0 = Release|Any CPU
 		{76183A0D-5F8B-44A1-9B32-3270C809F235}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{76183A0D-5F8B-44A1-9B32-3270C809F235}.Debug|x64.Build.0 = Debug|Any CPU
-		{76183A0D-5F8B-44A1-9B32-3270C809F235}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{76183A0D-5F8B-44A1-9B32-3270C809F235}.Debug|x86.Build.0 = Debug|Any CPU
+		{76183A0D-5F8B-44A1-9B32-3270C809F235}.Debug|x86.ActiveCfg = Debug|x86
+		{76183A0D-5F8B-44A1-9B32-3270C809F235}.Debug|x86.Build.0 = Debug|x86
 		{76183A0D-5F8B-44A1-9B32-3270C809F235}.Release|x64.ActiveCfg = Release|Any CPU
 		{76183A0D-5F8B-44A1-9B32-3270C809F235}.Release|x64.Build.0 = Release|Any CPU
 		{76183A0D-5F8B-44A1-9B32-3270C809F235}.Release|x86.ActiveCfg = Release|x86
 		{76183A0D-5F8B-44A1-9B32-3270C809F235}.Release|x86.Build.0 = Release|x86
-		{A0FB4011-6EB9-4444-8323-84F34A9939BB}.Debug|x64.ActiveCfg = Debug|x64
-		{A0FB4011-6EB9-4444-8323-84F34A9939BB}.Debug|x64.Build.0 = Debug|x64
-		{A0FB4011-6EB9-4444-8323-84F34A9939BB}.Debug|x86.ActiveCfg = Debug|Win32
-		{A0FB4011-6EB9-4444-8323-84F34A9939BB}.Debug|x86.Build.0 = Debug|Win32
-		{A0FB4011-6EB9-4444-8323-84F34A9939BB}.Release|x64.ActiveCfg = Release|x64
-		{A0FB4011-6EB9-4444-8323-84F34A9939BB}.Release|x64.Build.0 = Release|x64
-		{A0FB4011-6EB9-4444-8323-84F34A9939BB}.Release|x86.ActiveCfg = Release|Win32
-		{A0FB4011-6EB9-4444-8323-84F34A9939BB}.Release|x86.Build.0 = Release|Win32
 		{CDB74489-AC6B-47B0-878F-F228456F7FA3}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{CDB74489-AC6B-47B0-878F-F228456F7FA3}.Debug|x64.Build.0 = Debug|Any CPU
 		{CDB74489-AC6B-47B0-878F-F228456F7FA3}.Debug|x86.ActiveCfg = Debug|Any CPU
@@ -119,8 +111,8 @@ Global
 		{84CF1E15-5D40-429A-8A80-8FA4D3F61ABB}.Release|x86.Build.0 = Release|Any CPU
 		{928975EE-B50F-4D16-88BC-6EC38174763C}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{928975EE-B50F-4D16-88BC-6EC38174763C}.Debug|x64.Build.0 = Debug|Any CPU
-		{928975EE-B50F-4D16-88BC-6EC38174763C}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{928975EE-B50F-4D16-88BC-6EC38174763C}.Debug|x86.Build.0 = Debug|Any CPU
+		{928975EE-B50F-4D16-88BC-6EC38174763C}.Debug|x86.ActiveCfg = Debug|x86
+		{928975EE-B50F-4D16-88BC-6EC38174763C}.Debug|x86.Build.0 = Debug|x86
 		{928975EE-B50F-4D16-88BC-6EC38174763C}.Release|x64.ActiveCfg = Release|Any CPU
 		{928975EE-B50F-4D16-88BC-6EC38174763C}.Release|x64.Build.0 = Release|Any CPU
 		{928975EE-B50F-4D16-88BC-6EC38174763C}.Release|x86.ActiveCfg = Release|x86
@@ -149,8 +141,19 @@ Global
 		{ACD1F6F8-C33E-4399-A4AA-93053DB35B93}.Release|x64.Build.0 = Release|Any CPU
 		{ACD1F6F8-C33E-4399-A4AA-93053DB35B93}.Release|x86.ActiveCfg = Release|x86
 		{ACD1F6F8-C33E-4399-A4AA-93053DB35B93}.Release|x86.Build.0 = Release|x86
+		{A0FB4011-6EB9-4444-8323-84F34A9939BB}.Debug|x64.ActiveCfg = Debug|x64
+		{A0FB4011-6EB9-4444-8323-84F34A9939BB}.Debug|x64.Build.0 = Debug|x64
+		{A0FB4011-6EB9-4444-8323-84F34A9939BB}.Debug|x86.ActiveCfg = Debug|Win32
+		{A0FB4011-6EB9-4444-8323-84F34A9939BB}.Debug|x86.Build.0 = Debug|Win32
+		{A0FB4011-6EB9-4444-8323-84F34A9939BB}.Release|x64.ActiveCfg = Release|x64
+		{A0FB4011-6EB9-4444-8323-84F34A9939BB}.Release|x64.Build.0 = Release|x64
+		{A0FB4011-6EB9-4444-8323-84F34A9939BB}.Release|x86.ActiveCfg = Release|Win32
+		{A0FB4011-6EB9-4444-8323-84F34A9939BB}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Chess.Lib.TestPerf\Chess.Lib.TestPerf.csproj
 	EndGlobalSection
 EndGlobal

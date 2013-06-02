@@ -22,7 +22,7 @@ void Search_StopSearch()
 	SearchStopped = TRUE;
 }
 
-void ResetStats()
+void Search_ResetStats()
 {
 	#ifdef STATS_SEARCH
 	SStats.TotalNodeCount = 0;
@@ -113,12 +113,13 @@ MoveSmall Search_SearchPos(Board* board, int searchDepth)
 	// Todo: Stop doing this and implement TTable entry "generation" / "age"
 	TTable_ClearAll();
 
+	// init stats
+	#ifdef STATS_SEARCH
+	Search_ResetStats();
+	#endif
+
 	for(int i = 1; i <= searchDepth; i++)
 	{
-		// init stats
-		#ifdef STATS_SEARCH
-		ResetStats();
-		#endif
 
 		// Cut the history table every cycle
 		for(int p = 0; p < 64; p++)
@@ -214,6 +215,10 @@ int Search_AlphaBeta(SearchContext* ctx, int alpha, int beta, SearchParams param
 	Move bestMove;
 	bestMove.From = 0;
 	bestMove.To = 0;
+	bestMove.Promotion = 0;
+	bestMove.PlayerPiece = 0;
+	bestMove.CapturePiece = 0;
+
 	_Bool useScout = FALSE;
 	int bestScore = SEARCH_MIN_SCORE; // track All-node score, needed for fail-soft
 	int nullReduction = 0;
