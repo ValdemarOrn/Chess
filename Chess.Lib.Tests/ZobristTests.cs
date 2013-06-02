@@ -1,19 +1,19 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Chess.Lib.Tests
 {
-	[TestClass]
+	[TestFixture]
 	public class ZobristTests
 	{
-		[TestMethod]
+		[Test]
 		public void TestInit()
 		{
 			Zobrist.Init();
 			var tile23 = Zobrist.Read(Board.BOARD_WHITE | Board.BOARD_PAWNS, 23);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestHashWrong1()
 		{
 			Zobrist.Init();
@@ -28,7 +28,7 @@ namespace Chess.Lib.Tests
 			Assert.AreNotEqual(hash2, hash);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestHashOK1()
 		{
 			Zobrist.Init();
@@ -47,7 +47,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual(hash2, hash);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestHashBoardSet()
 		{
 			Zobrist.Init();
@@ -62,7 +62,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual(hash, b->Hash);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestHashBoardUnset()
 		{
 			Zobrist.Init();

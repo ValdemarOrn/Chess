@@ -2,14 +2,14 @@
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Chess.Base.Tests
 {
-	[TestClass]
+	[TestFixture]
 	public class TestAttacksPawnWhite
 	{
-		[TestMethod]
+		[Test]
 		public void Test1()
 		{
 			// test free space
@@ -21,7 +21,7 @@ namespace Chess.Base.Tests
 			Assert.IsTrue(moves.Contains(12 + 9));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Test2()
 		{
 			// Test left edge of board
@@ -41,7 +41,7 @@ namespace Chess.Base.Tests
 			Assert.IsTrue(moves.Contains(pos + 7));
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestCaptureLeft()
 		{
 			var b = new Board();
@@ -54,7 +54,7 @@ namespace Chess.Base.Tests
 			Assert.IsTrue(moves.Contains(pos + 9));
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestCaptureRight()
 		{
 			var b = new Board();
@@ -67,7 +67,7 @@ namespace Chess.Base.Tests
 			Assert.IsTrue(moves.Contains(pos + 7));
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestCaptureSameColor()
 		{
 			var b = new Board();
@@ -79,7 +79,7 @@ namespace Chess.Base.Tests
 			Assert.AreEqual(2, moves.Length);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestEnPassantLeft()
 		{
 			var b = new Board();
@@ -98,7 +98,7 @@ namespace Chess.Base.Tests
 			Assert.IsTrue(moves.Contains(Notation.TextToTile("d5")));
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestEnPassantRight()
 		{
 			var b = new Board();

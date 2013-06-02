@@ -1,12 +1,12 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Chess.Lib.Tests
 {
-	[TestClass]
+	[TestFixture]
 	public unsafe class TTableTest
 	{
-		[TestMethod]
+		[Test]
 		public void TestTable1()
 		{
 			TTable.Delete();

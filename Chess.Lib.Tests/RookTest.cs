@@ -2,15 +2,15 @@
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Chess.Lib.MoveClasses;
 
 namespace Chess.Lib.Tests
 {
-	[TestClass]
+	[TestFixture]
 	public class RookTest
 	{
-		[TestMethod]
+		[Test]
 		public void TestRookVectors()
 		{
 			var vex = Rook.RookVectors;
@@ -21,7 +21,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual((ulong)0x6E10101010101000, vex[60]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestRookPermutations()
 		{
 			var vex = Rook.RookVectors;
@@ -29,7 +29,7 @@ namespace Chess.Lib.Tests
 			var strs = perms.Select(x => Bitboard.ToString(x)).ToList();
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestRookMovesAll()
 		{
 			for (int i = 0; i < 64; i++)
@@ -49,7 +49,7 @@ namespace Chess.Lib.Tests
 			}
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestRookMoves1()
 		{
 			int idx = 27;
@@ -61,7 +61,7 @@ namespace Chess.Lib.Tests
 			var strsm = moves.Select(x => Bitboard.ToString(x)).ToList();
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestRookMoves1x()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -70,7 +70,7 @@ namespace Chess.Lib.Tests
 			ulong attacks = Moves.GetAttacks(b, 28);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestRookMoves2()
 		{
 			int idx = 0;
@@ -84,7 +84,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual((ulong)0x01010101010101FE, moves[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestRookMoves3()
 		{
 			int idx = 8;
@@ -98,7 +98,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual((ulong)0x010101010101FE01, moves[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestRookMoves4()
 		{
 			int idx = 48;
@@ -112,7 +112,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual((ulong)0x01FE010101010101, moves[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestRookMoves5()
 		{
 			int idx = 59;
@@ -126,7 +126,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual((ulong)0xF708080808080808, moves[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestRookInitializeAndRead()
 		{
 			Rook.Load();

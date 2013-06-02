@@ -2,14 +2,14 @@
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Chess.Base.Tests
 {
-	[TestClass]
+	[TestFixture]
 	public class TestValidMove
 	{
-		[TestMethod]
+		[Test]
 		public void TestMoveCausesCheck()
 		{
 			var b = new Board();
@@ -40,7 +40,7 @@ namespace Chess.Base.Tests
 			Assert.IsTrue(causesCheck);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestValidMoves()
 		{
 			var b = new Board();

@@ -2,14 +2,14 @@
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Chess.Base.Tests
 {
-	[TestClass]
+	[TestFixture]
 	public class TestColors
 	{
-		[TestMethod]
+		[Test]
 		public void TesttoString()
 		{
 			Assert.AreEqual("Black", Colors.ToString(Color.Black));
@@ -18,7 +18,7 @@ namespace Chess.Base.Tests
 			Assert.AreEqual("", Colors.ToString((Color)45645654));
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestOpposite()
 		{
 			Assert.AreEqual(Color.Black, Colors.Opposite(Color.White));

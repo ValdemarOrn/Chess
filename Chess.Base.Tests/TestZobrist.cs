@@ -1,13 +1,13 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using System.Collections.Generic;
 
 namespace Chess.Base.Tests
 {
-	[TestClass]
+	[TestFixture]
 	public class TestZobrist
 	{
-		[TestMethod]
+		[Test]
 		public void TestZobrist1()
 		{
 			var b = new Board(true);
@@ -26,7 +26,7 @@ namespace Chess.Base.Tests
 			Assert.AreEqual(expected, zob2);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestZobristCastle()
 		{
 			var b = Notation.ReadFEN("rnbqk2r/pppp1ppp/5n2/2b1p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 0 1");
@@ -50,7 +50,7 @@ namespace Chess.Base.Tests
 			Assert.AreEqual(expected, zob2);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestZobristCastle2()
 		{
 			var b = Notation.ReadFEN("rnbqk2r/pppp1ppp/5n2/2b1p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 0 1");

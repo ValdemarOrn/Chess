@@ -2,14 +2,14 @@
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Chess.Base.Tests
 {
-	[TestClass]
+	[TestFixture]
 	public class TestABN
 	{
-		[TestMethod]
+		[Test]
 		public void TestStripPGN1()
 		{
 			string data = System.IO.File.ReadAllText("..\\..\\..\\TestData\\BobbyFischer.pgn");
@@ -17,7 +17,7 @@ namespace Chess.Base.Tests
 			Assert.AreEqual(1, output.Length);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestStripPGNMany()
 		{
 			string data = System.IO.File.ReadAllText("..\\..\\..\\TestData\\HumansVsComputers.pgn");
@@ -30,7 +30,7 @@ namespace Chess.Base.Tests
 			}
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestABN1()
 		{
 			var board = new Board(true);
@@ -44,7 +44,7 @@ namespace Chess.Base.Tests
 			Assert.AreEqual(52-16, moves[1].To);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestABN2()
 		{
 			// Tests knights and bishops moving
@@ -62,7 +62,7 @@ namespace Chess.Base.Tests
 			Assert.AreEqual(Color.White, board.PlayerTurn);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestABN3()
 		{
 			// Tests castling white kingside
@@ -80,7 +80,7 @@ namespace Chess.Base.Tests
 			Assert.AreEqual(Color.Black, board.PlayerTurn);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestABN4()
 		{
 			// Tests castling both kingside
@@ -98,7 +98,7 @@ namespace Chess.Base.Tests
 			Assert.AreEqual(Color.White, board.PlayerTurn);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestABN5()
 		{
 			// Tests castling both queenside
@@ -118,7 +118,7 @@ namespace Chess.Base.Tests
 			Assert.AreEqual(Color.White, board.PlayerTurn);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestABNEnPassantWhite()
 		{
 			// Tests castling both queenside
@@ -135,7 +135,7 @@ namespace Chess.Base.Tests
 			Assert.AreEqual(moves[4].To, 43);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestABNEnPassantBlack()
 		{
 			// Tests castling both queenside
@@ -152,7 +152,7 @@ namespace Chess.Base.Tests
 			Assert.AreEqual(moves[5].To, 19);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestABNFullgame1_1()
 		{
 			// test almost an entire game (excl. promotion)
@@ -169,7 +169,7 @@ namespace Chess.Base.Tests
 			Assert.IsTrue(board2.State.SequenceEqual(board.State));
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestABNFullgame1_2()
 		{
 			// test promotion
@@ -193,7 +193,7 @@ namespace Chess.Base.Tests
 			Assert.IsTrue(board2.State.SequenceEqual(board.State));
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestABNFullgame1_3()
 		{
 			// end results
@@ -217,7 +217,7 @@ namespace Chess.Base.Tests
 			Assert.IsTrue(board2.State.SequenceEqual(board.State));
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestABNFullgame2()
 		{
 			// end results

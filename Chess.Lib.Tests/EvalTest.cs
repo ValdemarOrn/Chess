@@ -1,12 +1,12 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Chess.Lib.Tests
 {
-	[TestClass]
+	[TestFixture]
 	public unsafe class EvalTest
 	{
-		[TestMethod]
+		[Test]
 		public void TestEval1()
 		{
 			var b = Board.Create();
@@ -16,7 +16,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual(20, result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestEvalStats()
 		{
 			var b = Board.Create();

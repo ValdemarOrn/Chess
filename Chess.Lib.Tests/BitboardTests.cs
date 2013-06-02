@@ -2,15 +2,15 @@
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Chess.Lib.Tests
 {
-	[TestClass]
+	[TestFixture]
 	public class BitboardTests
 	{
 
-		[TestMethod]
+		[Test]
 		public void TestSetGet()
 		{
 			var v = Bitboard.Set(0, 8);
@@ -26,7 +26,7 @@ namespace Chess.Lib.Tests
 			Assert.IsTrue(Bitboard.Get(v, 12));
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestUnsetGet()
 		{
 			var v = Bitboard.Unset(256, 8);
@@ -38,7 +38,7 @@ namespace Chess.Lib.Tests
 			Assert.IsFalse(Bitboard.Get(v, 7));
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestUnsetGetTopBit()
 		{
 			ulong max = 0x8000000000000000;
@@ -68,7 +68,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual((ulong)0x8000000000000000, max);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestForwardBit()
 		{
 			ulong val = 0x0100100;
@@ -84,7 +84,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual(44, fwd);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestReverseBit()
 		{
 			ulong val = 0x0100100;
@@ -100,7 +100,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual(49, rwd);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestPopCount()
 		{
 			ulong val = 0xff010010010030;
@@ -112,7 +112,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual(17, cnt);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestBitList()
 		{
 			ulong val = (ulong)0xC004003000020003;
@@ -122,7 +122,7 @@ namespace Chess.Lib.Tests
 			Assert.IsTrue(list2.SequenceEqual(list));	
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestBitList2()
 		{
 			ulong val = (ulong)0xC430044A20001204;
@@ -132,7 +132,7 @@ namespace Chess.Lib.Tests
 			Assert.IsTrue(list2.SequenceEqual(list));
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestMake()
 		{
 			var board = Bitboard.Bitboard_Make(0, 10, 12, 23, 27, 34, 36, 49, 54, 63);

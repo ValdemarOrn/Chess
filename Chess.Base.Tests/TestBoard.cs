@@ -2,14 +2,14 @@
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Chess.Base.Tests
 {
-	[TestClass]
+	[TestFixture]
 	public class TestBoard
 	{
-		[TestMethod]
+		[Test]
 		public void TestFindByColor()
 		{
 			var b = new Board(true);
@@ -29,7 +29,7 @@ namespace Chess.Base.Tests
 			Assert.IsFalse(c.Any(x => x < 48));
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestFindByPiece()
 		{
 			var b = new Board(true);
@@ -45,7 +45,7 @@ namespace Chess.Base.Tests
 			Assert.IsTrue(c.Contains(63));
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestFindByPieceAndColor()
 		{
 			var b = new Board(true);
@@ -63,7 +63,7 @@ namespace Chess.Base.Tests
 			Assert.IsTrue(c.Contains(3));
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestKingLocation()
 		{
 			var b = new Board(false);
@@ -74,7 +74,7 @@ namespace Chess.Base.Tests
 			Assert.AreEqual(53, b.KingLocation(Color.Black));
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestCastlingNoPieces()
 		{
 			var b = new Board(false);
@@ -85,7 +85,7 @@ namespace Chess.Base.Tests
 			Assert.IsFalse(b.CanCastleQWhite);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestCastlingOK()
 		{
 			var b = new Board(false);
@@ -104,7 +104,7 @@ namespace Chess.Base.Tests
 			Assert.IsTrue(b.CanCastleQWhite);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestCastlingNoQueensideWhite()
 		{
 			var b = new Board(false);
@@ -136,7 +136,7 @@ namespace Chess.Base.Tests
 			Assert.IsFalse(b.CanCastleQWhite);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestCastlingNoKingsideWhite()
 		{
 			var b = new Board(false);
@@ -169,7 +169,7 @@ namespace Chess.Base.Tests
 		}
 
 
-		[TestMethod]
+		[Test]
 		public void TestCastlingNoQueensideBlack()
 		{
 			var b = new Board(false);
@@ -201,7 +201,7 @@ namespace Chess.Base.Tests
 			Assert.IsTrue(b.CanCastleQWhite);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestCastlingNoKingsideBlack()
 		{
 			var b = new Board(false);
@@ -233,31 +233,31 @@ namespace Chess.Base.Tests
 			Assert.IsTrue(b.CanCastleQWhite);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestPromoteOK1()
 		{
 			//Todo: Test Promote()
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestPromoteOK2()
 		{
 			
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestPromoteFail()
 		{
 			
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestPromoteIllegalPiece()
 		{
 			
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestMove1()
 		{
 			//Todo: Test Move by ref()

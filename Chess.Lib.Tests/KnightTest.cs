@@ -2,15 +2,15 @@
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Chess.Lib.MoveClasses;
 
 namespace Chess.Lib.Tests
 {
-	[TestClass]
+	[TestFixture]
 	public class KnightTest
 	{
-		[TestMethod]
+		[Test]
 		public unsafe void TestKnightMoves1()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -22,7 +22,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual((ulong)0x142200221400, moves);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestKnightMoves2()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -34,7 +34,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual((ulong)0xA0100010, moves);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestKnightMoves1WhiteBlocking()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -56,7 +56,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual((ulong)0x142200221400, attacks);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestKnightMoves2BWhiteBlocking()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -77,7 +77,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual((ulong)0xA0100010, attacks);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestKnightMoves1BlockOpponent()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -100,7 +100,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual((ulong)0x142200221400, attacks);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestKnightMoves2BlockOpponent()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -122,7 +122,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual((ulong)0xA0100010, attacks);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestKnightBlack1()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();

@@ -2,16 +2,16 @@
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Chess.Lib.Tests
 {
-	[TestClass]
+	[TestFixture]
 	public class AttackPawnBlackTests
 	{
 		// --------------- Simple moves, single piece on board ---------------
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestBlackPawnSingle1()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -24,7 +24,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual((ulong)0x500000000000, moves);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestBlackPawnSingle2()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -37,7 +37,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual((ulong)0x14000000, moves);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestBlackPawnSingle3()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -52,7 +52,7 @@ namespace Chess.Lib.Tests
 
 		// --------------- capture moves, two pieces on board ---------------
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestBlackPawnCapture1()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -68,7 +68,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual((ulong)0x400000000000, moves);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestBlackPawnCapture2()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -87,7 +87,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual((ulong)0x14000000, moves);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestBlackPawnCapture3()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -103,7 +103,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual((ulong)0x14000000, moves);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestBlackPawnCapture4()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -124,7 +124,7 @@ namespace Chess.Lib.Tests
 
 		// --------------- non-capture moves, same color ---------------
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestBlackPawnSame1()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -140,7 +140,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual((ulong)0x20000000000, moves);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestBlackPawnSame2()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -159,7 +159,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual((ulong)0x14000000, moves);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestBlackPawnSame3()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -178,7 +178,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual((ulong)0x14000000, moves);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestBlackPawnSame4()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -194,7 +194,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual((ulong)0x40, moves);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestBlackEnPassantAttack()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();

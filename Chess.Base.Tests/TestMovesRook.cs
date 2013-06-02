@@ -2,14 +2,14 @@
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Chess.Base.Tests
 {
-    [TestClass]
+    [TestFixture]
     public class TestMovesRook
     {
-        [TestMethod]
+        [Test]
         public void TestFree()
         {
             // test free space
@@ -35,7 +35,7 @@ namespace Chess.Base.Tests
             Assert.IsTrue(moves.Contains(pos - 32));
         }
 
-        [TestMethod]
+        [Test]
         public void TestSameColor()
         {
             var b = new Board();
@@ -55,7 +55,7 @@ namespace Chess.Base.Tests
             Assert.IsTrue(moves.Contains(pos - 8));
         }
 
-        [TestMethod]
+        [Test]
         public void TestOppositeColor()
         {
             var b = new Board();

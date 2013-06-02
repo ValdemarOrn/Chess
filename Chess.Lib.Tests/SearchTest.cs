@@ -1,13 +1,13 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Chess.Base;
 
 namespace Chess.Lib.Tests
 {
-	[TestClass]
+	[TestFixture]
 	public unsafe class SearchTest
 	{
-		[TestMethod]
+		[Test]
 		public void TestSearchSimple()
 		{
 			var bx = Notation.ReadFEN("3k4/8/8/8/2q5/3P4/7K/7Q w - - 0 1");
@@ -20,7 +20,7 @@ namespace Chess.Lib.Tests
 			var stats = Search.GetSearchStats();
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestSearchCapture()
 		{
 			var bx = Notation.ReadFEN("4k3/8/5r2/8/8/3P1Q2/7K/8 w - - 0 1");
@@ -33,7 +33,7 @@ namespace Chess.Lib.Tests
 			var stats = Search.GetSearchStats();
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestSearchCapture2()
 		{
 			var bx = Notation.ReadFEN("4k3/8/2r2N2/8/8/3P1Q2/7K/8 b - - 0 1");
@@ -46,7 +46,7 @@ namespace Chess.Lib.Tests
 			var stats = Search.GetSearchStats();
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestSearchCapture3()
 		{
 			var bx = Notation.ReadFEN("4k3/8/2r2N2/8/8/3P1Q2/7K/8 b - - 0 1");
@@ -59,7 +59,7 @@ namespace Chess.Lib.Tests
 			var stats = Search.GetSearchStats();
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestSearchCapture4()
 		{
 			var bx = Notation.ReadFEN("4k3/8/2r5/8/4N3/3P1Q2/7K/8 w - - 0 1");
@@ -72,7 +72,7 @@ namespace Chess.Lib.Tests
 			var stats = Search.GetSearchStats();
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestSearchCapture5()
 		{
 			var bx = Notation.ReadFEN("4k3/8/2r5/8/4N3/3P1Q2/7K/8 w - - 0 1");
@@ -85,7 +85,7 @@ namespace Chess.Lib.Tests
 			var stats = Search.GetSearchStats();
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestSearchDeeper()
 		{
 			var bx = Notation.ReadFEN("4k3/8/2r5/8/4N3/3P1Q2/7K/8 w - - 0 1");
@@ -98,7 +98,7 @@ namespace Chess.Lib.Tests
 			var stats = Search.GetSearchStats();
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestPromotion()
 		{
 			var bx = Notation.ReadFEN("k7/pp5P/8/8/8/8/8/7K w - - 0 1");
@@ -111,7 +111,7 @@ namespace Chess.Lib.Tests
 			var stats = Search.GetSearchStats();
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestForStalemate()
 		{
 			// This position caused a stalemate as the engine did not choose the mate in one
@@ -136,7 +136,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual(1, Board.IsChecked(b, Board.COLOR_WHITE));
 		}
 
-		//[TestMethod]
+		//[Test]
 		public void TestSearch6()
 		{
 			var bx = Notation.ReadFEN("4k3/8/2r5/8/4N3/3P1Q2/7K/8 w - - 0 1");//new Chess.Board(true);

@@ -1,15 +1,15 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
 using Chess.Lib.MoveClasses;
 
 namespace Chess.Lib.Tests
 {
-	[TestClass]
+	[TestFixture]
 	public class QueenTest
 	{
-		[TestMethod]
+		[Test]
 		public void TestQueenMovesAll()
 		{
 			for (int i = 0; i < 64; i++)
@@ -29,7 +29,7 @@ namespace Chess.Lib.Tests
 			}
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestWhiteQueen1()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -41,7 +41,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual((ulong)0x11925438EF385492, moves);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestWhiteQueen2()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();

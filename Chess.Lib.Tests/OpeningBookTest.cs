@@ -1,18 +1,18 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Chess.Lib.Tests
 {
-	[TestClass]
+	[TestFixture]
 	public class OpeningBookTest
 	{
-		[TestMethod]
+		[Test]
 		public void TestDecompress()
 		{
 			new OpeningBook().Load(@"c:\openingBook.txt.gz");
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestLookup()
 		{
 			var book = new OpeningBook();

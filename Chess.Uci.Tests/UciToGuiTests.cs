@@ -1,15 +1,15 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using System.Collections.Generic;
 
 namespace Chess.Uci.Tests
 {
-	[TestClass]
+	[TestFixture]
 	public class UciToGuiTests
 	{
 		UciController ctrl;
 
-		[TestInitialize]
+		[SetUp]
 		public void Init()
 		{
 			ctrl = new UciController();
@@ -24,7 +24,7 @@ namespace Chess.Uci.Tests
 			Commands.Add(command);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestID()
 		{
 			ctrl.ID("Vladivostok", "Valdemar Erlingsson");
@@ -33,7 +33,7 @@ namespace Chess.Uci.Tests
 			Assert.AreEqual("id author Valdemar Erlingsson", Commands[1]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestUciOk()
 		{
 			ctrl.UciOk();
@@ -41,7 +41,7 @@ namespace Chess.Uci.Tests
 			Assert.AreEqual("uciok", Commands[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestReadyOk()
 		{
 			ctrl.ReadyOk();
@@ -49,7 +49,7 @@ namespace Chess.Uci.Tests
 			Assert.AreEqual("readyok", Commands[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestBestMove1()
 		{
 			ctrl.BestMove(UciMove.FromString("a2a4"), null);
@@ -57,7 +57,7 @@ namespace Chess.Uci.Tests
 			Assert.AreEqual("bestmove a2a4", Commands[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestBestMove2()
 		{
 			ctrl.BestMove(UciMove.FromString("b7b8q"), null);
@@ -65,7 +65,7 @@ namespace Chess.Uci.Tests
 			Assert.AreEqual("bestmove b7b8q", Commands[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestBestMove3()
 		{
 			ctrl.BestMove(UciMove.FromString("b7b8q"), UciMove.FromString("a2a4"));
@@ -73,7 +73,7 @@ namespace Chess.Uci.Tests
 			Assert.AreEqual("bestmove b7b8q ponder a2a4", Commands[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestCopyProtection1()
 		{
 			ctrl.CopyProtection(true);
@@ -82,7 +82,7 @@ namespace Chess.Uci.Tests
 			Assert.AreEqual("copyprotection ok", Commands[1]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestCopyProtection2()
 		{
 			ctrl.CopyProtection(false);
@@ -91,7 +91,7 @@ namespace Chess.Uci.Tests
 			Assert.AreEqual("copyprotection error", Commands[1]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestRegistration1()
 		{
 			ctrl.Registration(true);
@@ -100,7 +100,7 @@ namespace Chess.Uci.Tests
 			Assert.AreEqual("registration ok", Commands[1]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestRegistration2()
 		{
 			ctrl.Registration(false);
@@ -109,7 +109,7 @@ namespace Chess.Uci.Tests
 			Assert.AreEqual("registration error", Commands[1]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestInfo1()
 		{
 			Dictionary<UciInfo, string> vals = new Dictionary<UciInfo, string>();
@@ -123,7 +123,7 @@ namespace Chess.Uci.Tests
 			Assert.AreEqual("info depth 12 nodes 555 nps 500000 pv e2e4 e7e5 g1f3", Commands[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestInfo2()
 		{
 			Dictionary<UciInfo, string> vals = new Dictionary<UciInfo, string>();
@@ -136,7 +136,7 @@ namespace Chess.Uci.Tests
 			Assert.AreEqual("info score cp 150 currmove a2a4 multipv 2", Commands[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestOption1()
 		{
 			ctrl.Option("Hash", UciOptionType.Spin, 32, 1, 1024, null);
@@ -144,7 +144,7 @@ namespace Chess.Uci.Tests
 			Assert.AreEqual("option name Hash type spin default 32 min 1 max 1024", Commands[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestOption2()
 		{
 			ctrl.Option("NalimovPath", UciOptionType.String, null, null, null, null);
@@ -152,7 +152,7 @@ namespace Chess.Uci.Tests
 			Assert.AreEqual("option name NalimovPath type string", Commands[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestOption3()
 		{
 			ctrl.Option("Ponder", UciOptionType.Check, true, null, null, null);
@@ -160,7 +160,7 @@ namespace Chess.Uci.Tests
 			Assert.AreEqual("option name Ponder type check default true", Commands[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestOption4()
 		{
 			ctrl.Option("Test", UciOptionType.Spin, "X", null, null, new List<object>() { "A", "B", "X", "Y" });

@@ -2,14 +2,14 @@
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Chess.Base.Tests
 {
-	[TestClass]
+	[TestFixture]
 	public class TestCheck
 	{
-		[TestMethod]
+		[Test]
 		public void TestAttacksSinglePawn()
 		{
 			var b = new Board();
@@ -22,7 +22,7 @@ namespace Chess.Base.Tests
 			Assert.AreEqual(1, attacks[12 + 9]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestAttacksTwoRooks1()
 		{
 			var b = new Board();
@@ -41,7 +41,7 @@ namespace Chess.Base.Tests
 			Assert.AreEqual(2, attacks[8 + 4]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestAttacksTwoRooks2()
 		{
 			var b = new Board();
@@ -68,7 +68,7 @@ namespace Chess.Base.Tests
 			Assert.AreEqual(2, attacks[8*6+3]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestCheckOneRook()
 		{
 			var b = new Board();
@@ -80,7 +80,7 @@ namespace Chess.Base.Tests
 			Assert.IsTrue(check);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestCheckMateNeverTwoRooks()
 		{
 			var b = new Board();
@@ -93,7 +93,7 @@ namespace Chess.Base.Tests
 			Assert.IsFalse(check);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestCheckMateNoTwoRooks()
 		{
 			var b = new Board();
@@ -107,7 +107,7 @@ namespace Chess.Base.Tests
 			Assert.IsFalse(check);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestCheckMateYesTwoRooks()
 		{
 			var b = new Board();
@@ -121,7 +121,7 @@ namespace Chess.Base.Tests
 			Assert.IsTrue(check);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestCheckMateNoTwoRooksOneQueen()
 		{
 			// should be able to move the queen in front
@@ -137,7 +137,7 @@ namespace Chess.Base.Tests
 			Assert.IsFalse(check);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestStalemateIsChecked()
 		{
 			// king can't kill the queen, pawn protects
@@ -155,7 +155,7 @@ namespace Chess.Base.Tests
 			Assert.IsFalse(stalemate);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestStalemateFalse()
 		{
 			// king can kill the rook
@@ -172,7 +172,7 @@ namespace Chess.Base.Tests
 			Assert.IsFalse(stalemate);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestStalemateTrue()
 		{
 			// king can't kill the rook, pawn protects

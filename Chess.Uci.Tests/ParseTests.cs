@@ -1,12 +1,12 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Chess.Uci.Tests
 {
-	[TestClass]
+	[TestFixture]
 	public class ParseTests
 	{
-		[TestMethod]
+		[Test]
 		public void TestParse1()
 		{
 			var e = CommandParser.GetElements("name Ponder type check default true", "type", "name", "default");
@@ -15,7 +15,7 @@ namespace Chess.Uci.Tests
 			Assert.AreEqual("true", e["default"]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestParse2()
 		{
 			var e = CommandParser.GetElements("name NalimovPath value C:\\TB asd asd", "value", "name", "fake");
@@ -23,14 +23,14 @@ namespace Chess.Uci.Tests
 			Assert.IsTrue(!e.ContainsKey("fake"));
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestParse3()
 		{
 			var e = CommandParser.GetElements("name NalimovPath value C:\\TB asd asd fake true", "value", "name", "fake");
 			Assert.AreEqual("true", e["fake"]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestParse4()
 		{
 			var e = CommandParser.GetElements("name NalimovPath xxxy value C:\\TB asd asd fake true", "value", "name", "fake", "xxxy");

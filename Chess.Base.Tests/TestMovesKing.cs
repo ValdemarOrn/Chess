@@ -2,14 +2,14 @@
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Chess.Base.Tests
 {
-	[TestClass]
+	[TestFixture]
 	public class TestMovesKing
 	{
-		[TestMethod]
+		[Test]
 		public void TestFree()
 		{
 			// test free space
@@ -33,7 +33,7 @@ namespace Chess.Base.Tests
 			Assert.IsTrue(moves.Contains(pos - 9));
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestSameColor()
 		{
 			var b = new Board();
@@ -56,7 +56,7 @@ namespace Chess.Base.Tests
 			Assert.AreEqual(0, moves.Length);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestOppositeColor()
 		{
 			var b = new Board();
@@ -92,7 +92,7 @@ namespace Chess.Base.Tests
 
 		// ------------------------------------
 
-		[TestMethod]
+		[Test]
 		public void TestCastleWhiteKingsideOK()
 		{
 			var b = new Board();
@@ -107,7 +107,7 @@ namespace Chess.Base.Tests
 			Assert.IsTrue(moves.Contains(6));
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestCastleWhiteKingsideBlocked()
 		{
 			var b = new Board();
@@ -120,7 +120,7 @@ namespace Chess.Base.Tests
 			Assert.IsTrue(moves.Contains(5));
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestCastleWhiteKingsideRookMoved()
 		{
 			var b = new Board();
@@ -144,7 +144,7 @@ namespace Chess.Base.Tests
 
 		// ---------------------------
 
-		[TestMethod]
+		[Test]
 		public void TestCastleWhiteQueensideOK()
 		{
 			var b = new Board();
@@ -160,7 +160,7 @@ namespace Chess.Base.Tests
 			Assert.IsTrue(moves.Contains(2));
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestCastleWhiteQueensideBlocked()
 		{
 			var b = new Board();
@@ -174,7 +174,7 @@ namespace Chess.Base.Tests
 			Assert.IsTrue(moves.Contains(3));
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestCastleWhiteQueensideRookMoved()
 		{
 			var b = new Board();
@@ -197,7 +197,7 @@ namespace Chess.Base.Tests
 
 		// ------------------------------------
 
-		[TestMethod]
+		[Test]
 		public void TestCastleBlackKingsideOK()
 		{
 			var b = new Board();
@@ -212,7 +212,7 @@ namespace Chess.Base.Tests
 			Assert.IsTrue(moves.Contains(62));
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestCastleBlackKingsideBlocked()
 		{
 			var b = new Board();
@@ -225,7 +225,7 @@ namespace Chess.Base.Tests
 			Assert.IsTrue(moves.Contains(61));
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestCastleBlackKingsideRookMoved()
 		{
 			var b = new Board();
@@ -249,7 +249,7 @@ namespace Chess.Base.Tests
 
 		// ---------------------------
 
-		[TestMethod]
+		[Test]
 		public void TestCastleBlackQueensideOK()
 		{
 			var b = new Board();
@@ -265,7 +265,7 @@ namespace Chess.Base.Tests
 			Assert.IsTrue(moves.Contains(58));
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestCastleBlackQueensideBlocked()
 		{
 			var b = new Board();
@@ -279,7 +279,7 @@ namespace Chess.Base.Tests
 			Assert.IsTrue(moves.Contains(59));
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestCastleBlackQueensideRookMoved()
 		{
 			var b = new Board();

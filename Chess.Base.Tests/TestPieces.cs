@@ -2,14 +2,14 @@
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Chess.Base.Tests
 {
-	[TestClass]
+	[TestFixture]
 	public class TestPieces
 	{
-		[TestMethod]
+		[Test]
 		public void TestToString()
 		{
 			Assert.AreEqual("Bishop", Pieces.ToString(Piece.Bishop));

@@ -2,14 +2,14 @@
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Chess.Base.Tests
 {
-	[TestClass]
+	[TestFixture]
 	public class TestMovesKnight
 	{
-		[TestMethod]
+		[Test]
 		public void TestKnight1()
 		{
 			// test free space
@@ -28,7 +28,7 @@ namespace Chess.Base.Tests
 			Assert.IsTrue(moves.Contains((byte)(pos - 16 + 1)));
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestKnightCapture()
 		{
 			var b = new Board();
@@ -47,7 +47,7 @@ namespace Chess.Base.Tests
 			Assert.IsTrue(moves.Contains((byte)(pos - 16 + 1)));
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestKnightCaptureSameColor()
 		{
 			var b = new Board();
@@ -66,7 +66,7 @@ namespace Chess.Base.Tests
 			//Assert.IsTrue(moves.Contains((byte)(pos - 16 + 1)));
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestKnightNoMoves()
 		{
 			var b = new Board();
@@ -84,7 +84,7 @@ namespace Chess.Base.Tests
 			Assert.AreEqual(0, moves.Length);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestKnightKillAll()
 		{
 			var b = new Board();
@@ -102,7 +102,7 @@ namespace Chess.Base.Tests
 			Assert.AreEqual(8, moves.Length);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestKnightCorner1()
 		{
 			// upper left
@@ -115,7 +115,7 @@ namespace Chess.Base.Tests
 			Assert.IsTrue(moves.Contains((byte)(pos - 16 + 1)));
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestKnightCorner2()
 		{
 			// 7 + 1
@@ -130,7 +130,7 @@ namespace Chess.Base.Tests
 			Assert.IsTrue(moves.Contains((byte)(pos - 17)));
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestKnightCorner3()
 		{
 			// lower right
@@ -143,7 +143,7 @@ namespace Chess.Base.Tests
 			Assert.IsTrue(moves.Contains((byte)(pos + 16 - 1)));
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestKnightCorner4()
 		{
 			// 1 + 6

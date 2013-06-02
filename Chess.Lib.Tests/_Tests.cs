@@ -1,19 +1,19 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Runtime.InteropServices;
+using NUnit.Framework;
 
 namespace Chess.Lib.Tests
 {
-	[TestClass]
+	[SetUpFixture]
 	public unsafe class _Tests
 	{
-		[AssemblyInitialize()]
-		public static void Init(TestContext ctx)
+		[SetUp]
+		public static void Init()
 		{
 			Manager.InitLibrary();
 		}
 
-		[AssemblyCleanup()]
+		[TearDown]
 		public static void Cleanup()
 		{
 			TTable.Delete();

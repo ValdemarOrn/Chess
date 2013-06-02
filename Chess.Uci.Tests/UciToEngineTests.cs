@@ -1,16 +1,16 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using System.Collections.Generic;
 
 namespace Chess.Uci.Tests
 {
-	[TestClass]
+	[TestFixture]
 	public class UciToEngineTests
 	{
 		MockUciEngine engine;
 		UciController ctrl;
 
-		[TestInitialize]
+		[SetUp]
 		public void Init()
 		{
 			engine = new MockUciEngine();
@@ -18,7 +18,7 @@ namespace Chess.Uci.Tests
 			ctrl.Engine = engine;
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestCallUci()
 		{
 			var ok = ctrl.ReadCommand("uci");
@@ -26,7 +26,7 @@ namespace Chess.Uci.Tests
 			Assert.AreEqual("Uci", engine.Function);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestCallDebug()
 		{
 			var ok = ctrl.ReadCommand("debug on");
@@ -40,7 +40,7 @@ namespace Chess.Uci.Tests
 			Assert.AreEqual(false, engine.Arguments[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestCallIsReady()
 		{
 			var ok = ctrl.ReadCommand("isready");
@@ -49,7 +49,7 @@ namespace Chess.Uci.Tests
 			Assert.AreEqual(0, engine.Arguments.Count);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestSetOption()
 		{
 			var ok = ctrl.ReadCommand(@"setoption name NalimovPath value c:\chess\tb\4;c:\chess\tb\5\n");
@@ -59,7 +59,7 @@ namespace Chess.Uci.Tests
 			Assert.AreEqual(@"c:\chess\tb\4;c:\chess\tb\5\n", engine.Arguments[1]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestRegister()
 		{
 			var ok = ctrl.ReadCommand("register name Valdemar Erlingsson code 12345");
@@ -77,7 +77,7 @@ namespace Chess.Uci.Tests
 			Assert.AreEqual(null, engine.Arguments[2]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestUciNewGame()
 		{
 			var ok = ctrl.ReadCommand("ucinewgame");
@@ -86,7 +86,7 @@ namespace Chess.Uci.Tests
 			Assert.AreEqual(0, engine.Arguments.Count);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestPosition()
 		{
 			var ok = ctrl.ReadCommand("position fen rnbqkb1r/ppp1pppp/5n2/1B1p4/4P3/5N2/PPPP1PPP/RNBQK2R b KQkq - 3 3 moves a2a4 c8d7");
@@ -105,7 +105,7 @@ namespace Chess.Uci.Tests
 			Assert.AreEqual("a3a7q", moves[0].ToString());
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestGo1()
 		{
 			var ok = ctrl.ReadCommand("go infinite searchmoves e2e4 d2d4");
@@ -119,7 +119,7 @@ namespace Chess.Uci.Tests
 			Assert.AreEqual(null, goParams.WhiteInc);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestGo2()
 		{
 			var ok = ctrl.ReadCommand("go wtime 300000 btime 300000 winc 0 binc 0");
@@ -134,7 +134,7 @@ namespace Chess.Uci.Tests
 			Assert.AreEqual(null, goParams.Depth);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestGo3()
 		{
 			var ok = ctrl.ReadCommand("go movestogo 8 ponder");
@@ -145,7 +145,7 @@ namespace Chess.Uci.Tests
 			Assert.AreEqual(8, goParams.MovesToGo);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestGo4()
 		{
 			var ok = ctrl.ReadCommand("go wtime 126000 btime 120000 winc 6000 binc 6000");
@@ -158,7 +158,7 @@ namespace Chess.Uci.Tests
 			Assert.AreEqual(6000, goParams.WhiteInc);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestStop()
 		{
 			var ok = ctrl.ReadCommand("stop");
@@ -167,7 +167,7 @@ namespace Chess.Uci.Tests
 			Assert.AreEqual(0, engine.Arguments.Count);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestPonderHit()
 		{
 			var ok = ctrl.ReadCommand("ponderhit");
@@ -176,7 +176,7 @@ namespace Chess.Uci.Tests
 			Assert.AreEqual(0, engine.Arguments.Count);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestQuit()
 		{
 			var ok = ctrl.ReadCommand("quit");

@@ -2,15 +2,15 @@
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Chess.Lib.MoveClasses;
 
 namespace Chess.Lib.Tests
 {
-	[TestClass]
+	[TestFixture]
 	public class BishopTest
 	{
-		[TestMethod]
+		[Test]
 		public void TestBishopVectors()
 		{
 			var vex = Bishop.BishopVectors;
@@ -18,7 +18,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual((ulong)0x0040201008040200, vex[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestBishopPermutations()
 		{
 			var vex = Bishop.BishopVectors;
@@ -26,7 +26,7 @@ namespace Chess.Lib.Tests
 			var strs = perms.Select(x => Bitboard.ToString(x)).ToList();
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestBishopMoves1()
 		{
 			int idx = 27;
@@ -38,7 +38,7 @@ namespace Chess.Lib.Tests
 			var strsm = moves.Select(x => Bitboard.ToString(x)).ToList();
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestBishopMovesAll()
 		{
 			for (int i = 0; i < 64; i++)
@@ -58,7 +58,7 @@ namespace Chess.Lib.Tests
 			}
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestBishopMoves2()
 		{
 			int idx = 0;
@@ -72,7 +72,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual((ulong)0x8040201008040200, moves[0]);
 		}
 		
-		[TestMethod]
+		[Test]
 		public void TestRookInitializeAndRead()
 		{
 			Bishop.Load();

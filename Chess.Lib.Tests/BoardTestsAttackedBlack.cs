@@ -1,12 +1,12 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Chess.Lib.Tests
 {
-	[TestClass]
+	[TestFixture]
 	public class BoardTestsAttackedBlack
 	{
-		[TestMethod]
+		[Test]
 		public unsafe void TestIsAttackedBlack1()
 		{
 			// Pawn 1
@@ -17,7 +17,7 @@ namespace Chess.Lib.Tests
 			Assert.IsTrue(isAttacked);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestIsAttackedBlack1x()
 		{
 			// Pawn 1 - wrong side
@@ -28,7 +28,7 @@ namespace Chess.Lib.Tests
 			Assert.IsFalse(isAttacked);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestIsAttackedBlack2()
 		{
 			// Pawn 2
@@ -39,7 +39,7 @@ namespace Chess.Lib.Tests
 			Assert.IsFalse(isAttacked);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestIsAttackedBlack3()
 		{
 			// Pawn 3
@@ -50,7 +50,7 @@ namespace Chess.Lib.Tests
 			Assert.IsFalse(isAttacked);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestIsAttackedBlack4()
 		{
 			// Knight 1
@@ -61,7 +61,7 @@ namespace Chess.Lib.Tests
 			Assert.IsTrue(isAttacked);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestIsAttackedBlack5()
 		{
 			// Knight 2
@@ -72,7 +72,7 @@ namespace Chess.Lib.Tests
 			Assert.IsTrue(isAttacked);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestIsAttackedBlack6()
 		{
 			// Knight 3
@@ -83,7 +83,7 @@ namespace Chess.Lib.Tests
 			Assert.IsFalse(isAttacked);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestIsAttackedBlack7()
 		{
 			// Knight 4
@@ -94,7 +94,7 @@ namespace Chess.Lib.Tests
 			Assert.IsTrue(isAttacked);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestIsAttackedBlack8()
 		{
 			// Bishop 1
@@ -105,7 +105,7 @@ namespace Chess.Lib.Tests
 			Assert.IsTrue(isAttacked);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestIsAttackedBlack9()
 		{
 			// Bishop 2
@@ -116,7 +116,7 @@ namespace Chess.Lib.Tests
 			Assert.IsTrue(isAttacked);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestIsAttackedBlack10()
 		{
 			// Bishop 3
@@ -127,7 +127,7 @@ namespace Chess.Lib.Tests
 			Assert.IsTrue(isAttacked);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestIsAttackedBlack11()
 		{
 			// Bishop 4 - attacking blank
@@ -137,7 +137,7 @@ namespace Chess.Lib.Tests
 			Assert.IsTrue(isAttacked);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestIsAttackedBlack12()
 		{
 			// Bishop 5
@@ -148,7 +148,7 @@ namespace Chess.Lib.Tests
 			Assert.IsFalse(isAttacked);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestIsAttackedBlack13()
 		{
 			// Rook 1
@@ -159,7 +159,7 @@ namespace Chess.Lib.Tests
 			Assert.IsTrue(isAttacked);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestIsAttackedBlack14()
 		{
 			// Rook 2
@@ -170,7 +170,7 @@ namespace Chess.Lib.Tests
 			Assert.IsTrue(isAttacked);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestIsAttackedBlack15()
 		{
 			// Rook 3
@@ -181,7 +181,7 @@ namespace Chess.Lib.Tests
 			Assert.IsFalse(isAttacked);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestIsAttackedBlack16()
 		{
 			// Rook 4
@@ -192,7 +192,7 @@ namespace Chess.Lib.Tests
 			Assert.IsTrue(isAttacked);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestIsAttackedBlack17()
 		{
 			// Rook 5
@@ -203,7 +203,7 @@ namespace Chess.Lib.Tests
 			Assert.IsTrue(isAttacked);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestIsAttackedBlack18()
 		{
 			// Rook 6 - blocked
@@ -215,7 +215,7 @@ namespace Chess.Lib.Tests
 			Assert.IsFalse(isAttacked);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestIsAttackedBlack19()
 		{
 			// Queen 1
@@ -226,7 +226,7 @@ namespace Chess.Lib.Tests
 			Assert.IsTrue(isAttacked);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestIsAttackedBlack20()
 		{
 			// Queen 2
@@ -237,7 +237,7 @@ namespace Chess.Lib.Tests
 			Assert.IsTrue(isAttacked);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestIsAttackedBlack21()
 		{
 			// Queen 3
@@ -248,7 +248,7 @@ namespace Chess.Lib.Tests
 			Assert.IsTrue(isAttacked);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestIsAttackedBlack22()
 		{
 			// Queen 4
@@ -259,7 +259,7 @@ namespace Chess.Lib.Tests
 			Assert.IsTrue(isAttacked);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestIsAttackedBlack23()
 		{
 			// Queen 5

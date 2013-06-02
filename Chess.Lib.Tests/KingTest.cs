@@ -1,12 +1,12 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Chess.Lib.Tests
 {
-	[TestClass]
+	[TestFixture]
 	public class KingTest
 	{
-		[TestMethod]
+		[Test]
 		public unsafe void WhiteKingTest1()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -32,7 +32,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual((ulong)0x3828, moves);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void WhiteCastleKingsideOnly()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -51,7 +51,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual((ulong)0x3868, moves);			
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void WhiteCastleQueensideOnly()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -70,7 +70,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual((ulong)0x382C, moves);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void BlackKingTest1()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -96,7 +96,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual((ulong)0x2838000000000000, moves);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void BlackCastleKingsideOnly()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -108,7 +108,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual((ulong)0x6038000000000000, moves);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void BlackCastleQueensideOnly()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -120,7 +120,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual((ulong)0xC38000000000000, moves);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void SwitchKings()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();

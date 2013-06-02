@@ -2,14 +2,14 @@
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Chess.Lib.Tests
 {
-	[TestClass]
+	[TestFixture]
 	public class BoardTests
 	{
-		[TestMethod]
+		[Test]
 		public unsafe void TestBoardXY()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -25,7 +25,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual(7, Board.Y(7 * 8 + 7));
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestBoardColorWhite()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -48,7 +48,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual(0, Board.Color(b, 46));
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestBoardColorBlack()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -71,7 +71,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual(0, Board.Color(b, 46));
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestBoardInit()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -84,7 +84,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual(allCastle, b->Castle);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestBoardInitPieces()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -99,7 +99,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual(allCastle, b->Castle);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestBoardAttacks()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -120,7 +120,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual((ulong)0xE0A0EA000000000, blackMap);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestGetCastlingAll()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -137,7 +137,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual(Board.CASTLE_BK | Board.CASTLE_BQ | Board.CASTLE_WK | Board.CASTLE_WQ, castling);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestGetCastlingNone()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -149,7 +149,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual(0, castling);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestGetCastlingNone2()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -168,7 +168,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual(0, castling);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestGetCastlingSingleRooks()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -198,7 +198,7 @@ namespace Chess.Lib.Tests
 			Board.ClearPiece(b, 63);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestGetCastlingSingleAllowances()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -228,7 +228,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual(Board.CASTLE_BK, castling);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestCheckStateNone()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -248,7 +248,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual(0, check);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestCheckStateWhite()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -264,7 +264,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual(1, check);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestCheckStateBlack()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -280,7 +280,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual(1, check);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestIsCheckedNone()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -299,7 +299,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual(0, check);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestIsCheckedWhite()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -317,7 +317,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual(0, check);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestIsCheckedBlack()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -335,7 +335,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual(1, check);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestMakePawn()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -347,7 +347,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual(false, Bitboard.Get(b->Boards[Board.BOARD_PAWNS], 12));
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestMakeRooks()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -368,7 +368,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual(false, Bitboard.Get(b->Boards[Board.BOARD_BLACK], 62));
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestMakeRooksUnmake()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -393,7 +393,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual(0, b->CurrentMove);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestMakeUnmakePGNFischer()
 		{
 			string data = System.IO.File.ReadAllText("..\\..\\..\\TestData\\BobbyFischer.pgn");
@@ -402,7 +402,7 @@ namespace Chess.Lib.Tests
 			GenericGameTest(game, finalState);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestMakeUnmakePGNKasparovDeepBlue()
 		{
 			string data = System.IO.File.ReadAllText("..\\..\\..\\TestData\\HumansVsComputers.pgn");
@@ -411,7 +411,7 @@ namespace Chess.Lib.Tests
 			GenericGameTest(game, finalState);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestMakeUnmakePGNKasparovX3DFritz()
 		{
 			string data = System.IO.File.ReadAllText("..\\..\\..\\TestData\\HumansVsComputers.pgn");
@@ -421,7 +421,7 @@ namespace Chess.Lib.Tests
 			GenericGameTest(game, finalState);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestMakeUnmakePGNKasparovX3D()
 		{
 			string data = System.IO.File.ReadAllText("..\\..\\..\\TestData\\HumansVsComputers.pgn");
@@ -430,7 +430,7 @@ namespace Chess.Lib.Tests
 			GenericGameTest(game, finalState);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestMakeUnmakePromotion()
 		{
 			string game = "1. e4 d5 2. exd5 Nf6 3. Bb5+ c6 4. dxc6 Qb6 5. Bf1 Qb4 6. cxb7 Kd7 7. bxc8=Q+ Kd6 8. Qh3 Qb5 9. Qxh7 Qb6 10. Qxh8 ";
@@ -493,7 +493,7 @@ namespace Chess.Lib.Tests
 			}
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestMoveCanSelfCheck1()
 		{
 			// Can self check because of coverage
@@ -504,7 +504,7 @@ namespace Chess.Lib.Tests
 			Assert.IsTrue(canSelfCheck);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestMoveCanSelfCheck2()
 		{
 			// Cannot self check because of coverage 2
@@ -516,7 +516,7 @@ namespace Chess.Lib.Tests
 			Assert.IsFalse(canSelfCheck);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestMoveCanSelfCheck3()
 		{
 			// Can always self check when moving the king
@@ -528,7 +528,7 @@ namespace Chess.Lib.Tests
 			Assert.IsTrue(canSelfCheck);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestMoveCanSelfCheck4()
 		{
 			// Can self check because of En passant
@@ -549,7 +549,7 @@ namespace Chess.Lib.Tests
 			Assert.IsTrue(canSelfCheck);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestFen1()
 		{
 			string fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
@@ -563,7 +563,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual(fen, fen2);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestFen2()
 		{
 			string fen = "r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq - 0 1";
@@ -577,7 +577,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual(fen, fen2);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestFen3()
 		{
 			string fen = "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - - 0 1";
@@ -591,7 +591,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual(fen, fen2);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestFen4()
 		{
 			string fen = "r3k2r/Pppp1ppp/1b3nbN/nP6/BBP1P3/q4N2/Pp1P2PP/R2Q1RK1 w kq - 0 1";
@@ -605,7 +605,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual(fen, fen2);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestFen5()
 		{
 			string fen = "rnbqkb1r/pp1p1ppp/2p5/4P3/2B5/8/PPP1NnPP/RNBQK2R w KQkq - 0 6";
@@ -619,7 +619,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual(fen, fen2);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestSmallestAttacker()
 		{
 			string fen = @"2kq4/8/2p5/3b3R/8/4N3/8/2R3K1 w KQkq - 0 1";
@@ -630,7 +630,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual(42, attacker);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestSmallestAttackerPinned()
 		{
 			string fen = @"2kq4/8/2p5/3b3R/8/4N3/8/2R3K1 w KQkq - 0 1";
@@ -641,7 +641,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual(59, attacker);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestMakeNullMove()
 		{
 			string fen = @"2kq4/8/2p5/3b3R/8/4N3/8/2R3K1 w KQkq - 0 1";

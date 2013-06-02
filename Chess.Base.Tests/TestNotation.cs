@@ -2,14 +2,14 @@
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Chess.Base.Tests
 {
-	[TestClass]
+	[TestFixture]
 	public class TestNotation
 	{
-		[TestMethod]
+		[Test]
 		public void TestTextToTile()
 		{
 			string a = "E1";
@@ -96,7 +96,7 @@ namespace Chess.Base.Tests
 			Assert.IsTrue(exception);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestTileToText()
 		{
 			Assert.AreEqual("e1", Notation.TileToText(4));
@@ -108,7 +108,7 @@ namespace Chess.Base.Tests
 			Assert.AreEqual("", Notation.TileToText(1235));
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestFEN1()
 		{ 
 			var b1 = new Board(true);
@@ -120,7 +120,7 @@ namespace Chess.Base.Tests
 			Assert.IsTrue(equal);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestFEN2()
 		{
 			var b1 = new Board(true);
@@ -135,7 +135,7 @@ namespace Chess.Base.Tests
 			Assert.IsTrue(equal);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestFENEnPassantBlank()
 		{
 			var str = "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq -";
@@ -143,7 +143,7 @@ namespace Chess.Base.Tests
 			Assert.AreEqual(0, b2.EnPassantTile);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestFENEnPassantWhite()
 		{
 			var str = "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3";
@@ -158,7 +158,7 @@ namespace Chess.Base.Tests
 			Assert.IsTrue(equal);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestFENEnPassantBlack()
 		{
 			var str = "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq c6";
@@ -174,7 +174,7 @@ namespace Chess.Base.Tests
 			Assert.IsTrue(equal);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestFENEnPassantWrongTurnWhite()
 		{
 			var str = "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e3";
@@ -193,7 +193,7 @@ namespace Chess.Base.Tests
 			Assert.IsTrue(ex);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestFENEnPassantWrongTurnBlack()
 		{
 			var str = "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR b KQkq c6";
@@ -212,7 +212,7 @@ namespace Chess.Base.Tests
 			Assert.IsTrue(ex);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestFENEnPassantMissingPieceWhite()
 		{
 			var str = "rnbqkbnr/pppppppp/8/8/8/8/PPPP1PPP/RNBQKBNR b KQkq e3";
@@ -231,7 +231,7 @@ namespace Chess.Base.Tests
 			Assert.IsTrue(ex);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestFENEnPassantMissingPieceBlack()
 		{
 			var str = "rnbqkbnr/pp1ppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq c6";
@@ -250,7 +250,7 @@ namespace Chess.Base.Tests
 			Assert.IsTrue(ex);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestFENCastle1()
 		{
 			var b1 = new Board(true);
@@ -265,7 +265,7 @@ namespace Chess.Base.Tests
 			Assert.IsTrue(b2.CanCastleKBlack);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestFENCastle2()
 		{
 			var b1 = new Board(true);
@@ -280,7 +280,7 @@ namespace Chess.Base.Tests
 			Assert.IsFalse(b2.CanCastleKBlack);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestFENCastleNone()
 		{
 			var b1 = new Board(true);
@@ -295,7 +295,7 @@ namespace Chess.Base.Tests
 			Assert.IsFalse(b2.CanCastleKBlack);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestFENTurnWhite()
 		{
 			var b1 = new Board(true);
@@ -306,7 +306,7 @@ namespace Chess.Base.Tests
 			Assert.AreEqual(Color.White, b2.PlayerTurn);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestFENTurnBlack()
 		{
 			var b1 = new Board(true);
@@ -317,7 +317,7 @@ namespace Chess.Base.Tests
 			Assert.AreEqual(Color.Black, b2.PlayerTurn);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestFENHalfmovesAndRound()
 		{
 			var b1 = new Board(true);

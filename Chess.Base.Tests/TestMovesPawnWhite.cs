@@ -2,14 +2,14 @@
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Chess.Base.Tests
 {
-	[TestClass]
+	[TestFixture]
 	public class TestMovesPawnWhite
 	{
-		[TestMethod]
+		[Test]
 		public void Test1_1()
 		{
 			// test free space, starting rank
@@ -21,7 +21,7 @@ namespace Chess.Base.Tests
 			Assert.IsTrue(moves.Contains(12 + 16));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Test1_2()
 		{
 			// test free space, piece has moved forward
@@ -32,7 +32,7 @@ namespace Chess.Base.Tests
 			Assert.IsTrue(moves.Contains(28));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Test2()
 		{
 			// Test edge of board
@@ -44,7 +44,7 @@ namespace Chess.Base.Tests
 			Assert.IsTrue(moves.Contains(pos + 8));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Test3()
 		{
 			// Test obstacle far, same color
@@ -57,7 +57,7 @@ namespace Chess.Base.Tests
 			Assert.IsTrue(moves.Contains(pos + 8));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Test4()
 		{
 			// Test obstacle far, opposite color
@@ -70,7 +70,7 @@ namespace Chess.Base.Tests
 			Assert.IsTrue(moves.Contains(pos + 8));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Test5()
 		{
 			// Test obstacle near, same color
@@ -82,7 +82,7 @@ namespace Chess.Base.Tests
 			Assert.AreEqual(0, moves.Length);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Test6()
 		{
 			// Test obstacle near, opposite color
@@ -94,7 +94,7 @@ namespace Chess.Base.Tests
 			Assert.AreEqual(0, moves.Length);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestCaptureLeft()
 		{
 			var b = new Board();
@@ -108,7 +108,7 @@ namespace Chess.Base.Tests
 			Assert.IsTrue(moves.Contains(pos + 16));
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestCaptureRight()
 		{
 			var b = new Board();
@@ -122,7 +122,7 @@ namespace Chess.Base.Tests
 			Assert.IsTrue(moves.Contains(pos + 16));
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestCaptureSameColor()
 		{
 			var b = new Board();
@@ -134,7 +134,7 @@ namespace Chess.Base.Tests
 			Assert.AreEqual(2, moves.Length);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestEnPassantLeft()
 		{
 			var b = new Board();
@@ -153,7 +153,7 @@ namespace Chess.Base.Tests
 			Assert.IsTrue(moves.Contains(Notation.TextToTile("d6")));
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestEnPassantRight()
 		{
 			var b = new Board();

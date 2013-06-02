@@ -1,12 +1,12 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Chess.Lib.Tests
 {
-	[TestClass]
+	[TestFixture]
 	public class MovesTest
 	{
-		[TestMethod]
+		[Test]
 		public unsafe void TestGetCastlingType()
 		{
 			var b = Board.Create();
@@ -26,7 +26,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual(Board.CASTLE_BK, type);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestGetCastlingTypeWithRook()
 		{
 			var b = Board.Create();
@@ -47,7 +47,7 @@ namespace Chess.Lib.Tests
 
 		// test  GetAvailableCastlingTypes(BoardStruct* board, int color);
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestGetAvailableCastlingTypesAll()
 		{
 			var b = Board.Create();
@@ -65,7 +65,7 @@ namespace Chess.Lib.Tests
 		}
 
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestGetAvailableCastlingTypesWhiteQueenside()
 		{
 			var b = Board.Create();
@@ -83,7 +83,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual(Board.CASTLE_BQ | Board.CASTLE_BK, blackCastle);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestGetAvailableCastlingTypesWhiteKingside()
 		{
 			var b = Board.Create();
@@ -101,7 +101,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual(Board.CASTLE_BQ | Board.CASTLE_BK, blackCastle);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestGetAvailableCastlingTypesBlackQueenside()
 		{
 			var b = Board.Create();
@@ -119,7 +119,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual(Board.CASTLE_BK, blackCastle);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestGetAvailableCastlingTypesBlackKingside()
 		{
 			var b = Board.Create();
@@ -140,7 +140,7 @@ namespace Chess.Lib.Tests
 
 		// test  GetCastlingMoves(BoardStruct* board, int color);
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestGetCastlingMovesAll()
 		{
 			var b = Board.Create();
@@ -158,7 +158,7 @@ namespace Chess.Lib.Tests
 		}
 
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestGetCastlingMovesWhiteQueenside()
 		{
 			var b = Board.Create();
@@ -176,7 +176,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual((ulong)0x4400000000000000, blackCastleBB);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TesGetCastlingMovesWhiteKingside()
 		{
 			var b = Board.Create();
@@ -194,7 +194,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual((ulong)0x4400000000000000, blackCastleBB);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestGetCastlingMovesBlackQueenside()
 		{
 			var b = Board.Create();
@@ -212,7 +212,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual((ulong)0x4000000000000000, blackCastleBB);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestGetCastlingMovesBlackKingside()
 		{
 			var b = Board.Create();
@@ -230,7 +230,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual((ulong)0x400000000000000, blackCastleBB);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestGetAllMovesWhiteKing()
 		{
 			var moveList100 = stackalloc Move[100];
@@ -251,7 +251,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual(9, moveList100[2].To);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestGetAllMovesKingsPawns()
 		{
 			var moveList100 = stackalloc Move[100];

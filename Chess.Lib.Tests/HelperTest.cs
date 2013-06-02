@@ -1,12 +1,12 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Chess.Lib.Tests
 {
-	[TestClass]
+	[TestFixture]
 	public class HelperTest
 	{
-		[TestMethod]
+		[Test]
 		public unsafe void TestManagedBoardToNativeInit()
 		{
 			var board = new Chess.Base.Board(true);
@@ -18,7 +18,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual(b2->Hash, b->Hash);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestManagedBoardToNativeFEN()
 		{
 			var board = Chess.Base.Notation.ReadFEN("rnbqkb1r/pp2pppp/3p1n2/2p5/2B1P3/5N2/PPPP1PPP/RNBQ1RK1 b kq");

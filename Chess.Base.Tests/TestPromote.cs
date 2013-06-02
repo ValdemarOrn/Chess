@@ -2,14 +2,14 @@
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Chess.Base.Tests
 {
-	[TestClass]
+	[TestFixture]
 	public class TestPromote
 	{
-		[TestMethod]
+		[Test]
 		public void TestPromoteWhite()
 		{
 			var b = new Board();
@@ -21,7 +21,7 @@ namespace Chess.Base.Tests
 			Assert.AreEqual(Piece.Queen, b.GetPiece(pos));
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestPromoteBlack()
 		{
 			var b = new Board();
@@ -33,7 +33,7 @@ namespace Chess.Base.Tests
 			Assert.AreEqual(Piece.Queen, b.GetPiece(pos));
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestPromoteNotAtEdgeWhite()
 		{
 			var b = new Board();
@@ -45,7 +45,7 @@ namespace Chess.Base.Tests
 			Assert.AreEqual(Piece.Pawn, b.GetPiece(pos));
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestPromoteNotAtEdgeBlack()
 		{
 			var b = new Board();
@@ -57,7 +57,7 @@ namespace Chess.Base.Tests
 			Assert.AreEqual(Piece.Pawn, b.GetPiece(pos));
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestPromoteNonPawnWhite()
 		{
 			var b = new Board();
@@ -69,7 +69,7 @@ namespace Chess.Base.Tests
 			Assert.AreEqual(Piece.Rook, b.GetPiece(pos));
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestPromoteNonPawnBlack()
 		{
 			var b = new Board();

@@ -2,22 +2,22 @@
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Chess.Lib.Tests
 {
-	[TestClass]
+	[TestFixture]
 	public class MovePawnWhiteTests
 	{
-		[ClassInitialize]
-		public static void Init(TestContext context)
+		[TestFixtureSetUp]
+		public static void Init()
 		{
 			//Pawn.Load();
 		}
 
 		// --------------- Simple moves, single piece on board ---------------
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestWhitePawnSingle1()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -30,7 +30,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual((ulong)0x1010000, moves);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestWhitePawnBlocker1()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -44,7 +44,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual((ulong)0x0, moves);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestWhitePawnSingle2()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -57,7 +57,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual((ulong)0x800000000, moves);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestWhitePawnSingle3()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -72,7 +72,7 @@ namespace Chess.Lib.Tests
 
 		// --------------- capture moves, two pieces on board ---------------
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestWhitePawnCapture1()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -88,7 +88,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual((ulong)0x1030000, moves);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestWhitePawnCapture2()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -107,7 +107,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual((ulong)0x1C00000000, moves);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestWhitePawnCapture3()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -123,7 +123,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual((ulong)0xC00000000, moves);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestWhitePawnCapture4()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -144,7 +144,7 @@ namespace Chess.Lib.Tests
 
 		// --------------- non-capture moves, same color ---------------
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestWhitePawnSame1()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -160,7 +160,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual((ulong)0x1010000, moves);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestWhitePawnSame2()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -179,7 +179,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual((ulong)0x800000000, moves);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestWhitePawnSame3()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -198,7 +198,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual((ulong)0x1800000000, moves);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestWhitePawnSame4()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -214,7 +214,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual((ulong)0x8000000000000000, moves);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestWhiteBlockedBlack()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -230,7 +230,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual((ulong)0x0, moves);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestWhiteBlockedWhite()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -246,7 +246,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual((ulong)0x0, moves);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestWhiteEnPassantMoveRight()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -260,7 +260,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual((ulong)0x60000000000, moves);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestWhiteEnPassantMoveLeft()
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
@@ -274,7 +274,7 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual((ulong)0x600000000000, moves);
 		}
 
-		[TestMethod]
+		[Test]
 		public unsafe void TestWhiteProblematicMove()
 		{
 			// this position caused a wrong hit during Perft

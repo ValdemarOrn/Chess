@@ -2,14 +2,14 @@
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Chess.Base.Tests
 {
-	[TestClass]
+	[TestFixture]
 	public class TestMoves
 	{
-		[TestMethod]
+		[Test]
 		public void TestIsCastlingMove()
 		{
 			var b = new Board();
@@ -33,7 +33,7 @@ namespace Chess.Base.Tests
 			Assert.IsTrue(Moves.IsCastlingMove(b, 60, 57) == 0);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestIsEnPassantLeftWhite()
 		{
 			var b = new Board();
@@ -55,7 +55,7 @@ namespace Chess.Base.Tests
 			Assert.IsFalse(isEnPassant);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestIsEnPassantRightWhite()
 		{
 			var b = new Board();
@@ -77,7 +77,7 @@ namespace Chess.Base.Tests
 			Assert.IsFalse(isEnPassant);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestIsEnPassantLeftBlack()
 		{
 			var b = new Board();
@@ -99,7 +99,7 @@ namespace Chess.Base.Tests
 			Assert.IsFalse(isEnPassant);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestIsEnPassantRightBlack()
 		{
 			var b = new Board();
@@ -121,7 +121,7 @@ namespace Chess.Base.Tests
 			Assert.IsFalse(isEnPassant);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestEnPassantVictimWhiteRight()
 		{
 			var b = new Board();
@@ -142,7 +142,7 @@ namespace Chess.Base.Tests
 			Assert.AreEqual(target, posBlack - 16);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestEnPassantVictimBlackLeft()
 		{
 			var b = new Board();
@@ -163,7 +163,7 @@ namespace Chess.Base.Tests
 			Assert.AreEqual(target, posWhite + 16);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestIsCaptureMoveEnPassant()
 		{
 			var b = new Board();
@@ -181,7 +181,7 @@ namespace Chess.Base.Tests
 			Assert.IsTrue(capture);
 		}
 
-		[TestMethod]
+		[Test]
 		public void TestIsCaptureMoveNormal()
 		{
 			var b = new Board();
