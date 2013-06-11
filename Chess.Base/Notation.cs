@@ -7,11 +7,64 @@ namespace Chess.Base
 {
 	public class Notation
 	{
-		/// <summary>
-		/// Get the algebraic notation for the tile, e.g. a1, e4, h3
-		/// </summary>
-		/// <param name="tile"></param>
-		/// <returns></returns>
+		public static int FileToInt(char file)
+		{
+			file = Char.ToLower(file);
+			int x = -1;
+
+			switch (file)
+			{
+				case 'a':
+					x = 0; break;
+				case 'b':
+					x = 1; break;
+				case 'c':
+					x = 2; break;
+				case 'd':
+					x = 3; break;
+				case 'e':
+					x = 4; break;
+				case 'f':
+					x = 5; break;
+				case 'g':
+					x = 6; break;
+				case 'h':
+					x = 7; break;
+				default:
+					throw new ArgumentException();
+			}
+			return x;
+		}
+
+		public static int RankToInt(char file)
+		{
+			file = Char.ToLower(file);
+			int x = -1;
+
+			switch (file)
+			{
+				case '1':
+					x = 0; break;
+				case '2':
+					x = 1; break;
+				case '3':
+					x = 2; break;
+				case '4':
+					x = 3; break;
+				case '5':
+					x = 4; break;
+				case '6':
+					x = 5; break;
+				case '7':
+					x = 6; break;
+				case '8':
+					x = 7; break;
+				default:
+					throw new ArgumentException();
+			}
+			return x;
+		}
+
 		public static string TileToText(int tile)
 		{
 			if (tile < 0 || tile >= 64)
@@ -34,7 +87,7 @@ namespace Chess.Base
 		{
 			text = text.Trim().ToLower();
 
-			if(text.Length != 2)
+			if (text.Length != 2) 
 				throw new Exception("Unable to parse tile number " + text);
 
 			int x = 0;
@@ -69,6 +122,77 @@ namespace Chess.Base
 				throw new Exception("Unable to parse tile number " + text);
 
 			return y * 8 + x;
+		}
+
+		/// <summary>
+		/// Returns the Piece type that is being promoted to, or Piece.None if there
+		/// is no promotion
+		/// Example: a8=Q returns Piece.Queen
+		/// </summary>
+		/// <param name="moveString"></param>
+		/// <returns></returns>
+		public static Piece GetPromotion(string moveString)
+		{
+			moveString = moveString.Replace("+", "").Replace("#", "");
+			var lastChar = moveString[moveString.Length - 1];
+
+			if (lastChar == 'N')
+				return Piece.Knight;
+			if (lastChar == 'B')
+				return Piece.Bishop;
+			if (lastChar == 'R')
+				return Piece.Rook;
+			if (lastChar == 'Q')
+				return Piece.Queen;
+
+			return Piece.None;
+		}
+
+		/// <summary>
+		/// Returns the type of piece that is moving.
+		/// Example: Rb2b4 returns Piece.Rook
+		/// Example: b4 returns Piece.Pawn
+		/// </summary>
+		/// <param name="moveString"></param>
+		/// <returns></returns>
+		public static Piece GetPiece(string moveString)
+		{
+			var p = moveString[0];
+
+			switch (p)
+			{
+				case 'N':
+					return Piece.Knight;
+				case 'B':
+					return Piece.Bishop;
+				case 'K':
+					return Piece.King;
+				case 'Q':
+					return Piece.Queen;
+				case 'R':
+					return Piece.Rook;
+				default:
+					return Piece.Pawn;
+			}
+		}
+
+		public static string GetPieceLetter(Piece piece)
+		{
+			switch (piece)
+			{
+				case Piece.Knight:
+					return "N";
+				case Piece.Bishop:
+					return "B";
+				case Piece.King:
+					return "K";
+				case Piece.Queen:
+					return "Q";
+				case Piece.Rook:
+					return "R";
+				default:
+					return "";
+			}
 		}
 
 		/// <summary>
@@ -201,19 +325,132 @@ namespace Chess.Base
 
 			if (parts.Length >= 5)
 			{
-				int halfmoves = Convert.ToInt32(parts[4]);
+				int halfmoves = -1;
+				Int32.TryParse(parts[4], out halfmoves);
+				if (halfmoves == -1)
+					throw new Exception("Malformed FEN string. Half move count is not a valid integer");
+
 				b.FiftyMoveRulePlies = halfmoves;
 			}
 
 			if (parts.Length >= 6)
 			{
-				int round = Convert.ToInt32(parts[5]);
-				b.MoveCount = round;
+				int fullmove = -1;
+				Int32.TryParse(parts[5], out fullmove);
+				if (fullmove == -1)
+					throw new Exception("Malformed FEN string. Fullmove count is not a valid integer");
+
+				b.MoveCount = fullmove;
 			}
 
 			return b;
 		}
 
-		
+		/// <summary>
+		/// Create a FEN string that represents the state of the board
+		/// </summary>
+		/// <param name="board"></param>
+		/// <returns></returns>
+		public static string BoardToFEN(Board board)
+		{
+			Dictionary<int, char> FENPieces = new Dictionary<int,char>();
+			FENPieces[Colors.Val(Color.White, Piece.Pawn)] = 'P';
+			FENPieces[Colors.Val(Color.White, Piece.Knight)] = 'N';
+			FENPieces[Colors.Val(Color.White, Piece.Bishop)] = 'B';
+			FENPieces[Colors.Val(Color.White, Piece.Rook)] = 'R';
+			FENPieces[Colors.Val(Color.White, Piece.Queen)] = 'Q';
+			FENPieces[Colors.Val(Color.White, Piece.King)] = 'K';
+			FENPieces[Colors.Val(Color.Black, Piece.Pawn)] = 'p';
+			FENPieces[Colors.Val(Color.Black, Piece.Knight)] = 'n';
+			FENPieces[Colors.Val(Color.Black, Piece.Bishop)] = 'b';
+			FENPieces[Colors.Val(Color.Black, Piece.Rook)] = 'r';
+			FENPieces[Colors.Val(Color.Black, Piece.Queen)] = 'q';
+			FENPieces[Colors.Val(Color.Black, Piece.King)] = 'k';
+
+			List<char> str = new List<char>();
+
+			int empties = 0;
+			for(int i = 0; i < 64; i++)
+			{
+				int rank = 7 - (i / 8);
+				int x = i % 8;
+				int idx = rank * 8 + x;
+
+				if(i % 8 == 0 && i > 0)
+				{
+					if(empties > 0)
+						str.Add((char)('0' + empties));
+
+					str.Add('/');
+					empties = 0;
+				}
+
+				if(board.State[idx] > 0)
+				{
+					if(empties > 0)
+						str.Add((char)('0' + empties));
+
+					empties = 0;
+					str.Add(FENPieces[board.State[idx]]);
+				}
+				else
+					empties++;
+			}
+
+			// add the final empties to the string
+			if(empties > 0)
+				str.Add((char)('0' + empties));
+
+			str.Add(' ');
+
+			// player turn
+			str.Add((board.PlayerTurn == Color.White) ? 'w' : 'b');
+			str.Add(' ');
+
+			// castling rights
+			if(board.CastlingRights.Count == 0)
+			{
+				str.Add('-');
+			}
+			else
+			{
+				if(board.CanCastleKWhite)
+					str.Add('K');
+				if(board.CanCastleQWhite)
+					str.Add('Q');
+				if(board.CanCastleKBlack)
+					str.Add('k');
+				if(board.CanCastleQBlack)
+					str.Add('q');
+			}
+			str.Add(' ');
+
+			// en passant
+			if(board.EnPassantTile == 0)
+			{
+				str.Add('-');
+			}
+			else
+			{
+				string text = TileToText(board.EnPassantTile);
+				str.Add(text[0]);
+				str.Add(text[1]);
+			}
+			str.Add(' ');
+
+			// half move count
+			string moves = board.FiftyMoveRulePlies.ToString();
+
+			str.AddRange(moves);
+
+			str.Add(' ');
+
+			// full move count
+			moves = board.MoveCount.ToString();
+			str.AddRange(moves);
+
+			var output = new String(str.ToArray());
+			return output;
+		}
 	}
 }

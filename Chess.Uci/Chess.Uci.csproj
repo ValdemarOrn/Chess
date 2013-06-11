@@ -50,6 +50,7 @@
     <Compile Include="UciGoParameters.cs" />
     <Compile Include="UciInfo.cs" />
     <Compile Include="UciMove.cs" />
+    <Compile Include="UciOption.cs" />
     <Compile Include="UciOptions.cs" />
     <Compile Include="UciOptionType.cs" />
     <Compile Include="UciToEngine.cs" />

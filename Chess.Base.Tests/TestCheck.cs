@@ -84,11 +84,12 @@ namespace Chess.Base.Tests
 		public void TestCheckMateNeverTwoRooks()
 		{
 			var b = new Board();
+			b.PlayerTurn = Color.Black;
 			b.State[6] = Colors.Val(Piece.Rook, Color.White);
 			b.State[7] = Colors.Val(Piece.Rook, Color.White);
 			b.State[8 * 6 + 5] = Colors.Val(Piece.King, Color.Black);
 
-			bool check = b.IsCheckMate(Color.Black);
+			bool check = b.IsCheckMate();
 
 			Assert.IsFalse(check);
 		}
@@ -102,7 +103,7 @@ namespace Chess.Base.Tests
 			b.State[8 * 6 + 6] = Colors.Val(Piece.King, Color.Black);
 			b.PlayerTurn = Color.Black;
 
-			bool check = b.IsCheckMate(Color.Black);
+			bool check = b.IsCheckMate();
 
 			Assert.IsFalse(check);
 		}
@@ -116,7 +117,7 @@ namespace Chess.Base.Tests
 			b.State[7*8 + 7] = Colors.Val(Piece.King, Color.Black);
 			b.PlayerTurn = Color.Black;
 
-			bool check = b.IsCheckMate(Color.Black);
+			bool check = b.IsCheckMate();
 
 			Assert.IsTrue(check);
 		}
@@ -132,7 +133,7 @@ namespace Chess.Base.Tests
 			b.State[6*8 + 0] = Colors.Val(Piece.Queen, Color.Black);
 			b.PlayerTurn = Color.Black;
 
-			bool check = b.IsCheckMate(Color.Black);
+			bool check = b.IsCheckMate();
 
 			Assert.IsFalse(check);
 		}
@@ -151,7 +152,7 @@ namespace Chess.Base.Tests
 			bool check = b.IsChecked(Color.Black);
 			Assert.IsTrue(check);
 
-			bool stalemate = b.IsStalemate(Color.Black);
+			bool stalemate = b.IsStalemate();
 			Assert.IsFalse(stalemate);
 		}
 
@@ -168,7 +169,7 @@ namespace Chess.Base.Tests
 			bool check = b.IsChecked(Color.Black);
 			Assert.IsFalse(check);
 
-			bool stalemate = b.IsStalemate(Color.Black);
+			bool stalemate = b.IsStalemate();
 			Assert.IsFalse(stalemate);
 		}
 
@@ -186,7 +187,7 @@ namespace Chess.Base.Tests
 			bool check = b.IsChecked(Color.Black);
 			Assert.IsFalse(check);
 
-			bool stalemate = b.IsStalemate(Color.Black);
+			bool stalemate = b.IsStalemate();
 			Assert.IsTrue(stalemate);
 		}
 

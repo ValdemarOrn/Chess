@@ -328,5 +328,31 @@ namespace Chess.Base.Tests
 			Assert.AreEqual(12, b2.FiftyMoveRulePlies);
 			Assert.AreEqual(18, b2.MoveCount);
 		}
+
+		[Test]
+		public void TestFromToFEN()
+		{
+			var strings = new List<string>();
+			strings.Add("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq");
+			strings.Add("rnbqkbnr/pp1ppppp/8/2p1P3/8/8/PPPP1PPP/RNBQKBNR b KQkq");
+			strings.Add("rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq -");
+			strings.Add("rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3");
+			strings.Add("rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq c6");
+			strings.Add("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq");
+			strings.Add("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w Kq");
+			strings.Add("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w -");
+			strings.Add("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w Kq");
+			strings.Add("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR b Kq");
+			strings.Add("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR b Kq - 12 18");
+
+			foreach(var str in strings)
+			{
+				var b = Notation.ReadFEN(str);
+				var fen = Notation.BoardToFEN(b);
+
+				// use StartsWith because the BoardToFEN may add extra default data
+				Assert.IsTrue(fen.StartsWith(str));
+			}
+		}
 	}
 }

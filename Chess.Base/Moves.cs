@@ -103,30 +103,7 @@ namespace Chess.Base
 				return true;
 
 			return false;
-		}
-
-		/// <summary>
-		/// Checks if a piece on the board can be promoted
-		/// </summary>
-		/// <param name="square"></param>
-		/// <param name="pieceType"></param>
-		/// <returns></returns>
-		public static bool CanPromote(Board board, int square)
-		{
-			// Can only promote pawns
-			if (board.GetPiece(square) != Piece.Pawn)
-				return false;
-
-			Color color = board.GetColor(square);
-
-			if (Board.Y(square) == 7 && color == Color.White)
-				return true;
-
-			if (Board.Y(square) == 0 && color == Color.Black)
-				return true;
-
-			return false;
-		}
+		}		
 
 		/// <summary>
 		/// Checks if a piece can be promoted
@@ -141,30 +118,7 @@ namespace Chess.Base
 		}
 
 		/// <summary>
-		/// Checks if a rook at the specified square still has the ability to castle
-		/// </summary>
-		/// <param name="board"></param>
-		/// <param name="square"></param>
-		/// <returns></returns>
-		public static bool CanRookStillCastle(Board board, int square)
-		{
-			switch(square)
-			{
-				case(0):
-					return board.CanCastleQWhite;
-				case (7):
-					return board.CanCastleKWhite;
-				case (56):
-					return board.CanCastleQBlack;
-				case (63):
-					return board.CanCastleKBlack;
-				default:
-					return false;
-			}
-		}
-
-		/// <summary>
-		/// Returns all valid moves for the current player
+		/// Returns all moves, valid or not, for the current player
 		/// </summary>
 		/// <param name="board"></param>
 		/// <returns></returns>

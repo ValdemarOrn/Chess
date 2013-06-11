@@ -58,7 +58,6 @@
     <Compile Include="EvalTest.cs" />
     <Compile Include="TTableTest.cs" />
     <Compile Include="SearchTest.cs" />
-    <Compile Include="OpeningBookTest.cs" />
     <Compile Include="BoardTestsAttackedBlack.cs" />
     <Compile Include="BoardTestsAttackedWhite.cs" />
     <Compile Include="SEETest.cs" />

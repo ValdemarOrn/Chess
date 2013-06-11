@@ -1,0 +1,1738 @@
+[Event "Analyzed Games"]
+[Site "ChessDoctor.com"]
+[Date "????.??.??"]
+[Round "?"]
+[White "W1"]
+[Black "B1"]
+[Result "*"]
+[PlyCount "67"]
+
+{00001.4.4 Analyzed by National Master Corey Russell} 1. e4 Nf6 2. d3 d6 3. Nc3
+Nfd7 {A very bad move. In the opening stages of the game, do NOT move a piece
+twice without first developing your other pieces, except to prevent loss of
+material. In the beginning, there are 3 elements that are very important: 1)
+Development -- getting pieces out of their home squares 2) Center control, and
+3) space. Black should've staked some central control by playing either ...c5
+or ...e5.} 4. Be3 e6 5. Nf3 {Because of black's particularly passive play,
+there's no reason white should not do 5. f4! right away to gain more SPACE and
+central control (e5 square). Notice white plays f4 later anyways, albeit after
+a lot of maneuvering.} Be7 6. Qe2 b6 7. O-O-O Bb7 8. Kb1 {There isn't a good
+reason for this move. Simply 8. d4, staking claim in the center and opening up
+the f1-a6 diagonal for the white's light-squared bishop is more logical.} a6 {
+Again, black needs to control the center. ...c5! and Nc6! would give black a
+fighting chance.} 9. d4 O-O 10. e5 {Good! You're locking up the center to give
+yourself a free hand on the king-side.} d5 11. h4 Nc6 {VERY bad. Black needs
+open lines for his pieces, including . ...c5! is the natural way to do that,
+followed by ..Nc6, ...Rc8, and mabe ...cxd4. This would also weaken white's
+protection of his e5 pawn once the d4 pawn falls. The general principle is:
+Attack the base of pawn chains. For white, this is e6, and for black it is d4.
+Note that eventually, White indeed does attack the base of black's pawn chain,
+which was black's fatal error.} 12. g3 h6 {Black should've avoided weakening
+his king position. Again, ..Na5 and ...c5 was mandatory. White could've taken
+advantage of this mistake by playing 13. g4!, followed by h5, Rg1, and g5
+opening up lines on black's king side immediately.} 13. Nh2 Re8 {
+Black misses many chances to play ...c5, which is his correct plan.} 14. f4 Na5
+15. b3 {This weakens your king position unnecessarily. Since there is no
+threat, white can play g4! with a strong attack. For example, if 15. ... Bxh4
+16. Nf3 Be7 17. g5, and white opens the h-file to fatal effect, because of
+mate threats involving Qh2. And if black declines white's pawn, white can
+simply play g5, opening up black's king side.} Nb8 16. Qf3 Qd7 17. Bd3 Bb4 18.
+Bd2 Nbc6 {Of course, ...c5! would be very strong for black. For example, 18. ..
+. c5 19. Ne2 Bxd2 20. Rxd2 c4 21. bxc4 Nxc4 22. Bxc4 (forced because of the ...
+Qb5+, Ka1, Qb2 mate threat) dxc4 23. Qf1 Bxh1 would leave black with a winning
+position!} 19. Ne2 Bxd2 20. Rxd2 Rad8 21. f5 Na7 22. f6 N5c6 23. h5 {
+Good constriction move! White now has a winning position.} Nb5 24. Qg4 g5 25.
+hxg6 Na3+ 26. Ka1 Nxc2+ 27. Rxc2 Kf8 28. Nf3 {This wins, but the fastest win
+is 28. g7+ Kg8 29. Qh5, with the idea of Qxh6 and Qh8 checkmate.} fxg6 29. Qxg6
+Re7 30. Rxh6 {Good! Playing only for mate, as the rook on e7 is irrelevant.
+The pawn on f6 is very dangerous to black's king position.} Rh7 31. Rxh7 Qxh7
+32. Qxh7 a5 33. Qh8+ Kf7 34. Ng5# *
+
+[Event "Analyzed Games"]
+[Site "ChessDoctor.com"]
+[Date "????.??.??"]
+[Round "?"]
+[White "W2"]
+[Black "B2"]
+[Result "*"]
+[PlyCount "91"]
+
+{00002.4.7 Analyzed by National Master Corey Russell} 1. e3 c5 2. Bc4 e6 3. Nf3
+Nc6 4. Bb5 d5 {This does put a foothold in the center, but this allows white
+to weaken your pawn structure if he wishes with Bxc6+. In this case, you don't
+have to allow the weakening. 4. ... Nge7 develops a piece while at the same
+time maintains your pawns' integrity. Notice if white plays complacently with
+5. O-O a6 6. Ba4? b5 7. Bb3 c4 wins a piece. Notice white couldn't take
+advantage of the pin that you walked into after playing ...d5.} 5. Ne5 Nge7 6.
+Bxc6+ Nxc6 7. Nxc6 bxc6 8. Nc3 Be7 {
+A little passive. Why not the more aggressive ...Bd6?} 9. Qg4 Bf6 {Definitely
+bious. This bishop needs to defend the c5 pawn. Since this bishop has already
+moved, simply castling king-side with O-O was very good. Why can't checkmate
+with just a queen. She needs support.} 10. Qa4 Bb7 {Again, an unnecessarily
+passive piece placement. The most aggiessive post for this piece is a6, and
+you could put it there if you defended your c-pawn with ...Qb6 instead.} 11.
+Qb3 O-O {The losing move. Much stronger is ...Rb8!, developing your rook,
+defending your bishop. This even sets up a sneaky trap. If 12. O-O? Ba6 13.
+Qa4 Bxf1 wins material for black.} 12. Qxb7 Qe8 13. Na4 Be7 14. d4 cxd4 15.
+exd4 f6 16. O-O Qf7 17. Qb3 Qg6 {Notice that if you played ...Bd6 earlier, you
+could've expanded in the center by playing ...e5.} 18. Qd3 {White is playing
+well...when ahead in material, trade material. This makes white's piece
+advantage even stronger.} Rfc8 19. Qxg6 hxg6 20. Re1 e5 {
+This loses a pawn. ...Kf7 was to be preferred.} 21. dxe5 f5 {This concedes an
+unopposed (passed) pawn to white. As unpleasant as it was, ...fxe5 was to be
+preferred.} 22. e6 Re8 23. h3 Rac8 24. Bd2 c5 25. Re5 Rcd8 26. Ba5 Bf6 27. Re2
+Rc8 28. Bc3 d4 {
+Good, avoiding exchanges when behind in material. This is black's best chance.}
+29. Bd2 g5 30. c3 g4 31. hxg4 d3 32. Re3 Rcd8 33. gxf5 Bg5 34. e7 Bxe7 35. Rxe7
+{Strong move by white. White is trading more & more material... the end result
+is not in doubt.} Rxe7 36. Bg5 Kf7 37. Bxe7 Kxe7 38. Re1+ Kf6 39. Nxc5 Kxf5 40.
+Rd1 Rd5 41. Nxd3 Ke4 42. b3 {This wins, but 42. f3+ Ke3 43. Nf2 preserves
+white's piece, and forces black to resign.} g5 43. c4 Rd4 44. Rd2 Rxd3 45. Rxd3
+Kxd3 {So in conclusion, always look at what your opponent's last move was --
+what is their idea? Are they threatening anything? Also, try to place your
+pieces in the best places. To ccompare where good posts are, just compare how
+many moves your piece would have at the various squares. Whichever gives your
+piece the most mobility, is the best square. NOTE: You will have to balance
+good placement with the piece's safety. If pawns can push your piece around,
+then that's not a very good square either. Otherwise, you did fairly well with
+the resources you had available.} 46. c5 *
+
+[Event "Analyzed Games"]
+[Site "ChessDoctor.com"]
+[Date "????.??.??"]
+[Round "?"]
+[White "W3"]
+[Black "B3"]
+[Result "*"]
+[PlyCount "91"]
+
+{00002.4.7 Analyzed by National Master Corey Russell} 1. e3 c5 2. Bc4 e6 3. Nf3
+Nc6 4. Bb5 d5 {This does put a foothold in the center, but this allows white
+to weaken your pawn structure if he wishes with Bxc6+. In this case, you don't
+have to allow the weakening. 4. ... Nge7 develops a piece while at the same
+time maintains your pawns' integrity. Notice if white plays complacently with
+5. O-O a6 6. Ba4? b5 7. Bb3 c4 wins a piece. Notice white couldn't take
+advantage of the pin that you walked into after playing ...d5.} 5. Ne5 Nge7 6.
+Bxc6+ Nxc6 7. Nxc6 bxc6 8. Nc3 Be7 {
+A little passive. Why not the more aggressive ...Bd6?} 9. Qg4 Bf6 {Definitely
+bious. This bishop needs to defend the c5 pawn. Since this bishop has already
+moved, simply castling king-side with O-O was very good. Why can't checkmate
+with just a queen. She needs support.} 10. Qa4 Bb7 {Again, an unnecessarily
+passive piece placement. The most aggiessive post for this piece is a6, and
+you could put it there if you defended your c-pawn with ...Qb6 instead.} 11.
+Qb3 O-O {The losing move. Much stronger is ...Rb8!, developing your rook,
+defending your bishop. This even sets up a sneaky trap. If 12. O-O? Ba6 13.
+Qa4 Bxf1 wins material for black.} 12. Qxb7 Qe8 13. Na4 Be7 14. d4 cxd4 15.
+exd4 f6 16. O-O Qf7 17. Qb3 Qg6 {Notice that if you played ...Bd6 earlier, you
+could've expanded in the center by playing ...e5.} 18. Qd3 {White is playing
+well...when ahead in material, trade material. This makes white's piece
+advantage even stronger.} Rfc8 19. Qxg6 hxg6 20. Re1 e5 {
+This loses a pawn. ...Kf7 was to be preferred.} 21. dxe5 f5 {This concedes an
+unopposed (passed) pawn to white. As unpleasant as it was, ...fxe5 was to be
+preferred.} 22. e6 Re8 23. h3 Rac8 24. Bd2 c5 25. Re5 Rcd8 26. Ba5 Bf6 27. Re2
+Rc8 28. Bc3 d4 {
+Good, avoiding exchanges when behind in material. This is black's best chance.}
+29. Bd2 g5 30. c3 g4 31. hxg4 d3 32. Re3 Rcd8 33. gxf5 Bg5 34. e7 Bxe7 35. Rxe7
+{Strong move by white. White is trading more & more material... the end result
+is not in doubt.} Rxe7 36. Bg5 Kf7 37. Bxe7 Kxe7 38. Re1+ Kf6 39. Nxc5 Kxf5 40.
+Rd1 Rd5 41. Nxd3 Ke4 42. b3 {This wins, but 42. f3+ Ke3 43. Nf2 preserves
+white's piece, and forces black to resign.} g5 43. c4 Rd4 44. Rd2 Rxd3 45. Rxd3
+Kxd3 46. c5 {So in conclusion, always look at what your opponent's last move
+was -- what is their idea? Are they threatening anything? Also, try to place
+your pieces in the best places. To ccompare where good posts are, just compare
+how many moves your piece would have at the various squares. Whichever gives
+your piece the most mobility, is the best square. NOTE: You will have to
+balance good placement with the piece's safety. If pawns can push your piece
+around, then that's not a very good square either. Otherwise, you did fairly
+well with the resources you had available.} *
+
+[Event "Analyzed Games"]
+[Site "ChessDoctor.com"]
+[Date "????.??.??"]
+[Round "?"]
+[White "W4"]
+[Black "B4"]
+[Result "*"]
+[PlyCount "123"]
+
+{00003.4.10 Analyzed by National Master John Graves} 1. e4 Nf6 2. e5 Nd5 3. d4
+e6 4. Nf3 Bb4+ 5. c3 Be7 6. Bb5 {Bd3 is better, it is the natural diagonal for
+the bishop. It doesn't do much on b5} b6 7. O-O a6 8. Ba4 Bb7 9. Nbd2 Nf4 10.
+Nc4 {Re1 is much better. You will discover on the knight while moving your own
+towards the KINGSIDE. You will use the e4 or the f1 square for the knight. The
+knight on c4 really doesn't do anything. Notice this plan does not block your
+c1 bishop and keeps it pointing at the enemy kingside.} g5 11. Bxf4 gxf4 12.
+Bc2 Bd5 13. Bd3 Nc6 14. Qd2 Bxc4 15. Bxc4 h5 16. Qxf4 Rg8 17. Rad1 {Not bad but
+h3 stops blacks rook from getting to the g4 square. Try to keep in mind when
+you have a superior position It doesn't hurt to take a little time out to stop
+your opponents plans. the term is called "prophylaxis" your plan of d4d5
+really cant be stopped.} b5 18. d5 {Bb3! see previous note.} Rg4 19. Qh6 Bf8
+20. Qh8 Rxc4 21. dxc6 Rxc6 22. Nd4 Qh4 {22...Rb6 is better.} 23. Nxc6 dxc6 24.
+Rd4 Qg5 25. f4 Qh6 26. Qxh6 Bxh6 27. Rf3 c5 28. Re4 {
+Oops, You gave up the only useful file.} Rd8 29. Kf1 Rd2 30. Re2 Rd1+ 31. Re1
+Rxe1+ 32. Kxe1 a5 33. g3 Ke7 34. h4 a4 35. b3 b4 36. bxa4 Bf8 37. cxb4 cxb4 38.
+a5 Ke8 39. a6 Bc5 40. Kd1 {a3! is faster.} Ba7 41. Kc2 c5 42. Kb3 Ke7 43. Kc4
+Kf8 44. Kb5 Ke8 45. Kc6 c4 46. Kb7 Bd4 47. a7 Bxa7 48. Kxa7 c3 49. Rf2 {
+a3?? c2! 50. Rc3 b2! and black queens!} Kf8 50. Rc2 Kg8 51. Kb6 f5 52. Kb5 Kf8
+53. Kxb4 Ke8 54. Rxc3 Kf7 55. a4 Kg8 56. a5 Kf7 57. a6 Ke8 58. a7 Kf7 59. a8=Q
+Kg6 60. Rc7 Kh6 61. Qh8+ Kg6 62. Qf6# {White mates} *
+
+[Event "Analyzed Games"]
+[Site "ChessDoctor.com"]
+[Date "????.??.??"]
+[Round "?"]
+[White "W5"]
+[Black "B5"]
+[Result "*"]
+[PlyCount "70"]
+
+{00005.4.12 Analyzed by National Master Corey Russell} 1. e3 Nf6 2. d4 e6 3.
+Nf3 Ne4 {This game illustrates one very important principle: Do NOT move
+pieces (Knights, Bishops, Rooks, Queen) more than once in the beginning stages
+of the game! Remember, you have an army -- get all your soldiers in battle,
+don't just send one guy by himself!} 4. Qe2 {? Not good...Queens should not be
+moved early. This move blocks white's bishop from getting out. Instead, 4 Bd3
+is a much better move. Remember to develop with attack if possible.} f5 5. Ne5
+{? Again, do NOT move pieces more than once early. Black only has one good
+piece. White should develop a piece and try to get rid of black's good knight.
+5 Nbd2 would be a good way to do this.} a6 {This does not get any pieces out,
+plus ignores white's threat. ...Qf6 is mandatory to meet White's threat.} 6.
+Qh5+ {This is one of the few time yous should move a piece more than once
+early -- to procure LARGE amounts of material.} g6 7. Qe2 {White misses his
+chance. The black h-pawn was pinned -- so white could've played 7. Nxg6!, and
+if 7. ... hxg6 then 8. Qxh8, and white is ahead a Rook and Pawn vs. knight.
+Black's best defense is 7. ... Nf6 8. Qh3 Rg8.} Bg7 8. Nc4 {? Bishops and
+knights are roughly equal. It was MANDATORY to continue getting pieces out.
+Nc3, Nd2, or g3 followed by Bg2 are all preferable to 8. Nc4.} b5 9. Na5 c6 10.
+h4 {Of course, this is a major mistake. White's throwing away his knight at a5
+for no reason.} Qxa5+ {
+Developing pieces is still necessary. White should respond by 11. Bd2} 11. c3
+h5 12. Rh3 {
+? White MUST get rid of black's good knight at e4. 12. Nd2 is called for.} b4
+13. cxb4 Qxb4+ 14. Nd2 Bf6 {Dubious. Black's queen side needs developing. ...
+a5 or c5 would allow black's knight and bishop to get developed.} 15. g4 {
+? Loses 2 pawns for no reason. Why not get rid of black's best piece by f3?}
+fxg4 {The general rule of thumb is: when choosing which pawn to capture,
+capture toward the Center. ..hxg4 would not only keep the f5 pawn defending
+black's knight, it would another pawn after ...Rxh4.} 16. Rh1 d5 17. Bg2 Nd6 {
+When ahead in material (especially a full knight or more) TRADE! 17. ... Nxd2
+would makes black's advantage even greater.} 18. a3 Qa4 19. Rb1 a5 20. b3 Qb5
+21. Qd1 Ba6 22. Bf1 Qb7 23. Bxa6 Rxa6 24. a4 Qb4 {This still wins, but black
+is playing without his knight at b8 and the rook on h8. Either ...Nd7 or
+castling kingside is preferable.} 25. Ra1 Ne4 26. Ba3 Qc3 27. Rc1 Qd3 28. Nxe4
+Qxe4 29. Rf1 Bxh4 30. Rc2 g3 31. f3 Qxe3+ 32. Re2 Qc3+ {Black has a much
+stronger move, 32. ... g2+ is mate in 1 move! White has to play Rff2, and ...
+Bxf2 is checkmate because the rook on e2 is not allowed to recapture (that
+would expose white's king to the black queen on e3).} 33. Rd2 g2+ 34. Ke2 Rf8 {
+Objectively, not best as white can crush the rook with Bxf8! Best was gxf1/Q+,
+35. Kxf1 Rb6.} 35. Rg1 Qxf3# {So in conclusion, get ALL your pieces out early,
+castle, and you will do much better in your games.} *
+
+[Event "Analyzed Games"]
+[Site "ChessDoctor.com"]
+[Date "????.??.??"]
+[Round "?"]
+[White "W6"]
+[Black "B6"]
+[Result "*"]
+[PlyCount "63"]
+
+{00006.4.13 Analyzed by National Master John Graves} 1. e4 c5 2. d3 Nc6 3. Bd2
+{Nc3 is better, or even f4.} b5 {Nf6 or e6 are superior moves. Also 3...e5
+follewed by d6,Nf6,g6,Bg7 and 0-0 is another excellent set up. It is Important
+to play in the center first.} 4. c3 b4 5. c4 Nd4 {g6! is far better, Increase
+your control over d4 and develop another piece at the same time, there was no
+reason to occupy the hole on d4 (no pawns can oppose d4).} 6. Be3 g6 7. Bxd4
+cxd4 8. Qd2 a5 9. Nf3 Bg7 10. Ng5 Bh6 {It is better to complete your
+development with d6 and Nf6. The bishop has aready moved and was placed rather
+well where it was at.} 11. f4 e6 12. g3 Bb7 13. a3 b3 14. a4 d5 15. Bg2 Nf6 16.
+Ra3 Qb6 17. Qe2 Bf8 18. e5 Nd7 {Black can take the rook right away.} 19. Nd2
+Bxa3 20. bxa3 b2 21. Nb1 Nc5 22. Qd1 Bc6 23. Nf3 Nxa4 24. O-O Nc3 {The black kn
+ight has finally found a nice hole to hop in to, even if it is only for a move.
+Black trades one advantage for another, the two connected passed pawns.} 25.
+Nxc3 dxc3+ 26. Nd4 Qxd4+ 27. Rf2 h5 {0-0 is a simple win.} 28. cxd5 Bxd5 29.
+Bxd5 exd5 30. h4 Rb8 31. Qb1 c2 32. Kh2 *
+
+[Event "Analyzed Games"]
+[Site "ChessDoctor.com"]
+[Date "????.??.??"]
+[Round "?"]
+[White "W7"]
+[Black "B7"]
+[Result "*"]
+[PlyCount "66"]
+
+{00007.4.14 Analyzed by National Master Corey Russell} 1. e4 c5 2. c3 Nf6 3. e5
+Nd5 4. d4 cxd4 5. Qxd4 e6 {Good. Defends the knight at d5 while at the same
+time opening development of black's dark squared bishop.} 6. Bf4 {? Definitely
+bad. White should try to castle as soon as possible. Also, in the opening,
+it's best to develop with attack. 6 Bc4! would be the way to do it (threatens
+black's knight at d5). After this, black will get an advantage.} Nc6 7. Qd2 h6
+{Black's first slip. Black can win a pawn, starting with 7. ... Nxf4 8. Qxf4
+Qc7 9. Nf3 f6. Notice white can't take the black pawn on f6 because that would
+expose white's queen to attack by the black queen. White's king pawn is what
+is called a pin.} 8. Bb5 Be7 9. Bxc6 dxc6 {When having the option, it is
+generally better to capture TOWARD the center of the board. Hence bxc6 is
+preferred. In addition, this would give black an excellent post for his queen
+bishop on a6. Notice that black's queen bishop doesn't even move this game! If
+white does proper defence, this lack of post for thie bishop could've meant a
+loss for black.} 10. c4 {
+Very bad. White needs to get pieces out immediately. Nf3 is called for.} Nxf4
+11. Qxf4 Bg5 12. Qf3 Qa5+ 13. Nc3 {White misses a strong defence: Qc3! That
+would a) defend the e-pawn b) block the check c) threaten black's queen. Try
+to look for moves that do more than one thing at once, if possible.} Qxe5+ 14.
+Nge2 O-O 15. Ne4 {Remember: Using ALL of your chessmen is always more
+effective. White could've played the correct O-O, and after Rad1, Rfe1, ALL of
+his pieces would be active, while black has a hemmed in light-squared bishop.
+White would have real chances to save his game, despite being a pawn minus.
+Instead white gives up his b-pawn for free.} Qxb2 16. O-O Be7 {Good. This rves
+the bishop pair. Bishops control more squares on an open board. You could
+check this for yourself. Put 2 knights on an empty board in the center, and
+they can go to 16 squres. Put 2 bishops in the middle, and they can go to 26
+squares!} 17. g4 f5 18. gxf5 exf5 19. Rab1 Qe5 20. N4g3 g6 {Better is 20. ...
+f4, because this would deny white a square for his Knight at f4, in addition
+open up the h3-c8 diagonal for black's bishop. With the text, white can play
+21. Nf4 Qf6 22. Re1 g5 23. Ng6! Qxg6 24. Rxe7, with chances for white to
+survive.} 21. Qd3 Rd8 22. f4 {
+?? Misses black's in-between move. Black should win easily now.} Qc5+ 23. Kg2
+Rxd3 24. Rbd1 Qxc4 25. Nc1 Qc2+ 26. Nge2 Rxd1 27. Rxd1 Qxd1 28. Kf2 Bc5+ 29.
+Kf3 Qf1+ 30. Kg3 Qf2+ 31. Kh3 Qf3+ 32. Kh4 Bf2+ 33. Ng3 {So the key thing for
+you to remember Peter is to develop ALL of your pieces. You happen to win this
+time, but if you could have gotten your rook & bishop active, you win would
+have been sure. As it was, white had many chances to get in the game.} Qg4# *
+
+[Event "Analyzed Games"]
+[Site "ChessDoctor.com"]
+[Date "????.??.??"]
+[Round "?"]
+[White "W8"]
+[Black "B8"]
+[Result "*"]
+[PlyCount "70"]
+
+{00008.4.15 Analyzed by National Master John Graves} 1. e4 e5 2. Nf3 Nc6 3. Nc3
+d6 4. Bc4 Nf6 {Be7! stops Ng5.} 5. Ng5 {winning a pawn by force.} Be6 6. Bxe6
+fxe6 7. Nxe6 Qe7 8. Nb5 {Nf8 is best. White is just a pawn up. A possible plan
+would be to play Nf8, d3,0-0, Bg5 and Nd5 trading down into a winning endgame.}
+Rc8 9. Nbxc7+ Rxc7 10. Nxc7+ Qxc7 11. d3 Nd4 {
+A one move threat, Be7 completing development is far superior.} 12. c3 Qa5 13.
+b4 {Wins a piece by force!} Qc7 14. O-O $1 {
+?? cd4 wins!! Black just gets a few scary checks.} Qxc3 15. Bd2 {
+Rb1 is better. Bd2 loses another pawn.} Qxd3 16. Re1 {
+oops. Mabye 16. f3 holding on to the pawn is a better idea.} Nc2 17. Rc1 Nxe1
+18. Qa4+ {Not a bad try.} Kf7 19. Bxe1 Nxe4 20. Qd7+ Kf6 {20... Be7 lets black
+rook into the game and develops ALL of his pieces, black should win in due
+time.} 21. Qd8+ Be7 22. Qd7 {Qh8! gives black a winning position. Don't waste
+a check if you have no follow up.} Nd2 23. Bxd2 Qxd2 24. Rf1 Rf8 {
+24...Qb4! covers b7 and wins easily.} 25. Qxb7 Rf7 26. Qxa7 d5 27. b5 e4 28. a4
+Ke5 29. Qe3 {Keeping queens on would make it harder for black to make progress.
+} Qxe3 30. fxe3 Rxf1+ 31. Kxf1 Bd8 32. g3 d4 33. exd4+ Kxd4 34. h4 Kd3 35. Ke1
+{Both sides missed their chances in this mistake filled game. White one the
+opening battle but gave away a winning middle game. The early Nb5 was fancy
+but it gave black 2 minor pieces for a rook which in most cases favors the 2
+minors.} h5 *
+
+[Event "Analyzed Games"]
+[Site "ChessDoctor.com"]
+[Date "????.??.??"]
+[Round "?"]
+[White "W9"]
+[Black "B9"]
+[Result "*"]
+[PlyCount "140"]
+
+{00009.4.16. Analyzed by National Master Corey Russell} 1. e4 e6 2. d4 Nf6 3.
+Nd2 Nc6 4. Nb3 {Of course, this isn't the best. This loses the pawn at e4 for
+nothing. More logical is Nf3, getting a knight out while defending against the
+threat against d4.} Nxe4 5. Bd3 d5 6. Nf3 Bd7 7. O-O Bb4 8. Be3 O-O 9. Ne5 Nxe5
+10. dxe5 c6 {I don't like this for black. it gives his bishop at d7 nowhere to
+move. ..a5 makes more sense. Also, if white captures on e4, black can get a
+somewhat reasonable post for his B on c6. Now it has nothing. White's bishops,
+on the other hand, have great scope.} 11. a3 Be7 12. Na5 {Obviously incorrect.
+(the Q on d8 can capture this knight for nothing). How about playing 12. f3,
+winning a knight? (12. ...Nxc5 13. Bxc5 Bxc5, or 12. ... Ng5 13. h4! and
+black's knight has no where to move!} Nxf2 13. Bxf2 Qxa5 14. Qe2 Bc5 15. Qh5
+Bxf2+ 16. Rxf2 g6 17. Qh4 Qc7 18. Re1 a6 19. b4 {? White's heavy concentration
+of pieces indicates that the king-side is where white should be active. For
+sure, Re3 would be the way to go. Rh3 would be winning (if ...Qd8 to try to
+trade queens, white can play Rf6!). There is nothing black can do to prevent a
+sacrificial breaktrhough.} b5 20. Bxg6 {Oops! This doesn't quite work. 21. Re3
+is still the right move (with the idea of Rh3, ...h5, Qg5. Black can defend by
+playing ...fxg6! 21. Re3 Rxf2 22. Kxf2 Rf8+ 23. Kg1 Rf7.} Rfb8 21. Bxh7+ {
+21. Qxh7+ Kf8 22. Qxf7 is checkmate. Always choose the fastest win.} Kf8 22.
+Qh6+ {Why bother with this, when 22. Rxf7+ wins immediately. 22. ... Kxf7 23.
+Rf1+ (...Ke8 24. Bg6#) Kg7 24. Qf6+! Kxh7 25. Rf3, and black is helpless
+against the threat of Rh3+ and Rh8 mate. Watch for this motif, this happens a
+lot in chess games.} Ke8 23. Qg7 Kd8 24. Rxf7 {
+Good! This moves ties down black's forces.} Qa7+ 25. Kf1 Qb7 26. Qf6+ Kc8 27.
+Qe7 Qc7 28. Rf8+ {Not good. This lets black get out of the bind. Black's king
+can't move because he was tied down to defense of his bishop. Both Bd3, with
+the idea of pushing the h-pawn to h8, or Bf5!, both win quickly.} Kb7 29. Rxb8+
+Rxb8 30. a4 Re8 31. Qf7 bxa4 32. Ra1 Rd8 33. g4 Qxe5 34. Rxa4 Qxh2 35. Qh5 Rf8+
+36. Ke1 Qf2+ 37. Kd1 Qf1+ 38. Kd2 Rf2+ 39. Kc3 Qc4+ 40. Kb2 c5 41. Qf7 {
+?? Doesn't black's reply of ...Rxf7 pretty much end the game? Whenever you
+want to move your queen behind enemy lines, make sure enemy pieces can't get
+at her!} Rh2 42. Qxd7+ Kb8 43. Qd6+ Kb7 44. Qd7+ Kb8 45. Qd6+ Kb7 {Why not Qxh2
+, ending black's game? There is no perpetual check. It is good to trade when
+ahead, but it doesn't hurt to be even more ahead either.} 46. Qxc5 Qxc5 47.
+bxc5 Rxh7 48. Rb4+ Kc7 49. Rb6 e5 50. Rxa6 Re7 51. Kc1 e4 52. Kd2 e3+ 53. Ke1
+d4 54. g5 {A mistake. Black can now draw. If white plays 54. Ra7+ Kd8 55. Rxe7
+Kxe7 56. g5! would win the game. White has a passed c & g pawn -- it's
+impossible for black's king to stop both, and black's pawns are contained
+easily by the white king.} Kb7 55. Rb6+ Kc7 56. g6 Re5 57. Ke2 Rxc5 58. g7
+Rxc2+ 59. Kd3 Rg2 60. Re6 Kd7 61. Re5 Rxg7 62. Kxd4 e2 63. Rxe2 Kd6 64. Kd3 Kd5
+65. Kc2 Rh7 66. Rd2+ Ke5 67. Kc3 Rh6 68. Rd3 Rc6+ 69. Kd2 Re6 70. Ke3 {
+The notes say White won, but this is a drawn position. Perhaps white won on
+flag? Continue your studies of tactics, middle game, and endgame. You're sure
+to improve.} Rf6 *
+
+[Event "Analyzed Games"]
+[Site "ChessDoctor.com"]
+[Date "????.??.??"]
+[Round "?"]
+[White "W10"]
+[Black "B10"]
+[Result "*"]
+[PlyCount "78"]
+
+{00010.4.17 Analyzed by National Master Corey Russell} 1. e4 e5 2. Qh5 Nc6 3.
+Bb5 Nf6 4. Qf3 Nd4 5. Qd3 a6 6. Ba4 Bc5 7. c3 Nc6 8. Bb3 O-O 9. Nf3 h6 {
+? This is unnecessary. Continued development, with ...b5, Bb7, with the idea
+of pressuring white's e-pawn, is preferable.} 10. O-O b5 11. a4 Bb7 12. axb5
+axb5 13. Rxa8 Bxa8 {...Qxa8 is preferable. The queen has a lot more scope on
+a8 than d8. The bishop is fine on b7. In addition, black has tactics that make
+his b-pawn immune (Qxb5 Nxe4, d3 Ba6).} 14. Qxb5 d6 15. Qe2 Na5 {Too early.
+hop should go to b6 first, THEN Na5, d5 to try to play energetically.
+Otherwise, black is a pawn down for nothing. Also, the text overlooks a pawn
+fork. Be careful of those! Pawn forks often happen.} 16. Bc2 c6 17. b4 Ba7 18.
+bxa5 Qxa5 19. Na3 Re8 20. Nc4 Qd8 21. Ba3 d5 22. Ncxe5 {White gives you a
+chance. He could've played 22. exd5 cxd5 23. Ncxe5 Nd7 24. Qd3! and the
+hanging knight at e5 is immune because Qh7 is mate.} dxe4 23. Bxe4 Qa5 24. Bd6
+Re6 25. Qd3 Nxe4 26. Bb4 {White gives black a breather. Simply Qxe4 Rxd6 27
+Nc4 Qd5 28. Nxd6 would leave white up a rook and pawn vs a knight.} Qd5 27. Qa6
+Rxe5 28. Qxa7 {Gives black a chance again. Nxe5 is still winning.} Re8 29. Re1
+c5 30. Bxc5 Bc6 31. h3 {This now gives black a chance again...31. Be3, and
+white still has chances to convert his extra pawns to a win. Now black is
+equal.} Nxd2 32. Rxe8+ Bxe8 33. Nxd2 Qxd2 34. Qb8 Qe1+ 35. Kh2 Kh7 36. c4 {
+Dubious. White should improve his pieces first. Be3 & Qe5 would give white
+real chances to win.} Bc6 37. g4 {This gives black the game. 37. f3 would hold
+the position. Remember, the general rule of thumb is put your pawns opposite
+your own bishop, and on the same squares as your opponent's. The text move
+opens White's king to merciless infiltration.} g5 38. f4 Qh1+ 39. Kg3 {
+It appears from the game that your weakness is tactics. I suggest working on
+tactical problem books, like "Bobby Fischer Teaches Chess".} Qg2# *
+
+[Event "Analyzed Games"]
+[Site "ChessDoctor.com"]
+[Date "????.??.??"]
+[Round "?"]
+[White "W11"]
+[Black "B11"]
+[Result "*"]
+[PlyCount "42"]
+
+{00011.4.18 Analyzed by National Master Corey Russell} 1. h4 Nf6 {Good. You get
+your knight into the game, and help control the center. When getting your
+pieces out, develop toward the center (the squares e4, d4, e5, d5 are known as
+the center).} 2. Rh3 {?! Extremely dubious. The rook is vulnerable to attack,
+this move does not control the center, and this weakens white's kingside. Pawn
+to d4 makes more sense.} h5 {Much stronger is 2 ... d5. This gets a foothold
+in the center, opens up a line for your bishop on c8, and to boot forces white
+to move one of his pieces again, since the Rook on h3 is threatened by black's
+bishop. Notice too, that now the g5 square is open for white's pieces, since
+now your h-pawn can't cover it.} 3. e3 d5 4. Bb5+ c6 5. Ba4 b5 6. Bb3 Qd6 {
+Since a rook is worth more than a bishop (rook = 5 pawns, bishop = 3 pawns),
+better is to take the free material with ...Bxh3. Believe it or not, among
+masters, the difference of having a rook instead of a bishop is winning.} 7.
+Nc3 a5 8. Nf3 a4 {Instead, of ...Bxh3 9.gxh3 a4! would leave black up a rook!
+If you see a good move, stop: there might be an even better move.} 9. Rg3 axb3
+10. cxb3 Bf5 11. Rg5 Rh6 {This overlooks white's threat. A handy thing to
+remember is: why did my opponent make that move? You probably would've seen
+that he was threatening your bishop.} 12. Rxf5 Rg6 13. Ne5 Qe6 {There's a princ
+iple in chess that says, "Avoid moving queens early". This is no exception. In
+addition, White's knight was threatening to capture black's rook. Why not win
+a pawn and get your rook out of jeapardy with ...Rxg2?} 14. e4 Rxg2 15. Ne2
+dxe4 {...Nxe4 wins immediately. Black would be threatening white's Rook,
+Knight, and once white's rook moves, even ...Nxf2 is in the air.} 16. Nd4 Qd5 {
+This was good retort on your part. You save your queen, and stay in the center.
+As it happens, black can win a knight by playing 16. ... Rg1+ 17. Ke2 (forced)
+Rxd1 18 Nxe6 fxe6 19. Kxd1 exf5. You'll start seeing these combinations with
+practice.} 17. Nexc6 Qd6 {
+17. ... Qxf5! 18. Nxf5 Rg1+ still wins material for black. Work it out.} 18. a4
+Qh2 {
+Good infiltration! This move takes advantage of white's exposed king position.}
+19. Rxb5 Rxf2 20. Rxb8+ Rxb8 21. Nxb8 {So in conclusion, develop toward the
+center, with attack if possible, and especially look at forcing moves minimize
+missing combinations.} Qg1# *
+
+[Event "Analyzed Games"]
+[Site "ChessDoctor.com"]
+[Date "????.??.??"]
+[Round "?"]
+[White "W12"]
+[Black "B12"]
+[Result "*"]
+[PlyCount "98"]
+
+{00012.4.19 Analyzed by National Master Corey Russell} 1. e4 e5 2. d3 {
+This isn't losing, but much more aggressive is 2. Bc4 or 2. Nf3. As it is,
+your light-squared bishop is now hemmed in. Notice the bishop had 5 legal
+moves prior to moving your pawn to d3; now it has only one.} Bc5 3. Be3 Qg5 {
+?? Clearly a bad move by the computer. White will win with best play; I know
+white didn't, so let's see what white could have done to collect the fullpoint.
+} 4. Bxg5 h6 5. Be3 Bb4+ 6. Bd2 {An opening principle is: Don't move a piece
+twice in the opening without good reason. Clearly move 4 was justified for the
+free queen! However, the bishop has a good post already on e3. Why not either
+Nc3 or Nbd2? Remember, when ahead a lot in material, trade pieces! Therefore,
+white had nothing to fear by a potential BxN by black.} Bc5 7. Be3 Bxe3 8. fxe3
+Nf6 9. Nf3 Nc6 10. Nc3 d6 11. Nb5 {The first misstep. Always get developed
+first, THEN attack. Therefore, Be2, O-O is called for first. Then white has
+his choice of opening lines with d4 or attacking on the kingside with Qe1-g3,
+Nh4-f5.} Kd8 12. Qd2 Be6 13. c4 {A nice move! This denies black any
+counterplay, and establishes a clamp on the key central square on d5.} a6 14.
+Na3 {Oops! If you must retreat, retreat TOWARD the center. Nc3 is called for.
+In addition, if white's knight was on c3, white can advance d4 without having
+to worry about his e4 pawn (since in that case, the knight would be protecting
+it).} g5 15. d4 {This isn't right. Just get developed with Be2. Don't worry
+about 15. ... g4, because Nh4, O-O and Nf5 is strong (notice how if you got
+developed, your rook would partcipate).} g4 16. d5 gxf3 17. dxe6 Nxe4 18. Qc2
+f2+ 19. Ke2 f5 20. b3 {Why? Getting your bishop active is still mandatory. g3
+followed by Bg2 or h3, and white would still be winning.} Ke7 21. g3 Kxe6 22.
+Bh3 Rac8 {The computer misses a cheapo. White can win a free piece with Qxe4!
+Notice black cannot take the white queen, because the f-pawn is pinned! It is
+illegal for black to expose his king to check, so white gets a knight scott
+free.} 23. Kf3 Ng5+ 24. Kxf2 {This hangs a piece. Kg2 was safe and strong...
+black's f-pawn wasn't going anywhere. Besides, if white had to, he can sac
+(sacrifice) his rook for pawn and knight, which is still better than losing
+the bishop for the pawn.} Nxh3+ 25. Kg2 Ng5 26. Rhf1 Rce8 27. Rxf5 {
+Instead, Qxf5+ Ke7 28. h4 would leave white in a strong position.} Nb4 28. Qb1
+{Too passive. Qf2! is natural and strong. Remember with your heavy pieces
+(rooks & queens), have them double on an open column, or file. What might
+happen is 28. Qf2 Ne4 29. Qf3 Ng5 30. Qg4 (threatening Rxg5, discovered check!)
+Ke7 31. Raf1, getting nearly all white's pieces into the attack. The only
+straggler is that knight at a3, but he can be rerouted by Nb1- c3.} Reg8 29.
+Nc2 {Not the best. 29. h4, followed by Qe4 and Raf1 would still be very strong.
+} Kxf5 30. Nd4+ Kf6 31. Qf5+ Ke7 32. Qe6+ Kf8 {
+? A poor move by black. Simply 32. ... Nxe6 would force white to resign.} 33.
+Qc8+ Kg7 34. Qxc7+ Nf7 35. Ne6+ {Instead, 25. Rf1! wins outright! That move
+would threaten Qxf7#, so therefore black would have to play ...Rf8, but THEN
+36. Ne6+ Kg6 37. Qe7 is lights out for black. There is this phrase among
+tournament chess players, "Monkey see check, monkey do check". Don't be a
+monkey! Only check if there's a concrete reason to do so.} Kg6 36. Qe7 Nc2 37.
+Rf1 Nxe3+ 38. Kg1 Nxf1 39. Kxf1 b6 40. g4 Re8 41. Qh4 {This was the losing
+move for white. To have a fighting chance, white had to play 41. Qd7 to
+protect his knight.} Rxe6 42. g5 Nxg5 43. Kf2 Rf8+ 44. Kg3 Rf4 45. Qxh6+ Kxh6
+46. Kg2 Rg4+ 47. Kf2 Rf6+ 48. Ke2 Rg2+ 49. Kd3 {I want to thank you for
+sending in this game. Unlike many who send submissions, you sent a loss. This
+is exactly the kind of game that an individual can get the most out of -- one
+of his/her draws or losses. It can be humbling at times, and even difficult,
+but by going over a loss, trying to find out what went wrong, and how to
+improve, will reap great results. I myself did the same when I was a youth,
+and by continually going over games that I lost/drew, I found out what I did
+wrong, and resolved not to repeat them. I did go over wins as well to look for
+improvements, but rarely did I learn as much. BTW, I have a feeling that if
+the computer gives you a free queen again, it will be in trouble, because
+you've learned from your mistakes! Keep up the good fight.} Rf3# *
+
+[Event "Analyzed Games"]
+[Site "ChessDoctor.com"]
+[Date "????.??.??"]
+[Round "?"]
+[White "W13"]
+[Black "B13"]
+[Result "*"]
+[PlyCount "79"]
+
+{00013.4.20 Analyzed by National Master John Graves} 1. c4 e5 2. Nc3 d6 3. g3
+f5 4. Bg2 Nf6 5. e3 g6 6. Nge2 Bg7 7. O-O O-O 8. d3 {
+d4 is also possible, but there is nothing wrong with d3.} c6 9. b4 Be6 10. b5
+d5 11. bxc6 bxc6 12. Qa4 g5 {g5 is a mistake, but with the center still fluid
+a wing demonstration can be dangerous.12...g5 also gives white time to develop
+an initiative. 12...e4 is tempting but that allows white to put uncomfortable
+pressure on the "d" line. 12...dc! followed by Qd3 gives black equality} 13.
+Ba3 Rf7 14. Rac1 Rd7 15. Bb4 {Why not cd right away?} a5 16. Ba3 {
+cd5 is a possibility} Bf7 17. cxd5 cxd5 18. Nb5 Na6 19. Rc6 Nb4 20. Bxb4 axb4
+21. Qxb4 Rxa2 22. Nec3 Ra8 23. Nd6 Bf8 24. Nxf7 Rxf7 {
+Forced. Whit wins a pawn after 24...Bb4 25. Nd8 Bc3 26.Ne6 hitting g5 and c3.}
+25. Qb3 Ra3 26. Qc2 e4 27. dxe4 dxe4 28. Rd1 {White has the advantage due to
+the more harmonious nature of his pieces. He also has an advantage on the
+light squares. Namely f5 e6 and f7.} Qe8 29. Nb5 Ra2 30. Qc4 Ra4 31. Qc2 Ra2
+32. Qxa2 Qxc6 33. Nd4 Qd5 34. Qc2 Ng4 {This is incorrect. Qe5 is far superior.
+This gets black of the the a2-g8 diagonal and protects the f pawn, this gives
+black a chance to hold the game.} 35. h3 Ne5 {this loses at once, better was
+to admit the mistake and play the knight back to f6.} 36. Nxf5 Nd3 37. g4 h5
+38. Qc8 Qa2 39. Rf1 Kh7 {
+The light squares really hurt black in the final stages of the game.} 40. Bxe4
+*
+
+[Event "Analyzed Games"]
+[Site "ChessDoctor.com"]
+[Date "????.??.??"]
+[Round "?"]
+[White "W14"]
+[Black "B14"]
+[Result "*"]
+[PlyCount "81"]
+
+{00014.4.21 Analyzed by National Master John Graves} 1. e4 e5 2. Nf3 Nc6 3. d4
+exd4 4. Bc4 Bb4+ 5. c3 {This check only helps white.} dxc3 6. bxc3 {
+0-0 may also be possible.} Bc5 {
+6...Ba5 is better since it avoids losing a pawn by force.} 7. Bxf7+ Kxf7 8.
+Qd5+ Ke8 9. Qh5+ g6 10. Qxc5 d6 11. Qe3 Bg4 12. O-O Bxf3 13. Qxf3 Ne5 14. Qe2
+Qf6 15. f4 Nc6 16. e5 {a good breakthrough.} dxe5 17. fxe5 Qe6 18. Re1 {
+Nd2 is far superior.} Nge7 19. Nd2 Kd7 20. Nf3 Raf8 21. Ng5 Qf5 22. e6+ Kc8 23.
+Nf7 Rhg8 24. Nh6 Qc5+ 25. Be3 Qxc3 26. Nxg8 Nxg8 27. Rac1 Qf6 28. Rxc6 bxc6 29.
+Qa6+ Kd8 30. Rd1+ {Oops! Qd3! wins at once. 30...Ke7 or e8 Qd7 mate.30...Kc8
+31.Qd7 Kb7 32.Rb1 Ka6 32.Qc6 Ka5 33.Qb5 mate.} Ke7 31. Bc5+ Kxe6 32. Qc4+ Kf5
+33. Rf1+ Kg5 34. Be3+ Kh5 35. Rxf6 Nxf6 36. Qe2+ Ng4 37. h3 g5 38. Qxg4+ Kg6
+39. Qxg5+ Kf7 40. Qf5+ Ke8 41. Qe6+ *
+
+[Event "Analyzed Games"]
+[Site "ChessDoctor.com"]
+[Date "????.??.??"]
+[Round "?"]
+[White "W15"]
+[Black "B15"]
+[Result "*"]
+[PlyCount "68"]
+
+{00015.4.22 Analyzed by Candidate Master Daniel Waite All right! Courage! You
+will learn more from your losses than you will from your wins. If you study
+the games you lose you will see the patterns that get you in trouble and
+common mistakes you make. If you minimize these then you will improve quickly.
+A good source for this study might be Soltis' "Catalogue of Chess Mistakes."} 
+1. e4 c5 2. Nf3 Nc6 3. Bc4 d6 {Your move is a tad unusual but it works.
+Typically the King's Bishop often finds its way to c4. Traditionally the idea
+is to play 3. d4 cxd4 4. Nxd4 first.} 4. O-O Be6 {Your opponent errs. The one
+thing you must be aware of in the Opening is to grab any and all chances to
+wreck your opponents pawn structure. Look at 5. Bxe6 fxe6 6. d4 cxd4 7. Nxd4
+Nxd4 8. Qxd4 Nf6 9. f4. This may be my personality but I feel Black has
+serious problems organizing anything useful with the shattered pawn structure.
+The only redeeming quality is that Black as three center pawns.} 5. d3 Bxc4 6.
+dxc4 Nf6 7. Re1 g6 8. Bf4 Bg7 {Remember to play with a plan! The last few
+moves are setting up a nice attack but do you understand what you are trying?
+Often we hear the mantra to develop, so we develop and miss the point behind
+why we are making the move. The idea of the opening is to create an
+"imbalance" [any difference in the position] - especially in minor piece
+position - and develop around it. One idea of developing the Bishop to f4 is
+to play h3 to give the Bishop a safe haven while keeping the Knight at bay.
+BTW the pawns at e4 and c4 are considered a strong strategy against the
+Sicilian.} 9. Nc3 O-O 10. Rb1 Ng4 {Here you have to look at playing 10. Qd2
+with the idea of playing Bh6 to rid the game of the Dragon Bishop. Also
+tempting is to blast the center with 10. e5!} 11. Nd5 Qa5 {
+It always helps when your opponent misses a solid move. /\Nge5} 12. h3 Nf6 13.
+e5 Nh5 {It looks like your move loses a pawn but it is a gutsy idea. The
+aggressiveness of your play will help you as you learn the various tactical
+possibilities of a position. One suggestion is to concentrate on pattern
+recognition. Learn the various patterns behind combinations. There are
+probably only about 20 common ones.} 14. Bg5 Qxa2 {Ouch. Black begs White to
+finish the game in a clean stroke. There is an "urban legend" that tells of a
+rich guy that left his son a vast fortune on the condition that he would never
+play Qxa2 even if it were the correct move. 14/\dxe4 or 14/\f6 was necessary
+to hold the balance.} 15. Nxe7+ Nxe7 16. Bxe7 Rfc8 17. b3 dxe5 {I find in my
+lost games that I generally had a "big miss." Well, this one is yours. After
+17. exd6 the game is over, you can hear the "fat lady warming up." The pawn on
+d6 moves to d7 and completely chokes Black's middle. The Black Rooks become
+totally useless and you own all the important squares. All this is helped by
+the useless placement of the Black Queen. Even 17. Ng5 does close to mortal
+damage to Black threatening both 18. exd6 and 18. Qd5.} 18. Nxe5 Nf4 19. Re4
+Re8 {Please, do not help your opponent! Remember, never force your opponent to
+do something you will regret. 19. Qc1! Attacks the Knight on f4, if that is
+what you want, and holds the back line down nicely. One thing you must learn
+is when a threat is real and when it is not. The ideal is to ignore your
+opponent's threats and execute your own. To do this you must learn to
+distinguish between the real and the imagined.} 20. Nd3 Nxd3 21. Re2 Nf4 {
+21. cxd3 was necessary. It is ugly but playable. It's better than what
+happened. White is saddled with two "backward" pawns - on d3 and on b3. I'd
+call this a positional nightmare, but against a weak opponent you will have an
+interesting fight on your hands. The squares in front of them are called
+"holes" where Black will plant a piece. This is called a "blockade." The
+strength of a blockade is that the pawn is immobile. In chess, if it doesn't
+[or can't] move it will suffer violence. Keep your position as flexible as
+possible while coaxing your opponent into making his as ridged as possible.
+Another strength of the blockade is that it is a base of operation against the
+opponent. The blockader can not be attacked through the weak pawn.} 22. Re1 b6
+23. Bg5 Rxe1+ {23. Qf3 or 23. Rc1. Your idea of chasing the Knight with the
+Bishop is misguided and at this point fatal. Don't attack something for the
+sake of attacking. Always ask yourself, "what is my opponent threatening?" "If
+I move this what can my opponent threaten or take?" You must have a solid
+positional reason to attack. Generally if it is mobile, look somewhere else
+unless you are attempting to create a weakness such as immobility or a poorly
+defended piece. As much as possible "over protect" everything [pieces and
+important squares]. By creating an interlocking web of pieces you will make
+them "all" mobile [perfect for attack or defense]. Think "internet." Anything
+that "inters" it doesn't leave with all its body parts.} 24. Qxe1 Ne2+ 25. Kf1
+Qxc2 26. b4 cxb4 27. Rxb4 Re8 28. c5 bxc5 {O.K. your opponent is mortal after
+all. He misses the "discovered attack." 28/\Ng3+ 29. fxg3 Rxe1+. This can be
+crushing if there is a check involved. Of course 28/\Bc3 forking Qe1 & Rb4
+works. Next time you see him, feel free to point this out to him and gloat
+that he missed "all" the big moves in this game! - grin} 29. Rb5 c4 30. f3 c3 {
+Black misses mate in five [forced]. Cover the screen and figure it out. 30/
+\Ng3+ 31. Kg1 Rxe1+ 32. Kh2 Nf1+ 33. Kh1 Ne3+ 34. Kh2 Qxg2#. You should be
+able to follow this in your mind and see it at the board because they are all
+forced moves. Track forced moves all the way through. Always consider check. A
+check is a free move. Following a "line of checks" often leads to checkmate.}
+31. g4 Qd3 32. Rc5 Qxf3+ 33. Qf2 Qh1+ 34. Qg1 {O.K. so he got you in four
+moves, but he needed your help. An idea to prolong the game would have been to
+move your Q to b1 instead of moving the pawns. I suspect when you start moving
+pawns you are out of plans. Suggestions for improvement: Keep up the slash and
+attack style. Be a threat to everyone you meet. Put some effort into learning
+pawn play. "Pawns are the soul of chess." Most plans revolve around the pawn
+structure. If you get this down you will become difficult for the "sharks"
+[2000+ players] to handle. Don't give away pieces! Don't force your opponent
+to do anything you will regret. Don't panic - if you find yourself tempted to
+move pawns sit on your hands and breath [that's when you inhale and exhale air
+from your lungs - I often forget in a tense game] then look for a logical line
+that the position demands. Keep examining your lost games, your courage will
+take you far! [I read that on a "Chinese fortune" cookie once - grin.] Develop
+an attitude: If my opponent can beat me they will have to do it without my
+help!} Qxg1# *
+
+[Event "Analyzed Games"]
+[Site "ChessDoctor.com"]
+[Date "????.??.??"]
+[Round "?"]
+[White "W16"]
+[Black "B16"]
+[Result "*"]
+[PlyCount "57"]
+
+{00016,4,23 Analyzed by National Master Corey Russell} 1. e4 d5 2. exd5 Qxd5 {
+This position is known as the Center Counter, or Scandinavian defense. While
+objectively sound for black, I don't recommend it as this early queen sortie,
+as it doesn't help black's central control much, plus black always has to be
+careful where he moves his queen again, as the monarch is always pushed around
+by White with an eventual Nc3 or c4. If black isn't careful, he could lose his
+queen easily, as this game demonstrates.} 3. d4 Nc6 {A good move by black. He
+gets his knight out, while at the same time puts pressure on White by
+threatening to capture on d4.} 4. Nf3 Nf6 {Natural, but inaccurate. An
+aggressive ...Bg4! followed by castling queenside could really put the
+pressure on White's center. For example, if ...Bg4 5. c4?? Qe4+ 6. Be2 Bxf3 7.
+gxf3 Qxd4 leaves black up a pawn! This is one reason why it's common for white
+to boot black's queen from the center as soon as possible by playing Nc3 move
+2. As it stands, white gets a free hand to push black around.} 5. c4 Qa5+ {
+? This only forces white to develop his bishop with a gain of time. Black has
+to accept the fact his only reasonable posts for her is d6 or d8.} 6. Bd2 Qb6
+7. c5 {?? The key blunder. Like it or not, black had to play 7. ... Qf5. After
+this, White has a won game, and you played well to convert it.} Qxb2 8. Bc3
+Qxa1 9. Bxa1 Bg4 10. Be2 {A little passive, but of course a reasonable move.
+Instead Bb5, followed by Nbd2, Qa4 would really put the pressure on black.} e6
+11. h3 Bf5 12. Bb5 Rb8 13. O-O {Again, sound, but Nbd2, followed by Bxc6, and
+Qa4 and/or Ne5 would make black resign soon.} a6 14. Ba4 Be7 15. Re1 O-O 16.
+Bc2 {Why not 16. Nbd2? Then Bxc6 and Qa4 would pick up some of black's pawns
+for sure. There are many ways to win at this point.} Bxc2 17. Qxc2 h6 18. Ne5 {
+Good. When up material (such as a Queen for a rook in your case), trade pieces.
+This makes the your material advantage more effective.} Nb4 19. Qc4 Nbd5 20.
+Nc3 Rfd8 21. Ne4 c6 22. Nxf6+ Nxf6 23. Ng6 {This is okay, but if black replied
+23. ... Bf8! 24. Nxf8 Kxf8, with the idea of not moving his pawns and
+establishing a blockade, it would make it more difficult for white to win.
+With the text, black opens lines in White's favor.} Bxc5 {?} 24. dxc5 fxg6 25.
+Qxe6+ Kh7 26. Bxf6 gxf6 27. Qf7+ Kh8 28. Qxf6+ Kg8 29. Re7 *
+
+[Event "Analyzed Games"]
+[Site "ChessDoctor.com"]
+[Date "????.??.??"]
+[Round "?"]
+[White "W17"]
+[Black "B17"]
+[Result "*"]
+[PlyCount "102"]
+
+{00017.4.24 Analyzed by National Master Corey Russell} 1. b4 e5 2. Nc3 Bxb4 {
+This pawn sacrifice was unjustified by White. With best play, black should win.
+} 3. Bb2 Nf6 4. e4 Nc6 5. Nf3 O-O 6. g3 Nd4 {Black could've won another pawn
+using a tactical motif called, "Removing the Defender". 6. ... Bxc3 7. Bxc3
+Nxe4. White cannot take on e5, or he will lose at least a piece because of the
+pin on the e-line.} 7. Bg2 d6 8. O-O Bg4 9. h3 Nxf3+ 10. Bxf3 Bxf3 {Why not win
+the pawn on h3? White can't trap the Bishop with 11. g4 since by taking the
+pawn, the bishop would also threaten the rook at f1. This concept is known as
+gaining a tempo.} 11. Qxf3 b5 {?! Definitely dubious. This makes black's pawn
+structure slightly weaker. Why not solidfy central control with ...c6, Re8,
+with a ...d5 expansion? Remember, when ahead in material, trade pieces, not
+pawns.} 12. Nxb5 Bxd2 {As a result of this interchange, white has 3 pawn
+islands, black has 2. A pawn island is a group of pawns separated by open
+files. This should give black a slight endgame advantage. The reason that
+fewer pawn islands is better, is that they don't need pieces to defend them
+(they can defend each other).} 13. Rad1 Rb8 14. Rxd2 Rxb5 15. Ba3 Ra5 {
+Remember your heavy pieces (Queen, rooks) want to double on the open file
+(column). Therefore, Qb8 would be quite strong, to establish b-file control.
+Black could follow-up with ...Qb7 (pressuring white's e-pawn), ...Rfb8, and/or
+Rb1 with a definite edge for black.} 16. Rd3 Qb8 {...Qa8! (pressuring white's
+e-pawn again) is quite strong... white would have to be tied down with Re1,
+then Rb8, followed by the killer shot ...d5 (white can't take because ...e4
+would fork white's queen and rook).} 17. Rb3 Qc8 18. Qc3 Ra6 19. Qc4 Nd7 {
+The knight was already good on f6. Better was to oppose white's control of the
+b-file with ...Rb6. This would also free your queen from defense of the rook
+on a6, so ...Qxh3 is a real threat.} 20. Rfb1 Rb6 21. f4 {This is a dubious
+line opening by white. There are too many hanging white pawns, plus this opens
+up White's king considerably.} Rxb3 22. axb3 Nb6 23. Qf1 exf4 24. Qxf4 {
+This is obviously an oversight by white. White had to play gxf4, and if black
+tries to open things up with ..f5, then e5 gives White a fighting chance.} Qxh3
+25. Rd1 Nc8 {Why not ...Nd7? The post on e5 would be very strong for black.
+Remember, if you can, try to centralize your knights... they drive a wedge in
+your opponent's position.} 26. e5 Rd8 27. exd6 cxd6 28. Bxd6 {? This loses.
+White's bishop is much stronger than the knight at c8, plus when behind in
+material trade pawns, not pieces. Since black's d-pawn is pinned, c4 looks
+likes White's best chance. Now black can win a piece with ...Qe6. Remember
+attack pinned pieces! You might win them.} Nxd6 29. c4 Nb7 30. Rxd8+ Nxd8 31.
+Qb8 Qd7 32. b4 Kf8 33. c5 Ke8 34. b5 a5 {This is not right. ..Qd4+, then ...
+Qxc5 would force white to resign. Notice ...Qxc5 defends a7, covers e5 against
+potential checks by the white queen, and helps restrict white's b-pawn. Why
+does the black queen do so much? Because it's centralized! I can't emphasize
+the importance of this enough.} 35. b6 {White had much stronger, c6! This
+threatens c6-c7-c8(Q). Black would be forced to take the draw by perpetual
+check! Remember, 2 connected passed pawns are very strong. White's move allows
+a light-squared blockade by black.} Qb7 {
+?? This loses by force! Again, ...Qd4+, 36. Kh1 Qxc5 37. b7 Qb5 wins for black.
+} 36. Qe5+ {? White could have had a beautiful win with 36. Qxb7 Nxb7 37. c6
+Nc5 38. b7 Na6 39. c7!!, and black can't stop white from queening.
+Chessplayers have this expression: "Two passed pawns on the 6th rank (row) are
+worth a rook".} Ne6 37. Qd6 a4 38. c6 Qxb6+ 39. Kg2 Qc5 40. Qd7+ Kf8 41. Qc8+
+Ke7 42. Qd7+ Kf6 43. g4 g5 44. Kf3 a3 45. Ke4 a2 46. Qd1 Qxc6+ 47. Ke3 Qa6 {
+This wins, but 47. ...Qc3+ 48. K moves a1(Q) would make white resign.} 48. Qa1+
+Ke7 49. Ke4 Nc5+ 50. Kf5 f6 51. Qxf6+ Qxf6# *
+
+[Event "Analyzed Games"]
+[Site "ChessDoctor.com"]
+[Date "????.??.??"]
+[Round "?"]
+[White "W18"]
+[Black "B18"]
+[Result "*"]
+[PlyCount "76"]
+
+{00018.4.25 Analyzed by National Master Corey Russell} 1. d4 Nf6 2. c4 g6 3.
+Nf3 Bg7 4. Nc3 d5 5. e3 c6 6. Be2 O-O 7. O-O Nbd7 {While this plan is sound,
+white can get a slight pull by playing 8. cxd5 cxd5 9. Qb3 e6 (...Nb6 10. Ne5)
+10. Bd2, and white can gain c-file occupatio first. Probably 7. ... dxc4 8.
+Bxc4 Bg4 leads to better chances for equality, with the idea of an eventual ...
+e5 by black.} 8. Qc2 dxc4 9. Bxc4 Nb6 10. Bb3 Nfd5 11. Nxd5 {? Definitely
+wrong. If white was planning this, he never should've posted his queen on c2,
+because now the lady will be exposed for free tempos by black. Instead, a3 or
+e4 are much more consistent...leaving white with a slight advantage (center,
+black's less than ideal knight on b6).} cxd5 12. Bd2 Bf5 13. Qd1 Rc8 14. Ba5
+Qd6 15. Bxb6 axb6 16. Qe2 {An automatic move...this connects rooks, but that's
+about it. Instead Qd2 is stronger. This would prevent blacks' queen from
+infiltrating b4, help insure white can contest the c-file (since the Q would
+be covering c1), and indirectly hinders an e5 break by black (because the
+black d-pawn would be hit by white's queen and bishop. Also, ...Bg4, followed
+by ...Bxf3, gxf3 is not dangerous for white. Remember: a weakness is only a
+weakness if it can be taken advantage of! This motif is seen often in
+Grandmaster (GM) chess.} Bg4 17. h3 Bxf3 18. Qxf3 e6 19. Rac1 Qb4 20. Qe2 Rc6
+21. Rxc6 {? Now black mobilizes his pawns, white's bishop is bad, and will
+activate black's bishop as well, not to mention undoubling black's pawns for
+him. Because of the opposite colored bishops, white could put a much stiffer
+reistance by playing 21. Qd3 Rfc8 22. Rcd1!, and black has no access points
+(c2 is covered by the light squared bishop), and no way to boot white's bishop.
+Note that even if black sac'd his rook on c4 at some point, white doesn't even
+have to take it! Also, the d-line pressure would discourage a ...e5 break by
+black. White would basically "shuffle", since black can't break through.} bxc6
+22. Qa6 c5 23. Rd1 cxd4 24. exd4 Bxd4 25. Qa3 Qc5 26. Qxc5 bxc5 27. Rd2 Rb8 {
+Good move, this restricts white's options, and indirectly prevents white from
+mobilizing his own pawn majority.} 28. Kf1 Kg7 29. Ke2 Kf6 30. f3 Ke5 31. Kd1
+c4 32. f4+ Ke4 33. Bc2+ Ke3 34. b3 cxb3 35. Bxb3 Rb7 36. g3 Bc3 37. Rc2 d4 38.
+Rg2 {A well-played game by black...black made the most of his opportunities.
+With this game, it's hard to answer your question about strength...white made
+a number of positional errors, and black could be anywhere from an A-class
+player to grandmaster. I need more games to make a better evaluation in that
+regard. White played approx. B-player strength. Keep at it, and always go over
+any losses/draws you experience, so you can learn and improve even more.} Kf3 *
+
+[Event "Analyzed Games"]
+[Site "ChessDoctor.com"]
+[Date "????.??.??"]
+[Round "?"]
+[White "W19"]
+[Black "B19"]
+[Result "*"]
+[PlyCount "101"]
+
+{00019.5.01 Analyzed by National Master Corey Russell} 1. e4 e5 2. Nf3 Nc6 3.
+Bc4 Be7 4. d4 d6 5. Nc3 Nf6 6. O-O O-O 7. h3 {Good move! This deprives the
+black B on c8 and N on f6 of a possible post on g4.} a6 {Black's last move is
+rather dubious. In most King pawn openings, Piece play is everthing. Much more
+logical is 7. ... cxd4 8. Nxd4 Re8, with a slightly cramped but solid position
+for black. Notice that White can't play 9. Bg5? Nxe4! as this would win a pawn
+for black.} 8. a4 h6 {There is no need for this move. Black should still play
+the plan mentioned on move 7.} 9. a5 Re8 10. d5 Nb8 11. Ne1 Nh7 {? Definitely
+a mistake. Black should of course continue development with ...Nbd7 instead,
+with the idea of ...Nf8, Ng6, Bd7, c6 with a playable game. The text leaves
+the center for no good reason.} 12. f4 {This is the right plan, just played
+too early. Better would've been to prepare this move with Nd3, and possibly
+even Kh2, g3, f4 so that way white can recapture f4 with a pawn and therefore
+deprive the nice e5 square for black's pieces. As the game goes, white gets a
+hole on e5. Squares that cannot be covered by pawns are called holes.} exf4 13.
+Bxf4 Bf6 14. Qf3 Nd7 15. Nd3 {Alert play. It was critical for white to cover
+c5 and e5 as soon as possible, to contest any knight outposts by black.} Qe7
+16. Rae1 Ne5 {Another mistake by black. This is rather poor play for an expert.
+The battle for e5 ("Fight for the Center") is key, therefore he should've
+played ...Nf8! with the idea of Ng6, and the stranglehold control of e5 would
+give him a small advantage.} 17. Bxe5 Bxe5 {Black makes what should've been
+his last mistake. White can now win at least a pawn with 18. Nxe5 Qxe5 19.
+Qxf7+ Kh8. If instead black tried 18. ... dxe5, then white has 19. d6! cxd6 20.
+Bxf7+ Kh8 21. Bxe8 Qxe8 which leave white ahead with a rook for a bishop. One
+of the best ways that I suggest to not miss tactics is to always look at
+forcing moves.} 18. Bb3 Ng5 19. Qh5 f6 {This unnecessarily weakens light
+squares in Black's camp. The reason strong players avoid weakening their
+squares if possible is to deny good outposts/lines for the opponent's pieces.
+This is precisely what White correctly does in this game, and that is to play
+on the light squares. Much better for black would be 19. ... g6! 20. Qe2 Bd7,
+which would leave black with a slight advantage. Notice White can't play 20.
+Qxh6?? because 20. ... Bg7 21. Qh4 Nf3+ wins White's queen.} 20. Ba4 Rf8 21.
+Nd1 Qf7 22. Qe2 Bd4+ 23. Kh1 Qg6 {Not very good, but postion has deteriated to
+the point it's hard to suggest a good move. Black needed to complete
+development with 23. ... Bd7 24. Bxd7 Qxd7, and reroute his Knight to e5 and
+hope that that counterbalances his holes on e6 and f5. Notice that none of
+this would be a problem if he would've played ...g6 earlier.} 24. c3 Ba7 25.
+Bc2 Qe8 26. N1f2 Bd7 27. b3 {
+Why not Nf4? if black replies ...Bb5, c4 is an effective rejoinder.} Nf7 28.
+Ng4 Ne5 29. Nf4 Nxg4 30. hxg4 Qe5 31. Ne6 {A good, practical decision, as
+bishops of opposites may give chances to draw. With proper play though, black
+should still win.} Bxe6 32. dxe6 Qxe6 33. Bd3 Kh8 {Black has been playing this
+game entirely too passively. ...Qe5! is much stronger. That move blockades
+white's e-pawn (hence hemming white's bishop in), threatens pawns on a5, c3,
+and in addition threatens dark-square penetration to white's king-side with ...
+Qg3 or ...Qg5.} 34. Qf3 Rae8 35. e5 {
+A nice clearance sacrifice. After this move, a draw is the most likely result.}
+dxe5 36. Qe4 f5 {Forced.} 37. gxf5 Qf6 38. Rf3 Rd8 39. Ref1 c6 40. Rg3 Qf7 41.
+Rff3 Rd6 42. Rg6 Rf6 43. Qg4 e4 44. Bc4 Qxg6 45. fxg6 exf3 46. gxf3 Rxf3 47.
+Qd7 Rg3 48. Qxb7 Rg1+ 49. Kh2 Rf2+ 50. Kh3 Rf3+ {You did play aggressively and
+with energy, which is good. Try to look at forcing moves, so that you have a
+smaller chance of missing a combination. Also, try to minimize making "holes"
+in your position, especially in the center of the board. If your opponent has
+holes, try to occupy them and use them as springboards for your attack. Don't
+worry about ratings too much, as this often can be a distractor from playing
+good chess. Try instead to improve your game. Your rating will increase
+naturally as your understanding of chess grows.} 51. Kh2 *
+
+[Event "Analyzed Games"]
+[Site "ChessDoctor.com"]
+[Date "????.??.??"]
+[Round "?"]
+[White "W20"]
+[Black "B20"]
+[Result "*"]
+[PlyCount "83"]
+
+{00020.5.02 Analyzed by National Master Corey Russell} 1. e4 c6 2. d4 d5 3. e5
+Bf5 4. Nc3 e6 5. g4 Bg6 6. Nge2 c5 7. h4 h5 8. Nf4 Bh7 {This is all book so
+far, and this line is known to give a slight advantage to white. Development
+is critical for black...better is not to ...h5 at all, but ..h6, so that the
+bishop can retreat to to ..h7 safely.} 9. Nxh5 cxd4 10. Nb5 Qa5+ 11. Qd2 {
+! Good move. 11 Bd2 Qb6 is uncomfortable for white.} Bb4 12. Nxg7+ Kf8 13. c3
+dxc3 14. bxc3 Bc5 15. Nh5 Be4 16. Rh3 {
+Excellent. Gets the rook out of danger, and puts it at an active post.} Nc6 17.
+Qg5 Bg6 {?! Dubious. Black's best defense is ...Rh7} 18. Rf3 Bxh5 {This walks
+to White's hands. ...Ke8 would offer stiffer resistance. For example 19. Nf4??
+Be7 would win white's queen (or a piece).} 19. gxh5 Rd8 20. Rg3 {Alert play.
+Normally, one should develop first before conducting such an blunt attack, but
+this move does take advantage of black's earlier missteps.} Qb6 21. Rg2 {
+One of the few missteps by white. 21 Qg7+ Ke8 22 Rf3 would checkmate or win
+massive amount of material.} Bxf2+ 22. Kd1 Bg3 23. Qxg3 Ke7 24. Qg7 Nh6 25.
+Bxh6 Rxh6 26. Qxh6 Nxe5 27. Qg7 Nd7 28. h6 e5 29. Qg5+ Ke6 30. Rb2 {
+After this, black really could resign.} Rf8 31. Bh3+ f5 32. h7 {For the past
+few moves, white could have won black's queen with Nd4+ if he wished.} Kf7 33.
+Qxf5+ Nf6 34. Nd6+ Kg7 35. Rg2+ Kh8 36. Rg8+ Nxg8 37. hxg8=Q+ Rxg8 38. Qh5+ Kg7
+39. Qg5+ Kh7 40. Bf5+ Rg6 41. Qxg6+ Kh8 {If you really don't lose much, then
+for stronger opposition, I suggest going to your local chess club. Portland
+has strong chess players -- I know, I've played them! Also you can play on the
+internet, though for improving your slow chess I strongly recommend playing
+over the board. Your style is aggressive...balance that with defence, you
+should continue to do well.} 42. Nf7# *
+
+[Event "Analyzed Games"]
+[Site "ChessDoctor.com"]
+[Date "????.??.??"]
+[Round "?"]
+[White "W21"]
+[Black "B21"]
+[Result "*"]
+[PlyCount "71"]
+
+{00021.5.04 Analyzed by National Master Corey Russell} 1. e4 Nc6 2. Bc4 Nf6 3.
+d4 e5 {There was no reason take the free, central pawn at e4. If white tries
+to threaten checkmate and black's knight with Qf3, then d5! stops the mate
+threat and protects black's knight. Black would have the advantage.} 4. d5 Bc5
+{A Knight is worth 3 pawns. You don't want to give it up for just a pawn,
+unless you have a really good reason. Correct was to preserve your knight with
+4. ... Ne7, with the idea of ...Ng6, ...Bc5, ...d6.} 5. dxc6 bxc6 6. Bg5 O-O {
+6. ... Bxf2+ 7. Kxf2 Nxe4+ wins two pawns (the bishop on g5 falls). This
+tactical motif is very common...watch for it.} 7. b3 d6 8. Nc3 Bg4 {
+Not good. White can win a piece with 9. Bxf6. Perhaps ...h6 was in order.} 9.
+f3 Bh5 10. Na4 Bb4+ 11. c3 Ba3 {You need to preserve your bishop with 11. ...
+Ba5. With this move, white can now trap your bishop with 12. b4, with the idea
+of Qb3.} 12. Bc1 Bc5 13. Nxc5 dxc5 14. Ba3 Qc8 15. Bxc5 Rd8 {Again, isn't
+winning a pawn with 15. ... Nxe4 preferable? White can't take back or he'd
+lose his queen.} 16. Qc2 Nd7 17. Ne2 Nxc5 18. O-O Bxf3 {This is a hard
+position for black, but it's not time to throw away pieces yet. When in doubt,
+improve your worst pieces. Black would like to get his a-rook into the game.
+The best way to do that is ...Rd6, ...Qd7, and ...Rd8. If black can establish
+dominance over the d file (column), then he'd have a slight advantage despite
+having a worse pawn structure.} 19. Rxf3 Qd7 {Black's position was bad, but
+this makes it worse. Black needed to play ...Ne6 to block white's threat.
+Doubling on the d-line is still black's best bet.} 20. Rxf7 Qg4 {Black is dead
+lost after this. The only chance was to get the most for his queen with 20. ...
+Qxf7 21. Bxf7+ Kxf7, though white would still be winning. There is no way for
+black to rescue his game after this point.} 21. Rf4+ Ne6 22. Rxg4 h5 23. Rg6
+Re8 24. Rxe6 Rxe6 25. Bxe6+ Kh7 26. Bf5+ g6 27. Be6 Re8 28. Bc4 Rf8 29. Qd3 g5
+30. Qd7+ Kh6 31. Qe6+ Kg7 32. Qxe5+ Rf6 33. Qxg5+ Rg6 34. Qxh5 Rh6 35. Qf7+ Kh8
+36. Qg8# {So in conclusion, don't give up pieces for pawns except for VERY
+good reasons (like forced checkmate). Also, when in doubt in what to move,
+improve your worst pieces. Masters do this themselves when a plan isn't
+obvious. In addition, try to concentrate your heavy pieces (rooks & queen) on
+open files (columns)...they are most effective in that setup. Try to look at
+forced moves, and try ask yourself, "Why did my opponent move there?". If you
+ask yourself that question, often you can see that he was trying to threaten
+your pawns/pieces or checkmate, and if you see his threat, you can parry it.} *
+
+[Event "Analyzed Games"]
+[Site "ChessDoctor.com"]
+[Date "????.??.??"]
+[Round "?"]
+[White "W22"]
+[Black "B22"]
+[Result "*"]
+[PlyCount "131"]
+
+{00022.5.05 Analyzed by National Master Corey Russell} 1. Nf3 Nf6 2. Nc3 Nc6 3.
+d4 d5 4. e4 {This loses a pawn. Correct is continuing development with 4. Bg5.}
+dxe4 5. d5 exf3 6. dxc6 fxg2 {Black misses his chance to get a very strong
+position with 6. ... Qxd1+ 7. Kxd1 Bg4!. This threatens 8. ... fxg2 discovered
+check, followed by 9. ... gxh1(Q). Notice that if white tried 7. cxb7, then 7.
+... fxg2+ 8. Ke1 gxh1(Q) 9. bxa8(Q) Qxa8 would leave black up a lot of
+material. The move black chooses just develops white's bishop.} 7. Bxg2 Qxd1+
+8. Kxd1 Bf5 9. cxb7 {Yes! The correct move. This passed pawn is very strong,
+and should have decided the game.} Rd8+ 10. Bd2 {
+Good! Respond to threats by developing pieces. Best chances that way.} e5 11.
+Re1 {Correct. If possible develop with attack, like this move does.} Bd6 12.
+Bc6+ Bd7 13. Bf3 O-O 14. Ne4 Bg4 {?? Loses a piece by force. Black's position
+was difficult, he had to figure out a way to get rid of White's thorn in his
+side at b7. Otherwise, he might as well resign right now.} 15. Nxf6+ gxf6 16.
+Bxg4 Bb4 17. Re2 {Too passive. Much stronger is 17. c3 Bc5 18. Bc8, forcing
+black to sacrifice his rook because of white's threat of b8(Q), and after
+exchanges on c8, would leave white up a full rook!} Bxd2 18. Rxd2 Rxd2+ 19.
+Kxd2 Rd8+ 20. Ke1 {No. Now that most pieces are exchanged, the king is a
+fighting piece -- the threat of mate is non-existent. White should try to
+support his passed b-pawn with 20. Kc3.} Rb8 21. Bf3 {This works, but 21. Bc8!
+Kf8 22. Rd1 would leave black in a complete bind. Black would be helpless to
+stop white's plan of advancing her queen-side pawns, and forcing a
+breakthrough on b6.} f5 22. Rd1 {? Not the best. Let's take a look here. What
+are the key elements of this position? Elements of chess are king safety,
+material imbalances, space, development, for example. In this case, the key
+facts are: 1) White has an extra bishop, and 2) the passed, PROTECTED pawn on
+b7. The b7 pawn has the most potential, and should have been preserved if at
+all possible. In this case it was, by playing Bc6 instead. Then the plan of 23.
+Rd1, Rd7, Rxc7, followed by Rc8 is winning outright.} e4 23. Bg2 Rxb7 24. f3 {
+Not the best. The general rule of thumb when up a piece is in endgame is:
+Trade pieces, NOT pawns. Conversely, if someone is losing, they should trade
+pawns, not pieces. Correct was to preserve white's b-pawn with 24. b3. The
+text makes it more difficult for white to win.} exf3 25. Bxf3 Rxb2 26. Rd8+ Kg7
+27. Kd1 {Again, now that mate threats are minimal, aggressive use of the king
+is called for. White should advance toward the center with Kd2.} Rxa2 28. Bd5
+Ra3 29. Rd7 c5 30. Rxf7+ Kg6 31. Rc7 Ra5 32. Bg8 {?! Dubious. White's bishop
+was already well placed on d5. More logical was to get white's king involved
+in the action with Ke2.} h6 33. Bh7+ Kg5 34. Rf7 f4 35. Ke1 {
+Unnecessarily passive. Ke2 is still best.} c4 36. Kf2 a6 37. Kg2 {Actually, 37.
+Rg7+ Kh5 38. Kf3 would win material for white, plus bottle up black's king. A
+mating net might even be possible. Otherwise, black's only choice would be 37.
+... Kf6, but that loses the h6 pawn to Rg6+. That would present problems for
+black since that would create a passed pawn (a passed pawn means unopposed by
+enemy pawns).} Kh4 38. Rxf4+ Kg5 39. Kg3 {
+There was a free pawn on c4. There was no reason not to take it.} Ra2 40. Rg4+
+Kf6 41. Rxc4 Ra3+ 42. Bd3 h5 43. Kh4 Ra1 44. Rc6+ Ke5 45. Rxa6 Rh1 46. Kh3 Kf4
+47. Rf6+ Kg5 48. Be4 {Actually 48. Rf5+ Kh6 (...Kg6? 49. Rf1+ picks up black's
+rook) Be2 would pick up black's last pawn, and probably make black resign.} Re1
+49. Re6 Re2 50. Re5+ {Never give check just to give check! Only do it for a
+good reason. Correct is 50. c4 (passed pawns must be pushed!) The black king
+cannot get at white's rook, and can't win the bishop on e4 since white can
+always preserve her bishop with Bd5, which also protects her rook on e6.} Kf4
+51. Rxh5 Rxe4 {Black makes an inaccuracy here. Now white can win by force. ...
+Kxe4 would give black some chances to draw.} 52. Rh4+ Ke5 53. c3 {Simply exchan
+ging rooks followed by Kg4 would win easily for white. Black could have played
+...Rd3+ leaving white only a pawn up.} Rxh4+ 54. Kxh4 Kd5 55. Kg3 {This works,
+but generally this is the wrong move. In king and pawn endgames, the rule of
+thumb is: Advance the king as much as is possible to support a pawn advance,
+without jeopardizing the pawn's safety. Therefore, 55. Kg5 was the correct
+move. If white's c-pawn were gone, black could draw by running his king to h8,
+and white would unable to make progress. With Kg5, however, white can get to
+g7 first, blocking black's king, and forcing white's h-pawn to queen.} Kc4 56.
+h4 Kxc3 57. h5 Kd4 58. h6 Ke5 59. h7 Kf6 60. h8=Q+ Kg6 61. Kh4 Kf7 62. Qe5 Kg6
+63. Qe8+ Kg7 64. Kg5 Kh7 65. Qg6+ {Inaccurate. 65. Qe7+ Kh8 66. Kg6 Kg8 67.
+Qg7#. When checkmating a lone king with a queen + king, you always want to
+leave a legal move for the enemy king until it's checkmate. If you don't, then
+black can escape with a draw by stalemate, which is exactly what happened in
+this game.} Kh8 66. Kh6 {So in conclusion, watch out for your opponent's
+threats, and if you have passed pawns on the 7th rank (row), do all you can to
+protect them. They can often decide games if they can queen, because they will
+force more valuable pieces to sac themselves to stop it. Also, in endgames,
+use your king to support your passed pawns, and to limit the activity of your
+opponent's king.} *
+
+[Event "Analyzed Games"]
+[Site "ChessDoctor.com"]
+[Date "????.??.??"]
+[Round "?"]
+[White "W23"]
+[Black "B23"]
+[Result "*"]
+[PlyCount "103"]
+
+{00023.5.07 Analyzed by National Master John Graves} 1. e4 e5 2. Nf3 Nc6 3. Bb5
+a6 4. Ba4 Nf6 5. O-O Nxe4 6. d4 b5 7. Bb3 d5 8. dxe5 Be6 9. c3 Bc5 10. Nbd2 O-O
+11. Bc2 Nxf2 12. Rxf2 f6 13. exf6 Bxf2+ 14. Kxf2 Qxf6 15. Nf1 Ne5 16. Be3 Rae8
+17. Bd4 {Okay now the real game can begin! 17.Bc5 is given as the main line
+leading to equality according to NCO. The text is also given as equal after 17.
+..Bg4.} Qh4+ 18. Kg1 Nxf3+ 19. gxf3 c6 20. Ng3 Qh3 21. Bd3 {Be5 gives white a
+small advantage. The plan is to put the pawn on f4 and to plug up both the
+open files. White will put the queen on d3 and put the rook on e1 and prepare
+a timely f5 with the attack.} Kh8 22. Be2 a5 23. Be5 Bc8 24. f4 Qe6 25. Bh5 {
+I like 25. Qd4 alot better. Why declare your minor piece configuration? What
+if the knight wants to go to f5? What if the Bishop wants to eye the king on
+d3? Then the rook will fufill its role and play to e1 to support the f5 pawn
+break. Maybe white can play the rook to the "g" file with an attack.} Re7 26.
+Qd4 Kg8 27. Rf1 Bb7 28. Qc5 {
+The Queen is just fine on d4, it keeps the black bishop nice and hemmed in.}
+Rd7 29. Kg2 d4 30. Bxd4 Qxa2 31. Bg4 Rdf7 32. Rf2 {32.c4!! seems to give white
+a clear edge. 32... Rf4? 33. Be6 Kh8 34. Qf8! mating is one point. Any capture
+on c4 will lead to a white Be6 with an easy win. Blacks best move seems to be
+32...Re8 but 33. Bh5 g6 creates a nasty weakness on the dark squares. White
+will play 34. Be2 with a clear advantage.} Rxf4 33. Rxf4 Rxf4 34. Kh3 Rxg4 35.
+Kxg4 Qxb2 36. Qe5 h5+ 37. Kxh5 Qxh2+ 38. Kg4 Bc8+ 39. Kf3 Qh8 40. Nh5 {
+Now black is just a piece down. White is clearly winning.} Bd7 41. Qg5 Qh6 42.
+Qd8+ Be8 43. Qxe8+ Kh7 44. Qf7 Qg5 45. Nf6+ Kh6 46. Be3 gxf6 47. Bxg5+ {
+47. Qf6 is faster.} Kxg5 48. Ke4 a4 49. Qh7 a3 50. Qf5+ Kh4 51. Kf4 c5 52. Qg4#
+*
+
+[Event "Analyzed Games"]
+[Site "ChessDoctor.com"]
+[Date "????.??.??"]
+[Round "?"]
+[White "W24"]
+[Black "B24"]
+[Result "*"]
+[PlyCount "111"]
+
+{00024.5.08 Analyzed by National Master Corey Russell} 1. d4 {Personally, I
+don't recommend my students playing 1.d4 until they are about class "A"
+strength. 1.d4 very often leads to strategic play, and 1.e4 is often direct
+and tactical. The problem is, there are more strategical concepts than
+tactical in chess, so 1.d4 is harder to play well. I know some players avoid 1.
+e4 because of the theory involved, but once you understand positions resulting
+of 1.e4, it really does help understanding 1.d4. This was true for myself.} d5
+2. c4 Nf6 3. Nc3 {Already a strategical miscue happens. Because of black's
+inaccurate move 2, white can get nice central control and space with 3. cxd5
+Nxd5 4. e4 Nb6 5. Nf3. The pawns on d4 and e4 are called the "ideal" pawn
+center.} e6 4. cxd5 exd5 5. g3 {Unfortunately, this is one of those positions
+where the fianchetto of the bishop isn't very effective. White's bishop is
+blocked by the black d-pawn, and there is no way to dislodge it except by an
+eventual e4. But if white does that, then white will be obliged to recapture
+with a piece, and this leaves white's d-pawn isolated. See all the strategical
+concepts I was talking about? In this position, much more promising is quick
+development with 5. Bg5, then a later e3, Bd3, Nf3, etc. The text should give
+black a nice game.} Bb4 6. Bd2 {Unnecessarily passive. Quick king-side
+castling is white's best chance for an advantage. Therefore 6. Bg2 is the best
+chance. 6. ... Ne4 is not really a threat, because 7. Qb3 defends against the
+threat and counter-attacks. This kind of defense-counterattack tactic is
+fairly common in 1.e4.} Bxc3 {Black shouldn't have released the pressure.
+Simply O-O is logical and strong. Black could then follow it up with ...Re8, ..
+.c6, ...Bf5, ...Nbd7, with a nice game because of the clamp on the central e4
+square. Only if white wastes a tempo with a3 should black capture the knight
+at c3.} 7. Bxc3 Ne4 8. Bg2 Nxc3 9. bxc3 Be6 10. e4 {?! Definitely dubious.
+White is opening up the center before he's completed development. Luckily for
+white, black didn't play the most active line.} dxe4 11. Bxe4 c6 {Stops white
+threat on b7, but much more interesting was 11. ... O-O!? 12 Bxb7 Bd5! 13.
+Bxa8 Re8+ 14. Ne2 Bxa8, with a clear advantage for black! Note that if white
+tries 15. O-O, then white will be extremely weak on the light squares.
+Otherwise, 15. Rg1?? loses to 15. ... Bf3. This line just illustrates the
+dangers of opening up the center too early.} 12. Ne2 Nd7 13. Bg2 Nf6 14. Nf4 {
+Not good. 14. ... Bc4! would pose white some tough problems ...this would
+prevent white from castling, and threatens ...O-O and ...Re8, which would be
+devestating.} O-O 15. Nxe6 fxe6 16. O-O h6 17. Qb3 Qd7 18. Rfe1 Rae8 19. Bh3
+Nd5 20. c4 Nb6 21. d5 cxd5 22. cxd5 Nxd5 23. Rad1 Qc6 24. Rc1 Qd7 25. Rc5 b6 {
+The losing move for black. Of course 25. ... Kh8 would leave black in a
+tenetable position.} 26. Rxd5 Qxd5 27. Bxe6+ {Nice tactic! The rest of the
+game wasn't the most accurate, but was sufficient to convert the point.} Qxe6
+28. Rxe6 Rxe6 29. Qxe6+ Kh7 30. Qe7 Rc8 31. Qxa7 Rc1+ 32. Kg2 b5 33. Qb7 Rc5
+34. Qe7 Rc4 35. Qe2 Rb4 36. a3 Rc4 37. Qe5 b4 38. Qf5+ Kg8 39. Qe6+ Kh7 40.
+Qxc4 bxa3 41. Qd3+ Kg8 42. Qxa3 Kf7 43. Qb3+ Kf6 44. f4 Ke7 {Since white
+already has mating material, simply going for mate is sufficient. Therefore,
+cutting off black's king is logical, with either Qb6 or Qd5, and simply
+advancing white's king.} 45. f5 Kd6 46. Qe6+ Kc5 47. Kf3 Kd4 48. Kf4 Kc5 49.
+Ke4 Kb4 50. Qc6 Kb3 51. Qc5 g5 52. Kd3 g4 53. Qc4+ Kb2 54. Qc3+ Ka2 55. Kc2 h5
+56. Qb2# *
+
+[Event "Analyzed Games"]
+[Site "ChessDoctor.com"]
+[Date "????.??.??"]
+[Round "?"]
+[White "W25"]
+[Black "B25"]
+[Result "*"]
+[PlyCount "50"]
+
+{00025.5.10 Analyzed by National Master Corey Russell} 1. e4 e5 2. Nf3 d6 3. d4
+Be7 4. h4 {This is definitely not the best move. 4. dxe5 dxe5 5. Qxd8+ Kxd8 6.
+Nxe5 wins a pawn with a great game for white. Among masters, this is usually
+winning. The text move, however, doesn't develop a piece, weakens white's
+kingside, and even concedes the g4 square to black. I honestly can't see how
+this helps white. Piece development is critical...generally white would want
+to get his bishop out, his queen knight out, castle short, and basically get
+all white's pieces into the center to try to overwhelm black.} Bg4 5. Be2 {
+Unnecessarily passive. More promising is 5. dxe5 Bxf3 (forced) 6. Qxf3 dxe5 7.
+Bc4 Nf6 8. Be3 with a reasonable game for white.} Bxf3 6. Bxf3 Bxh4 7. g3 Bf6
+8. dxe5 Bxe5 9. Bf4 {Definitely a mistake. This hangs the pawn on b2 for no
+compensation. 9. Nd2!, however is more active, and can help drive away black's
+bishop with Nc4.} Nc6 10. Rh5 {This entire rook maneuver should not work...
+it's too vulnerable to attack by black's pieces. Instead, the best white may
+have at this point is c3, to defend against the threat of ...Bxb2, plus deny
+the central d4 square for the black pieces.} Nf6 11. Rh4 Bxb2 12. Nd2 Bxa1 13.
+Qxa1 Nb4 14. Qb2 a5 15. e5 {This does not work out at all, because this opens
+up the center when white's king is still uncastled, plus gives the d5 square
+to use for black's pieces. At this point, white probably had to console
+himself with 15. a3 Nc6 16 Qxb7, though black is certainly still better.} dxe5
+16. Bxe5 O-O 17. Rh5 {This hangs the rook (17. ... Nxh5 18. Bxh5 Qg5), but
+white's position is very difficult in any case. White cannot castle, and the
+center's wide open, chances look bleak that white can repair his position.} Re8
+18. Rg5 Ra6 {This is an excellent defensive move, as well as prepares for
+active operations on b6 or e6.} 19. Ne4 Nbd5 20. Be2 Rb6 21. Bb5 {Stepping into
+pins (now the rook on b6 pins the bishop on b5) is rarely good, and this is no
+exception. Black could have played 21 ... c6 and pretty much have forced white
+to resign. Notice that 22. Nxf6+ Nxf6 doesn't go anywhere, since the bishop on
+e5 would then be pinned.} Re7 22. Nxf6+ Nxf6 23. Kf1 Qd1+ 24. Kg2 Qd5+ 25. Kh3
+{This hastens the end, but there was no way for white to hold onto the
+position in any case.} Qh1# {I know you say you play non-competitively, but
+actually playing better players is THE way to get better quickly. Failing that,
+you could check out some chess books out of the local library, but books can
+only teach so much. There's no substitute for experience.} *
+
+[Event "Analyzed Games"]
+[Site "ChessDoctor.com"]
+[Date "????.??.??"]
+[Round "?"]
+[White "W26"]
+[Black "B26"]
+[Result "*"]
+[PlyCount "127"]
+
+{00026.5.11 Analyzed by National Master Corey Russell} 1. e4 d5 2. e5 {
+This doesn't offer much for white. This allows black to keep his center pawn
+at d5, and e5 becomes a target. 2. exd5 Qxd5 3. Nc3 is the usual and more
+promising continuation for white.} c5 3. Bb5+ Nc6 4. e6 {
+This sacrifice isn't sound. 4. f4 is the best white has.} fxe6 5. Qh5+ {
+This doesn't accomplish anything. Try not to check just to check...only if it
+helps you accomplish some aim. In this case, black's only way to get his
+dark-squared bishop out was to play ...g6 and ...Bg7, so this only helps black.
+Better was quick development, like Nf3, O-O, d4, and Nc3.} g6 6. Qd1 a6 7. Bf1
+{This can't be right. Development is still critical. 7. Bxc6+ bxc6 8. Nf3 Bg7
+9. d4 is white's best chance, though black is a little better because of his
+central control.} Ne5 {There's a saying, "avoid moving your piece twice in the
+opening". Black makes the same mistake white did. Much more promising for
+black is ...Bg7.} 8. d4 cxd4 9. Qxd4 Qa5+ {...Bg7 is still strong (threatens ..
+.Nf3+ winning white's queen). This check should have accomplished nothing.} 10.
+b4 {This weakens white along the a1-h8 diagonal. Much better is 10. Bd2 Qc7 11.
+Bf4 Bg7 12. Nc3 Nf3+ 13. Nxf3 Bxd4 14. Bxc7 is much better for white than the
+game. White would be up a piece!} Qc7 11. Bf4 Bg7 12. Nf3 {This only falls
+into black's plan. Much better was 12. c3, though black would still have an
+advantage because of his central control.} Nxf3+ 13. gxf3 Bxd4 14. Bxc7 Bxa1
+15. c3 Bb2 {Black missed his chance to extricate his bishop. 15. ... d4! would
+do the trick. Notice that 16. Be5 dxc3! 17. Bxh8 c2, and black queens by force.
+Any other variation allows the black bishop to escape.} 16. Be5 Nf6 17. Kd1 O-O
+18. Kc2 Nd7 19. Bd4 Ba1 20. Bh3 e5 21. Be3 Rxf3 22. Bxd7 Bxd7 23. Bh6 Bf5+ 24.
+Kb3 Rxf2 25. Na3 Rb2+ 26. Ka4 Rxa2 27. Rc1 Bb2 {Black has better, with 27. ...
+b5+ 28. Ka5 Rxa3+ 29. Kb6 Bxc3, which is resignable for white.} 28. Kb3 Rxa3+
+29. Kxb2 Ra4 30. Kb3 b5 31. Bg5 e6 {In endgames, the general rule of thumb is:
+keep your pawns on opposite colors of your bishop, and the same color as your
+opponent's (to limit scope of the enemy bishop). ...Kf7 would be a nice way to
+limit white's activity, while getting black's king active to help the black
+pawn mass to advance.} 32. Be7 Ra7 33. Bd6 e4 34. Bc5 Rb7 35. h4 a5 36. Rg1
+axb4 37. cxb4 e5 38. h5 Rc7 39. Bd6 Rc4 40. Rg2 Bh3 41. Rg3 Bf5 42. Rg5 h6 43.
+Rg3 d4 44. hxg6 d3 45. Rg1 e3 46. g7 e2 47. Bf8 Bh3 48. Rh1 Bf1 {
+?? The losing move. 48. ... d2 49. Rxh3 d1Q+ leads to mate.} 49. Rxh6 e1=Q 50.
+Rh8+ Kf7 51. g8=Q+ Ke8 52. Bd6+ Kd7 53. Qe6+ {
+Black could have taken the queen. Was there time pressure, perhaps?} Kc6 54.
+Be7+ Kc7 55. Bd8+ Kb7 56. Rh7+ Kb8 57. Qb6+ Kc8 58. Qe6+ Kxd8 59. Rh8+ Kc7 60.
+Rh7+ Kb8 61. Qe8+ Rc8 62. Qxb5+ Ka8 63. Qxa4+ Kb8 64. Qa7# {A narrow escape by
+white. Be careful when an enemy bishop or rook is on the same line as your
+queen or king. There may some nasty discoveries, as there was this game. Also,
+try not to allow your opponent a massive pawn center. Passed pawns (pawns
+unopposed by enemy pawns) are very dangerous. Keep a close eye on your
+opponent's passed pawns, and support your own the best you can.} *
+
+[Event "Analyzed Games"]
+[Site "ChessDoctor.com"]
+[Date "????.??.??"]
+[Round "?"]
+[White "W27"]
+[Black "B27"]
+[Result "*"]
+[PlyCount "63"]
+
+{00027.5.12 Analyzed by Candidate Master Daniel Waite} 1. e4 c5 2. Nf3 e6 3. d4
+cxd4 4. Nxd4 Nf6 5. Nc3 a6 {The idea of the opening is to create an imbalance
+and develop around it. White needs to capitalize on Black's dark square
+weakness and launch a Kingside attack. Black on the other hand must keep
+things "active" on the Queenside. Key to this will be Black's King Bishop.} 6.
+Bg5 Be7 {6. e5 is tempting. To play this move White must answer two questions:
+1.) Can I survive the attack on the a8 - h1 diagonal? 2.) Can I maintain the
+pawn on e5? If there is doubt to either of these questions then the move
+should not be played. Black's game strategy is based on "baiting." The idea of
+"baiting" is to set a trap. This game strategy is unsound since it is based on
+what the player wants to do and not the demands of the position. Still a
+misstep could be lethal. Unfortunately the constant "baiting" will eventually
+turn a winning position into a completely lost game. White carefully
+side-steps most of the pitfalls.} 7. Bc4 b5 {Ouch, White does not understand
+what the position demands. 7. Bd3 was necessary. 7. Bc4 is not a good idea, in
+fact it walks into Black's basic idea of launching an early Queenside attack.}
+8. Bb3 d6 {Ouch! Black misses the simple 8/\. b4.} 9. f4 b4 10. Ba4+ Bd7 11.
+Bxd7+ Qxd7 {11/\. Nbxd7 gives Black a nice advantage due to the solid pawn
+structure, the nice out post on c5 for the Knight, and half-open c-file for
+the Rook. Because of 9. f4 Black will also have the e4 square for a solid post
+for the King Knight.} 12. Nce2 Nxe4 13. Bxe7 Qxe7 14. Qd3 d5 15. c3 bxc3 {
+Black can also try /\Qc5 and /\Nd7. Personally /\Qc5 is tempting. White wisely
+plays to exchange of the Knight on e4. Another way to do this is to play Ng3.}
+16. Nxc3 Qd8 {One of my High School students stated that Black's move is
+"pointless." Stronger is /\Qb4 or /\Nd7.} 17. Nxe4 dxe4 18. Qxe4 O-O {
+Again Black is "baiting" White to play 19. Qxa8 Qxd4 when the White position
+begins to fall to pieces. Trading positional considerations for material is
+risky if you do not know what you are doing. Avoiding the "bait" is wise.
+Remember when you opponent plays this type of game, you are sure a major error
+will happen in their game. The question is distinguishing the error from the
+"bait."} 19. O-O Nd7 20. Nc6 Qb6+ 21. Rf2 Nf6 {White plays an excellent move.
+It is flexible in the sense that it contributes to stacking the Rooks on the
+file of your choice.} 22. Qf3 Rac8 {
+Black simply blunders. 23. Ne7+ picks up the exchange.} 23. Rc1 Rc7 {Black imme
+diately blunders again! 23/\.Nd5 wins the Knight on c6 or the Rook on c1. If
+White chooses to complicate the issue then 24. Qxd5 exd5 25. Ne7+ Kh8 26. Nxc8
+Qe6. The passed d-pawn and the trapped Knight make life interesting for White.}
+24. Kh1 Nd5 25. Rfc2 Rfc8 {/\h6 still holds, barely} 26. Ne7+ Kh8 {Black misses
+a chance at a nice "bating" idea. 26/\. Nxe7 27. Rxc7 Qxc7 28. Rxc7 Rxc7. The
+idea is to "bait" 29. Qa8+ Rc8. Thus White must give up the Queen or submit to
+checkmate.} 27. Nxc8 Qxb2 {Another attempt at a "bating" maneuver. Actually 27/
+\. Rxc2 is better, but black is lost. All that remains is the quickest way to
+finish off Black.} 28. Rxc7 Nxc7 29. Qd1 Nd5 {
+29. Qc6! finishes the game quicker.} 30. Rc2 Qb7 31. Nd6 Qd7 32. Rc8+ *
+
+[Event "Analyzed Games"]
+[Site "ChessDoctor.com"]
+[Date "????.??.??"]
+[Round "?"]
+[White "W28"]
+[Black "B28"]
+[Result "*"]
+[PlyCount "78"]
+
+{00028.5.13 Analyzed by Candidate Master Daniel Waite} 1. d4 e6 2. e4 d5 {
+There are different types of mistakes a player can make. This isa"psychologica
+l" mistake (different than the "concrete" mistake). Since White opened with
+the Queen's Pawn, this allows Black to force the game into King's Pawn lines.
+Principle: In the Opening you choose the pawn structure - not your opponent.}
+3. Nc3 Nf6 {White invites the Winawer Variation (3. /\Bb4). Black however opts
+for the Classical Variation. Gligoric commented that "Black can not avoid
+concrete variations which tend to favor White." Short called this line the
+"Boring Variation" and wrote, "This variation is suitable for people with
+masochistic urges."} 4. e5 Nfd7 {Probably best is 4. Bg5 (pinning the Knight
+and forcing Black to respond). Principle: seize the initiative.} 5. Nf3 c5 {
+Before playing this move White should try Qg4. Here is the wages of being lead
+down your opponent's path. The last two moves, White missed the mostaggressive
+idea.} 6. Bb5 a6 7. Bxd7+ Bxd7 8. O-O Nc6 9. Re1 b5 {9. Re1 is pointless.
+White missed Ne2 with the idea of c3. This would ensure a permanent (possibly
+winning) advantage in pawn structure. At this point 9/\. cxd4 is stronger.
+However, Black's pawn structure resembles a strong Queenside attack.} 10. Be3
+Qb6 11. b3 cxd4 {With the last two moves White transforms a playable position
+into one that is almost completely lost. An idea for move 10 is a4. However b3
+is utterly bad. The c-pawn is permanently weak and probably undefendable. The
+"hole" created on c3 will be the can opener to pry White's position open. At
+this point White can probably resign. White has no credible attacking
+possibilities. The only redeeming quality is that Black is playing a "virtual"
+piece down (the bad Bishop). Principle: do not weaken your position with pawn
+moves.} 12. Nxd4 Qa5 {A good move but not a game winner. Black aims at the
+hole on c3 and control of the c-file with the Queen Rook. Control open lines
+(files and diagonals)!} 13. Nxc6 Qxc3 14. Nd4 Rc8 15. Bg5 h6 {White's wounds
+are self-inflicted. The Bishops presence in the center was critical. Black
+should consider the immediate /\Bc5. Principle: always play in the center, if
+possible! An idea for White could be Qg4. Notice that the Queen at g4 still
+operates in the center.} 16. Bh4 Qb4 17. a3 Qc5 {Black misses the simple /\Bc5.
+} 18. Qd3 Qc3 {White can still make life interesting with 18. b4. Black is
+offering an interesting idea that is consistent with the over all game plan.
+The idea is to encourage White to err.} 19. Qxc3 Rxc3 {With the exchange of
+Queens, White gives up the c-file, the Queenside and the game.} 20. a4 b4 {
+White's move is terrible. Principle: do not attack when you have no positional
+justification! Black lets White off the hook by missing 20/\. bxa4!;completely
+demolishing the White Queenside. (This move was spotted my one of my students.)
+} 21. Re3 Bc5 22. Rd1 Bxd4 23. Rxd4 Rxc2 24. h3 a5 25. Rf3 O-O 26. Rdf4 Rc3 {
+White's move is without merit. 26. Rg3 gives possibilities. Black misses the
+simple 26/\.g5. It may look pretty to complicate the position but sometimes
+the risk is too great. Principle: Simpleisbest!} 27. g4 g5 28. Bxg5 Rxf3 {
+Again, simple is best. 28/\.hxg5.} 29. Rxf3 hxg5 30. Kf1 Rd8 31. Ke2 Bc6 32.
+Rd3 d4 33. Kd2 Kg7 34. Kc2 Be4 {The final error in a completely lost game.} 35.
+f3 Bxd3+ 36. Kxd3 f6 37. exf6+ Kxf6 38. Kd2 d3 39. Kd1 d2 {Resign} *
+
+[Event "Analyzed Games"]
+[Site "ChessDoctor.com"]
+[Date "????.??.??"]
+[Round "?"]
+[White "W29"]
+[Black "B29"]
+[Result "*"]
+[PlyCount "78"]
+
+{00029.5.14 Analyzed by National Master Corey Russell} 1. e4 e5 2. Nf3 d6 {
+This move is playable, but rather passive. Now your dark-squared bishop can't
+be deployed to an active post. I would recommend the more active ...Nc6.} 3.
+Bc4 Be6 4. Qe2 a6 {While getting space is a laudable goal, in the early phases
+of the game, you want to get your pieces mobilized. ...Nc6 would do that, plus
+help restrain the d4 advance that white would like to do.} 5. Nc3 b5 6. Bd5 c6
+7. Bxe6 fxe6 8. d4 exd4 9. Nxd4 e5 10. Qh5+ g6 11. Bg5 Nf6 {Actually, 11. ...
+gxh5 12. Bxd8 Kxd8 would have won a piece. Would've went a long way to help
+black win the game.} 12. Qf3 Bg7 {This misses white's threat. White has 2
+pieces on the knight at f6 -- white will now a tactical idea called "removing
+the defender", which should have won the game for white. Black's only defense
+is ...Kf7. It wouldn't be too bad in this position, because if needed, black
+can always castle "by hand" by playing ...Be7, ...Rf8, ...Kg8.} 13. Ne6 Qe7 14.
+Nxg7+ Kf7 15. Bh6 Rg8 16. g4 g5 17. Nh5 {This gives black a chance. If white
+would've taken the post near the center (Nf5), and followed up with h4, O-O-O,
+white would have soon won.} Rg6 18. Qf5 {This does nothing. 18. h4! would have
+soon won the game.. too many threats. For example, if 18. ... Rxh6 19. hxg5
+Rg6 20. Nxf6, and black could safely resign.} Qd7 19. Bg7 Qxf5 20. exf5 Rxg7
+21. O-O-O d5 22. f3 Nxh5 23. gxh5 g4 {This is wrong. Black's queen side isn't
+developed. Should be a top priority, because the more pieces you have involved
+in the battle, the more likely you will succeed in breaking through. Even ...
+Kf6 is a superior move. The king can be (and often is) a fighting piece in the
+endgame.} 24. h6 Rg5 25. Rhg1 Rxf5 26. fxg4 Rf4 27. Rdf1 Rxf1+ 28. Rxf1+ Kg6
+29. Rf5 {White threw away his advantage with this move. 29. Rf8 Kxh6 30. h4
+would have paralyzed black, and white would have all the time he needed to
+work on his own plans. After this, black gets developed and has the better
+game because of white's weak king-side pawns and black's formidable pawn mass
+in the center.} Nd7 30. Rh5 Re8 31. Ne2 e4 {This is playable, but 31. ... Nf6
+(attacks the rook on h5 and pawn at g4) 32. Rh4 Kg5 would win 2 pawns and the
+game.} 32. Nf4+ Kf6 33. g5+ {This was a serious error by white. White's only
+plus is his king-side pawn majority, so he should've looked for a way to
+mobilize them. The way to do that was 33. Rf5+ Ke7 34. g5, which would make it
+a lot harder for black. Notice black couldn't even have tried 34. ... Rf8? in
+that variation, because white's pawns are too fast. e.g., 34. ... Rf8 35. g6!
+Rxf5 36. gxh7 Rf8 37. Ng6+ Kf7 38. Nxf8, and black can't stop white from
+playing h8Q. This illustrates the power of the advanced, passed pawns.} Kf5 34.
+Ne2 Kg6 35. Nf4+ Kf5 36. Nh3 e3 {Instead, 36. ... Kg4 would have forked the
+white's rook and knight, winning a piece.} 37. Kd1 Kg6 38. Nf4+ Kf5 39. Nh3 Kg4
+{This is winning for black, but because of low time, both players agreed to a
+draw. So in conclusion, get your pieces developed in the early stages. Also,
+when calculating variations, see what you get vs. your opponents, to see if
+you could win material. Early in the game, black could have gotten Q & B,
+while white would get black's queen. Only by using all your forces will you
+have good chances of success.} *
+
+[Event "Analyzed Games"]
+[Site "ChessDoctor.com"]
+[Date "????.??.??"]
+[Round "?"]
+[White "W30"]
+[Black "B30"]
+[Result "*"]
+[PlyCount "75"]
+
+{00030.5.15 Analyzed by Candidate Master Daniel Waite} 1. Nf3 Nf6 2. Nc3 Nc6 3.
+d3 d6 4. Be3 Be6 {Imagine that your computer needs repair. You get your Acme
+Handy Dandy Computer Repair Tool Kit out and start to repair the beast. What
+do you have to do first? Answer: Open the kit so you can get the tools out.
+You can hit the computer with the tool kit all you want, but it won't fix the
+computer. You must get the tools out of the kit. Chess is the same way. If you
+want to crush your opponent, you must open the game so you can get your tools
+(pieces) into position where they are useful. Moving the Queen's Bishop to e3
+blocks the potential development of the King's Bishop.} 5. Nh4 Na5 {Idea: Do no
+t move a piece a second time in the opening without a specific reason. It is
+almost always a bad idea. The problem with moving a piece a second time is
+that wastes time. Let's say you have only 15 minutes to fix your computer and
+you take 14 minutes to get the Acme Handy Dandy Computer Repair Tool Kit out.
+Remember to make the most efficient use of your TIME and moves. Second idea:
+count the number of squares the Knight can move to on f3 (eight), now count
+the number of squares it can move to on h4 (four). Because FLEXIBILITY is
+important, remember, "A Knight on the rim is dim [or grim]." Imagine a really
+ugly Y2K bug creeping out of the shadows and snatching a Knight you put on the
+edge of the board.} 6. Bf4 Bd5 {Here you had to move the Queen's Bishop again,
+if you had put it here on move 4. you would have had a spare move to make.
+It's like taking an extra turn. [Ever wish you could take more than one turn
+at a time? Here is where you can do it, legally! By playing 4. Bf4 you could
+now play anything else on move 6.] BTW, your opponent helps by mindlessly
+copying your moves.} 7. e3 h6 {7. e4 takes up more space in the center.
+Concentrate your opening moves on the four squares in the center of the board.
+If your video card needs to be replaced why try to change your hard drive?
+Important Idea: BEFORE YOU MOVE: Ask yourself, "What is my opponent
+threatening?" Answer: 8/\. g5 [forking your Bishop and Knight].} 8. Be2 Bxg2 9.
+Rg1 Bh3 {There are three ways to deal with a threat: First, move the piece
+that is threatened. Second, capture the piece that is attacking [in this case
+9. Nxg2 wins the Bishop]. Or finally, ignore the threat and attack something.
+This works when your threat is stronger than your opponents' threat.} 10. Qd2
+Qd7 11. O-O-O Rh7 {Black's play is worse than pointless. It is inviting
+trouble. Of course you can zap the Rook out of the game with Bxh7.} 12. d4 c6
+13. Bd3 Ng4 {Good! White covers the center squares.} 14. Nf5 Nxf2 {Other than
+. Bxh7 White could try 14. Bf5. Both are crushing. However there is a trick
+after 14. Bxh7 Black could try /\g6 trapping the Bishop. Still, the Rook is
+more valuable than the Bishop. While not a winning advantage, you should
+probably "win the exchange" if possible.} 15. Qxf2 Qxf5 16. Bxf5 Rd8 17. Bxh3
+Nc4 18. b3 Na3 19. Ne2 Rd7 20. Kb2 Nxc2 21. Kxc2 e5 {Idea: A check is a FREE
+MOVE. A check is a FORCING MOVE. Always consider forcing moves first [check,
+threaten checkmate, winning material]. It's like getting to move twice in the
+same move!} 22. dxe5 dxe5 23. Bxe5 Re7 {You are probably at a point where
+nothing short of the end of the world will keep you from winning. The point is
+to find the SHORTEST path to victory. If you study the position you will
+discover that Bxd7+ comes close to forcing checkmate. [Actually it does. Can
+you figure out how.]} 24. Bb8 h5 25. Bxa7 Rh6 26. Nc3 f5 27. Bxf5 Rg6 28. Bxg6+
+Rf7 29. e4 Bb4 {29. Qf7#} 30. Na4 Ba3 31. Bxf7+ Ke7 32. Nc5 Bxc5 33. Qxc5+ Kf6
+{33. Bxc5#} 34. Rd6+ Ke7 {Either 34. Rdf1# or 34. Rgf1#} 35. Rxc6+ Kd7 {
+Excellent! Even though you have been missing the win, this move is a good
+learning tool. By moving the Rook you uncovered the check - giving you a FREE
+MOVE in some cases TWO FREE MOVES! This maneuver is called "DISCOVERED CHECK."
+You can gain all sorts of free moves doing this. The power of the idea is that
+you win a pawn [or piece or two] while your opponent is dealing with check.
+Good work! Keep looking for thesefreemoves!} 36. a4 bxc6 {36. Rd1# or 36. Qd6#}
+37. Rd1+ Kc8 38. Qxc6# *
+
+[Event "Analyzed Games"]
+[Site "ChessDoctor.com"]
+[Date "????.??.??"]
+[Round "?"]
+[White "Deep Fritz 7.0"]
+[Black "Kramnik, Vladimir"]
+[Result "0-1"]
+[PlyCount "66"]
+
+{Analyzed by ?. Hi Everyone. Because the Kramnik-Deep Fritz. 7.0 match was
+postponed I felt it necessary to analyze a game that Vladimir Kramnik played
+against Deep Fritz 7.0 in his practice with the engine in preparation for his
+match.} 1. c4 {The English Opening.} e5 2. Nc3 Nc6 3. Nf3 f5 $5 {The 3 Knights
+Variation of the English Opening is a good system to use against Fritz. The
+positions are closed in nature and there are very few forcing lines allowing
+Kramnik to adjust his play to take advantage of the computer's weaknesses.} 4.
+d4 e4 5. Ng5 Bb4 $5 {This continues to develop while not committing himself to
+a specific line of play. For instance Fritz might play a known sac after 5...
+Nf6 6. e3 h6 7. Nh3 g5 8. f3 exf3 9. Qxf3!? when play is very sharp, something
+not to Kramnik's advantage. 9...g4?! is suicide in that line so after 9...d6
+10. Nf2 Qe7 11. Nd5 (sacrificing a pawn) Nxd5 12. cxd5 Nb4 13. Bb5+ Kd8 14.
+0-0 g4 15. Qe2 Nxd5 16. Nh1 and Fritz would have good compensation in a highly
+tactical position. The text is much quieter and better suited to a human vs.
+machine match.} 6. Nh3 Nf6 7. e3 Bxc3+ 8. bxc3 {Now white has two bishops. The
+problem is the position is very closed in nature, so the bishops will have
+little effect if the position isn't opened up. Kramnik should be very happy
+after this exchange as his knights could become very active.} d6 9. Nf4 O-O 10.
+h4 {Kramnik mentioned that all the moves up to here were played by the program
+very quickly, meaning most of this is probably theory in the Fritz opening
+book. Here we should take stock. Fritz just played a good move (10. h4)
+securing his f4 knight by preventing the natural g5 advance by black. However,
+the f4 knight seems like white's only trump. The pawns on c3 an c4 are weak,
+black has the two knights in a closed position, and white's king is in the
+center while black's is in safety. However, the c4 pawn has the useful
+function of keeping the knight out of d5 while the c3 fellow solidifies d4.
+White has a solid position, but unless the bishops can be unleashed, black
+will have a slight advantage.} Qe7 $6 {Kramnik should leave e7 for the knight.
+I suggest 10...Qe8 or 10...Ne7. The Qe8-f7 maneuver is very useful as it eyes
+h5 and c4. 10...Ne7 allows black to play the prophylactic c5 to prevent the
+freeing c5 move for white. For instance 10...Ne7 11. h5 c5! 12. Ba3 Qa5 etc.
+and black has a "very" comfortable game though both Ng6 and Nh5 exchanging off
+f4 is prevented. Or if 10...Qe8!? 11. Ba3 Qf7 12. h5 b6 and if white plays the
+dubious 13. c5?! anyway, then 13...bxc5 14. dxc5 d5! and the black bishop is
+shut in and black has the superior center and now the e5 square. After
+Kramnik's 10...Qe7 move Fritz can free himself.} 11. c5 $1 {One might think 11.
+h5 to be enough to secure the knight at f4 and thus the game in general, but
+Fritz wants to trade off one of its weak pawns while trying to open the
+position for his two bishops. The a2-g8 diagonal is now open for the bishop or
+queen.} Nd8 $5 {Very nice! Let's examine the alternatives. The greedy, 11...
+dxc5? (opening the position willingly!) 12. Bc4+ Kh8 13. h5! and white can
+open the h-file decisively for instance if the natural 13...cxd4?? then 14.
+Ng6+! hxg6 15. hxg6+ Nh7 16. Rxh7 Checkmate! If 11...d5 then 12. c4 simply and
+white has the better of it. 11...Kh8 was a reasonable alternative too, but the
+sacrifice with the text is probably the best defense against a computer who
+can't resist accepting!} 12. Qb3+ Ne6 $5 {Possibly it's odd that black wants
+to get rid of his knight in a situation favorable to knights. But he's willing
+to get rid of one of his knights for the only active white bishop, the (soon
+to be) c4 bishop.} 13. Bc4 Re8 14. Ba3 Kh8 {Ignoring threats on the b-pawn.
+After the upcoming exchange, white's only active bishop is gone and black has
+good counterplay.} 15. Bxe6 Bxe6 16. Qxb7 d5 $1 {The only move, but it still
+deserves an exclamation mark. This ignores the threat on the c7 pawn as well.
+Positionally speaking, this move is very effective at closing in the a3 bishop.
+} 17. Rb1 $1 {Wow. The first time I've ever seen Fritz decline a pawn. If
+Fritz doesn't see a mate in the line or decisive material advantage then he
+usually grabs material without second thought. However, here he didn't see
+decisive material advantage or mate and he DID declind the c7 pawn. Perhaps
+Fritz is starting to understand the position more with the new version? The
+other good alternative was 17. Qa6 with h5 to follow and white's comfortable
+all around the board. If the greedy and bad 17. Nxe6? Qxe6 18. Qxc7 Qa6! 19.
+Bb4 Rec8 20. Qa5 Qd3! 21. Rd1 Qc2 22. Qa6 Ng4 23. Qe2 Qa4 24. Qb2 f4 25. exf4
+(25. Qb3 Qa6 is also wonderful for black) e3! 26. fxe3 Nxe3 and the proof is
+in the pudding.} Bf7 18. Rb3 $2 {It's a completely understandable mistake.
+Fritz is striving for bishop activity. 18. c6? can't be played because the a3
+bishop would be hanging. Therefore Fritz logically defends it which allows him
+to play c6. Fritz is forgetting about his more important minor piece! The f4
+knight. It was imperitive to play 18. h5 to prevent any exchange of the f4
+knight by Nh5 for instance. Once the knight goes the kingside belongs to black
+and Kramnik will haven no trouble redirecting his forces.} Rec8 {
+Threatening 19...c6! to prevent white's freeing move c6.} 19. c6 {Natural.} Qd8
+20. Qa6 Nh5 $1 {From this point on, Black has good counterplay on the kingside.
+What's the strategy called? Development! After the f4 knight leaves the
+kingside black has a lead in development over on the kingside. Black can build
+an initiative. All black's forces are out to pasture on the queenside. While
+white attempts to win the a-pawn Black will be attempting to win the white
+king!} 21. Nxh5 Bxh5 22. Rb7 $6 {This has the greedy motive behind it against
+the a7 pawn. The a7 pawn is worthless though, more important is undermining
+the key pawn at d5! I believe 22. c4!? would be much to Fritz's advantage.
+Once the center opens, Fritz will have a raw calculating advantage as the
+position would be very tacitcal despite white giving back some material. For
+instance, 22. c4!? Bf7 23. cxd5 Bxd5 24. Rb7 Qe8 25. 0-0 if 25...Bxc6 then
+simply 26. Rb2 Bd5 27. Rc1 Qf7 28. Rbc2 f4 29. Qd6! and white has solved the
+potential kingside initiative while retaining the better of the two pawn
+structures. After all the trades for instance 29...fxe3 30. fxe3 cxd6 31.
+Rxc8+ Rxc8 32. Rxc8+ Qg8 33. Rxg8+ Kxg8 34. Bxd6 Bxa2 35. Kf2 and it should be
+draw as Fritz's bishop controls the a-pawn's queening square. A draw would be
+much better than the game result!} Qf6 $1 {With the white knight gone, black
+starts his redeployment of forces on the kingside. No white pieces are in
+position to defend the white king! The more passive 22...Be8?! sucuumbs to 23.
+c4! The idea of Be8 of course is to work with Qf6 against the c-pawn. I like
+the text. The bishop is nicely placed at h5 and there's no real reason to
+retreat it. For instance after 22...Be8?! 23. c4! dxc4 24. Qxc4 Qf6 then 25.
+d5! and c6 is granite anyway.} 23. O-O {
+For once Fritz is worried more about king safety!} h6 $5 {This makes a place
+for the king at h7 so as to not get mated on the 1st or second rank. This was
+very important, of course. For instance if Kramnik immediately plays 23...
+Bf3!? which is reasonable even here, then a line might occur like 23...Bf3! 24.
+gxf3 exf3 25. Rfb1 Qxh4, but 26. Qd3! Qh3 27. Qf1 Qg4+ 28. Kh2 Qh4+ 29. Qh3 30.
+Kh1 Re8 31. Rxc7 and if the natural rook lift 31...Re6 (idea e6-g6) then 32.
+Rxg7! h6 33. Qxf5 Qh4+ 34. Kg1 f2+ 35. Kf1 Qh1+ 36. Kxf2 Qh2+ 37. Kf3 Rxe3+ 38.
+Kxe3 Re8+ and black can only delay mate on the back rank or second rank by
+checks. This is a very important move from that standpoint.} 24. Bc5 {
+Greedy, Greedy. Much better is 24. g3!? where Bf3 has no threat because the h4
+pawn is solid and white could simply continue with 25. Rfb1 etc. withadvantage.
+Therefore a line might be 24. g3!? Kh7 25. Rfb1 Qe6 (eyeing c4) 26. c4 dxc4 27.
+Qa5 if black tries to hold on to the c4-pawn with 27...Bf7 then 28. Rxc7 Rxc7
+29. Qxc7 Rc8 30. Qxa7 Rxc6 31. Rb7 Ra6 32. Qc5 Ra8 33. Bb4!? Qg6 34. a3 Qh5 35.
+Be1 Kg8 36. a4! Rf8 37. Bb4 Ra8 38. a5 Qd1+ 39. Kh2 Qf3 40. Be1 and white has
+the d-pawn and a-pawn and not even the f4 break is enough for black.} Kh7 25.
+Bxa7 Qxh4 {This is the beginning of the end. Now that the h4 pawn is gone,
+black has a very strong sac Bf3! to effectively end the game.} 26. Rfb1 Bf3 $1
+{Very strong. This natural sac probably wasn't found by the computer, else it
+would've done something about it earlier.} 27. Qf1 {Of course if 27. gxf3 exf3
+28. Qd3 Rf8! 29. Qd1 (only move) Qh5 30. Bb8 (intending use of b8-h2 diagonal
+to defend) Raxb8 and the game's simply over.} Re8 28. Bb8 $5 {Fritz finds the
+only way to defend. The idea is to take c7 with the bishop and use the
+diagonal to help defend.} Raxb8 $1 29. Rxb8 Re6 $1 {Coming to g6 decisively.}
+30. Rf8 Rg6 31. Rxf5 Rxg2+ 32. Qxg2 Bxg2 33. Kxg2 Qg4+ {And that's the point
+of the combination. The rook on f5 is now black's. This was a stunning and
+gorgeous win by the world champ against the flagship chessbase chess engine.
+This proves that some humans can still excel over computers in tactics!} 0-1
+
+[Event "Klompendans Ladies vs. Veterans Tournam"]
+[Site "ChessDoctor.com"]
+[Date "????.??.??"]
+[Round "?"]
+[White "Polgar, Sofi"]
+[Black "Korchnoi, Victor"]
+[Result "0-1"]
+[PlyCount "112"]
+
+{Analyzed by ?. Round 1 (Tournament still going on right now) First a note. I
+felt obligated to my good friend Sofi to analyze some of her great games in
+this tournament. I helped her prepare a little bit by playing various openings
+against her at KasparovChess so she could get a wide variety of play
+experience. I also gave a lecture which she helped me give of
+Kasparov-Korchnoi back in Linares a couple years back. Therefore, it was
+obvious she was very well-versed in the style of this wonderful, still
+energetic veteran, Viktor Korchnoi. Unfortunately, she lost this 1st round
+game, but the battle was nice and she missed a win. Viktor dragged it to a
+lost endgame for white after good play from both sides. This proves how one
+slip can hurt your winning chances.} 1. e4 e6 {No surprise here. The wonderful
+veteran playing the black pieces is the French extraordinair of the 20th and
+perhaps the 21st century! :) I know Sofi, and this was the first line she
+prepared extensively for!} 2. d4 d5 3. Nc3 Nf6 4. Bg5 {Sofi's pet variation
+against the French from the white side. She never opted (at least not that I
+remember) for 4. e5 Nfd7 5. f4 c5 etc. with slower spatial play. She's more of
+a tactician hoping for the open game.} Be7 $5 {Apparently, this hadn't gone
+unnoticed by the veteran. This forces white to play e5 and close up the game.
+4...dxe4 was undoubtedly what Sofi was hoping for, however I'm sure she
+prepared for this.} 5. e5 Nfd7 6. Bxe7 Qxe7 7. f4 a6 {This idea Viktor uses is
+not new by any means. 7...a6!? has the idea of pushing to b5 and bringing the
+bishop out on b7. It's a solid line, which doesn't waste time as it may seem
+with the wing pawn advance. Why is that exactly? I thought we were taught that
+all unneeded wing pawn advances are a waste of time? However, tempo has a less
+binding effect in the closed game. This position is very closed. The kings
+don't "need" to get to safety immediately, the development of pieces quickly
+is not quite as important as staking out space with pawns in this type of game.
+Therefore, 4...a6 is a useful strategic move that doesn't lose tempo to any
+serious extent.} 8. Nf3 c5 9. Qd2 Nc6 10. dxc5 $1 {This capture is well timed.
+Because the e5 pawn is covered solidly by its counterpart at f4 it's ok that
+the d-pawn leave e5's defense. More importantly this profits white the nice d4
+square to plop a knight when the time is right. Note that after Sofi's 10th
+move there are no pawns that can currently chase away the knight at d4.} Qxc5
+11. Bd3 b5 12. a3 $1 {The best move. Natural would seem 12. Ne2 gaining total
+control over d4, however 12. Ne2 succumbs to 12...b4! This nice move prevents
+c3 and targets the c2 pawn rather effectively. after 13. a3 Qb6! and white's
+king is stuck in the center for some time. Therefore, it's imperitve that
+white prevent b4. Sofi does just that.} Bb7 13. Qf2 {This is still theory.
+This is obviously a needed move. The black queen at her current post is far
+too menacing. Also played before was 13. b4?! This possibly natural move is
+very, very bad. This weakens a whole row of squares on the c-file. The plan
+for black would hardly be difficult then. I like Sofi's choice a lot. The
+queen exchange would definitely benefit her. If 13. Ne2?! then simply 13...
+Qb6! (13...b4!? is possible too) and black's just fine once again. He'll
+simply continue with Rc8 and Nc5 with a wonderful position. It's impertive
+that Sofi get her queen on that diagonal.} b4 $1 {Black need not initiate the
+queen exchange! This move fights for advantage. The useful 13...h6 intending
+g5 isn't really an option either because then simply 14. h4! b4 15. Na4 Qxf2
+16. Kxf2 a5 17. g4 with advantage for white. After the text Black stands as it
+is very active.} 14. Na4 Qxf2+ {Now he must make this exchange. 14. Qa5? just
+gets in the way of his queenside pawns.} 15. Kxf2 a5 16. Bb5 $5 {This move is
+"ok". However, unless she intends to take on c6 it doesn't have much of a
+point. 16. Rac1 seems more natural intending c2-c4. The immediate 16. c4!? is
+also possible, but let's not jump the gun. A move like 16. Nd2 also intending
+c4 allows 16...g5! Therefore 16. Rac1 seems called for.} Ke7 $1 {The best move.
+After the queens are exchange black rightly sees there's no need to castle.}
+17. Rhd1 Rhc8 18. c4 $1 {Now we're talking Sofi! I was proud of my friend here.
+The bishop doesn't have a "big" chance of being trapped at b5, but, what does
+it do there? After this move, white's options increase dramatically and it
+gets rid of a weak pawn. In fact this is the only white move to keep an
+advantage!} bxc3 {e. p.} 19. bxc3 $1 {Now, white has the b-file and a strong
+hold on d4. This is a fine trade-off for the newly weak c-pawn.} Rab8 20. Rab1
+{Here, 20. c4?! is interesting, but a positional mistake. The important
+feature in the position is the d4 square. Anyway with the pawn on c3, after
+Nd4 if Nxd4 then cxd4 fixing the pawn structure anyway. I like Sofi's decision
+of leaving the pawn on c3. White has a slight advantage.} Ba8 21. Nd4 f6 $2 {
+Very natural. In fact, in all honesty, this was the first move I looked at
+here. But this could be the losing mistake and prove Sofi's earlier 16. Bb5
+correct. More sensible is 21...Rc7.} 22. exf6+ $6 {I'm sure that Sofi saw 22.
+Bxc6, however I think she underestimated its power. It totally solidifies the
+knight at d4 and trades into a won endgame. For instance, 22. Bxc6 Bxc6 23.
+Rxb8 Nxb8 24. exf6 Kxf6 25. Nb6 Re8 26. Rb1 g6 27. g3 with big advantage. The
+black forces are tied down to e6, white still has total control over the d4
+square, and black's bishop is bad. Sofi, most likely by instinct, and fear of
+how Viktor would respond, played 22. exf6+ intending to hold on to the bishop
+pair. Because of this choice, I have no idea why Sofi played 16. Bb5.} Nxf6 23.
+Bd3 {Now 24. Bxc6 is bad as black's knight is already on f6. 24. Bxc6? would
+just give up Sofi's good bishop. At least Sofi's consistent. :)} e5 $1 {
+Powerful. Immediately equalizes and probably earns black the advantage. This
+trades off the weak e-pawn.} 24. fxe5 Nxe5 25. Bf5 {
+The only move to hold the balance.} Rf8 26. Ke2 {Sofi bringing the king slowly
+but surely over to defend c3 while getting off of the f-file where a rook is
+aimed right at his majesty. I liked 26. Rb6!? This looked strong because 26...
+Rxb6 exchanging rooks would be to white's advantage then. Therefore after 26...
+Nc4 27. Re6+ Kf7 28. Ra6 g6 29. Be6+ Ke7 30. Ke2 Nh5 31. g3 Nf6 32. Rf1 Bb7 33.
+Ra7 Kd6 34. Rb1 Ba8 35. Ra6+ Ke7 36. Rxb8 Rxb8 37. Nc5 Ne8 38. Ra7+ Kd6 39.
+Ne4+! with an endgame advantage.} g6 $1 {
+The best move! It's imperitive that Viktor dislodges this strong f5 bishop.}
+27. Bd3 Nxd3 {Black earns himself a bishop vs. knight ending and strong
+control over the e4 square.} 28. Kxd3 Ne4 29. Re1 Rfc8 30. Nf3 $6 {
+I think better is 30. Ne2.} Kd6 31. Nd4 Bc6 $1 {The most important move of the
+game! This is the move that wins. 32. Rb5 is a strong threat. I'm not sure
+what his time management was like, but I think this must've been one his
+longer thinks as this is the beginning of his winning move sequence.} 32. Rxb8
+Rxb8 33. Nxc6 Kxc6 34. c4 {The only move.} dxc4+ 35. Kxc4 Nd6+ 36. Kc3 Nb5+ 37.
+Kb3 Kd5 {Now the black king has a nice central position, black has the b-file,
+which means that the king can't defend the a3 pawn unless it wants to be
+trapped.} 38. Nc3+ Nxc3+ 39. Kxc3 a4 {Now the king is officially cut off from
+defense of the a-pawn and the b3 square is secure for the black rook.} 40. Re7
+$2 {This doesn't help matters for Sofi. Better was 40. Rd1+.} Rb3+ 41. Kc2 Rxa3
+42. Rxh7 Ra2+ 43. Kb1 Rxg2 44. h4 Ke6 $1 {The best move. Black let's go of the
+a-pawn and concentrates on the kingside and converting his g-pawn.} 45. h5 g5
+46. Ra7 Rh2 47. Rxa4 Kf5 48. Kc1 g4 49. Ra5+ Kf4 50. Ra4+ Kg5 51. Kd1 g3 {
+No stopping the g-pawn.} 52. Ra8 Kxh5 53. Rg8 Kh4 54. Ke1 Rf2 55. Rh8+ Kg4 56.
+Rh1 Rh2 {And Sofi resigned. There's no stopping the g-pawn conversion and
+subsequent mate. Sofi played a nice game, missed some winning chances, but I'm
+proud of her. As a matter of fact she went on to beat another strong veteran
+Smyslov in the 3rd round with a quick 22-mover.} 0-1
+

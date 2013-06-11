@@ -55,7 +55,7 @@
     <Compile Include="MovesClasses\Pawn.cs" />
     <Compile Include="MovesClasses\Queen.cs" />
     <Compile Include="MovesClasses\Rook.cs" />
-    <Compile Include="OpeningBook.cs" />
+    <Content Include="OpeningBook.cs" />
     <Compile Include="Perft.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Search.cs" />

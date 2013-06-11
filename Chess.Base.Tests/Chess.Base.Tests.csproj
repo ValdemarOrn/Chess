@@ -7,7 +7,7 @@
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{DB6292BE-67D3-48D3-90A6-8C9A37974CDE}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Chess.Base.Tests</RootNamespace>
     <AssemblyName>Chess.Base.Tests</AssemblyName>
@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
@@ -49,7 +52,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestABN.cs" />
+    <Compile Include="TestOpeningBook.cs" />
+    <Compile Include="TestPGNParser1.cs" />
     <Compile Include="TestAttacksBishop.cs" />
     <Compile Include="TestAttacksKing.cs" />
     <Compile Include="TestAttacksKnight.cs" />
@@ -69,10 +73,12 @@
     <Compile Include="TestMovesPawnWhite.cs" />
     <Compile Include="TestMovesQueen.cs" />
     <Compile Include="TestMovesRook.cs" />
+    <Compile Include="TestPGNParser2.cs" />
     <Compile Include="TestPieces.cs" />
     <Compile Include="TestPromote.cs" />
     <Compile Include="TestValidMove.cs" />
     <Compile Include="TestZobrist.cs" />
+    <Compile Include="_Program.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Chess.Base\Chess.Base.csproj">

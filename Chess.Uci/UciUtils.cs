@@ -7,7 +7,7 @@ namespace Chess.Uci
 {
 	public static class UciUtils
 	{
-		/// <summary>
+		/*/// <summary>
 		/// Convert a string to a UciToEngine enum
 		/// </summary>
 		/// <param name="command"></param>
@@ -48,6 +48,28 @@ namespace Chess.Uci
 			{
 				if (e.ToLower() == command)
 					return (UciToGui)Enum.Parse(typeof(UciToGui), e);
+			}
+
+			return null;
+		}*/
+
+		/// <summary>
+		/// T must be enum
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="value"></param>
+		/// <returns></returns>
+		public static Nullable<T> GetEnum<T>(string value) where T : struct, IConvertible
+		{
+			if (value == null || String.IsNullOrWhiteSpace(value))
+				return null;
+
+			var enumStrings = Enum.GetNames(typeof(T));
+
+			foreach (var e in enumStrings)
+			{
+				if (e.ToLower() == value)
+					return (T)Enum.Parse(typeof(T), e);
 			}
 
 			return null;

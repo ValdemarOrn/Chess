@@ -34,30 +34,43 @@ namespace Chess.Uci
 			return output;
 		}
 
+		public static List<string> GetMultipleElements(string commandString, string key)
+		{
+			var output = new List<string>();
+
+			var indexes = GetIndexes(commandString, new List<string>(){ key });
+			indexes = indexes.OrderBy(x => x.Item1).ToList();
+
+			// add end-of-line index
+			indexes.Add(new Tuple<int, string>(commandString.Length, null));
+
+			for (int i = 0; i < indexes.Count - 1; i++)
+			{
+				var str = commandString.Substring(indexes[i].Item1, indexes[i + 1].Item1 - indexes[i].Item1);
+				str = str.Replace(indexes[i].Item2, "").Trim();
+				output.Add(str);
+			}
+
+			return output;
+		}
+
 		private static List<Tuple<int, string>> GetIndexes(string commandString, List<string> keys)
 		{
 			var indexes = new List<Tuple<int, string>>();
+			int idx = 0;
 			while (true)
 			{
-				int i = 999999999;
-				string k = null;
+				var res = keys
+					.Select(x => new KeyValuePair<string, int>(x, commandString.IndexOf(x, idx)))
+					.Where(x => x.Value > -1);
 
-				foreach (var key in keys)
-				{
-					var idx = commandString.IndexOf(key);
-
-					if (idx != -1 && idx < i)
-					{
-						i = idx;
-						k = key;
-					}
-				}
-
-				if (i == 999999999 || k == null)
+				if(res.Count() == 0)
 					break;
 
-				keys.Remove(k);
-				indexes.Add(new Tuple<int, string>(i, k));
+				var min = res.Min(x => x.Value);
+				var kvp = res.First(x => x.Value == min);
+				idx = kvp.Value + kvp.Key.Length;
+				indexes.Add(new Tuple<int, string>(kvp.Value, kvp.Key));
 			}
 
 			return indexes;

@@ -166,9 +166,9 @@ namespace Chess.Uci
 			while (i < parts.Length)
 			{
 				if(typeof(T) == typeof(UciToEngine))
-					engineCommand = (Nullable<T>)(object)UciUtils.GetEngineCommand(parts[i]);
+					engineCommand = (Nullable<T>)(object)UciUtils.GetEnum<UciToEngine>(parts[i]);
 				else if (typeof(T) == typeof(UciToGui))
-					engineCommand = (Nullable<T>)(object)UciUtils.GetEngineCommand(parts[i]);
+					engineCommand = (Nullable<T>)(object)UciUtils.GetEnum<UciToGui>(parts[i]);
 				else
 					throw new Exception("Wrong argument type");
 
@@ -254,7 +254,7 @@ namespace Chess.Uci
 			UciCallback(output);
 		}
 
-		public void Option(string name, UciOptionType type, object defaultValue, object min, object max, List<object> values)
+		public void Option(string name, UciOptionType type, object defaultValue, int? min, int? max, List<object> values)
 		{
 			var sb = new StringBuilder();
 			sb.Append("option name ");

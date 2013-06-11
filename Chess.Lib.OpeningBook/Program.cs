@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Chess.Base;
+using Chess.Base.PGN;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -9,42 +12,47 @@ namespace Chess.Lib.OpeningBookGenerator
 	{
 		public static void Main(string[] args)
 		{
-			Manager.InitLibrary();
+			string input = @"C:\Users\Valdemar\Desktop\Chess\PGN\_CCRL-4040.[439277].pgn";
+			string output = @"c:\book.txt";
+			FileStream file;
+			StreamWriter writer;
 
-			if (args.Length == 3 && args[0] == "clean")
+			try
 			{
-				var pgnInputFile = args[1];
-				var cleanfile = args[2];
-				System.IO.File.WriteAllText(cleanfile, "");
-				OpeningBook.StripPGNs(pgnInputFile, cleanfile);
+				file = File.Open(output, FileMode.CreateNew);
+				writer = new StreamWriter(file);
+				writer.AutoFlush = false;
 			}
-			else if (args.Length == 5 && args[0] == "make")
+			catch(Exception e)
 			{
-				string cleanfile = args[1];
-				int from = Convert.ToInt32(args[2]);
-				int count = Convert.ToInt32(args[3]);
-				string outputFile = args[4];
-
-				System.IO.File.WriteAllText(outputFile, "");
-
-				var inputs = System.IO.File.ReadAllLines(cleanfile);
-				inputs = inputs.Skip(from).Take(count).ToArray();
-				var output = OpeningBook.GenerateBook(inputs);
-
-				System.IO.File.WriteAllText(outputFile, output);
+				Console.WriteLine("Unable to open output file: " + e.Message);
+				return;
 			}
-			else
+
+			int total = 0;
+
+			Action<string, string> handler = (f, enc) =>
 			{
-				Console.WriteLine("To clean and strip moves from a PGN file:");
-				Console.WriteLine("Gen.exe clean pgnfile.pgn cleanfile.txt");
+				total++;
+
+				if (total % 100 == 0)
+					Console.WriteLine("Processed {0} Games", total);
+			};
+
+			Action<string, PGNParserError> error = (f, x) =>
+			{
+				Console.WriteLine("Error parsing game {0} in file {1}", x.GameNumber, f);
+				Console.WriteLine(x.ToString());
 				Console.WriteLine("");
-				Console.WriteLine("To compile the opening book from the cleaned file:");
-				Console.WriteLine("Gen.exe make cleanfile.txt startPos count output.txt");
-				Console.WriteLine("Example:");
-				Console.WriteLine("Gen.exe make cleanfile.txt 0 1000 book.txt");
-			}
+			};
 
+			var lines = OpeningBook.CompileBook(new List<string>() { input }, 20, 5, handler, error);
 
+			lines.ForEach(x => writer.WriteLine(x));
+			writer.Flush();
+			writer.Close();
+			Console.WriteLine("Process Complete");
+			Console.ReadLine();
 		}
 	}
 }

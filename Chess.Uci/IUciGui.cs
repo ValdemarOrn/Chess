@@ -14,6 +14,6 @@ namespace Chess.Uci
 		void CopyProtection(bool protectionIsOk);
 		void Registration(bool registrationIsOk);
 		void Info(Dictionary<UciInfo, string> infoValues);
-		void Option(string name, UciOptionType type, object defaultValue, object min, object max, List<object> values);
+		void Option(string name, UciOptionType type, object defaultValue, int? min, int? max, List<object> values);
 	}
 }

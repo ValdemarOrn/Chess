@@ -3,6 +3,7 @@ using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
+using Chess.Base.PGN;
 
 namespace Chess.Lib.Tests
 {
@@ -392,14 +393,16 @@ namespace Chess.Lib.Tests
 			Assert.AreEqual(Board.COLOR_WHITE, b->PlayerTurn);
 			Assert.AreEqual(0, b->CurrentMove);
 		}
-
+		
 		[Test]
 		public unsafe void TestMakeUnmakePGNFischer()
 		{
 			string data = System.IO.File.ReadAllText("..\\..\\..\\TestData\\BobbyFischer.pgn");
 			string finalState = "1Q6/5pk1/2p3p1/1p2N2p/1b5P/1bn5/2r3P1/2K5 w - - 16 42";
-			string game = Chess.Base.ABN.StripPGN(data)[0];
-			GenericGameTest(game, finalState);
+			var games = new PGNParser().ParsePGN(data);
+			var game = games.Games[0];
+			var moves = game.GetMainVariation();
+			GenericGameTest(moves, finalState);
 		}
 
 		[Test]
@@ -407,8 +410,10 @@ namespace Chess.Lib.Tests
 		{
 			string data = System.IO.File.ReadAllText("..\\..\\..\\TestData\\HumansVsComputers.pgn");
 			string finalState = "4r3/6P1/2p2P1k/1p6/pP2p1R1/P1B5/2P2K2/3r4 b - - 0 45";
-			string game = Chess.Base.ABN.StripPGN(data)[0];
-			GenericGameTest(game, finalState);
+			var games = new PGNParser().ParsePGN(data);
+			var game = games.Games[0];
+			var moves = game.GetMainVariation();
+			GenericGameTest(moves, finalState);
 		}
 
 		[Test]
@@ -416,9 +421,10 @@ namespace Chess.Lib.Tests
 		{
 			string data = System.IO.File.ReadAllText("..\\..\\..\\TestData\\HumansVsComputers.pgn");
 			string finalState = "r6k/1r1qnppp/NPp2n1b/2Pp4/3Pp3/1RB1P1PP/R1Q2P2/K4B2 b - - 4 45";
-			var games = Chess.Base.ABN.StripPGN(data);
-			string game = games[games.Length - 2];
-			GenericGameTest(game, finalState);
+			var games = new PGNParser().ParsePGN(data).Games;
+			var game = games[games.Count - 2];
+			var moves = game.GetMainVariation();
+			GenericGameTest(moves, finalState);
 		}
 
 		[Test]
@@ -426,19 +432,23 @@ namespace Chess.Lib.Tests
 		{
 			string data = System.IO.File.ReadAllText("..\\..\\..\\TestData\\HumansVsComputers.pgn");
 			string finalState = "3Q4/6pk/7p/8/8/8/r4qPP/3R3K w - - 2 28";
-			string game = Chess.Base.ABN.StripPGN(data).Last();
-			GenericGameTest(game, finalState);
+			var games = new PGNParser().ParsePGN(data).Games;
+			var game = games.Last();
+			var moves = game.GetMainVariation();
+			GenericGameTest(moves, finalState);
 		}
 
 		[Test]
 		public unsafe void TestMakeUnmakePromotion()
 		{
-			string game = "1. e4 d5 2. exd5 Nf6 3. Bb5+ c6 4. dxc6 Qb6 5. Bf1 Qb4 6. cxb7 Kd7 7. bxc8=Q+ Kd6 8. Qh3 Qb5 9. Qxh7 Qb6 10. Qxh8 ";
+			string data = "1. e4 d5 2. exd5 Nf6 3. Bb5+ c6 4. dxc6 Qb6 5. Bf1 Qb4 6. cxb7 Kd7 7. bxc8=Q+ Kd6 8. Qh3 Qb5 9. Qxh7 Qb6 10. Qxh8 ";
 			string finalState = "rn3b1Q/p3ppp1/1q1k1n2/8/8/8/PPPP1PPP/RNBQKBNR b KQ - 0 10";
-			GenericGameTest(game, finalState);
+			var game = new PGNParser().ParseGame(data);
+			var moves = game.GetMainVariation();
+			GenericGameTest(moves, finalState);
 		}
 
-		private unsafe static void GenericGameTest(string game, string endState)
+		private unsafe static void GenericGameTest(List<PGNMove> moves, string endState)
 		{
 			BoardStruct* b = (BoardStruct*)Board.Create();
 			Board.Init(b, 1);
@@ -446,8 +456,6 @@ namespace Chess.Lib.Tests
 			var finalBoard = Chess.Base.Notation.ReadFEN(endState);
 			var fBoard = Helpers.ManagedBoardToNative(finalBoard);
 			Assert.AreEqual(Zobrist.Calculate(fBoard), fBoard->Hash);
-
-			var moves = Chess.Base.ABN.ABNToMoves(new Chess.Base.Board(true), game);
 
 			var stateStack = new IntPtr[150];
 			int head = 0;

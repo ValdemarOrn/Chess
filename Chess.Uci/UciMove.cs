@@ -35,7 +35,7 @@ namespace Chess.Uci
 
 		public static UciMove FromString(string move)
 		{
-			if (move == null)
+			if (move == null || String.IsNullOrWhiteSpace(move))
 				return null;
 
 			move = move.ToLower();

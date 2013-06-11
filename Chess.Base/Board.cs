@@ -12,12 +12,7 @@ namespace Chess.Base
 		public int MoveCount;
 		public HashSet<Castling> CastlingRights;
 		public int EnPassantTile;
-
-		/// <summary>
-		/// Counts halfmoves since the last pawn move or capture. NOTE: this contains half moves so the
-		/// number must reach 100 before the 50 move rule has been fulfilled
-		/// </summary>
-		public int FiftyMoveRulePlies;
+		public int FiftyMoveRulePlies; // counts plies, so 100 plies = 50 moves
 
 		public bool CanCastleQWhite 
 		{
@@ -72,7 +67,9 @@ namespace Chess.Base
 		/// <summary>
 		/// Creates a new board
 		/// </summary>
-		/// <param name="init">If set to true the board will be initialized to the standard chess starting position</param>
+		/// <param name="init">
+		/// If set to true the board will be initialized to the standard chess starting position
+		/// </param>
 		public Board(bool init)
 		{
 			MoveCount = 1;
@@ -184,11 +181,7 @@ namespace Chess.Base
 
 		public List<int> FindByPieceAndColor(Piece piece, Color color)
 		{
-			return FindByPieceAndColor((int)piece | (int)color);
-		}
-
-		public List<int> FindByPieceAndColor(int pieceAndColor)
-		{
+			int pieceAndColor = Colors.Val(piece, color);
 			var output = new List<int>();
 
 			for (int i = 0; i < State.Length; i++)
@@ -216,7 +209,7 @@ namespace Chess.Base
 			return complete;
 		}
 		
-		private bool Move(Move move, bool verifyLegalMove = false)
+		public bool Move(Move move, bool verifyLegalMove = false)
 		{
 			if (GetColor(move.From) != this.PlayerTurn)
 				return false;
@@ -431,7 +424,9 @@ namespace Chess.Base
 		}
 
 		/// <summary>
-		/// Evaluates how many pieces can attack each tile
+		/// Evaluates how many pieces can attack each tile.
+		/// Returns an array of 64 ints, each number represents the number of attackers
+		/// for that square
 		/// </summary>
 		/// <param name="board"></param>
 		/// <param name="attackerColor"></param>
@@ -487,13 +482,13 @@ namespace Chess.Base
 		/// <param name="board"></param>
 		/// <param name="kingColor"></param>
 		/// <returns></returns>
-		public bool IsCheckMate(Color kingColor)
+		public bool IsCheckMate()
 		{
-			Board board = this;
+			Color kingColor = this.PlayerTurn;
 
 			var attackerColor = (kingColor == Color.White) ? Color.Black : Color.White;
-			var attacks = board.GetAttackBoard(attackerColor);
-			var kingLocation = board.KingLocation(kingColor);
+			var attacks = this.GetAttackBoard(attackerColor);
+			var kingLocation = this.KingLocation(kingColor);
 
 			// king is not in check
 			if (attacks[kingLocation] == 0)
@@ -503,10 +498,10 @@ namespace Chess.Base
 			// If there are any valid moves, then the defender can break the check.
 			for (int i = 0; i < 64; i++)
 			{
-				if (board.GetColor(i) != kingColor)
+				if (this.GetColor(i) != kingColor)
 					continue;
 
-				var moves = Moves.GetValidMoves(board, i);
+				var moves = Moves.GetValidMoves(this, i);
 				if (moves.Length > 0)
 					return false;
 			}
@@ -521,9 +516,9 @@ namespace Chess.Base
 		/// <param name="board"></param>
 		/// <param name="kingColor"></param>
 		/// <returns></returns>
-		public bool IsStalemate(Color kingColor)
+		public bool IsStalemate()
 		{
-			Board board = this;
+			Color kingColor = this.PlayerTurn;
 
 			// It's not a stalemate if he's in check
 			if (IsChecked(kingColor))
@@ -534,10 +529,10 @@ namespace Chess.Base
 			// Note: pawns are the only pieces that can be blocked from moving, aside from king
 			for (int i = 0; i < 64; i++)
 			{
-				if (board.GetColor(i) != kingColor)
+				if (this.GetColor(i) != kingColor)
 					continue;
 
-				var moves = Moves.GetValidMoves(board, i);
+				var moves = Moves.GetValidMoves(this, i);
 				if (moves.Length > 0)
 					return false;
 			}
@@ -562,6 +557,74 @@ namespace Chess.Base
 			board.Move(from, to, false);
 			bool ok = board.IsChecked(colorToMove);
 			return ok;
+		}
+
+		/// <summary>
+		/// Checks if a rook at the specified square still has the ability to castle
+		/// </summary>
+		/// <param name="board"></param>
+		/// <param name="square"></param>
+		/// <returns></returns>
+		public bool CanRookCastle(int square)
+		{
+			Board board = this;
+
+			switch (square)
+			{
+				case (0):
+					return board.CanCastleQWhite;
+				case (7):
+					return board.CanCastleKWhite;
+				case (56):
+					return board.CanCastleQBlack;
+				case (63):
+					return board.CanCastleKBlack;
+				default:
+					return false;
+			}
+		}
+
+		/// <summary>
+		/// Checks if a piece on the board can be promoted
+		/// </summary>
+		/// <param name="square"></param>
+		/// <param name="pieceType"></param>
+		/// <returns></returns>
+		public bool CanPromote(int square)
+		{
+			Board board = this;
+
+			// Can only promote pawns
+			if (board.GetPiece(square) != Piece.Pawn)
+				return false;
+
+			Color color = board.GetColor(square);
+
+			if (Board.Y(square) == 7 && color == Color.White)
+				return true;
+
+			if (Board.Y(square) == 0 && color == Color.Black)
+				return true;
+
+			return false;
+		}
+
+		public void LoadFEN(string fenString)
+		{
+			var b = Notation.ReadFEN(fenString);
+			
+			this.State = b.State;
+			this.PlayerTurn = b.PlayerTurn;
+
+			this.CastlingRights = b.CastlingRights;
+			this.EnPassantTile = b.EnPassantTile;
+			this.FiftyMoveRulePlies = b.FiftyMoveRulePlies;
+			this.MoveCount = b.MoveCount;
+		}
+
+		public string ToFEN()
+		{
+			return "";
 		}
 	}
 }
