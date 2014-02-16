@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Chess.Base;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,7 @@ namespace Chess.Lib.TestPerf
 		public int Depth;
 		public ulong ExpectedCount;
 		public ulong ActualCount;
+		public double TimeMillis;
 
 		public Position(string fen, int depth, ulong expected)
 		{
@@ -18,6 +20,12 @@ namespace Chess.Lib.TestPerf
 			Depth = depth;
 			ExpectedCount = expected;
 		}
+	}
+
+	public class PerftTestResult
+	{
+		public ulong Count { get; set; }
+		public double TimeMillis { get; set; }
 	}
 
 	public unsafe class PerftTestSuite
@@ -29,6 +37,7 @@ namespace Chess.Lib.TestPerf
 		{
 			Positions = new List<Position>();
 
+			// Do not change these. They are used for performance analysis.
 			Positions.Add(new Position("r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q2/PPPBBPpP/1R2K2R w Kkq - 0 1", 1, 44));
 			Positions.Add(new Position("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1", 5, 4865609));
 			Positions.Add(new Position("r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq -", 4, 4085603));
@@ -44,7 +53,9 @@ namespace Chess.Lib.TestPerf
 				Console.WriteLine("Searching " + position.Depth + " plies");
 				Console.WriteLine("Expecting " + position.ExpectedCount);
 				Console.WriteLine("Position: " + position.FEN);
-				position.ActualCount = TestPosition(position);
+				var result = TestPosition(position);
+				position.ActualCount = result.Count;
+				position.TimeMillis = result.TimeMillis;
 			}
 
 			Console.WriteLine("\n-------------------------------\n");
@@ -58,11 +69,35 @@ namespace Chess.Lib.TestPerf
 				}
 			}
 
-			int failed = Positions.Where(x => x.ActualCount != x.ExpectedCount).Count();
-			int success = Positions.Where(x => x.ActualCount == x.ExpectedCount).Count();
-
-			Console.WriteLine("Tests Passed: " + success);
+			var passed = Positions.Count(x => x.ActualCount == x.ExpectedCount);
+			var failed = Positions.Count(x => x.ActualCount != x.ExpectedCount);
+			Console.WriteLine("Tests Passed: " + passed);
 			Console.WriteLine("Tests Failed: " + failed);
+
+			var averageSpeed = Positions.Sum(x => (double)x.ActualCount) / Positions.Sum(x => x.TimeMillis);
+			Console.WriteLine("Average speed: {0:0} kNodes/Sec", averageSpeed);
+
+			if (failed != 0)
+				return;
+
+			#if DEBUG
+			return;
+			#endif
+
+			Console.WriteLine("");
+			Console.WriteLine("Previous Runs:");
+			System.IO.File
+				.ReadAllLines("..\\..\\PerformanceLog.txt").Select(x => "\t" + x)
+				.Reverse()
+				.Take(30)
+				.ToList()
+				.ForEach(Console.WriteLine);
+
+			System.IO.File.AppendAllLines(
+				"..\\..\\PerformanceLog.txt",
+				new[] { string.Format("{0:yyyy-MM-dd HH:mm:ss} - {1:0} kNodes/sec", DateTime.Now, averageSpeed) });
+
+			Console.WriteLine("");
 		}
 
 		/// <summary>
@@ -70,19 +105,17 @@ namespace Chess.Lib.TestPerf
 		/// </summary>
 		/// <param name="pos"></param>
 		/// <returns></returns>
-		public static ulong TestPosition(Position pos)
+		public static PerftTestResult TestPosition(Position pos)
 		{
-			string fenString = pos.FEN;
-			int depth = pos.Depth;
 			ulong expectedCount = pos.ExpectedCount;
 
-			var x = Chess.Base.Notation.ReadFEN(fenString);
+			var x = Notation.ReadFEN(pos.FEN);
 			var b = Helpers.ManagedBoardToNative(x);
 
 			var start = DateTime.Now;
-			var results = Perft.Search(b, depth);
+			var results = Perft.Search(b, pos.Depth);
 			var seconds = (DateTime.Now - start).TotalSeconds;
-			Console.WriteLine("Perft(" + depth + "): " + (results->Total) + ", Time: " + String.Format("{0:0.000}", seconds));
+			Console.WriteLine("Perft(" + pos.Depth + "): " + (results->Total) + ", Time: " + String.Format("{0:0.000}", seconds));
 			Console.WriteLine("NPS: " + String.Format("{0:0} kNodes/sec", (results->Total / seconds / 1000)));
 			Console.WriteLine("");
 
@@ -101,8 +134,7 @@ namespace Chess.Lib.TestPerf
 			}
 
 			Board.Delete(b);
-
-			return results->Total;
+			return new PerftTestResult { Count = results->Total, TimeMillis = seconds * 1000.0 };
 		}
 	}
 }

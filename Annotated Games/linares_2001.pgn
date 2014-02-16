@@ -1,0 +1,1121 @@
+[Event "SuperGM"]
+[Site "Linares ESP"]
+[Date "2001.02.23"]
+[Round "1"]
+[White "Grischuk, A."]
+[Black "Polgar, J."]
+[Result "1/2-1/2"]
+[ECO "B47"]
+[WhiteElo "2663"]
+[BlackElo "2676"]
+[Annotator "Henderson,John"]
+[PlyCount "87"]
+[EventDate "2001.??.??"]
+
+1. e4 c5 2. Nf3 e6 3. d4 cxd4 4. Nxd4 Nc6 5. Nc3 Qc7 6. Be2 a6 {The Taimanov\Ka
+n Sicilian.  I'm never quite sure which it is - Taimanov only likes to
+recognise himself with one particular kind of set-up.} 7. O-O Nf6 8. Kh1 Nxd4
+9. Qxd4 Bc5 10. Qd3 b5 11. f4 Bb7 12. Bf3 O-O (12... h5 {with the idea of ..
+Ng4 is a bit more adventurous - and it's also a line with a good plus score
+for Black.}) 13. e5 Ne8 14. a4 $146 {Taking on b7 and either f5 or Ne4 is par
+for the course here - usually White doesn't commit the queenside pawns.} 14...
+b4 15. Bxb7 Qxb7 16. Ne4 Be7 17. Be3 Qc6 18. Ng5 g6 (18... Bxg5 $6 19. fxg5 Rc8
+20. Bd2 $1 (20. Rac1 d6 $1) 20... a5 (20... Qxc2 $2 21. Qxc2 Rxc2 22. Bxb4) 21.
+c3 b3 22. Rf4 $1 d6 23. Rh4 g6 24. Qh3 {with a big attack down the h-file.})
+19. Rad1 d6 20. Bd4 dxe5 21. Bxe5 Nf6 22. Qh3 h5 23. Nf3 ({
+Bluff?  I thought defending c2 with} 23. Qb3 {was the only way.}) 23... Ng4 (
+23... Qxc2 $5 {After a good, long think.  I don't know what spooked Judit, but
+taking on c2 looked good; what does White have?} 24. Nd4 (24. a5 Ng4 $1) 24...
+Qxa4 25. f5 (25. Qh4 Nd5 $1) (25. Qd3 Qe8 $1 {a little awkward, but two pawns
+are two pawns and Black should be able to untangle herself.}) 25... Ng4 $1 ({
+Could this be what Judit missed? Apart from attacking the bishop on e5, Ng4
+also threatens ..Qxd1 followed by a knight fork on f2.  This just looks good
+to me.} 25... exf5 $2 26. Nxf5 $1 gxf5 27. Qh4 $1 Rfd8 28. Qg5+ Kf8 29. Rde1 {
+White has got a lot of pressure for the piece here.}) 26. Qg3 exf5 {
+now you can take on f5 as the piece sac doesn't work anymore as there's no Qh4.
+}) 24. Nd4 Qc5 25. Qg3 Rad8 26. c3 bxc3 27. bxc3 Rd5 28. Rde1 Rc8 29. Rf3 Bf8
+30. h3 Nxe5 31. fxe5 Bg7 32. Rfe3 Qa5 $2 ({Time trouble -} 32... Qc7 $1 {
+, not only keep's the pressure on e5, but also indirectly defending her king:}
+33. Qf4 (33. Nxe6 $2 fxe6 34. Qxg6 Qf7 $1) 33... Rc5 $1 {and somethings got to
+give for White - there's going to be too many weak pawns hanging at the end of
+the day.}) 33. Nxe6 $1 {The saving resource.} 33... fxe6 34. Qxg6 Qb6 35. Rf3
+Rf8 36. Rxf8+ Kxf8 37. Rf1+ Kg8 38. Qe8+ ({
+Grischuk could have put Polgar under extreme pressure with the simple} 38. Kh2
+$1 {with the big threat of Rf7.  Black now has to play some very accurate
+moves to survive.} 38... Qb7 39. Qxe6+ Kh8 (39... Kh7 40. Rf7 Rxe5 41. Qf6 $1)
+40. Qe8+ Kh7 41. Qxh5+ Kg8 42. Qe8+ Kh7 43. Rf7 Rd8 $1 {To be fair, this move
+was spotted by someone whom Lubosh Kavalek once stated: "Before Fritz, we had
+Ljubo!" I thought that White was simply winning here, but Ljubomir Ljubojevic
+had seen something that Deep Fritz hadn't.} 44. Qe6 Qe4 $1 45. Qf6 Rg8 (45...
+Qg6 $2 46. Qh4+ Kg8 47. Rxg7+ {wins.}) 46. Qg5 (46. e6 Kh8 $1) 46... Qg6 47.
+Qh4+ Qh6 $11 {Once the queens come off, Black will be able to activate his
+rook and bishop to reach a drawish ending:} 48. Qf6 (48. Qxh6+ Kxh6 49. Re7 Rc8
+50. Re6+ Kg5 51. Rxa6 Bxe5+ 52. Kg1 Rxc3 $11) 48... Kh8 49. Qxh6+ Bxh6 50. Rf6
+(50. e6 Re8 51. e7 Kg8 52. Rf6 Bg7 53. Rxa6 Be5+ 54. g3 Rxe7) 50... Bg7 51.
+Rxa6 Bxe5+ 52. Kg1 Rc8 $1 $11 {It's going to be too difficult for White to
+make progress with the pawns.  Not only are Black's pieces active. but is
+pawns are too far apart - they will be easy to contain.}) 38... Kh7 39. Qxh5+
+Kg8 40. Qf7+ Kh7 41. Qh5+ Kg8 42. Rf4 Qb1+ 43. Kh2 Bxe5 44. Qf7+ 1/2-1/2
+
+[Event "SuperGM"]
+[Site "Linares ESP"]
+[Date "2001.02.23"]
+[Round "1"]
+[White "Shirov, A."]
+[Black "Karpov, A."]
+[Result "1/2-1/2"]
+[ECO "B17"]
+[WhiteElo "2718"]
+[BlackElo "2679"]
+[Annotator "Henderson,John"]
+[PlyCount "187"]
+[EventDate "2001.??.??"]
+
+1. e4 c6 2. d4 d5 3. Nc3 dxe4 4. Nxe4 Nd7 5. Ng5 Ngf6 6. Bd3 e6 7. N1f3 Bd6 8.
+Qe2 h6 9. Ne4 Nxe4 10. Qxe4 c5 11. Qg4 ({More popular has been} 11. Bd2 {or}) (
+11. O-O) 11... Qf6 $146 ({A novelty - the more typical Caro-Kann move,} 11...
+Kf8 {, is more usual.}) 12. c3 $6 ({
+If White want's to take anything from the game, he really had to play} 12. Be3
+$5 cxd4 (12... b6 13. Be4 Rb8 14. O-O-O $1) 13. Bxd4 e5 14. Qe4 $1 Qe6 15. Bc3
+Nc5 16. Bb5+ Kf8 17. Qe3 {and White has much the better of it: Good pieces,
+better scope for the rooks and a safer king.}) 12... cxd4 13. cxd4 b6 14. O-O (
+14. Be4 Rb8 15. Bd2 Bb7 $1 16. Bxb7 Rxb7 17. Rc1 Rc7) 14... Bb7 15. Be3 h5 $1 {
+Karpov really has a nice position - just look how harmoniously placed his
+pieces are.} 16. Qh3 Bxf3 17. gxf3 (17. Qxf3 Qxf3 18. gxf3 Ke7 $1 {
+is not the sort of ending I'd like to defending against Karpov.}) 17... Rd8 18.
+Rac1 g5 19. Be4 Ke7 {Rather than sit back and watch Karpov squeezing him like
+a python, Shirov decides it's time to rock the boat a little.} 20. Rfe1 Bf4 ({
+Karpov may have been better opting for} 20... g4 $5 21. Qg2 Rhg8 22. Kh1) 21.
+Bxf4 Qxf4 22. d5 $1 {Now all the fun starts.} 22... Ne5 23. dxe6 f5 24. Rc7+ (
+24. Qxf5 $2 Qxf5 25. Bxf5 Nxf3+ 26. Kf1 Nxe1 27. Rxe1 Rd2 {is hopeless}) 24...
+Kd6 25. Rxa7 fxe4 26. e7 Nxf3+ 27. Kf1 Rde8 28. Qd7+ Ke5 29. Rd1 Kf6 $1 30.
+Qc6+ Kf7 31. Rd8 Nxh2+ 32. Ke1 Ng4 $2 ({With just under 40 seconds or so for
+the last eight moves, Karpov makes a crucial slip at the wrong moment. The
+winning line was:} 32... e3 $1 33. Qd5+ (33. fxe3 $2 Qxe3+ 34. Kd1 Qf3+ 35.
+Qxf3+ Nxf3 36. Ke2 g4 {
+and White doesn't seem to have an answer to Black simply pushing the h-pawn.})
+33... Kg7 34. fxe3 Qxe3+ 35. Kd1 Qf3+ 36. Qxf3 Nxf3 {and again the same
+winning plan seems unstoppable: ..g4 followed by pushing the h-pawn.}) 33. Qxb6
+e3 34. Qb3+ Kg7 35. Qc3+ Qf6 36. fxe3 Qxc3+ 37. bxc3 Ne5 ({Karpov now had only
+5-6 seconds left - and the pressure was beginning to tell.  I think he knew
+that recapturing the pawn was going to lead to a similar position as in the
+game, so decided instead to try and group all his pieces together, get to the
+time control, and then see how the ground lay.} 37... Nxe3 38. Kf2 Nf5 39. Ra5
+Kf6 40. Rdd5 Nxe7 41. Rd6+ Kf7 42. Rxg5 {and the likely result here is a draw
+- this is better than the game; but, in reality, Black hasn't got the
+resources to take advantage of the extra piece.}) 38. Rd5 Kf6 39. e4 Nf3+ 40.
+Kf2 g4 41. Kg3 Rh7 42. Rf5+ Kg6 43. Ra6+ Kg7 44. Ra7 Kg6 45. Ra6+ Kg7 46. Ra7
+Rh6 47. Rd7 Re6 48. Rxh5 Rxe4 49. Rf5 Ne5 50. Rc7 Re1 (50... Ng6 51. Rg5 Kf6
+52. Rxg4 Re6 53. a4 {is also an easy draw.}) 51. a4 Nf7 52. a5 Nh6 (52... R8xe7
+53. Rxe7 Rxe7 54. a6 (54. Kxg4 $2 Nh6+ $1) 54... Nh6 55. Ra5 Ra7 {
+is also leading nowhere.}) 53. Rf4 R8xe7 54. Rxe7+ Rxe7 55. a6 Re3+ 56. Kg2
+Rxc3 57. Ra4 Rc8 58. a7 Ra8 59. Kg3 Kf6 60. Kf4 Ke7 61. Ra6 Nf7 62. Kxg4 Kd7
+63. Kf5 Nd6+ 64. Kf4 Nb5 65. Ke5 Kc7 66. Kd5 Kb7 67. Ra1 Nxa7 {A theory draw
+you would think in an elite tournament?  Well, not really!  Cast your minds
+back to another Spanish elite tournament (Dos Hermanas, 1996), and you'll
+discover that Garry Kasparov managed to beat Judit Polgar in this ending -
+albeit with a little help from his opponent, who made the cardinal error of
+trapping her king on the backrank.  The only reason I remember this was I had
+to do a review in a magazine of the ChessBase Endgame CD-Rom's containing all
+five-piece major endings on 4-CDs, which had just come out at the time. I
+still find them indispensible - particularly as coasters when friends come
+round and I don't want stains on the coffee table!    However, with Shirov's
+king so central, the only way he could lose it now was by a Helpmate.  Shirov
+makes no mistake of that.} 68. Rb1+ Kc7 69. Rc1+ Kb6 70. Rb1+ Nb5 71. Kc4 Rc8+
+72. Kd5 Rc5+ 73. Ke4 Kc6 74. Ra1 Nd6+ 75. Kd4 Rd5+ 76. Ke3 Kd7 77. Ra8 Ke6 78.
+Ra7 Kf5 79. Rc7 Re5+ 80. Kd3 Rd5+ 81. Ke3 Ne4 82. Rc4 Nc5 83. Rc3 Ke5 84. Ra3
+Rd4 85. Rc3 Kd5 86. Ra3 Re4+ 87. Kf3 Re8 88. Re3 Rf8+ 89. Ke2 Kd4 90. Re7 Rf6
+91. Re8 Ne6 92. Ra8 Nf4+ 93. Kf3 Nd3+ 94. Kg4 1/2-1/2
+
+[Event "SuperGM"]
+[Site "Linares ESP"]
+[Date "2001.02.23"]
+[Round "1"]
+[White "Leko, P."]
+[Black "Kasparov, G."]
+[Result "1/2-1/2"]
+[ECO "B97"]
+[WhiteElo "2745"]
+[BlackElo "2849"]
+[Annotator "Henderson,John"]
+[PlyCount "109"]
+[EventDate "2001.??.??"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 a6 6. Bg5 e6 7. f4 Qb6 {
+The Fischer favourite - the Poisoned Pawn variation!  Bobby's had a phenominal
+record with this line: a near 80% score with the Black pieces.    If you don't
+count Efim Geller (his bete noire) using Fischer's pet-line against the man
+himself (Monte Carlo, 1967), Bobby only ever lost one game with it - to Boris
+Spassky in their epic 1972 Reykjavic match.} 8. Nb3 {
+The cautious approach.  This just leads to a sort of main line Najdorf.} 8...
+Be7 9. Qf3 Nbd7 10. O-O-O Qc7 11. Bd3 b5 12. a3 Rb8 (12... Bb7 {is more usual.
+The text (though still fitting in with the ideals of the Najdorf) has only
+ever been played 3-times - and all Black wins!}) 13. Rhe1 b4 14. axb4 Rxb4 15.
+Kb1 Bb7 16. Qh3 Nc5 17. Nxc5 (17. Na2 Nxd3 18. Bxf6 Rxb3 19. Bxg7 Nxe1 20. Qxb3
+Rg8 21. Bd4 Nxg2 22. Qf3 d5 23. Rg1 Qc4 24. Rxg2 Rxg2 25. Qxg2 Qxd4 26. Qg8+
+Bf8 27. exd5 Bxd5 28. Qxh7 Qxf4 29. Qd3 Qc4 {
+0-1 Ellison,D-Collinson,A/Balatonbereny 1992/TD (29).}) 17... dxc5 ({I thought
+} 17... Qxc5 {looked better.  But then again, who am I to question the man
+that took over Fischer's mantle of mastery of the Najdorf?} 18. Na2 (18. e5 Nd7
+$1 19. Na2 (19. Bxe7 $2 Qxc3 $1) 19... Bxg5 20. Nxb4 Bxf4 21. Nxa6 Bxa6 22.
+Bxa6 Bxe5 {Black has strong pressure on the White king.}) 18... Rb6 {
+with an easy game.}) 18. e5 Nd5 19. Nxd5 Bxd5 20. c3 (20. Bxe7 Qb6 $1 {
+a nice little zwischenzug (Bless you!)} 21. Bxc5 (21. Bd6 $4 Rxb2+ 22. Kc1 Qb4
+$1 {soon mates.}) 21... Rxb2+ 22. Kc1 Rb1+ 23. Kd2 Rxd1+ 24. Rxd1 Qxc5 25. Ke2
+Qb4 {also looks drawn - but Black has the advantage of the outside passed-pawn.
+He may be able to make something of it if he can safely get the rook into the
+game.}) 20... Rb3 21. Bc2 Qb7 $5 ({Drastic action indeed.  I think Kasparov
+started to worry about how he was going to get his rook into the game after a
+Ba4+:} 21... Rb8 $1 22. Ba4+ $1 Kf8 (22... Bc6 23. Bxc6+ Qxc6 24. Bxe7 Kxe7 25.
+Qg3 $1 Qb6 26. Qh4+ Ke8 27. Re2 {and, apart from worrying about how to develop
+the rook on h8, Kasparov will come under a lot of pressure with Rd6 coming
+shortly.}) 23. Bxe7+ Qxe7 24. Rd2 {
+and White has a little advantage - though nothing to worry about.}) 22. Bxb3
+Qxb3 23. Rxd5 $2 ({Being in Spain, Leko really had to take the bull by the
+horns here and go in for the kill.  But then again, Peter was never Matador
+material - he's been too cautious all his life:} 23. Bxe7 $1 Qa2+ (23... Be4+
+$2 24. Rd3 $1 Qc4 25. Rxe4 Qxe4 26. Bxc5 {wins}) 24. Kc1 (24. Kc2 $6 Bb3+ 25.
+Kd3 Bxd1 26. Rxd1 Kxe7) 24... Qa1+ 25. Kc2 Qa4+ (25... Qa2 $2 26. Rxd5 $1 Qxd5
+27. Bd6) 26. Kd3 Qc4+ 27. Ke3 Qe4+ 28. Kf2 Qxf4+ 29. Kg1 Kxe7 30. Qh5 $1 {
+and, with Rf1 threatened, White's hoping to entice Black to play ..g6,
+weakening the dark-squares round the Black king.  White should be able to
+convert this easily enough.}) 23... Qxd5 24. Bxe7 Kxe7 25. Qh4+ Kd7 26. Qg4 Kc6
+27. Qe2 $1 (27. Qxg7 $2 Rb8 $1 28. Rc1 (28. Qxf7 Qb3 29. Re2 Qd1+ $1) 28...
+Qe4+ 29. Rc2 (29. Ka1 $2 Rb5 $1) 29... Qxf4 {and suddenly White has got one or
+two little problems to solve - though probably still drawn.}) 27... Rd8 28.
+Qxa6+ Kc7 29. Qa7+ Kc6 {Leko's a pawn ahead but, with the domination of the
+d-file and the active king should it go into a rook and pawn ending, Kasparov
+can easily hold.} 30. Qa6+ Kc7 31. Qa5+ Kb7 32. Qb5+ Kc7 33. Qa5+ Kb7 34. Qb5+
+{Leko repeats a few moves to make the time control in safety.} 34... Kc7 35.
+Qe2 h5 36. g3 g6 37. c4 ({Trying to contest the d-file wasn't any better:} 37.
+Kc2 Qa2 $1 38. Qb5 (38. h3 c4 $1) 38... Qd5 {
+and we're basically back to where we started.}) 37... Qd2 38. Qe3 $2 ({
+Trying to be too clever: Leko's hoping Kasparov will exchange queen's now so
+that he can have his rook more actively placed on e3 to defend the g-pawn.} 38.
+Qxd2 Rxd2 39. h4 Rd3 {the active rook guarentees the draw} 40. Rg1 Kb6 $11)
+38... Rd4 $2 ({The mutual time trouble explains all - Kasparov actually missed
+a big chance to come out with the better side of the draw!} 38... Qb4 $1 {
+Now how does White defend the dual threats of ..Rd2 and ..Rd4?} 39. Rc1 Rd2 40.
+Rc2 Rxc2 41. Kxc2 Qxc4+ 42. Kd2 Kc6 {and now it's White looking for the draw.})
+39. Qxd2 Rxd2 40. Re3 (40. h4 Rd3 41. Rg1 Kb6 {
+is much the same - the active rook secures the draw.}) 40... Rxh2 41. Rf3 Kc6
+42. Ka2 Rh3 43. Rb3 h4 44. gxh4 Rxh4 45. Rf3 Rh5 {
+With the idea of ..Rf5 and ..g5 winning.} 46. Rg3 Rh2 47. Rf3 Rc2 48. Kb3 Rc1
+49. Rf2 Kb6 50. Rf3 Ka5 51. Rf2 Re1 52. Ka3 Ra1+ 53. Kb3 Rc1 54. Rf3 Kb6 55.
+Rf2 1/2-1/2
+
+[Event "SuperGM"]
+[Site "Linares ESP"]
+[Date "2001.02.24"]
+[Round "2"]
+[White "Kasparov, Gary"]
+[Black "Polgar, Judit"]
+[Result "1/2-1/2"]
+[ECO "B90"]
+[WhiteElo "2849"]
+[BlackElo "2676"]
+[Annotator "Henderson,John"]
+[PlyCount "54"]
+[EventDate "2001.02.23"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 a6 6. Be3 Ng4 {
+The Kasparov Variation.} 7. Bg5 h6 8. Bh4 g5 9. Bg3 Bg7 10. h3 Ne5 ({Both these
+players had this position in the last round of the Corus 2000 tournament. Then,
+Judit played the unusual} 10... Nf6 $5 {
+and got a good game - though Kasparov won.}) 11. f3 Nbc6 12. Bf2 Be6 13. Qd2 ({
+After} 13. Nxe6 fxe6 {, Black has superb central control.}) 13... Nxd4 14. Bxd4
+Qa5 15. a3 Rg8 $1 {Castling on either wing is taboo, but the King is perfectly
+safe in the centre.  The only problem Judit had was where to best develop the
+rooks: c8 was the most obvious for the queen's rook, and from g8, the king's
+rook stays out of harms way after the h-file is opened.} 16. h4 Rc8 17. hxg5
+hxg5 18. O-O-O (18. Qxg5 $4 Nxf3+ $1) 18... Nc4 19. Bxc4 Bxd4 ({
+Awkward for Black is} 19... Rxc4 $6 20. Bxg7 Rxg7 21. Rh8+ Kd7 22. g4 {
+, leaving problems of how to get the "fianchettoed" rook back into the game.})
+20. Qxd4 $146 ({White only got a small advantage after} 20. Bb5+ axb5 21. Qxd4
+Rc4 22. Qd2 Kd7 23. Na2 Qxd2+ 24. Rxd2 g4 25. Nb4 gxf3 26. gxf3 f6 27. Nd3 {
+1-0 Bologan,V-Xu Jun/Beijing CHN 2000/The Week in Chess 296 (81).  (80)}) 20...
+Rxc4 21. Qa7 Qc7 ({The thematic exchange sacrifice on c3 doesn't work here:} 
+21... Rxc3 22. bxc3 Qxa3+ 23. Kd2 {with a big White advantage.}) 22. Kb1 Rc5 $1
+{Entombing Kasparov's queen.  Kasparov's novelty of 20 Qxd4 had the idea of
+Qa7 in  mind - trying to stretch the Black defenses - so he must have known
+that his queen was safe here.  However, it does seem well out of place on a7.}
+23. Nd5 Bxd5 24. exd5 Kf8 (24... Rxc2 $2 25. Rc1 Rc5 26. b4 $1 {
+and Black is losing very quickly.} 26... Rc3 27. Kb2 $1 {
+and carnage down the c-file.}) 25. Rd2 Kg7 26. b4 ({Kasparov felt he let the
+game slip here. During the post mortem, both players skipped through the
+begining of the game and concentrated all their efforts here. Kasparov felt
+that, in reflection, he should have gone for:} 26. Rh5 Kf6 $1 ({Again both
+ers felt this looked the more natural move. The alternative left Black with
+too many problems with her King and trouble in the ending, also.} 26... f6 27.
+g4 Rc8 (27... Rh8 28. Rxh8 Kxh8 29. Qa8+ Qc8 30. Qxc8+ Rxc8 31. Re2 Rc7 32. c3
+Kg7 33. Kc2 Kf7 34. Kd3 {with the better ending.}) 28. c3) 27. b4 (27. g4 Rc8 (
+27... b5 28. Qxa6 Rb8 29. f4 gxf4 30. Rf5+ Kg7 31. Rxf4 Rb6 32. Qa5 b4 33. Qa4
+Rc3) 28. c3) 27... b5 28. Qxa6 Rc3 29. Rh6+ Kg7 30. Rh1 Rc8 31. Re1 Rxc2 32.
+Qxc8 Qxc8 33. Rxc2 {This was just some of the many lines that Garry and Judit
+flicked out (to be honest, I couldn't keep up with the speed they went through
+the variations at) - no definite conlcusion was reached at the end, though it
+was felt that Kasparov had "something" but maybe not enough for a win.}) 26...
+b5 27. Qxa6 Rc3 ({
+In the end, White has to play carefully and Black has a perpetual in hand:} 
+27... Rc3 28. Re1 (28. Qxb5 $2 Rxa3 29. Rd3 Ra2 $1 30. Qc6 (30. Kxa2 Qxc2+ 31.
+Ka1 Ra8+) 30... Qa7 31. Qc3+ f6 32. Rhd1 (32. Re1 $2 Ra8 33. Kc1 Qf2 $1 34.
+Rxe7+ Kg6) 32... Ra8) 28... Rc8 29. Ree2 Qc4 30. Kb2 (30. Qa7 Rc7 31. Qd4+ Qxd4
+32. Rxd4 Rxa3) 30... Rxc2+ 31. Rxc2 Qd4+ 32. Kc1 (32. Ka2 Qxd5+ 33. Kb2 Qd4+) (
+32. Kb1 Qd1+ 33. Kb2 Qd4+) 32... Qa1+ 33. Kd2 Qd4+ 34. Kc1 (34. Ke1 Qg1+) 34...
+Qa1+ $11) 1/2-1/2
+
+[Event "SuperGM"]
+[Site "Linares ESP"]
+[Date "2001.02.25"]
+[Round "3"]
+[White "Shirov, A."]
+[Black "Kasparov, G."]
+[Result "1/2-1/2"]
+[ECO "B84"]
+[WhiteElo "2718"]
+[BlackElo "2849"]
+[Annotator "Henderson,John"]
+[PlyCount "95"]
+[EventDate "2001.??.??"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 a6 6. Be2 e6 {A blast from
+the past - You need to go as far back as the Yerevan Olympiad 1996 for Garry's
+last Scheveningen, when he faced Topalov. Kasparov has never really been one
+to play the Najdorf with ..e5, and usually always falls back on ..e6.} 7. f4
+Be7 8. Be3 O-O 9. g4 d5 $1 {The recommended remedy.} 10. e5 Ne4 11. Nxe4 dxe4
+12. g5 Qb6 $146 ({Putting the queen on the same diagonal as the bishop does
+look odd, but there's method in Kasparov's madness. Developing the queen on c7
+has been more usual - until now that is!:} 12... Qc7 13. Qd2 Rd8 14. O-O-O Nc6
+15. Kb1 b5 16. Qc3 Bb7 17. Nxc6 Bxc6 {
+1/2-1/2 Lanka,Z-Van Wely,L/Pula 1997/CBM 57 ext (17).}) 13. Nf5 {If Rb1 or Qc1,
+..Bc5 is awkward. As for 0-0?  It looks as if Black can simply take on b2
+safely as there's no real attack or threat from White.} 13... Qa5+ 14. Bd2 Qc5
+15. Nxe7+ Qxe7 16. c3 b5 17. Be3 Rd8 18. Qc2 Bb7 {Black's easily equalised -
+And, as they say in the Sicilian: If Black has equalised, he's winning!} 19.
+Kf2 Nd7 20. b4 {Shirov had to stop ..Nc5.} 20... Nf8 21. h4 Qc7 (21... Rac8 $5
+22. a4 $1 {Probably the best.} 22... Qxb4 23. cxb4 Rxc2 24. axb5 axb5 25. Rhc1
+Rb2 26. Rab1 Ra2 (26... Rxb1 27. Rxb1 Bc6 28. Rc1 Be8 29. h5 $1) 27. h5 {
+And, if anything, despite being a pawn down, White is better.}) 22. h5 Nd7 23.
+h6 g6 24. a4 Nb6 25. axb5 axb5 26. Kg3 $5 ({
+Puzzling, bit I think Alexei was worried about something like this:} 26. Bxb5
+Nd5 27. Rxa8 Rxa8 28. Qd2 Nxf4 29. Rd1 (29. Bxf4 $2 e3+ 30. Qxe3 Bxh1) 29...
+Nd5 30. c4 Nxe3 31. Kxe3 Ra3+ 32. Ke2 Rd3 33. Qb2 Qd8 $1) 26... Nc4 27. Rxa8
+Rxa8 28. Bxc4 Qxc4 29. Rd1 Bd5 30. Rd4 Qf1 31. Qd1 $1 {The only move.  If
+Black gets to keep the queen's on, he stands much better.  Now, due to the
+opposite coloured bishops and the formation of both sets of pawns, White can
+realistically look for the draw.} 31... Ra1 32. Qxf1 Rxf1 33. Kg4 Rf3 ({
+If there's a win, it has to be around here somewhere - but with the opposite
+coloured bishops and all the pawns on the same coloured squares as the bishops,
+It's not going to be all that easy:} 33... Re1 $1 34. Bf2 $1 (34. Bd2 $6 Re2 (
+34... Rg1+ $2 35. Kh3 Rh1+ 36. Kg2 e3+ 37. Rxd5 $1 exd5 38. Bxe3 {
+and Black will never be able to stage a breakthrough.}) 35. Bc1 e3 36. Rd1 (36.
+Rd3 Rg2+ 37. Kh3 e2 38. Bd2 Rg1) 36... Rg2+ 37. Kh3 e2 38. Re1 Rf2 39. Bd2 Bf3
+40. Kg3 Rf1 {White's helpless now - Black simply marches the king up the board:
+Kf8-e7-d7-c6-d5-e4-d3.}) 34... Re2 ({To show you how difficult it is to win,
+White - as in the game - can even give up a pawn and still draw easily enough:
+} 34... Rc1 35. Rd2 Rxc3 36. Bd4 Rc1 37. Bc5 Re1 38. Rc2 $1 Bc4 39. Rc3 {
+and again White blockades the crucial e3-square.}) 35. Bg3 Re3 36. Rd2 Rxc3 37.
+Re2 e3 38. Be1 Rb3 39. Rc2 {Black has at least made some progress as White's
+bishop can't get to c5.  However, now a new problem: White can generate his
+own threats:} 39... Bc4 (39... Kf8 40. Rc3 $1 $11) 40. Ra2 Bd5 (40... Kf8 41.
+Ra8+ Ke7 42. Ra7+ Ke8 43. Ra8+ $11) 41. Rc2 Bc4 $11) 34. Bg1 Rxc3 35. Rd2 Kf8
+36. Bc5+ Ke8 ({
+The exchange sacrifice doesn't work here - though again it comes close:} 36...
+Rxc5 37. bxc5 b4 38. c6 $1 Ke7 (38... Bxc6 39. Rb2 e3 40. Kg3 $1) 39. Rd4 b3
+40. Rb4 e3 41. Rb7+ Kd8 42. Kg3 Kc8 43. Rb5 Kc7 44. Rc5 Be4 (44... Kb6 45. c7
+$1 Bb7 46. c8=Q Bxc8 47. Rxc8) 45. Rb5 Bd5 46. Rc5 $11) 37. Re2 Rc1 $2 ({
+But it does here!} 37... Kd7 $1 38. Re3 Rxc5 39. bxc5 b4 40. Re1 Kc6 {
+White's in serious trouble: the active Black king, bishop and pawns will
+secure the victory.}) 38. Kg3 Kd7 39. Kf2 Kc6 40. Be3 Rb1 41. Bc5 {
+There's just no way through for Kasparov now.} 41... Rc1 42. Bd6 Rh1 43. Re3
+Rh2+ 44. Kg3 Rc2 45. Bf8 Ra2 46. Bc5 Ra1 47. Kf2 Rc1 48. Bd6 1/2-1/2
+
+[Event "SuperGM"]
+[Site "Linares ESP"]
+[Date "2001.02.25"]
+[Round "3"]
+[White "Grischuk, A."]
+[Black "Leko, P."]
+[Result "1/2-1/2"]
+[ECO "B12"]
+[WhiteElo "2663"]
+[BlackElo "2745"]
+[Annotator "Henderson,John"]
+[PlyCount "46"]
+[EventDate "2001.??.??"]
+
+1. e4 c6 2. d4 d5 3. e5 Bf5 4. c3 e6 5. Be3 Qb6 6. Qb3 Nd7 7. Nd2 f6 8. f4 g5
+$5 {a new development in this system.  Instead of  ..Nh6 (with or without ..h5)
+and ..Ne7, the idea is to breakdown the pawn chain as quickly as possible. 
+It's very similar to the plan of f6 and g5 in the French Defence Tarrasch.} 9.
+Ngf3 gxf4 10. Bxf4 Bh6 $146 ({Brutal and to the point: Leko's inovation simply
+exchanges everything off for an easy life.} 10... Bg7 11. exf6 Ngxf6 12. Nh4 (
+12. Be2 O-O 13. O-O h6 14. Nh4 Bh7 15. Bd6 Rfe8 16. Nhf3 Ng4 17. Nh4 Ngf6 18.
+Ndf3 Ne4 19. Bf4 Rf8 20. g3 Rae8 21. Rae1 Qxb3 22. axb3 a6 23. Ng2 c5 24. Rd1
+cxd4 25. cxd4 Rc8 26. Ne3 Bf5 27. Kg2 Rc6 28. b4 b5 29. Bd3 Nd6 30. Nxf5 Nxf5
+31. Bb1 Rc4 32. b3 Rc3 33. Rfe1 Rxb3 34. Rxe6 Rxb4 35. Rxa6 Rb2+ 36. Kh3 h5 37.
+Ra7 Nb6 38. Ng5 Bh6 39. Rf1 Bxg5 40. Bxg5 Rxb1 41. Rxb1 {
+1-0 Morozevich,A-Stohl,I/Istanbul TUR 2000/The Week in Chess 313 (41).}) 12...
+O-O 13. Nxf5 exf5 14. Qxb6 Rae8+ 15. Kd1 axb6 16. Bd3 Nh5 17. Rf1 Re6 18. Kc2
+c5 19. c4 cxd4 20. cxd5 Rg6 21. g3 Nc5 22. Bc7 Na6 23. Bxa6 bxa6 24. Kd3 b5 25.
+Rae1 Rf7 26. Re8+ Bf8 27. Rc8 Ng7 28. Nf3 Re7 29. Nxd4 Rd7 30. d6 Rf6 31. g4
+Kf7 32. g5 Rfxd6 33. Bxd6 Bxd6 34. Nxf5 Be5+ 35. Kc2 Bxh2 36. Rc6 {
+1-0 Antoniewski,R-Skalik,P/Zakopane chT 2000/The Week in Chess 310 (36).}) 11.
+Bxh6 Nxh6 12. exf6 Nxf6 13. Be2 Rg8 {
+Black's equalised already; the half-point can be taken anytime now.} 14. Qxb6
+axb6 15. O-O Ne4 16. Nxe4 Bxe4 17. Ne1 Nf5 18. Bf3 Ne3 19. Rf2 Bf5 20. Be2 Ke7
+21. Bd3 c5 22. Bxf5 Nxf5 23. Nf3 h5 1/2-1/2
+
+[Event "SuperGM"]
+[Site "Linares ESP"]
+[Date "2001.02.25"]
+[Round "3"]
+[White "Polgar, J."]
+[Black "Karpov, A."]
+[Result "1/2-1/2"]
+[ECO "B17"]
+[WhiteElo "2676"]
+[BlackElo "2679"]
+[Annotator "Henderson,John"]
+[PlyCount "59"]
+[EventDate "2001.??.??"]
+
+1. e4 c6 2. d4 d5 3. Nc3 dxe4 4. Nxe4 Nd7 5. Ng5 Ngf6 6. Bd3 e6 7. N1f3 Bd6 8.
+Qe2 h6 9. Ne4 Nxe4 10. Qxe4 Qc7 ({The immediate} 10... c5 {
+was played by Karpov in his opening round game with Shirov.}) 11. Qg4 Kf8 {
+This line is extremely popular at the top level. However, at first sight it is
+hard to believe that a king move like that is enough for equality. First
+played (I believe) by Andrei Kharltonov in the late 80s, the line soon became
+popular with some of the world's top Caro aficionados: Speelman, Anand and, of
+course, Karpov.} 12. O-O ({The immediate} 12. Be3 {was Judit's choice in three
+games against Karpov in a rapid play match in Hungary, 1998, where she scored
+2/3.}) 12... c5 13. dxc5 $5 {New - but not a novelty. 13 Re1 and 13 c3 is more
+standard.  The idea is, at the cost of the White pawn structure, to open as
+many lines as possible to try and take advantage of Black's underdevelopment.}
+13... Nxc5 14. Be3 (14. Re1 e5 15. Bf5 e4 16. Nh4 Bxh2+ 17. Kh1 h5 18. Qh3 Be5
+19. Be3 g6 20. Bxc8 Qxc8 21. Bxc5+ Qxc5 22. Rxe4 Kg7 23. c3 Bf6 24. Qf3 Rad8
+25. Rf4 Qe5 26. g3 Rd2 27. Qxb7 Rb8 28. Qxa7 Rbxb2 29. Kg1 Qd5 30. a4 Be5 31.
+Rf3 Bf6 32. Rf4 Bxc3 33. Rf1 Be5 34. Rf3 Bf6 35. Rf4 Bg5 36. Ng2 Bxf4 37. Nxf4
+Qe5 38. a5 h4 39. a6 Ra2 {
+0-1 Luther,T-Anastasian,A/Istanbul TUR 2000/The Week in Chess 314 (39).}) 14...
+Nxd3 15. cxd3 e5 $1 {Black has to unravel somehow, and this is the best way.}
+16. Qe4 ({How about} 16. Qh5 $5 Qe7 (16... g6 $6 17. Qh4 {
+and Black's looking a bit loose.}) 17. Rae1 (17. Bg5 $6 Qe6 $1 {
+with the idea of ..Qg4 with a good game.}) 17... Kg8 (17... g6 18. Bxh6+ Kg8
+19. Qg5 $1) 18. Nd2 g6 19. Qe2 {
+with the idea of Ne4 and f4 to open up the game.}) 16... g6 17. Rac1 $2 ({
+Did Judit miss a trick here?} 17. Rfc1 $1 Qe7 18. Bxa7 Kg7 19. Qe3 Bg4 (19...
+Bf5 20. Bc5 $1) 20. Nd2 {
+and, with the idea of Nc4 and Bb6, White just seems to be a pawn ahead.}) 17...
+Qe7 18. Rfe1 ({Now if} 18. Bxa7 Kg7 $1 {see the difference - at the end of the
+day, White's a-pawn is attacked, and Black has superb piece-play.} 19. Qe3 Bg4
+20. Nd2 (20. a3 Bxf3 21. gxf3 Rhc8 $1 {White's pawn structure is completely
+shattered.  Despite being a pawn ahead, the ending may be better for Black.})
+20... b5 $1) 18... Bf5 19. Qa4 Kg7 20. Nxe5 (20. Bf4 f6 21. d4 e4 22. Bxd6 Qxd6
+23. Nd2 Rhc8 $1 24. Rxc8 Rxc8 25. Qxa7 Qb4 {and Black's better here.}) 20...
+Bxe5 21. Bf4 Rac8 22. Rxc8 Rxc8 23. Rxe5 Rc1+ 24. Bxc1 Qxe5 25. Be3 f6 26. Qb4
+b6 27. h3 (27. d4 $1 Qe4 (27... Qd5 $2 28. Qe7+) 28. h3 {and Black still has a
+lot of work to do to secure a draw: A pawn ahead, White has a strong, passed
+d-pawn and the Black pawns are the more vulnerable to attack - especially with
+the king unprotected on g7.}) 27... g5 28. Qa3 Qc7 29. b4 Qd7 30. Qc3 (30. d4
+Be6 {and Black can easily set up a good blockade from d5.}) 1/2-1/2
+
+[Event "SuperGM"]
+[Site "Linares ESP"]
+[Date "2001.02.27"]
+[Round "4"]
+[White "Grischuk, A."]
+[Black "Kasparov, G."]
+[Result "0-1"]
+[ECO "B90"]
+[WhiteElo "2663"]
+[BlackElo "2849"]
+[Annotator "Henderson,John"]
+[PlyCount "74"]
+[EventDate "2001.02.23"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 a6 6. f3 {A Grischuk pet-line.
+The young Muscovite wants to play the English Attack without having to worry
+about the crucial, crunch-line, 6 ..Ng4 - the Kasparov Variation.} 6... Qb6 $1
+{If Black wants to avoid going into the English Attack, then this is the way
+to do it -despite the fact that your opponent has a 100% score of 4/4 against
+this; including a win over Shirov in the semifinal of FIDE World Championship
+KO in New Delhi recently.} 7. Nb3 e6 (7... Nc6 8. Qe2 e6 9. Be3 Qc7 10. g4 b5
+11. O-O-O Bb7 12. h4 Rc8 13. Kb1 Nd7 14. Rg1 Nce5 15. Qf2 b4 16. Na4 Nxf3 17.
+Qxf3 Qc6 18. Nac5 Nxc5 19. Bxc5 dxc5 20. Na5 Qc7 21. Nxb7 Qxb7 22. Bc4 Be7 23.
+Qe2 Qc6 24. g5 O-O 25. h5 Rcd8 26. g6 Rxd1+ 27. Rxd1 fxg6 28. hxg6 Rf4 29. Qh2
+{1-0 Grischuk,A-Shirov,A/New Delhi IND 2000 (29).}) 8. Qe2 Qc7 {
+With Be3 coming, the queen was going to have to move anyway.} 9. g4 b5 10. Be3
+b4 $146 (10... Nc6 11. g5 Nd7 12. Qf2 Nce5 13. O-O-O b4 14. Nb1 Nc4 15. Bxc4
+Qxc4 16. N1d2 Qc7 17. Kb1 Bb7 18. Rc1 a5 19. c4 Nc5 20. Nxc5 dxc5 21. h4 a4 22.
+Qh2 Bd6 23. f4 O-O-O 24. Rhd1 Rd7 25. e5 Be7 26. Nf1 Rhd8 27. Qe2 Rxd1 28. Rxd1
+Rxd1+ 29. Qxd1 Qc6 30. Nd2 Kc7 31. Qf1 g6 32. Kc2 Qa6 33. Qd3 Qc6 34. h5 Qh1
+35. hxg6 hxg6 36. Qf1 Be4+ 37. Kc1 Qxf1+ 38. Nxf1 Bd3 39. Nd2 Kc6 40. b3 a3 41.
+Kd1 {1/2-1/2 Prasad,D-Ruck,R/Istanbul TUR 2000/The Week in Chess 313 (41).})
+11. Na4 Nbd7 {The scene is set: White is looking to exploit the queenside,
+Black is staking his claim in the centre.} 12. Qc4 Qxc4 13. Bxc4 d5 $1 14. exd5
+Ne5 15. Be2 (15. Nb6 Nxc4 16. Nxc4 Nxd5 17. Bc5 Bd7 $1 {
+with the strong idea of ..Bb5 or ..Ba4 coupled with ..Rc8.}) 15... Nxd5 16. Bd4
+Bd6 17. Bc5 Be7 ({Supported by Ljubomir Ljubojevic, we'd come to the
+conclusion in the press room that the other retreat looked good for Kasparov:} 
+17... Bc7 $1 18. a3 bxa3 19. Rxa3 Bb7 {
+with the Black pieces looking the more ready for the first strike.}) 18. a3 a5
+(18... Bh4+ 19. Bf2 Bf6 20. Bd4 {achieves nothing for Black.}) 19. Bd4 $1 {
+I think by now Kasparov was regretting he hadn't placed the bishop on c7 -
+White's no worse here.} 19... f6 (19... Bf6 $2 20. g5 $1) 20. Nac5 $2 ({
+Despite the fact that it cedes the bishop-pair, Grischuk have taken on e5:} 20.
+Bxe5 $1 fxe5 21. Nac5 bxa3 (21... O-O 22. axb4 Nxb4 23. Kd2 Rd8+ 24. Kc1 $14)
+22. Rxa3 Bd7 23. Ra1 {
+Black's got slightly the better of it, but White has the better pawn structure.
+}) 20... O-O 21. O-O bxa3 22. Rxa3 Nf4 23. Bb5 Rb8 24. Bxe5 Nh3+ $1 (24... Rxb5
+$2 25. Bxf4 Rxc5 26. Nxc5 Bxc5+ 27. Kg2 Bxa3 28. bxa3 e5 (28... Rd8 29. Bc7
+Rd2+ 30. Rf2 $11) 29. Bd2 $11) 25. Kg2 Rxb5 26. Bg3 $2 (26. Kxh3 $1 fxe5 (26...
+Bxc5 27. Nxc5 fxe5 28. Nd3 e4 29. c4 $1 Rb6 30. Ne5 Rxb2 31. Rxa5) 27. c4 $1
+Rb4 28. Rxa5 $11) 26... Ng5 ({Kasparov could have gone for a simple win of a
+pawn, but was probably worried about the prospects of an opposite coloured
+bishop ending.} 26... Bxc5 27. Nxc5 Rxc5 28. Kxh3 Rxc2 $15) 27. Bf2 $2 ({
+White's last - and only - chance was:} 27. c4 $1 Rxc5 (27... Rb4 28. h4 Rxc4
+29. Rxa5 Nf7 30. Rc1 Rxc1 31. Nxc1 $11) 28. Nxc5 Bxc5 29. Rxa5 {and the passed
+c and b-pawn offer good survival chances against the Black pieces.}) 27... Bb7
+{There's no-way back for Grischuk now.} 28. Bg1 Rc8 $1 29. h4 Bxf3+ $1 30. Rxf3
+Nxf3 31. Kxf3 Bxc5 32. Nxc5 Rbxc5 33. Bxc5 Rxc5 34. c3 h5 35. gxh5 Rxh5 36. b4
+axb4 37. cxb4 Rxh4 0-1
+
+[Event "SuperGM"]
+[Site "Linares ESP"]
+[Date "2001.02.27"]
+[Round "4"]
+[White "Polgar, Ju"]
+[Black "Shirov, A."]
+[Result "1-0"]
+[ECO "B90"]
+[Annotator "Henderson,John"]
+[PlyCount "93"]
+[EventDate "2001.02.23"]
+
+{Game of the day though is unquestionably Judit Polgar's superb win over
+Alexei Shirov.  After a lean period, she's back to her brilliant best again.  } 1. e4 c5 2.
+Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 a6 6. Be3 {Again the English Attack,
+which must be one of the most popular lines against the Najdorf these days.
+Intended as a quiet sideline of the Najdorf to avoid all the theory, it first
+became a big favourite of the man that should have been Britain's first GM,
+William Hartston, in the early 70s when the Najdorf was at its zenith during
+the Fischer years. Its was then refined by the likes of Nigel Short (who
+really had most to do with its development), Mickey Adams, John Nunn and
+Murray Chandler in the 80s as a way of avoiding all the reams of theory in the
+Najdorf - now it basically IS the variation in the Najdorf with reams of
+theory being produced on it!} 6... e5 7. Nb3 Be6 8. f3 Nbd7 9. Qd2 ({Shirov is 
+no stranger to this line - with either colour!  He had the Black side of it
+last year in the Spanish Team Championships, he used it twice himself against
+Gelfand in the FIDE KO in New Delhi, and also against Kasparov in the
+Frankfurt Giants.} 9. g4 b5 10. g5 b4 11. Ne2 Nh5 12. Qd2 a5 13. Ng3 Nxg3 14.
+hxg3 a4 15. Nc1 Qa5 16. Bh3 Bxh3 17. Rxh3 Nb6 18. b3 d5 19. Nd3 Bd6 20. Rd1 d4
+21. Bg1 axb3 22. axb3 Rc8 23. Qh2 Qa2 24. Rxh7 Rxh7 25. Qxh7 Rxc2 26. g6 Qxb3
+27. Qxg7 fxg6 28. Nxe5 Qc3+ 29. Kf1 Bxe5 30. Qxe5+ Kf7 31. Qf4+ Kg8 32. Bf2 Nd7
+33. Qg5 Qxf3 34. Qxg6+ Kf8 35. Qf5+ Qxf5 36. exf5 Ne5 37. Bxd4 Nf3 38. Be3 b3 {
+0-1 Morovic,D-Shirov,A/Barcelona ESP 2000/The Week in Chess 301 (38).}) 9... b5
+(9... Be7 10. g4 O-O 11. O-O-O Qc7 12. Kb1 Rfc8 13. g5 Nh5 14. Nd5 Bxd5 15.
+exd5 Nb6 16. Rg1 a5 17. a3 a4 18. Nc5 dxc5 19. d6 Bxd6 20. Qxd6 Nf4 21. Bxf4
+exf4 22. Bb5 g6 23. Rge1 Ra5 24. Re8+ Rxe8 25. Qxc7 Rxb5 26. Qxb7 {
+1-0 Shirov,A-Gelfand,B/New Delhi IND 2000/The Week in Chess 318 (26).}) 10. a4
+b4 11. Nd5 Bxd5 (11... Be7 {
+was the only move here until the Shirov-Kasparov encounter from Frankfurt.})
+12. exd5 Nb6 13. Bxb6 Qxb6 14. a5 $1 {The idea is simple: White is going to
+stymie Black's play by rounding up on the vulnerable b-pawn.} 14... Qb7 15. Bc4
+g6 (15... Be7 {is also an option, but apart from having to defend b4, Black is
+cramped with no play.  The idea of ..g6 is to jettison the pawn and hope to
+complicate matters with active piece play.}) 16. Ra4 Rb8 17. Nc1 $1 $146 ({
+A nice innovation: Judit is going to swing the knight round to d3 to first
+pick up the b-pawn...and then the a-pawn! Such is the seriousness of Black's
+position now, Shirov has to resort to drastic action.} 17. Qd3 Ra8 18. Qd2 Rb8
+19. Qd3 Ra8 {
+1/2-1/2 Shirov,A-Kasparov,G/Frankfurt GER 2000/The Week in Chess 294 (19).})
+17... h5 $1 ({
+Let's admit it. Shirov was never the one to go quietly now, was he?} 17... Bg7
+18. Nd3 ({White can also win the b-pawn without losing the d-pawn with} 18. Na2
+$5 b3 19. Bxb3 O-O 20. Nc3) 18... Nxd5 19. Bxd5 Qxd5 20. Nxb4 Qxd2+ 21. Kxd2
+Kd7 22. Rb1 Ra8 23. Nd5 {
+and the ending would have been too awful to contemplate for Black.}) 18. Nd3
+Bh6 {Black's only hope is to take the game into the weird and wonderful world
+of Planet Shirov.} 19. Qxb4 Qc7 20. Qa3 O-O 21. Nf2 $1 ({A brave move. 
+Unbelievably, Judit is going to use her King as a defender on the queenside.
+And if it works, she's also going to have the King primed for the ending. The
+safer option would have been:} 21. O-O $5 Nd7 {
+with the idea of ..f5 to try and generate something - anything.}) 21... Bc1 22.
+Nd3 Be3 23. Kd1 $1 Rfc8 24. Re1 {Look at how all the White pieces are working
+together.  Judit's plan has been impressive.} 24... Bh6 25. c3 Rb5 {
+What else?  Shirov was just getting pushed off the board.} 26. Bxb5 axb5 27.
+Rb4 Nxd5 28. Rxb5 $1 {
+This simplifies everything - the advancing a-pawn cannot be stopped.} 28... Qc4
+29. Rxd5 Qxd5 30. Kc2 Ra8 31. a6 Qc6 32. Ra1 e4 {One last throw of the dice.}
+33. Nb4 Qc4 34. Qa5 exf3 35. gxf3 Re8 36. Qd5 $3 Re2+ 37. Kd1 Rd2+ 38. Qxd2
+Bxd2 39. Kxd2 Qf4+ 40. Kc2 Qf5+ 41. Nd3 Qxf3 42. Ra5 (42. a7 $4 Qg2+ $1 $11 43.
+Kd1 (43. Kb3 Qd5+ 44. Kb4 Qb7+) 43... Qf3+ 44. Kd2 Qg2+ {and White can't
+escape the perpetual - this has been a superbly played game by Judit.}) 42...
+Qa8 43. a7 d5 44. Nb4 d4 45. Nd5 dxc3 46. bxc3 Kg7 47. Kb3 {Not only getting
+out of any troublesome checks after Nb6 or c7, but also giving White an added
+option of a stylish win by taking his king to b6 (via b4 and c5)  and then
+playing Nc7.} 1-0
+
+[Event "SuperGM"]
+[Site "Linares ESP"]
+[Date "2001.02.28"]
+[Round "5"]
+[White "Kasparov, G."]
+[Black "Karpov, A."]
+[Result "1-0"]
+[ECO "B12"]
+[Annotator "Henderson,John"]
+[PlyCount "61"]
+[EventDate "2001.02.23"]
+
+1. e4 c6 2. d4 d5 3. e5 {This must have came as a surprise to Karpov. 
+Kasparov has never played the Advanced Variation, one of the most aggressive
+systems against the Caro.  These days Karpov is so predictable;  Kasparov has
+obviously prepared a minefield for him - the only question is: When is he
+going to step on it?} (3. Nd2 dxe4 4. Nxe4 Nd7 5. Ng5 Ngf6 6. Bc4 e6 7. Qe2 Nb6
+8. Bb3 h6 9. N5f3 c5 10. Bf4 Bd6 11. Bg3 Qe7 12. dxc5 Bxc5 13. Ne5 Bd7 14. Ngf3
+Nh5 15. O-O-O Nxg3 16. hxg3 O-O-O 17. Rh5 Be8 18. Rxd8+ Kxd8 19. Qd2+ Bd6 20.
+Nd3 Qc7 21. g4 Kc8 22. g5 Bf8 23. Rh4 Kb8 24. a4 Be7 25. a5 Nd5 26. Kb1 Bd8 27.
+a6 Qa5 28. Qe2 Nb6 29. axb7 Bxg5 30. Nxg5 Qxg5 31. Rh5 Qf6 32. Ra5 Bc6 33. Nc5
+Bxb7 34. Nxb7 Kxb7 35. Qa6+ Kc6 36. Ba4+ Kd6 37. Qd3+ Nd5 38. Qg3+ Qe5 39. Qa3+
+Kc7 40. Qc5+ Kd8 41. Rxa7 {1-0 Kasparov,G-Karpov,A/Linares 1992/CBM 28 (41)})
+3... Bf5 4. Nc3 e6 5. g4 Bg6 6. Nge2 Ne7 ({There was a funny incident at this
+stage in the press room.  One of the hacks had tuned in for the ICC coverage
+of the game and after he had "fingered" the K-K match, he almost fell off his
+seat when he saw that Karpov's king was wandering around the board! Turns out
+that, instead of the live coverage, Tony Miles was looking at some analysis on
+the Advanced, which featured a famous encounter between Braga and Timman!:} 
+6... c5 7. Be3 Nc6 8. dxc5 Nxe5 9. Nd4 Nf6 10. f4 Nexg4 11. Bb5+ Ke7 12. Bg1
+Qc7 13. c6 b6 14. Qe2 Qxf4 15. c7 Ne4 16. Nc6+ Kd6 17. h3 Qg3+ 18. Kf1 Qf4+ 19.
+Ke1 Qg3+ 20. Kf1 Qxc3 21. Qxg4 Qxb2 22. a4 Qxa1+ 23. Kg2 f5 24. Qh4 Qf6 25.
+Bh2+ Kc5 26. Nb8 Qxh4 27. c8=Q+ Kb4 28. Rb1+ Ka3 29. Ra1+ Kb4 30. Rb1+ Ka3 31.
+Ra1+ Kb4 {1/2-1/2 Braga,F-Timman,J/Mar del Plata 1982/MCL (31).}) 7. Nf4 c5 8.
+dxc5 (8. h4 cxd4 9. Nb5 Nec6 10. h5 Be4 11. f3 Bxf3 12. Qxf3 Nxe5 13. Qg3 Nbc6
+14. Nd3 Nxd3+ 15. Bxd3 e5 16. O-O Bc5 17. Rf5 O-O 18. h6 g6 19. Rxe5 a6 20. Na3
+Qc7 21. Bf4 Nxe5 22. Bxe5 Qb6 23. Rf1 Rae8 24. g5 Re6 25. Qf4 f5 26. gxf6 Kf7
+27. b4 Bd6 28. Nc4 dxc4 29. Bxc4 d3+ 30. Kh2 Rfe8 31. Bxd6 dxc2 32. Bc5 Qc6 33.
+Bd5 Qd7 {1-0 Kotronias,V-Karpov,A/Athens 1997/EXT 98 (33).}) 8... Nd7 ({
+There was an interesting aside here.  After the game, Alexei Shirov one (if
+not THE) world expert on this line, asked the hacks in the press room after
+the game if Karpov hadn't seen Kasparov's own analysis to his game with Bareev
+at KasparovChess.com, where Garry had mentioned the possibility of animpending 
+disaster in this line for Black after 9 h4?  Good question, Alexei!  But I
+replied that after Karpov's disastrous computer handling during his Advanced
+Match in Leon with Anand in 1999, I wasn't so sure that Karpov might know what
+the Internet was!  For the record, here's Shirov-Bareev game from New Delhi.} 
+8... Nec6 9. h4 Qc7 10. Bg2 Qxe5+ 11. Kf1 d4 12. h5 Bxc2 13. Qxc2 dxc3 14. Nd3
+Qd4 15. Be3 Qc4 16. Qxc3 Qxc3 17. bxc3 Na6 18. Rb1 O-O-O 19. Bxc6 bxc6 20. Ne5
+Rg8 21. Nxf7 Rd7 22. Ne5 Rb7 23. Rxb7 Kxb7 24. Nd3 e5 25. Ke2 Be7 26. Kf3 Kc7
+27. Ke4 Re8 28. Rh3 Kd7 29. Nxe5+ Kc7 30. Rf3 Bf6 31. Rf5 h6 32. f4 {
+1-0 Shirov,A-Bareev,E/New Delhi IND 2000/The Week in Chess 318 (32).}) 9. h4
+Nxe5 10. Bg2 h5 11. Qe2 N7c6 12. Nxg6 Nxg6 13. Bg5 $146 ({And here's the
+minefield.  Kasparov and the team had found a big improvement from Karpov's
+game last year against Shirov:} 13. Nxd5 Bxc5 14. Bg5 Nge7 15. Qb5 f6 16. Qxc5
+Nxd5 17. O-O-O Qe7 18. Qb5 O-O-O 19. Bd2 hxg4 20. Qc4 Nb6 21. Qxg4 Rd4 22. Qg3
+Rhd8 23. Bc3 Rxd1+ 24. Rxd1 Rxd1+ 25. Kxd1 Na4 26. Bxc6 {
+1/2-1/2 Shirov,A-Karpov,A/Monaco 2000/CBM 75 (26).}) 13... Be7 14. gxh5 Nf8 $2
+({It was only by now that Karpov was seeing the power of Kasparov's TN.  He's
+in a difficult position, and his only real alternative (bad as it was) was to
+try:} 14... Nge5 15. f4 $1 (15. h6 $2 Bxg5 16. hxg7 Rg8 17. hxg5 Qxg5 $17) (15.
+Nb5 Nc4 $1 $15) (15. Bxe7 Qxe7 $11) 15... Nd7 16. O-O-O Nxc5 17. Bxd5 $1 Qb8
+18. f5 Bxg5+ 19. hxg5 Qf4+ 20. Rd2 Qxf5 21. Qe3 $1 O-O-O 22. Bxc6 Rxd2 23.
+Bxb7+ Kxb7 24. Kxd2 $16) 15. Nb5 $1 Nd7 16. h6 $1 {Strong - very strong.} 16...
+Nxc5 (16... g6 17. Nd6+ Kf8 18. Bxe7+ Qxe7 19. h5 $1 Nxc5 20. hxg6 fxg6 (20...
+Qxd6 $2 21. g7+ Ke7 22. gxh8=Q Rxh8 23. O-O-O $18) 21. Qf3+ Kg8 22. Qg3 $1 Kh7
+23. O-O-O $16) 17. Bf4 $1 ({The position wasn't without its dangers for
+Kasparov either.  We found the following amusing line in the press room before
+Kasparov found the correct reply:} 17. hxg7 Rg8 18. Bf4 (18. Bh6 a6 19. Nc3 Nd4
+20. Qd2 Nf5 $11) 18... Rc8 19. O-O-O Nb4 20. a3 (20. Nxa7 Nb3+ 21. axb3 Rxc2+
+22. Qxc2 Nxc2 23. Kxc2 Qa5 24. Be3 Rxg7 $13) 20... Nb3+ 21. Kb1 Rxc2 22. Qh5
+Bf6 23. Be5 Rc1+ 24. Rxc1 Nd2+ 25. Ka1 Nb3+ 26. Kb1 Nd2+ 27. Ka1 Nb3+ $11)
+17... Kf8 $2 ({Black's only hope was to try and survive with:} 17... Na6 18.
+hxg7 Rg8 19. O-O-O $1 Rxg7 20. Rhg1 $1 Rc8 21. Qh5 $16) 18. hxg7+ Kxg7 19.
+O-O-O Kf8 ({Kasparov is now crashing through in all lines:} 19... a6 20. Nc3
+Bxh4 21. Qg4+ Kf8 22. Nxd5 $1 exd5 23. Rxd5 $18) 20. Kb1 {Not only looking to
+further open up the game with c4, but also avoiding any chances of the fantasy
+lines given to the note to move 17.} 20... a6 (20... Rc8 21. c4 $1 d4 22. Bxc6
+d3 (22... bxc6 23. Nxa7 $18) 23. Qe5 f6 24. Qe3 Rxc6 25. Qg3 e5 (25... Rg8 26.
+Qf3 $18) 26. Rhg1 $1 Kf7 27. Qg6+ Ke6 28. Bxe5 $1 Rxh4 29. Bxf6 Bxf6 30. Rge1+
+$18) 21. Nc7 Rc8 22. Bxd5 $1 exd5 23. Rxd5 Qxc7 ({
+There was no other option.  Trying to save the queen lost the king!} 23... Nd7
+24. Ne6+ $3 fxe6 25. Qxe6 Ncb8 26. Bd6 Rh7 (26... Bxd6 27. Rf5+ Nf6 28. Rxf6+
+$18) 27. Rg1 $18) 24. Bxc7 Rxc7 25. Rf5 Rd7 26. c3 f6 27. Rg1 Nd8 28. Qg4 Ke8
+29. Rh5 Rf8 30. Rxc5 Bxc5 31. Qh5+ 1-0
+
+[Event "SuperGM"]
+[Site "Linares ESP"]
+[Date "2001.03.02"]
+[Round "6"]
+[White "Kasparov, G."]
+[Black "Leko, P."]
+[Result "1-0"]
+[ECO "C88"]
+[WhiteElo "2849"]
+[BlackElo "2745"]
+[Annotator "Henderson,John"]
+[PlyCount "61"]
+[EventDate "2001.02.23"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. O-O Be7 6. Re1 b5 7. Bb3 O-O 8. a4
+{The Anti-Marshall. Although Leko has never played the Marshall (8 c3 d5), he
+has had plenty of experience of the White side of Frank's gambit, so would be
+well aware of all the nuances in it, so Kasparov avoids it. It's not that he
+is frightened of the Marshall.  It's just that, if Black doesn't go in for
+anything speculative, he has a safe draw.  Playing the Anti-Marshall against
+Nigel Short in their 1993 PCA title match was the advice given to Kasparov by
+the former Soviet giant and opening expert, Efim Geller.    } 8... Bb7 9. d3 d6
+10. Nbd2 Na5 11. Ba2 c5 12. Nf1 Re8 13. Ne3 $146 ({Different.  The standard
+Lopez knight manoeuvre is to head for f5 via g3.  Garry new idea keeps this as
+an option, but also allows him to cover d5 and c4.} 13. Ng3 h6 14. Nf5 Bf8 15.
+Bd2 b4 16. N3h4 d5 17. Qf3 Re6 18. Qg3 Kh7 19. Nf3 Nh5 20. Qg4 g6 21. Ne3 Nf6
+22. Qh4 Re8 23. exd5 Nxd5 24. Nxd5 Bxd5 25. Bxd5 Qxd5 26. Ng5+ Kh8 27. Ne4 Qd8
+28. Bg5 Qb6 29. Bxh6 Bxh6 30. Qxh6+ Kg8 31. Re3 {
+1-0 Balashov,Y-Frolov,D/Moscow 1996/CBM 55 ext (31).}) 13... h6 14. Bd2 c4 $6 (
+{The wrong choice, according to Leko.  Instead, he felt that} 14... b4 $1 {
+was a better option.}) 15. Bc3 Qb6 16. Nd2 Nc6 17. Nd5 Nxd5 18. exd5 Na5 19.
+Bxa5 $1 Qxa5 20. dxc4 $1 (20. axb5 $2 cxd3 21. Bc4 dxc2 (21... Qxa1 $2 22. Qxa1
+axb5 23. Qd1 dxc2 24. Qxc2 bxc4 25. Nxc4 $16) 22. Qxc2 Qc7 $1 23. bxa6 Bxa6 24.
+Qe4 Bg5 $11) 20... Qxa4 21. c5 ({Also good was} 21. Bb3 $5 Qb4 22. c3 Qc5 23.
+Ne4 Qc7 24. c5 $1 $14) 21... Qb4 ({The defining moment.  During the post
+mortem, Garry's legendary instinct detector was on full alert.  Looking at the
+position, he commented to Leko that Black's position "smelt bad" - and worse
+for this move.  Instead, both felt Black should have taken another route here,
+though it still favours White thanks to strength of the c & d-pawn:} 21... Qd4
+22. c6 (22. Ne4 $2 Qxd1 23. Raxd1 dxc5 24. d6 Bxe4 $1 $17) 22... Bc8 23. c3 Qb6
+24. Bb1 $1 $14 {and White still controls the game.}) ({Also no better was} 
+21... Qh4 22. c6 Bc8 23. c4 $1) 22. Ne4 $1 ({Kasparov, as ever, chooses the
+best line, though he could also have opted for the immediate push of the
+c-pawn:} 22. c6 $5 Bc8 23. Bb3 Bg4 $1 24. c3 (24. Nf3 Qf4 $1) 24... Qf4 25. f3
+Bc8 (25... Bf5 26. Bc2 $1 $14) 26. g3 Qg5 27. c4 $1 Rb8 28. Ne4 Qg6 29. c5 $14)
+22... Qxb2 23. cxd6 ({Winnin the queen was also an option:} 23. c3 f5 24. cxd6
+Bf8 (24... fxe4 25. dxe7 Qxc3 26. d6+ $18) 25. Re2 Qa3 26. Bb3 $18) 23... Bf8 (
+23... Bh4 24. g3 Bg5 25. c3 $18) 24. c3 f5 25. d7 Red8 26. d6+ Kh8 27. Nc5 Bc6
+28. Nd3 Qxc3 29. Nxe5 Be4 30. Nf7+ Kh7 31. Ng5+ (31. Ng5+ Kh8 32. Nxe4 fxe4 33.
+Qd5 $1 $18) 1-0
+
+[Event "SuperGM"]
+[Site "Linares ESP"]
+[Date "2001.03.02"]
+[Round "6"]
+[White "Polgar, J."]
+[Black "Grischuk, A."]
+[Result "1/2-1/2"]
+[ECO "C96"]
+[WhiteElo "2676"]
+[BlackElo "2663"]
+[Annotator "Henderson,John"]
+[PlyCount "107"]
+[EventDate "2001.02.23"]
+
+{"Remember the name of Alexander Grischuk for the future - he's got great
+potential," was the prophetic words to me last year at Linares from the
+legendary Russian chess editor of "64 - Review", Alexander Roshal.    Much
+like Anatoly Karpov, Garry Kasparov and Vladimir Kramnik, the 17-year-old
+Muscovite is another Russian who's become the leading player of his generation
+- and one with genuine designs on the laurel leafs of the world championship. 
+   The last year has proved to be the big breakthrough for Grischuk as he
+moved onto the world stage. After strong showings in the New York Open,
+Reykjavik Open and North Sea Cup, he went on to big wins at the Lausanne Yong
+Masters, Chigorin Memorial and the Torshavn International. Not content with
+that, he more than played his part in Russia winning the recent Chess Olympiad
+in Istanbul.     However, the highlight of that glittering year was
+unquestionably his performance in the Fide KO world championship in New Delhi.
+Unlucky to be knocked out in the semi-final by Alexei Shirov in a superb match,
+Grischuk walked away with some serious pocket money -  $172,000!    Grischuk
+showed he had a much better feeling for handling the nuances of the Black side
+of the Lopez than Leko, as he came close to defeating Judit Polgar.  } 1. e4 e5
+2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. O-O Be7 6. Re1 b5 7. Bb3 d6 8. c3 O-O 9. h3
+Na5 10. Bc2 c5 11. d4 Bb7 {The Romanishin Variation. Named after one the most
+original thinkers in the game, the Ukrainian GM Oleg Romanishin, who is one of
+the world's leading experts on this line. It's also one of Grischuk's
+favourite pet-lines.} 12. Nbd2 ({Traditional theory in the Lopez is that White
+should play d5 as soon as Black commits the bishop to b7. However modern
+players tend to opt for a more open centre, reasoning that at some point Black
+must make a minor concession by exchanging in the centre. The locking of the
+center with 12 d5 saw an amazing game between Shirov and Grischuk from the
+FIDE KO World Ch:} 12. d5 Nc4 13. a4 Nb6 14. Qe2 Nxa4 15. Bxa4 bxa4 16. c4 Nd7
+17. Rxa4 Nb6 18. Ra3 a5 19. Nc3 a4 20. Be3 Bc8 21. b3 axb3 22. Rxb3 Ra6 23.
+Reb1 f5 24. Bxc5 $1 dxc5 25. Nxe5 Na4 26. Nxa4 Rxa4 27. Nc6 Qc7 28. e5 Ra6 29.
+Qf3 f4 30. Re1 Bf5 31. Rb5 Bc2 32. Rb2 Bg6 33. Rd2 Be8 34. Nxe7+ Qxe7 35. d6
+Qe6 36. Qb7 Bc6 37. Qxa6 Bxg2 $3 38. f3 (38. Kxg2 f3+ 39. Kh2 Qf5 40. Qb7 Qf4+
+41. Kh1 Qf5 $11) 38... Bxf3 39. Kh2 Bg4 40. Qb7 Qh6 41. Qd5+ Rf7 42. Kg1 Qxh3
+43. Qg2 Qh4 44. Rf2 f3 $2 (44... Bh3 $1 $11) 45. e6 Rf8 46. e7 Re8 47. d7 Bxd7
+48. Qxf3 Qg5+ 49. Kf1 {1-0 Shirov,A-Grischuk,A/New Delhi IND 2000 (49).}) 12...
+cxd4 13. cxd4 exd4 14. Nxd4 Re8 15. b4 Nc6 16. Nxc6 Bxc6 17. Bb2 Nd7 (17... Bf8
+$6 18. Qf3 $1 Rc8 19. Bb3 Qe7 20. Rad1 Bb7 21. Qf5 d5 22. e5 Nd7 23. Ne4 g6 24.
+Qxd7 dxe4 25. e6 fxe6 26. Qd4 Kf7 27. Qh8 Qh4 28. g3 Qh5 29. Qf6+ Kg8 30. Rd7 {
+1-0 Xie Jun-Chiburdanidze,M/Manila 1991/CBM 26 (30).}) 18. Bb3 Bf6 19. Bxf6
+Nxf6 20. Rc1 Rc8 21. Qf3 Bb7 $1 22. Rxc8 ({Keeping the rooks on makes no
+difference: Black's going to get in the freeing ..d5 and all his problems have
+been solved.} 22. Rcd1 Qe7 23. Qf4 Qe5 24. Qxe5 Rxe5 25. f3 d5 $1 $11) 22...
+Qxc8 23. Qf4 Qc7 24. f3 Qb6+ 25. Qe3 ({Keeping the queens on was no option:} 
+25. Kh1 $2 Qd4 $1 {
+and Black has the upper hand due to the better pieces and dominating queen.})
+25... Qxe3+ 26. Rxe3 d5 $1 27. e5 $6 ({
+On reflection, perhaps Judit could have had an easier life with} 27. Bc2 $5
+dxe4 (27... Rc8 28. Bb3 $1) 28. Nxe4 Nd5 29. Rb3 Rc8 30. Bd3 Rc1+ 31. Kf2 {
+Black's a bit better, but White has an easier time of it here than in the game.
+}) 27... Nh5 $1 $15 28. Bc2 Rc8 $2 ({The young Muscovite was too hasty.  He
+had a great chance to round up on the vulnerable e-pawn which would have given
+him a golden opportunity for the full point.} 28... f6 $1 29. e6 Nf4 30. e7 Kf7
+31. Nb3 (31. Bxh7 $2 g6 $1 32. Nb3 Kg7 33. Nc5 Bc8 $19) 31... g6 32. Nc5 Bc8
+33. Bb3 Rxe7 $15) 29. Bf5 Rc1+ 30. Kf2 g6 31. Nb3 Rc4 32. Bd3 (32. Bd7 $2 Nf4
+$1 (32... Rxb4 $2 33. Nc5 $1 Bc6 34. Bxc6 Rc4 35. Bxd5 Rxc5 36. Bb7 $11) 33.
+Nc5 Rc2+ 34. Kf1 d4 35. Ra3 Bd5 $1 36. g3 Bc4+ 37. Ke1 Nd5 $19) 32... Rxb4 33.
+g3 Ng7 34. Re2 Bc8 35. Rc2 $1 ({Realistically the best chance.  White can't
+wait around for Black to reposition his pieces to make the ending simpler:} 35.
+h4 Bf5 $1 36. Bxf5 Nxf5 37. Nc5 a5 38. Nb7 a4 39. Nd6 a3 $1 $17) 35... Bxh3 36.
+Rc6 Ra4 37. g4 h5 $6 ({Grischuk misses his big chance here.  Instead} 37...
+Rxa2+ 38. Kg3 (38. Be2 Ne6 39. Nc1 Ra3 40. Kg3 Ng5 41. Nd3 h5 42. gxh5 Bf5 $1
+43. Nf4 Ne4+ 44. Kg2 Nc3 45. hxg6 fxg6 46. Kf2 (46. e6 Nxe2 47. Nxe2 Ra2 $19)
+46... d4 $19 {White can't stop all of the three passed pawns.}) 38... Ne6 $1
+39. Rxe6 (39. Nc5 Rg2+ $1 40. Kxh3 Nf4+ 41. Kh4 h6 $1 42. Bxg6 Nxg6+ 43. Kh3
+Rc2 $1 44. Rc8+ Kh7 45. Rc7 Nxe5 $19) 39... fxe6 40. Kxh3 Ra3 41. Bc2 b4 {
+wins for Black.}) 38. Nc5 Rxa2+ 39. Kg3 hxg4 40. fxg4 Ne6 ({There's now a ray
+of hope for Polgar.  Black's now finding it difficult to make progress due to
+the active White pieces:} 40... Ra3 41. Kxh3 (41. Kh4 Rc3 $1 $19) 41... Ne6 42.
+Nxe6 Rxd3+ 43. Kh4 fxe6 44. Rxa6 Kf7 45. Ra7+ Ke8 46. Kg5 $1 {
+and the king stuck on  the backrank guarantees White a draw.}) 41. Nxe6 fxe6
+42. Bxg6 Kg7 ({Grischuk was now realising the problems he had in trying to win
+from here.  The most obvious try also looks as if it draws:} 42... Bg2 43. Rxe6
+a5 44. Kf4 Rf2+ 45. Kg5 Be4 46. Bf5 $1 $11) 43. Bh5 Bf1 44. Rxe6 b4 45. Rg6+
+Kh8 46. Rb6 Bb5 47. g5 Ra1 48. g6 Rg1+ 49. Kf4 b3 50. Rb8+ Kg7 51. Rb7+ Kh8 52.
+Rb8+ Kg7 53. Rb7+ Kh8 54. Rb8+ 1/2-1/2
+
+[Event "SuperGM"]
+[Site "Linares ESP"]
+[Date "2001.03.03"]
+[Round "7"]
+[White "Polgar, Ju"]
+[Black "Kasparov, G."]
+[Result "1/2-1/2"]
+[ECO "B90"]
+[Annotator "Henderson,John"]
+[PlyCount "69"]
+[EventDate "2001.??.??"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 a6 6. Be3 {
+Again the English Attack.} 6... e6 7. f3 b5 8. Qd2 Nbd7 9. O-O-O Bb7 10. g4 Nb6
+11. Qf2 Nfd7 12. Bd3 Rc8 13. Nce2 Be7 14. h4 O-O 15. Kb1 Na4 $146 ({
+A novelty from Kasparov.  The standard continuation here is 15 ..d5:} 15... d5
+16. g5 dxe4 17. fxe4 Nc4 18. Bc1 Qb6 19. Qg2 Nde5 20. h5 Rfd8 21. Bxc4 Rxc4 22.
+Be3 Bc5 23. Qg3 Nd7 24. g6 hxg6 25. hxg6 fxg6 26. Qxg6 Nf8 27. Qh5 Bxe4 28.
+Rdf1 Nh7 29. Qf7+ Kh8 30. Nxe6 Rg8 31. Bxc5 Rxc5 32. N2f4 {
+1-0 Adams,M-Georgiev,K/Elenite 1993/CBM 38 (32).}) 16. g5 Ndc5 17. Ng3 Qc7 18.
+Nb3 d5 19. e5 $1 ({Attack was the only form of defense - especially against
+Kasparov! Sitting back and trying to defend this position wasn't really on for
+Judit, so she opts for counter-attack by opening up some lines towards
+Kasparov's own king.  Her other form of counter-attack wasn't so hopeful:} 19.
+exd5 Nxd3 20. Rxd3 Bxd5 21. Nf5 Bb4 $1 22. Rxd5 exd5 23. Bd4 Nc5 24. Nxg7 (24.
+Bxg7 Nxb3 25. axb3 Rfe8 26. Bd4 Bc5) 24... Nxb3 25. axb3 Bc5 $1 {
+with no direct route through to Kasparov's king.}) 19... Qxe5 20. Bd4 Qc7 21.
+f4 Ne4 {Attempting to blockade some of those open lines.} 22. Bxe4 dxe4 23.
+Rhe1 Bd6 24. Nh5 e5 25. c3 (25. Bxe5 $2 Bxe5 26. fxe5 Qxe5 27. Nd4 Rc4 $1 $19)
+25... f6 26. gxf6 exd4 27. Nxd4 g6 $2 (27... Ba3 $3 28. fxg7 (28. Ne6 Qf7 $1
+29. Qg3 Nxb2 30. Rd4 g6 31. f5 Na4 32. Re3 Bc5 33. fxg6 hxg6 34. Nxc5 Nxc5 35.
+Nf4 Kh7 36. h5 Qxf6 37. hxg6+ Kg8 38. Qh3 Rc7 $19) (28. bxa3 Nxc3+ 29. Ka1 Nxd1
+30. Rxd1 g6 31. Ne6 Qc3+ 32. Qb2) 28... Rf7 29. Rd2 Bxb2 30. Rxb2 Nxb2 31. Qxb2
+Qxc3 32. Qxc3 Rxc3 $19) 28. f5 gxh5 29. Ne6 ({
+The most obvious must have been tempting - but good for Kasparov!:} 29. Qg2+
+Kf7 (29... Kh8 30. Ne6 Rg8 31. Qd2 e3 32. Rxe3 Qc4 33. Qxd6 Rg2 $19) 30. Qg7+
+Ke8 31. Ne6 Nxc3+ 32. bxc3 Qxc3 33. Re2 Bd5 $1) 29... Nxc3+ 30. bxc3 Qxc3 31.
+Rxd6 Qb4+ 32. Ka1 Qc3+ 33. Kb1 Qb4+ 34. Ka1 Qc3+ 35. Kb1 1/2-1/2
+
+[Event "SuperGM"]
+[Site "Linares ESP"]
+[Date "2001.03.03"]
+[Round "7"]
+[White "Shirov, A."]
+[Black "Leko, P."]
+[Result "1/2-1/2"]
+[ECO "C88"]
+[Annotator "Henderson,John"]
+[PlyCount "85"]
+[EventDate "2001.??.??"]
+
+{"My grandfather plays more interesting chess than Peter...and he's been dead
+for years!"  So wrote a humble Olive Farmer from Greece (aka Nigel Short) on
+the ICC recently.  Well, this was at least a spirited effort from young Mr
+Leko in an attempt to dispel the "boring" tag - but he does seem to prefer the
+draw to the win when given the option!} 1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4
+Nf6 5. O-O Be7 6. Re1 b5 7. Bb3 O-O 8. h3 $5 {
+A Shirov, Anti-Marshall speciality.} 8... Bb7 9. d3 h6 10. Nc3 Bc5 $146 {
+Up to now, 10 ..Re8 or ..d6 has been the only moves here.  However, Leko's
+move fits in with his Archangel\Moeller set-up with ..Bb7.} 11. a4 b4 12. Ne2
+Na5 13. Ba2 d5 14. Nxe5 dxe4 15. d4 Ba7 16. Be3 Bd5 $1 {Common sense, really. 
+Leko has to do something about the knight on a5, and his move (challenging the
+Shirov's strong, white-squared bishop) makes way for the knight to come back
+into the game via b7 or c6.} 17. c4 bxc3 18. b4 Nc6 19. Nxc6 Bxc6 20. Nxc3 Nd5
+21. Bxd5 Bxd5 22. Bxh6 {It's Planet Shirov time!} 22... gxh6 23. Qg4+ Kh8 24.
+Qh5 f5 ({The draw is inevitable:} 24... Be6 25. Qxh6+ Kg8 26. Rad1 Bxd4 27.
+Rxd4 Qxd4 28. Nxe4 f6 29. Qg6+ $11) 25. Qxh6+ Kg8 26. Qg6+ Kh8 27. Qh6+ Kg8 28.
+Re3 {Shirov still has some trick's left before the draw.} 28... f4 29. Qg6+ Kh8
+30. Qh6+ Kg8 31. Qg6+ Kh8 32. Nxd5 {Nothing boring about this draw!} 32... fxe3
+33. Qh6+ Kg8 34. Qg6+ Kh8 {
+And we all sat back getting ready for the final repetition...or so we thought.}
+35. Rc1 $4 {They have a saying in Spain: "Tirar la casa la por ventana."
+(Throwing the house out of the window).  Fortunately for Shirov, Leko throws
+the house back through the window!} 35... Qh4 $4 ({Incredulous!  Leko turns
+down a rock-solid win in preference for a draw.  It's clear though what was
+going through his head: For the last dozen moves or so he's been ready for the
+draw.} 35... exf2+ $1 {
+spotted by everyone - including probably Nigel Short's grandfather!} 36. Kf1
+Qh4 $1 {Eh, where's the repetition, Alexei?} 37. Rxc7 Bxd4 38. Nf6 Bxf6 39. Rc5
+e3 40. Rh5+ Qxh5 41. Qxh5+ Kg7 42. Qg4+ Kh6 $1 43. Qf4+ Bg5 44. Qd6+ Rf6 $19)
+36. fxe3 Rg8 37. Nf4 $1 Bxd4 (37... Raf8 38. Qxe4 Qg3 39. Qe5+ Rg7 (39... Qg7
+$4 40. Ng6+ Kh7 41. Qh5+ Qh6 42. Nxf8+ Rxf8 43. Rxc7+ Kg8 44. Qxh6 $18) 40. Rc6
+Rxf4 41. Rh6+ Kg8 42. Qe6+ Rff7 43. Qc8+ Rf8 44. Qe6+ $11) 38. Qxe4 Bf6 39.
+Qxa8 Rxa8 40. Ng6+ Kg8 41. Nxh4 Bxh4 42. Rxc7 Be1 43. b5 1/2-1/2
+
+[Event "SuperGM"]
+[Site "Linares ESP"]
+[Date "2001.03.04"]
+[Round "7"]
+[White "Grischuk, A."]
+[Black "Karpov, An"]
+[Result "1-0"]
+[ECO "B12"]
+[Annotator "Henderson,John"]
+[PlyCount "99"]
+[EventDate "2001.??.??"]
+
+1. e4 c6 2. d4 d5 3. e5 Bf5 4. Nc3 Qb6 {After the carnage inflicted by
+Kasparov in round 5, Karpov wisely sidesteps any possibility of repetition by
+avoiding the main-line.} 5. Nf3 e6 6. Be2 Ne7 7. O-O Bg4 $146 {More often seen
+is 7 ..Nd7, but there is no real difference here as the line tends to go 7 ..
+Nd7 8 b3 Bg4.} 8. Na4 Qc7 9. b3 b5 {This may be a bit too committal - Grischuk
+can take advantage of Karpov's lack of development to open the game now. Maybe
+the cautious 9 ..Nd7 was to be preffered.} 10. Nb2 Nd7 11. c4 $1 bxc4 12. bxc4
+dxc4 13. Ng5 Bxe2 14. Qxe2 Nb6 15. Nxc4 Nf5 16. Rd1 Be7 17. Nf3 ({
+There was an option that took advantage of the bad, black pawns:} 17. Rb1 $5
+O-O 18. Qc2 $1 Nxc4 (18... Rfd8 19. g4 Bxg5 20. gxf5 Be7 21. fxe6 fxe6) 19.
+Qxc4 {White's got nice and easy play here.}) 17... Nxc4 18. Qxc4 Qd7 19. g4 Nh4
+20. Nxh4 Bxh4 21. g5 $1 h6 (21... Qd5 $6 22. Qxd5 cxd5 23. Rb1 h6 (23... O-O
+24. Rb3 $1) 24. gxh6 gxh6 25. Rb7 $14) 22. d5 $1 hxg5 23. Qxc6 Rc8 24. Qxd7+
+Kxd7 25. d6 f6 {The locked in bishop on h4 causes Karpov trouble.} 26. Be3 a5
+27. Rab1 Rb8 28. Bb6 ({Grischuk misses a good opportunity:} 28. Rbc1 $5 Rbc8 (
+28... Rhc8 29. Ba7 Rxc1 30. Rxc1 Rb7 31. Bd4 g4 32. Rc5 fxe5 33. Bxe5 Bf6 34.
+Rxa5 Bxe5 35. Rxe5 $14) 29. Bd4 g4 30. Kg2 {
+and White's much better in the ending.}) 28... fxe5 29. Rdc1 e4 30. Rc7+ Kxd6
+31. Rxg7 Rhc8 (31... Rhg8 32. Rh7 $1 Rbc8 (32... Rh8 33. Bc7+ Kc6 34. Rc1+ Kb7
+35. Rd7 $1 $16) 33. Bc7+ Kd5 (33... Kc6 34. Bxa5 Rgf8 35. Bb6 $14) 34. Rd1+ Kc5
+35. a4 $14) 32. Rd1+ Ke5 33. Be3 $2 ({Much better was} 33. Bc7+ $1 Kf6 34. Rdd7
+Rb1+ 35. Kg2 {with chances - though probably drawn with careful play.}) 33...
+Kf6 ({Karpov's habitual time trouble is his own downfall.  I suppose if he had
+more than the 50 or so seconds he had on the clock, he may well have
+discovered he had much better!:} 33... Rc2 $1 34. Rf7 Rb5 $1 35. Bd4+ Kd6 36.
+Ba7+ Kc6 37. Re7 Rbb2 38. Rxe6+ Kc7 39. Re7+ Kc8 40. Re8+ Kb7 41. Rd7+ Kc6 $1
+$17) 34. Rdd7 Rd8 35. Bxg5+ Bxg5 36. Rdf7+ Ke5 37. Rxg5+ Kd4 38. Ra7 $1 Rb1+ $2
+({Missing the main chance to save the game:} 38... e3 $1 39. fxe3+ Kxe3 40.
+Re5+ (40. Raxa5 Rd1+ 41. Kg2 Kf4 $1 $11) 40... Kd4 41. Raxa5 Rb1+ 42. Kf2 Rb2+
+43. Kg3 Rg8+ 44. Kf3 Rf8+ $11) 39. Kg2 Rb2 40. Raxa5 Rf8 $2 ({
+Desperation to make the final move at the time control: Karpov had to play} 
+40... Rd5 41. Rgxd5+ exd5 42. Kg3 $11) 41. Ra4+ $1 Kd3 42. Rg3+ Kd2 43. Rxe4 {
+The rest is academic now: White easily wins.} 43... Rxa2 44. Rxe6 Ra4 45. Rd6+
+Kc2 46. Rdd3 Raf4 47. Rgf3 Rxf3 48. Rxf3 Rh8 49. Rf4 Kd3 50. h4 1-0
+
+[Event "SuperGM"]
+[Site "Linares ESP"]
+[Date "2001.03.04"]
+[Round "8"]
+[White "Kasparov, Gary"]
+[Black "Shirov, Alexei"]
+[Result "1-0"]
+[ECO "A00"]
+[Annotator "ChessBase Team"]
+[PlyCount "75"]
+[EventDate "2001.02.23"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. O-O Nxe4 6. d4 b5 7. Bb3 d5 8. dxe5
+Be6 9. Nbd2 Nc5 10. c3 d4 11. Ng5 Qxg5 12. Qf3 O-O-O 13. Bxe6+ fxe6 14. Qxc6
+Qxe5 15. b4 Qd5 16. Qxd5 exd5 17. bxc5 dxc3 18. Nb3 d4 19. Ba3 g6 20. Bb4 Bg7
+21. a4 Kd7 ({This exact position occurred in Shirov-Timman, Hoogovens 1996.
+Shirov was White and won. This is how the game continued:} 21... Kd7 22. axb5
+axb5 23. Rad1 Ke6 24. Rfe1+ ({but we must also consider the following game:} 
+24. Rd3 Kd5 25. Na5 Ra8 26. Bxc3 Ke4 27. Rfd1 dxc3 28. Re3+ Kf5 29. g4+ Kxg4
+30. Nb3 Rhe8 31. Rg3+ Kh4 32. Rd7 Rg8 33. Rd5 Bf6 34. Nd4 g5 35. Rd7 Kh5 36.
+Rxc3 Ra1+ 37. Kg2 Rd1 38. Rxh7+ Kg6 39. Rxc7 Rxd4 40. Rb3 Rg4+ 41. Kf1 b4 42.
+Rc6 Kf5 43. Rd3 Re8 44. Rd5+ Re5 45. Rd7 Rc4 46. Rb7 Re6 47. Rc8 Bd4 48. c6 Bc3
+49. c7 Rec6 50. h3 Ke4 51. Ke2 Be5 52. Rcb8 Rc2+ 53. Kf1 Kf3 54. Ke1 Rc1+ 55.
+Kd2 Bf4+ {0-1 Sargissian,G-Danilovic,A/Moscow 1997.}) 24... Kd5 25. Bxc3 Kc4
+26. Ba5 Kxb3 27. Rb1+ Kc4 28. Rec1+ Kd5 29. c6 Kd6 30. Rxb5 Rb8 31. Bb4+ Ke6
+32. Re1+ Kf6 33. Be7+ Kf7 34. Rd5 Rhc8 35. Rd7 Kg8 36. g3 Rb6 37. Rc1 Rb3 38.
+Bc5 d3 39. Rd1 Rcb8 40. Kg2 Bf8 41. Bxf8 Rxf8 42. R1xd3 Rxd3 43. Rxd3 Rf7 44.
+f4 Re7 45. g4 Re6 46. Rd8+ Kf7 47. Rd7+ Re7 48. Rxe7+ Kxe7 49. g5 {1-0}) 22.
+axb5 axb5 23. Rfd1 ({Now we have only one predecessor game:} 23. Rfd1 Ke6 24.
+Rac1 Rd5 25. Ba5 Ra8 26. Rd3 Rxa5 27. Nxa5 Rxc5 28. Kf1 b4 29. Nb3 Rd5 30. Ra1
+c5 31. Ra6+ Rd6 32. Nxc5+ Kd5 33. Rxd6+ Kxc5 34. Rd8 b3 35. Rc8+ Kb4 36. Ke2
+Ka3 37. Rd1 c2 38. Rd3 Bh6 39. Rxc2 {
+1-0 Van den Doel,E-Timmermans,I/Deizisau 1999}) 23... Ke6 24. Rac1 {Deep Fritz
+thinks that Timmerman's move 24...Rd5 is not good. 24...c6 looks a bit like a
+draw (= 0.37). After a few minutes Fritz switches to 24...Rhe8 with a +0.56
+score. Maybe Kasparov is winning?! Well, Shirov is in a big think. He's
+probably looking for a way to escape. Our bets are now on Kasparov.} 24... Rhe8
+25. Kf1 Kf5 26. c6 g5 27. Ba5 Rd6 28. Bb4 Rdd8 29. Rd3 g4 30. Bc5 Ke4 31. Rcd1
+h5 {and Deep Fritz thinks Kasparov is completely winning.} 32. Nxd4 b4 33. Re3+
+Kd5 34. Bxb4 Kc4 35. Bxc3 Rxe3 36. fxe3 Rf8+ 37. Ke2 Kxc3 38. Ne6 {
+Shirov resigned.} 1-0
+
+[Event "SuperGM"]
+[Site "Linares ESP"]
+[Date "2001.03.05"]
+[Round "9"]
+[White "Karpov, A."]
+[Black "Kasparov, G."]
+[Result "1/2-1/2"]
+[ECO "D73"]
+[WhiteElo "2679"]
+[BlackElo "2849"]
+[Annotator "Henderson,John"]
+[PlyCount "71"]
+[EventDate "2001.??.??"]
+
+1. d4 Nf6 2. Nf3 g6 3. g3 Bg7 4. Bg2 d5 5. c4 dxc4 6. Na3 c3 7. bxc3 O-O 8. O-O
+c5 9. e3 {A modest little move. White intends to build a long-term advantage.}
+9... Nc6 10. Qe2 Bf5 11. Rd1 Qb6 $5 $146 ({An interesting TN from Kasparov,
+who signals his intent on complicating matters against his old foe.} 11... Qa5
+{is more usual. However, in that line, White would continue as in the game
+with Nc4, and Black will play ..Qa6 - therefore we sort of transpose back into
+the mainline.}) 12. Bb2 Rfd8 13. Nc4 Qa6 14. a4 {Karpov obviously doesn't like
+the idea of Kasparov fixing the a-pawn with a ..Qa4.} 14... Na5 15. Bf1 Ne4 16.
+Nfd2 ({
+It looks like the only move.  Kasparov would have been only too happy with} 16.
+Nce5 $6 Qxe2 17. Bxe2 Be6 {and white has a lot of vulnerable weakpoints}) 16...
+Nxd2 17. Nxa5 ({The other option didn't hold much promise for White:} 17. Nxd2
+Qxe2 18. Bxe2 Rac8 {and Black has an ideal Grunfeld ending.}) 17... Qxa5 (17...
+Nxf1 $5 18. Qxa6 bxa6 19. Kxf1 Bg4 20. Rd2 Bf3 {
+is unclear - Black has the bishop-pair, White the better pawn structure.}) 18.
+Rxd2 cxd4 19. cxd4 $2 ({On Karpov's own admission, this is a bad move. 
+Opening the c-file turns out bad for Karpov.  He had more dynamic chances with
+the alternative recapture:} 19. exd4 $1 e5 20. Qb5 $1 {and White's no worse.})
+19... Rac8 20. h3 ({
+Karpov was beginning to worry about ..Bg4, so felt he had to prevent it} 20.
+Bg2 Bg4 21. Qe1 b6 22. d5 Bc3 $1 (22... Bxb2 23. Rxb2 $11) 23. Bxc3 Qxc3 {
+with a small plus for Black.}) 20... Be4 21. Bg2 Bxg2 22. Kxg2 e5 $1 23. Kg1 h5
+24. h4 b6 25. Rdd1 exd4 26. Bxd4 Bxd4 27. exd4 ({The players came to the
+conclusion very quickly that the alternative recapture would have made life
+very difficult indeed for Karpov:} 27. Rxd4 $6 Rxd4 28. exd4 Qc3 29. Rd1 Qc4 (
+29... Qb3 30. a5 $11) 30. Qxc4 Rxc4 31. d5 Kf8 32. d6 Ke8 33. Re1+ Kd8 34. a5
+bxa5 35. Re7 a6 36. Rxf7 a4 {is going to be difficult to defend.}) 27... Qd5 (
+27... Qc3 28. Qe3 $11) 28. Qa6 $1 {In the nick of time.  Without this move,
+White would have an impossible job to hold the position. Left to his own
+devices, Kasparov would build-up on the c and a-pawns with ..Rc4 leaving White
+with an awkward defence.} 28... Rc7 ({Kasparov thought long and hard here over
+his other option, which he couldn't quite get to work.  Come the post mortem,
+the banter between the two titans (in Russian, obviously) became very animated:
+} 28... Rc2 $5 29. Qxa7 Rdc8 30. Rf1 $1 (30. Qxb6 Rxf2 $5 {Kasparov felt this
+must have been mating, however, my little silicon friend Deep Fritz seems to
+differ:} 31. Kxf2 Rc2+ 32. Ke3 Qg2 33. Qb8+ Kh7 34. Qb5 Qxg3+ (34... Qf2+ 35.
+Ke4 Qg2+ 36. Ke3 $11) 35. Ke4 Qg4+ (35... f5+ $2 36. Kd5 $18) 36. Ke3 $11)
+30... Qxd4 $11) 29. Rac1 Qxd4 (29... Rxc1 30. Rxc1 Qxd4 31. Qxa7 $11) 30. Rxd4
+Rxc1+ 31. Kg2 Rxd4 32. Qxa7 Rcc4 33. Qxb6 Rxa4 {Karpov even pointed out here
+he successfully defended a similar position in the 1971 Alekhine Memorial
+against Tal - and that went on for 103 moves!  There was no such chance of
+that here, particularly as Kasparov had already won the tournament!} 34. Qb8+
+Kh7 35. Qc7 Kg8 36. Qb8+ 1/2-1/2
+
+[Event "SuperGM"]
+[Site "Linares ESP"]
+[Date "2001.03.05"]
+[Round "9"]
+[White "Grischuk, A."]
+[Black "Shirov, A."]
+[Result "1-0"]
+[ECO "B90"]
+[WhiteElo "2663"]
+[BlackElo "2718"]
+[Annotator "Henderson,John"]
+[PlyCount "101"]
+[EventDate "2001.??.??"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 a6 6. f3 Qb6 7. Nb3 e6 8. g4 (
+{A little divergance.  Grischuk opted for} 8. Qe2 {against Kasparov.}) 8... Nc6
+9. Qe2 {Grischuk now intends Be3 and 0-0-0.} 9... d5 $146 {It's an early visit
+to Planet Shirov!  Only someone like Alexei could contemplate such a move at
+an early stage.  Still underdeveloped and with his king in the center, Shirov
+simply sacrifices a pawn.} 10. Be3 ({Accepting looked dangerous - especially
+faced over the board without the aid of a computer!:} 10. exd5 Nb4 11. dxe6
+Bxe6) (10. g5 d4 $1 {both with serious compensation.}) 10... d4 11. Bf2 Bc5 12.
+a3 $1 ({Castling long falls for a nice trick.  Instead, Grischuk wants to play
+Na4 without allowing the check on b4:} 12. O-O-O $2 d3 $1 13. Bxc5 dxe2 14.
+Bxb6 exd1=Q+ 15. Kxd1 Nd7 {with unclear play.}) 12... Qc7 ({
+Shirov may have been better opting for the pawn sacrifice with} 12... dxc3 $5
+13. Bxc5 Qc7 14. bxc3 Nd7 15. Be3 O-O {and Black will have good compensation
+with play down the c-file against the doubled pawns.}) 13. O-O-O (13. Nxc5 $5
+dxc3 14. b4 $1 {looked a safer bet for Grischuk.}) 13... Bxa3 $1 14. bxa3 ({
+White also had} 14. Nxd4 $5 Nxd4 (14... Bb4 15. Qc4 $1) (14... Be7 15. Nxc6
+Qxc6 16. Qc4 Qxc4 17. Bxc4 b5 18. Bb3 {white is slightly better.}) 15. Bxd4 (
+15. Rxd4 $2 Qxc3 $1) 15... e5 16. bxa3 (16. Nd5 Nxd5 17. exd5 Bd6 18. Bxe5 Bxe5
+19. Re1 f6 20. f4 Qa5 21. fxe5 Bxg4 $1 $11) 16... exd4 17. Nd5 Qd6 18. Kb2 O-O
+19. Rxd4 Nxd5 20. exd5 (20. Rxd5 Qb6+ 21. Ka1 Be6 $1) 20... Qb6+ 21. Rb4 Qf6+
+22. Kb1 Bd7 $1 {with unclear play.}) 14... dxc3 15. Bc5 e5 16. Qe3 Nd4 17. g5
+Nh5 18. Qxc3 Nxb3+ 19. cxb3 Be6 20. Kb2 $1 Rc8 21. Bb4 Qxc3+ 22. Bxc3 {
+After the dust has cleared, white has a small plus thanks to the bishop-pair.}
+22... f6 23. gxf6 gxf6 24. Rd6 Nf4 ({
+The immediate king move may have been better:} 24... Kf7 $5) 25. Bd2 $1 {
+White's now going to be a little better in the endgame due to the doubled
+f-pawns.} 25... Kf7 26. Bxf4 exf4 27. Bc4 (27. Rxe6 Kxe6 28. Bh3+ Ke5 $1 29.
+Bxc8 Rxc8 $11 {Black's king is very active here.}) 27... Bxc4 28. bxc4 Rxc4 29.
+Rd7+ Ke6 30. Rhd1 Rc6 $2 ({I don't know what was going through Shirov's head -
+the obvious reply was the simplest of draws:} 30... Rhc8 $1 31. R1d6+ (31. Rxh7
+Rc2+ 32. Kb1 R2c7 33. Rxc7 (33. Rh3 $2 Rc3 $1 $15) 33... Rxc7) 31... Ke5 32.
+Rd5+ Ke6 $11) 31. Rxb7 Rg8 32. Rdd7 Rg2+ 33. Kb3 Rxh2 34. Re7+ Kd6 35. Rbd7+
+Kc5 36. Rd5+ Kb6 37. a4 $1 {Threatening a5 mate!} 37... a5 38. Rb5+ Ka6 39. Re8
+$1 {Forcing a set of rooks off - the single rook ending is an easy win due to
+the f-pawns.} 39... Rb6 40. Ra8+ Kb7 41. Rb8+ Kxb8 42. Rxb6+ Kc7 43. Rxf6 h5
+44. Rxf4 h4 45. Kc4 h3 46. Rh4 Rh1 47. Kd5 h2 48. Ke5 Rf1 49. Rxh2 Rxf3 50.
+Rc2+ Kb6 51. Rc4 1-0
+
+[Event "SuperGM"]
+[Site "Linares ESP"]
+[Date "2001.03.06"]
+[Round "10"]
+[White "Kasparov, G."]
+[Black "Grischuk, A."]
+[Result "1-0"]
+[ECO "B45"]
+[WhiteElo "2849"]
+[BlackElo "2663"]
+[Annotator "Henderson,John"]
+[PlyCount "89"]
+[EventDate "2001.02.23"]
+
+1. e4 c5 2. Nf3 Nc6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 e6 6. Nxc6 ({After} 6. Ndb5
+d6 {White has to accept transposing into a Sveshnikov Sicilian with} 7. Bf4 e5
+8. Bg5) 6... bxc6 7. e5 Nd5 8. Ne4 Bb7 ({A little played side-line (only two
+or three games in the database!)  that got a lot of attention two years ago at
+Linares, when Peter Leko decided to try it against Kasparov.  The mainline is} 
+8... Qc7 9. f4 Qb6) 9. Be2 c5 10. O-O (10. c4 $6 Ne3 $1 11. Bxe3 Bxe4 12. f3
+Bc6 $11) 10... Qc7 11. Nd6+ ({White has to be careful not to open the game up
+too early - it could lead to Black's advantage:} 11. f4 f5 $1 12. exf6 Nxf6 13.
+Nxf6+ gxf6 14. Bh5+ Kd8 15. f5 Bd6 {
+and if anything, it's the Black pieces that are the more dangerous.}) 11...
+Bxd6 12. exd6 Qc6 (12... Qb6 {is also an alternative.}) 13. f3 c4 14. Qd4 O-O
+15. Bxc4 Rfc8 ({Finally we diverge from the aforementioned Kasparov-Leko game.
+Grischuk is hoping the resulting ending with opposite coloured  bishops will
+ease his chances of drawing:} 15... Qxd6 16. Bb3 Qb6 17. Rd1 Rfc8 18. Qxb6 Nxb6
+19. a4 d5 20. a5 Nc4 21. a6 Bc6 22. Bxc4 dxc4 23. Be3 Bd5 24. Ra5 Rc6 25. Rda1
+f6 26. h4 Kf7 27. Rb5 Rc7 28. Kf2 Rd8 29. Raa5 Ke7 30. Kg3 h5 31. b4 cxb3 32.
+cxb3 Rg8 33. Rc5 Rd7 34. b4 g5 35. Rc2 g4 36. Kf2 g3+ 37. Ke1 e5 38. Rd2 Rgd8
+39. Rc5 Ke6 40. b5 Rb8 41. Rd3 Rbd8 42. Rd2 Rb8 43. Rd3 Rbd8 44. b6 axb6 45.
+Rb5 Bc4 46. Rxb6+ Kf5 47. Rxd7 Rxd7 48. a7 {
+1/2-1/2 Kasparov,G-Leko,P/Linares 1999/CBM 70 (48).}) 16. Bxd5 $1 ({Kasparov is
+quick to see that the ending is good - Black is going to get in a bit of a
+tangle recouping the pawn, giving White the time to organise the advance of
+the queenside pawns.} 16. Bb3 $6 Qxd6 17. c4 e5 18. Qd3 Qc5+ 19. Kh1 Ba6 $1)
+16... Qxd5 ({The finesse of taking first on d6 will backfire - badly} 16...
+Qxd6 $2 17. Bh6 $3 gxh6 18. Qg4+ Kh8 19. Bxb7 Qb6+ 20. Rf2 Qxb7 21. c3 {
+and Black's in a bad way because of the crippled pawn structure.}) 17. Qxd5
+Bxd5 18. Rf2 $1 {With White looking to play c4, why waste a tempo with c3?}
+18... Rc6 19. Bf4 Rac8 20. Rc1 Ra6 (20... Bxa2 $2 21. Ra1 Bd5 22. Rxa7 Rxc2 23.
+Rxc2 Rxc2 24. Rxd7 $18) 21. a3 ({
+Black has a good chance of saving the game if White is too hasty:} 21. b3 Rxa2
+22. c4 Rxf2 23. Kxf2 Bb7 {
+with ideal drawing chances because of the opposite bishops.}) 21... f6 22. Be3
+Ra4 23. Ra1 $1 {With the idea of activating the pawns with b3 and c4.} 23... e5
+24. b3 Ra6 25. c4 Be6 26. Rd2 Rb8 27. Rd3 Rb7 28. g4 h5 29. h3 hxg4 30. hxg4 f5
+31. Bc5 $1 Rc6 32. b4 $1 {Two very precise moves have left Black struggling
+further and further in the hope of saving the ending.} 32... fxg4 33. fxg4 Rc8
+34. Re1 Bxc4 35. Rc3 Bb5 36. Rxe5 Rf8 37. Bxa7 Bc6 38. Be3 Rbb8 39. Bg5 Rb5 40.
+Rcc5 Rb6 41. b5 Bf3 42. Be7 Ra8 43. Rg5 Rxa3 44. Bf6 Kf7 45. Bb2 1-0

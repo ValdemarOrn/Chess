@@ -8,47 +8,6 @@ using System.Text;
 
 namespace Chess.Base
 {
-	public class OpeningMove
-	{
-		public Move Move;
-
-		public int WhiteWins;
-		public int BlackWins;
-		public int Tie;
-		public int Total;
-
-		public double WhiteWinPercent { get { return WhiteWins * 100 / (double)Total; } }
-		public double BlackWinPercent { get { return BlackWins * 100 / (double)Total; } }
-	}
-
-	public class MoveFilter
-	{
-		public int MinNumberOfGames;
-
-		/// <summary>
-		/// Set mimimum win % when playing as white
-		/// </summary>
-		public double MinWhiteWinPercent;
-
-		/// <summary>
-		/// Set mimimum win % when playing as black
-		/// </summary>
-		public double MinBlackWinPercent;
-
-		/// <summary>
-		/// Set maximum win % of white when playing as Black
-		/// </summary>
-		public double MaxWhiteWinPercent;
-
-		/// <summary>
-		/// Set maximum win % of black when playing as White
-		/// </summary>
-		public double MaxBlackWinPercent;
-
-		public double ImportanceOfGameCount;
-		public double ImportantOfWinPercentage;
-	}
-
 	public class OpeningBook
 	{
 		/// <summary>
@@ -108,7 +67,7 @@ namespace Chess.Base
 				}
 			}
 
-			output = output.OrderBy(x => x).ToList();
+			output = output.Where(x => !String.IsNullOrWhiteSpace(x)).OrderBy(x => x).ToList();
 			return output;
 		}
 
@@ -165,7 +124,14 @@ namespace Chess.Base
 			return moves.Select(x => x.Value).ToList();
 		}
 
-		public Move SelectMove(List<OpeningMove> openingMoves, Color player, MoveFilter filter)
+		/// <summary>
+		/// Filters the possible moves based and selects one with a weighted random function
+		/// </summary>
+		/// <param name="openingMoves"></param>
+		/// <param name="player"></param>
+		/// <param name="filter"></param>
+		/// <returns></returns>
+		public Move SelectMove(List<OpeningMove> openingMoves, Color player, OpeningBookFilter filter)
 		{
 			List<OpeningMove> validMoves = new List<OpeningMove>();
 			int total = openingMoves.Sum(x => x.Total);
@@ -201,6 +167,14 @@ namespace Chess.Base
 
 		static RNGCryptoServiceProvider Rand = new RNGCryptoServiceProvider();
 
+		/// <summary>
+		/// returns a random object from the list, taking into account its weight
+		/// (possibility of it being selected).
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="list"></param>
+		/// <param name="weightFunction"></param>
+		/// <returns></returns>
 		private T WeightedRandom<T>(List<T> list, Func<T, double> weightFunction)
 		{
 			var totalWeight = list.Sum(x => weightFunction(x));

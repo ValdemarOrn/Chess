@@ -34,6 +34,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chess.Vladivostok", "Vladiv
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Chess.Lib", "Chess.Lib\Chess.Lib.vcxproj", "{A0FB4011-6EB9-4444-8323-84F34A9939BB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chess.Testbed", "Chess.Testbed\Chess.Testbed.csproj", "{4CB8A3ED-2221-4877-8981-F1CCA2571802}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chess.Testbed.Tests", "Chess.Testbed.Tests\Chess.Testbed.Tests.csproj", "{FD0BEF03-9A4D-419B-A1B0-486DEE89735B}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Chess.vsmdi
@@ -149,6 +153,18 @@ Global
 		{A0FB4011-6EB9-4444-8323-84F34A9939BB}.Release|x64.Build.0 = Release|x64
 		{A0FB4011-6EB9-4444-8323-84F34A9939BB}.Release|x86.ActiveCfg = Release|Win32
 		{A0FB4011-6EB9-4444-8323-84F34A9939BB}.Release|x86.Build.0 = Release|Win32
+		{4CB8A3ED-2221-4877-8981-F1CCA2571802}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{4CB8A3ED-2221-4877-8981-F1CCA2571802}.Debug|x64.Build.0 = Debug|Any CPU
+		{4CB8A3ED-2221-4877-8981-F1CCA2571802}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4CB8A3ED-2221-4877-8981-F1CCA2571802}.Debug|x86.Build.0 = Debug|Any CPU
+		{4CB8A3ED-2221-4877-8981-F1CCA2571802}.Release|x64.ActiveCfg = Release|Any CPU
+		{4CB8A3ED-2221-4877-8981-F1CCA2571802}.Release|x86.ActiveCfg = Release|Any CPU
+		{FD0BEF03-9A4D-419B-A1B0-486DEE89735B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{FD0BEF03-9A4D-419B-A1B0-486DEE89735B}.Debug|x64.Build.0 = Debug|Any CPU
+		{FD0BEF03-9A4D-419B-A1B0-486DEE89735B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FD0BEF03-9A4D-419B-A1B0-486DEE89735B}.Debug|x86.Build.0 = Debug|Any CPU
+		{FD0BEF03-9A4D-419B-A1B0-486DEE89735B}.Release|x64.ActiveCfg = Release|Any CPU
+		{FD0BEF03-9A4D-419B-A1B0-486DEE89735B}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

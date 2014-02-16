@@ -8,6 +8,7 @@ namespace Chess.Uci
 	/// <summary>
 	/// UCI Option Types
 	/// </summary>
+	[Serializable]
 	public enum UciOptionType
 	{
 		Check,

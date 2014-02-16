@@ -1,0 +1,29 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Chess.Testbed.Views" x:Class="Chess.Testbed.Views.MainWindow"
+        Title="Chess Testbed" Height="670" Width="940">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0" IsMainMenu="True" VerticalAlignment="Top" >
+            <MenuItem Header="_File">
+                <MenuItem Header="_Save Settings" Command="{Binding SaveSettingsCommand}"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="_Edit" />
+            <MenuItem Header="_Help" />
+        </Menu>
+        
+        <TabControl Grid.Row="1">
+            <TabItem Header="Scheduler">
+                <local:PlayView Height="Auto" Width="Auto" />
+            </TabItem>
+            <TabItem Header="Engines">
+                <local:EnginesView Height="Auto" Width="Auto" />
+            </TabItem>
+            
+        </TabControl>
+    </Grid>
+</Window>

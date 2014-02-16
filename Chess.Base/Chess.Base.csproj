@@ -65,6 +65,8 @@
     <Compile Include="Notation.cs" />
     <Compile Include="Moves.cs" />
     <Compile Include="OpeningBook.cs" />
+    <Compile Include="OpeningMove.cs" />
+    <Compile Include="OpeningMoveFilter.cs" />
     <Compile Include="Perft.cs" />
     <Compile Include="PGN\GameAnnotation.cs" />
     <Compile Include="PGN\GameComment.cs" />

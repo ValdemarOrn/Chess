@@ -1,0 +1,41 @@
+﻿<local:UserControlBase x:Class="Chess.Testbed.Views.EngineSettingView"
+                       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                       xmlns:local="clr-namespace:Chess.Testbed.Views"
+                       xmlns:control="clr-namespace:Chess.Testbed.Control"
+                       mc:Ignorable="d"
+                       d:DesignHeight="25" d:DesignWidth="372">
+    <local:UserControlBase.Resources>
+        <control:BoolToVisibilityConverter x:Key="boolVisibility" />
+        <control:BoolStringConverter x:Key="boolString" />
+    </local:UserControlBase.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="50"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock x:Name="textBlock" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,5,0" Text="{Binding Option.Name}"></TextBlock>
+
+        <TextBox Grid.Column="1" VerticalAlignment="Center" Text="{Binding Path=Value, UpdateSourceTrigger=PropertyChanged}"
+                 Visibility="{Binding Path=StringVisible, Converter={StaticResource ResourceKey=boolVisibility}}" />
+
+        <ComboBox Grid.Column="1" VerticalAlignment="Center" SelectedValue="{Binding Path=Value}" ItemsSource="{Binding Option.Options}"
+                 Visibility="{Binding Path=ComboBoxVisible, Converter={StaticResource ResourceKey=boolVisibility}}" />
+
+        <control:NumericTextBox Grid.Column="1" VerticalAlignment="Center" Min="{Binding Option.Min}" Max="{Binding Option.Max}" 
+                                Value="{Binding Path=Value}"
+                                Visibility="{Binding Path=SpinnerVisible, Converter={StaticResource ResourceKey=boolVisibility}}" />
+
+        <CheckBox Grid.Column="1" VerticalAlignment="Center" IsChecked="{Binding Path=Value, Converter={StaticResource ResourceKey=boolString}}"
+                 Visibility="{Binding Path=CheckBoxVisible, Converter={StaticResource ResourceKey=boolVisibility}}" />
+
+        <Button Grid.Column="1" VerticalAlignment="Center" Content="{Binding Option.Name}"
+                 Visibility="{Binding Path=ButtonVisible, Converter={StaticResource ResourceKey=boolVisibility}}" />
+
+        <Button Grid.Column="2" VerticalAlignment="Center" Margin="5,0,0,0" Command="{Binding SetDefaultCommand}">Reset</Button>
+    </Grid>
+</local:UserControlBase>
