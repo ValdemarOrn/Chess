@@ -22,16 +22,18 @@ namespace Chess.Testbed
 		}
 
 		[DllImport("kernel32")]
-		static extern bool AllocConsole();
+		private static extern bool AllocConsole();
 
 		public static bool IsInitialized { get; private set; }
 		public static bool EnableConsoleLog { get; private set; }
 		public static bool EnableFileLog { get; private set; }
 
-		static object lockObject = new object();
-		static Timer timer;
-		static FileStream fileStream;
-		static StreamWriter streamWriter;
+		private static object lockObject = new object();
+		private static Timer timer;
+		private static FileStream fileStream;
+		private static StreamWriter streamWriter;
+		private static DateTime lastFlushTime;
+		private static int flushIntervalMillis;
 
 		public static void InitLogging(bool enableConsoleLog, bool enableFileLog)
 		{
@@ -41,17 +43,27 @@ namespace Chess.Testbed
 			if (IsInitialized)
 				throw new Exception("Logging already initialized");
 
-			Application.Current.DispatcherUnhandledException += Current_DispatcherUnhandledException;
+			if (Application.Current != null)
+				Application.Current.DispatcherUnhandledException += Current_DispatcherUnhandledException;
 
 			if (EnableFileLog)
 			{
 				var filename = string.Format("Chess.Testbed-{0:yyyy-MM-dd-HHmmss}.log", DateTime.Now);
-				var dir = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+				var dir = MasterState.ExeDir;
 				var filepath = Path.Combine(dir, "Logs", filename);
 				Directory.CreateDirectory(Path.GetDirectoryName(filepath));
 				fileStream = new FileStream(filepath, FileMode.CreateNew, FileAccess.Write, FileShare.Read);
 				streamWriter = new StreamWriter(fileStream);
-				timer = new Timer((e) => streamWriter.Flush(), null, 1000, 1000);
+				flushIntervalMillis = 1000;
+				timer = new Timer((e) =>
+				{
+					lock (lockObject)
+					{
+						streamWriter.Flush();
+						lastFlushTime = DateTime.Now;
+					}
+
+				}, null, flushIntervalMillis, flushIntervalMillis);
 			}
 
 			if (EnableConsoleLog)
@@ -144,10 +156,18 @@ namespace Chess.Testbed
 		{
 			lock (lockObject)
 			{
-				if (EnableFileLog)
-					streamWriter.WriteLine(message);
 				if (EnableConsoleLog)
 					Console.WriteLine(message);
+
+				if (EnableFileLog)
+				{
+					streamWriter.WriteLine(message);
+					if ((DateTime.Now - lastFlushTime).TotalMilliseconds > flushIntervalMillis)
+					{
+						lastFlushTime = DateTime.Now;
+						streamWriter.Flush();
+					}
+				}
 			}
 		}
 		

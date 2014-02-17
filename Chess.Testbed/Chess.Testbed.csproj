@@ -63,13 +63,53 @@
     </ApplicationDefinition>
     <Compile Include="Control\BoolStringConverter.cs" />
     <Compile Include="Control\BoolToVisibilityConverter.cs" />
+    <Compile Include="Control\EnumStringConverter.cs" />
     <Compile Include="Control\NumericTextBox.xaml.cs">
       <DependentUpon>NumericTextBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Control\ScheduledMatchToStringConverter.cs" />
     <Compile Include="Extensions.cs" />
-    <Compile Include="GameManager.cs" />
+    <Compile Include="IPlayer.cs" />
+    <Compile Include="MatchRunner.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="MasterState.cs" />
+    <Compile Include="Pieces\BlackBishop.xaml.cs">
+      <DependentUpon>BlackBishop.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pieces\BlackKing.xaml.cs">
+      <DependentUpon>BlackKing.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pieces\BlackKnight.xaml.cs">
+      <DependentUpon>BlackKnight.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pieces\BlackPawn.xaml.cs">
+      <DependentUpon>BlackPawn.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pieces\BlackQueen.xaml.cs">
+      <DependentUpon>BlackQueen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pieces\BlackRook.xaml.cs">
+      <DependentUpon>BlackRook.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pieces\WhiteBishop.xaml.cs">
+      <DependentUpon>WhiteBishop.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pieces\WhiteKing.xaml.cs">
+      <DependentUpon>WhiteKing.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pieces\WhiteKnight.xaml.cs">
+      <DependentUpon>WhiteKnight.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pieces\WhitePawn.xaml.cs">
+      <DependentUpon>WhitePawn.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pieces\WhiteQueen.xaml.cs">
+      <DependentUpon>WhiteQueen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pieces\WhiteRook.xaml.cs">
+      <DependentUpon>WhiteRook.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScheduledMatch.cs" />
     <Compile Include="Serializer.cs" />
     <Compile Include="UciProcess.cs" />
     <Compile Include="TimeSettings.cs" />
@@ -79,13 +119,61 @@
     <Compile Include="Views\EngineSettingViewModel.cs" />
     <Compile Include="Views\MainWindowViewModel.cs" />
     <Compile Include="Views\PlayViewModel.cs" />
-    <Compile Include="Views\TimeControlView.xaml.cs">
-      <DependentUpon>TimeControlView.xaml</DependentUpon>
+    <Compile Include="Views\TimeView.xaml.cs">
+      <DependentUpon>TimeView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\TimeControlViewModel.cs" />
+    <Compile Include="Views\TimeViewModel.cs" />
     <Compile Include="Views\UserControlBase.cs" />
     <Compile Include="Views\ViewModelBase.cs" />
     <Page Include="Control\NumericTextBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pieces\BlackBishop.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pieces\BlackKing.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pieces\BlackKnight.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pieces\BlackPawn.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pieces\BlackQueen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pieces\BlackRook.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pieces\WhiteBishop.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pieces\WhiteKing.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pieces\WhiteKnight.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pieces\WhitePawn.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pieces\WhiteQueen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pieces\WhiteRook.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -119,7 +207,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\TimeControlView.xaml">
+    <Page Include="Views\TimeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ViewStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -71,7 +71,6 @@ namespace Chess.Testbed.Views
 		{
 			SelectedEngine = MasterState.Instance.CreateNewEngine();
 			NotifyChanged(() => Engines);
-			MasterState.Instance.TriggerAction(MasterState.EventEnginesChanged);
 		}
 
 		private void BrowseEngine()
@@ -96,12 +95,6 @@ namespace Chess.Testbed.Views
 				SelectedEngine.LoadEngineData();
 				NotifyChanged(() => SelectedEngine);
 				NotifyChanged(() => SelectedEngineOptions);
-				/*foreach (var val in SelectedEngine.OptionSettings)
-				{
-					var option = SelectedEngine.Options.SingleOrDefault(x => x.Name == val.Key);
-					if (option != null)
-						option.Value = val.Value;
-				}*/
 			}
 			catch (Exception e)
 			{

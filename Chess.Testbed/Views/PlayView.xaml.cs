@@ -25,9 +25,15 @@ namespace Chess.Testbed.Views
 			DataContext = new PlayViewModel();
 		}
 
-		private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		private void ListBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			(DataContext as PlayViewModel).Opponents = (sender as ListBox).SelectedItems.Cast<UciEngineSettings>().ToArray();
+			((PlayViewModel)DataContext).Opponents = ((ListBox)sender).SelectedItems.Cast<UciEngineSettings>().ToArray();
+		}
+
+		private void UserControlIsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+		{
+			if ((bool)e.NewValue)
+				((PlayViewModel)DataContext).ReloadScheduledMatchesCommand.Execute(null);
 		}
 	}
 }

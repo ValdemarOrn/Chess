@@ -9,8 +9,16 @@ namespace Chess.Testbed
 {
 	public class UciProcess
 	{
-		private Process EngineProcess;
-		private System.Threading.AutoResetEvent ResetEvent;
+		public enum CommandDirection
+		{
+			EngineInput,
+			EngineOutput
+		}
+
+		private Process engineProcess;
+		private System.Threading.AutoResetEvent resetEvent;
+
+		public event Action<CommandDirection, string> CommandSendEvent;
 
 		public UciEngineSettings Settings { get; private set; }
 		public bool EngineStarted { get; private set; }
@@ -30,7 +38,7 @@ namespace Chess.Testbed
 
 		public UciProcess(UciEngineSettings settings)
 		{
-			ResetEvent = new System.Threading.AutoResetEvent(false);
+			resetEvent = new System.Threading.AutoResetEvent(false);
 			Options = new List<UciOption>();
 			Settings = settings;
 
@@ -49,31 +57,34 @@ namespace Chess.Testbed
 				//WorkingDirectory = ""
 			};
 
-			EngineProcess = new Process();
-			EngineProcess.StartInfo = startInfo;
-			EngineProcess.EnableRaisingEvents = true;
-			EngineProcess.OutputDataReceived += (s, e) => { ReadCommand(e.Data); };
+			engineProcess = new Process { StartInfo = startInfo, EnableRaisingEvents = true };
+			engineProcess.OutputDataReceived += (s, e) => ReadCommand(e.Data);
 		}
 
 		public void Start()
 		{
-			EngineProcess.Start();
+			engineProcess.Start();
 			EngineStarted = true;
-			EngineProcess.BeginOutputReadLine();
+			engineProcess.BeginOutputReadLine();
 			WriteCommand("uci");
-			ResetEvent.WaitOne(); // set by readyok
+			resetEvent.WaitOne(); // set by readyok
 		}
 
 		public void WriteCommand(string data)
 		{
-			EngineProcess.StandardInput.WriteLine(data);
-			EngineProcess.StandardInput.Flush();
+			engineProcess.StandardInput.WriteLine(data);
+			engineProcess.StandardInput.Flush();
+			if (CommandSendEvent != null)
+				CommandSendEvent.Invoke(CommandDirection.EngineInput, data);
 		}
 
 		private void ReadCommand(string data)
 		{
 			if (String.IsNullOrWhiteSpace(data))
 				return;
+
+			if (CommandSendEvent != null)
+				CommandSendEvent.Invoke(CommandDirection.EngineOutput, data);
 
 			var parts = data.Split(' ');
 			if (parts.Length < 0)
@@ -85,7 +96,7 @@ namespace Chess.Testbed
 
 			var cmd = command.Value;
 			Dictionary<string, string> parameters;
-			string name = null;
+			string name;
 
 			switch (cmd)
 			{
@@ -145,8 +156,8 @@ namespace Chess.Testbed
 					name = parameters["name"];
 					var type = UciUtils.GetEnum<UciOptionType>(parameters["type"]).Value;
 					var def = parameters.GetValueOrNull("default");
-					var min = parameters.ContainsKey("min") ? Convert.ToInt32(parameters["min"]) : new Nullable<int>();
-					var max = parameters.ContainsKey("max") ? Convert.ToInt32(parameters["max"]) : new Nullable<int>();
+					var min = parameters.ContainsKey("min") ? Convert.ToInt32(parameters["min"]) : new int?();
+					var max = parameters.ContainsKey("max") ? Convert.ToInt32(parameters["max"]) : new int?();
 					Option(name, type, def, min, max, vars);
 					break;
 			}
@@ -187,7 +198,7 @@ namespace Chess.Testbed
 			WriteCommand("ucinewgame");
 		}
 
-		public void Position(string fenString, List<UciMove> moves)
+		public void Position(string fenString, IEnumerable<UciMove> moves)
 		{
 			string output = "position ";
 
@@ -196,9 +207,10 @@ namespace Chess.Testbed
 			else
 				output += "fen " + fenString;
 
-			if (moves != null && moves.Count > 0)
+			var moveArray = moves.ToArray();
+			if (moves != null && moveArray.Length > 0)
 			{
-				output += " moves " + moves.Select(x => x.ToString()).Aggregate((m, x) => m + " " + x);
+				output += " moves " + moveArray.Select(x => x.ToString()).Aggregate((m, x) => m + " " + x);
 			}
 
 			WriteCommand(output);
@@ -269,7 +281,7 @@ namespace Chess.Testbed
 		private void ReadyOk()
 		{
 			ReadyOkFlag = true;
-			ResetEvent.Set();
+			resetEvent.Set();
 		}
 
 		private void CopyProtection(bool protectionIsOk)
@@ -284,7 +296,7 @@ namespace Chess.Testbed
 
 		private void Option(string name, UciOptionType type, object defaultValue, int? min, int? max, List<object> options)
 		{
-			var opt = new UciOption()
+			var opt = new UciOption
 			{
 				DefaultValue = defaultValue,
 				Max = max,
@@ -306,11 +318,11 @@ namespace Chess.Testbed
 
 		public void Dispose()
 		{
-			if (EngineStarted && !EngineProcess.HasExited && !IsDisposed)
+			if (EngineStarted && !engineProcess.HasExited && !IsDisposed)
 			{
 				IsDisposed = true;
-				EngineProcess.CancelOutputRead();
-				EngineProcess.Kill();
+				engineProcess.CancelOutputRead();
+				engineProcess.Kill();
 			}
 		}
 	}

@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Chess.Testbed.Views
+namespace Chess.Testbed.Pieces
 {
 	/// <summary>
-	/// Interaction logic for TimeControlView.xaml
+	/// Interaction logic for WhiteBishop.xaml
 	/// </summary>
-	public partial class TimeControlView : UserControl
+	public partial class WhiteBishop : UserControl
 	{
-		public TimeControlView()
+		public WhiteBishop()
 		{
 			InitializeComponent();
 		}

@@ -1,0 +1,26 @@
+﻿<UserControl x:Class="Chess.Testbed.Pieces.BlackQueen"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Viewbox Stretch="Uniform">
+        <Canvas HorizontalAlignment="Left" Height="45" UseLayoutRounding="False" VerticalAlignment="Top" Width="45">
+            <Canvas Height="35.193" Canvas.Left="3.25" Canvas.Top="5.25" Width="38.5">
+                <Path Data="F1M2.75,0C4.269,0 5.5,1.231 5.5,2.75 5.5,4.269 4.269,5.5 2.75,5.5 1.231,5.5 0,4.269 0,2.75 0,1.231 1.231,0 2.75,0" Fill="Black" Height="5.5" Canvas.Left="0" Canvas.Top="4" Width="5.5"/>
+                <Path Data="F1M2.75,0C4.269,0 5.5,1.231 5.5,2.75 5.5,4.269 4.269,5.5 2.75,5.5 1.231,5.5 0,4.269 0,2.75 0,1.231 1.231,0 2.75,0" Fill="Black" Height="5.5" Canvas.Left="8" Canvas.Top="1" Width="5.5"/>
+                <Path Data="F1M2.75,0C4.269,0 5.5,1.231 5.5,2.75 5.5,4.269 4.269,5.5 2.75,5.5 1.231,5.5 0,4.269 0,2.75 0,1.231 1.231,0 2.75,0" Fill="Black" Height="5.5" Canvas.Left="16.5" Canvas.Top="0" Width="5.5"/>
+                <Path Data="F1M2.75,0C4.269,0 5.5,1.231 5.5,2.75 5.5,4.269 4.269,5.5 2.75,5.5 1.231,5.5 0,4.269 0,2.75 0,1.231 1.231,0 2.75,0" Fill="Black" Height="5.5" Canvas.Left="25" Canvas.Top="1" Width="5.5"/>
+                <Path Data="F1M2.75,0C4.269,0 5.5,1.231 5.5,2.75 5.5,4.269 4.269,5.5 2.75,5.5 1.231,5.5 0,4.269 0,2.75 0,1.231 1.231,0 2.75,0" Fill="Black" Height="5.5" Canvas.Left="33" Canvas.Top="4" Width="5.5"/>
+                <Path Data="F1M3.999,19.702C12.499,18.202,24.999,18.202,30.999,19.702L33.499,7.202 25.999,18.702 25.699,4.602 20.499,18.202 17.499,3.702 14.499,18.202 9.299,4.602 8.999,18.702 1.499,7.202z" Fill="Black" Height="21.145" Canvas.Left="1.751" Stroke="Black" StrokeThickness="1.5" StrokeLineJoin="Round" Canvas.Top="1.048" Width="34.998"/>
+                <Path Data="F1M0.75,1.875C0.75,3.875 2.25,3.875 3.25,5.875 4.25,7.375 4.25,6.875 3.75,9.375 2.25,10.375 2.25,11.875 2.25,11.875 0.75,13.375 2.75,14.375 2.75,14.375 9.25,15.375 19.25,15.375 25.75,14.375 25.75,14.375 27.25,13.375 25.75,11.875 25.75,11.875 26.25,10.375 24.75,9.375 24.25,6.875 24.25,7.375 25.25,5.875 26.25,3.875 27.75,3.875 27.75,1.875 19.25,0.375 9.25,0.375 0.75,1.875" Fill="Black" Height="15.875" Canvas.Left="5" Stroke="Black" StrokeThickness="1.5" StrokeLineJoin="Round" Canvas.Top="18.875" Width="28.5"/>
+                <Path Data="M0.246,0.708C7.694,3.299,15.799,3.299,23.246,0.708" Height="3.402" Canvas.Left="7.504" Stroke="Black" StrokeThickness="1.5" StrokeLineJoin="Round" Canvas.Top="32.542" Width="23.493"/>
+                <Path Data="M0.246,2.693C7.694,0.102,15.799,0.102,23.246,2.693" Height="3.402" Canvas.Left="7.504" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Stroke="White" StrokeThickness="1.5" StrokeLineJoin="Round" Canvas.Top="21.057" Width="23.493"/>
+                <Path Data="M0,0.75L20,0.75" Height="1.5" Canvas.Left="9.25" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Stroke="White" StrokeThickness="1.5" StrokeLineJoin="Round" Canvas.Top="25.5" Width="20"/>
+                <Path Data="M0.236,0.712C7.379,3.077,15.093,3.077,22.236,0.712" Height="3.236" Canvas.Left="8.014" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Stroke="White" StrokeThickness="1.5" StrokeLineJoin="Round" Canvas.Top="28.538" Width="22.471"/>
+                <Path Data="M0.257,0.705C8.007,3.533,16.507,3.533,24.257,0.705" Height="3.576" Canvas.Left="6.993" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Stroke="White" StrokeThickness="1.5" StrokeLineJoin="Round" Canvas.Top="31.545" Width="24.514"/>
+            </Canvas>
+        </Canvas>
+    </Viewbox>
+</UserControl>

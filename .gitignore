@@ -24,6 +24,7 @@ Thumbs.db
 [Dd]ebug*/
 test-results/
 *.lib
+*.opensdf
 *.sbr
 obj/
 intermediate*/

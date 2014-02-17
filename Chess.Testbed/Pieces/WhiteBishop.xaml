@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="Chess.Testbed.Pieces.WhiteBishop"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Viewbox Stretch="Uniform">
+        <Canvas HorizontalAlignment="Left" Height="45" UseLayoutRounding="False" VerticalAlignment="Top" Width="45">
+            <Canvas Height="33.315" Canvas.Left="6" Canvas.Top="5.5" Width="33">
+                <Path Data="F1M3.915,2.923C7.305,1.953 14.025,3.353 17.415,0.923 20.806,3.353 27.524,1.953 30.915,2.923 30.915,2.923 32.565,3.463 33.915,4.923 33.235,5.893 32.265,5.913 30.915,5.423 27.524,4.453 20.806,5.883 17.415,4.423 14.025,5.883 7.305,4.453 3.915,5.423 2.561,5.913 1.592,5.893 0.915,4.923 2.269,2.984 3.915,2.923 3.915,2.923" Fill="White" Height="6.464" Canvas.Left="-0.915" Stroke="Black" StrokeThickness="1.5" StrokeLineJoin="Round" Canvas.Top="27.577" Width="34.876"/>
+                <Path Data="F1M1.978,22.298C4.478,24.798 14.478,24.798 16.978,22.298 17.478,20.798 16.978,20.298 16.978,20.298 16.978,17.798 14.478,16.298 14.478,16.298 19.978,14.798 20.478,4.798 9.478,0.798 -1.522,4.798 -1.022,14.798 4.478,16.298 4.478,16.298 1.978,17.798 1.978,20.298 1.978,20.298 1.478,20.798 1.978,22.298" Fill="White" Height="24.923" Canvas.Left="7.022" Stroke="Black" StrokeThickness="1.5" StrokeLineJoin="Round" Canvas.Top="4.202" Width="18.956"/>
+                <Path Data="F1M5.75,3.25C5.75,4.631 4.631,5.75 3.25,5.75 1.869,5.75 0.75,4.631 0.75,3.25 0.75,1.869 1.869,0.75 3.25,0.75 4.631,0.75 5.75,1.869 5.75,3.25" Fill="White" Height="6.5" Canvas.Left="13.25" Stroke="Black" StrokeThickness="1.5" StrokeLineJoin="Round" Canvas.Top="-0.75" Width="6.5"/>
+                <Path Data="M5,2.5L10,2.5 M7.5,0L7.5,5 M0,14.5L15,14.5 M2.5,10.5L12.5,10.5" Height="15.25" Canvas.Left="9" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Stroke="Black" StrokeThickness="1.5" StrokeMiterLimit="4" Canvas.Top="10" Width="15"/>
+            </Canvas>
+        </Canvas>
+    </Viewbox>
+</UserControl>

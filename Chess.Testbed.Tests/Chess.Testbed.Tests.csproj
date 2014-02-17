@@ -38,6 +38,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -57,7 +60,9 @@
   </Choose>
   <ItemGroup>
     <Compile Include="EngineProcessTests.cs" />
+    <Compile Include="MatchRunnerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="_TestSetup.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Chess.Testbed\Chess.Testbed.csproj">
@@ -68,6 +73,9 @@
       <Project>{c69f5f4a-0b82-4689-8e54-df39f61eddff}</Project>
       <Name>Chess.Uci</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

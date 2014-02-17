@@ -23,7 +23,7 @@ namespace Chess.Testbed.Views
 		{
 			try
 			{
-				var filename = Assembly.GetEntryAssembly().Location + ".settings";
+				var filename = MasterState.ExeDir + "Chess.Testbed.exe.settings";
 				if (!File.Exists(filename))
 					return;
 
@@ -39,7 +39,7 @@ namespace Chess.Testbed.Views
 		private void SaveSettings()
 		{
 			var data = MasterState.Instance.SerializeState();
-			var filename = Assembly.GetEntryAssembly().Location + ".settings";
+			var filename = MasterState.ExeDir + "Chess.Testbed.exe.settings";
 			File.WriteAllText(filename, data);
 		}
 	}

@@ -11,7 +11,8 @@ namespace Chess.Testbed
 		TimePerMove,
 		Infinite,
 		NodeCount,
-		TimeControl
+		TimeControl,
+		Blitz
 	}
 
 	/// <summary>
@@ -19,10 +20,11 @@ namespace Chess.Testbed
 	/// </summary>
 	public class TimeSettings
 	{
+		public int Id { get; set; }
 		public string Name { get; set; }
 
-		public TimeMode TimeModeWhite { get; set; }
-		public TimeMode TimeModeBlack { get; set; }
+		public TimeMode TimeModeHuman { get; set; }
+		public TimeMode TimeModeMachine { get; set; }
 
 		/// <summary>
 		/// If TimeMode = FixedDepth, sets the depth to search for
@@ -35,26 +37,26 @@ namespace Chess.Testbed
 		public int? NodeCount { get; set; }
 
 		/// <summary>
-		/// If TimeMode = TimePerMove, sets the time to search for
+		/// If TimeMode = TimePerMove, sets the time to search for, in seconds
 		/// </summary>
-		public int? TimePerMoveMillis { get; set; }
+		public int? TimePerMove { get; set; }
 
 
 		/// <summary>
-		/// Sets the amount of time each player has at the start
+		/// Sets the number of seconds each player has at the start
 		/// </summary>
-		public int? InitialTimeMillis { get; set; }
+		public int? InitialTime { get; set; }
 
 		/// <summary>
-		/// How much to increment player's time after he moves
+		/// How many seconds to increment player's time after he moves
 		/// </summary>
-		public int? MoveIncrementMillis { get; set; }
+		public int? MoveIncrement { get; set; }
 
 		/// <summary>
-		/// Number of milliseconds per time control window.
-		/// E.g. 40 moves / 40 minutes => 40*60*1000 = 2400000
+		/// Number of seconds per time control window.
+		/// E.g. 40 moves / 40 minutes => 40*60 = 2400
 		/// </summary>
-		public int? TimeControlWindowMillis { get; set; }
+		public int? TimeControlWindow { get; set; }
 
 		/// <summary>
 		/// How many moves per time control window

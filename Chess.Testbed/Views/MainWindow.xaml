@@ -23,6 +23,9 @@
             <TabItem Header="Engines">
                 <local:EnginesView Height="Auto" Width="Auto" />
             </TabItem>
+            <TabItem Header="Time Control">
+                <local:TimeView Height="Auto" Width="Auto" />
+            </TabItem>
             
         </TabControl>
     </Grid>

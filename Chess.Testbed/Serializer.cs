@@ -18,12 +18,12 @@ namespace Chess.Testbed
 			return sw.ToString();
 		}
 
-		public static object DeserializeFromXml(string root, Type outType)
+		public static T DeserializeFromXml<T>(string root)
 		{
-			var serializer = new XmlSerializer(outType);
+			var serializer = new XmlSerializer(typeof(T));
 			var sr = new StringReader(root);
 			var rootDir = serializer.Deserialize(sr);
-			return rootDir;
+			return (T)rootDir;
 		}
 	}
 }

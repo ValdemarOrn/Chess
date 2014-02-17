@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Chess.Testbed.Tests
 {
-	[TestClass]
+	[TestFixture]
 	public class EngineProcessTests
 	{
-		[TestMethod]
+		[Test]
 		public void TestEngineStartup()
 		{
 			var e = new UciEngineSettings

@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="Chess.Testbed.Pieces.WhiteRook"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Viewbox Stretch="Uniform">
+        <Canvas HorizontalAlignment="Left" Height="45" UseLayoutRounding="False" VerticalAlignment="Top" Width="45">
+            <Canvas Height="30" Canvas.Left="9" Canvas.Top="9" Width="27">
+                <Path Data="F1M0.75,3.75L27.75,3.75 27.75,0.75 0.75,0.75z" Fill="White" Height="4.5" Canvas.Left="-0.75" Stroke="Black" StrokeThickness="1.5" StrokeLineJoin="Round" Canvas.Top="26.25" Width="28.5"/>
+                <Path Data="F1M0.75,0.75L21.75,0.75 21.75,4.75 0.75,4.75z" Fill="White" Height="5.5" Canvas.Left="2.25" Stroke="Black" StrokeThickness="1.5" StrokeLineJoin="Round" Canvas.Top="22.25" Width="22.5"/>
+                <Path Data="F1M0.75,5.75L0.75,0.75 4.75,0.75 4.75,2.75 9.75,2.75 9.75,0.75 14.75,0.75 14.75,2.75 19.75,2.75 19.75,0.75 23.75,0.75 23.75,5.75" Fill="White" Height="5.75" Canvas.Left="1.25" Stroke="Black" StrokeThickness="1.5" StrokeLineJoin="Round" Canvas.Top="-0.75" Width="24.5"/>
+                <Path Data="F1M23.53,0.53L20.53,3.53 3.53,3.53 0.53,0.53" Fill="White" Height="4.28" Canvas.Left="1.47" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Stroke="Black" StrokeThickness="1.5" StrokeLineJoin="Round" Canvas.Top="4.47" Width="24.061"/>
+                <Path Data="F1M17.75,0L17.75,12.5 0.75,12.5 0.75,0" Fill="White" Height="13.25" Canvas.Left="4.25" Stroke="Black" StrokeThickness="1.5" StrokeMiterLimit="4" Canvas.Top="8" Width="18.5"/>
+                <Path Data="F1M19.825,0.386L21.325,2.886 1.325,2.886 2.825,0.386" Fill="White" Height="3.636" Canvas.Left="2.175" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Stroke="Black" StrokeThickness="1.5" StrokeLineJoin="Round" Canvas.Top="20.114" Width="22.649"/>
+                <Path Data="M0,0.75L23,0.75" Height="1.5" Canvas.Left="2" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Stroke="Black" StrokeThickness="1.5" StrokeMiterLimit="4" Canvas.Top="4.25" Width="23"/>
+            </Canvas>
+        </Canvas>
+    </Viewbox>
+</UserControl>
