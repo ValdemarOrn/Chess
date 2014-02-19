@@ -83,6 +83,9 @@ namespace Chess.Testbed
 
 		public ScheduledMatch DequeueMatch()
 		{
+			if (scheduledMatches.Count == 0)
+				return null;
+
 			var match = scheduledMatches.Dequeue();
 			TriggerAction(EventScheduledMatchesChanged);
 			return match;

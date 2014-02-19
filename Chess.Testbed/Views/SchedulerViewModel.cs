@@ -8,9 +8,9 @@ using Chess.Testbed.Control;
 
 namespace Chess.Testbed.Views
 {
-	public class PlayViewModel : ViewModelBase
+	public class SchedulerViewModel : ViewModelBase
 	{
-		public PlayViewModel()
+		public SchedulerViewModel()
 		{
 			MasterState.Instance.RegisterAction(MasterState.EventEnginesChanged, () => NotifyChanged(() => Engines));
 			MasterState.Instance.RegisterAction(MasterState.EventTimeSettingsChanged, () => NotifyChanged(() => TimeSettings));
@@ -21,7 +21,7 @@ namespace Chess.Testbed.Views
 			PlayWhite = true;
 			PlayBlack = true;
 		}
-
+    
 		public ModelCommand InsertMachesCommand { get; private set; }
 		public ModelCommand ReloadScheduledMatchesCommand { get; private set; }
 

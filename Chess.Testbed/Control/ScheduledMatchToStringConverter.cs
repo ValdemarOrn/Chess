@@ -12,7 +12,7 @@ namespace Chess.Testbed.Control
 		public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
 		{
 			if (!(value is ScheduledMatch))
-				throw new ArgumentException("Unexpected value type");
+				return null;
 
 			var match = value as ScheduledMatch;
 			var white = MasterState.Instance.Engines.SingleOrDefault(x => x.Id == match.WhiteId);

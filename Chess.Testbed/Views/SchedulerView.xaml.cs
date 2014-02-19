@@ -17,23 +17,23 @@ namespace Chess.Testbed.Views
 	/// <summary>
 	/// Interaction logic for PlayView.xaml
 	/// </summary>
-	public partial class PlayView : UserControl
+	public partial class SchedulerView : UserControl
 	{
-		public PlayView()
+		public SchedulerView()
 		{
 			InitializeComponent();
-			DataContext = new PlayViewModel();
+			DataContext = new SchedulerViewModel();
 		}
 
 		private void ListBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			((PlayViewModel)DataContext).Opponents = ((ListBox)sender).SelectedItems.Cast<UciEngineSettings>().ToArray();
+			((SchedulerViewModel)DataContext).Opponents = ((ListBox)sender).SelectedItems.Cast<UciEngineSettings>().ToArray();
 		}
 
 		private void UserControlIsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
 		{
 			if ((bool)e.NewValue)
-				((PlayViewModel)DataContext).ReloadScheduledMatchesCommand.Execute(null);
+				((SchedulerViewModel)DataContext).ReloadScheduledMatchesCommand.Execute(null);
 		}
 	}
 }

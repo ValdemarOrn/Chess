@@ -17,23 +17,13 @@ namespace Chess.Testbed
 		private StreamWriter writerWhite;
 		private StreamWriter writerBlack;
 
-		/*private UciEngineSettings whiteSettings;
-		private UciEngineSettings blackSettings;*/
-		
-		//private ScheduledMatch match;
-
 		public IPlayer PlayerWhite { get; private set; }
 		public IPlayer PlayerBlack { get; private set; }
 		public TimeSettings TimeSettings { get; private set; }
+		public Base.Board Board { get; private set; }
 
 		public MatchRunner(IPlayer white, IPlayer black, TimeSettings timeSettings)
 		{
-			/*ScheduledMatch match
-			this.match = match;
-			whiteSettings = MasterState.Instance.Engines.Single(x => x.Id == match.WhiteId);
-			blackSettings = MasterState.Instance.Engines.Single(x => x.Id == match.BlackId);
-			timeSettings = MasterState.Instance.TimeSettings.Single(x => x.Id == match.TimeControlId);*/
-
 			TimeSettings = timeSettings;
 			PlayerWhite = white;
 			PlayerBlack = black;
@@ -47,6 +37,7 @@ namespace Chess.Testbed
 			fsBlack = new FileStream(fileBlack, FileMode.CreateNew, FileAccess.Write, FileShare.Read);
 			writerWhite = new StreamWriter(fsWhite);
 			writerBlack = new StreamWriter(fsBlack);
+			Board = new Base.Board(true);
 		}
 
 		public void LoadAndSetup()

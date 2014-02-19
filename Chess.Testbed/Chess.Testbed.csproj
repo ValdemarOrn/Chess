@@ -63,6 +63,9 @@
     </ApplicationDefinition>
     <Compile Include="Control\BoolStringConverter.cs" />
     <Compile Include="Control\BoolToVisibilityConverter.cs" />
+    <Compile Include="Control\Chessboard.xaml.cs">
+      <DependentUpon>Chessboard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Control\EnumStringConverter.cs" />
     <Compile Include="Control\NumericTextBox.xaml.cs">
       <DependentUpon>NumericTextBox.xaml</DependentUpon>
@@ -117,14 +120,22 @@
     <Compile Include="UciEngineSettings.cs" />
     <Compile Include="Control\ModelCommand.cs" />
     <Compile Include="Views\EngineSettingViewModel.cs" />
+    <Compile Include="Views\GameView.xaml.cs">
+      <DependentUpon>GameView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\GameViewModel.cs" />
     <Compile Include="Views\MainWindowViewModel.cs" />
-    <Compile Include="Views\PlayViewModel.cs" />
+    <Compile Include="Views\SchedulerViewModel.cs" />
     <Compile Include="Views\TimeView.xaml.cs">
       <DependentUpon>TimeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TimeViewModel.cs" />
     <Compile Include="Views\UserControlBase.cs" />
     <Compile Include="Views\ViewModelBase.cs" />
+    <Page Include="Control\Chessboard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Control\NumericTextBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -185,6 +196,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\GameView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -203,7 +218,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\PlayView.xaml">
+    <Page Include="Views\SchedulerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -218,8 +233,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Views\EnginesViewModel.cs" />
-    <Compile Include="Views\PlayView.xaml.cs">
-      <DependentUpon>PlayView.xaml</DependentUpon>
+    <Compile Include="Views\SchedulerView.xaml.cs">
+      <DependentUpon>SchedulerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
