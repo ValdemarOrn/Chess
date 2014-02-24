@@ -144,6 +144,9 @@ namespace Chess.Vladivostok
 			// Stop searching after time has passed
 			Task.Factory.StartNew(() =>
 			{
+				if (parameters.Infinite)
+					return;
+
 				Thread.Sleep((int)time);
 				Search.StopSearch();
 			});

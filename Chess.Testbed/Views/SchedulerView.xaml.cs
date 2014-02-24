@@ -25,10 +25,17 @@ namespace Chess.Testbed.Views
 			DataContext = new SchedulerViewModel();
 		}
 
-		private void ListBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
+		private void OpponentSelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			((SchedulerViewModel)DataContext).Opponents = ((ListBox)sender).SelectedItems.Cast<UciEngineSettings>().ToArray();
 		}
+
+		private void UpcomingMatchesSelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			((SchedulerViewModel)DataContext).SelectedMatches = ((ListBox)sender).SelectedItems.Cast<ScheduledMatch>().ToArray();
+		}
+
+		
 
 		private void UserControlIsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
 		{

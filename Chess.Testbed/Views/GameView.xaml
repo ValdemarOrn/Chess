@@ -35,8 +35,8 @@
             <Button Content="Queue Game" Command="{Binding QueueNextGameCommand}"></Button>
             <CheckBox IsChecked="False">Auto-Queue</CheckBox>
             <Separator/>
-            <Button Content="Go" />
-            <Button Content="Stop" />
+            <Button Content="Go" Command="{Binding EngineGoCommand}" />
+            <Button Content="Stop" Command="{Binding EngineStopCommand}" />
             <CheckBox IsChecked="False">Autoplay</CheckBox>
             <Separator/>
             <CheckBox IsChecked="False">Flip</CheckBox>
@@ -45,10 +45,39 @@
 
         <control:Chessboard Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch" Board="{Binding MatchRunner.Board}"
                             LightTileBrush="WhiteSmoke" DarkTileBrush="DarkGray" FontBrush="#777" BoardEdgeBrush="#eee" />
-        
-        <ListBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding WhitePlayerLog}" Margin="0,5,8,2" 
+
+        <ToolBar Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Margin="0,2,0,0" VerticalAlignment="Top" Height="23">
+            <ToolBar.Resources>
+                <Style TargetType="Label">
+                    <Setter Property="Padding" Value="0" />
+                    <Setter Property="Width" Value="90" />
+                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                </Style>
+            </ToolBar.Resources>
+            <Label Content="{Binding WhitePlayerInfo[Depth], FallbackValue=Depth}"></Label>
+            <Label Content="{Binding WhitePlayerInfo[Score], FallbackValue=Score}"></Label>
+            <Label Content="{Binding WhitePlayerInfo[Nodes], FallbackValue=kNodes}"></Label>
+            <Label Content="{Binding WhitePlayerInfo[CurrMove], FallbackValue=-}"></Label>
+            <Label Content="{Binding WhitePlayerInfo[NPS], FallbackValue=kNodes/sec}"></Label>
+        </ToolBar>
+        <ListBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding WhitePlayerLog}"  Margin="0,25,0,0"
                  ScrollViewer.VerticalScrollBarVisibility="Visible" x:Name="ListBoxWhitePlayerLog" />
-        <ListBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding BlackPlayerLog}" Margin="0,3,8,2" 
+
+        <ToolBar Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Margin="0,2,0,0" VerticalAlignment="Top" Height="23">
+            <ToolBar.Resources>
+                <Style TargetType="Label">
+                    <Setter Property="Padding" Value="0" />
+                    <Setter Property="Width" Value="90" />
+                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                </Style>
+            </ToolBar.Resources>
+            <Label Content="{Binding BlackPlayerInfo[Depth], FallbackValue=Depth}"></Label>
+            <Label Content="{Binding BlackPlayerInfo[Score], FallbackValue=Score}"></Label>
+            <Label Content="{Binding BlackPlayerInfo[Nodes], FallbackValue=kNodes}"></Label>
+            <Label Content="{Binding BlackPlayerInfo[CurrMove], FallbackValue=-}"></Label>
+            <Label Content="{Binding BlackPlayerInfo[NPS], FallbackValue=kNodes/sec}"></Label>
+        </ToolBar>
+        <ListBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding BlackPlayerLog}"  Margin="0,25,0,0"
                  ScrollViewer.VerticalScrollBarVisibility="Visible" x:Name="ListBoxBlackPlayerLog"/>
         
         <Grid Grid.Column="1" Grid.Row="1" Margin="5,0,0,5">

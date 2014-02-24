@@ -13,9 +13,11 @@ namespace Chess.Testbed.Views
 		public TimeViewModel()
 		{
 			CreateNewTimeSettingCommand = new ModelCommand(CreateNewSetting);
+			DeleteTimeSettingCommand = new ModelCommand(DeleteTimeSetting);
 		}
 
 		public ModelCommand CreateNewTimeSettingCommand { get; private set; }
+		public ModelCommand DeleteTimeSettingCommand { get; private set; }
 
 		public ObservableCollection<TimeSettings> TimeSettings
 		{
@@ -209,6 +211,13 @@ namespace Chess.Testbed.Views
 		private void CreateNewSetting()
 		{
 			SelectedSetting = MasterState.Instance.CreateNewTimeSetting();
+			NotifyChanged(() => TimeSettings);
+		}
+
+		private void DeleteTimeSetting()
+		{
+			MasterState.Instance.RemoveTimeSetting(SelectedSetting);
+			SelectedSetting = TimeSettings.FirstOrDefault();
 			NotifyChanged(() => TimeSettings);
 		}
 	}

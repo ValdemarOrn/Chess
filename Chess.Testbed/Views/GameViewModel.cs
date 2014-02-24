@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Chess.Base;
 using Chess.Testbed.Control;
+using Chess.Uci;
 
 namespace Chess.Testbed.Views
 {
@@ -13,11 +14,17 @@ namespace Chess.Testbed.Views
 		public GameViewModel()
 		{
 			QueueNextGameCommand = new ModelCommand(QueueNextGame);
+			EngineGoCommand = new ModelCommand(EngineGo);
+			EngineStopCommand = new ModelCommand(EngineStop);
 			whitePlayerLog = new List<string>();
 			blackPlayerLog = new List<string>();
+			whitePlayerInfo = new Dictionary<string, string>();
+			blackPlayerInfo = new Dictionary<string, string>();
 		}
-
+		
 		public ModelCommand QueueNextGameCommand { get; private set; }
+		public ModelCommand EngineGoCommand { get; private set; }
+		public ModelCommand EngineStopCommand { get; private set; }
 
 		private MatchRunner matchRunner;
 		public MatchRunner MatchRunner
@@ -52,8 +59,27 @@ namespace Chess.Testbed.Views
 			}
 		}
 
+		private Dictionary<string, string> whitePlayerInfo;
+		public Dictionary<string, string> WhitePlayerInfo
+		{
+			get { return whitePlayerInfo; }
+			set { whitePlayerInfo = value; NotifyChanged(); }
+		}
+
+		private Dictionary<string, string> blackPlayerInfo;
+		public Dictionary<string, string> BlackPlayerInfo
+		{
+			get { return blackPlayerInfo; }
+			set { blackPlayerInfo = value; NotifyChanged(); }
+		}
+
 		private void QueueNextGame()
 		{
+			if (MatchRunner != null)
+			{
+				MatchRunner.Dispose();
+			}
+
 			var nextGame = MasterState.Instance.DequeueMatch();
 			if (nextGame == null)
 			{
@@ -88,8 +114,56 @@ namespace Chess.Testbed.Views
 				NotifyChanged(() => BlackPlayerLog);
 			});
 
+			MatchRunner.PlayerWhite.RegisterInfoListener(dict =>
+			{
+				UpdatePlayerInfo(dict, whitePlayerInfo);
+				NotifyChanged(() => WhitePlayerInfo);
+			});
+
+			MatchRunner.PlayerBlack.RegisterInfoListener(dict =>
+			{
+				UpdatePlayerInfo(dict, blackPlayerInfo);
+				NotifyChanged(() => BlackPlayerInfo);
+			});
+
 			NotifyChanged(() => MatchRunner);
 			Task.Run(() => MatchRunner.LoadAndSetup());
+		}
+
+		private void UpdatePlayerInfo(Dictionary<UciInfo, string> dict, Dictionary<string, string> outputDict)
+		{
+			foreach (var kvp in dict)
+			{
+				long count;
+				bool ok;
+				var val = kvp.Value;
+				switch (kvp.Key)
+				{
+					case Uci.UciInfo.Depth:
+						val = "Depth " + val;
+						break;
+					case Uci.UciInfo.Nodes:
+						ok = long.TryParse(val, out count);
+						val = ok ? (count / 1000).ToString() + " kNodes" : val;
+						break;
+					case Uci.UciInfo.NPS:
+						ok = long.TryParse(val, out count);
+						val = ok ? (count / 1000).ToString() + " kNodes/sec" : val;
+						break;
+				}
+
+				outputDict[kvp.Key.ToString()] = val;
+			}
+		}
+
+		private void EngineGo()
+		{
+			MatchRunner.Go();
+		}
+
+		private void EngineStop()
+		{
+			MatchRunner.Stop();
 		}
 	}
 }

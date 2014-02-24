@@ -7,6 +7,8 @@ namespace Chess.Base
 {
 	public class Notation
 	{
+		public const string FenStartingPosition = @"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+
 		public static int FileToInt(char file)
 		{
 			file = Char.ToLower(file);

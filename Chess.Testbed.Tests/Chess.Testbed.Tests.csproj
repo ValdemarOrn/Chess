@@ -59,12 +59,17 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="ChessClockTests.cs" />
     <Compile Include="EngineProcessTests.cs" />
     <Compile Include="MatchRunnerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="_TestSetup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Chess.Base\Chess.Base.csproj">
+      <Project>{5c3de354-edd4-4377-a3d0-a33a5d2c7c71}</Project>
+      <Name>Chess.Base</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Chess.Testbed\Chess.Testbed.csproj">
       <Project>{4cb8a3ed-2221-4877-8981-f1cca2571802}</Project>
       <Name>Chess.Testbed</Name>

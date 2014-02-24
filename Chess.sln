@@ -158,12 +158,14 @@ Global
 		{4CB8A3ED-2221-4877-8981-F1CCA2571802}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{4CB8A3ED-2221-4877-8981-F1CCA2571802}.Debug|x86.Build.0 = Debug|Any CPU
 		{4CB8A3ED-2221-4877-8981-F1CCA2571802}.Release|x64.ActiveCfg = Release|Any CPU
+		{4CB8A3ED-2221-4877-8981-F1CCA2571802}.Release|x64.Build.0 = Release|Any CPU
 		{4CB8A3ED-2221-4877-8981-F1CCA2571802}.Release|x86.ActiveCfg = Release|Any CPU
 		{FD0BEF03-9A4D-419B-A1B0-486DEE89735B}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{FD0BEF03-9A4D-419B-A1B0-486DEE89735B}.Debug|x64.Build.0 = Debug|Any CPU
 		{FD0BEF03-9A4D-419B-A1B0-486DEE89735B}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{FD0BEF03-9A4D-419B-A1B0-486DEE89735B}.Debug|x86.Build.0 = Debug|Any CPU
 		{FD0BEF03-9A4D-419B-A1B0-486DEE89735B}.Release|x64.ActiveCfg = Release|Any CPU
+		{FD0BEF03-9A4D-419B-A1B0-486DEE89735B}.Release|x64.Build.0 = Release|Any CPU
 		{FD0BEF03-9A4D-419B-A1B0-486DEE89735B}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution

@@ -15,15 +15,21 @@ namespace Chess.Testbed.Views
 			MasterState.Instance.RegisterAction(MasterState.EventEnginesChanged, () => NotifyChanged(() => Engines));
 			MasterState.Instance.RegisterAction(MasterState.EventTimeSettingsChanged, () => NotifyChanged(() => TimeSettings));
 			MasterState.Instance.RegisterAction(MasterState.EventScheduledMatchesChanged, () => NotifyChanged(() => ScheduledMatches));
-			InsertMachesCommand = new ModelCommand(InsertMaches);
+
+			InsertMatchesCommand = new ModelCommand(InsertMatches);
 			ReloadScheduledMatchesCommand = new ModelCommand(ReloadScheduledMatches);
+			DeletedSelectedMatchesCommand = new ModelCommand(DeletedSelectedMatches);
+			DeletedScheduledMatchesCommand = new ModelCommand(DeletedScheduledMatches);
+
 			MatchCount = 1;
 			PlayWhite = true;
 			PlayBlack = true;
 		}
-    
-		public ModelCommand InsertMachesCommand { get; private set; }
+
+		public ModelCommand InsertMatchesCommand { get; private set; }
 		public ModelCommand ReloadScheduledMatchesCommand { get; private set; }
+		public ModelCommand DeletedSelectedMatchesCommand { get; private set; }
+		public ModelCommand DeletedScheduledMatchesCommand { get; private set; }
 
 		public ObservableCollection<UciEngineSettings> Engines
 		{
@@ -52,6 +58,13 @@ namespace Chess.Testbed.Views
 		{
 			get { return opponents; }
 			set { opponents = value; NotifyChanged(); }
+		}
+
+		private ScheduledMatch[] selectedMatches;
+		public ScheduledMatch[] SelectedMatches
+		{
+			get { return selectedMatches; }
+			set { selectedMatches = value; NotifyChanged(); }
 		}
 
 		private TimeSettings timeSetting;
@@ -87,7 +100,7 @@ namespace Chess.Testbed.Views
 			NotifyChanged(() => ScheduledMatches);
 		}
 
-		private void InsertMaches()
+		private void InsertMatches()
 		{
 			if (Competitor == null || Opponents == null || Opponents.Length == 0)
 			{
@@ -118,6 +131,18 @@ namespace Chess.Testbed.Views
 			}
 
 			MasterState.Instance.QueueMatches(matches);
+		}
+
+		private void DeletedSelectedMatches()
+		{
+			var matches = SelectedMatches.ToArray();
+			foreach (var match in matches)
+				MasterState.Instance.RemoveMatch(match);
+		}
+
+		private void DeletedScheduledMatches()
+		{
+			MasterState.Instance.ClearAllMatches();
 		}
 
 	}

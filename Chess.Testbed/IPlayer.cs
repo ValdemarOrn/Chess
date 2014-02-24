@@ -15,7 +15,7 @@ namespace Chess.Testbed
 		XBoard
 	}
 
-	public interface IPlayer
+	public interface IPlayer : IDisposable
 	{
 		PlayerType Type { get; }
 		string Name { get; }
@@ -25,5 +25,7 @@ namespace Chess.Testbed
 		void Play(UciGoParameters parameters);
 		void Stop();
 		void RegisterCommandListener(Action<UciProcess.CommandDirection, string> listener);
+		void RegisterInfoListener(Action<Dictionary<UciInfo, string>> listener);
+		void RegisterBestMoveListener(Action<UciMove, UciMove> listener);
 	}
 }

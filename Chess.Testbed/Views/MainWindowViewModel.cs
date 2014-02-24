@@ -30,7 +30,7 @@ namespace Chess.Testbed.Views
 				var data = File.ReadAllText(filename);
 				MasterState.Instance.DeserializeState(data);
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				Log.ErrorDialog("Unable to load configuration settings");
 			}

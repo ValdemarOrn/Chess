@@ -16,11 +16,13 @@ namespace Chess.Testbed.Views
 		public EnginesViewModel()
 		{
 			CreateNewEngineCommand = new ModelCommand(CreateNewEngine);
+			DeleteEngineCommand = new ModelCommand(DeleteEngine);
 			BrowseEngineCommand = new ModelCommand(BrowseEngine, () => SelectedEngine != null);
 			ReloadEngineCommand = new ModelCommand(ReloadEngine, () => SelectedEngine != null && EngineCommand != null && File.Exists(EngineCommand));
 		}
 
 		public ModelCommand CreateNewEngineCommand { get; private set; }
+		public ModelCommand DeleteEngineCommand { get; private set; }
 		public ModelCommand BrowseEngineCommand { get; private set; }
 		public ModelCommand ReloadEngineCommand { get; private set; }
 
@@ -70,6 +72,12 @@ namespace Chess.Testbed.Views
 		private void CreateNewEngine()
 		{
 			SelectedEngine = MasterState.Instance.CreateNewEngine();
+			NotifyChanged(() => Engines);
+		}
+
+		private void DeleteEngine()
+		{
+			MasterState.Instance.RemoveEngine(SelectedEngine);
 			NotifyChanged(() => Engines);
 		}
 

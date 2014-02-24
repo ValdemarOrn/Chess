@@ -25,6 +25,7 @@ namespace Chess.Testbed
 		public void Start()
 		{
 			process.Start();
+			process.UciNewGame();
 		}
 
 		public void SetPosition(string fenString, IEnumerable<UciMove> moves)
@@ -47,5 +48,23 @@ namespace Chess.Testbed
 		{
 			process.CommandSendEvent += listener;
 		}
+
+		public void RegisterInfoListener(Action<Dictionary<UciInfo, string>> listener)
+		{
+			process.InfoCallback += listener;
+		}
+
+		public void RegisterBestMoveListener(Action<UciMove, UciMove> listener)
+		{
+			process.BestMoveCallback += listener;
+		}
+
+		public void Dispose()
+		{
+			process.Dispose();
+		}
+
+
+		
 	}
 }

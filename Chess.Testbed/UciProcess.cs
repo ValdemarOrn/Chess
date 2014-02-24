@@ -17,15 +17,14 @@ namespace Chess.Testbed
 
 		private Process engineProcess;
 		private System.Threading.AutoResetEvent resetEvent;
-
-		public event Action<CommandDirection, string> CommandSendEvent;
+		public volatile bool isDisposed;
 
 		public UciEngineSettings Settings { get; private set; }
 		public bool EngineStarted { get; private set; }
-		public bool IsDisposed { get; private set; }
 
-		public Action<UciMove, UciMove> BestMoveCallback { get; set; }
-		public Action<Dictionary<UciInfo, string>> InfoCallback { get; set; }
+		public event Action<CommandDirection, string> CommandSendEvent;
+		public event Action<UciMove, UciMove> BestMoveCallback;
+		public event Action<Dictionary<UciInfo, string>> InfoCallback;
 
 		// Received info from engine
 		public string IdName { get; private set; }
@@ -318,11 +317,24 @@ namespace Chess.Testbed
 
 		public void Dispose()
 		{
-			if (EngineStarted && !engineProcess.HasExited && !IsDisposed)
+			if (EngineStarted && !engineProcess.HasExited && !isDisposed)
 			{
-				IsDisposed = true;
-				engineProcess.CancelOutputRead();
-				engineProcess.Kill();
+				try
+				{
+					Quit();
+					System.Threading.Thread.Sleep(200);
+				}
+				catch (Exception)
+				{
+					
+				}
+				finally
+				{
+					isDisposed = true;
+					engineProcess.CancelOutputRead();
+					if (!engineProcess.HasExited)
+						engineProcess.Kill();
+				}
 			}
 		}
 	}

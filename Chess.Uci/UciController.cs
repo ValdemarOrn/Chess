@@ -24,7 +24,7 @@ namespace Chess.Uci
 		{
 			var command = GetCommand<UciToEngine>(commandString);
 
-			if (command.Item1 == null)
+			if (command == null)
 				return false;
 
 			switch (command.Item1)
@@ -153,11 +153,12 @@ namespace Chess.Uci
 		{
 			Nullable<T> engineCommand;
 			string values = null;
+			if (String.IsNullOrWhiteSpace(command))
+				return null;
 
 			var parts = command.Split(new char[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
-			
 			if (parts.Length == 0)
-				return new Tuple<T?, string>(null, null);
+				return null;
 
 			// search through the tokens, looking for a valid UCI command string
 			engineCommand = null;

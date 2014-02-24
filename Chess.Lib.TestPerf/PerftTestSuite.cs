@@ -80,10 +80,7 @@ namespace Chess.Lib.TestPerf
 			if (failed != 0)
 				return;
 
-			#if DEBUG
-			return;
-			#endif
-
+			#if !DEBUG
 			Console.WriteLine("");
 			Console.WriteLine("Previous Runs:");
 			System.IO.File
@@ -98,6 +95,7 @@ namespace Chess.Lib.TestPerf
 				new[] { string.Format("{0:yyyy-MM-dd HH:mm:ss} - {1:0} kNodes/sec", DateTime.Now, averageSpeed) });
 
 			Console.WriteLine("");
+			#endif
 		}
 
 		/// <summary>

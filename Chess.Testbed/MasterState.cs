@@ -23,14 +23,14 @@ namespace Chess.Testbed
 
 		private List<UciEngineSettings> engines;
 		private List<TimeSettings> timeSettings;
-		private Queue<ScheduledMatch> scheduledMatches;
+		private List<ScheduledMatch> scheduledMatches;
 		
 		private MasterState()
 		{
 			engines = new List<UciEngineSettings>();
 			timeSettings = new List<TimeSettings>();
 			actionDictionary = new Dictionary<string, Action>();
-			scheduledMatches = new Queue<ScheduledMatch>();
+			scheduledMatches = new List<ScheduledMatch>();
 		}
 
 		public IEnumerable<UciEngineSettings> Engines { get { return engines; } }
@@ -76,7 +76,7 @@ namespace Chess.Testbed
 		public void QueueMatches(IEnumerable<ScheduledMatch> matches)
 		{
 			foreach (var match in matches)
-				scheduledMatches.Enqueue(match);
+				scheduledMatches.Add(match);
 
 			TriggerAction(EventScheduledMatchesChanged);
 		}
@@ -86,9 +86,23 @@ namespace Chess.Testbed
 			if (scheduledMatches.Count == 0)
 				return null;
 
-			var match = scheduledMatches.Dequeue();
+			var match = scheduledMatches.First();
+			scheduledMatches.RemoveAt(0);
 			TriggerAction(EventScheduledMatchesChanged);
 			return match;
+		}
+
+		public void RemoveMatch(ScheduledMatch match)
+		{
+			if (scheduledMatches.Contains(match))
+				scheduledMatches.Remove(match);
+			TriggerAction(EventScheduledMatchesChanged);
+		}
+
+		public void ClearAllMatches()
+		{
+			scheduledMatches.Clear();
+			TriggerAction(EventScheduledMatchesChanged);
 		}
 
 		public void RegisterAction(string name, Action action)
@@ -129,7 +143,7 @@ namespace Chess.Testbed
 				timeSettings = s.TimeSettings.ToList();
 
 			if (s.ScheduledMatches != null)
-				scheduledMatches = new Queue<ScheduledMatch>(s.ScheduledMatches);
+				scheduledMatches = new List<ScheduledMatch>(s.ScheduledMatches);
 		}
 
 		[Serializable]
