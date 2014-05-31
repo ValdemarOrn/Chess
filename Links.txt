@@ -1,3 +1,5 @@
 
 http://graphics.stanford.edu/~seander/bithacks.html
 http://www.sluijten.com/winglet/08display01.htm
+
+--
